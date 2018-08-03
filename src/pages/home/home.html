@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     Sakamoto San Come Back!
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+      <ion-nav #mycontent [root]="rootPage"></ion-nav>
+
+    <ion-menu [content]="mycontent">
+        <ion-content>
+            <ion-list>
+              <ion-item menuClose detail-none>Close Menu</ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+
+
+  <!--<img src="../../assets/imgs/Sakamoto.jpg" alt="">
+    <br>
+    Hello, It's ME. 
+    Your Score is {{itemCount}}
+    
+  <ion-item>
+    <ion-label floating >Product Price?</ion-label>
+    <ion-input type="number" name="price" [(ngModel)]="ProductPrice"></ion-input>
+  </ion-item>
+    <button ion-button round outline (click)="showPrice()">GO!</button>
+  <p>
+    Product Price is {{ShowPrice}}
+  </p>-->
+  <button ion-button menuClose="left" (click)=GotoChart()>Close Left Menu</button>
+  <button ion-button menuToggle>Toggle Menu</button>
+
+
+</ion-content>
