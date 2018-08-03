@@ -10,12 +10,14 @@ import { ChartPage } from '../pages/chart/chart';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ChartPage
+    ChartPage,
+    FollowTaxMthPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { RestProvider } from '../providers/rest/rest';
   entryComponents: [
     MyApp,
     HomePage,
-    ChartPage
+    ChartPage,
+    FollowTaxMthPage
   ],
   providers: [
     StatusBar,
