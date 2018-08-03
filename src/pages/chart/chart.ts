@@ -31,7 +31,7 @@ export class ChartPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public http: HttpClient,
-    public restProvider: RestProvider) {
+    public webapi:RestProvider) {
 
         //this.getUsers();
 
@@ -77,19 +77,23 @@ export class ChartPage {
   
 
   getUsers() {
-
-    this.http.get(this.apiUrl+'/Test').subscribe(data => {
-
-            console.log(data);
-       this.respondData = data;
-
-      
-      }, err => {
-        console.log(err);
-      });
-
-  }
-
+    /* let headers = new HttpHeaders();
+     //headers.append('Authorization','Basic YWRtaW46MTIzNDU2');
+     headers.append('Content-Type','application/json');
+ 
+     this.http.get(this.apiUrl+'/Test',{headers:headers}).subscribe(data => {
+        console.log(data);
+        this.respondData = data;
+       }, err => {
+         console.log(err);
+     });
+   }*/
+ 
+   this.webapi.getData('Test').then((data)=>{
+     // console.log(result);
+     this.respondData = data;
+    });
+   }
 
   /*getUsers() {
     return new Promise(resolve => {
