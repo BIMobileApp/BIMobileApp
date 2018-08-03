@@ -11,7 +11,7 @@ import { RestProvider } from '../../providers/rest/rest';
 
 export class HomePage {
 
-  itemCount:number = 10;
+  itemCount:number = 10; //number
   ProductPrice:number;
   ShowPrice:number;
 
