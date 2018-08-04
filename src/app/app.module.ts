@@ -11,13 +11,15 @@ import { ChartPage } from '../pages/chart/chart';
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
+import { Test2Page } from '../pages/test2/test2';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ChartPage,
-    FollowTaxMthPage
+    FollowTaxMthPage,
+    Test2Page
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
     MyApp,
     HomePage,
     ChartPage,
-    FollowTaxMthPage
+    FollowTaxMthPage,
+    Test2Page
   ],
   providers: [
     StatusBar,

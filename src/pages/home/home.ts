@@ -3,6 +3,7 @@ import { NavController ,App} from 'ionic-angular';
 import { ChartPage } from '../chart/chart';
 import { RestProvider } from '../../providers/rest/rest';
 import { FollowTaxMthPage } from '../follow-tax-mth/follow-tax-mth';
+import { Test2Page } from '../test2/test2';
 
 
 @Component({
@@ -32,6 +33,11 @@ export class HomePage {
 
   GotoFax(){
     this.app.getRootNav().push(FollowTaxMthPage);  
+  }
+  
+ //Test2 ของดาว
+  GotoTest2(){
+     this.app.getRootNav().push(Test2Page);  
   }
   /*showPrice(){
     this.ShowPrice = this.ProductPrice;

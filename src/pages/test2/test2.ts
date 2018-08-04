@@ -19,14 +19,10 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class Test2Page {
   @ViewChild('barCanvas') barCanvas;
-  @ViewChild('doughnutCanvas') doughnutCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
 
   barChart: any;
-  doughnutChart: any;
-  lineChart: any;
-
   respondData: any;
+
 
   constructor(
     public navCtrl: NavController, 
@@ -34,63 +30,100 @@ export class Test2Page {
     public http: HttpClient,
     public webapi:RestProvider) {
 
-      this.getUsers();
+        this.getData();
   }
 
   apiUrl = "http://localhost:62657/api";
 
   
   ionViewDidLoad() {
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
-      type: 'bar',
-      data: {
-          labels: ["BJP", "INC", "AAP", "CPI", "CPI-M", "NCP"],
-          datasets: [{
-              label: '# of Votes',
-              data: [200, 50, 30, 15, 20, 34],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true
-                  }
-              }]
-          }
-      }
-
-  });
-  }
-
-  getUsers() {
-    this.webapi.getData('WebService').then((data)=>{
-      // console.log(result);
-      this.respondData = data;
-      console.log(this.respondData);
-//sads
-     
-
-     });
+    
     
   }
 
+  getData() {
+    this.webapi.getData('WebService').then((data)=>{
+      this.respondData = data;
+      console.log(this.respondData);
+      this.createBarChart();
+     });
+     
+  }
+
+  showStreets() {
+    let other = [];
+    let amts = [];
+    
+    for (var i = 0; i < this.respondData.length; i++) {
+        other.push(this.respondData[i]);
+    } 
+   //get data
+      for (var i = 0; i < other.length; i++) {
+        amts.push(other[i].AMT);
+      }
+      return JSON.stringify(amts);
+    }
+
+    getLebel(){
+        let other = [];
+        let lebel = [];
+
+        for (var i = 0; i < this.respondData.length; i++) {
+            other.push(this.respondData[i]);
+        } 
+        //get lebel
+        for (var i = 0; i < other.length; i++) {
+            lebel.push(other[i].GROUP_NAME);
+        }
+        return JSON.stringify(lebel);
+    }
+    
+
+  createBarChart(){
+    let amt = JSON.parse(this.showStreets());
+    console.log(amt);
+
+    let lebel = JSON.parse(this.getLebel());
+    console.log(lebel);
+
+
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+        type: 'bar',
+        data: {
+            labels: lebel,
+            datasets: [{
+                label: '# of Votes',
+                data:amt,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 206, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
   
+    });
+  }
+
 }
