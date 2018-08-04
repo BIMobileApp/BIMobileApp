@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController ,App} from 'ionic-angular';
 import { ChartPage } from '../chart/chart';
 import { RestProvider } from '../../providers/rest/rest';
-import { Test2Page } from '../test2/test2';
+import { FollowTaxMthPage } from '../follow-tax-mth/follow-tax-mth';
 
 
 @Component({
@@ -30,8 +30,8 @@ export class HomePage {
     this.app.getRootNav().push(ChartPage);  
   }
 
-  GotoTest2(){
-    this.app.getRootNav().push(Test2Page);
+  GotoFax(){
+    this.app.getRootNav().push(FollowTaxMthPage);  
   }
   /*showPrice(){
     this.ShowPrice = this.ProductPrice;

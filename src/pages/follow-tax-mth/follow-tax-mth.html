@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>กราฟแสดงสัดส่วนผลการจัดเก็บภาษีสรรพสามิตทั่วประเทศ ภาค 1-10<br/>
+      ตั้งแต่ต้นปี ถึง 2 สิงหาคม 2561
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <button ion-button round outline menuClose="left" (click)=testgraph()>View</button> <br>
+  <ion-card>
+    <ion-card-header>
+      Line Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+  <div>
+    แหล่งข้อมูล : ข้อมูลจากระบบรับเงินรายได้,ประมาณการ,ภาษีนำเข้าจากกรมศุลกากร
+    ข้อมูล ณ วันที่ 2 สิงหาคม 2561
+  </div>
+</ion-content>
