@@ -10,12 +10,14 @@ import { ChartPage } from '../pages/chart/chart';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import { Test2Page } from '../pages/test2/test2';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ChartPage
+    ChartPage,
+    Test2Page
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { RestProvider } from '../providers/rest/rest';
   entryComponents: [
     MyApp,
     HomePage,
-    ChartPage
+    ChartPage,
+    Test2Page
   ],
   providers: [
     StatusBar,
