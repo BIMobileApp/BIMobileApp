@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>เลือกเมนู</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card-content no-padding>
+        <ion-item>
+          <ion-label  center>เมนูรายงาน
+          </ion-label>
+        </ion-item>  
+      </ion-card-content>
+
+    <div class="list-no-border">
+      <!--nearby places-->
+      <ion-item  tappable (click)="gotoOldReport()">
+        <ion-icon name="md-document" item-left color="primary"></ion-icon>
+        <span ion-text color="primary">รายงานเก่า</span>
+      </ion-item>
+      <!--recent places-->
+      <ion-item  tappable (click)="gotoReport()">
+        <ion-icon name="md-document" item-left color="primary"></ion-icon>
+        <span ion-text color="primary">รายงานใหม่</span>
+      </ion-item>
+    </div>
+  </ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-input></ion-input>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card-content no-padding>
+        <ion-item>
+          <ion-label  center>
+            สถิติการจัดเก็บภาษีสรรพสามิตและการปราบปราม<br>
+            ปีงบประมาณ 2561
+          </ion-label>
+        </ion-item>  
+      </ion-card-content>
+
+    <div class="list-no-border">
+      <!--nearby places-->
+      <ion-item  tappable (click)="menuGroup1()">
+        <ion-icon name="md-time" item-left color="primary"></ion-icon>
+        <span ion-text color="primary">ตั้งแต่ต้นปีถึง 5 สิงหาคม 2561</span>
+      </ion-item>
+      <!--recent places-->
+      <ion-item  tappable (click)="menuGroup2()">
+        <ion-icon name="md-time" item-left color="primary"></ion-icon>
+        <span ion-text color="primary">ตั้งแต่ต้นปี ถึง 31 กรกฎาคม 2561</span>
+      </ion-item>
+    </div>
+  </ion-content>
+  
