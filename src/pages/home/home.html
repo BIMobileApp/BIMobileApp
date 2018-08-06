@@ -1,48 +1,96 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-     EXSICE BI MOBILE APP
+      EXSICE BI MOBILE APP
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
 
-      <ion-nav #mycontent [root]="rootPage"></ion-nav>
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>
 
-    <ion-menu [content]="mycontent">
-        <ion-content>
-            <ion-list>
-              <ion-item menuClose detail-none>Close Menu</ion-item>
-            </ion-list>
-        </ion-content>
-    </ion-menu>
+  <ion-menu [content]="mycontent">
+    <ion-content>
+      <ion-list>
+        <ion-item menuClose detail-none>Close Menu</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-content>
+    <ion-card>
+      <img src="../../assets/imgs/mobileelscover.png" />
+      <ion-card-content>
+
+        <div class="row ">
+          <div class="col"></div>
+          <div class="Advice">
+            <img class="imgCover" src="../../assets/imgs/Advice.png" /> คำแนะนำ
+          </div>
+        </div>
+
+        <ion-list >
+          <ion-item class="login">
+            <ion-label floating>ชื่อผู้ใช้</ion-label>
+            <ion-input type="text"  [(ngModel)]="userData.username"></ion-input>
+          </ion-item>
+          <ion-item class="login">
+            <ion-label floating>รหัสผ่าน</ion-label>
+            <ion-input type="password"  [(ngModel)]="userData.password"></ion-input>
+          </ion-item>
+          <ion-input [hidden]="true"></ion-input>
+        </ion-list>
+        <br>
+        <button ion-button block (click)="login()">เข้าสู่ระบบ</button>
+
+      </ion-card-content>
+      <ion-card-content>
+        <div class="row ">
+          <div class="col"></div>
+          <div class="reportHome">
+            <img src="../../assets/imgs/DataStatus.png" />
+          </div>
+
+          <div class="col"></div>
+          <div class="reportHome">
+            <img src="../../assets/imgs/MonthTAX.png" />
+          </div>
+
+          <div class="col"></div>
+          <div class="reportHome">
+            <img src="../../assets/imgs/yearTAX.png" />
+          </div>
+
+          <div class="col"></div>
+          <div class="reportHome">
+            <img src="../../assets/imgs/earlyYear.png" />
+          </div>
+
+          <div class="col"></div>
+        </div>
+      </ion-card-content>
+
+    </ion-card>
+  </ion-content>
+
+  <button ion-button round outline menuClose="left" (click)=GotoFax()>Test1</button>
+  <br>
+
+  <!--Test2 ของดาว-->
+  <button ion-button round outline menuClose="left" (click)=GotoTest2()>Test2</button>
+  <br>
+
+  <button ion-button round outline menuClose="left" (click)=GotoGauge()>GotoGauge</button>
+  <br>
+  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test4</button>
+  <br>
+
+  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test5</button>
+  <br>
+  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test6</button>
+  <br>
 
 
-  <!--<img src="../../assets/imgs/Sakamoto.jpg" alt="">
-    <br>
-    Hello, It's ME. 
-    Your Score is {{itemCount}}
-    
-  <ion-item>
-    <ion-label floating >Product Price?</ion-label>
-    <ion-input type="number" name="price" [(ngModel)]="ProductPrice"></ion-input>
-  </ion-item>
-    <button ion-button round outline (click)="showPrice()">GO!</button>
-  <p>
-    Product Price is {{ShowPrice}}
-  </p>-->
-  <button ion-button round outline menuClose="left" (click)=GotoFax()>Test1</button> <br>
-
-   <!--Test2 ของดาว-->
-  <button ion-button round outline menuClose="left" (click)=GotoTest2()>Test2</button> <br>
-
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test3</button> <br>
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test4</button> <br>
-
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test5</button> <br>
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test6</button> <br>
-  
-  
 
 </ion-content>

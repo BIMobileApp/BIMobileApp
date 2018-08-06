@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
 import { Test2Page } from '../pages/test2/test2';
+import { TabGaugeAllmthSectionTaxPage } from '../pages/tab-gauge-allmth-section-tax/tab-gauge-allmth-section-tax';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { Test2Page } from '../pages/test2/test2';
     HomePage,
     ChartPage,
     FollowTaxMthPage,
-    Test2Page
+    Test2Page,
+    TabGaugeAllmthSectionTaxPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { Test2Page } from '../pages/test2/test2';
     HomePage,
     ChartPage,
     FollowTaxMthPage,
-    Test2Page
+    Test2Page,
+    TabGaugeAllmthSectionTaxPage
   ],
   providers: [
     StatusBar,
