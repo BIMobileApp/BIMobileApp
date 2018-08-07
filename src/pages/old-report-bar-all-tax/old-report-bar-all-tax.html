@@ -1,0 +1,35 @@
+<!--
+  Generated template for the OldReportBarAllTaxPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>กราฟแท่ง</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+      กราฟแสดงผลการจัดเก็บภาษีสรรพสามิตทุกประเภท เปรียบเทียบปีก่อน และประมาณการ
+    <ion-card-header>
+      กราฟแสดงผลการจัดเก็บภาษีสรรพสามิตทุกประเภท เปรียบเทียบปีก่อน และประมาณการ
+    </ion-card-header>
+    <ion-card-content>
+      <div style="display: block">
+        <canvas baseChart 
+        [datasets]="barChartData" 
+        [labels]="barChartLabels" 
+        [options]="barChartOptions" 
+        [legend]="barChartLegend"
+        [chartType]="barChartType" 
+        (chartHover)="chartHovered($event)" 
+        (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

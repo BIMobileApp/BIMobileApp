@@ -6,6 +6,9 @@ import { FollowTaxMthPage } from '../follow-tax-mth/follow-tax-mth';
 import { Test2Page } from '../test2/test2';
 import { TabGaugeAllmthSectionTaxPage } from '../tab-gauge-allmth-section-tax/tab-gauge-allmth-section-tax';
 
+import { GaugechartPage } from '../gaugechart/gaugechart';
+import { DashboardPage } from '../dashboard/dashboard';
+import { MenuGroupPage } from '../menu-group/menu-group';
 
 @Component({
   selector: 'page-home',
@@ -27,10 +30,9 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-  
   }
 
-  login() {
+  /*login() {
 
     console.log(this.userData);
 
@@ -54,25 +56,40 @@ export class HomePage {
         });
         alert.present();
       }
-    };
+    };*/
 
   GotoChart(){
+  }
+  login(){
+    this.app.getRootNav().push(MenuGroupPage);  
+  }
+  /*GotoChart(){
     this.app.getRootNav().push(ChartPage);  
   }
 
   GotoFax(){
     this.app.getRootNav().push(FollowTaxMthPage);  
-  }
   
  //Test2 ของดาว
   GotoTest2(){
      this.app.getRootNav().push(Test2Page);  
   }
-
-  GotoGauge(){
+*/ 
+ GotoGauge(){
     this.app.getRootNav().push(TabGaugeAllmthSectionTaxPage);  
   }
-  /*showPrice(){
-    this.ShowPrice = this.ProductPrice;
+  }
+
+  /*GotoGaugeChart(){
+    this.app.getRootNav().push(GaugechartPage);  
+  }
+
+  GotoDashboard(){
+    this.app.getRootNav().push(DashboardPage);  
+  }
+
+  GotoMenuGroup(){
+    this.app.getRootNav().push(MenuGroupPage);  
   }*/
-}
+
+

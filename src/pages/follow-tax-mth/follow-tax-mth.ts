@@ -95,15 +95,17 @@ testgraph(){
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: other,// ],// [65, 59, 80, 81, 56, 55, 40, 10, 5, 50, 10, 15],
+                data: other,//[, 65, 59, 80, 81, 56, 55, 40, 10, 5, 50, 10, 15],
                 spanGaps: false,
-            }
+            }            
         ]
     }
-
 });
-
 }
 
+public map(){
+  
+ 
+}
 
 }

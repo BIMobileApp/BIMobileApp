@@ -1,96 +1,79 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      EXSICE BI MOBILE APP
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<!-- -->
+<ion-content padding class="animated fadeIn login auth-page">
+    <div class="login-content">
+  
+      <!-- Logo -->
+      <div padding-horizontal text-center class="animated fadeInDown">
+        <div class="logo"></div>
+        <h2 ion-text class="text-primary">
+          <strong>ระบบสารสนเทศเพื่อการบริการ</strong> กรมสรรพสามิต
+        </h2>
+      </div>
+  
+      <!-- Login form -->
+      <form class="list-form">
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+            ชื่อผู้ใช้
+          </ion-label>
+          <ion-input type="email"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+            รหัสผ่าน
+          </ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </form>
+  
+      <!--<p text-right ion-text color="secondary" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p>-->
+  
+      <div>
+        <button ion-button icon-start block color="dark" tappable (click)="login()">
+          <ion-icon name="log-in"></ion-icon>
+          เข้าสู่ระบบ
+        </button>
+  
+        <!--<p text-center ion-text color="secondary">Or Sign in with:</p>-->
+  
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <button ion-button icon-only block class="btn-search">
+                <ion-icon name="logo-search">ค้นหา</ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-3>
+              <button ion-button icon-only block class="btn-twitter">
+                <ion-icon name="logo-twitter">เดือนนี้</ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-3>
+              <button ion-button icon-only block class="btn-gplus">
+                <ion-icon name="logo-googleplus">รายเดือนทั้งปี</ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-3>
+                <button ion-button icon-only block class="btn-gplus">
+                  <ion-icon name="logo-googleplus">ตั้งแต่ต้นปี</ion-icon>
+                </button>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </div>
+  
+  
+      <!-- Other links -->
+      <!--<div text-center margin-top>
+        <span ion-text color="secondary" tappable (click)="register()">New here? <strong>Sign up</strong></span>
+      </div>-->
+  
+    </div>
 
-<ion-content>
-
-  <ion-nav #mycontent [root]="rootPage"></ion-nav>
-
-  <ion-menu [content]="mycontent">
-    <ion-content>
-      <ion-list>
-        <ion-item menuClose detail-none>Close Menu</ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-
-  <ion-content>
-    <ion-card>
-      <img src="../../assets/imgs/mobileelscover.png" />
-      <ion-card-content>
-
-        <div class="row ">
-          <div class="col"></div>
-          <div class="Advice">
-            <img class="imgCover" src="../../assets/imgs/Advice.png" /> คำแนะนำ
-          </div>
-        </div>
-
-        <ion-list >
-          <ion-item class="login">
-            <ion-label floating>ชื่อผู้ใช้</ion-label>
-            <ion-input type="text"  [(ngModel)]="userData.username"></ion-input>
-          </ion-item>
-          <ion-item class="login">
-            <ion-label floating>รหัสผ่าน</ion-label>
-            <ion-input type="password"  [(ngModel)]="userData.password"></ion-input>
-          </ion-item>
-          <ion-input [hidden]="true"></ion-input>
-        </ion-list>
-        <br>
-        <button ion-button block (click)="login()">เข้าสู่ระบบ</button>
-
-      </ion-card-content>
-      <ion-card-content>
-        <div class="row ">
-          <div class="col"></div>
-          <div class="reportHome">
-            <img src="../../assets/imgs/DataStatus.png" />
-          </div>
-
-          <div class="col"></div>
-          <div class="reportHome">
-            <img src="../../assets/imgs/MonthTAX.png" />
-          </div>
-
-          <div class="col"></div>
-          <div class="reportHome">
-            <img src="../../assets/imgs/yearTAX.png" />
-          </div>
-
-          <div class="col"></div>
-          <div class="reportHome">
-            <img src="../../assets/imgs/earlyYear.png" />
-          </div>
-
-          <div class="col"></div>
-        </div>
-      </ion-card-content>
-
-    </ion-card>
+    <button ion-button round outline menuClose="left" (click)=GotoGauge()>GotoGauge</button>
   </ion-content>
-
-  <button ion-button round outline menuClose="left" (click)=GotoFax()>Test1</button>
-  <br>
-
-  <!--Test2 ของดาว-->
-  <button ion-button round outline menuClose="left" (click)=GotoTest2()>Test2</button>
-  <br>
-
-  <button ion-button round outline menuClose="left" (click)=GotoGauge()>GotoGauge</button>
-  <br>
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test4</button>
-  <br>
-
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test5</button>
-  <br>
-  <button ion-button round outline menuClose="left" (click)=GotoChart()>Test6</button>
-  <br>
-
-
-
-</ion-content>
+  
