@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>ผลการจัดเก็บภาษีกรมสรรพสามิต</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-card-content no-padding>
+        <ion-item  style="background-color:#E6E6FA;">
+          <ion-label  center>ผลการจัดเก็บภาษีสรรพสามิตทุกประเภท</ion-label>
+        </ion-item>
+      </ion-card-content>
+
+          <ion-item  style="background-color:#E6E6FA;">
+            <ion-label  center>ตั้งแต่ 1 สิงหาคม 2561 ถึง 5 สิงหาคม 2561</ion-label>
+          </ion-item>
+
+          <ion-item style="background-color:#E6E6FA;">
+            <ion-label>ตั้งแต่</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="dateData.startDate"> </ion-datetime>
+          </ion-item>
+
+          <ion-item style="background-color:#E6E6FA;">
+            <ion-label>ถึง</ion-label>            
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="dateData.endDate"> </ion-datetime>
+          </ion-item>
+
+          <button ion-button round outline menuClose="left" (click)=viewgraph()>ดูรายงาน</button> <br>
+         
+          <ion-grid>
+              <ion-row style="width: 100%">
+                <ion-col col-1 style="background-color:#808080; text-align: center;">ลำดับ</ion-col>
+                <ion-col col-4 style="background-color:#808080; text-align: center;">ประเภทรายได้</ion-col>
+                <ion-col col-2 style="background-color:#808080; text-align: center;">ภาษีปีนี้</ion-col>
+                <ion-col col-2 style="background-color:#808080; text-align: center;">ประมาณการ</ion-col>
+                <ion-col col-2 style="background-color:#808080; text-align: center;">ภาษีปีก่อน</ion-col>
+                </ion-row>
+                <ion-row *ngFor="let data of responseData">
+                    <ion-col  col-1 style="text-align: center;" >{{data.ROW_LIST}}</ion-col>
+                    <ion-col  col-4>{{data.GROUP_NAME}}</ion-col>
+                    <ion-col  col-2 >{{data.TAX_NETTAX_AMT}}</ion-col>
+                    <ion-col  col-2>{{data.LAST_TAX_NETTAX_AMT}}</ion-col>
+                    <ion-col  col-2  >{{data.COMPARE_NETTAX_AMT}}</ion-col>
+                </ion-row>
+          
+         </ion-grid>
+        
+</ion-content>

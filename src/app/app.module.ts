@@ -15,11 +15,15 @@ import { MenuGroupOldReportPage } from '../pages/menu-group-old-report/menu-grou
 import { MenuGroupNewReportPage } from '../pages/menu-group-new-report/menu-group-new-report';
 import { OldReportMenuGroup1Page } from '../pages/old-report-menu-group1/old-report-menu-group1';
 import { OldReportMenuGroup2Page } from '../pages/old-report-menu-group2/old-report-menu-group2';
+import { IncomerealtimePage } from '../pages/incomerealtime/incomerealtime';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
 import { ChartsModule } from 'ng2-charts';
+import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-delivery-all-tax';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -33,13 +37,16 @@ import { ChartsModule } from 'ng2-charts';
     MenuGroupOldReportPage,
     MenuGroupNewReportPage,
     OldReportMenuGroup1Page,
-    OldReportMenuGroup2Page
+    OldReportMenuGroup2Page,
+    CheckDeliveryAllTaxPage,
+    IncomerealtimePage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    ChartsModule
+    ChartsModule,
+    NgxDatatableModule 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,7 +60,9 @@ import { ChartsModule } from 'ng2-charts';
     MenuGroupOldReportPage,
     MenuGroupNewReportPage,
     OldReportMenuGroup1Page,
-    OldReportMenuGroup2Page
+    OldReportMenuGroup2Page,
+    CheckDeliveryAllTaxPage,
+    IncomerealtimePage
   ],
   providers: [
     StatusBar,
@@ -62,4 +71,5 @@ import { ChartsModule } from 'ng2-charts';
     RestProvider
   ]
 })
+
 export class AppModule {}

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>รายงานรับเงินรายได้</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card-content no-padding>
+        <ion-item  style="background-color:#E6E6FA;">
+          <ion-label  center>รายงานรับเงินรายได้ Real Time</ion-label>
+        </ion-item>
+  </ion-card-content>
+  <ion-grid>
+    <ion-row style="width: 100%">
+      <ion-col col-2 style="background-color:#808080; text-align: center;">ลำดับ</ion-col>
+      <ion-col col-5 style="background-color:#808080; text-align: center;">กลุ่มสินค้า</ion-col>
+      <ion-col col-5 style="background-color:#808080; text-align: center;">ภาษี</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let data of responseData">
+          <ion-col  col-2 style="text-align: center;" >{{data.SORT}}</ion-col>
+          <ion-col  col-5>{{data.GROUP_NAME}}</ion-col>
+          <ion-col  col-5 >{{data.TAX}}</ion-col>
+      </ion-row>
+</ion-grid>
+</ion-content>
