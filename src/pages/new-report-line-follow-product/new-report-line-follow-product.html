@@ -12,7 +12,31 @@
 
 </ion-header>
 
+<ion-content>
+    <ion-card>
+      <ion-item style="background-color:#E6E6FA;">
+        <div padding-horizontal text-center text-wrap>
+          <p>กราฟเส้นแสดงภาษีและประมาณการตามสินค้า</p>
+        </div>
+      </ion-item><br>
+   
+      <ion-item>
+          <ion-label>สินค้า</ion-label>
+          <ion-select [(ngModel)]="product" >
+              <ion-option *ngFor="let data of prod" value="{{ data.id }}">
+                  {{ data.name }}
+                </ion-option>
+          </ion-select>
+        </ion-item>
 
-<ion-content padding>
-  <canvas #LineCanvas></canvas>
-</ion-content>
+
+
+      <ion-card-content>
+          <canvas #LineCanvas></canvas>
+      </ion-card-content><br>
+      <div text-left text-wrap>
+          <p>*หมายเหตุ : ภาษี = ภาษีในประเทศ + ภาษีนำเข้า</p>
+          <p>*ที่มาข้อมูล : ภาษีในประเทศจากระบบรับเงินรายได้ ภาษีนำเข้าจากกรมศุลกากร</p>
+          <p>*ข้อมูล ณ วันที่ 7 สิงหาคม 2561</p>
+        </div>
+    </ion-card>

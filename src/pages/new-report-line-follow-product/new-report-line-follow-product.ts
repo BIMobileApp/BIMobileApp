@@ -27,6 +27,8 @@ export class NewReportLineFollowProductPage {
   TAX = [];
   EST = [];
   lebel = [];
+  prod: any;
+  product: any;
 
 
   constructor(
@@ -39,26 +41,43 @@ export class NewReportLineFollowProductPage {
   }
 
   ionViewDidLoad() {
-    this.getData();
+    this.getProduct();
   }
 
   //----------------------- Start Connect API--------------------------------------//
+  getProduct() {
+    this.webapi.getData('xxx').then((data) => {
+      this.prod = data;
+      console.log(this.prod);
+      for (var i = 0; i < this.prod.length; i++) {
+        this.other.push(this.prod[i]);
+      }
+    });
+  }
+
+  
   getData() {
-    this.webapi.getData('OldBarAllTax').then((data) => {
+    this.webapi.getData('newReportLineFollowProd').then((data) => {
       this.respondData = data;
       console.log(this.respondData);
       for (var i = 0; i < this.respondData.length; i++) {
         this.other.push(this.respondData[i]);
       }
-      this.getTAX();
-      this.getEST();
-      this.getLebel();
-      this.createChart();
+
     });
 
   }
   //----------------------- End Connect API--------------------------------------//
   //----------------------- Start Manage Data from API-------------------------//
+  getProd() {
+    for (var i = 0; i < this.other.length; i++) {
+      this.prod.push(this.other[i].GRP_NAME);
+    }
+    this.prod = JSON.parse(JSON.stringify(this.prod));
+    console.log(this.prod);
+  }
+
+
   getTAX() {
     for (var i = 0; i < this.other.length; i++) {
       this.TAX.push(this.other[i].TAX);
@@ -78,12 +97,20 @@ export class NewReportLineFollowProductPage {
 
   getLebel() {
     for (var i = 0; i < this.other.length; i++) {
-      this.lebel.push(this.other[i].GRP_NAME);
+      this.lebel.push(this.other[i].MONTH);
     }
     this.lebel = JSON.parse(JSON.stringify(this.lebel));
     console.log(this.lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
+
+  onChange() {
+    this.getData();
+    this.getTAX();
+    this.getEST();
+    this.getLebel();
+    this.createChart();
+  }
 
   createChart() {
     this.lineChart = new Chart(this.LineCanvas.nativeElement, {
@@ -95,18 +122,18 @@ export class NewReportLineFollowProductPage {
             label: "ปีนี้",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
+            backgroundColor: "rgb(255, 99, 132)",
+            borderColor: "rgb(255, 99, 132)",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
+            pointBorderColor: "rgb(255, 99, 132)",
             pointBackgroundColor: "#fff",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBackgroundColor: "rgb(255, 99, 132)",
+            pointHoverBorderColor: "rgb(255, 99, 132)",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
@@ -117,18 +144,18 @@ export class NewReportLineFollowProductPage {
             label: "ประมาณการ",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(70,192,192,1)",
+            backgroundColor: "rgb(255, 206, 86)",
+            borderColor: "rgb(255, 206, 86)",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
+            pointBorderColor: "rgb(255, 206, 86)",
             pointBackgroundColor: "#fff",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBackgroundColor: "rgb(255, 206, 86)",
+            pointHoverBorderColor: "rgb(255, 206, 86)",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
@@ -136,6 +163,34 @@ export class NewReportLineFollowProductPage {
             spanGaps: false,
           }
         ]
+      },
+      options: {
+        //end toolti
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              userCallback: function (value, index, values) {
+                value = value.toString();
+                value = value.split(/(?=(?:...)*$)/);
+                value = value.join(',');
+                return value;
+              }
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'ล้านบาท'
+            }
+          }
+          ],
+          xAxes: [{
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 0
+            }
+          }]
+        }
       }
 
     });
