@@ -15,6 +15,8 @@ import { MenuGroupOldReportPage } from '../pages/menu-group-old-report/menu-grou
 import { MenuGroupNewReportPage } from '../pages/menu-group-new-report/menu-group-new-report';
 import { OldReportMenuGroup1Page } from '../pages/old-report-menu-group1/old-report-menu-group1';
 import { OldReportMenuGroup2Page } from '../pages/old-report-menu-group2/old-report-menu-group2';
+import { IncomerealtimePage } from '../pages/incomerealtime/incomerealtime';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -24,6 +26,9 @@ import { TabGaugeAllmthSectionTaxPage } from '../pages/tab-gauge-allmth-section-
 import { ChartsModule } from 'ng2-charts';
 import { FollowProductGroupPage } from '../pages/follow-product-group/follow-product-group';
 import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-report-bar-all-tax';
+import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-delivery-all-tax';
+import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-product/new-report-line-follow-product';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +46,10 @@ import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-repo
     OldReportMenuGroup1Page,
     OldReportMenuGroup2Page,
     FollowProductGroupPage,
-    OldReportBarAllTaxPage
+    OldReportBarAllTaxPage,
+    CheckDeliveryAllTaxPage,
+    IncomerealtimePage,
+    NewReportLineFollowProductPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,10 @@ import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-repo
     OldReportMenuGroup1Page,
     OldReportMenuGroup2Page,
     FollowProductGroupPage,
-    OldReportBarAllTaxPage
+    OldReportBarAllTaxPage,
+    CheckDeliveryAllTaxPage,
+    IncomerealtimePage,
+    NewReportLineFollowProductPage
   ],
   providers: [
     StatusBar,
@@ -74,4 +85,5 @@ import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-repo
     RestProvider
   ]
 })
+
 export class AppModule {}

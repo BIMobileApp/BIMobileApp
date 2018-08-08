@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { HttpClient } from '@angular/common/http';
+import { RestProvider } from '../../providers/rest/rest';
+import { Chart } from 'chart.js';
 
 /**
  * Generated class for the OldReportBarAllTaxPage page.
@@ -13,60 +15,158 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-old-report-bar-all-tax',
   templateUrl: 'old-report-bar-all-tax.html',
-  
+
 })
 export class OldReportBarAllTaxPage {
-  public barChartOptions:any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
 
-  public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType:string = 'bar';
-  public barChartLegend:boolean = true;
- 
-  public barChartData:any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
- 
-  public randomize():void {
-    // Only Change 3 values
-    let data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    let clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
-  }
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('barCanvas') barCanvas;
+  respondData: any;
+  other = [];
+  TAX = [];
+  TAX_LY = [];
+  EST = [];
+  lebel = [];
+  barChart: any;
+
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public http: HttpClient,
+    public webapi: RestProvider) {
+
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OldReportBarAllTaxPage');
+    this.getData();
+  }
+  //----------------------- Start Connect API--------------------------------------//
+  getData() {
+    this.webapi.getData('OldBarAllTax').then((data) => {
+      this.respondData = data;
+      // console.log(this.respondData);
+      for (var i = 0; i < this.respondData.length; i++) {
+        this.other.push(this.respondData[i]);
+      }
+      this.createChart();
+    });
+
+  }
+  //----------------------- End Connect API--------------------------------------//
+  //----------------------- Start Manage Data from API-------------------------//
+  getTAX() {
+    let gettax = [];
+    for (var i = 0; i < this.other.length; i++) {
+      this.TAX.push(this.other[i].TAX);
+    }
+    this.TAX = JSON.parse(JSON.stringify(this.TAX));
+    // console.log(this.TAX);
+
   }
 
-  OldBarAllTAx(){
-
+  getTAX_LY() {
+    for (var i = 0; i < this.other.length; i++) {
+      this.TAX_LY.push(this.other[i].TAX_LY);
+    }
+    this.TAX_LY = JSON.parse(JSON.stringify(this.TAX_LY));
+    //console.log(this.TAX_LY);
   }
+
+  getEST() {
+    for (var i = 0; i < this.other.length; i++) {
+      this.EST.push(this.other[i].EST);
+    }
+    this.EST = JSON.parse(JSON.stringify(this.EST));
+    //console.log(this.EST);
+  }
+
+  getLebel() {
+    for (var i = 0; i < this.other.length; i++) {
+      this.lebel.push(this.other[i].GRP_NAME);
+    }
+    this.lebel = JSON.parse(JSON.stringify(this.lebel));
+    //console.log(this.lebel);
+  }
+  //----------------------- End Manage Data from API-------------------------//
+
+  //----------------------- Start Create Bar Chart--------------------------------------//
+
+  createChart() {
+    this.getTAX();
+    this.getTAX_LY();
+    this.getEST();
+    this.getLebel();
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+      type: 'bar',
+      data: {
+        labels: this.lebel,
+        datasets: [{
+          label: 'ปีนี้',
+          data: this.TAX,
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255,99,132)',
+          borderWidth: 1
+        },
+        {
+          label: 'ปีก่อน',
+          data: this.TAX_LY,
+          backgroundColor: 'rgb(54, 162, 235)',
+          borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 1
+        },
+        {
+          label: 'ประมาณการ',
+          data: this.EST,
+          backgroundColor: 'rgb(255, 206, 86)',
+          borderColor: 'rgb(255, 206, 86)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var value = data.datasets[0].data[tooltipItem.index];
+              if (parseInt(value) >= 1000) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' บาท';
+              } else {
+                return value + ' บาท';
+              }
+            }
+          } // end callbacks:
+
+        }, //end toolti
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              userCallback: function (value, index, values) {
+                value = value.toString();
+                value = value.split(/(?=(?:...)*$)/);
+                value = value.join(',');
+                return value;
+              }
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'ล้านบาท'
+            }
+          }
+          ],
+          xAxes: [{
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 0
+            }
+          }]
+        }
+      }
+
+    });
+  }
+
+  //----------------------- End Create Bar Chart--------------------------------------//
 }

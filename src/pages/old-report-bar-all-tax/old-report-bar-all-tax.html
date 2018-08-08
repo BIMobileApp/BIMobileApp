@@ -12,24 +12,22 @@
 
 </ion-header>
 
-
 <ion-content>
   <ion-card>
-      กราฟแสดงผลการจัดเก็บภาษีสรรพสามิตทุกประเภท เปรียบเทียบปีก่อน และประมาณการ
-    <ion-card-header>
-      กราฟแสดงผลการจัดเก็บภาษีสรรพสามิตทุกประเภท เปรียบเทียบปีก่อน และประมาณการ
-    </ion-card-header>
-    <ion-card-content>
-      <div style="display: block">
-        <canvas baseChart 
-        [datasets]="barChartData" 
-        [labels]="barChartLabels" 
-        [options]="barChartOptions" 
-        [legend]="barChartLegend"
-        [chartType]="barChartType" 
-        (chartHover)="chartHovered($event)" 
-        (chartClick)="chartClicked($event)"></canvas>
+    <ion-item style="background-color:#E6E6FA;">
+      <div padding-horizontal text-center text-wrap>
+        <p>กราฟแสดงผลการจัดเก็บภาษีสรรพสามิตทุกประเภท เปรียบเทียบปีก่อน และประมาณการ</p>
+        <br>
+        <p>ตั้งแต่ 1 สิงหาคม 2561 ถึง 7 สิงหาคม 2561</p>
       </div>
-    </ion-card-content>
+    </ion-item><br>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content><br>
+    <div text-left text-wrap>
+        <p>*หมายเหตุ : ภาษี = ภาษีในประเทศ + ภาษีนำเข้า</p>
+        <p>*ที่มาข้อมูล : ภาษีในประเทศจากระบบรับเงินรายได้ ภาษีนำเข้าจากกรมศุลกากร</p>
+        <p>*ข้อมูล ณ วันที่ 7 สิงหาคม 2561</p>
+      </div>
   </ion-card>
 </ion-content>

@@ -8,6 +8,7 @@ import { FollowProductGroupPage } from '../follow-product-group/follow-product-g
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+import { CheckDeliveryAllTaxPage } from '../check-delivery-all-tax/check-delivery-all-tax';
 
 @IonicPage()
 @Component({
@@ -30,4 +31,7 @@ export class OldReportMenuGroup1Page {
   gotofollowProduct(){
     this.app.getRootNav().push(FollowProductGroupPage); 
   }
+
+  
+
 }

@@ -32,7 +32,7 @@ export class HomePage {
   ionViewDidLoad() {
   }
 
-  /*login() {
+  login() {
 
     console.log(this.userData);
 
@@ -47,7 +47,7 @@ export class HomePage {
         //บันทึกข้อมูลของ local storage
         localStorage.setItem("userData", this.userData.username);
         //ปิดหน้า login และกลับไปหน้าหลัง
-        this.navCtrl.setRoot(TabGaugeAllmthSectionTaxPage);
+        this.navCtrl.setRoot(MenuGroupPage);
       } else {
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
@@ -56,13 +56,13 @@ export class HomePage {
         });
         alert.present();
       }
-    };*/
+    };
 
   GotoChart(){
   }
-  login(){
+ /*login(){
     this.app.getRootNav().push(MenuGroupPage);  
-  }
+  }*/
   /*GotoChart(){
     this.app.getRootNav().push(ChartPage);  
   }

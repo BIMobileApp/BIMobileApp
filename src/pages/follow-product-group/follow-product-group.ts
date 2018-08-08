@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController,App, NavParams } from 'ionic-angular';
 import { OldReportBarAllTaxPage } from '../old-report-bar-all-tax/old-report-bar-all-tax';
+import { CheckDeliveryAllTaxPage } from '../check-delivery-all-tax/check-delivery-all-tax';
 
 /**
  * Generated class for the FollowProductGroupPage page.
@@ -28,5 +29,9 @@ export class FollowProductGroupPage {
 
   OldBarAllTax(){
     this.app.getRootNav().push(OldReportBarAllTaxPage); 
+  }
+
+  CheckDeliveryAllTax(){
+    this.app.getRootNav().push(CheckDeliveryAllTaxPage);  
   }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
+import { IncomerealtimePage } from '../incomerealtime/incomerealtime';
+import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
 
 @IonicPage()
 @Component({
@@ -8,10 +10,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MenuGroupNewReportPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public app:App) {
   }
    ionViewDidLoad() {
     console.log('ionViewDidLoad MenuGroupNewReportPage');
+  }
+
+  reportincome(){
+    this.app.getRootNav().push(IncomerealtimePage);  
+  }
+
+  LineFollowProduct(){
+    this.app.getRootNav().push(NewReportLineFollowProductPage);  
   }
 
 }

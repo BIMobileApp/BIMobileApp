@@ -16,45 +16,23 @@
 <ion-content>
     <ion-card-content no-padding>
         <ion-item  style="background-color:#E6E6FA;">
-          <ion-label  center>ตาราง</ion-label>
+          <ion-label  center>ตามประเภทสินค้า</ion-label>
         </ion-item>
         <ion-grid>
             <ion-row>
-              <ion-col col-3><img src="#"></ion-col>
-              <ion-col col-3><img src="#"></ion-col>
+              <ion-col col-3 (click)="CheckDeliveryAllTax()"><img src="../../assets/imgs/table.png"></ion-col>
+              <ion-col col-3 (click)=" OldBarAllTax()"><img src="../../assets/imgs/graph.png"></ion-col>
               <ion-col col-3><img src="#"></ion-col>
               <ion-col col-3><img src="#"></ion-col>
             </ion-row>
             <ion-row>
-              <ion-col col-3 >เดือนนี้</ion-col>
-              <ion-col col-3>ในประเทศและนำเข้า</ion-col>
-              <ion-col col-3>ภาค 1-10</ion-col>
-              <ion-col col-3>พื้นที่</ion-col>
+              <ion-col col-3>ตาราง</ion-col>
+              <ion-col col-3>กราฟแท่ง</ion-col>
+              <ion-col col-3>xx</ion-col>
+              <ion-col col-3>xx</ion-col>
             </ion-row>
          </ion-grid>
  </ion-card-content>
 
- <ion-card-content no-padding>
-    <ion-item  style="background-color:#E6E6FA;">
-      <ion-label  center>กราฟแท่ง</ion-label>
-    </ion-item>
-    <ion-grid>
-        <ion-row>
-          <ion-col col-3 (click)="OldBarAllTax()"><img src="#"></ion-col>
-          <ion-col col-3><img src="#"></ion-col>
-          <ion-col col-3><img src="#"></ion-col>
-          <ion-col col-3><img src="#"></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-3>เดือนนี้</ion-col>
-          <ion-col col-3>xx</ion-col>
-          <ion-col col-3>xx</ion-col>
-          <ion-col col-3>xx</ion-col>
-        </ion-row>
-     </ion-grid>
-</ion-card-content>
-
  
-
-
 </ion-content>
