@@ -36,6 +36,7 @@ import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-repo
 import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-delivery-all-tax';
 import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-product/new-report-line-follow-product';
 import { ContactPage } from '../pages/contact/contact';
+import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-prod/new-report-line-tax-est-prod';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { ContactPage } from '../pages/contact/contact';
     CompareTaxCarPage,
     CompareTaxBeerPage,
     CompareTaxDrinkPage,
-    ContactPage
+    ContactPage,
+    NewReportLineTaxEstProdPage
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,8 @@ import { ContactPage } from '../pages/contact/contact';
     CompareTaxCarPage,
     CompareTaxBeerPage,
     CompareTaxDrinkPage,
-    ContactPage
+    ContactPage,
+    NewReportLineTaxEstProdPage
   ],
   providers: [
     StatusBar,

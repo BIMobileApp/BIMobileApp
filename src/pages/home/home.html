@@ -1,79 +1,93 @@
 <!-- -->
 <ion-content padding class="animated fadeIn login auth-page">
-    <div class="login-content">
-  
-      <!-- Logo -->
-      <div padding-horizontal text-center class="animated fadeInDown">
-        <div class="logo"></div>
-        <h2 ion-text class="text-primary">
-          <strong>ระบบสารสนเทศเพื่อการบริการ</strong> กรมสรรพสามิต
-        </h2>
-      </div>
-  
-      <!-- Login form -->
-      <!-- <form class="list-form"> -->
-        <ion-item>
-          <ion-label floating>
-            <ion-icon name="mail" item-start class="text-primary"></ion-icon>
-            ชื่อผู้ใช้
-          </ion-label>
-          <ion-input type="taxt" [(ngModel)]="userData.username"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label floating>
-            <ion-icon name="lock" item-start class="text-primary"></ion-icon>
-            รหัสผ่าน
-          </ion-label>
-          <ion-input  type="password" [(ngModel)]="userData.password"></ion-input>
-        </ion-item>
-     <!-- </form> -->
-  
-      <!--<p text-right ion-text color="secondary" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p>-->
-  
-      <div>
-        <button ion-button icon-start block color="dark" tappable (click)="login()">
-          <ion-icon name="log-in"></ion-icon>
-          เข้าสู่ระบบ
-        </button>
-  
-        <!--<p text-center ion-text color="secondary">Or Sign in with:</p>-->
-  
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3>
-              <button ion-button icon-only block class="btn-search">
-                <ion-icon name="logo-search">ค้นหา</ion-icon>
-              </button>
-            </ion-col>
-            <ion-col col-3>
-              <button ion-button icon-only block class="btn-twitter">
-                <ion-icon name="logo-twitter">เดือนนี้</ion-icon>
-              </button>
-            </ion-col>
-            <ion-col col-3>
-              <button ion-button icon-only block class="btn-gplus">
-                <ion-icon name="logo-googleplus">รายเดือนทั้งปี</ion-icon>
-              </button>
-            </ion-col>
-            <ion-col col-3>
-                <button ion-button icon-only block class="btn-gplus">
-                  <ion-icon name="logo-googleplus">ตั้งแต่ต้นปี</ion-icon>
-                </button>
-              </ion-col>
-          </ion-row>
-        </ion-grid>
-  
-      </div>
-  
-  
-      <!-- Other links -->
-      <!--<div text-center margin-top>
-        <span ion-text color="secondary" tappable (click)="register()">New here? <strong>Sign up</strong></span>
-      </div>-->
-  
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h2 ion-text class="text-primary">
+        <strong>ระบบสารสนเทศเพื่อการบริการ</strong> กรมสรรพสามิต
+      </h2>
     </div>
 
-    <button ion-button round outline menuClose="left" (click)=GotoGauge()>GotoGauge</button>
-  </ion-content>
+    <!-- Login form -->
+    <!-- <form class="list-form"> -->
+    <ion-grid>
+      <ion-row >
+        
+        <ion-col col-4 (click)="LineFollowProduct()">
+          <img src="../../assets/imgs/DataStatus.png">
+          <p text-center>ข่าวสาร</p>
+        </ion-col>
+
+        <ion-col col-4 (click)="LineFollowProduct()">
+          <img src="../../assets/imgs/DataStatus.png">
+          <p text-center>ที่มา</p>
+        </ion-col>
+
+        <ion-col col-4 (click)="LineFollowProduct()">
+          <img src="../../assets/imgs/MonthTAX.png">
+          <p text-center>เดือนนี้</p>
+        </ion-col>
+        
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col col-4 (click)="LineFollowProduct()">
+          <img src="../../assets/imgs/yearTAX.png">
+          <p text-center>รายเดือนทั้งปี</p>
+        </ion-col>
+        <ion-col col-4 (click)="LineFollowProduct()">
+          <img src="../../assets/imgs/earlyYear.png">
+          <p text-center>ตั้งแต่ต้นปี</p>
+        </ion-col>
+        <ion-col col-4 (click)="LineFollowProduct()">
+          <img src="../../assets/imgs/Advice.png">
+          <p text-center>คำแนะนำ</p>
+        </ion-col>
+      </ion-row >
+    </ion-grid>
+
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+        ชื่อผู้ใช้
+      </ion-label>
+      <ion-input type="taxt" [(ngModel)]="userData.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+        รหัสผ่าน
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
+    </ion-item>
+    <!-- </form> -->
+
+    <!--<p text-right ion-text color="secondary" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p>-->
+
+    <div>
+      <button ion-button icon-start block color="dark" tappable (click)="login()">
+        <ion-icon name="log-in"></ion-icon>
+        เข้าสู่ระบบ
+      </button>
+
+      <!--<p text-center ion-text color="secondary">Or Sign in with:</p>-->
+
   
+
+    </div>
+
+
+    <!-- Other links -->
+    <!--<div text-center margin-top>
+        <span ion-text color="secondary" tappable (click)="register()">New here? <strong>Sign up</strong></span>
+      </div>-->
+
+  </div>
+
+  <!--<button ion-button round outline menuClose="left" (click)=GotoGauge()>GotoGauge</button>-->
+</ion-content>
