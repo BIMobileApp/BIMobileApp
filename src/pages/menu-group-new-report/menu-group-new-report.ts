@@ -10,6 +10,7 @@ import { CompareTaxAlcoholPage } from '../compare-tax-alcohol/compare-tax-alcoho
 import { CompareTaxBeerPage } from '../compare-tax-beer/compare-tax-beer';
 import { CompareTaxCarPage } from '../compare-tax-car/compare-tax-car';
 import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
+import { NewReportLineTaxEstProdPage } from '../new-report-line-tax-est-prod/new-report-line-tax-est-prod';
 
 @IonicPage()
 @Component({
@@ -59,8 +60,11 @@ export class MenuGroupNewReportPage {
     this.app.getRootNav().push(CompareTaxDrinkPage); 
   }
 
-  LineFollowProduct(){
+  report3(){
     this.app.getRootNav().push(NewReportLineFollowProductPage);  
   }
 
+  repoer16(){
+    this.app.getRootNav().push(NewReportLineTaxEstProdPage);  
+  }
 }

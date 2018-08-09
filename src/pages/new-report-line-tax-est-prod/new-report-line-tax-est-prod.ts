@@ -38,6 +38,7 @@ export class NewReportLineTaxEstProdPage {
   }
 
   ionViewDidLoad() {
+    this.getProduct();
   }
 
 
