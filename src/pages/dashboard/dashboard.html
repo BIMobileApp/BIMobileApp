@@ -1,30 +1,40 @@
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-input></ion-input>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
+<ion-content padding="">
     <ion-card-content no-padding>
-        <ion-item>
-          <ion-label  center>
-            สถิติการจัดเก็บภาษีสรรพสามิตและการปราบปราม<br>
-            ปีงบประมาณ 2561
-          </ion-label>
-        </ion-item>  
-      </ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col><img src="../assets/imgs/gauge.png"></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col><img src="../assets/imgs/gauge.png"></ion-col>
+              <ion-col></ion-col>
+              <ion-col><img src="../assets/imgs/gauge.png"></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col ><img src="../assets/imgs/gauge.png"></ion-col>
+                <ion-col><img src="../assets/imgs/logo.png"></ion-col>
+                <ion-col ><img src="../assets/imgs/gauge.png"></ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col><img src="../assets/imgs/gauge.png"></ion-col>
+                  <ion-col></ion-col>
+                  <ion-col><img src="../assets/imgs/gauge.png"></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col></ion-col>
+                    <ion-col><img src="../assets/imgs/gauge.png"></ion-col>
+                    <ion-col></ion-col>
+                  </ion-row>
+        </ion-grid>
 
-    <div class="list-no-border">
-      <!--nearby places-->
-      <ion-item  tappable (click)="menuGroup1()">
-        <ion-icon name="md-time" item-left color="primary"></ion-icon>
-        <span ion-text color="primary">ตั้งแต่ต้นปีถึง 5 สิงหาคม 2561</span>
-      </ion-item>
-      <!--recent places-->
-      <ion-item  tappable (click)="menuGroup2()">
-        <ion-icon name="md-time" item-left color="primary"></ion-icon>
-        <span ion-text color="primary">ตั้งแต่ต้นปี ถึง 31 กรกฎาคม 2561</span>
-      </ion-item>
-    </div>
-  </ion-content>
+        <ion-card-header>
+            <ion-label  center>
+                <strong text-wrap>BI Mobile ระบบสารสนเทศ</strong>
+                <strong text-wrap>เพื่อการบริหารหรมสรรพสามิต</strong>
+        </ion-label>
+       </ion-card-header>
+      <h2 style="text-align:  center;">เข้าสู่ระบบ</h2>
+    </ion-card-content>
+</ion-content>
   

@@ -9,6 +9,8 @@ import { CompareTaxAlcoholPage } from '../compare-tax-alcohol/compare-tax-alcoho
 import { CompareTaxBeerPage } from '../compare-tax-beer/compare-tax-beer';
 import { CompareTaxCarPage } from '../compare-tax-car/compare-tax-car';
 import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
+import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
+import { ChartPage } from '../chart/chart';
 
 @IonicPage()
 @Component({
@@ -25,7 +27,7 @@ export class MenuGroupNewReportPage {
     console.log('ionViewDidLoad MenuGroupNewReportPage');
   }
 
-  reportincome(){
+  /*reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  
   }
   report2(){
@@ -57,5 +59,13 @@ export class MenuGroupNewReportPage {
   report29(){
     this.app.getRootNav().push(CompareTaxDrinkPage); 
   }
+
+  LineFollowProduct(){
+    this.app.getRootNav().push(NewReportLineFollowProductPage);  
+  }
+
+  test(){
+    this.app.getRootNav().push(ChartPage);  
+  }*/
 
 }

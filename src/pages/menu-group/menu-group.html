@@ -4,24 +4,40 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <ion-card-content no-padding>
+<ion-content padding="true">
+    <!--<ion-card-content no-padding>
         <ion-item>
           <ion-label  center>เมนูรายงาน
           </ion-label>
         </ion-item>  
-      </ion-card-content>
+      </ion-card-content>-->
+    <ion-grid>
+      <ion-row>
+        <ion-col > <ion-item><span ion-text color="primary">ภาพรวม</span></ion-item></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col (click)="gotoCategoryTax();"><img src="../assets/imgs/department.png"></ion-col>
+          <ion-col (click)="gotoDepartmentList();"><img src="../assets/imgs/category.png"></ion-col>
+          <ion-col (click)="gotoDepartmentReport();"><img src="../assets/imgs/if_courthouse.png"></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>การจัดเก็บภาษี</ion-col>
+          <ion-col>แยกตามหมวดหมู่</ion-col>
+          <ion-col>แยกตามตามสำนัก</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-item><span ion-text color="primary">ลงรายละเอียด</span></ion-item></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col (click)="thisYaerReport();"><img src="../assets/imgs/overall.png"></ion-col>
+          <ion-col (click)="beforReport();"><img src="../assets/imgs/detail.png"></ion-col>
+          <ion-col (click)="caseReport();"><img src="../assets/imgs/if_11_61475 (1).png"></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>ต้นปี-ปัจจุบัน</ion-col>
+          <ion-col>ต้นปี-เดือนก่อน</ion-col>
+          <ion-col>คดี</ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <div class="list-no-border">
-      <!--nearby places-->
-      <ion-item  tappable (click)="gotoOldReport()">
-        <ion-icon name="md-document" item-left color="primary"></ion-icon>
-        <span ion-text color="primary">รายงานเก่า</span>
-      </ion-item>
-      <!--recent places-->
-      <ion-item  tappable (click)="gotoReport()">
-        <ion-icon name="md-document" item-left color="primary"></ion-icon>
-        <span ion-text color="primary">รายงานใหม่</span>
-      </ion-item>
-    </div>
   </ion-content>

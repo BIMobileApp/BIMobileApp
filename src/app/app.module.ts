@@ -24,13 +24,20 @@ import { CompareTaxAlcoholPage } from '../pages/compare-tax-alcohol/compare-tax-
 import { CompareTaxCarPage } from '../pages/compare-tax-car/compare-tax-car';
 import { CompareTaxBeerPage } from '../pages/compare-tax-beer/compare-tax-beer';
 import { CompareTaxDrinkPage } from '../pages/compare-tax-drink/compare-tax-drink';
+import { CetegoryTaxPage } from '../pages/cetegory-tax/cetegory-tax';
+import { CategoryDepartmentListPage } from '../pages/category-department-list/category-department-list';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
+import { Test2Page } from '../pages/test2/test2';
+import { TabGaugeAllmthSectionTaxPage } from '../pages/tab-gauge-allmth-section-tax/tab-gauge-allmth-section-tax';
 import { ChartsModule } from 'ng2-charts';
+import { FollowProductGroupPage } from '../pages/follow-product-group/follow-product-group';
+import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-report-bar-all-tax';
 import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-delivery-all-tax';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-product/new-report-line-follow-product';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +45,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     HomePage,
     ChartPage,
     FollowTaxMthPage,
+    Test2Page,
+    TabGaugeAllmthSectionTaxPage,
     GaugechartPage,
     DashboardPage,
     MenuGroupPage,
@@ -45,6 +54,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MenuGroupNewReportPage,
     OldReportMenuGroup1Page,
     OldReportMenuGroup2Page,
+    FollowProductGroupPage,
+    OldReportBarAllTaxPage,
     CheckDeliveryAllTaxPage,
     IncomerealtimePage,
     TaxbudgetyearPage,
@@ -54,14 +65,16 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CompareTaxAlcoholPage,
     CompareTaxCarPage,
     CompareTaxBeerPage,
-    CompareTaxDrinkPage
+    CompareTaxDrinkPage,
+    NewReportLineFollowProductPage,
+    CetegoryTaxPage,
+    CategoryDepartmentListPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    ChartsModule,
-    NgxDatatableModule 
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,6 +82,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     HomePage,
     ChartPage,
     FollowTaxMthPage,
+    Test2Page,
+    TabGaugeAllmthSectionTaxPage,
     GaugechartPage,
     DashboardPage,
     MenuGroupPage,
@@ -76,6 +91,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MenuGroupNewReportPage,
     OldReportMenuGroup1Page,
     OldReportMenuGroup2Page,
+    FollowProductGroupPage,
+    OldReportBarAllTaxPage,
     CheckDeliveryAllTaxPage,
     IncomerealtimePage,
     TaxbudgetyearPage,
@@ -85,7 +102,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CompareTaxAlcoholPage,
     CompareTaxCarPage,
     CompareTaxBeerPage,
-    CompareTaxDrinkPage
+    CompareTaxDrinkPage,
+    NewReportLineFollowProductPage,
+    CetegoryTaxPage,
+    CategoryDepartmentListPage
   ],
   providers: [
     StatusBar,

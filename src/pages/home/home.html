@@ -11,13 +11,13 @@
       </div>
   
       <!-- Login form -->
-      <form class="list-form">
+      <!-- <form class="list-form"> -->
         <ion-item>
           <ion-label floating>
             <ion-icon name="mail" item-start class="text-primary"></ion-icon>
             ชื่อผู้ใช้
           </ion-label>
-          <ion-input type="email"></ion-input>
+          <ion-input type="taxt" [(ngModel)]="userData.username"></ion-input>
         </ion-item>
   
         <ion-item>
@@ -25,9 +25,9 @@
             <ion-icon name="lock" item-start class="text-primary"></ion-icon>
             รหัสผ่าน
           </ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input  type="password" [(ngModel)]="userData.password"></ion-input>
         </ion-item>
-      </form>
+     <!-- </form> -->
   
       <!--<p text-right ion-text color="secondary" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p>-->
   
@@ -73,5 +73,8 @@
       </div>-->
   
     </div>
+
+    <button ion-button round outline menuClose="left" (click)=GotoGauge()>GotoGauge</button>
+    <button ion-button icon-only block class="btn-search" (click)=GotoHomePage();   >Home Page</button>
   </ion-content>
   

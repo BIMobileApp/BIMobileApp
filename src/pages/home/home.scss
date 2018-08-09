@@ -1,4 +1,37 @@
+page-home {
+    ion-content{
+        background-color: rgb(252, 241, 241) !important;
+        font-size: 40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  
+    
+      .Advice{
+        width: 20% !important;
+        height: auto !important;
+        font-size: 70%;
+        text-align: center;
+      }
 
-page-login,
-.login {
+      .imgCover{
+        width: 50px !important;
+        height:  auto !important;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .login{
+        font-size: 100%;
+      }
+
+      .reportHome{
+        width: 20% !important;
+        height: auto !important;
+        
+      }
+
+      .login {
+      }
+     
 }
