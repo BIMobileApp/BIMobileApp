@@ -1,27 +1,42 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>เลือกเมนู</ion-title>
+    <button ion-button menuToggle="left">
+      <ion-icon name="menu"></ion-icon>
+    </button> 
   </ion-navbar>
+    <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-header>
 
 <ion-content>
-    <ion-card-content no-padding>
-        <ion-item>
-          <ion-label  center>เมนูรายงาน
-          </ion-label>
-        </ion-item>  
-      </ion-card-content>
 
-    <div class="list-no-border">
-      <!--nearby places-->
-      <ion-item  tappable (click)="gotoOldReport()">
-        <ion-icon name="md-document" item-left color="primary"></ion-icon>
-        <span ion-text color="primary">รายงานเก่า</span>
-      </ion-item>
-      <!--recent places-->
-      <ion-item  tappable (click)="gotoReport()">
-        <ion-icon name="md-document" item-left color="primary"></ion-icon>
-        <span ion-text color="primary">รายงานใหม่</span>
-      </ion-item>
-    </div>
-  </ion-content>
+    <ion-menu [content]="mycontent">
+        <ion-content>
+          <ion-list>
+            <ion-item (click)="gotoHome()"><ion-icon name="home"></ion-icon> หน้าแรก</ion-item>
+            <ion-item (click)="gotoContact()"><ion-icon name="contact"></ion-icon> ติดต่อเรา</ion-item>
+            <ion-item (click)="gotoLogout()"><ion-icon name="md-log-out"></ion-icon> ออกจากระบบ</ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+
+
+  <ion-card-content no-padding>
+    <ion-item>
+      <ion-label center>เมนูรายงาน
+      </ion-label>
+    </ion-item>
+  </ion-card-content>
+
+  <div class="list-no-border">
+    <!--nearby places-->
+    <ion-item tappable (click)="gotoOldReport()">
+      <ion-icon name="md-document" item-left color="primary"></ion-icon>
+      <span ion-text color="primary">รายงานเก่า</span>
+    </ion-item>
+    <!--recent places-->
+    <ion-item tappable (click)="gotoReport()">
+      <ion-icon name="md-document" item-left color="primary"></ion-icon>
+      <span ion-text color="primary">รายงานใหม่</span>
+    </ion-item>
+  </div>
+</ion-content>

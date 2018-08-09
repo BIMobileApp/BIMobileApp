@@ -16,7 +16,14 @@ import { MenuGroupNewReportPage } from '../pages/menu-group-new-report/menu-grou
 import { OldReportMenuGroup1Page } from '../pages/old-report-menu-group1/old-report-menu-group1';
 import { OldReportMenuGroup2Page } from '../pages/old-report-menu-group2/old-report-menu-group2';
 import { IncomerealtimePage } from '../pages/incomerealtime/incomerealtime';
-
+import { TaxbudgetyearPage } from '../pages/taxbudgetyear/taxbudgetyear';
+import { TaxBudgetProductPage } from '../pages/tax-budget-product/tax-budget-product';
+import { TaxBudgetRegPage } from '../pages/tax-budget-reg/tax-budget-reg';
+import { TaxBudgetRegByMthPage } from '../pages/tax-budget-reg-by-mth/tax-budget-reg-by-mth';
+import { CompareTaxAlcoholPage } from '../pages/compare-tax-alcohol/compare-tax-alcohol';
+import { CompareTaxCarPage } from '../pages/compare-tax-car/compare-tax-car';
+import { CompareTaxBeerPage } from '../pages/compare-tax-beer/compare-tax-beer';
+import { CompareTaxDrinkPage } from '../pages/compare-tax-drink/compare-tax-drink';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -28,6 +35,7 @@ import { FollowProductGroupPage } from '../pages/follow-product-group/follow-pro
 import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-report-bar-all-tax';
 import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-delivery-all-tax';
 import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-product/new-report-line-follow-product';
+import { ContactPage } from '../pages/contact/contact';
 
 
 @NgModule({
@@ -49,7 +57,16 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
     OldReportBarAllTaxPage,
     CheckDeliveryAllTaxPage,
     IncomerealtimePage,
-    NewReportLineFollowProductPage
+    NewReportLineFollowProductPage,
+    TaxbudgetyearPage,
+    TaxBudgetProductPage,
+    TaxBudgetRegPage,
+    TaxBudgetRegByMthPage,
+    CompareTaxAlcoholPage,
+    CompareTaxCarPage,
+    CompareTaxBeerPage,
+    CompareTaxDrinkPage,
+    ContactPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +93,16 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
     OldReportBarAllTaxPage,
     CheckDeliveryAllTaxPage,
     IncomerealtimePage,
-    NewReportLineFollowProductPage
+    NewReportLineFollowProductPage,
+    TaxbudgetyearPage,
+    TaxBudgetProductPage,
+    TaxBudgetRegPage,
+    TaxBudgetRegByMthPage,
+    CompareTaxAlcoholPage,
+    CompareTaxCarPage,
+    CompareTaxBeerPage,
+    CompareTaxDrinkPage,
+    ContactPage
   ],
   providers: [
     StatusBar,

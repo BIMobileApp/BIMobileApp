@@ -34,7 +34,7 @@ export class TabGaugeAllmthSectionTaxPage {
   }
 
   getData() {
-    this.webapi.getData('GaugeMthSectionTax?BUDGET_MONTH_CD=1').then((data)=>{
+    this.webapi.getData('GaugeMthSectionTax').then((data)=>{
       this.respondData = data;
       console.log(this.respondData);
     });
@@ -44,7 +44,7 @@ export class TabGaugeAllmthSectionTaxPage {
     googleChart(){
     var data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
-      ['ปีนี้', ],
+      ['ปีนี้',55 ],
       ['ปีก่อน', 55],
       ['ประมาณการ', 68]
     ]);

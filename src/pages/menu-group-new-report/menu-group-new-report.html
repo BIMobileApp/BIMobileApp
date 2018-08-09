@@ -1,95 +1,162 @@
 <ion-header>
-    <ion-navbar color="primary">
-      <ion-title>รายงานใหม่</ion-title>
-    </ion-navbar>
-  </ion-header>
-   
-  <ion-content>
-      <ion-card-content no-padding>
-          <ion-item  style="background-color:#E6E6FA;">
-            <ion-label  center>ตาราง</ion-label>
-          </ion-item>
-          <ion-grid>
-              <ion-row>
-                <ion-col col-3 (click)="reportincome();"><img src="../assets/imgs/table.png"></ion-col>
-                <ion-col col-3><img src="../assets/imgs/table.png"></ion-col>
-                <ion-col col-3><img src="../assets/imgs/table.png"></ion-col>
-                <ion-col col-3><img src="../assets/imgs/table.png"></ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-3>รายงาน 22</ion-col>
-                <ion-col col-3>ในประเทศและนำเข้า</ion-col>
-                <ion-col col-3>ภาค 1-10</ion-col>
-                <ion-col col-3>พื้นที่</ion-col>
-              </ion-row>
-           </ion-grid>
-   </ion-card-content>
+  <ion-navbar color="primary">
+    <ion-title>รายงานใหม่</ion-title>
+  </ion-navbar>
+</ion-header>
 
-   <ion-card-content no-padding>
-      <ion-item  style="background-color:#E6E6FA;">
-        <ion-label  center>Gauge</ion-label>
-      </ion-item>
-      <ion-grid>
-          <ion-row>
-            <ion-col col-3><img src="../assets/imgs/gauge.png"></ion-col>
-            <ion-col col-3><img src="../assets/imgs/gauge.png"></ion-col>
-            <ion-col col-3><img src="../assets/imgs/gauge.png"></ion-col>
-            <ion-col col-3><img src="../assets/imgs/gauge.png"></ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-3>สำนักแผนภาษี</ion-col>
-            <ion-col col-3>สำนักมาตรฐาน 1</ion-col>
-            <ion-col col-3>สำนักมาตรฐาน 2</ion-col>
-            <ion-col col-3>สตป.</ion-col>
-          </ion-row>
-       </ion-grid>
-</ion-card-content>
-
-<ion-card-content no-padding>
-    <ion-item  style="background-color:#E6E6FA;">
-      <ion-label  center>กราฟเส้น</ion-label>
+<ion-content>
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label center>ตาราง</ion-label>
     </ion-item>
     <ion-grid>
-        <ion-row>
-          <ion-col col-3 (click)="LineFollowProduct()"><img src="../assets/imgs/graph.png"></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-3>3. รายงานภาษีและประมาณการตามกลุ่มสินค้า</ion-col>
-          <ion-col col-3>30. รายงานเปรียบเทียบปีก่อน สุรา</ion-col>
-          <ion-col col-3>31. รายงานเปรียบเทียบปีก่อน รถยนต์</ion-col>
-          <ion-col col-3>32. รายงานเปรียบเทียบปีก่อน เบียร์</ion-col>
-          <ion-col col-3>33. รายงานเปรียบเทียบปีก่อน เครื่องดื่ม</ion-col>
-        </ion-row>
-     </ion-grid>
-</ion-card-content>
+      <ion-row>
+        <ion-col col-3 (click)="reportincome();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+        <ion-col col-3 (click)="report2();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+        <ion-col col-3 (click)="report15();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+        <ion-col col-3 (click)="report19();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>รายงาน 22</ion-col>
+        <ion-col col-3>รายงาน 2</ion-col>
+        <ion-col col-3>รายงาน 15</ion-col>
+        <ion-col col-3>รายงาน 19</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 (click)="report20();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+        <ion-col col-3 (click)="report26();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+        <ion-col col-3 (click)="report27();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+        <ion-col col-3 (click)="report28();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>รายงาน 20</ion-col>
+        <ion-col col-3>รายงาน 26 </ion-col>
+        <ion-col col-3>รายงาน 27</ion-col>
+        <ion-col col-3>รายงาน 28</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3 (click)="report29();">
+          <img src="../assets/imgs/table.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>รายงาน 29</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
 
-<ion-card-content no-padding>
-    <ion-item  style="background-color:#E6E6FA;">
-      <ion-label  center>กราฟแท่ง</ion-label>
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label center>Gauge</ion-label>
     </ion-item>
     <ion-grid>
-        <ion-row>
-          <ion-col col-3><img src="../assets/imgs/if_4_1320813.png"></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-3>คดีและค่าปรับ</ion-col>
-        </ion-row>
-     </ion-grid>
-</ion-card-content>
+      <ion-row>
+        <ion-col col-3>
+          <img src="../assets/imgs/gauge.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="../assets/imgs/gauge.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="../assets/imgs/gauge.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="../assets/imgs/gauge.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>สำนักแผนภาษี</ion-col>
+        <ion-col col-3>สำนักมาตรฐาน 1</ion-col>
+        <ion-col col-3>สำนักมาตรฐาน 2</ion-col>
+        <ion-col col-3>สตป.</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
 
-<ion-card-content no-padding>
-    <ion-item  style="background-color:#E6E6FA;">
-      <ion-label  center>แผนที่</ion-label>
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label center>กราฟเส้น</ion-label>
     </ion-item>
     <ion-grid>
-        <ion-row>
-          <ion-col col-3><img src="../assets/imgs/map.png"></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-3>คดีและค่าปรับ</ion-col>
-        </ion-row>
-     </ion-grid>
-</ion-card-content>
+      <ion-row>
+        <ion-col col-3 (click)="LineFollowProduct()">
+          <img src="../assets/imgs/graph.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="../assets/imgs/graph.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="../assets/imgs/graph.png">
+        </ion-col>
+        <ion-col col-3>
+          <img src="../assets/imgs/graph.png">
+        </ion-col>
 
-    </ion-content>
-  
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>3. รายงานภาษีและประมาณการตามกลุ่มสินค้า</ion-col>
+        <ion-col col-3>30. รายงานเปรียบเทียบปีก่อน สุรา</ion-col>
+        <ion-col col-3>31. รายงานเปรียบเทียบปีก่อน รถยนต์</ion-col>
+        <ion-col col-3>32. รายงานเปรียบเทียบปีก่อน เบียร์</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <img src="../assets/imgs/graph.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        
+        <ion-col col-3>33. รายงานเปรียบเทียบปีก่อน เครื่องดื่ม</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label center>กราฟแท่ง</ion-label>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <img src="../assets/imgs/if_4_1320813.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>คดีและค่าปรับ</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label center>แผนที่</ion-label>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <img src="../assets/imgs/map.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>คดีและค่าปรับ</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+
+</ion-content>

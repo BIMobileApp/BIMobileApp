@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>ตารางเปรียบเทียบภาษี</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+   <ion-card>
+      <ion-card-header>
+          <ion-label  center>
+              <strong>รายงาน Top 10 ประจำเดือน</strong>
+      </ion-label>
+     </ion-card-header>
+   <!--  <ion-item>
+      <ion-label>เดือน</ion-label>
+      <ion-datetime displayFormat="MMMM" 
+      pickerFormat="MMMM"   [(ngModel)]="summaryDate" #item (ionChange)="getDashboardItemsByDate(item.value)"></ion-datetime>
+    </ion-item>-->
+    <ion-item>
+      <ion-label >เดือน</ion-label>
+      <ion-select [(ngModel)]="summaryDate" #item (ionChange)="getDashboardItemsByDate(item.value)">
+        <ion-option value="1">มกราคม</ion-option>
+        <ion-option value="2">กุมภาพันธ์</ion-option>
+        <ion-option value="3">มีนาคม</ion-option>
+        <ion-option value="4">เมษายน</ion-option>
+        <ion-option value="5">พฤษภาคม</ion-option>
+        <ion-option value="6">มิถุนายน</ion-option>
+        <ion-option value="7">กรกฎาคม</ion-option>
+        <ion-option value="8">สิงหาคม</ion-option>
+        <ion-option value="9">กันยายน</ion-option>
+        <ion-option value="10">ตุลาคม</ion-option>
+        <ion-option value="11">พฤศจิกายน</ion-option>
+        <ion-option value="12">ธันวาคม</ion-option>
+      </ion-select>
+    </ion-item>
+
+      <ion-card-content>                 
+          <ion-grid>           
+              <ion-row>
+                <ion-col col-2 style="background-color:#808080; text-align: center;">ลำดับ</ion-col>
+                <ion-col col-5 style="background-color:#808080; text-align: center;">ผู้ประกอบการ</ion-col>
+                <ion-col col-5 style="background-color:#808080; text-align: center;">ภาษีปีนี้</ion-col>
+                </ion-row>
+                <ion-row *ngFor="let data of responseData" >
+                    <ion-col  col-2  style="text-align: center;">{{data.SORT}}</ion-col>
+                    <ion-col  col-5>{{data.REG_NAME}}</ion-col>
+                    <ion-col  col-5 style="text-align: right;" >{{data.TAX}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-10 style="text-align: center;"><strong>รวมทั้งสิ้น</strong></ion-col>
+                    <ion-col col-2></ion-col>
+                  </ion-row>
+          </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>

@@ -37,7 +37,7 @@ export class HomePage {
     console.log(this.userData);
 
     //function check login
-      if (this.userData.username == "parinya_i" && this.userData.password == "parinya79") { 
+      if (this.userData.username == "a" && this.userData.password == "a") { 
         //alert 
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบสำเร็จ',

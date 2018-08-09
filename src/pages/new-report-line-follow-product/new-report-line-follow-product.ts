@@ -29,7 +29,7 @@ export class NewReportLineFollowProductPage {
   lebel = [];
   prod: any;
   product: any;
-
+  id:any;
 
   constructor(
     public navCtrl: NavController,
@@ -46,23 +46,28 @@ export class NewReportLineFollowProductPage {
 
   //----------------------- Start Connect API--------------------------------------//
   getProduct() {
-    this.webapi.getData('xxx').then((data) => {
+    this.webapi.getData('getProduct').then((data) => {
       this.prod = data;
       console.log(this.prod);
-      for (var i = 0; i < this.prod.length; i++) {
-        this.other.push(this.prod[i]);
-      }
+     
     });
   }
 
   
-  getData() {
-    this.webapi.getData('newReportLineFollowProd').then((data) => {
+  getData(id) {
+    this.respondData = "";
+    this.other = [];
+    this.webapi.getData('newReportLineFollowProd?id='+id).then((data) => {
       this.respondData = data;
       console.log(this.respondData);
       for (var i = 0; i < this.respondData.length; i++) {
         this.other.push(this.respondData[i]);
       }
+      
+      this.getTAX();
+      this.getEST();
+      this.getLebel();
+      this.createChart();
 
     });
 
@@ -79,6 +84,7 @@ export class NewReportLineFollowProductPage {
 
 
   getTAX() {
+    this.TAX=[];
     for (var i = 0; i < this.other.length; i++) {
       this.TAX.push(this.other[i].TAX);
     }
@@ -88,6 +94,7 @@ export class NewReportLineFollowProductPage {
   }
 
   getEST() {
+    this.EST=[];
     for (var i = 0; i < this.other.length; i++) {
       this.EST.push(this.other[i].EST);
     }
@@ -96,6 +103,7 @@ export class NewReportLineFollowProductPage {
   }
 
   getLebel() {
+    this.lebel=[];
     for (var i = 0; i < this.other.length; i++) {
       this.lebel.push(this.other[i].MONTH);
     }
@@ -104,14 +112,7 @@ export class NewReportLineFollowProductPage {
   }
   //----------------------- End Manage Data from API-------------------------//
 
-  onChange() {
-    this.getData();
-    this.getTAX();
-    this.getEST();
-    this.getLebel();
-    this.createChart();
-  }
-
+  
   createChart() {
     this.lineChart = new Chart(this.LineCanvas.nativeElement, {
       type: 'line',

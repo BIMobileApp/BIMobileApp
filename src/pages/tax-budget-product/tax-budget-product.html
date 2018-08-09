@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>ตารางเปรียบเทียบภาษี</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    
+     <ion-card>
+        <ion-card-header>
+            <ion-label  center>
+            <p>รายงานเปรียบเทียบภาษีปีก่อนของกลุ่มสินค้า</p>
+        </ion-label>
+       </ion-card-header>
+  
+        <ion-card-content>                 
+            <ion-grid>           
+                <ion-row>
+                  <ion-col col-3 style="background-color:#808080; text-align: center;">กลุ่มสินค้า</ion-col>
+                  <ion-col col-3 style="background-color:#808080; text-align: center;">ปีนี้</ion-col>
+                  <ion-col col-3 style="background-color:#808080; text-align: center;">ปีก่อน</ion-col>
+                  <ion-col col-3 style="background-color:#808080; text-align: center;">ประมาณการ</ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let data of responseData" >
+                      <ion-col  col-3 >{{data.GROUP_NAME}}</ion-col>
+                      <ion-col  col-3>{{data.TAX}}</ion-col>
+                      <ion-col  col-3 >{{data.TAX_LY}}</ion-col>
+                      <ion-col  col-3>{{data.ESTIMATE}}</ion-col>
+                  </ion-row>
+            </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+  </ion-content>
+  
