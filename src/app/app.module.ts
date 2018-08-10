@@ -26,6 +26,13 @@ import { CompareTaxBeerPage } from '../pages/compare-tax-beer/compare-tax-beer';
 import { CompareTaxDrinkPage } from '../pages/compare-tax-drink/compare-tax-drink';
 import { CetegoryTaxPage } from '../pages/cetegory-tax/cetegory-tax';
 import { CategoryDepartmentListPage } from '../pages/category-department-list/category-department-list';
+import { TaxYearByProductPage } from '../pages/tax-year-by-product/tax-year-by-product';
+import { TaxGroupSourcePage } from '../pages/tax-group-source/tax-group-source';
+import { FollowTaxRealtimePage } from '../pages/follow-tax-realtime/follow-tax-realtime';
+import { TaxEdRealtimePage } from '../pages/tax-ed-realtime/tax-ed-realtime';
+import { TaxgroupMonthlyFreezonePage } from '../pages/taxgroup-monthly-freezone/taxgroup-monthly-freezone';
+import { TaxAllCountryPage } from '../pages/tax-all-country/tax-all-country';
+import { TaxMonthlyFreezonePage } from '../pages/tax-monthly-freezone/tax-monthly-freezone';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -73,7 +80,14 @@ import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-pr
     NewReportLineTaxEstProdPage,
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
-    CategoryDepartmentListPage
+    CategoryDepartmentListPage,
+    TaxYearByProductPage,
+    TaxGroupSourcePage,
+    FollowTaxRealtimePage,
+    TaxEdRealtimePage,
+    TaxgroupMonthlyFreezonePage,
+    TaxAllCountryPage,
+    TaxMonthlyFreezonePage
   ],
   imports: [
     BrowserModule,
@@ -120,7 +134,14 @@ import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-pr
     NewReportLineTaxEstProdPage,
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
-    CategoryDepartmentListPage
+    CategoryDepartmentListPage,
+    TaxYearByProductPage,
+    TaxGroupSourcePage,
+    FollowTaxRealtimePage,
+    TaxEdRealtimePage,
+    TaxgroupMonthlyFreezonePage,
+    TaxAllCountryPage,
+    TaxMonthlyFreezonePage
   ],
   providers: [
     StatusBar,

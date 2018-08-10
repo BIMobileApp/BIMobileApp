@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>แยกตามหมวดหมู่->รายสินค้า</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+        <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+            <ion-label  center><strong>รายงานแสดงยอดภาษีกลุ่มสถานะในประเทศ/นำเข้า</strong></ion-label>
+        </ion-item>
+
+    <ion-card>
+        <ion-card-content no-padding>                  
+            <ion-grid>           
+                <ion-row  style="background-color:#808080;" text-center>
+                  <ion-col>ผู้ประกอบการ</ion-col>
+                  <ion-col>ในประเทศ</ion-col>
+                  <ion-col>นำเข้า</ion-col>
+                  <ion-col>รวม</ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let data of responseData" >
+                      <ion-col>{{data.GROUP_NAME}}</ion-col>
+                      <ion-col text-right>{{data.INCOME}}</ion-col>
+                      <ion-col text-right>{{data.IMPORT}}</ion-col>
+                      <ion-col text-right>{{data.SUM_ALL}}</ion-col>
+                  </ion-row>
+            </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+  </ion-content>
+  
