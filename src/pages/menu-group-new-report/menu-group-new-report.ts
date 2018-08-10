@@ -34,10 +34,10 @@ export class MenuGroupNewReportPage {
   reportAlcohol26_30(){
     this.navCtrl.setRoot(CompareTaxAlcoholPage);
   }
-  reportAlcohol28_32(){
+  reportBeer28_32(){
     this.navCtrl.setRoot(CompareTaxBeerPage);
   }
-  reportAlcohol29_33(){
+  reportDrink29_33(){
     this.navCtrl.setRoot(CompareTaxDrinkPage);
   }
   /*reportincome(){

@@ -41,7 +41,7 @@ export class CompareTaxBeerPage {
       this.LineData = data;
       console.log(this.LineData);
       this.getTAX();
-      this. getTAX_LY();
+      this.getTAX_LY();
       this.getEST();
       this.getComEst();
       this.getLebel();
