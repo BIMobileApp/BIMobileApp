@@ -10,16 +10,23 @@ import { RestProvider } from '../../providers/rest/rest';
 export class TaxBudgetRegPage {
 
   responseData: any;
+  summaryDate:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
   }
-
+ 
   ionViewDidLoad() {
-    this.webapi.getData('TaxBudgetReg').then((data)=>{
-      this.responseData = data;
+    var d = new Date(); 
+    var n = d.getFullYear();
+    var nt = d.getFullYear();
+    console.log(n);
+
+    this.summaryDate = n;
+    this.webapi.getData('TaxBudgetReg?year='+n).then((data)=>{
+        this.responseData = data;
+        console.log(this.responseData);
     });
   }
-
 }
