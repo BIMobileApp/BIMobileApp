@@ -39,6 +39,10 @@ import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-d
 import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-product/new-report-line-follow-product';
 import { ContactPage } from '../pages/contact/contact';
 import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-prod/new-report-line-tax-est-prod';
+import { CompareTaxEstCarPage } from '../pages/compare-tax-est-car/compare-tax-est-car';
+import { CompareTaxEstBeerPage } from '../pages/compare-tax-est-beer/compare-tax-est-beer';
+import { CompareTaxEstAlcoholPage } from '../pages/compare-tax-est-alcohol/compare-tax-est-alcohol';
+import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-tax-est-drink';
 
 
 @NgModule({
@@ -73,7 +77,12 @@ import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-pr
     NewReportLineTaxEstProdPage,
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
-    CategoryDepartmentListPage
+    CategoryDepartmentListPage,
+    CompareTaxEstCarPage,
+    CompareTaxEstBeerPage,
+    CompareTaxEstAlcoholPage,
+    CompareTaxEstDrinkPage
+
   ],
   imports: [
     BrowserModule,
@@ -120,7 +129,11 @@ import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-pr
     NewReportLineTaxEstProdPage,
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
-    CategoryDepartmentListPage
+    CategoryDepartmentListPage,
+    CompareTaxEstCarPage,
+    CompareTaxEstBeerPage,
+    CompareTaxEstAlcoholPage,
+    CompareTaxEstDrinkPage
   ],
   providers: [
     StatusBar,
