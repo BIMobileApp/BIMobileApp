@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, App, NavParams, AlertController } from 'ionic-angular';
-import { ChartPage } from '../chart/chart';
 import { RestProvider } from '../../providers/rest/rest';
 import { FollowTaxMthPage } from '../follow-tax-mth/follow-tax-mth';
 import { Test2Page } from '../test2/test2';
@@ -43,7 +42,8 @@ export class HomePage {
     //function check login
     this.webapi.getData('TMP_USER?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {
       this.userDB = data;
-      console.log(this.userDB);
+      console.log(this.userDB.length);
+
       
       if (this.userDB.length!=0) {
         //if (this.userData.username == "a" && this.userData.password == "a") { 
