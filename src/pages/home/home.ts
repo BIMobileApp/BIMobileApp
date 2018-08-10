@@ -37,7 +37,7 @@ export class HomePage {
     //console.log(this.userData);
 
     //function check login
-      /*if (this.userData.username == "admin" && this.userData.password == "admin") { 
+      if (this.userData.username == "a" && this.userData.password == "a") { 
         //alert 
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบสำเร็จ',
@@ -56,8 +56,8 @@ export class HomePage {
         });
         alert.present();
       }
-    };*/
-    this.app.getRootNav().push(MenuGroupPage); 
+    }
+    //this.app.getRootNav().push(MenuGroupPage); 
     
   }
 
@@ -76,7 +76,7 @@ export class HomePage {
   GotoTest2(){
      this.app.getRootNav().push(Test2Page);  
   }
-*/ 
+
   GotoGauge(){
       this.app.getRootNav().push(TabGaugeAllmthSectionTaxPage);  
     }
@@ -84,7 +84,7 @@ export class HomePage {
     GotoHomePage(){
       this.app.getRootNav().push(DashboardPage);  
     }
-  }
+  }*/ 
 
   /*GotoGaugeChart(){
     this.app.getRootNav().push(GaugechartPage);  

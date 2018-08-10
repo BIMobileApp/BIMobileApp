@@ -9,6 +9,7 @@ import { CompareTaxAlcoholPage } from '../compare-tax-alcohol/compare-tax-alcoho
 import { CompareTaxBeerPage } from '../compare-tax-beer/compare-tax-beer';
 import { CompareTaxCarPage } from '../compare-tax-car/compare-tax-car';
 import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
+import { NewReportLineTaxEstProdPage } from '../new-report-line-tax-est-prod/new-report-line-tax-est-prod';
 import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
 import { ChartPage } from '../chart/chart';
 
@@ -27,6 +28,18 @@ export class MenuGroupNewReportPage {
     console.log('ionViewDidLoad MenuGroupNewReportPage');
   }
 
+  reportCar27_31(){
+    this.navCtrl.setRoot(CompareTaxCarPage);
+  }
+  reportAlcohol26_30(){
+    this.navCtrl.setRoot(CompareTaxAlcoholPage);
+  }
+  reportAlcohol28_32(){
+    this.navCtrl.setRoot(CompareTaxBeerPage);
+  }
+  reportAlcohol29_33(){
+    this.navCtrl.setRoot(CompareTaxDrinkPage);
+  }
   /*reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  
   }
@@ -60,7 +73,7 @@ export class MenuGroupNewReportPage {
     this.app.getRootNav().push(CompareTaxDrinkPage); 
   }
 
-  LineFollowProduct(){
+  report3(){
     this.app.getRootNav().push(NewReportLineFollowProductPage);  
   }
 

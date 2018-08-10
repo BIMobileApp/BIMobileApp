@@ -37,6 +37,8 @@ import { FollowProductGroupPage } from '../pages/follow-product-group/follow-pro
 import { OldReportBarAllTaxPage } from '../pages/old-report-bar-all-tax/old-report-bar-all-tax';
 import { CheckDeliveryAllTaxPage } from '../pages/check-delivery-all-tax/check-delivery-all-tax';
 import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-product/new-report-line-follow-product';
+import { ContactPage } from '../pages/contact/contact';
+import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-prod/new-report-line-tax-est-prod';
 
 
 @NgModule({
@@ -58,6 +60,7 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
     OldReportBarAllTaxPage,
     CheckDeliveryAllTaxPage,
     IncomerealtimePage,
+    NewReportLineFollowProductPage,
     TaxbudgetyearPage,
     TaxBudgetProductPage,
     TaxBudgetRegPage,
@@ -66,6 +69,8 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
     CompareTaxCarPage,
     CompareTaxBeerPage,
     CompareTaxDrinkPage,
+    ContactPage,
+    NewReportLineTaxEstProdPage,
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage
@@ -73,9 +78,16 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
-    ChartsModule
-  ],
+    ChartsModule,
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition'
+    }
+  )],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -95,6 +107,7 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
     OldReportBarAllTaxPage,
     CheckDeliveryAllTaxPage,
     IncomerealtimePage,
+    NewReportLineFollowProductPage,
     TaxbudgetyearPage,
     TaxBudgetProductPage,
     TaxBudgetRegPage,
@@ -103,6 +116,8 @@ import { NewReportLineFollowProductPage } from '../pages/new-report-line-follow-
     CompareTaxCarPage,
     CompareTaxBeerPage,
     CompareTaxDrinkPage,
+    ContactPage,
+    NewReportLineTaxEstProdPage,
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage

@@ -1,16 +1,23 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>เลือกเมนู</ion-title>
+    <button ion-button menuToggle="left">
+      <ion-icon name="menu"></ion-icon>
+    </button> 
   </ion-navbar>
+    <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-header>
 
 <ion-content padding="true">
-    <!--<ion-card-content no-padding>
-        <ion-item>
-          <ion-label  center>เมนูรายงาน
-          </ion-label>
-        </ion-item>  
-      </ion-card-content>-->
+    <ion-menu [content]="mycontent">
+        <ion-content>
+          <ion-list>
+            <ion-item (click)="gotoHome()"><ion-icon name="home"></ion-icon> หน้าแรก</ion-item>
+            <ion-item (click)="gotoContact()"><ion-icon name="contact"></ion-icon> ติดต่อเรา</ion-item>
+            <ion-item (click)="gotoLogout()"><ion-icon name="md-log-out"></ion-icon> ออกจากระบบ</ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+      
     <ion-grid>
       <ion-row>
         <ion-col > <ion-item><span ion-text color="primary">ภาพรวม</span></ion-item></ion-col>
