@@ -24,6 +24,8 @@ import { CompareTaxAlcoholPage } from '../pages/compare-tax-alcohol/compare-tax-
 import { CompareTaxCarPage } from '../pages/compare-tax-car/compare-tax-car';
 import { CompareTaxBeerPage } from '../pages/compare-tax-beer/compare-tax-beer';
 import { CompareTaxDrinkPage } from '../pages/compare-tax-drink/compare-tax-drink';
+import { CetegoryTaxPage } from '../pages/cetegory-tax/cetegory-tax';
+import { CategoryDepartmentListPage } from '../pages/category-department-list/category-department-list';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -68,14 +70,24 @@ import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-pr
     CompareTaxBeerPage,
     CompareTaxDrinkPage,
     ContactPage,
-    NewReportLineTaxEstProdPage
+    NewReportLineTaxEstProdPage,
+    NewReportLineFollowProductPage,
+    CetegoryTaxPage,
+    CategoryDepartmentListPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
-    ChartsModule
-  ],
+    ChartsModule,
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition'
+    }
+  )],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -105,7 +117,10 @@ import { NewReportLineTaxEstProdPage } from '../pages/new-report-line-tax-est-pr
     CompareTaxBeerPage,
     CompareTaxDrinkPage,
     ContactPage,
-    NewReportLineTaxEstProdPage
+    NewReportLineTaxEstProdPage,
+    NewReportLineFollowProductPage,
+    CetegoryTaxPage,
+    CategoryDepartmentListPage
   ],
   providers: [
     StatusBar,

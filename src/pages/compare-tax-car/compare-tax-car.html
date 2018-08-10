@@ -7,8 +7,10 @@
   <ion-content padding>   
      <ion-card>
         <ion-card-header>
-            <ion-label  center>
+            <ion-label >
+                <div text-center>
                 <strong>รายงานเปรียบทียบภาษีรถยนต์</strong>
+            </div>
         </ion-label>
        </ion-card-header>
         <ion-card-content>                 
@@ -30,6 +32,12 @@
             </ion-grid>
         </ion-card-content>
       </ion-card>
+
+      <ion-card>
+      <ion-card-content>
+            <canvas #LineCanvas></canvas>
+          </ion-card-content>
+          </ion-card>
   
   </ion-content>
   

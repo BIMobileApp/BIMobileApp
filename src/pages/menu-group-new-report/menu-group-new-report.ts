@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { IncomerealtimePage } from '../incomerealtime/incomerealtime';
-import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
 import { TaxbudgetyearPage } from '../taxbudgetyear/taxbudgetyear';
 import { TaxBudgetProductPage } from '../tax-budget-product/tax-budget-product';
 import { TaxBudgetRegPage } from '../tax-budget-reg/tax-budget-reg';
@@ -11,6 +10,8 @@ import { CompareTaxBeerPage } from '../compare-tax-beer/compare-tax-beer';
 import { CompareTaxCarPage } from '../compare-tax-car/compare-tax-car';
 import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
 import { NewReportLineTaxEstProdPage } from '../new-report-line-tax-est-prod/new-report-line-tax-est-prod';
+import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
+import { ChartPage } from '../chart/chart';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,19 @@ export class MenuGroupNewReportPage {
     console.log('ionViewDidLoad MenuGroupNewReportPage');
   }
 
-  reportincome(){
+  reportCar27_31(){
+    this.navCtrl.setRoot(CompareTaxCarPage);
+  }
+  reportAlcohol26_30(){
+    this.navCtrl.setRoot(CompareTaxAlcoholPage);
+  }
+  reportAlcohol28_32(){
+    this.navCtrl.setRoot(CompareTaxBeerPage);
+  }
+  reportAlcohol29_33(){
+    this.navCtrl.setRoot(CompareTaxDrinkPage);
+  }
+  /*reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  
   }
   report2(){
@@ -64,7 +77,8 @@ export class MenuGroupNewReportPage {
     this.app.getRootNav().push(NewReportLineFollowProductPage);  
   }
 
-  repoer16(){
-    this.app.getRootNav().push(NewReportLineTaxEstProdPage);  
-  }
+  test(){
+    this.app.getRootNav().push(ChartPage);  
+  }*/
+
 }

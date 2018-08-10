@@ -21,8 +21,10 @@
   <!--google-->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script>
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
       google.charts.load('current', {'packages':['gauge']});
-   </script>
+  </script>
 
   <!-- un-comment this code to enable service worker
   <script>

@@ -5,6 +5,8 @@ import { MenuGroupOldReportPage } from '../menu-group-old-report/menu-group-old-
 import { DashboardPage } from '../dashboard/dashboard';
 import { HomePage } from '../home/home';
 import { ContactPage } from '../contact/contact';
+import { CetegoryTaxPage } from '../cetegory-tax/cetegory-tax';
+import { CategoryDepartmentListPage } from '../category-department-list/category-department-list';
 
 @IonicPage()
 @Component({
@@ -40,6 +42,10 @@ export class MenuGroupPage {
   gotoLogout(){
     this.app.getRootNav().push(HomePage);  
   }
+  
+  gotoDepartmentReport(){
+    this.app.getRootNav().push(MenuGroupNewReportPage); 
+  }
 
   gotoReport(){
     this.app.getRootNav().push(MenuGroupNewReportPage);  
@@ -47,6 +53,26 @@ export class MenuGroupPage {
 
   gotoOldReport(){
     this.app.getRootNav().push(DashboardPage);  
+  }
+
+  thisYaerReport(){
+    this.app.getRootNav().push(MenuGroupOldReportPage); 
+  }
+
+  beforReport(){
+    this.app.getRootNav().push(MenuGroupNewReportPage); 
+  }
+
+  caseReport(){
+    
+  }
+
+  gotoCategoryTax(){
+    this.app.getRootNav().push(CetegoryTaxPage); 
+  }
+
+  gotoDepartmentList(){
+    this.app.getRootNav().push(CategoryDepartmentListPage); 
   }
 
 }

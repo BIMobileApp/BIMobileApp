@@ -34,7 +34,7 @@ export class HomePage {
 
   login() {
 
-    console.log(this.userData);
+    //console.log(this.userData);
 
     //function check login
       if (this.userData.username == "a" && this.userData.password == "a") { 
@@ -56,10 +56,12 @@ export class HomePage {
         });
         alert.present();
       }
-    };
-
-  GotoChart(){
+    }
+    //this.app.getRootNav().push(MenuGroupPage); 
+    
   }
+
+
  /*login(){
     this.app.getRootNav().push(MenuGroupPage);  
   }*/
@@ -74,11 +76,15 @@ export class HomePage {
   GotoTest2(){
      this.app.getRootNav().push(Test2Page);  
   }
-*/ 
- GotoGauge(){
-    this.app.getRootNav().push(TabGaugeAllmthSectionTaxPage);  
-  }
-  }
+
+  GotoGauge(){
+      this.app.getRootNav().push(TabGaugeAllmthSectionTaxPage);  
+    }
+
+    GotoHomePage(){
+      this.app.getRootNav().push(DashboardPage);  
+    }
+  }*/ 
 
   /*GotoGaugeChart(){
     this.app.getRootNav().push(GaugechartPage);  
