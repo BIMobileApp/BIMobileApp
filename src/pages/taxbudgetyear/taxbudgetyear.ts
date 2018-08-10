@@ -16,9 +16,8 @@ export class TaxbudgetyearPage {
   }
 
   ionViewDidLoad() {
-    this.webapi.getData('TaxBudgetYear').then((data)=>{
+    /*this.webapi.getData('TaxBudgetYear').then((data)=>{
       this.responseData = data;
-    });
+    });*/
   }
-
 }

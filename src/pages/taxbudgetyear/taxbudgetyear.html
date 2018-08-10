@@ -6,13 +6,11 @@
 
 <ion-content padding>
   
-    <ion-card>
-      <ion-card-header>
-          <ion-label  center>
-          <p>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</p>
-      </ion-label>
-     </ion-card-header>
+    <!-- <ion-item  style="background-color:#E6E6FA;">
+            <ion-label  center>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
+    </ion-item>-->
 
+    <ion-card>
       <ion-card-content>                 
           <ion-grid>           
               <ion-row style="width: 100%">
@@ -21,15 +19,14 @@
                 <ion-col col-3 style="background-color:#808080; text-align: center;">ปีก่อน</ion-col>
                 <ion-col col-3 style="background-color:#808080; text-align: center;">ประมาณการ</ion-col>
                 </ion-row>
-                <ion-scroll scrollX="true">
-                <ion-row *ngFor="let data of responseData" >
+                <!--<ion-row *ngFor="let data of responseData" >
                     <ion-col  col-3 >{{data.MONTH_DESC}}</ion-col>
                     <ion-col  col-3>{{data.TAX}}</ion-col>
                     <ion-col  col-3 >{{data.TAX_LY}}</ion-col>
                     <ion-col  col-3>{{data.ESTIMATE}}</ion-col>
-                </ion-row>
-                </ion-scroll>
+                </ion-row>-->
           </ion-grid>
       </ion-card-content>
     </ion-card>
+
 </ion-content>
