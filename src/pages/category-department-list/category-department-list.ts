@@ -5,6 +5,11 @@ import { TaxBudgetRegPage } from '../tax-budget-reg/tax-budget-reg';
 import { TaxbudgetyearPage } from '../taxbudgetyear/taxbudgetyear';
 import { TaxBudgetProductPage } from '../tax-budget-product/tax-budget-product';
 import { IncomerealtimePage } from '../incomerealtime/incomerealtime';
+import { TaxYearByProductPage } from '../tax-year-by-product/tax-year-by-product';
+import { TaxGroupSourcePage } from '../tax-group-source/tax-group-source';
+import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtime';
+import { TaxEdRealtimePage } from '../tax-ed-realtime/tax-ed-realtime';
+import { TaxgroupMonthlyFreezonePage } from '../taxgroup-monthly-freezone/taxgroup-monthly-freezone';
 
 @IonicPage()
 @Component({
@@ -40,6 +45,26 @@ export class CategoryDepartmentListPage {
 
   IncomeRealTimeTable(){
     this.app.getRootNav().push(IncomerealtimePage); 
+  }
+
+  TaxYearByProduct(){
+    this.app.getRootNav().push(TaxYearByProductPage); 
+  }
+
+  TaxGroupSource(){
+    this.app.getRootNav().push(TaxGroupSourcePage); 
+  }
+
+  FollowTaxRealtime(){
+    this.app.getRootNav().push(FollowTaxRealtimePage); 
+  }
+
+  TaxEdRealtime(){
+    this.app.getRootNav().push(TaxEdRealtimePage); 
+  }
+
+  TaxMonthlyFreezone(){
+    this.app.getRootNav().push(TaxgroupMonthlyFreezonePage); 
   }
 
 }

@@ -25,9 +25,9 @@
                   <ion-col col-5 style="background-color:#808080; text-align: center;">ภาษีปีนี้</ion-col>
                   </ion-row>
                   <ion-row *ngFor="let data of responseData" >
-                      <ion-col  col-2 >{{data.SORT}}</ion-col>
+                      <ion-col  col-2  text-center>{{data.SORT}}</ion-col>
                       <ion-col  col-5>{{data.REG_NAME}}</ion-col>
-                      <ion-col  col-5 >{{data.TAX}}</ion-col>
+                      <ion-col  col-5 text-right>{{data.TAX}}</ion-col>
                   </ion-row>
                   <ion-row>
                       <ion-col col-10 style="text-align: center;"><strong>รวมทั้งสิ้น</strong></ion-col>

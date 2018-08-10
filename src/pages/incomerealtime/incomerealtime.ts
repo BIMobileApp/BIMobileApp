@@ -13,17 +13,11 @@ export class IncomerealtimePage {
      public navParams: NavParams,
      public webapi:RestProvider) {
 
-      this.webapi.getData('SourceImcome').then((data)=>{
-        this.respondData = data;
-        console.log(this.respondData);
-      });
-   
   }
 
   ionViewDidLoad() {
-    
+    this.webapi.getData('SourceImcome').then((data)=>{
+      this.respondData = data;
+    });
   }
-
-
-
 }

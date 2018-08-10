@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController ,App,NavParams, AlertController} from 'ionic-angular';
+import { NavController, App, NavParams, AlertController } from 'ionic-angular';
 import { ChartPage } from '../chart/chart';
 import { RestProvider } from '../../providers/rest/rest';
 import { FollowTaxMthPage } from '../follow-tax-mth/follow-tax-mth';
@@ -20,13 +20,18 @@ export class HomePage {
     "username": "",
     "password": ""
   };
+  userDB: any;
+  offcode: any;
+  offdesc: any;
+  username: any;
 
   constructor(public navCtrl: NavController,
-    public app:App,
+    public app: App,
     public restProvider: RestProvider,
     public alertCtrl: AlertController,
-    public navParams: NavParams){
-    
+    public navParams: NavParams,
+    public webapi: RestProvider) {
+
   }
 
   ionViewDidLoad() {
@@ -35,15 +40,23 @@ export class HomePage {
   login() {
 
     //console.log(this.userData);
-
     //function check login
-      if (this.userData.username == "a" && this.userData.password == "a") { 
-        //alert 
+    this.webapi.getData('TMP_USER?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {
+      this.userDB = data;
+      console.log(this.userDB);
+      
+      if (this.userDB.length!=0) {
+        //if (this.userData.username == "a" && this.userData.password == "a") { 
         const alert = this.alertCtrl.create({
-          title: 'เข้าสู่ระบบสำเร็จ',
+          title: 'ยินดีต้อนรับ',
+          subTitle: 'เข้าสู่ระบสำเร็จ',
           buttons: ['OK']
         });
         alert.present();
+       this.offcode = this.userDB[0].OFFCODE;
+       this.offdesc = this.userDB[0].OFFDESC;
+       this.username = this.userDB[0].USERNAME;
+       //console.log(this.offcode+'----'+this.offdesc+'------'+this.username);
         //บันทึกข้อมูลของ local storage
         localStorage.setItem("userData", this.userData.username);
         //ปิดหน้า login และกลับไปหน้าหลัง
@@ -56,10 +69,12 @@ export class HomePage {
         });
         alert.present();
       }
-    }
-    //this.app.getRootNav().push(MenuGroupPage); 
+    });
     
   }
+  //this.app.getRootNav().push(MenuGroupPage); 
+
+}
 
 
  /*login(){
@@ -84,7 +99,7 @@ export class HomePage {
     GotoHomePage(){
       this.app.getRootNav().push(DashboardPage);  
     }
-  }*/ 
+  }*/
 
   /*GotoGaugeChart(){
     this.app.getRootNav().push(GaugechartPage);  

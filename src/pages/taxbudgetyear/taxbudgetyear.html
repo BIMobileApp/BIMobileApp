@@ -4,27 +4,33 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  
+
+<ion-content>
+
+    <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+        <ion-label  center><strong>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</strong></ion-label>
+    </ion-item>
+
+
     <!-- <ion-item  style="background-color:#E6E6FA;">
             <ion-label  center>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
     </ion-item>-->
-
+    
     <ion-card>
       <ion-card-content>                 
           <ion-grid>           
-              <ion-row style="width: 100%">
+              <ion-row>
                 <ion-col col-3 style="background-color:#808080; text-align: center;">เดือน</ion-col>
                 <ion-col col-3 style="background-color:#808080; text-align: center;">ปีนี้</ion-col>
                 <ion-col col-3 style="background-color:#808080; text-align: center;">ปีก่อน</ion-col>
                 <ion-col col-3 style="background-color:#808080; text-align: center;">ประมาณการ</ion-col>
                 </ion-row>
-                <!--<ion-row *ngFor="let data of responseData" >
+                <ion-row *ngFor="let data of responseData">
                     <ion-col  col-3 >{{data.MONTH_DESC}}</ion-col>
                     <ion-col  col-3>{{data.TAX}}</ion-col>
                     <ion-col  col-3 >{{data.TAX_LY}}</ion-col>
                     <ion-col  col-3>{{data.ESTIMATE}}</ion-col>
-                </ion-row>-->
+                </ion-row>
           </ion-grid>
       </ion-card-content>
     </ion-card>

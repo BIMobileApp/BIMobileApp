@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>แยกตามหมวดหมู่->Realtime</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content> 
+      <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+          <ion-label  center><strong>รายงานติดตามการชำระภาษี</strong></ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-label  text-center>เดือน : </ion-label>
+          <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
+            <ion-option value="1" >มกราคม</ion-option>
+            <ion-option value="2">กุมภาพันธ์</ion-option>
+            <ion-option value="3">มีนาคม</ion-option>
+            <ion-option value="4">เมษายน</ion-option>
+            <ion-option value="5">พฤษภาคม</ion-option>
+            <ion-option value="6">มิถุนายน</ion-option>
+            <ion-option value="7">กรกฎาคม</ion-option>
+            <ion-option value="8">สิงหาคม</ion-option>
+            <ion-option value="9">กันยายน</ion-option>
+            <ion-option value="10">ตุลาคม</ion-option>
+            <ion-option value="11">พฤศจิกายน</ion-option>
+            <ion-option value="12">ธันวาคม</ion-option>
+          </ion-select>
+        </ion-item>
+     <ion-card>
+        <ion-card-content>                 
+            <ion-grid>           
+                <ion-row  style="background-color:#ffa94d ;">
+                  <ion-col text-center>วันที่</ion-col>
+                  <ion-col text-center>ในประเทศ</ion-col>
+                  <ion-col text-center>ต่างประเทศ</ion-col>
+                  <ion-col text-center>FreeZone</ion-col>
+                  <ion-col text-center>นำเข้าชำระในพื้นที่</ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let data of responseData">
+                      <ion-col text-center  style="text-align: center;">{{data.TIME_ID}}</ion-col>
+                      <ion-col text-right>{{data.CD_INCOME}}</ion-col>
+                      <ion-col text-right>{{data.INCOME}}</ion-col>
+                      <ion-col text-right>{{data.IMPORT}}</ion-col>
+                      <ion-col text-right>{{data.IMPORT}}</ion-col>
+                  </ion-row>
+            </ion-grid>
+        </ion-card-content>
+      </ion-card>
+  
+  </ion-content>
+  

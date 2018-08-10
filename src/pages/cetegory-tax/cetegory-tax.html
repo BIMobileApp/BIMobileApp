@@ -8,10 +8,10 @@
       <ion-card-content no-padding>
           <ion-grid>
               <ion-row>
-                <ion-col> <img src="../assets/imgs/graph.png"> แผนที่ประเทศไทย</ion-col>
+                <ion-col (click)="TaxAllCountry();"> <img src="../assets/imgs/graph.png"> แผนที่ประเทศไทย</ion-col>
                </ion-row>
                <ion-row>
-                  <ion-col> <img src="../assets/imgs/graph.png">รายงานที่ 1</ion-col>
+                  <ion-col (click)="TaxMonthlyFreezone();"> <img src="../assets/imgs/graph.png">รายงานที่ 1</ion-col>
                  </ion-row>
                  <ion-row>
                     <ion-col (click)="TaxThisyearTable()"> <img src="../assets/imgs/graph.png">ภาษีประจำปีงบปัจจุบัน</ion-col>
