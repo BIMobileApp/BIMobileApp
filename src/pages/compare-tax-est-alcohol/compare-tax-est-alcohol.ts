@@ -1,54 +1,65 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js';
 
+/**
+ * Generated class for the CompareTaxEstAlcoholPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: 'page-compare-tax-beer',
-  templateUrl: 'compare-tax-beer.html',
+  selector: 'page-compare-tax-est-alcohol',
+  templateUrl: 'compare-tax-est-alcohol.html',
 })
-export class CompareTaxBeerPage {
+export class CompareTaxEstAlcoholPage {
   @ViewChild('LineCanvas') LineCanvas;
   responseData: any;
   lineChart: any;
+
   LineData: any;
   TAX = [];
   TAX_LY = [];
   EST = [];
   ComEst = [];
   lebel = [];
+  prod: any;
+  product: any;
+  id:any;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public webapi:RestProvider) {
+    public webapi: RestProvider) {
   }
 
   ionViewDidLoad() {
-    let grp_name = 'ภาษีเบียร์';
-    this.webapi.getData('CompareTax?grp_name='+grp_name).then((data)=>{
-      this.responseData = data;
-      console.log(this.responseData);
-    });
-
+    this.getProduct();
     this.getLineData();
+    
   }
   getLineData() {
-    let grp_id = "7001";
+    let grp_id = "7002";
     this.webapi.getData('CompareTaxLineGraph?id=' + grp_id).then((data) => {
       this.LineData = data;
       console.log(this.LineData);
       this.getTAX();
-      this.getTAX_LY();
       this.getEST();
-      this.getComEst();
       this.getLebel();
       this.createChart();
     });
 
 
+  }
+
+  getProduct() {
+    this.webapi.getData('getProduct').then((data) => {
+      this.prod = data;
+      console.log(this.prod);
+     
+    });
   }
 
   //----------------------- Start Manage Data from API-------------------------//
@@ -63,16 +74,6 @@ export class CompareTaxBeerPage {
 
   }
 
-  getTAX_LY() {
-    this.TAX_LY = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.TAX_LY.push(this.LineData[i].TAX_LY);
-    }
-    this.TAX_LY = JSON.parse(JSON.stringify(this.TAX_LY));
-    console.log("lastyear" + this.TAX_LY);
-
-  }
-
   getEST() {
     this.EST = [];
     for (var i = 0; i < this.LineData.length; i++) {
@@ -80,15 +81,6 @@ export class CompareTaxBeerPage {
     }
     this.EST = JSON.parse(JSON.stringify(this.EST));
     console.log("est" + this.EST);
-  }
-
-  getComEst() {
-    this.ComEst = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.ComEst.push(this.LineData[i].COMPARE_ESTIMATE_DIFF);
-    }
-    this.ComEst = JSON.parse(JSON.stringify(this.ComEst));
-    console.log("com" + this.ComEst);
   }
 
   getLebel() {
@@ -132,28 +124,6 @@ export class CompareTaxBeerPage {
             spanGaps: false,
           },
           {
-            label: "ปีก่อน",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgb(255, 206, 86)",
-            borderColor: "rgb(255, 206, 86)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 206, 86)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 206, 86)",
-            pointHoverBorderColor: "rgb(255, 206, 86)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: this.TAX_LY,
-            spanGaps: false,
-          },
-          {
             label: "ประมาณการ",
             fill: false,
             lineTension: 0.1,
@@ -173,28 +143,6 @@ export class CompareTaxBeerPage {
             pointRadius: 1,
             pointHitRadius: 10,
             data: this.EST,
-            spanGaps: false,
-          },
-          {
-            label: "เปรียบเทียบประมาณการ",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgb(255, 432, 12)",
-            borderColor: "rgb(255, 432, 12)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 432, 12)",
-            pointBackgroundColor: "#fff",   
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 432, 12)",
-            pointHoverBorderColor: "rgb(255, 432, 12)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: this.ComEst,
             spanGaps: false,
           }
         ]

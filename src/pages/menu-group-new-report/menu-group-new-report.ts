@@ -12,6 +12,10 @@ import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
 import { NewReportLineTaxEstProdPage } from '../new-report-line-tax-est-prod/new-report-line-tax-est-prod';
 import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
 import { ChartPage } from '../chart/chart';
+import { CompareTaxEstCarPage } from '../compare-tax-est-car/compare-tax-est-car';
+import { CompareTaxEstBeerPage } from '../compare-tax-est-beer/compare-tax-est-beer';
+import { CompareTaxEstDrinkPage } from '../compare-tax-est-drink/compare-tax-est-drink';
+import { CompareTaxEstAlcoholPage } from '../compare-tax-est-alcohol/compare-tax-est-alcohol';
 
 @IonicPage()
 @Component({
@@ -34,11 +38,24 @@ export class MenuGroupNewReportPage {
   reportAlcohol26_30(){
     this.navCtrl.setRoot(CompareTaxAlcoholPage);
   }
-  reportAlcohol28_32(){
+  reportBeer28_32(){
     this.navCtrl.setRoot(CompareTaxBeerPage);
   }
-  reportAlcohol29_33(){
+  reportDrink29_33(){
     this.navCtrl.setRoot(CompareTaxDrinkPage);
+  }
+
+  reportCar24_3(){
+    this.navCtrl.setRoot(CompareTaxEstCarPage);
+  }
+  reportBeer3(){
+    this.navCtrl.setRoot(CompareTaxEstBeerPage);
+  }
+  reportDrink3(){
+    this.navCtrl.setRoot(CompareTaxEstDrinkPage);
+  }
+  reportAlcohol3(){
+    this.navCtrl.setRoot(CompareTaxEstAlcoholPage);
   }
   /*reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  

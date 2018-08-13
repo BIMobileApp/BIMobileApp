@@ -26,8 +26,32 @@
           </ion-select>
         </ion-item>
      <ion-card>
-        <ion-card-content>                 
-            <ion-grid>           
+        <ion-card-content>
+            
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                        <div class="table-responsive">     
+                        <table class="table">
+                                <thead>
+                                        <tr style="background-color: #626567">
+                                                <th>วันที่</th>
+                                                <th>นำเข้ากรมศุลกากร</th>
+                                                <th>ในประเทศ</th>
+                                                <th>ต่างประเทศ</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let data of responseData">
+                                                <td>{{data.TIME_ID}}</td>
+                                                <td>{{data.CD_INCOME}}</td>
+                                                <td>{{data.INCOME}}</td>
+                                                <td>{{data.FREE_ZONE}}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </ion-scroll>  
+
+            <!--<ion-grid>           
                 <ion-row  style="background-color:#ffa94d ;">
                   <ion-col text-center>วันที่</ion-col>
                   <ion-col text-center>นำเข้ากรมศุลกากร</ion-col>
@@ -41,7 +65,7 @@
                       <ion-col text-right>{{data.FREE_ZONE}}</ion-col>
                       <ion-col text-right>{{data.INCOME_FREE_ZONE}}</ion-col>
                   </ion-row>
-            </ion-grid>
+            </ion-grid>-->
         </ion-card-content>
       </ion-card>
   

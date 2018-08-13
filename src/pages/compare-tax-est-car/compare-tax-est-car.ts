@@ -1,54 +1,66 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js';
 
+/**
+ * Generated class for the CompareTaxEstCarPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: 'page-compare-tax-beer',
-  templateUrl: 'compare-tax-beer.html',
+  selector: 'page-compare-tax-est-car',
+  templateUrl: 'compare-tax-est-car.html',
 })
-export class CompareTaxBeerPage {
+export class CompareTaxEstCarPage {
   @ViewChild('LineCanvas') LineCanvas;
   responseData: any;
   lineChart: any;
+
   LineData: any;
   TAX = [];
   TAX_LY = [];
   EST = [];
   ComEst = [];
   lebel = [];
+  prod: any;
+  product: any;
+  id:any;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public webapi:RestProvider) {
+    public webapi: RestProvider) {
   }
 
   ionViewDidLoad() {
-    let grp_name = 'ภาษีเบียร์';
-    this.webapi.getData('CompareTax?grp_name='+grp_name).then((data)=>{
-      this.responseData = data;
-      console.log(this.responseData);
-    });
-
+    this.getProduct();
     this.getLineData();
+    this.thisYear();
+    
   }
   getLineData() {
-    let grp_id = "7001";
+    let grp_id = "0501";
     this.webapi.getData('CompareTaxLineGraph?id=' + grp_id).then((data) => {
       this.LineData = data;
       console.log(this.LineData);
       this.getTAX();
-      this.getTAX_LY();
       this.getEST();
-      this.getComEst();
       this.getLebel();
       this.createChart();
     });
 
 
+  }
+
+  getProduct() {
+    this.webapi.getData('getProduct').then((data) => {
+      this.prod = data;
+      console.log(this.prod);
+     
+    });
   }
 
   //----------------------- Start Manage Data from API-------------------------//
@@ -63,16 +75,6 @@ export class CompareTaxBeerPage {
 
   }
 
-  getTAX_LY() {
-    this.TAX_LY = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.TAX_LY.push(this.LineData[i].TAX_LY);
-    }
-    this.TAX_LY = JSON.parse(JSON.stringify(this.TAX_LY));
-    console.log("lastyear" + this.TAX_LY);
-
-  }
-
   getEST() {
     this.EST = [];
     for (var i = 0; i < this.LineData.length; i++) {
@@ -80,15 +82,6 @@ export class CompareTaxBeerPage {
     }
     this.EST = JSON.parse(JSON.stringify(this.EST));
     console.log("est" + this.EST);
-  }
-
-  getComEst() {
-    this.ComEst = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.ComEst.push(this.LineData[i].COMPARE_ESTIMATE_DIFF);
-    }
-    this.ComEst = JSON.parse(JSON.stringify(this.ComEst));
-    console.log("com" + this.ComEst);
   }
 
   getLebel() {
@@ -132,28 +125,6 @@ export class CompareTaxBeerPage {
             spanGaps: false,
           },
           {
-            label: "ปีก่อน",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgb(255, 206, 86)",
-            borderColor: "rgb(255, 206, 86)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 206, 86)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 206, 86)",
-            pointHoverBorderColor: "rgb(255, 206, 86)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: this.TAX_LY,
-            spanGaps: false,
-          },
-          {
             label: "ประมาณการ",
             fill: false,
             lineTension: 0.1,
@@ -173,28 +144,6 @@ export class CompareTaxBeerPage {
             pointRadius: 1,
             pointHitRadius: 10,
             data: this.EST,
-            spanGaps: false,
-          },
-          {
-            label: "เปรียบเทียบประมาณการ",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgb(255, 432, 12)",
-            borderColor: "rgb(255, 432, 12)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 432, 12)",
-            pointBackgroundColor: "#fff",   
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 432, 12)",
-            pointHoverBorderColor: "rgb(255, 432, 12)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: this.ComEst,
             spanGaps: false,
           }
         ]
@@ -230,5 +179,63 @@ export class CompareTaxBeerPage {
 
     });
   }
+
+  thisYear(){
+    var gauge = new RadialGauge({
+      renderTo: 'canvas-id-thisyear',
+      width: 300,
+      height: 300,
+      units: "Km/h",
+      minValue: 0,
+      startAngle: 90,
+      ticksAngle: 180,
+      valueBox: false,
+      maxValue: 220,
+      value :[89],
+      majorTicks: [
+          "0",
+          "20",
+          "40",
+          "60",
+          "80",
+          "100",
+          "120",
+          "140",
+          "160",
+          "180",
+          "200",
+          "220"
+      ],
+      minorTicks: 2,
+      strokeTicks: true,
+      highlights: [
+          {
+              "from": 160,
+              "to": 220,
+              "color": "rgba(200, 50, 50, .75)"
+          },
+          {
+            "from": 0,
+            "to": 100,
+            "color": "rgba(0,0,255,0.3)"
+        },
+        {
+          "from": 101,
+          "to": 159,
+          "color": "rgba(255, 0, 0, 0.8)"
+      }
+      ],
+      colorPlate: "#fff",
+      borderShadowWidth: 0,
+      borders: false,
+      needleType: "arrow",
+      needleWidth: 2,
+      needleCircleSize: 7,
+      needleCircleOuter: true,
+      needleCircleInner: false,
+      animationDuration: 1500,
+      animationRule: "linear"
+  }).draw(); 
+}
 
 }

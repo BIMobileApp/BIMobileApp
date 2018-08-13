@@ -1,18 +1,75 @@
-<!--
-  Generated template for the TaxMonthlyFreezonePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>tax_monthly_freezone</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+    <ion-navbar color="primary">
+      <ion-title>แยกตามหมวดหมู่</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content>
+      <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+          <ion-label  center><strong>Gauge ภาษีประจำเดือนแต่ละพื้นที่</strong></ion-label>
+      </ion-item>
+      <ion-grid>
+          <ion-row>
+              <ion-col>
+      <ion-item>
+          <ion-label  text-center>เดือน : </ion-label>
+          <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
+            <ion-option value="1" >มกราคม</ion-option>
+            <ion-option value="2">กุมภาพันธ์</ion-option>
+            <ion-option value="3">มีนาคม</ion-option>
+            <ion-option value="4">เมษายน</ion-option>
+            <ion-option value="5">พฤษภาคม</ion-option>
+            <ion-option value="6">มิถุนายน</ion-option>
+            <ion-option value="7">กรกฎาคม</ion-option>
+            <ion-option value="8">สิงหาคม</ion-option>
+            <ion-option value="9">กันยายน</ion-option>
+            <ion-option value="10">ตุลาคม</ion-option>
+            <ion-option value="11">พฤศจิกายน</ion-option>
+            <ion-option value="12">ธันวาคม</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+  
+      <ion-col>
+        <ion-item>
+              <ion-label  text-center>ภาค : </ion-label>
+            <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
+                <ion-option value="1" >ภาค1</ion-option>
+                <ion-option value="1" >ภาค2</ion-option>
+                <ion-option value="1" >ภาค3</ion-option>
+                <ion-option value="1" >ภาค4</ion-option>
+                <ion-option value="1" >ภาค5</ion-option>
+                <ion-option value="1" >ภาค6</ion-option>
+                <ion-option value="1" >ภาค7</ion-option>
+                <ion-option value="1" >ภาค8</ion-option>
+                <ion-option value="1" >ภาค9</ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-col>
+      </ion-row>
+       </ion-grid>
+  
+  
+      <ion-card>
+          <ion-card-content>
+      
+              <ion-item><span ion-text color="primary">ปีนี้</span><hr/></ion-item>
+              <div class="ion-canvas">
+                  <canvas  id="canvas-id-thisyear"></canvas>
+              </div>
+  
+              <ion-item><span ion-text color="primary">ปีก่อน</span><hr/></ion-item>
+              <div class="ion-canvas">
+                  <canvas  id="canvas-id-lastyear"></canvas>
+              </div>
+  
+              <ion-item><span ion-text color="primary">ประมาณการ</span><hr/></ion-item>
+              <div class="ion-canvas">
+                  <canvas  id="canvas-id-compareyear"></canvas>
+              </div>
+            </ion-card-content>
+      </ion-card>
+  
+  </ion-content>
+  

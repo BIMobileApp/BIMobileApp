@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { ContactPage } from '../contact/contact';
 import { CetegoryTaxPage } from '../cetegory-tax/cetegory-tax';
 import { CategoryDepartmentListPage } from '../category-department-list/category-department-list';
+import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone';
 
 @IonicPage()
 @Component({
@@ -43,14 +44,6 @@ export class MenuGroupPage {
     this.app.getRootNav().push(HomePage);  
   }
   
-  gotoDepartmentReport(){
-    this.app.getRootNav().push(MenuGroupNewReportPage); 
-  }
-
-  gotoReport(){
-    this.app.getRootNav().push(MenuGroupNewReportPage);  
-  }
-
   gotoOldReport(){
     this.app.getRootNav().push(DashboardPage);  
   }
@@ -64,7 +57,7 @@ export class MenuGroupPage {
   }
 
   caseReport(){
-    
+    this.app.getRootNav().push(MenuGroupNewReportPage); 
   }
 
   gotoCategoryTax(){
@@ -73,6 +66,14 @@ export class MenuGroupPage {
 
   gotoDepartmentList(){
     this.app.getRootNav().push(CategoryDepartmentListPage); 
+  }
+
+  TaxMonthlyFreezone(){
+    this.app.getRootNav().push(TaxMonthlyFreezonePage); 
+  }
+
+  gotoDepartmentReport(){
+    this.app.getRootNav().push(MenuGroupNewReportPage); 
   }
 
 }

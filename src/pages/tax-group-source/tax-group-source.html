@@ -9,8 +9,31 @@
         </ion-item>
 
     <ion-card>
-        <ion-card-content no-padding>                  
-            <ion-grid>           
+        <ion-card-content no-padding> 
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                        <div class="table-responsive">     
+                        <table class="table">
+                                <thead>
+                                        <tr style="background-color: #626567">
+                                                <th>ผู้ประกอบการ</th>
+                                                <th>ในประเทศ</th>
+                                                <th>นำเข้า</th>
+                                                <th>รวม</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let data of responseData">
+                                                <td>{{data.GROUP_NAME}}</td>
+                                                <td>{{data.INCOME}}</td>
+                                                <td>{{data.IMPORT}}</td>
+                                                <td>{{data.SUM_ALL}}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </ion-scroll>  
+
+            <!--<ion-grid>           
                 <ion-row  style="background-color:#808080;" text-center>
                   <ion-col>ผู้ประกอบการ</ion-col>
                   <ion-col>ในประเทศ</ion-col>
@@ -23,7 +46,7 @@
                       <ion-col text-right>{{data.IMPORT}}</ion-col>
                       <ion-col text-right>{{data.SUM_ALL}}</ion-col>
                   </ion-row>
-            </ion-grid>
+            </ion-grid>-->
         </ion-card-content>
       </ion-card>
 
