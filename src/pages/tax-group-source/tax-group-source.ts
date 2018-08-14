@@ -21,5 +21,4 @@ export class TaxGroupSourcePage {
       this.responseData = data;
     });
   }
-
 }

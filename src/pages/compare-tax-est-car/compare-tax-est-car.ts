@@ -38,7 +38,7 @@ export class CompareTaxEstCarPage {
   ionViewDidLoad() {
     this.getProduct();
     this.getLineData();
-    this.thisYear();
+    //this.thisYear();
     
   }
   getLineData() {
@@ -180,7 +180,7 @@ export class CompareTaxEstCarPage {
     });
   }
 
-  thisYear(){
+  /*thisYear(){
     var gauge = new RadialGauge({
       renderTo: 'canvas-id-thisyear',
       width: 300,
@@ -236,6 +236,6 @@ export class CompareTaxEstCarPage {
       animationDuration: 1500,
       animationRule: "linear"
   }).draw(); 
-}
+}*/
 
 }

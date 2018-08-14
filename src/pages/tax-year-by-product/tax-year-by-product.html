@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-      <ion-title>แยกตามหมวดหมู่->รายสินค้า</ion-title>
+      <ion-title>แยกตามหมวดหมู่</ion-title>
     </ion-navbar>
   </ion-header>
   
@@ -18,13 +18,12 @@
         </ion-item>
 
         <ion-card-content no-padding>
-
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
                         <div class="table-responsive">     
                         <table class="table">
                                 <thead>
                                         <tr style="background-color: #626567">
-                                                <th>ลำดับ</th>
+                                                <th text-center>ลำดับ</th>
                                                 <th>กลุ่มสินค้า</th>
                                                 <th>ต.ค</th>
                                                 <th>พ.ย</th>
@@ -42,7 +41,7 @@
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td>{{data.SORT}}</td>
+                                                <td text-center>{{data.SORT}}</td>
                                                 <td>{{data.GROUP_NAME}}</td>
                                                 <td>{{data.OCT}}</td>
                                                 <td>{{data.NOV}}</td>

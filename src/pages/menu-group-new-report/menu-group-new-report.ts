@@ -33,29 +33,29 @@ export class MenuGroupNewReportPage {
   }
 
   reportCar27_31(){
-    this.navCtrl.setRoot(CompareTaxCarPage);
+    this.app.getRootNav().push(CompareTaxCarPage);  
   }
   reportAlcohol26_30(){
-    this.navCtrl.setRoot(CompareTaxAlcoholPage);
+    this.app.getRootNav().push(CompareTaxAlcoholPage);  
   }
   reportBeer28_32(){
-    this.navCtrl.setRoot(CompareTaxBeerPage);
+    this.app.getRootNav().push(CompareTaxBeerPage);  
   }
   reportDrink29_33(){
-    this.navCtrl.setRoot(CompareTaxDrinkPage);
+    this.app.getRootNav().push(CompareTaxDrinkPage);  
   }
 
   reportCar24_3(){
-    this.navCtrl.setRoot(CompareTaxEstCarPage);
+    this.app.getRootNav().push(CompareTaxEstCarPage);  
   }
   reportBeer3(){
-    this.navCtrl.setRoot(CompareTaxEstBeerPage);
+    this.app.getRootNav().push(CompareTaxEstBeerPage);  
   }
   reportDrink3(){
-    this.navCtrl.setRoot(CompareTaxEstDrinkPage);
+    this.app.getRootNav().push(CompareTaxEstDrinkPage);  
   }
   reportAlcohol3(){
-    this.navCtrl.setRoot(CompareTaxEstAlcoholPage);
+    this.app.getRootNav().push(CompareTaxEstAlcoholPage);  
   }
   /*reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  

@@ -6,23 +6,18 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-      <ion-title></ion-title>
-    </ion-navbar>
-  
+        <ion-navbar color="primary">
+          <ion-title>แยกตามสำนัก</ion-title>
+        </ion-navbar>
   </ion-header>
   
   
-  <ion-content padding>
-  
+  <ion-content>
+      <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+          <ion-label  center><strong>กราฟเส้นแสดงภาษีและประมาณการตามสินค้า (สุรา)</strong></ion-label>
+      </ion-item>
+
     <ion-card>
-        <ion-item style="background-color:#E6E6FA;">
-            <div padding-horizontal text-center text-wrap>
-              <p>กราฟเส้นแสดงภาษีและประมาณการตามสินค้า (สุรา)</p>
-            </div>
-          </ion-item>
-          <br>
-          
                 <ion-item>
                   <ion-label>สินค้า</ion-label>
                  <ion-select name="car"> 
@@ -39,7 +34,9 @@
                   </ion-select>-->
                 </ion-item>
       <ion-card-content>
-        <canvas #LineCanvas></canvas>
+          <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;"> 
+              <canvas #LineCanvas></canvas>
+          </ion-scroll>
       </ion-card-content>
     </ion-card>
   </ion-content>

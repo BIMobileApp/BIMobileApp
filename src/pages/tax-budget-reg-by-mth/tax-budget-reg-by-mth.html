@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>ตารางเปรียบเทียบภาษี</ion-title>
+    <ion-title>แยกตามหมวดหมู่</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,6 +9,8 @@
         <ion-label  center><strong>รายงาน Top 10 ประจำเดือน</strong></ion-label>
     </ion-item>
     
+    <ion-card>
+    <ion-card-content no-padding>   
     <ion-item>
         <ion-label  text-center>เดือน : </ion-label>
         <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
@@ -26,17 +28,17 @@
           <ion-option value="12">ธันวาคม</ion-option>
         </ion-select>
       </ion-item>
-   <ion-card>
+    </ion-card-content>
+ 
    <!--  <ion-item>
       <ion-label>เดือน</ion-label>
       <ion-datetime displayFormat="MMMM" 
       pickerFormat="MMMM"   [(ngModel)]="summaryDate" #item (ionChange)="getDashboardItemsByDate(item.value)"></ion-datetime>
     </ion-item>-->
-      <ion-card-content no-padding>   
-          
-            <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+      <ion-card-content no-padding>             
+            <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
                     <div class="table-responsive">     
-                    <table class="table">
+                    <table class="table" style="width: 100%;">
                             <thead>
                                     <tr style="background-color: #626567">
                                             <th>ลำดับ</th>
@@ -46,34 +48,14 @@
                             </thead>
                             <tbody>
                                     <tr *ngFor="let data of responseData">
-                                            <td>{{data.SORT}}</td>
+                                            <td text-center>{{data.SORT}}</td>
                                             <td>{{data.REG_NAME}}</td>
-                                            <td>{{data.TAX}}</td>
+                                            <td text-right>{{data.TAX}}</td>
                                     </tr>
                             </tbody>
                     </table>
                 </div>
             </ion-scroll>   
-
-
-
-
-          <!--<ion-grid>           
-              <ion-row  style="background-color:#ffa94d ;">
-                <ion-col col-3 text-center>ลำดับ</ion-col>
-                <ion-col col-5 text-center>ผู้ประกอบการ</ion-col>
-                <ion-col col-4text-center>ภาษีปีนี้</ion-col>
-                </ion-row>
-                <ion-row *ngFor="let data of responseData">
-                    <ion-col  col-3  style="text-align: center;">{{data.SORT}}</ion-col>
-                    <ion-col  col-5>{{data.REG_NAME}}</ion-col>
-                    <ion-col  col-4 style="text-align: right;" >{{data.TAX}}</ion-col>
-                </ion-row>
-                <ion-row style="text-align: center; background-color: #ffa94d ;">
-                    <ion-col col-10 text-center><strong>รวมทั้งสิ้น</strong></ion-col>
-                    <ion-col col-2></ion-col>
-                </ion-row>
-          </ion-grid>-->
       </ion-card-content>
     </ion-card>
 

@@ -1,38 +1,47 @@
 <ion-header>
     <ion-navbar color="primary">
-      <ion-title>ตารางเปรียบเทียบภาษี</ion-title>
+      <ion-title>แยกตามสำนัก</ion-title>
     </ion-navbar>
   </ion-header>
   
-  <ion-content padding>   
+  <ion-content>  
+        <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+                <ion-label  center><strong>รายงานเปรียบทียบภาษีปีก่อนเบียร์</strong></ion-label>
+    </ion-item>
      <ion-card>
-        <ion-card-header>
-            <ion-label  center>
-                <strong>รายงานเปรียบทียบภาษีปีก่อนเบียร์</strong>
-        </ion-label>
-       </ion-card-header>
-        <ion-card-content>                 
-            <ion-grid>           
-                <ion-row>
-                  <ion-col  style="background-color:#808080; ">กลุ่มสินค้า</ion-col>
-                  <ion-col  style="background-color:#808080;">ปีนี้</ion-col>
-                  <ion-col  style="background-color:#808080;">ปีก่อน</ion-col>
-                  <ion-col  style="background-color:#808080;">ประมาณการ</ion-col>
-                  <ion-col  style="background-color:#808080;">เปรียบเทียบประมาณการ</ion-col>
-                  </ion-row>
-                 <ion-row *ngFor="let data of responseData" >
-                      <ion-col >{{data.TYPE_NAME}}</ion-col>
-                      <ion-col >{{data.TAX}}</ion-col>
-                      <ion-col>{{data.TAX_LY}}</ion-col>
-                      <ion-col>{{data.ESTIMATE}}</ion-col>
-                      <ion-col>{{data.COMPARE_ESTIMATE_DIFF}}</ion-col>
-                  </ion-row>
-            </ion-grid>
+        <ion-card-content>  
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
+                        <div class="table-responsive">     
+                        <table class="table"  style="width: 100%;">
+                                <thead>
+                                        <tr style="background-color: #626567">
+                                                <th>กลุ่มสินค้า</th>
+                                                <th>ปีนี้</th>
+                                                <th>ปีก่อน</th>
+                                                <th>ประมาณการ</th>
+                                                <th>เปรียบเทียบประมาณการ</th>
+                                          </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let data of responseData">
+                                                <td>{{data.TYPE_NAME}}</td>
+                                                <td>{{data.TAX}}</td>
+                                                <td>{{data.TAX_LY}}</td>
+                                                <td>{{data.ESTIMATE}}</td>
+                                                <td>{{data.COMPARE_ESTIMATE_DIFF}}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </ion-scroll>  
+            
         </ion-card-content>
       </ion-card>
       <ion-card>
             <ion-card-content>
-                  <canvas #LineCanvas></canvas>
+                    <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">   
+                        <canvas #LineCanvas></canvas>
+                    </ion-scroll>
                 </ion-card-content>
      </ion-card>
   

@@ -12,12 +12,13 @@ export class TaxMonthlyFreezonePage {
   }
 
   ionViewDidLoad() {
-    this.thisYear();
-    this.lastYear();
-    this.compareYear();
+   /* this.thisYear();
+   this.lastYear();
+    this.compareYear();*/
   }
-  thisYear(){
-    var gauge = new RadialGauge({
+
+ /* thisYear(){
+    ar gauge = new RadialGauge({
       renderTo: 'canvas-id-thisyear',
       width: 300,
       height: 300,
@@ -71,7 +72,7 @@ export class TaxMonthlyFreezonePage {
       needleCircleInner: false,
       animationDuration: 1500,
       animationRule: "linear"
-  }).draw(); 
+  }).draw();   
 }
 
 lastYear(){
@@ -188,6 +189,6 @@ lastYear(){
             animationDuration: 1500,
             animationRule: "linear"
         }).draw(); 
-   }
+   }*/
 
 }

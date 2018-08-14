@@ -28,9 +28,9 @@
      <ion-card>
         <ion-card-content no-padding>
             
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
                         <div class="table-responsive">     
-                        <table class="table">
+                        <table class="table" style="width: 100%;">
                                 <thead>
                                         <tr style="background-color: #626567">
                                                 <th>วันที่</th>
@@ -52,24 +52,6 @@
                         </table>
                     </div>
                 </ion-scroll>  
-
-
-            <!--<ion-grid>           
-                <ion-row  style="background-color:#ffa94d ;">
-                  <ion-col text-center>วันที่</ion-col>
-                  <ion-col text-center>ในประเทศ</ion-col>
-                  <ion-col text-center>ต่างประเทศ</ion-col>
-                  <ion-col text-center>FreeZone</ion-col>
-                  <ion-col text-center>นำเข้าชำระในพื้นที่</ion-col>
-                  </ion-row>
-                  <ion-row *ngFor="let data of responseData">
-                      <ion-col text-center  style="text-align: center;">{{data.TIME_ID}}</ion-col>
-                      <ion-col text-right>{{data.CD_INCOME}}</ion-col>
-                      <ion-col text-right>{{data.INCOME}}</ion-col>
-                      <ion-col text-right>{{data.IMPORT}}</ion-col>
-                      <ion-col text-right>{{data.IMPORT}}</ion-col>
-                  </ion-row>
-            </ion-grid>-->
         </ion-card-content>
       </ion-card>
   

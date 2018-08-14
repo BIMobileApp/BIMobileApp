@@ -17,7 +17,7 @@
     <ion-card>
             
         <ion-card-content no-padding>       
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
                         <div class="table-responsive">     
                         <table class="table">
                                 <thead>
@@ -29,12 +29,12 @@
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td>{{data.SORT}}</td>
+                                                <td text-center>{{data.SORT}}</td>
                                                 <td>{{data.REG_NAME}}</td>
-                                                <td>{{data.TAX}}</td>
+                                                <td text-right>{{data.TAX}}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">รวมทั้งสิ้น</td>
+                                            <td colspan="2" text-center><strong>รวมทั้งสิ้น</strong></td>
                                             <td></td>
                                         </tr>
                                 </tbody>

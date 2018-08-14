@@ -1,50 +1,64 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle="left">
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button> 
+    </button>
+    <ion-title>Home</ion-title>
   </ion-navbar>
-    <ion-nav #mycontent [root]="rootPage"></ion-nav>
 </ion-header>
 
-<ion-content padding="true">
-    <ion-menu [content]="mycontent">
-        <ion-content>
-          <ion-list>
-            <ion-item (click)="gotoHome()"><ion-icon name="home"></ion-icon> หน้าแรก</ion-item>
-            <ion-item (click)="gotoContact()"><ion-icon name="contact"></ion-icon> ติดต่อเรา</ion-item>
-            <ion-item (click)="gotoLogout()"><ion-icon name="md-log-out"></ion-icon> ออกจากระบบ</ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-      
-    <ion-grid>
-      <ion-row>
-        <ion-col > <ion-item><span ion-text color="primary">ภาพรวม</span></ion-item></ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col (click)="gotoCategoryTax();"><img src="../assets/imgs/department.png"></ion-col>
-          <ion-col (click)="gotoDepartmentList();"><img src="../assets/imgs/category.png"></ion-col>
-          <ion-col (click)="gotoDepartmentReport();"><img src="../assets/imgs/if_courthouse.png"></ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>การจัดเก็บภาษี</ion-col>
-          <ion-col>แยกตามหมวดหมู่</ion-col>
-          <ion-col>แยกตามตามสำนัก</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col><ion-item><span ion-text color="primary">ลงรายละเอียด</span></ion-item></ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col (click)="thisYaerReport();"><img src="../assets/imgs/overall.png"></ion-col>
-          <ion-col (click)="beforReport();"><img src="../assets/imgs/detail.png"></ion-col>
-          <ion-col (click)="caseReport();"><img src="../assets/imgs/if_11_61475 (1).png"></ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>ต้นปี-ปัจจุบัน</ion-col>
-          <ion-col>ต้นปี-เดือนก่อน</ion-col>
-          <ion-col>คดี</ion-col>
-      </ion-row>
-    </ion-grid>
 
-  </ion-content>
+<ion-content padding="true">
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <span ion-text color="primary">ภาพรวม</span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="gotoCategoryTax();">
+        <img src="../assets/imgs/department.png">
+      </ion-col>
+      <ion-col (click)="gotoDepartmentList();">
+        <img src="../assets/imgs/category.png">
+      </ion-col>
+      <ion-col (click)="gotoDepartmentReport();">
+        <img src="../assets/imgs/if_courthouse.png">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>การจัดเก็บภาษี</ion-col>
+      <ion-col>แยกตามหมวดหมู่</ion-col>
+      <ion-col>แยกตามตามสำนัก</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <span ion-text color="primary">ลงรายละเอียด</span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="thisYaerReport();">
+        <img src="../assets/imgs/overall.png">
+      </ion-col>
+      <ion-col (click)="beforReport();">
+        <img src="../assets/imgs/detail.png">
+      </ion-col>
+      <ion-col (click)="caseReport();">
+        <img src="../assets/imgs/if_11_61475 (1).png">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>ต้นปี-ปัจจุบัน</ion-col>
+      <ion-col>ต้นปี-เดือนก่อน</ion-col>
+      <ion-col>คดี</ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+</ion-content>

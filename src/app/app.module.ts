@@ -85,6 +85,10 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage,
+    CompareTaxEstCarPage,
+    CompareTaxEstBeerPage,
+    CompareTaxEstAlcoholPage,
+    CompareTaxEstDrinkPage,
     TaxYearByProductPage,
     TaxGroupSourcePage,
     FollowTaxRealtimePage,
@@ -95,20 +99,20 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxEstCarPage,
     CompareTaxEstBeerPage,
     CompareTaxEstAlcoholPage,
-    CompareTaxEstDrinkPage
-
+    CompareTaxEstDrinkPage,
+    TaxMonthlyFreezonePage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ChartsModule,
     IonicModule.forRoot(MyApp, {
-      backButtonText: '',
+      /*backButtonText: '',
       iconMode: 'ios',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition'
+      pageTransition: 'ios-transition'*/
     }
   )],
   bootstrap: [IonicApp],
@@ -144,6 +148,10 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage,
+    CompareTaxEstCarPage,
+    CompareTaxEstBeerPage,
+    CompareTaxEstAlcoholPage,
+    CompareTaxEstDrinkPage,
     TaxYearByProductPage,
     TaxGroupSourcePage,
     FollowTaxRealtimePage,
@@ -154,7 +162,8 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxEstCarPage,
     CompareTaxEstBeerPage,
     CompareTaxEstAlcoholPage,
-    CompareTaxEstDrinkPage
+    CompareTaxEstDrinkPage,
+    TaxMonthlyFreezonePage
   ],
   providers: [
     StatusBar,
