@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 
-/**
- * Generated class for the CompareTaxEstCarPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-est-car',
@@ -19,6 +12,7 @@ export class CompareTaxEstCarPage {
   @ViewChild('LineCanvas') LineCanvas;
   responseData: any;
   lineChart: any;
+  GaugeChart: any;
 
   LineData: any;
   TAX = [];

@@ -7,9 +7,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tax-monthly-freezone.html',
 })
 export class TaxMonthlyFreezonePage {
+    TaxGauge: any;
+    TaxlyGauge: any;
+    TaxEstGauge: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+      public navCtrl: NavController, 
+      public navParams: NavParams) {
+    }
 
   ionViewDidLoad() {
    /* this.thisYear();
@@ -76,7 +81,7 @@ export class TaxMonthlyFreezonePage {
 }
 
 lastYear(){
-      var gauge = new RadialGauge({
+    this.TaxlyGauge = new RadialGauge({
         renderTo: 'canvas-id-lastyear',
         width: 300,
         height: 300,
@@ -134,7 +139,7 @@ lastYear(){
    }
 
     compareYear(){
-          var gauge = new RadialGauge({
+        this.TaxEstGauge = new RadialGauge({
             renderTo: 'canvas-id-compareyear',
             width: 300,
             height: 300,

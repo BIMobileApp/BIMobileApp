@@ -82,7 +82,6 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxDrinkPage,
     ContactPage,
     NewReportLineTaxEstProdPage,
-    NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage,
     CompareTaxEstCarPage,
@@ -99,8 +98,8 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxEstCarPage,
     CompareTaxEstBeerPage,
     CompareTaxEstAlcoholPage,
-    CompareTaxEstDrinkPage,
-    TaxMonthlyFreezonePage
+    CompareTaxEstDrinkPage
+
   ],
   imports: [
     BrowserModule,
@@ -145,7 +144,6 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxDrinkPage,
     ContactPage,
     NewReportLineTaxEstProdPage,
-    NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage,
     CompareTaxEstCarPage,
@@ -162,8 +160,7 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxEstCarPage,
     CompareTaxEstBeerPage,
     CompareTaxEstAlcoholPage,
-    CompareTaxEstDrinkPage,
-    TaxMonthlyFreezonePage
+    CompareTaxEstDrinkPage
   ],
   providers: [
     StatusBar,
