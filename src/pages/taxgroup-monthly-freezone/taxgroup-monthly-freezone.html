@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content>
+<!--<ion-content>
     <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
         <ion-label  center><strong>Gauge ภาษีประจำเดือนแต่ละพื้นที่</strong></ion-label>
     </ion-item>
@@ -53,22 +53,67 @@
 
     <ion-card>
         <ion-card-content>
-    
-            <ion-item><span ion-text color="primary">ปีนี้</span><hr/></ion-item>
-            <div class="ion-canvas">
-                <canvas  id="canvas-id-thisyear"></canvas>
-            </div>
+                <div class="ion-canvas">
+                        <canvas #canvas></canvas>
+                    </div>
+                  
+                  
+                  
+                     <button
+                        ion-button
+                        color="primary"
+                        (click)="drawCircle()">
+                        Draw a circle
+                     </button>
+                  
+                  
+                  
+                     <button
+                        ion-button
+                        color="primary"
+                        (click)="drawSquare()">
+                        Draw a Square
+                     </button>
+                  
+                  
+                  
+                     <button
+                        ion-button
+                        color="primary"
+                        (click)="drawTriangle()">
+                        Draw a Triangle
+                     </button>
 
-            <ion-item><span ion-text color="primary">ปีก่อน</span><hr/></ion-item>
-            <div class="ion-canvas">
-                <canvas  id="canvas-id-lastyear"></canvas>
-            </div>
 
-            <ion-item><span ion-text color="primary">ประมาณการ</span><hr/></ion-item>
-            <div class="ion-canvas">
-                <canvas  id="canvas-id-compareyear"></canvas>
-            </div>
-          </ion-card-content>
+        </ion-card-content>
+
+        
+     
+                
+
+
     </ion-card>
 
+</ion-content>-->
+<ion-content>
+        <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+                <ion-label  center><strong>Gauge ภาษีประจำเดือนแต่ละพื้นที่</strong></ion-label>
+        </ion-item>
+
+        <ion-card>
+                <ion-card-content>
+                    <ion-item><span ion-text color="primary">ปีนี้</span></ion-item>
+                    <div class="ion-canvas">
+                            <canvas  id="canvas-id1"></canvas>
+                    </div>
+                    <ion-item><span ion-text color="primary">ปีก่อน</span></ion-item>
+                    <div class="ion-canvas">
+                            <canvas  id="canvas-id2"></canvas>
+                    </div>
+                    <ion-item><span ion-text color="primary">ปีประมาณการ</span></ion-item>
+                    <div class="ion-canvas">
+                            <canvas  id="canvas-id3"></canvas>
+                    </div>
+                </ion-card-content>
+            </ion-card>
 </ion-content>

@@ -34,6 +34,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+   
   }
 
   login() {
@@ -65,6 +66,10 @@ export class HomePage {
       }
     });
     
+  }
+
+  test(){
+    this.app.getRootNav().push(Test2Page);  
   }
   //this.app.getRootNav().push(MenuGroupPage); 
 

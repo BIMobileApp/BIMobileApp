@@ -50,6 +50,7 @@ import { CompareTaxEstCarPage } from '../pages/compare-tax-est-car/compare-tax-e
 import { CompareTaxEstBeerPage } from '../pages/compare-tax-est-beer/compare-tax-est-beer';
 import { CompareTaxEstAlcoholPage } from '../pages/compare-tax-est-alcohol/compare-tax-est-alcohol';
 import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-tax-est-drink';
+import {GaugesModule} from 'ng-canvas-gauges/lib';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     BrowserModule,
     HttpClientModule,
     ChartsModule,
+    GaugesModule,
     IonicModule.forRoot(MyApp, {
       /*backButtonText: '',
       iconMode: 'ios',
