@@ -15,17 +15,17 @@ declare let google;
   templateUrl: 'contact.html',
 })
 export class ContactPage {
-  @ViewChild('map') mapElement: ElementRef;
-  map:any;
+  /*@ViewChild('map') mapElement: ElementRef;
+  map:any;*/
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    this.loadMap();
+   // this.loadMap();
   }
   
-  loadMap() {
+/*  loadMap() {
     let lat = 13.7620638;
     let lng = 100.5577409;
     let latLng = new google.maps.LatLng(lat,lng);
@@ -42,7 +42,7 @@ export class ContactPage {
       icon: "https://image.flaticon.com/icons/png/128/149/149060.png"
 
     })
-  }
+  }*/
 
 }
 
