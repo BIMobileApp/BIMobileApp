@@ -10,6 +10,7 @@ import { TaxGroupSourcePage } from '../tax-group-source/tax-group-source';
 import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtime';
 import { TaxEdRealtimePage } from '../tax-ed-realtime/tax-ed-realtime';
 import { TaxgroupMonthlyFreezonePage } from '../taxgroup-monthly-freezone/taxgroup-monthly-freezone';
+import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
 
 @IonicPage()
 @Component({
@@ -65,6 +66,10 @@ export class CategoryDepartmentListPage {
 
   TaxMonthlyFreezone(){
     this.app.getRootNav().push(TaxgroupMonthlyFreezonePage); 
+  }
+
+  TaxAndEstimateProductLine(){
+    this.app.getRootNav().push(NewReportLineFollowProductPage); 
   }
 
 }
