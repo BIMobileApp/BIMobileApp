@@ -47,12 +47,6 @@ export class HomePage {
       
       if (this.userDB.length!=0) {
         //if (this.userData.username == "a" && this.userData.password == "a") { 
-        const alert = this.alertCtrl.create({
-          title: 'ยินดีต้อนรับ',
-          subTitle: 'เข้าสู่ระบสำเร็จ',
-          buttons: ['OK']
-        });
-        alert.present();
        this.offcode = this.userDB[0].OFFCODE;
        this.offdesc = this.userDB[0].OFFDESC;
        this.username = this.userDB[0].USERNAME;

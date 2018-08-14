@@ -82,7 +82,6 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxDrinkPage,
     ContactPage,
     NewReportLineTaxEstProdPage,
-    NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage,
     CompareTaxEstCarPage,
@@ -96,6 +95,7 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     TaxgroupMonthlyFreezonePage,
     TaxAllCountryPage,
     TaxMonthlyFreezonePage
+
   ],
   imports: [
     BrowserModule,
@@ -140,7 +140,6 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     CompareTaxDrinkPage,
     ContactPage,
     NewReportLineTaxEstProdPage,
-    NewReportLineFollowProductPage,
     CetegoryTaxPage,
     CategoryDepartmentListPage,
     CompareTaxEstCarPage,

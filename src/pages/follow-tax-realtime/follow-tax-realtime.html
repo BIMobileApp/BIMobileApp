@@ -26,8 +26,35 @@
           </ion-select>
         </ion-item>
      <ion-card>
-        <ion-card-content>                 
-            <ion-grid>           
+        <ion-card-content no-padding>
+            
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                        <div class="table-responsive">     
+                        <table class="table">
+                                <thead>
+                                        <tr style="background-color: #626567">
+                                                <th>วันที่</th>
+                                                <th>ในประเทศ</th>
+                                                <th>ต่างประเทศ</th>
+                                                <th>FreeZone</th>
+                                                <th>นำเข้าชำระในพื้นที่</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let data of responseData">
+                                                <td>{{data.TIME_ID}}</td>
+                                                <td>{{data.CD_INCOME}}</td>
+                                                <td>{{data.INCOME}}</td>
+                                                <td>{{data.IMPORT}}</td>
+                                                <td>{{data.IMPORT}}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </ion-scroll>  
+
+
+            <!--<ion-grid>           
                 <ion-row  style="background-color:#ffa94d ;">
                   <ion-col text-center>วันที่</ion-col>
                   <ion-col text-center>ในประเทศ</ion-col>
@@ -42,7 +69,7 @@
                       <ion-col text-right>{{data.IMPORT}}</ion-col>
                       <ion-col text-right>{{data.IMPORT}}</ion-col>
                   </ion-row>
-            </ion-grid>
+            </ion-grid>-->
         </ion-card-content>
       </ion-card>
   

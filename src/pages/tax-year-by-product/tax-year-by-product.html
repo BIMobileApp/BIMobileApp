@@ -17,8 +17,53 @@
             </ion-select>
         </ion-item>
 
-        <ion-card-content>                 
-            <ion-grid>           
+        <ion-card-content no-padding>
+
+                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
+                        <div class="table-responsive">     
+                        <table class="table">
+                                <thead>
+                                        <tr style="background-color: #626567">
+                                                <th>ลำดับ</th>
+                                                <th>กลุ่มสินค้า</th>
+                                                <th>ต.ค</th>
+                                                <th>พ.ย</th>
+                                                <th>ธ.ค</th>
+                                                <th>ม.ค</th>
+                                                <th>ก.พ</th>
+                                                <th>ม.ค</th>
+                                                <th>เม.ย</th>
+                                                <th>พ.ค</th>
+                                                <th>มิ.ย</th>
+                                                <th>ก.ค</th>
+                                                <th>ส.ค</th>
+                                                <th>ก.ย</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let data of responseData">
+                                                <td>{{data.SORT}}</td>
+                                                <td>{{data.GROUP_NAME}}</td>
+                                                <td>{{data.OCT}}</td>
+                                                <td>{{data.NOV}}</td>
+                                                <td>{{data.DECS}}</td>
+                                                <td>{{data.JAN}}</td>
+                                                <td>{{data.FAB}}</td>
+                                                <td>{{data.MAR}}</td>
+                                                <td>{{data.APR}}</td>
+                                                <td>{{data.MAY}}</td>
+                                                <td>{{data.JAN}}</td>
+                                                <td>{{data.JUL}}</td>
+                                                <td>{{data.AUG}}</td>
+                                                <td>{{data.SEP}}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </ion-scroll>   
+            
+
+            <!--<ion-grid>           
                 <ion-row  style="background-color:#ffa94d ;">
                   <ion-col text-center>ลำดับ</ion-col>
                   <ion-col text-center>กลุ่มสินค้า</ion-col>
@@ -51,7 +96,7 @@
                       <ion-col>{{data.AUG}}</ion-col>
                       <ion-col>{{data.SEP}}</ion-col>
                   </ion-row>
-            </ion-grid>
+            </ion-grid>-->
         </ion-card-content>
       </ion-card>
   
