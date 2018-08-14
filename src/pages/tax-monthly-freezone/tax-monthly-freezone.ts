@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+//import { RadialGauge } from '../../JS/RadialGauge.js';
+
 
 @IonicPage()
 @Component({
@@ -18,12 +20,12 @@ export class TaxMonthlyFreezonePage {
 
   ionViewDidLoad() {
    /* this.thisYear();
-   this.lastYear();
+    this.lastYear();
     this.compareYear();*/
   }
-
+  
  /* thisYear(){
-    ar gauge = new RadialGauge({
+    this.TaxGauge = new RadialGauge({
       renderTo: 'canvas-id-thisyear',
       width: 300,
       height: 300,
@@ -194,6 +196,7 @@ lastYear(){
             animationDuration: 1500,
             animationRule: "linear"
         }).draw(); 
-   }*/
+   }
+   */
 
 }
