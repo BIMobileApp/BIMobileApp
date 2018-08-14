@@ -101,15 +101,8 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
     BrowserModule,
     HttpClientModule,
     ChartsModule,
-    IonicModule.forRoot(MyApp, {
-      backButtonText: '',
-      iconMode: 'ios',
-      modalEnter: 'modal-slide-in',
-      modalLeave: 'modal-slide-out',
-      tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition'
-    }
-  )],
+    IonicModule.forRoot(MyApp,)
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -157,9 +150,9 @@ import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-t
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     RestProvider
   ]
 })
 
-export class AppModule {}
+export class AppModule { }

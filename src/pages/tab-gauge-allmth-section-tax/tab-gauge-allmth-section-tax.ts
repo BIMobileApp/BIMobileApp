@@ -53,7 +53,8 @@ export class TabGaugeAllmthSectionTaxPage {
       redFrom: 0, redTo: 25,
       yellowFrom:26, yellowTo: 75,
       greenFrom:76, greenTo: 100,
-      minorTicks: 5
+      minorTicks: 5,
+      pieStartAngle: -90,
     };
     var formatter = new google.visualization.NumberFormat({
       suffix: '%',

@@ -68,7 +68,7 @@ export class HomePage {
   }
   //this.app.getRootNav().push(MenuGroupPage); 
 
-}
+
 
 
  /*login(){
@@ -84,16 +84,18 @@ export class HomePage {
  //Test2 ของดาว
   GotoTest2(){
      this.app.getRootNav().push(Test2Page);  
+  }*/
+
+  
   }
-
-  GotoGauge(){
-      this.app.getRootNav().push(TabGaugeAllmthSectionTaxPage);  
-    }
-
+/*
     GotoHomePage(){
       this.app.getRootNav().push(DashboardPage);  
     }
-  }*/
+  
+    GotoGauge(){
+      this.app.getRootNav().push(TabGaugeAllmthSectionTaxPage);  
+    }*/
 
   /*GotoGaugeChart(){
     this.app.getRootNav().push(GaugechartPage);  
