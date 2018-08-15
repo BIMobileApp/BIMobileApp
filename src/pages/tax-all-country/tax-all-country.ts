@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { TaxCoutrySection1Page } from '../tax-coutry-section1/tax-coutry-section1';
 import { TaxCoutrySection2Page } from '../tax-coutry-section2/tax-coutry-section2';
 import { TaxCoutrySection3Page } from '../tax-coutry-section3/tax-coutry-section3';
@@ -22,55 +22,56 @@ import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-secti
 @Component({
   selector: 'page-tax-all-country',
   templateUrl: 'tax-all-country.html',
-  
+
 })
 export class TaxAllCountryPage {
-offcode: any;
+  offcode: any;
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public app:App,) {
+    public app: App, ) {
   }
 
   ionViewDidLoad() {
     this.offcode = localStorage.offcode;
-    console.log(this.offcode);
+
     this.UserAthu();
-    
+
   }
 
-  UserAthu(){
-
+  UserAthu() {
+    this.offcode = this.offcode.substring(0, 2);
+    console.log(this.offcode );
   }
 
   section1() {
-    this.app.getRootNav().push(TaxCoutrySection1Page); 
+    this.app.getRootNav().push(TaxCoutrySection1Page);
   }
   section2() {
-    this.app.getRootNav().push(TaxCoutrySection2Page); 
+    this.app.getRootNav().push(TaxCoutrySection2Page);
   }
   section3() {
-    this.app.getRootNav().push(TaxCoutrySection3Page); 
+    this.app.getRootNav().push(TaxCoutrySection3Page);
   }
   section4() {
-    this.app.getRootNav().push(TaxCoutrySection4Page); 
+    this.app.getRootNav().push(TaxCoutrySection4Page);
   }
   section5() {
-    this.app.getRootNav().push(TaxCoutrySection5Page); 
+    this.app.getRootNav().push(TaxCoutrySection5Page);
   }
   section6() {
-    this.app.getRootNav().push(TaxCoutrySection6Page); 
+    this.app.getRootNav().push(TaxCoutrySection6Page);
   }
   section7() {
-    this.app.getRootNav().push(TaxCoutrySection7Page); 
+    this.app.getRootNav().push(TaxCoutrySection7Page);
   }
   section8() {
-    this.app.getRootNav().push(TaxCoutrySection8Page); 
+    this.app.getRootNav().push(TaxCoutrySection8Page);
   }
   section9() {
-    this.app.getRootNav().push(TaxCoutrySection9Page); 
+    this.app.getRootNav().push(TaxCoutrySection9Page);
   }
   section10() {
-    this.app.getRootNav().push(TaxCoutrySection10Page); 
+    this.app.getRootNav().push(TaxCoutrySection10Page);
   }
 }
