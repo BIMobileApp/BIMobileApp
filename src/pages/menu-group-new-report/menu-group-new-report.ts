@@ -28,9 +28,8 @@ export class MenuGroupNewReportPage {
     public navParams: NavParams,
     public app:App) {
   }
-   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuGroupNewReportPage');
-  }
+   ionViewDidLoad() { 
+   }
 
   reportCar27_31(){
     this.app.getRootNav().push(CompareTaxCarPage);  
@@ -57,10 +56,10 @@ export class MenuGroupNewReportPage {
   reportAlcohol3(){
     this.app.getRootNav().push(CompareTaxEstAlcoholPage);  
   }
-  /*reportincome(){
+  reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  
   }
-  report2(){
+ /* report2(){
     this.app.getRootNav().push(TaxbudgetyearPage);  
   }
   report15(){

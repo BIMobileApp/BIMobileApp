@@ -4,25 +4,20 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-
     <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
         <ion-label  center><strong>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</strong></ion-label>
     </ion-item>
-
-
     <!-- <ion-item  style="background-color:#E6E6FA;">
             <ion-label  center>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
-    </ion-item>-->
-    
+    </ion-item>-->    
     <ion-card>
       <ion-card-content no-padding>
-            <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 100%;">    
+            <ion-scroll scrollX="true" scrollY="true" style="height: 100%;">    
             <div class="table-responsive">     
             <table class="table">
                     <thead>
-                            <tr style="background-color: #626567">
+                            <tr class="head">
                                     <th>เดือน</th>
                                     <th>ปีนี้</th>
                                     <th>ปีก่อน</th>
@@ -31,10 +26,10 @@
                     </thead>
                     <tbody>
                             <tr *ngFor="let data of responseData">
-                                    <td>{{data.MONTH_DESC}}</td>
-                                    <td>{{data.TAX}}</td>
-                                    <td>{{data.TAX_LY}}</td>
-                                    <td>{{data.ESTIMATE}}</td>
+                                    <td><p>{{data.MONTH_DESC}}</p></td>
+                                    <td><p>{{data.TAX | number : fractionSize}}</p></td>
+                                    <td><p>{{data.TAX_LY | number : fractionSize}}</p></td>
+                                    <td><p>{{data.ESTIMATE | number : fractionSize}}</p></td>
                             </tr>
                     </tbody>
             </table>

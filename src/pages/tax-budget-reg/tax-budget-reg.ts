@@ -11,6 +11,7 @@ export class TaxBudgetRegPage {
 
   responseData: any;
   summaryDate:any;
+  year:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -20,13 +21,24 @@ export class TaxBudgetRegPage {
   ionViewDidLoad() {
     var d = new Date(); 
     var n = d.getFullYear();
-    var nt = d.getFullYear();
-    console.log(n);
+    var nt = d.getFullYear()+543;
+    let year_en:any;
+    let year_th:any;
 
-    this.summaryDate = n;
-    this.webapi.getData('TaxBudgetReg?year='+n).then((data)=>{
-        this.responseData = data;
-        console.log(this.responseData);
+    var range = [];
+    for(var i=0;i<10;i++) {
+
+     year_en = n-i;
+     year_th = nt-i;
+
+      range.push( {"key":year_th,"value": year_en});
+    }
+    this.summaryDate = range;
+  }
+
+  selectDate(year){
+     this.webapi.getData('TaxBudgetReg?year='+year).then((data)=>{
+      this.responseData = data;
     });
   }
 }

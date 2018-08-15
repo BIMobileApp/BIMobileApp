@@ -13,14 +13,14 @@ export class TaxBudgetProductPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public webapi:RestProvider
-  ) {
+    public webapi:RestProvider) {
   }
 
   ionViewDidLoad() {
     this.webapi.getData('TaxBudgetProduct').then((data)=>{
       this.responseData = data;
     });
+    console.log(this.responseData);
   }
 
 }

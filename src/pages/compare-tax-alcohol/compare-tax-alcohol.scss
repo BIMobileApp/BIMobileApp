@@ -12,4 +12,15 @@ table, th , td  {
   .head{
     background-color:#ffffff !important;
   }
+  table > tbody > tr > td > p  {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 10em;
+  }
+  @media only screen  and (orientation: landscape)  {
+    table > tbody > tr > td > p  {
+        width: 90%;
+      }
+}
   

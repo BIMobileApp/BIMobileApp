@@ -5,42 +5,35 @@
 </ion-header>
 
 <ion-content> 
-    <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+    <ion-item style="background-color:#5b94f6; font-size: 14px; color:#fff" text-wrap>
         <ion-label  center><strong>รายงาน Top 10 ประจำเดือน</strong></ion-label>
-    </ion-item>
-    
-    <ion-card>
-    <ion-card-content no-padding>   
+    </ion-item>  
+
     <ion-item>
         <ion-label  text-center>เดือน : </ion-label>
-        <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
-          <ion-option value="1" >มกราคม</ion-option>
-          <ion-option value="2">กุมภาพันธ์</ion-option>
-          <ion-option value="3">มีนาคม</ion-option>
-          <ion-option value="4">เมษายน</ion-option>
-          <ion-option value="5">พฤษภาคม</ion-option>
-          <ion-option value="6">มิถุนายน</ion-option>
-          <ion-option value="7">กรกฎาคม</ion-option>
-          <ion-option value="8">สิงหาคม</ion-option>
-          <ion-option value="9">กันยายน</ion-option>
-          <ion-option value="10">ตุลาคม</ion-option>
-          <ion-option value="11">พฤศจิกายน</ion-option>
-          <ion-option value="12">ธันวาคม</ion-option>
+        <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="selectDate(item.value)" >
+            <ion-option value="1" >มกราคม</ion-option>
+            <ion-option value="2">กุมภาพันธ์</ion-option>
+            <ion-option value="3">มีนาคม</ion-option>
+            <ion-option value="4">เมษายน</ion-option>
+            <ion-option value="5">พฤษภาคม</ion-option>
+            <ion-option value="6">มิถุนายน</ion-option>
+            <ion-option value="7">กรกฎาคม</ion-option>
+            <ion-option value="8">สิงหาคม</ion-option>
+            <ion-option value="9">กันยายน</ion-option>
+            <ion-option value="10">ตุลาคม</ion-option>
+            <ion-option value="11">พฤศจิกายน</ion-option>
+            <ion-option value="12">ธันวาคม</ion-option>
         </ion-select>
       </ion-item>
-    </ion-card-content>
- 
-   <!--  <ion-item>
-      <ion-label>เดือน</ion-label>
-      <ion-datetime displayFormat="MMMM" 
-      pickerFormat="MMMM"   [(ngModel)]="summaryDate" #item (ionChange)="getDashboardItemsByDate(item.value)"></ion-datetime>
-    </ion-item>-->
-      <ion-card-content no-padding>             
-            <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
+
+
+      <ion-card>           
+        <ion-card-content no-padding>     
                     <div class="table-responsive">     
                     <table class="table" style="width: 100%;">
                             <thead>
-                                    <tr style="background-color: #626567">
+                                    <tr>
                                             <th>ลำดับ</th>
                                             <th>ผู้ประกอบการ</th>
                                             <th>ภาษีปีนี้</th>
@@ -49,14 +42,13 @@
                             <tbody>
                                     <tr *ngFor="let data of responseData">
                                             <td text-center>{{data.SORT}}</td>
-                                            <td>{{data.REG_NAME}}</td>
-                                            <td text-right>{{data.TAX}}</td>
+                                            <td><p>{{data.REG_NAME}}</p></td>
+                                            <td><p>{{data.TAX | number : fractionSize}}</p></td>
                                     </tr>
                             </tbody>
                     </table>
                 </div>
-            </ion-scroll>   
-      </ion-card-content>
-    </ion-card>
-
+                
+        </ion-card-content>
+        </ion-card>
 </ion-content>

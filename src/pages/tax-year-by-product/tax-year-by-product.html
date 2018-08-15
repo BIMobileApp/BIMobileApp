@@ -5,7 +5,7 @@
   </ion-header>
   
   <ion-content> 
-      <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+      <ion-item  style="background-color:#5b94f6; font-size: 14px; color:#fff" text-wrap>
           <ion-label  center><strong>รายงานประมาณการปีงบประมาณ</strong></ion-label>
       </ion-item>
      <ion-card>
@@ -13,16 +13,16 @@
         <ion-item>
             <ion-label  text-center>ปี : </ion-label>
             <ion-select  [(ngModel)]="dataYear"   (ionChange)="getDashboardItemsByDate(dataYear)" >
-              <ion-option  *ngFor="let item of summaryDate"  value="{{item}}">{{item}}</ion-option>
+              <ion-option  *ngFor="let item of summaryDate"  value="{{item.value}}">{{item.key}}</ion-option>
             </ion-select>
         </ion-item>
 
         <ion-card-content no-padding>
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
-                        <div class="table-responsive">     
+      
+                    <div class="table-responsive">     
                         <table class="table">
                                 <thead>
-                                        <tr style="background-color: #626567">
+                                        <tr>
                                                 <th text-center>ลำดับ</th>
                                                 <th>กลุ่มสินค้า</th>
                                                 <th>ต.ค</th>
@@ -42,60 +42,23 @@
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
                                                 <td text-center>{{data.SORT}}</td>
-                                                <td>{{data.GROUP_NAME}}</td>
-                                                <td>{{data.OCT}}</td>
-                                                <td>{{data.NOV}}</td>
-                                                <td>{{data.DECS}}</td>
-                                                <td>{{data.JAN}}</td>
-                                                <td>{{data.FAB}}</td>
-                                                <td>{{data.MAR}}</td>
-                                                <td>{{data.APR}}</td>
-                                                <td>{{data.MAY}}</td>
-                                                <td>{{data.JAN}}</td>
-                                                <td>{{data.JUL}}</td>
-                                                <td>{{data.AUG}}</td>
-                                                <td>{{data.SEP}}</td>
+                                                <td><p>{{data.GROUP_NAME}}</p></td>
+                                                <td><p>{{data.OCT | number : fractionSize}}</p></td>
+                                                <td><p>{{data.NOV | number : fractionSize}}</p></td>
+                                                <td><p>{{data.DEC | number : fractionSize}}</p></td>
+                                                <td><p>{{data.JAN | number : fractionSize}}</p></td>
+                                                <td><p>{{data.FAB | number : fractionSize}}</p></td>
+                                                <td><p>{{data.MAR | number : fractionSize}}</p></td>
+                                                <td><p>{{data.APR | number : fractionSize}}</p></td>
+                                                <td><p>{{data.MAY | number : fractionSize}}</p></td>
+                                                <td><p>{{data.JAN| number : fractionSize}}</p></td>
+                                                <td><p>{{data.JUL | number : fractionSize}}</p></td>
+                                                <td><p>{{data.AUG | number : fractionSize}}</p></td>
+                                                <td><p>{{data.SEP | number : fractionSize}}</p></td>
                                         </tr>
                                 </tbody>
                         </table>
-                    </div>
-                </ion-scroll>   
-            
-
-            <!--<ion-grid>           
-                <ion-row  style="background-color:#ffa94d ;">
-                  <ion-col text-center>ลำดับ</ion-col>
-                  <ion-col text-center>กลุ่มสินค้า</ion-col>
-                  <ion-col text-center>ต.ค</ion-col>
-                  <ion-col text-center>พ.ย</ion-col>
-                  <ion-col text-center>ธ.ค</ion-col>
-                  <ion-col text-center>ม.ค</ion-col>
-                  <ion-col text-center>ก.พ</ion-col>
-                  <ion-col text-center>ม.ค</ion-col>
-                  <ion-col text-center>เม.ย</ion-col>
-                  <ion-col text-center>พ.ค</ion-col>
-                  <ion-col text-center>มิ.ย</ion-col>
-                  <ion-col text-center>ก.ค</ion-col>
-                  <ion-col text-center>ส.ค</ion-col>
-                  <ion-col text-center>ก.ย</ion-col>
-                  </ion-row>
-                  <ion-row   *ngFor="let data of responseData">
-                    <ion-col text-center></ion-col>
-                      <ion-col>{{data.GROUP_NAME}}</ion-col>
-                      <ion-col>{{data.OCT}}</ion-col>
-                      <ion-col>{{data.NOV}}</ion-col>
-                      <ion-col>{{data.DECS}}</ion-col>
-                      <ion-col>{{data.JAN}}</ion-col>
-                      <ion-col>{{data.FAB}}</ion-col>
-                      <ion-col>{{data.MAR}}</ion-col>
-                      <ion-col>{{data.APR}}</ion-col>
-                      <ion-col>{{data.MAY}}</ion-col>
-                      <ion-col>{{data.JAN}}</ion-col>
-                      <ion-col>{{data.JUL}}</ion-col>
-                      <ion-col>{{data.AUG}}</ion-col>
-                      <ion-col>{{data.SEP}}</ion-col>
-                  </ion-row>
-            </ion-grid>-->
+                    </div>  
         </ion-card-content>
       </ion-card>
   

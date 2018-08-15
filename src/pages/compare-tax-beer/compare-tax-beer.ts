@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js';
@@ -23,7 +23,8 @@ export class CompareTaxBeerPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public webapi:RestProvider) {
+    public webapi:RestProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -230,5 +231,4 @@ export class CompareTaxBeerPage {
 
     });
   }
-
 }

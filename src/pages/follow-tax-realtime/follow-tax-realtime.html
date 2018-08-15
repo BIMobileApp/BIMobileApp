@@ -1,11 +1,11 @@
 <ion-header>
     <ion-navbar color="primary">
-      <ion-title>แยกตามหมวดหมู่->Realtime</ion-title>
+      <ion-title>แยกตามหมวดหมู่</ion-title>
     </ion-navbar>
   </ion-header>
   
   <ion-content> 
-      <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
+      <ion-item  style="background-color:#5b94f6; font-size: 14px; color:#fff" text-wrap>
           <ion-label  center><strong>รายงานติดตามการชำระภาษี</strong></ion-label>
       </ion-item>
       <ion-item>
@@ -27,12 +27,11 @@
         </ion-item>
      <ion-card>
         <ion-card-content no-padding>
-            
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
+        
                         <div class="table-responsive">     
                         <table class="table" style="width: 100%;">
                                 <thead>
-                                        <tr style="background-color: #626567">
+                                        <tr>
                                                 <th>วันที่</th>
                                                 <th>ในประเทศ</th>
                                                 <th>ต่างประเทศ</th>
@@ -42,16 +41,16 @@
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td>{{data.TIME_ID}}</td>
-                                                <td>{{data.CD_INCOME}}</td>
-                                                <td>{{data.INCOME}}</td>
-                                                <td>{{data.IMPORT}}</td>
-                                                <td>{{data.IMPORT}}</td>
+                                                <td><p>data.TIME_ID</p></td>
+                                                <td><p>{{data.CD_INCOME | number : fractionSize}}</p></td>
+                                                <td><p>{{data.INCOME | number : fractionSize}}</p></td>
+                                                <td><p>{{data.IMPORT | number : fractionSize}}</p></td>
+                                                <td><p>{{data.SUM_ALL | number : fractionSize}}</p></td>
                                         </tr>
                                 </tbody>
                         </table>
                     </div>
-                </ion-scroll>  
+
         </ion-card-content>
       </ion-card>
   

@@ -8,7 +8,9 @@ import { RestProvider } from '../../providers/rest/rest';
   templateUrl: 'incomerealtime.html',
 })
 export class IncomerealtimePage {
+  
   respondData: any;
+
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public webapi:RestProvider) {
@@ -19,5 +21,6 @@ export class IncomerealtimePage {
     this.webapi.getData('SourceImcome').then((data)=>{
       this.respondData = data;
     });
+    console.log(this.respondData);
   }
 }

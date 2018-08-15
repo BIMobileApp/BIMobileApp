@@ -1,12 +1,12 @@
 <ion-header>
     <ion-navbar color="primary">
-      <ion-title>แยกตามหมวดหมู่->Realtime</ion-title>
+      <ion-title>แยกตามหมวดหมู่</ion-title>
     </ion-navbar>
   </ion-header>
   
   <ion-content> 
-      <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
-          <ion-label  center><strong>รายงานติดตามการชำระภาษี</strong></ion-label>
+      <ion-item  style="background-color:#5b94f6; font-size: 14px; color:#fff" text-wrap>
+          <ion-label  center><strong>รายงานภาษีสรรพสามิตนำเข้าแยกรายวัน</strong></ion-label>
       </ion-item>
       <ion-item>
           <ion-label  text-center>เดือน : </ion-label>
@@ -26,30 +26,29 @@
           </ion-select>
         </ion-item>
      <ion-card>
-        <ion-card-content>
-            
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
-                        <div class="table-responsive">     
-                        <table class="table"  style="width: 100%;">
-                                <thead>
-                                        <tr style="background-color: #626567">
-                                                <th>วันที่</th>
-                                                <th>นำเข้ากรมศุลกากร</th>
-                                                <th>ในประเทศ</th>
-                                                <th>ต่างประเทศ</th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                        <tr *ngFor="let data of responseData">
-                                                <td>{{data.TIME_ID}}</td>
-                                                <td>{{data.CD_INCOME}}</td>
-                                                <td>{{data.INCOME}}</td>
-                                                <td>{{data.FREE_ZONE}}</td>
-                                        </tr>
-                                </tbody>
-                        </table>
-                    </div>
-                </ion-scroll>  
+        <ion-card-content no-padding>          
+               
+        <div class="table-responsive">     
+        <table class="table"  style="width: 100%;">
+                <thead>
+                        <tr>
+                                <th>วันที่</th>
+                                <th>นำเข้ากรมศุลกากร</th>
+                                <th>ในประเทศ</th>
+                                <th>ต่างประเทศ</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let data of responseData">
+                                <td>{{data.TIME_ID}}</td>
+                                <td><p #title (click)="showfullmsg(title.value)">{{data.CD_INCOME  | number : fractionSize}}</p></td>
+                                <td><p #title (click)="showfullmsg(title.value)">{{data.INCOME  | number : fractionSize}}</p></td>
+                                <td><p #title (click)="showfullmsg(title.value)">{{data.IMPORT  | number : fractionSize}}</p></td>
+                        </tr>
+                </tbody>
+        </table>
+        </div>
+         
 
         </ion-card-content>
       </ion-card>

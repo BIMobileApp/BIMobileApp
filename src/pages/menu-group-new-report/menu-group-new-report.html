@@ -11,22 +11,21 @@
           </ion-item>
           <ion-grid>
               <ion-row>
-                <ion-col col-3 (click)="reportincome();"><img src="../assets/imgs/DataStatus.png"></ion-col>
                 <ion-col col-3 (click)="report2();"><img src="../assets/imgs/DataStatus.png"></ion-col>
+                <ion-col col-3 (click)="reportCar24_3();"><img src="../assets/imgs/DataStatus.png"></ion-col>
                 <ion-col col-3 (click)="report2();"><img src="../assets/imgs/DataStatus.png"></ion-col>
               </ion-row>
               <ion-row>
-                <ion-col col-3><p>เปรียบเทียบมูลค่าภาษีปีก่อน กราฟเส้นปริมาณ (16)</p></ion-col>
-                <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า รายงานเปรียบเทียบปีก่อน สุรา(26)</p></ion-col>
-                <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า (25)</p></ion-col>
+                  <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า (3)</p></ion-col>
+                  <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า (27)</p></ion-col>
+                  <ion-col col-3><p>Gauge สำนักมาตรฐานภาษีแยกตามสินค้า(24)</p></ion-col>
               </ion-row>     
               <ion-row>
-                  <ion-col col-3 (click)="reportCar24_3();"><img src="../assets/imgs/DataStatus.png"></ion-col>
-                  <ion-col col-3  (click)="reportCar27_31();"><img src="../assets/imgs/DataStatus.png"></ion-col>
+                   <ion-col col-3 (click)="report2();"><img src="../assets/imgs/DataStatus.png"></ion-col>
+                  <!--<ion-col col-3  (click)="reportCar27_31();"><img src="../assets/imgs/DataStatus.png"></ion-col>-->
               </ion-row>
               <ion-row>
-                  <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า (24)</p></ion-col>
-                  <ion-col col-3><p>เปรียบเทียบปีก่อน รถยนต์ (27)</p></ion-col>
+                  <ion-col col-3><p>Gauge สำนักมาตรฐานปริมาณแยกตามสินค้า</p></ion-col>
               </ion-row>
            </ion-grid>
    </ion-card-content>
@@ -37,15 +36,21 @@
       </ion-item>
       <ion-grid>
           <ion-row>
-            <ion-col col-3><img src="../assets/imgs/gauge.png"></ion-col>
             <ion-col col-3 (click)="reportAlcohol3();"><img src="../assets/imgs/gauge.png"></ion-col>
             <ion-col col-3 (click)="reportAlcohol26_30();"><img src="../assets/imgs/gauge.png"></ion-col>
+            <ion-col col-3 (click)="report2();"><img src="../assets/imgs/gauge.png"></ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-3><p>เปรียบเทียบมูลค่าภาษีปีก่อน</p></ion-col>
-            <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า</p></ion-col>
+            <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า (3)</p></ion-col>
             <ion-col col-3><p >เปรียบเทียบปีก่อนสุรา (30)</p></ion-col>
+            <ion-col col-3><p>Gauge สำนักมาตรฐานภาษีแยกตามสินค้า(24)</p></ion-col>
           </ion-row>
+          <ion-row>
+              <ion-col col-3 (click)="report2();"><img src="../assets/imgs/gauge.png"></ion-col>
+         </ion-row>
+         <ion-row>
+             <ion-col col-3><p>Gauge สำนักมาตรฐานปริมาณแยกตามสินค้า</p></ion-col>
+         </ion-row>
        </ion-grid>
 </ion-card-content>
 
@@ -55,15 +60,21 @@
     </ion-item>
     <ion-grid>
         <ion-row>
-          <ion-col col-3 (click)="LineFollowProduct()"><img src="../assets/imgs/graph.png"></ion-col>
           <ion-col col-3 (click)="reportBeer3();"><img src="../assets/imgs/graph.png"></ion-col>
           <ion-col col-3 (click)="reportBeer28_32();"><img src="../assets/imgs/graph.png"></ion-col>
+          <ion-col col-3 (click)="report2();"><img src="../assets/imgs/graph.png"></ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-3><p>เปรียบเทียบมูลค่าภาษีปีก่อน</p></ion-col>
-          <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า</p></ion-col>
+          <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า(3)</p></ion-col>
           <ion-col col-3><p>เปรียบเทียบปีก่อนเบียร์ (28)</p></ion-col>
+          <ion-col col-3><p>Gauge สำนักมาตรฐานภาษีแยกตามสินค้า(24)</p></ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col col-3 (click)="report2();"><img src="../assets/imgs/graph.png"></ion-col>
+       </ion-row>
+       <ion-row>
+           <ion-col col-3><p>Gauge สำนักมาตรฐานปริมาณแยกตามสินค้า</p></ion-col>
+       </ion-row>
      </ion-grid>
 </ion-card-content>
 
@@ -73,15 +84,21 @@
     </ion-item>
     <ion-grid>
         <ion-row>
-          <ion-col col-3><img src="../assets/imgs/if_4_1320813.png"></ion-col>
           <ion-col col-3 (click)="reportDrink3();"><img src="../assets/imgs/if_4_1320813.png"></ion-col>
           <ion-col col-3 (click)="reportDrink29_33();"><img src="../assets/imgs/if_4_1320813.png"></ion-col>
+          <ion-col col-3 (click)="report2();"><img src="../assets/imgs/if_4_1320813.png"></ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-3><p>เปรียบเทียบมูลค่าภาษีปีก่อน</p></ion-col>
-          <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า</p></ion-col>
+          <ion-col col-3><p>เปรียบเทียบภาษีตามกลุ่มสินค้า(3)</p></ion-col>
           <ion-col col-3><p>เปรียบเทียบปีก่อนเครื่องดื่ม (29)</p></ion-col>
+          <ion-col col-3><p>Gauge สำนักมาตรฐานภาษีแยกตามสินค้า(24)</p></ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col col-3 (click)="report2();"><img src="../assets/imgs/if_4_1320813.png"></ion-col>
+       </ion-row>
+       <ion-row>
+           <ion-col col-3><p>Gauge สำนักมาตรฐานปริมาณแยกตามสินค้า</p></ion-col>
+       </ion-row>
      </ion-grid>
     </ion-card-content>
 
