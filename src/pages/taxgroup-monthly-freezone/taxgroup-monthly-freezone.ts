@@ -17,12 +17,13 @@ export class TaxgroupMonthlyFreezonePage {
     var radial = new RadialGauge({
         renderTo: document.createElement('canvas')
     });*/
-   // this.thisYear();
-   // this.lastYear();
+    /*this.thisYear();
+    this.lastYear();
+    this.compareYear();*/
    
     }
 
-   /* thisYear(){
+    /*thisYear(){
         var gauge = new RadialGauge({
             renderTo: 'canvas-id1',
             width: 300,

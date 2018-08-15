@@ -28,9 +28,8 @@ export class MenuGroupNewReportPage {
     public navParams: NavParams,
     public app:App) {
   }
-   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuGroupNewReportPage');
-  }
+   ionViewDidLoad() { 
+   }
 
   reportCar27_31(){
     this.app.getRootNav().push(CompareTaxCarPage);  

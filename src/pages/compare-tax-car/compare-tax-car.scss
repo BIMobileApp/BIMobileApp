@@ -9,3 +9,14 @@ table, th , td  {
   table tr:nth-child(even) {
     background-color: #ffffff;
   }
+  table > tbody > tr > td > p  {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 10em;
+  }
+  @media only screen  and (orientation: landscape)  {
+    table > tbody > tr > td > p  {
+        width: 90%;
+      }
+}

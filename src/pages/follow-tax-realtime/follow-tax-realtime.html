@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-      <ion-title>แยกตามหมวดหมู่->Realtime</ion-title>
+      <ion-title>แยกตามหมวดหมู่</ion-title>
     </ion-navbar>
   </ion-header>
   
@@ -42,11 +42,11 @@
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td>{{data.TIME_ID}}</td>
-                                                <td>{{data.CD_INCOME}}</td>
-                                                <td>{{data.INCOME}}</td>
-                                                <td>{{data.IMPORT}}</td>
-                                                <td>{{data.IMPORT}}</td>
+                                                <td>data.TIME_ID</td>
+                                                <td>{{data.CD_INCOME | number : fractionSize}}</td>
+                                                <td>{{data.INCOME | number : fractionSize}}</td>
+                                                <td>{{data.IMPORT | number : fractionSize}}</td>
+                                                <td>{{data.SUM_ALL | number : fractionSize}}</td>
                                         </tr>
                                 </tbody>
                         </table>

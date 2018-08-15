@@ -32,9 +32,9 @@
                     <tbody>
                             <tr *ngFor="let data of responseData">
                                     <td>{{data.MONTH_DESC}}</td>
-                                    <td>{{data.TAX}}</td>
-                                    <td>{{data.TAX_LY}}</td>
-                                    <td>{{data.ESTIMATE}}</td>
+                                    <td>{{data.TAX | number : fractionSize}}</td>
+                                    <td>{{data.TAX_LY | number : fractionSize}}</td>
+                                    <td>{{data.ESTIMATE | number : fractionSize}}</td>
                             </tr>
                     </tbody>
             </table>

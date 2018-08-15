@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
@@ -25,7 +25,8 @@ export class CompareTaxCarPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public http: HttpClient,
-    public webapi: RestProvider) {
+    public webapi: RestProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -232,6 +233,17 @@ export class CompareTaxCarPage {
       }
 
     });
+  }
+
+  item:any;
+  tooltip(item){
+
+    const alert = this.alertCtrl.create({
+      title: '',
+      subTitle: item
+    });
+    alert.present();
+    
   }
 
 }

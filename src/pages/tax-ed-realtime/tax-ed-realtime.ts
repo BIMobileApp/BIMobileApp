@@ -17,11 +17,11 @@ export class TaxEdRealtimePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TaxEdRealtimePage');
+ 
   }
 
   getDashboardItemsByDate(month){
-    this.webapi.getData('FollowPayTaxRealtime?month='+month).then((data)=>{
+    this.webapi.getData('TaxRealtimeFreezone?month='+month).then((data)=>{
       this.responseData = data;
     });
   }

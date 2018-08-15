@@ -17,16 +17,24 @@ export class TaxYearByProductPage {
     public webapi:RestProvider) {
   }
 
+   year_en:any;
+   year_th:any;
+
   ionViewDidLoad() {
     var d = new Date(); 
     var n = d.getFullYear();
-    
-    let date_year = new Array<any>();
+    var nt = d.getFullYear()+543;
+ 
 
-    for(let i = 0; i <= 10 ; i++){     
-      date_year.push(n-i);
-    } 
-   this.summaryDate = date_year;
+    var range = [];
+    for(var i=0;i<10;i++) {
+
+     this.year_en = n-i;
+     this.year_th = nt-i;
+
+      range.push( {"key":this.year_th,"value": this.year_en});
+    }
+    this.summaryDate = range;
   }
 
   dataYear:any;

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>compare-tax-drink</ion-title>
+    <ion-title>แยกตามสำนัก</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -26,10 +26,10 @@
                     <tbody>
                             <tr *ngFor="let data of responseData">
                                     <td>{{data.TYPE_NAME}}</td>
-                                    <td>{{data.TAX}}</td>
-                                    <td>{{data.TAX_LY}}</td>
-                                    <td>{{data.ESTIMATE}}</td>
-                                    <td>{{data.COMPARE_ESTIMATE_DIFF}}</td>
+                                    <td>{{data.TAX | number : fractionSize}}</td>
+                                    <td>{{data.TAX_LY | number : fractionSize}}</td>
+                                    <td>{{data.ESTIMATE | number : fractionSize}}</td>
+                                    <td>{{data.COMPARE_ESTIMATE_DIFF | number : fractionSize}}</td>
                             </tr>
                     </tbody>
             </table>

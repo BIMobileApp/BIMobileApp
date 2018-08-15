@@ -22,10 +22,10 @@
                                         </tr>
                                 </thead>
                                 <tbody>
-                                        <tr *ngFor="let data of responseData">
+                                        <tr *ngFor="let data of respondData">
                                                 <td>{{data.SORT}}</td>
                                                 <td>{{data.GROUP_NAME}}</td>
-                                                <td>{{data.TAX}}</td>
+                                                <td>{{data.TAX | number : fractionSize}}</td>
                                         </tr>
                                 </tbody>
                         </table>

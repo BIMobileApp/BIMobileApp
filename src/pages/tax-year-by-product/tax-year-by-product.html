@@ -13,7 +13,7 @@
         <ion-item>
             <ion-label  text-center>ปี : </ion-label>
             <ion-select  [(ngModel)]="dataYear"   (ionChange)="getDashboardItemsByDate(dataYear)" >
-              <ion-option  *ngFor="let item of summaryDate"  value="{{item}}">{{item}}</ion-option>
+              <ion-option  *ngFor="let item of summaryDate"  value="{{item.value}}">{{item.key}}</ion-option>
             </ion-select>
         </ion-item>
 
@@ -43,18 +43,18 @@
                                         <tr *ngFor="let data of responseData">
                                                 <td text-center>{{data.SORT}}</td>
                                                 <td>{{data.GROUP_NAME}}</td>
-                                                <td>{{data.OCT}}</td>
-                                                <td>{{data.NOV}}</td>
-                                                <td>{{data.DECS}}</td>
-                                                <td>{{data.JAN}}</td>
-                                                <td>{{data.FAB}}</td>
-                                                <td>{{data.MAR}}</td>
-                                                <td>{{data.APR}}</td>
-                                                <td>{{data.MAY}}</td>
-                                                <td>{{data.JAN}}</td>
-                                                <td>{{data.JUL}}</td>
-                                                <td>{{data.AUG}}</td>
-                                                <td>{{data.SEP}}</td>
+                                                <td>{{data.OCT | number : fractionSize}}</td>
+                                                <td>{{data.NOV | number : fractionSize}}</td>
+                                                <td>{{data.DEC | number : fractionSize}}</td>
+                                                <td>{{data.JAN | number : fractionSize}}</td>
+                                                <td>{{data.FAB | number : fractionSize}}</td>
+                                                <td>{{data.MAR | number : fractionSize}}</td>
+                                                <td>{{data.APR | number : fractionSize}}</td>
+                                                <td>{{data.MAY | number : fractionSize}}</td>
+                                                <td>{{data.JAN| number : fractionSize}}</td>
+                                                <td>{{data.JUL | number : fractionSize}}</td>
+                                                <td>{{data.AUG | number : fractionSize}}</td>
+                                                <td>{{data.SEP | number : fractionSize}}</td>
                                         </tr>
                                 </tbody>
                         </table>

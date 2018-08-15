@@ -8,14 +8,14 @@
             <ion-label  center><strong>รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</strong></ion-label>
         </ion-item>
 
-        <ion-grid>
-            <ion-row text-center>
-                <ion-col>ปีงบประมาณ : {{summaryDate}}</ion-col>
-            </ion-row>
-        </ion-grid>
+        <ion-item>
+            <ion-label  text-center>ปีงบประมาณ : </ion-label>
+            <ion-select [(ngModel)]="year"  #item (ionChange)="selectDate(item.value)">
+                <ion-option  *ngFor="let data of summaryDate" value="{{data.value}}" >{{data.key}}</ion-option>
+            </ion-select>
+        </ion-item>
         
-    <ion-card>
-            
+    <ion-card>           
         <ion-card-content no-padding>       
                 <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
                         <div class="table-responsive">     
@@ -31,7 +31,7 @@
                                         <tr *ngFor="let data of responseData">
                                                 <td text-center>{{data.SORT}}</td>
                                                 <td>{{data.REG_NAME}}</td>
-                                                <td text-right>{{data.TAX}}</td>
+                                                <td text-right>{{data.TAX | number : fractionSize}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" text-center><strong>รวมทั้งสิ้น</strong></td>
@@ -41,25 +41,7 @@
                         </table>
                         </div>
                         </ion-scroll>       
-          
-
-            <!--<ion-grid >    
-                <ion-row >
-                  <ion-col col-2 style="background-color:#808080; text-align: center;">ลำดับ</ion-col>
-                  <ion-col col-5 style="background-color:#808080; text-align: center;">ผุ้ประกอบการ</ion-col>
-                  <ion-col col-5 style="background-color:#808080; text-align: center;">ภาษีปีนี้</ion-col>
-                  </ion-row>
-                  <ion-row *ngFor="let data of responseData" >
-                      <ion-col  col-2  text-center>{{data.SORT}}</ion-col>
-                      <ion-col  col-5>{{data.REG_NAME}}</ion-col>
-                      <ion-col  col-5 text-right>{{data.TAX}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col col-10 style="text-align: center;"><strong>รวมทั้งสิ้น</strong></ion-col>
-                      <ion-col col-2></ion-col>
-                </ion-row>
-            </ion-grid>-->
-        </ion-card-content>
+            </ion-card-content>
  
       </ion-card>
 

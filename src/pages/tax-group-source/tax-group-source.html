@@ -23,9 +23,9 @@
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
                                                 <td>{{data.GROUP_NAME}}</td>
-                                                <td>{{data.INCOME}}</td>
-                                                <td>{{data.IMPORT}}</td>
-                                                <td>{{data.SUM_ALL}}</td>
+                                                <td>{{data.INCOME| number : fractionSize}}</td>
+                                                <td>{{data.IMPORT| number : fractionSize}}</td>
+                                                <td>{{data.SUM_ALL| number : fractionSize}}</td>
                                         </tr>
                                 </tbody>
                         </table>

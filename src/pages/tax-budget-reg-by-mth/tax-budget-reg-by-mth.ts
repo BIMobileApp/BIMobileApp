@@ -21,11 +21,13 @@ export class TaxBudgetRegByMthPage {
   }
 
   summaryDate: any;
-  getDashboardItemsByDate(summaryDate){
-    console.log(summaryDate);
+  selectDate(summaryDate){
+  
     this.webapi.getData('TaxBudgetRegByMth?mth='+summaryDate).then((data)=>{
       this.responseData = data;
-      console.log(this.responseData);
     });
+
+    console.log(this.responseData);
+
   }
 }
