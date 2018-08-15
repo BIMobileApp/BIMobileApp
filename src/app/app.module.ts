@@ -50,7 +50,17 @@ import { CompareTaxEstCarPage } from '../pages/compare-tax-est-car/compare-tax-e
 import { CompareTaxEstBeerPage } from '../pages/compare-tax-est-beer/compare-tax-est-beer';
 import { CompareTaxEstAlcoholPage } from '../pages/compare-tax-est-alcohol/compare-tax-est-alcohol';
 import { CompareTaxEstDrinkPage } from '../pages/compare-tax-est-drink/compare-tax-est-drink';
-import {GaugesModule} from 'ng-canvas-gauges/lib';
+import { TaxCoutrySection1Page } from '../pages/tax-coutry-section1/tax-coutry-section1';
+import { TaxCoutrySection2Page } from '../pages/tax-coutry-section2/tax-coutry-section2';
+import { TaxCoutrySection3Page } from '../pages/tax-coutry-section3/tax-coutry-section3';
+import { TaxCoutrySection4Page } from '../pages/tax-coutry-section4/tax-coutry-section4';
+import { TaxCoutrySection5Page } from '../pages/tax-coutry-section5/tax-coutry-section5';
+import { TaxCoutrySection6Page } from '../pages/tax-coutry-section6/tax-coutry-section6';
+import { TaxCoutrySection7Page } from '../pages/tax-coutry-section7/tax-coutry-section7';
+import { TaxCoutrySection8Page } from '../pages/tax-coutry-section8/tax-coutry-section8';
+import { TaxCoutrySection9Page } from '../pages/tax-coutry-section9/tax-coutry-section9';
+import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry-section10';
+
 
 
 @NgModule({
@@ -99,16 +109,24 @@ import {GaugesModule} from 'ng-canvas-gauges/lib';
     CompareTaxEstCarPage,
     CompareTaxEstBeerPage,
     CompareTaxEstAlcoholPage,
-    CompareTaxEstDrinkPage
+    CompareTaxEstDrinkPage,
+    TaxCoutrySection1Page,
+    TaxCoutrySection2Page,
+    TaxCoutrySection3Page,
+    TaxCoutrySection4Page,
+    TaxCoutrySection5Page,
+    TaxCoutrySection6Page,
+    TaxCoutrySection7Page,
+    TaxCoutrySection8Page,
+    TaxCoutrySection9Page,
+    TaxCoutrySection10Page
 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ChartsModule,
-    GaugesModule,
-    IonicModule.forRoot(MyApp),
-    /*IonicModule.forRoot(MyApp, {
+    IonicModule.forRoot(MyApp, {
       backButtonText: '',
       iconMode: 'ios',
       modalEnter: 'modal-slide-in',
@@ -116,7 +134,7 @@ import {GaugesModule} from 'ng-canvas-gauges/lib';
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition'
     }
-  )*/],
+  )],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -163,7 +181,17 @@ import {GaugesModule} from 'ng-canvas-gauges/lib';
     CompareTaxEstCarPage,
     CompareTaxEstBeerPage,
     CompareTaxEstAlcoholPage,
-    CompareTaxEstDrinkPage
+    CompareTaxEstDrinkPage,
+    TaxCoutrySection1Page,
+    TaxCoutrySection2Page,
+    TaxCoutrySection3Page,
+    TaxCoutrySection4Page,
+    TaxCoutrySection5Page,
+    TaxCoutrySection6Page,
+    TaxCoutrySection7Page,
+    TaxCoutrySection8Page,
+    TaxCoutrySection9Page,
+    TaxCoutrySection10Page
   ],
   providers: [
     StatusBar,

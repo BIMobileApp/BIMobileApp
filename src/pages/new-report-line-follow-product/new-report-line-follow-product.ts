@@ -123,18 +123,18 @@ export class NewReportLineFollowProductPage {
             label: "ปีนี้",
             fill: false,
             lineTension: 0.0,
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
+            backgroundColor: "#0392cf",
+            borderColor: "#0392cf",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 99, 132)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "#0392cf",
+            pointBackgroundColor: "#0392cf",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 99, 132)",
-            pointHoverBorderColor: "rgb(255, 99, 132)",
+            pointHoverBackgroundColor: "#0392cf",
+            pointHoverBorderColor: "#0392cf",
             pointHoverBorderWidth: 2,
             pointRadius: 3,
             pointHitRadius: 10,
@@ -145,18 +145,18 @@ export class NewReportLineFollowProductPage {
             label: "ประมาณการ",
             fill: false,
             lineTension: 0.0,
-            backgroundColor: "rgb(255, 206, 86)",
-            borderColor: "rgb(255, 206, 86)",
+            backgroundColor: "#f6cd61",
+            borderColor: "#f6cd61",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 206, 86)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "#f6cd61",
+            pointBackgroundColor: "#f6cd61",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 206, 86)",
-            pointHoverBorderColor: "rgb(255, 206, 86)",
+            pointHoverBackgroundColor: "#f6cd61",
+            pointHoverBorderColor: "#f6cd61",
             pointHoverBorderWidth: 2,
             pointRadius: 3,
             pointHitRadius: 10,
@@ -166,8 +166,10 @@ export class NewReportLineFollowProductPage {
         ]
       },
       options: {
-        backgroundColor:'rgb(237, 233, 225)',
-        //end toolti
+        
+        chartArea: {
+					backgroundColor: 'rgba(251, 85, 85, 0.4)'
+        },
         scales: {
           yAxes: [{
             ticks: {

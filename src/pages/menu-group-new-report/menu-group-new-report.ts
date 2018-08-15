@@ -56,10 +56,10 @@ export class MenuGroupNewReportPage {
   reportAlcohol3(){
     this.app.getRootNav().push(CompareTaxEstAlcoholPage);  
   }
-  /*reportincome(){
+  reportincome(){
     this.app.getRootNav().push(IncomerealtimePage);  
   }
-  report2(){
+ /* report2(){
     this.app.getRootNav().push(TaxbudgetyearPage);  
   }
   report15(){

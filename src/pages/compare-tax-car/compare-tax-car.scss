@@ -1,22 +1,25 @@
 table, th , td  {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 5px;
-  }
-  table tr:nth-child(odd) {
-    background-color: #f1f1f1;
-  }
-  table tr:nth-child(even) {
-    background-color: #ffffff;
-  }
+  border: 0px solid #ffffff !important; 
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tbody tr:nth-child(odd) {
+  background-color: #fbecc4 !important; 
+}
+table tbody tr:nth-child(even) {
+  background-color:#fff !important;
+}
+.head{
+  background-color:#ffffff !important;
+}
+table > tbody > tr > td > p  {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 10em;
+}
+@media only screen  and (orientation: landscape)  {
   table > tbody > tr > td > p  {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 10em;
-  }
-  @media only screen  and (orientation: landscape)  {
-    table > tbody > tr > td > p  {
-        width: 90%;
-      }
+      width: 90%;
+    }
 }

@@ -10,11 +10,11 @@
     </ion-item>
      <ion-card>
         <ion-card-content>  
-  
+                <ion-scroll scrollX="true" scrollY="true" style="height: 200px;">   
                  <div class="table-responsive">     
                         <table class="table"  style="width: 100%;">
                                 <thead>
-                                        <tr>
+                                        <tr class="head">
                                                 <th>กลุ่มสินค้า</th>
                                                 <th>ปีนี้</th>
                                                 <th>ปีก่อน</th>
@@ -24,15 +24,16 @@
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td>{{data.TYPE_NAME}}</td>
-                                                <td>{{data.TAX | number : fractionSize}}</td>
-                                                <td>{{data.TAX_LY | number : fractionSize}}</td>
-                                                <td>{{data.ESTIMATE | number : fractionSize}}</td>
-                                                <td>{{data.COMPARE_ESTIMATE_DIFF | number : fractionSize}}</td>
+                                                <td><p title="{{data.TYPE_NAME}}">{{data.TYPE_NAME}}</p></td>
+                                                <td><p title="{{data.TAX | number : fractionSize}}">{{data.TAX | number : fractionSize}}</p></td>
+                                                <td><p>{{data.TAX_LY | number : fractionSize}}</p></td>
+                                                <td><p>{{data.ESTIMATE | number : fractionSize}}</p></td>
+                                                <td><p>{{data.COMPARE_ESTIMATE_DIFF | number : fractionSize}}</p></td>
                                         </tr>
                                 </tbody>
                         </table>
                 </div>
+                </ion-scroll>
            
         </ion-card-content>
       </ion-card>

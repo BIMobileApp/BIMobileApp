@@ -1,3 +1,26 @@
-page-tax-budget-product {
-
+table, th , td  {
+  border: 0px solid #ffffff !important; 
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tbody tr:nth-child(odd) {
+  background-color: #fbecc4 !important; 
+}
+table tbody tr:nth-child(even) {
+  background-color:#fff !important;
+}
+.head{
+  background-color:#ffffff !important;
+}
+table > tbody > tr > td > p  {
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 10em;
+}
+@media only screen  and (orientation: landscape)  {
+  table > tbody > tr > td > p  {
+      width: 90%;
+    }
 }

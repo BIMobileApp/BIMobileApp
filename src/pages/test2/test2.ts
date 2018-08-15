@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { ViewChild } from '@angular/core'
+import { ViewChild,ElementRef } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';
 
@@ -12,7 +12,7 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class Test2Page {
   @ViewChild('barCanvas') barCanvas;
-
+  @ViewChild('title') mylblRef: ElementRef;
   barChart: any;
   respondData: any;
   summaryDate:any;
@@ -31,14 +31,16 @@ export class Test2Page {
 
 
   apiUrl = "http://localhost:62657/api";
-  item:any;
-  tooltip(item){
-    const alert = this.alertCtrl.create({
-      title: '',
-      subTitle: item
-    });
-    alert.present();
-  }
+  aaa:any;
+  
+  tooltip(){
+  let alert = this.alertCtrl.create({
+    title: '',
+    subTitle: this.mylblRef.nativeElement.innerText,
+    buttons: ['ตกลง']
+  });
+  alert.present();
+}
 
 
   ionViewDidLoad() {

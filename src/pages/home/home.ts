@@ -54,6 +54,8 @@ export class HomePage {
        //console.log(this.offcode+'----'+this.offdesc+'------'+this.username);
         //บันทึกข้อมูลของ local storage
         localStorage.setItem("userData", this.userData.username);
+        localStorage.setItem("offcode", this.offcode);
+        console.log(localStorage);
         //ปิดหน้า login และกลับไปหน้าหลัง
         this.navCtrl.setRoot(MenuGroupPage);
       } else {
