@@ -21,7 +21,8 @@
       <tr>
         <td>John</td>
         <td>Doe</td>
-        <td><p title="john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com" #item (click)="tooltip(item.value)">john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com</p></td>
+        <!--<td><p title="john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com" #item (click)="tooltip(item.value)">john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com</p></td>-->
+        <td><p title="john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com"  #title (click)="tooltip()">john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com</p></td>
       </tr>
       <tr>
         <td>Mary</td>
@@ -41,9 +42,9 @@
 
  <p >ปีงบประมาณ : {{summaryDate}} </p> 
 
- <ion-select >
+ <!--<ion-select >
    <ion-option *ngFor="let data of respondData" value="">{{data.key}}</ion-option>
- </ion-select>
+ </ion-select>-->
 
  
 </ion-content>
