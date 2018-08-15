@@ -6,16 +6,32 @@
 -->
 <ion-header>
 
-    <ion-navbar color="primary">
-        <ion-title>แผนที่ประเทศไทย</ion-title>
-      </ion-navbar>
+  <ion-navbar color="primary">
+    <ion-title>แผนที่ประเทศไทย</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding  text-center>
-        <img src="../../assets/imgs/thailandhello1_12.png"/>
-        <h2><strong>ตามรายภาค</strong></h2>
+<ion-content padding text-center>
+
+  <img src="../../assets/imgs/thailandhello1_12.png" />
+  <h2>
+    <strong>ตามรายภาค</strong>
+  </h2>
+  <div >
+    <button ion-button (click)="section1()" *ngIf="offcode=='01' ">ภาค 1</button>
+    <button ion-button (click)="section2()" *ngIf="offcode=='02' ">ภาค 2</button>
+    <button ion-button (click)="section3()" *ngIf="offcode=='03' ">ภาค 3</button>
+    <button ion-button (click)="section4()" *ngIf="offcode=='04' ">ภาค 4</button>
+    <button ion-button (click)="section5()" *ngIf="offcode=='05' ">ภาค 5</button>
+    <button ion-button (click)="section6()" *ngIf="offcode=='06' ">ภาค 6</button>
+    <button ion-button (click)="section7()" *ngIf="offcode=='07' ">ภาค 7</button>
+    <button ion-button (click)="section8()" *ngIf="offcode=='08' ">ภาค 8</button>
+    <button ion-button (click)="section9()" *ngIf="offcode=='09' ">ภาค 9</button>
+    <button ion-button (click)="section10()" *ngIf="offcode=='10' ">ภาค 10</button>
+  </div>
+  <div *ngIf="offcode=='00' ">
         <button ion-button (click)="section1()">ภาค 1</button>
         <button ion-button (click)="section2()">ภาค 2</button>
         <button ion-button (click)="section3()">ภาค 3</button>
@@ -26,13 +42,31 @@
         <button ion-button (click)="section8()">ภาค 8</button>
         <button ion-button (click)="section9()">ภาค 9</button>
         <button ion-button (click)="section10()">ภาค 10</button>
+  </div>
+</ion-content>
 
-                       
-       
-       
+<ion-content padding text-center *ngIf="offcode=='00' ">
+  <img src="../../assets/imgs/thailandhello1_12.png" />
+  <h2>
+    <strong>ตามรายภาค</strong>
+  </h2>
+  <button ion-button (click)="section1()">ภาค 1</button>
+  <button ion-button (click)="section2()">ภาค 2</button>
+  <button ion-button (click)="section3()">ภาค 3</button>
+  <button ion-button (click)="section4()">ภาค 4</button>
+  <button ion-button (click)="section5()">ภาค 5</button>
+  <button ion-button (click)="section6()">ภาค 6</button>
+  <button ion-button (click)="section7()" *ngIf="offcode=='07' ">ภาค 7</button>
+  <button ion-button (click)="section8()" *ngIf="offcode=='08' ">ภาค 8</button>
+  <button ion-button (click)="section9()" *ngIf="offcode=='09' ">ภาค 9</button>
+  <button ion-button (click)="section10()" *ngIf="offcode=='10' ">ภาค 10</button>
+</ion-content>
 
-    
-   <!-- <h2><strong>ตามรายภาค</strong></h2>
+
+
+
+
+<!-- <h2><strong>ตามรายภาค</strong></h2>
     <ion-grid>
         <ion-row>
             <ion-col >
@@ -67,6 +101,3 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
-
-
-</ion-content>
