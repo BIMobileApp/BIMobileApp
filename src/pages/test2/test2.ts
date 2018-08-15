@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { ViewChild } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
@@ -15,21 +15,59 @@ export class Test2Page {
 
   barChart: any;
   respondData: any;
-
+  summaryDate:any;
+  title: any;
+  myHero: any;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public http: HttpClient,
-    public webapi:RestProvider) {
+    public webapi:RestProvider,
+    public alertCtrl: AlertController) {
 
 
   }
 
-  apiUrl = "http://localhost:62657/api";
 
-  
+  apiUrl = "http://localhost:62657/api";
+  item:any;
+  tooltip(item){
+    const alert = this.alertCtrl.create({
+      title: '',
+      subTitle: item
+    });
+    alert.present();
+  }
+
+
   ionViewDidLoad() {
+
+    var d = new Date(); 
+    var n = d.getFullYear();
+    var nt = d.getFullYear()+543;
+
+    //this.title = n;
+    //this.myHero = nt;
+
+   //this. summaryDate = [this.title, this.myHero];
+    //var bc = this. summaryDate[0];
+   // var ac = this. summaryDate[1];
+
+   
+
+    var range = [];
+    for(var i=0;i<10;i++) {
+
+      this.title = n+i;
+      this.myHero = nt+i;
+
+      range.push( {"key":this.title,"value":this.myHero});
+    }
+   // console.log(range);
+
+    this.respondData = range;
+   // console.log( this.respondData);
 
     /*Highcharts.chart('container', {
 

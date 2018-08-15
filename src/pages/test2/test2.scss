@@ -1,3 +1,23 @@
-page-test2 {
-
+table, th , td  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+    font-family: 'Prompt' !important;
+  }
+  table tr:nth-child(odd) {
+    background-color: #FCBC8A;
+  }
+  table tr:nth-child(even) {
+    background-color: #FFE8D7;
+  }
+  table > tbody > tr > td > p  {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 10em;
+  }
+  @media only screen  and (orientation: landscape)  {
+    table > tbody > tr > td > p  {
+        width: 90%;
+      }
 }

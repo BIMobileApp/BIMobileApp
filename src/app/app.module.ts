@@ -107,15 +107,16 @@ import {GaugesModule} from 'ng-canvas-gauges/lib';
     HttpClientModule,
     ChartsModule,
     GaugesModule,
-    IonicModule.forRoot(MyApp, {
-      /*backButtonText: '',
+    IonicModule.forRoot(MyApp),
+    /*IonicModule.forRoot(MyApp, {
+      backButtonText: '',
       iconMode: 'ios',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition'*/
+      pageTransition: 'ios-transition'
     }
-  )],
+  )*/],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -167,9 +168,9 @@ import {GaugesModule} from 'ng-canvas-gauges/lib';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     RestProvider
   ]
 })
 
-export class AppModule {}
+export class AppModule { }

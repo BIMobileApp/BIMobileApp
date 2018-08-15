@@ -1,11 +1,11 @@
 table, th , td  {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 5px;
-  }
-  table tr:nth-child(odd) {
-    background-color: #f2a01a;
-  }
-  table tr:nth-child(even) {
-    background-color: #ffffff;
-  }
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #F0B27A;
+}
+table tr:nth-child(even) {
+  background-color:#fff;
+}

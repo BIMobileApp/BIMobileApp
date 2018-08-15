@@ -122,7 +122,7 @@ export class NewReportLineFollowProductPage {
           {
             label: "ปีนี้",
             fill: false,
-            lineTension: 0.1,
+            lineTension: 0.0,
             backgroundColor: "rgb(255, 99, 132)",
             borderColor: "rgb(255, 99, 132)",
             borderCapStyle: 'butt',
@@ -136,7 +136,7 @@ export class NewReportLineFollowProductPage {
             pointHoverBackgroundColor: "rgb(255, 99, 132)",
             pointHoverBorderColor: "rgb(255, 99, 132)",
             pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointRadius: 3,
             pointHitRadius: 10,
             data: this.TAX,
             spanGaps: false,
@@ -144,7 +144,7 @@ export class NewReportLineFollowProductPage {
           {
             label: "ประมาณการ",
             fill: false,
-            lineTension: 0.1,
+            lineTension: 0.0,
             backgroundColor: "rgb(255, 206, 86)",
             borderColor: "rgb(255, 206, 86)",
             borderCapStyle: 'butt',
@@ -158,7 +158,7 @@ export class NewReportLineFollowProductPage {
             pointHoverBackgroundColor: "rgb(255, 206, 86)",
             pointHoverBorderColor: "rgb(255, 206, 86)",
             pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointRadius: 3,
             pointHitRadius: 10,
             data: this.EST,
             spanGaps: false,
@@ -166,15 +166,17 @@ export class NewReportLineFollowProductPage {
         ]
       },
       options: {
+        backgroundColor:'rgb(237, 233, 225)',
         //end toolti
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = value.toString();
-                value = value.split(/(?=(?:...)*$)/);
-                value = value.join(',');
+                  value = value/1000000;
+                  value = value.toString();
+                  value = value.split(/(?=(?:...)*$)/);
+                  value = value.join(',');
                 return value;
               }
             },

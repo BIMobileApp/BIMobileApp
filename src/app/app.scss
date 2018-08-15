@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,16 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+  /* latin */
+  
+  @font-face {
+    font-family: Prompt;
+    src: url("../assets/fonts/TH K2D July8.ttf") ;
+    font-weight: normal;
+    font-style: normal;
+}
+
+  body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title {
+    font-family: 'Prompt' !important;
+    }
