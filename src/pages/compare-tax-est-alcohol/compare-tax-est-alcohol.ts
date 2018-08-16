@@ -28,7 +28,7 @@ export class CompareTaxEstAlcoholPage {
   lebel = [];
   prod: any;
   product: any;
-  id:any;
+  id: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -38,7 +38,7 @@ export class CompareTaxEstAlcoholPage {
   ionViewDidLoad() {
     this.getProduct();
     this.getLineData();
-    
+
   }
   getLineData() {
     let grp_id = "7002";
@@ -58,7 +58,7 @@ export class CompareTaxEstAlcoholPage {
     this.webapi.getData('getProduct').then((data) => {
       this.prod = data;
       console.log(this.prod);
-     
+
     });
   }
 
@@ -67,6 +67,7 @@ export class CompareTaxEstAlcoholPage {
   getTAX() {
     this.TAX = [];
     for (var i = 0; i < this.LineData.length; i++) {
+
       this.TAX.push(this.LineData[i].TAX);
     }
     this.TAX = JSON.parse(JSON.stringify(this.TAX));
@@ -105,20 +106,20 @@ export class CompareTaxEstAlcoholPage {
             label: "ปีนี้",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
+            backgroundColor: "#2BBBD8",
+            borderColor: "#2BBBD8",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 99, 132)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#2BBBD8",
+            pointBackgroundColor: "#2BBBD8",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 99, 132)",
-            pointHoverBorderColor: "rgb(255, 99, 132)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#2BBBD8",
+            pointHoverBorderColor: "#2BBBD8",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.TAX,
             spanGaps: false,
@@ -127,20 +128,20 @@ export class CompareTaxEstAlcoholPage {
             label: "ประมาณการ",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgb(255, 122, 21)",
-            borderColor: "rgb(255, 122, 21)",
+            backgroundColor: "#F78D3F",
+            borderColor: "#F78D3F",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 122, 21",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#F78D3F",
+            pointBackgroundColor: "#F78D3F",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 122, 21)",
-            pointHoverBorderColor: "rgb(255, 122, 21)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#F78D3F",
+            pointHoverBorderColor: "#F78D3F",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.EST,
             spanGaps: false,
@@ -148,22 +149,38 @@ export class CompareTaxEstAlcoholPage {
         ]
       },
       options: {
-        //end toolti
+        
+        tooltips: {
+          mode: 'index',
+          label: 'myLabel',
+          callbacks: {
+            label: function(tooltipItem, data) {
+              if (tooltipItem.yLabel > 999999){
+                var value = data.datasets[tooltipItem.datasetIndex].label + ': '+ (tooltipItem.yLabel/1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              }else{
+                var value = data.datasets[tooltipItem.datasetIndex].label + ': '+ tooltipItem.yLabel.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              }
+              
+              return value;
+            }
+          } // end callbacks:
+        }, //end tooltip
+      
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = value.toString();
-                value = value.split(/(?=(?:...)*$)/);
-                value = value.join(',');
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 return value;
               }
             },
             scaleLabel: {
               display: true,
               labelString: 'ล้านบาท'
-            }
+            },
+           
           }
           ],
           xAxes: [{
@@ -172,7 +189,8 @@ export class CompareTaxEstAlcoholPage {
               maxRotation: 90,
               minRotation: 0
             }
-          }]
+          }],
+
         }
       }
 

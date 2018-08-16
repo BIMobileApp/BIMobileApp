@@ -1,30 +1,24 @@
 <ion-header>
   <ion-navbar color="primary">
 
-    <ion-title>การจัดเก็บภาษี</ion-title>
+    <ion-title>ผลการจัดเก็บภาษีกรมสรรพสามิต</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding text-center>
-
-  <img src="../../assets/imgs/thailandhello1_12.png" />
   <h2>
-    <strong>ตามรายภาค</strong>
+    <strong>แผนที่แสดงผลการจัดเก็บภาษี</strong>
   </h2>
-  <div>
-    <button ion-button (click)="section1()" *ngIf="offcode=='01' ">ภาค 1</button>
-    <button ion-button (click)="section2()" *ngIf="offcode=='02' ">ภาค 2</button>
-    <button ion-button (click)="section3()" *ngIf="offcode=='03' ">ภาค 3</button>
-    <button ion-button (click)="section4()" *ngIf="offcode=='04' ">ภาค 4</button>
-    <button ion-button (click)="section5()" *ngIf="offcode=='05' ">ภาค 5</button>
-    <button ion-button (click)="section6()" *ngIf="offcode=='06' ">ภาค 6</button>
-    <button ion-button (click)="section7()" *ngIf="offcode=='07' ">ภาค 7</button>
-    <button ion-button (click)="section8()" *ngIf="offcode=='08' ">ภาค 8</button>
-    <button ion-button (click)="section9()" *ngIf="offcode=='09' ">ภาค 9</button>
-    <button ion-button (click)="section10()" *ngIf="offcode=='10' ">ภาค 10</button>
-  </div>
+  <h3>
+    ตั้งแต่วันที่ xxx ถึงวันที่ xxx
+  </h3>
+
   <div *ngIf="offcode=='00' ">
+    <img src="../../assets/imgs/thailandhello1.png" />
+    <h2>
+      <strong>ตามรายภาค</strong>
+    </h2>
     <button ion-button (click)="section1()">ภาค 1</button>
     <button ion-button (click)="section2()">ภาค 2</button>
     <button ion-button (click)="section3()">ภาค 3</button>
@@ -35,6 +29,10 @@
     <button ion-button (click)="section8()">ภาค 8</button>
     <button ion-button (click)="section9()">ภาค 9</button>
     <button ion-button (click)="section10()">ภาค 10</button>
+  </div>
+
+  <div *ngIf="offcode!='00' ">
+      <img src="../../assets/imgs/pak{{offcode}}.png" />
   </div>
 
   <!--/////////////////////////////// Gauge ///////////////////////////////////////////////-->
@@ -111,39 +109,43 @@
     <strong>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</strong>
   </h2>
 
-  <ion-card >
-      <ion-card-content no-padding>       
-          <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 400px;">    
-              <div class="table-responsive">     
-              <table class="table">
-                    <thead text-wrap>
-                            <tr>
-                                    <th>เดือน</th>
-                                    <th>ปีนี้</th>
-                                    <th>ปีก่อน</th>
-                                    <th>ประมาณการ</th>
-                            </tr>
-                    </thead>
-                    <tbody text-wrap>
-                            <tr *ngFor="let data of responseData">
-                                    <td><p>{{data.MONTH_SHORT_DESC}}</p></td>
-                                    <td><p text-right>{{data.TAX}}100</p></td>
-                                    <td><p text-right>{{data.TAX_LY}}</p></td>
-                                    <td><p text-right>{{data.ESTIMATE}}</p></td>
-                            </tr>
-                    </tbody>
-                    </table>
-        </div>
-        </ion-scroll>       
+  <ion-card>
+    <ion-card-content no-padding>
+      <div class="table-responsive">
+        <table style="width: 100%;">
+          <thead>
+            <tr style="background-color: rgb(247, 141, 63);">
+              <th>เดือน</th>
+              <th>ปีนี้</th>
+              <th>ปีก่อน</th>
+              <th>ประมาณการ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--<tr *ngFor="let data of responseData">
+                                    <td><p text-center>{{data.MONTH_SHORT_DESC}}</p></td>
+                                    <td><p>{{data.TAX}}</p></td>
+                                    <td><p>{{data.TAX_LY}}</p></td>
+                                    <td><p>{{data.ESTIMATE}}</p></td>
+                            </tr>-->
+            <tr *ngFor="let data of responseData">
+              <td text-center>{{data.MONTH_SHORT_DESC}}</td>
+              <td text-right>{{data.TAX}}</td>
+              <td text-right>{{data.TAX_LY}}</td>
+              <td text-right>{{data.ESTIMATE}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-</ion-card-content>
+    </ion-card-content>
 
-</ion-card>
+  </ion-card>
+
+
+
 
 </ion-content>
-
-
-
 
 
 <!--<ion-card-content no-padding>

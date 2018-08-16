@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import { TaxbudgetyearPage } from '../taxbudgetyear/taxbudgetyear';
-import { TaxAllCountryPage } from '../tax-all-country/tax-all-country';
-import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone';
 import { TaxCoutrySection1Page } from '../tax-coutry-section1/tax-coutry-section1';
 import { TaxCoutrySection2Page } from '../tax-coutry-section2/tax-coutry-section2';
 import { TaxCoutrySection3Page } from '../tax-coutry-section3/tax-coutry-section3';
@@ -55,10 +52,10 @@ export class CetegoryTaxPage {
   }
 
   TableGetData(){
-    this.webapi.getData('TaxBudgetYear').then((data)=>{
+    this.webapi.getData('TaxCurYear').then((data)=>{
       this.responseData = data;
 
-      //console.log(this.responseData);
+      console.log(this.responseData);
       this.getTAX();
       this. getTAX_LY();
       this.getEST();
@@ -73,6 +70,7 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TAX = val;
+     // console.log(this.responseData);
     }
   }
 
@@ -86,6 +84,7 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TAX_LY = val;
+      //console.log(this.responseData);
     }
   }
 
@@ -97,6 +96,7 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].ESTIMATE = val;
+      //console.log(this.responseData);
     }
   }
 
