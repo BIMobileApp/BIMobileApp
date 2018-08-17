@@ -1,11 +1,25 @@
-table, th , td , tr {
-    border: 1px solid #ffffff ; 
+page-cetegory-tax {
+  table, th, td, tr {
+    border: 2px solid #ffffff;
     border-collapse: collapse;
-
+    table-layout: fixed;
+    
   }
   table tbody tr:nth-child(odd) {
-    background-color: rgb(250, 220, 137) !important; 
+    background-color: rgb(250, 220, 137) !important;
   }
   table tbody tr:nth-child(even) {
-    background-color:rgb(255, 255, 255) ;
+    background-color: rgb(255, 255, 255) !important;
   }
+  h3.center{
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 3vw !important;
+  }
+  h3.right{
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
+  }
+}
