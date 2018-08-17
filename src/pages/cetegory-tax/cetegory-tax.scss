@@ -1,14 +1,11 @@
-table, th , td  {
-    border: 0px solid #ffffff !important; 
+table, th , td , tr {
+    border: 1px solid #ffffff ; 
     border-collapse: collapse;
+
   }
   table tbody tr:nth-child(odd) {
-    background-color: #fbecc4 !important; 
+    background-color: rgb(250, 220, 137) ; 
   }
   table tbody tr:nth-child(even) {
-    background-color:#fff !important;
+    background-color:rgb(255, 255, 255) ;
   }
-  .head{
-    background-color:#ffffff !important;
-  }
-  
