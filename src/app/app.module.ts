@@ -37,6 +37,7 @@ import { TaxMonthlyFreezonePage } from '../pages/tax-monthly-freezone/tax-monthl
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
+import { Test1Page } from '../pages/test1/test1';
 import { Test2Page } from '../pages/test2/test2';
 import { TabGaugeAllmthSectionTaxPage } from '../pages/tab-gauge-allmth-section-tax/tab-gauge-allmth-section-tax';
 import { ChartsModule } from 'ng2-charts';
@@ -60,8 +61,7 @@ import { TaxCoutrySection7Page } from '../pages/tax-coutry-section7/tax-coutry-s
 import { TaxCoutrySection8Page } from '../pages/tax-coutry-section8/tax-coutry-section8';
 import { TaxCoutrySection9Page } from '../pages/tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry-section10';
-
-
+import { Test3Page } from '../pages/test3/test3';
 
 @NgModule({
   declarations: [
@@ -119,7 +119,10 @@ import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry
     TaxCoutrySection7Page,
     TaxCoutrySection8Page,
     TaxCoutrySection9Page,
-    TaxCoutrySection10Page
+    TaxCoutrySection10Page,
+    Test1Page,
+    Test3Page
+    
 
   ],
   imports: [
@@ -133,6 +136,7 @@ import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition'
+      
     }
   )],
   bootstrap: [IonicApp],
@@ -191,7 +195,9 @@ import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry
     TaxCoutrySection7Page,
     TaxCoutrySection8Page,
     TaxCoutrySection9Page,
-    TaxCoutrySection10Page
+    TaxCoutrySection10Page,
+    Test1Page,
+    Test3Page
   ],
   providers: [
     StatusBar,

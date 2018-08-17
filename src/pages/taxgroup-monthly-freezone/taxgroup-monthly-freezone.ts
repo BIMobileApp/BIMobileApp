@@ -1,10 +1,13 @@
 import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+declare var google;
+
+
 @IonicPage()
 @Component({
   selector: 'page-taxgroup-monthly-freezone',
-  templateUrl: 'taxgroup-monthly-freezone.html',
+  templateUrl: 'taxgroup-monthly-freezone.html'
 })
 export class TaxgroupMonthlyFreezonePage {
 
@@ -13,154 +16,90 @@ export class TaxgroupMonthlyFreezonePage {
   }
 
   ionViewDidLoad() {
-   /* var linear = new LinearGauge({ renderTo: 'linear-gauge-id' });
-    var radial = new RadialGauge({
-        renderTo: document.createElement('canvas')
-    });*/
-    /*this.thisYear();
-    this.lastYear();
-    this.compareYear();*/
-   
+    this.taxchart1();
+    this.taxchart2();
+    this.taxchart3();
+  }
+
+    taxchart1(){
+      var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['Rank', 50 ]
+      ]);
+      var options = {
+        width: 250,
+        height: 250,
+        redFrom: 0,
+        redTo: 10,
+        yellowFrom: 10,
+        yellowTo: 15,
+        greenFrom: 15,
+        greenTo: 20,
+        minorTicks: 20,
+        majorTicks: ['0', '100'],
+      };
+    
+      var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+      chart.draw(data, options);
+
+      setInterval(function() {
+        data.setValue(0, 1,  50);
+        chart.draw(data, options);
+      });
     }
 
-    /*thisYear(){
-        var gauge = new RadialGauge({
-            renderTo: 'canvas-id1',
-            width: 300,
-            height: 300,
-            units: "Km/h",
-            minValue: 0,
-            startAngle: 90,
-            ticksAngle: 180,
-            valueBox: false,
-            maxValue: 220,
-            majorTicks: [
-                "0",
-                "20",
-                "40",
-                "60",
-                "80",
-                "100",
-                "120",
-                "140",
-                "160",
-                "180",
-                "200",
-                "220"
-            ],
-            minorTicks: 2,
-            strokeTicks: true,
-            highlights: [
-                {
-                    "from": 160,
-                    "to": 220,
-                    "color": "rgba(200, 50, 50, .75)"
-                }
-            ],
-            colorPlate: "#fff",
-            borderShadowWidth: 0,
-            borders: false,
-            needleType: "arrow",
-            needleWidth: 2,
-            needleCircleSize: 7,
-            needleCircleOuter: true,
-            needleCircleInner: false,
-            animationDuration: 1500,
-            animationRule: "linear"
-        }).draw();
+    taxchart2(){
+      var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['Rank', 50 ]
+      ]);
+      var options = {
+        width: 250,
+        height: 250,
+        redFrom: 0,
+        redTo: 10,
+        yellowFrom: 10,
+        yellowTo: 15,
+        greenFrom: 15,
+        greenTo: 20,
+        minorTicks: 20,
+        majorTicks: ['0', '100'],
+      };
+    
+      var chart = new google.visualization.Gauge(document.getElementById('chart_div1'));
+      chart.draw(data, options);
+
+      setInterval(function() {
+        data.setValue(0, 1,  50);
+        chart.draw(data, options);
+      });
     }
 
-    lastYear(){
-        var gauge = new RadialGauge({
-            renderTo: 'canvas-id2',
-            width: 300,
-            height: 300,
-            units: "Km/h",
-            minValue: 0,
-            startAngle: 90,
-            ticksAngle: 180,
-            valueBox: false,
-            maxValue: 220,
-            majorTicks: [
-                "0",
-                "20",
-                "40",
-                "60",
-                "80",
-                "100",
-                "120",
-                "140",
-                "160",
-                "180",
-                "200",
-                "220"
-            ],
-            minorTicks: 2,
-            strokeTicks: true,
-            highlights: [
-                {
-                    "from": 160,
-                    "to": 220,
-                    "color": "rgba(200, 50, 50, .75)"
-                }
-            ],
-            colorPlate: "#fff",
-            borderShadowWidth: 0,
-            borders: false,
-            needleType: "arrow",
-            needleWidth: 2,
-            needleCircleSize: 7,
-            needleCircleOuter: true,
-            needleCircleInner: false,
-            animationDuration: 1500,
-            animationRule: "linear"
-        }).draw();
-    }
-    compareYear(){
-        var gauge = new RadialGauge({
-            renderTo: 'canvas-id3',
-            width: 300,
-            height: 300,
-            units: "Km/h",
-            minValue: 0,
-            startAngle: 90,
-            ticksAngle: 180,
-            valueBox: false,
-            maxValue: 220,
-            majorTicks: [
-                "0",
-                "20",
-                "40",
-                "60",
-                "80",
-                "100",
-                "120",
-                "140",
-                "160",
-                "180",
-                "200",
-                "220"
-            ],
-            minorTicks: 2,
-            strokeTicks: true,
-            highlights: [
-                {
-                    "from": 160,
-                    "to": 220,
-                    "color": "rgba(200, 50, 50, .75)"
-                }
-            ],
-            colorPlate: "#fff",
-            borderShadowWidth: 0,
-            borders: false,
-            needleType: "arrow",
-            needleWidth: 2,
-            needleCircleSize: 7,
-            needleCircleOuter: true,
-            needleCircleInner: false,
-            animationDuration: 1500,
-            animationRule: "linear"
-        }).draw();
-    }*/
+    taxchart3(){
+      var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['Rank', 50 ]
+      ]);
+      var options = {
+        width: 250,
+        height: 250,
+        redFrom: 0,
+        redTo: 10,
+        yellowFrom: 10,
+        yellowTo: 15,
+        greenFrom: 15,
+        greenTo: 20,
+        minorTicks: 20,
+        majorTicks: ['0', '100'],
+      };
+    
+      var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
+      chart.draw(data, options);
 
+      setInterval(function() {
+        data.setValue(0, 1,  50);
+        chart.draw(data, options);
+      });
+    }
 }
+   

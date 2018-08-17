@@ -9,6 +9,7 @@ export class RestProvider {
 
   constructor(public http: HttpClient,
     public toast:ToastController) {
+     // this.baseUrl = "http://192.168.189.240:8090/api/";
     this.baseUrl = "http://localhost:62657/api/";
    // console.log('Hello RestProvider Provider');
   }
@@ -18,7 +19,7 @@ export class RestProvider {
   return new Promise((resolve, reject) => {
     // Header
     let headers = new HttpHeaders();
-    //headers.append('Authorization','Basic YWRtaW46MTIzNDU2');
+    //headers.append('Authorization','Basic bm9wYWRvbF9wOjEyMzQ1Ng==');
     headers.append('Content-Type','application/json');
 
     this.http.get(this.baseUrl+segment,{headers:headers})
@@ -40,7 +41,7 @@ postData(objdata, segment){
   return new Promise((resolve, reject) => {
     // Header
     let headers = new HttpHeaders();
-    //headers.append('Authorization','Basic YWRtaW46MTIzNDU2');
+    //headers.append('Authorization','Basic bm9wYWRvbF9wOjEyMzQ1Ng==');
     headers.append('Content-Type','application/json');
 
     this.http.post(this.baseUrl+segment,JSON.stringify(objdata),{headers:headers})
