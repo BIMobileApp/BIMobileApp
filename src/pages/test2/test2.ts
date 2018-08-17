@@ -8,7 +8,7 @@ import { RestProvider } from '../../providers/rest/rest';
 @IonicPage()
 @Component({
   selector: 'page-test2',
-  templateUrl: 'test2.html',
+  templateUrl: 'test2.html'
 })
 export class Test2Page {
   @ViewChild('barCanvas') barCanvas;

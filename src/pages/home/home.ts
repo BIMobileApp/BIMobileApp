@@ -8,6 +8,7 @@ import { TabGaugeAllmthSectionTaxPage } from '../tab-gauge-allmth-section-tax/ta
 import { GaugechartPage } from '../gaugechart/gaugechart';
 import { DashboardPage } from '../dashboard/dashboard';
 import { MenuGroupPage } from '../menu-group/menu-group';
+import { Test3Page } from '../test3/test3';
 
 @Component({
   selector: 'page-home',
@@ -71,7 +72,7 @@ export class HomePage {
   }
 
   test(){
-    this.app.getRootNav().push(Test2Page);  
+    this.app.getRootNav().push( MenuGroupPage);  
   }
   //this.app.getRootNav().push(MenuGroupPage); 
 
