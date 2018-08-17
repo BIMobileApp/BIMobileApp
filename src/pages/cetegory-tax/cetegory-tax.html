@@ -112,9 +112,9 @@
   <ion-card>
     <ion-card-content no-padding>
       <div class="table-responsive">
-        <table style="width: 100%;">
+        <table style="width: 100%;" >
           <thead>
-            <tr style="background-color: rgb(247, 141, 63);">
+            <tr style="background-color: #F78B26;">
               <th>เดือน</th>
               <th>ปีนี้</th>
               <th>ปีก่อน</th>
@@ -129,10 +129,10 @@
                                     <td><p>{{data.ESTIMATE}}</p></td>
                             </tr>-->
             <tr *ngFor="let data of responseData">
-              <td text-center>{{data.MONTH_SHORT_DESC}}</td>
-              <td text-right>{{data.TAX}}</td>
-              <td text-right>{{data.TAX_LY}}</td>
-              <td text-right>{{data.ESTIMATE}}</td>
+              <td text-center><strong>{{data.MONTH_SHORT_DESC}}</strong></td>
+              <td text-right ><strong>{{data.TAX}}</strong></td>
+              <td text-right><strong>{{data.TAX_LY}}</strong></td>
+              <td text-right><strong>{{data.ESTIMATE}}</strong></td>
             </tr>
           </tbody>
         </table>

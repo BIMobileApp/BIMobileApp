@@ -6,34 +6,16 @@
 
 
 <ion-content>
-    <ion-item  style="background-color:#E6E6FA; font-size: 14px;" text-wrap>
-        <ion-label  center><strong>กราฟเส้นแสดงภาษีและประมาณการตามสินค้า (รถยนต์)</strong></ion-label>
+    <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+        <h2>กราฟเส้นแสดงภาษีและประมาณการตามสินค้า (รถยนต์)</h2>
     </ion-item>
-  <ion-card>
-              <ion-item>
-                <ion-label>สินค้า</ion-label>
-               <ion-select name="car"> 
-                  <ion-option value="car" > 
-                    รถยนต์
-                  </ion-option>
-                  
-                </ion-select>
 
-                <!-- <ion-select [(ngModel)]="id.data.GRP_ID}}RP_ID" name="id.data.GRP_ID}">
-                    <ion-option *ngFor="let form of prod" value="{{data.GRP_ID}}">
-                      {{ data.GRP_NAME }}
-                    </ion-option>
-                </ion-select>-->
-              </ion-item>
-    <ion-card-content>
+        <ion-card>
+           
+            <ion-card-content>
+                    <canvas #LineCanvas></canvas>
+            </ion-card-content>
 
-        <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;"> 
-          <div class="ion-canvas">
-              <canvas  id="canvas-id-compareyear"></canvas>
-          </div>
-        </ion-scroll>
+        </ion-card>
 
-
-    </ion-card-content>
-  </ion-card>
 </ion-content>

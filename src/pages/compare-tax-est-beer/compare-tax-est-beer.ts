@@ -87,7 +87,7 @@ export class CompareTaxEstBeerPage {
   getLebel() {
     this.lebel = [];
     for (var i = 0; i < this.LineData.length; i++) {
-      this.lebel.push(this.LineData[i].BUDGET_MONTH_DESC);
+      this.lebel.push(this.LineData[i].MONTH_SHORT_DESC);
     }
     this.lebel = JSON.parse(JSON.stringify(this.lebel));
     console.log(this.lebel);
@@ -97,6 +97,8 @@ export class CompareTaxEstBeerPage {
 
 
   createChart() {
+    Chart.defaults.global.defaultFontFamily = "TH K2D July8";
+    Chart.defaults.global.defaultFontStyle="'Bold'";
     this.lineChart = new Chart(this.LineCanvas.nativeElement, {
       type: 'line',
       data: {
@@ -105,21 +107,22 @@ export class CompareTaxEstBeerPage {
           {
             label: "ปีนี้",
             fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
+            lineTension: 0.0,
+            backgroundColor: "#00818A",
+            borderColor: "#00818A",
+            borderWidth: 2,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 99, 132)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#00818A",
+            pointBackgroundColor: "#00818A",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 99, 132)",
-            pointHoverBorderColor: "rgb(255, 99, 132)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#00818A",
+            pointHoverBorderColor: "#00818A",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.TAX,
             spanGaps: false,
@@ -127,21 +130,22 @@ export class CompareTaxEstBeerPage {
           {
             label: "ประมาณการ",
             fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgb(255, 122, 21)",
-            borderColor: "rgb(255, 122, 21)",
+            lineTension: 0.0,
+            backgroundColor: "#F78D3F",
+            borderColor: "#F78D3F",
+            borderWidth: 2,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 122, 21",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#F78D3F",
+            pointBackgroundColor: "#F78D3F",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 122, 21)",
-            pointHoverBorderColor: "rgb(255, 122, 21)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#F78D3F",
+            pointHoverBorderColor: "#F78D3F",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.EST,
             spanGaps: false,
@@ -149,15 +153,34 @@ export class CompareTaxEstBeerPage {
         ]
       },
       options: {
-        //end toolti
+        legend: {
+          display: true,
+          labels: {
+              boxWidth: 10,
+          }
+      },
+        tooltips: {
+          mode: 'index',
+          label: 'myLabel',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              if (tooltipItem.yLabel > 999999) {
+                var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              } else {
+                var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              }
+
+              return value;
+            }
+          } // end callbacks:
+        }, //end 
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = value.toString();
-                value = value.split(/(?=(?:...)*$)/);
-                value = value.join(',');
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 return value;
               }
             },

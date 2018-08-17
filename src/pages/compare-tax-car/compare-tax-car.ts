@@ -30,20 +30,24 @@ export class CompareTaxCarPage {
   }
 
   ionViewDidLoad() {
-    let grp_name = 'ภาษีรถยนต์';
+    this. getTableData();
+    this.getLineData();
+  }
+
+  getTableData(){
+    let grp_name = "ภาษีรถยนต์";
     this.webapi.getData('CompareTax?grp_name=' + grp_name).then((data) => {
       this.responseData = data;
       console.log(this.responseData);
     });
 
-    this.getLineData();
   }
 
   getLineData() {
     let grp_id = "0501";
     this.webapi.getData('CompareTaxLineGraph?id=' + grp_id).then((data) => {
       this.LineData = data;
-      console.log(this.LineData);
+      //console.log(this.LineData);
       this.getTAX();
       this. getTAX_LY();
       this.getEST();
@@ -63,7 +67,7 @@ export class CompareTaxCarPage {
       this.TAX.push(this.LineData[i].TAX);
     }
     this.TAX = JSON.parse(JSON.stringify(this.TAX));
-    console.log("tax" + this.TAX);
+   // console.log("tax" + this.TAX);
 
   }
 
@@ -73,7 +77,7 @@ export class CompareTaxCarPage {
       this.TAX_LY.push(this.LineData[i].TAX_LY);
     }
     this.TAX_LY = JSON.parse(JSON.stringify(this.TAX_LY));
-    console.log("lastyear" + this.TAX_LY);
+   // console.log("lastyear" + this.TAX_LY);
 
   }
 
@@ -83,7 +87,7 @@ export class CompareTaxCarPage {
       this.EST.push(this.LineData[i].EST);
     }
     this.EST = JSON.parse(JSON.stringify(this.EST));
-    console.log("est" + this.EST);
+   // console.log("est" + this.EST);
   }
 
   getComEst() {
@@ -92,7 +96,7 @@ export class CompareTaxCarPage {
       this.ComEst.push(this.LineData[i].COMPARE_ESTIMATE_DIFF);
     }
     this.ComEst = JSON.parse(JSON.stringify(this.ComEst));
-    console.log("com" + this.ComEst);
+   // console.log("com" + this.ComEst);
   }
 
   getLebel() {
@@ -101,7 +105,7 @@ export class CompareTaxCarPage {
       this.lebel.push(this.LineData[i].BUDGET_MONTH_DESC);
     }
     this.lebel = JSON.parse(JSON.stringify(this.lebel));
-    console.log(this.lebel);
+  //  console.log(this.lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
 
