@@ -44,8 +44,8 @@ export class MenuGroupNewReportPage {
     this.app.getRootNav().push(CompareTaxDrinkPage);  
   }
 
-  reportCar24_3(){
-    this.app.getRootNav().push(CompareTaxEstCarPage);  
+  reportCar3(){
+    this.app.getRootNav().push(CompareTaxEstCarPage); 
   }
   reportBeer3(){
     this.app.getRootNav().push(CompareTaxEstBeerPage);  
