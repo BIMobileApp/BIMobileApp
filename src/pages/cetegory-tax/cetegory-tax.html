@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="navber">
 
     <ion-title>ผลการจัดเก็บภาษีกรมสรรพสามิต</ion-title>
   </ion-navbar>
@@ -108,72 +108,30 @@
   <h2>
     <strong>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</strong>
   </h2>
-
   <ion-card>
     <ion-card-content no-padding>
       <div class="table-responsive">
         <table style="width: 100%;" >
           <thead>
-            <tr style="background-color: #F78B26;">
-              <th>เดือน</th>
-              <th>ปีนี้</th>
-              <th>ปีก่อน</th>
-              <th>ประมาณการ</th>
+            <tr style="background-color: #F78B26; ">
+              <th><h3 class='center'>เดือน</h3></th>
+              <th><h3 class='center'>ปีนี้</h3></th>
+              <th><h3 class='center'>ปีก่อน</h3></th>
+              <th><h3 class='center'>ประมาณการ</h3></th>
+              <th><h3 class='center'>+/-</h3></th>
             </tr>
           </thead>
           <tbody>
-            <!--<tr *ngFor="let data of responseData">
-                                    <td><p text-center>{{data.MONTH_SHORT_DESC}}</p></td>
-                                    <td><p>{{data.TAX}}</p></td>
-                                    <td><p>{{data.TAX_LY}}</p></td>
-                                    <td><p>{{data.ESTIMATE}}</p></td>
-                            </tr>-->
             <tr *ngFor="let data of responseData">
-              <td text-center><strong>{{data.MONTH_SHORT_DESC}}</strong></td>
-              <td text-right ><strong>{{data.TAX}}</strong></td>
-              <td text-right><strong>{{data.TAX_LY}}</strong></td>
-              <td text-right><strong>{{data.ESTIMATE}}</strong></td>
+              <td ><h3 class='center'>{{data.MONTH_SHORT_DESC}}</h3></td>
+              <td ><h3 class='right'>{{data.TAX}}</h3></td>
+              <td><h3 class='right'>{{data.TAX_LY}}</h3></td>
+              <td><h3 class='right'>{{data.ESTIMATE}}</h3></td>
+          <!--    <td><h3 class='center'><img src="../../assets/imgs/{{data.compare}}.png" /></h3></td>-->
             </tr>
           </tbody>
         </table>
       </div>
-
     </ion-card-content>
-
   </ion-card>
-
-
-
-
 </ion-content>
-
-
-<!--<ion-card-content no-padding>
-          <ion-grid>
-              <ion-row>
-                <ion-col (click)="TaxAllCountry();"> <img src="../assets/imgs/graph.png"> แผนที่ประเทศไทย</ion-col>
-               </ion-row>
-               <ion-row>
-                  <ion-col (click)="TaxMonthlyFreezone();"> <img src="../assets/imgs/graph.png">รายงานที่ 1</ion-col>
-                 </ion-row>
-                 <ion-row>
-                    <ion-col (click)="TaxThisyearTable()"> <img src="../assets/imgs/graph.png">ภาษีประจำปีงบปัจจุบัน</ion-col>
-                   </ion-row>
-          </ion-grid>
-
-          <ion-list [virtualScroll]="items">
-
-            <ion-item *virtualItem="let item">
-              <ion-avatar item-start>
-                <ion-img ></ion-img>
-              </ion-avatar>
-             BBBBBBBBBBB
-            </ion-item>
-          
-          </ion-list>
-        
-        
-        
-      </ion-card-content>
-
-    </ion-content>-->

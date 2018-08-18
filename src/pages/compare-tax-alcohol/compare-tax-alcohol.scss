@@ -1,26 +1,43 @@
-table, th , td  {
-    border: 0px solid #ffffff !important; 
+page-compare-tax-alcohol {
+  table,
+  th,
+  td {
+    border: 0px solid #ffffff !important;
     border-collapse: collapse;
-    padding: 5px;
+    table-layout: fixed;
   }
   table tbody tr:nth-child(odd) {
-    background-color: #fbecc4 !important; 
+    background-color: rgb(250, 220, 137) !important;
   }
   table tbody tr:nth-child(even) {
-    background-color:#fff !important;
+    background-color: rgb(255, 255, 255) !important;
   }
-  .head{
-    background-color:#ffffff !important;
-  }
-  table > tbody > tr > td > p  {
+  table>tbody>tr>td>p {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     width: 10em;
   }
-  @media only screen  and (orientation: landscape)  {
-    table > tbody > tr > td > p  {
-        width: 90%;
-      }
+  @media only screen and (orientation: landscape) {
+    table>tbody>tr>td>p {
+      width: 90%;
+    }
+  }
+  h3.center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 3vw !important;
+  }
+  h3.right {
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
+  }
+  h3.left {
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
+  }
 }
-  
