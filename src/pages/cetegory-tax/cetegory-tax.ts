@@ -74,8 +74,6 @@ export class CetegoryTaxPage {
     }
   }
 
-
-
   getTAX_LY() {
     this.TAX_LY = [];
     let val;
@@ -131,8 +129,6 @@ export class CetegoryTaxPage {
   section10() {
     this.app.getRootNav().push(TaxCoutrySection10Page);
   }
-
-
 
 }
 

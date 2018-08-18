@@ -67,7 +67,7 @@ export class MenuGroupPage {
   gotoDepartmentList(){
     this.app.getRootNav().push(CategoryDepartmentListPage); 
   }
-
+  
   TaxMonthlyFreezone(){
     this.app.getRootNav().push(TaxMonthlyFreezonePage); 
   }

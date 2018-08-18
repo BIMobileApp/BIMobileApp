@@ -62,6 +62,13 @@ import { TaxCoutrySection8Page } from '../pages/tax-coutry-section8/tax-coutry-s
 import { TaxCoutrySection9Page } from '../pages/tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry-section10';
 import { Test3Page } from '../pages/test3/test3';
+import { NewReportGaugeTaxCarPage } from '../pages/new-report-gauge-tax-car/new-report-gauge-tax-car';
+import { NewReportGaugeQuantityCarPage } from '../pages/new-report-gauge-quantity-car/new-report-gauge-quantity-car';
+import { NewReportGaugeTaxAlcoholPage } from '../pages/new-report-gauge-tax-alcohol/new-report-gauge-tax-alcohol';
+import { NewReportGaugeQuantityAlcoholPage } from '../pages/new-report-gauge-quantity-alcohol/new-report-gauge-quantity-alcohol';
+import { NewReportGaugeTaxBeerPage } from '../pages/new-report-gauge-tax-beer/new-report-gauge-tax-beer';
+import { NewReportGaugeTaxDrinkPage } from '../pages/new-report-gauge-tax-drink/new-report-gauge-tax-drink';
+import { NewReportGaugeQuantityDrinkPage } from '../pages/new-report-gauge-quantity-drink/new-report-gauge-quantity-drink';
 
 @NgModule({
   declarations: [
@@ -121,9 +128,14 @@ import { Test3Page } from '../pages/test3/test3';
     TaxCoutrySection9Page,
     TaxCoutrySection10Page,
     Test1Page,
-    Test3Page
-    
-
+    Test3Page,
+    NewReportGaugeTaxCarPage,
+    NewReportGaugeQuantityCarPage,
+    NewReportGaugeTaxAlcoholPage,
+    NewReportGaugeQuantityAlcoholPage,
+    NewReportGaugeTaxBeerPage,
+    NewReportGaugeTaxDrinkPage,
+    NewReportGaugeQuantityDrinkPage
   ],
   imports: [
     BrowserModule,
@@ -197,7 +209,14 @@ import { Test3Page } from '../pages/test3/test3';
     TaxCoutrySection9Page,
     TaxCoutrySection10Page,
     Test1Page,
-    Test3Page
+    Test3Page,
+    NewReportGaugeTaxCarPage,
+    NewReportGaugeQuantityCarPage,
+    NewReportGaugeTaxAlcoholPage,
+    NewReportGaugeQuantityAlcoholPage,
+    NewReportGaugeTaxBeerPage,
+    NewReportGaugeTaxDrinkPage,
+    NewReportGaugeQuantityDrinkPage
   ],
   providers: [
     StatusBar,
