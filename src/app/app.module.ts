@@ -69,6 +69,7 @@ import { NewReportGaugeQuantityAlcoholPage } from '../pages/new-report-gauge-qua
 import { NewReportGaugeTaxBeerPage } from '../pages/new-report-gauge-tax-beer/new-report-gauge-tax-beer';
 import { NewReportGaugeTaxDrinkPage } from '../pages/new-report-gauge-tax-drink/new-report-gauge-tax-drink';
 import { NewReportGaugeQuantityDrinkPage } from '../pages/new-report-gauge-quantity-drink/new-report-gauge-quantity-drink';
+import { NewReportGaugeQuantityBeerPage } from '../pages/new-report-gauge-quantity-beer/new-report-gauge-quantity-beer';
 
 @NgModule({
   declarations: [
@@ -134,6 +135,7 @@ import { NewReportGaugeQuantityDrinkPage } from '../pages/new-report-gauge-quant
     NewReportGaugeTaxAlcoholPage,
     NewReportGaugeQuantityAlcoholPage,
     NewReportGaugeTaxBeerPage,
+    NewReportGaugeQuantityBeerPage,
     NewReportGaugeTaxDrinkPage,
     NewReportGaugeQuantityDrinkPage
   ],
@@ -215,6 +217,7 @@ import { NewReportGaugeQuantityDrinkPage } from '../pages/new-report-gauge-quant
     NewReportGaugeTaxAlcoholPage,
     NewReportGaugeQuantityAlcoholPage,
     NewReportGaugeTaxBeerPage,
+    NewReportGaugeQuantityBeerPage,
     NewReportGaugeTaxDrinkPage,
     NewReportGaugeQuantityDrinkPage
   ],

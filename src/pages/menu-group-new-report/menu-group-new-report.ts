@@ -38,14 +38,14 @@ export class MenuGroupNewReportPage {
     public app:App) {
   }
    ionViewDidLoad() { 
-    this.UserAthu();
+   // this.UserAthu();
    }
 
-   UserAthu() {
+ /*  UserAthu() {
     this.offcode = localStorage.offcode;
     this.offcode = this.offcode.substring(0, 2);
     console.log(this.offcode);
-  }
+  }*/
 
   reportCar27_31(){
     this.app.getRootNav().push(CompareTaxCarPage);  

@@ -12,6 +12,9 @@ declare var google;
 export class NewReportGaugeTaxCarPage {
 
   respondData:any;
+  TAX = [];
+  TAX_LY = [];
+  EST = [];
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -19,59 +22,101 @@ export class NewReportGaugeTaxCarPage {
   }
 
   ionViewDidLoad() {
+    let grp_id = "0501";
     let tax_year = new Date();
     var tax_year_th = tax_year.getFullYear()+543;
 
-    let grp_id = "0501";
     this.webapi.getData('taxPercentByProductGroup?year='+tax_year_th+'&grp_id='+grp_id).then((data) => {
       this.respondData = data;
-    });  
-    console.log(this.respondData);
-
-   // this.taxDataList();  
+      this.getTAX();
+      this.getTAX_LY(); 
+      this.getEST(); 
+    });
+  }
+  getTAX() {
+    this.TAX = [];
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].TAX_PERCENT;
+    }
+    this.showgaugechartTax(val);
   }
 
-  taxDataList(){
-   
+  getTAX_LY() {
+    this.TAX_LY = [];
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].TAX_LY_PERCENT;
+    }
+    this.showgaugechartTaxLy(val);
+  }
 
-  /*var range = [];
-   let tax:any;
-   let tax_ly:any;
-   let tax_est:any;
+  getEST() {
+    this.EST = [];
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].TAX_ESTIMATE_PERCENT;
+    }
+    this.showgaugechartEstimate(val);
+  }
 
-   for(var i=0;i< this.respondData.legth;i++) {
-
-     year_en = n-i;
-     year_th = nt-i;
-      range.push( {"key":year_th,"value": year_en});
-    }*/
- }
-
-  /*showgaugechart(){
-
+  showgaugechartTax(tax_value){
     var data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
-      ['Rank', 50 ]
+      ['ปีนี้', tax_value],
     ]);
     var options = {
-      width: 250,
-      height: 250,
-      redFrom: 0,
-      redTo: 10,
-      yellowFrom: 10,
-      yellowTo: 15,
-      greenFrom: 15,
-      greenTo: 20,
-      minorTicks: 20,
-      majorTicks: ['0', '100']
+           width: 200, height: 200,
+          minorTicks: 5,
+          majorTicks: ['0', '100'],
     };
   
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
 
     setInterval(function() {
-      data.setValue(0, 1,  50);
+      data.setValue(0, 1, tax_value);
       chart.draw(data, options);
     });
-  }*/
+  }
+
+  showgaugechartTaxLy(tax_value){
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['ปีก่อน', tax_value],
+    ]);
+    var options = {
+           width: 200, height: 200,
+          minorTicks: 5,
+          majorTicks: ['0', '100'],
+    };
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div1'));
+    chart.draw(data, options);
+
+    setInterval(function() {
+      data.setValue(0, 1, tax_value);
+      chart.draw(data, options);
+    });
+  }
+
+  showgaugechartEstimate(tax_value){
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['ปีประมาณการ', tax_value],
+    ]);
+    var options = {
+           width: 200, height: 200,
+          minorTicks: 5,
+          majorTicks: ['0', '100'],
+    };
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
+    chart.draw(data, options);
+
+    setInterval(function() {
+      data.setValue(0, 1, tax_value);
+      chart.draw(data, options);
+    });
+  }
 }
