@@ -139,7 +139,7 @@ export class CompareTaxDrinkPage {
   getLebel() {
     this.lebel = [];
     for (var i = 0; i < this.LineData.length; i++) {
-      this.lebel.push(this.LineData[i].BUDGET_MONTH_DESC);
+      this.lebel.push(this.LineData[i].MONTH_SHORT_DESC);
     }
     this.lebel = JSON.parse(JSON.stringify(this.lebel));
     console.log(this.lebel);
@@ -158,20 +158,21 @@ export class CompareTaxDrinkPage {
             label: "ปีนี้",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
+            backgroundColor: "#00818A",
+            borderColor: "#00818A",
+            borderWidth: 2,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 99, 132)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#00818A",
+            pointBackgroundColor: "#00818A",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 99, 132)",
-            pointHoverBorderColor: "rgb(255, 99, 132)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#00818A",
+            pointHoverBorderColor: "#00818A",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.TAX,
             spanGaps: false,
@@ -180,20 +181,21 @@ export class CompareTaxDrinkPage {
             label: "ปีก่อน",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgb(255, 206, 86)",
-            borderColor: "rgb(255, 206, 86)",
+            backgroundColor: "#b8d00a",
+            borderColor: "#b8d00a",
+            borderWidth: 2,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 206, 86)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#b8d00a",
+            pointBackgroundColor: "#b8d00a",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 206, 86)",
-            pointHoverBorderColor: "rgb(255, 206, 86)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#b8d00a",
+            pointHoverBorderColor: "#b8d00a",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.TAX_LY,
             spanGaps: false,
@@ -202,20 +204,21 @@ export class CompareTaxDrinkPage {
             label: "ประมาณการ",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgb(255, 122, 21)",
-            borderColor: "rgb(255, 122, 21)",
+            backgroundColor: "#F78D3F",
+            borderColor: "#F78D3F",
+            borderWidth: 2,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 122, 21",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#F78D3F",
+            pointBackgroundColor: "#F78D3F",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 122, 21)",
-            pointHoverBorderColor: "rgb(255, 122, 21)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#F78D3F",
+            pointHoverBorderColor: "#F78D3F",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.EST,
             spanGaps: false,
@@ -224,20 +227,21 @@ export class CompareTaxDrinkPage {
             label: "เปรียบเทียบประมาณการ",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgb(255, 432, 12)",
-            borderColor: "rgb(255, 432, 12)",
+            backgroundColor: "#D74B4B",
+            borderColor: "#D74B4B",
+            borderWidth: 2,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgb(255, 432, 12)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
+            pointBorderColor: "#D74B4B",
+            pointBackgroundColor: "#D74B4B",
+            pointBorderWidth: 3,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgb(255, 432, 12)",
-            pointHoverBorderColor: "rgb(255, 432, 12)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
+            pointHoverBackgroundColor: "#D74B4B",
+            pointHoverBorderColor: "#D74B4B",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
             pointHitRadius: 10,
             data: this.ComEst,
             spanGaps: false,
@@ -245,15 +249,34 @@ export class CompareTaxDrinkPage {
         ]
       },
       options: {
-        //end toolti
+        legend: {
+          display: true,
+          labels: {
+              boxWidth: 10,
+          }
+      },
+      tooltips: {
+        mode: 'index',
+        label: 'myLabel',
+        callbacks: {
+          label: function (tooltipItem, data) {
+            if (tooltipItem.yLabel > 999999) {
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+            } else {
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+            }
+
+            return value;
+          }
+        } // end callbacks:
+      }, //end tooltip
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = value.toString();
-                value = value.split(/(?=(?:...)*$)/);
-                value = value.join(',');
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 return value;
               }
             },
@@ -275,5 +298,6 @@ export class CompareTaxDrinkPage {
 
     });
   }
+
 
 }

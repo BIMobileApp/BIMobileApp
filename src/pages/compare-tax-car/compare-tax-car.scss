@@ -34,11 +34,22 @@ h3.right {
   color: black !important;
   font-size: 3vw !important;
   text-align: right !important;
+  overflow: hidden;
 }
 h3.left {
   font-weight: bold;
   color: black !important;
   font-size: 3vw !important;
-  text-align: right !important;
+  text-align: left !important;
+  word-break: break-all;
+}
+ion-item.size{
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  color: black ;
+  font-size: 4vw ;
 }
 }

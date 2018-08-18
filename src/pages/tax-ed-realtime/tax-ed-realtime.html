@@ -5,10 +5,10 @@
   </ion-header>
   
   <ion-content> 
-      <ion-item  style="background-color:#D0DFE6;font-size: 20px;" text-center>
-          <h2>รายงานภาษีสรรพสามิตนำเข้าแยกรายวัน</h2>
-      </ion-item>
-      <ion-item>
+      <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+                <h3 class="center">รายงานภาษีสรรพสามิตนำเข้าแยกรายวัน</h3>
+             </ion-item>
+      <ion-item class="size">
           <ion-label  text-center>เดือน : </ion-label>
           <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
             <ion-option value="1" >มกราคม</ion-option>
@@ -25,25 +25,26 @@
             <ion-option value="12">ธันวาคม</ion-option>
           </ion-select>
         </ion-item>
+        <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
      <ion-card>
         <ion-card-content no-padding>          
                
-        <div class="table-responsive">     
-        <table class="table"  style="width: 100%;">
-                <thead>
-                        <tr>
-                                <th>วันที่</th>
-                                <th>นำเข้ากรมศุลกากร</th>
-                                <th>ในประเทศ</th>
-                                <th>ต่างประเทศ</th>
+                        <div class="table-responsive">
+                                        <table class="table" style="width: 100%;">
+                                          <thead>
+                                            <tr style="background-color: #F78B26; ">
+                                <th><h3 class="center">วันที่</h3></th>
+                                <th><h3 class="center">นำเข้ากรมศุลกากร</h3></th>
+                                <th><h3 class="center">ในประเทศ</h3></th>
+                                <th><h3 class="center">ต่างประเทศ</h3></th>
                         </tr>
                 </thead>
                 <tbody>
                         <tr *ngFor="let data of responseData">
-                                <td>{{data.TIME_ID}}</td>
-                                <td><p #title (click)="showfullmsg(title.value)">{{data.CD_INCOME  | number : fractionSize}}</p></td>
-                                <td><p #title (click)="showfullmsg(title.value)">{{data.INCOME  | number : fractionSize}}</p></td>
-                                <td><p #title (click)="showfullmsg(title.value)">{{data.IMPORT  | number : fractionSize}}</p></td>
+                                <td><h3 class="center">{{data.TIME_ID}}</h3></td>
+                                <td><h3 class="right">{{data.CD_INCOME}}</h3></td>
+                                <td><h3 class="right">{{data.INCOME}}</h3></td>
+                                <td><h3 class="right">{{data.IMPORT}}</h3></td>
                         </tr>
                 </tbody>
         </table>

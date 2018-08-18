@@ -6,8 +6,15 @@
 
 <ion-content>
   <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
-    <h2>รายงานเปรียบทียบภาษีรถยนต์</h2>
-  </ion-item>
+    <h3 class="center">รายงานการเปรียบเทียบปีก่อน (รถยนต์)</h3>
+ </ion-item>
+
+ <ion-item class="size">
+    <ion-label>สินค้า : </ion-label>
+    <ion-select disabled="true">
+      <ion-option [selected]="true" value="">รถยนต์</ion-option>
+    </ion-select>
+</ion-item>
   <ion-card>
     <ion-card-content no-padding>
       <div class="table-responsive">

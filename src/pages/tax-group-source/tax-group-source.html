@@ -4,27 +4,29 @@
     </ion-navbar>
   </ion-header>
   <ion-content>
-        <ion-item  style="background-color:#D0DFE6;font-size: 20px;" text-center>
-           <h2>รายงานแสดงยอดภาษีกลุ่มสถานะในประเทศ/นำเข้า</h2>
+        <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+            <h3 class="center">รายงานแสดงยอดภาษีกลุ่มสถานะในประเทศ</h3>
         </ion-item>
+        <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
     <ion-card>
         <ion-card-content no-padding> 
-                        <div class="table-responsive">     
-                        <table class="table" style="width: 100%;">
-                                <thead>
-                                        <tr>
-                                                <th>ผู้ประกอบการ</th>
-                                                <th>ในประเทศ</th>
-                                                <th>นำเข้า</th>
-                                                <th>รวม</th>
+                 
+                        <div class="table-responsive">
+                                        <table class="table" style="width: 100%;">
+                                          <thead>
+                                            <tr style="background-color: #F78B26; ">
+                                                <th><h3 class="center">ผู้ประกอบการ</h3></th>
+                                                <th><h3 class="center">ในประเทศ</h3></th>
+                                                <th><h3 class="center">นำเข้า</h3></th>
+                                                <th><h3 class="center">รวม</h3></th>
                                         </tr>
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td><p>{{data.GROUP_NAME}}</p></td>
-                                                <td><p>{{data.INCOME| number : fractionSize}}</p></td>
-                                                <td><p>{{data.IMPORT| number : fractionSize}}</p></td>
-                                                <td><p>{{data.SUM_ALL| number : fractionSize}}</p></td>
+                                                <td><h3 class="left">{{data.GROUP_NAME}}</h3></td>
+                                                <td><h3 class="right">{{data.INCOME}}</h3></td>
+                                                <td><h3 class="right">{{data.IMPORT}}</h3></td>
+                                                <td><h3 class="right">{{data.SUM_ALL}}</h3></td>
                                         </tr>
                                 </tbody>
                         </table>

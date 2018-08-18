@@ -4,37 +4,36 @@
     </ion-navbar>
   </ion-header>
   <ion-content>
-        <ion-item  style="background-color:#D0DFE6;font-size: 20px;" text-center>
-           <h2>รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</h2>
+        <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+            <h3 class="center">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</h3>
         </ion-item>
 
-        <ion-item>
-            <ion-label  text-center>ปีงบประมาณ : </ion-label>
+        <ion-item class="size">
+            <ion-label>ปีงบประมาณ : </ion-label>
             <ion-select [(ngModel)]="year"  #item (ionChange)="selectDate(item.value)">
                 <ion-option  *ngFor="let data of summaryDate" value="{{data.value}}" >{{data.key}}</ion-option>
             </ion-select>
         </ion-item>
-        
+        <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
     <ion-card>           
         <ion-card-content no-padding>       
-             
-                        <div class="table-responsive">     
+                <div class="table-responsive">
                         <table class="table" style="width: 100%;">
-                                <thead>
-                                        <tr>
-                                                <th>ลำดับ</th>
-                                                <th>ผู้ประกอบการ</th>
-                                                <th>ภาษีปีนี้</th>
+                          <thead>
+                            <tr style="background-color: #F78B26; ">
+                                                <th width="10%"><h3 class="center">ลำดับ</h3></th>
+                                                <th><h3 class="center">ผู้ประกอบการ</h3></th>
+                                                <th width="30%"><h3 class="center">ภาษีปีนี้</h3></th>
                                         </tr>
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td text-center>{{data.SORT}}</td>
-                                                <td><p>{{data.REG_NAME}}</p></td>
-                                                <td><p>{{data.TAX | number : fractionSize}}</p></td>
+                                                <td width="10%"><h3 class="center">{{data.SORT}}</h3></td>
+                                                <td><h3 class="left">{{data.REG_NAME}}</h3></td>
+                                                <td width="30%"><h3 class="right">{{data.TAX}}</h3></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" text-center><strong>รวมทั้งสิ้น</strong></td>
+                                            <td colspan="2"><h3 class="center">รวมทั้งสิ้น</h3></td>
                                             <td></td>
                                         </tr>
                                 </tbody>

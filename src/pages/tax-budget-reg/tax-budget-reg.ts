@@ -34,11 +34,27 @@ export class TaxBudgetRegPage {
       range.push( {"key":year_th,"value": year_en});
     }
     this.summaryDate = range;
-  }
+
+  }    
 
   selectDate(year){
+
      this.webapi.getData('TaxBudgetReg?year='+year).then((data)=>{
       this.responseData = data;
+      this.getTableTAX();
     });
   }
+
+  getTableTAX() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX = val;
+      console.log(this.responseData);
+    }
+  }
+
+
 }
