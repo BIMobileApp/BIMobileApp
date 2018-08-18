@@ -20,7 +20,18 @@ export class IncomerealtimePage {
   ionViewDidLoad() {
     this.webapi.getData('SourceImcome').then((data)=>{
       this.respondData = data;
+      this.getTableTAX();
     });
     console.log(this.respondData);
+  }
+  getTableTAX() {
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData[i].TAX = val;
+      console.log(this.respondData);
+    }
   }
 }

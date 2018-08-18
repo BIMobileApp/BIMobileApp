@@ -25,9 +25,21 @@ export class TaxBudgetRegByMthPage {
   
     this.webapi.getData('TaxBudgetRegByMth?mth='+summaryDate).then((data)=>{
       this.responseData = data;
+      this.getTableTAX();
     });
 
     console.log(this.responseData);
 
+  }
+
+  getTableTAX() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX = val;
+      console.log(this.responseData);
+    }
   }
 }

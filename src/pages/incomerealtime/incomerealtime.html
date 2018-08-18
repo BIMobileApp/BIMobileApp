@@ -5,26 +5,26 @@
 </ion-header>
 
 <ion-content>
-    <ion-item  style="background-color:#5b94f6; font-size: 14px; color:#fff" text-wrap>
-        <ion-label  center><strong>รายงานรับเงินรายได้ Real Time</strong></ion-label>
-    </ion-item>
+    <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+                <h3 class="center">รายงานรับเงินรายได้ Real Time</h3>
+             </ion-item>
+             <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
     <ion-card>
         <ion-card-content no-padding>
-            
-                        <div class="table-responsive">     
-                        <table class="table" style="width: 100%;">
-                                <thead>
-                                        <tr>
-                                                <th>ลำดับ</th>
-                                                <th>กลุ่มสินค้า</th>
-                                                <th>ภาษี</th>
+                        <div class="table-responsive">
+                                        <table class="table" style="width: 100%;">
+                                          <thead>
+                                            <tr style="background-color: #F78B26; ">
+                                                <th width="10%"><h3 class="center">ลำดับ</h3></th>
+                                                <th><h3 class="center">กลุ่มสินค้า</h3></th>
+                                                <th width="30%"><h3 class="center">ภาษี</h3></th>
                                         </tr>
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of respondData">
-                                                <td text-center>{{data.SORT}}</td>
-                                                <td><p>{{data.GROUP_NAME}}</p></td>
-                                                <td><p>{{data.TAX | number : fractionSize}}</p></td>
+                                                <td width="10%"><h3 class="center">{{data.SORT}}</h3></td>
+                                                <td><h3 class="left">{{data.GROUP_NAME}}</h3></td>
+                                                <td width="30%"><h3 class="right">{{data.TAX}}</h3></td>
                                         </tr>
                                 </tbody>
                         </table>

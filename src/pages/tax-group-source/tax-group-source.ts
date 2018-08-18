@@ -19,6 +19,40 @@ export class TaxGroupSourcePage {
   ionViewDidLoad() {
     this.webapi.getData('TaxProductGroupSource').then((data)=>{
       this.responseData = data;
+      this.getTableINCOME();
+      this.getTableIMPORT();
+      this.getTableSUM_ALL();
     });
+  }
+
+  getTableINCOME() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].INCOME/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].INCOME = val;
+      console.log(this.responseData);
+    }
+  }
+  getTableIMPORT() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].IMPORT/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].IMPORT = val;
+      console.log(this.responseData);
+    }
+  }
+  getTableSUM_ALL() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].SUM_ALL/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].SUM_ALL = val;
+      console.log(this.responseData);
+    }
   }
 }

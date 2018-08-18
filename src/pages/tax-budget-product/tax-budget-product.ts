@@ -19,8 +19,42 @@ export class TaxBudgetProductPage {
   ionViewDidLoad() {
     this.webapi.getData('TaxBudgetProduct').then((data)=>{
       this.responseData = data;
+      this.getTableTAX();
+      this.getTableTAX_LY();
+      this.getTableESTIMATE();
     });
-    console.log(this.responseData);
+    
+  }
+
+  getTableTAX() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX = val;
+      console.log(this.responseData);
+    }
+  }
+  getTableTAX_LY() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX_LY/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX_LY = val;
+      console.log(this.responseData);
+    }
+  }
+  getTableESTIMATE() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].ESTIMATE/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].ESTIMATE = val;
+      console.log(this.responseData);
+    }
   }
 
 }
