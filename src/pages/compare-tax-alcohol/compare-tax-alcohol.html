@@ -11,9 +11,7 @@
 
      <ion-card>
         <ion-card-content> 
-            
-                <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">    
-                        <div class="table-responsive">     
+                 <div class="table-responsive">     
                         <table class="table" style="width: 100%;">
                                 <thead>
                                         <tr style="background-color: #F78B26; ">
@@ -25,15 +23,8 @@
                                         </tr>
                                 </thead>
                                 <tbody>
-                                       <!-- <tr *ngFor="let data of responseData">
-                                                <td><h3>{{data.TYPE_NAME}}</h3></td>
-                                                <td><h3 class="right">{{data.TAX | number : fractionSize}}</h3></td>
-                                                <td><h3 class="right">{{data.TAX_LY | number : fractionSize}}</h3></td>
-                                                <td><h3 class="right">{{data.ESTIMATE | number : fractionSize}}</h3></td>
-                                                <td><h3 class="right">{{data.COMPARE_ESTIMATE_DIFF | number : fractionSize}}</h3></td>
-                                        </tr> -->
                                         <tr *ngFor="let data of responseData">
-                                                <td><h3>{{data.TYPE_NAME}}</h3></td>
+                                                <td><h3 class="left">{{data.TYPE_NAME}}</h3></td>
                                                 <td><h3 class="right">{{data.TAX}}</h3></td>
                                                 <td><h3 class="right">{{data.TAX_LY}}</h3></td>
                                                 <td><h3 class="right">{{data.ESTIMATE}}</h3></td>
@@ -42,14 +33,13 @@
                                 </tbody>
                         </table>
                     </div>
-                </ion-scroll>  
         </ion-card-content>
       </ion-card>
       <ion-card>
         <ion-card-content>
-             <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">   
+            
                      <canvas #LineCanvas></canvas>
-              </ion-scroll>
+          
             </ion-card-content>
  </ion-card>
 

@@ -1,4 +1,4 @@
-import { Component, ViewChild  } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
@@ -18,18 +18,67 @@ export class CompareTaxDrinkPage {
   EST = [];
   ComEst = [];
   lebel = [];
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public webapi:RestProvider) {
+    public webapi: RestProvider) {
   }
 
   ionViewDidLoad() {
+    this.getTableData();
+    this.getLineData();
+  }
+  getTableData() {
     let grp_name = 'ภาษีเครื่องดื่ม';
-    this.webapi.getData('CompareTax?grp_name='+grp_name).then((data)=>{
+    this.webapi.getData('CompareTax?grp_name=' + grp_name).then((data) => {
       this.responseData = data;
       console.log(this.responseData);
+      this.getTableTAX();
+      this.getTableTAX_LY();
+      this.getTableEST();
+      this.getTableCOMPARE();
     });
-    this.getLineData();
+  }
+  getTableTAX() {
+    this.TAX = [];
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX / 1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX = val;
+    }
+  }
+  getTableTAX_LY() {
+    this.TAX_LY = [];
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX_LY / 1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX_LY = val;
+    }
+  }
+
+  getTableEST() {
+    this.EST = [];
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].ESTIMATE / 1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].ESTIMATE = val;
+    }
+  }
+
+  getTableCOMPARE() {
+    this.EST = [];
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].COMPARE_ESTIMATE_DIFF / 1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].COMPARE_ESTIMATE_DIFF = val;
+    }
   }
   getLineData() {
     let grp_id = "0201";
@@ -37,7 +86,7 @@ export class CompareTaxDrinkPage {
       this.LineData = data;
       console.log(this.LineData);
       this.getTAX();
-      this. getTAX_LY();
+      this.getTAX_LY();
       this.getEST();
       this.getComEst();
       this.getLebel();
@@ -182,7 +231,7 @@ export class CompareTaxDrinkPage {
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
             pointBorderColor: "rgb(255, 432, 12)",
-            pointBackgroundColor: "#fff",   
+            pointBackgroundColor: "#fff",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
             pointHoverBackgroundColor: "rgb(255, 432, 12)",

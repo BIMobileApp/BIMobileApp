@@ -10,25 +10,24 @@
     </ion-item>
      <ion-card>
         <ion-card-content>  
-                <ion-scroll scrollX="true" scrollY="true" style="height: 200px;">   
-                 <div class="table-responsive">     
+                <div class="table-responsive">     
                         <table class="table"  style="width: 100%;">
                                 <thead>
-                                        <tr class="head">
-                                                <th>กลุ่มสินค้า</th>
-                                                <th>ปีนี้</th>
-                                                <th>ปีก่อน</th>
-                                                <th>ประมาณการ</th>
-                                                <th>เปรียบเทียบประมาณการ</th>
+                                          <tr style="background-color: #F78B26; ">
+                                                <th><h3 class="center">กลุ่มสินค้า</h3></th>
+                                                <th><h3 class="center">ปีนี้</h3></th>
+                                                <th><h3 class="center">ปีก่อน</h3></th>
+                                                <th><h3 class="center">ประมาณการ</h3></th>
+                                                <th><h3 class="center">เปรียบเทียบประมาณการ</h3></th>
                                           </tr>
                                 </thead>
                                 <tbody>
                                         <tr *ngFor="let data of responseData">
-                                                <td><p title="{{data.TYPE_NAME}}">{{data.TYPE_NAME}}</p></td>
-                                                <td><p title="{{data.TAX | number : fractionSize}}">{{data.TAX | number : fractionSize}}</p></td>
-                                                <td><p>{{data.TAX_LY | number : fractionSize}}</p></td>
-                                                <td><p>{{data.ESTIMATE | number : fractionSize}}</p></td>
-                                                <td><p>{{data.COMPARE_ESTIMATE_DIFF | number : fractionSize}}</p></td>
+                                                <td><h3 class="left">{{data.TYPE_NAME}}</h3></td>
+                                                <td><h3 class="right">{{data.TAX}}</h3></td>
+                                                <td><h3 class="right">{{data.TAX_LY}}</h3></td>
+                                                <td><h3 class="right">{{data.ESTIMATE}}</h3></td>
+                                                <td><h3 class="right">{{data.COMPARE_ESTIMATE_DIFF}}</h3></td>
                                         </tr>
                                 </tbody>
                         </table>
@@ -39,9 +38,7 @@
       </ion-card>
       <ion-card>
             <ion-card-content>
-                    <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 200px;">   
                         <canvas #LineCanvas></canvas>
-                    </ion-scroll>
                 </ion-card-content>
      </ion-card>
   

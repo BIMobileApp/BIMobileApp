@@ -17,19 +17,19 @@
             <div class="table-responsive">     
             <table class="table">
                     <thead>
-                            <tr class="head">
-                                    <th>เดือน</th>
-                                    <th>ปีนี้</th>
-                                    <th>ปีก่อน</th>
-                                    <th>ประมาณการ</th>
+                                <tr style="background-color: #F78B26; ">
+                                    <th><h3 class="center">เดือน</h3></th>
+                                    <th><h3 class="center">ปีนี้</h3></th>
+                                    <th><h3 class="center">ปีก่อน</h3></th>
+                                    <th><h3 class="center">ประมาณการ</h3></th>
                             </tr>
                     </thead>
                     <tbody>
                             <tr *ngFor="let data of responseData">
-                                    <td><p>{{data.MONTH_DESC}}</p></td>
-                                    <td><p>{{data.TAX | number : fractionSize}}</p></td>
-                                    <td><p>{{data.TAX_LY | number : fractionSize}}</p></td>
-                                    <td><p>{{data.ESTIMATE | number : fractionSize}}</p></td>
+                                    <td><h3 class="left">{{data.MONTH_DESC}}</h3></td>
+                                    <td><h3 class="right">{{data.TAX}}</h3></td>
+                                    <td><h3 class="right">{{data.TAX_LY}}</h3></td>
+                                    <td><h3 class="right">{{data.ESTIMATE}}</h3></td>
                             </tr>
                     </tbody>
             </table>

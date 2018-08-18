@@ -87,7 +87,6 @@ export class CompareTaxAlcoholPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].COMPARE_ESTIMATE_DIFF = val;
-      //console.log(this.responseData);
     }
   }
 

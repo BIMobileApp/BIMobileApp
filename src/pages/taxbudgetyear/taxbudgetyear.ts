@@ -16,8 +16,42 @@ export class TaxbudgetyearPage {
   }
 
   ionViewDidLoad() {
+    this.getTableData(); 
+  }
+
+  getTableData() {
     this.webapi.getData('TaxBudgetYear').then((data)=>{
       this.responseData = data;
+      this.getTableTAX();
+      this.getTableTAX_LY();
+      this.getTableEST();
     });
+  }
+  getTableTAX() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX / 1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX = val;
+    }
+  }
+  getTableTAX_LY() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].TAX_LY / 1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].TAX_LY = val;
+    }
+  }
+  getTableEST() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].ESTIMATE / 1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].ESTIMATE = val;
+    }
   }
 }

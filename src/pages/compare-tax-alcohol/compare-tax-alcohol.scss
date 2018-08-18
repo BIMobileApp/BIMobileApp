@@ -22,16 +22,22 @@ page-compare-tax-alcohol {
     table>tbody>tr>td>p {
       width: 90%;
     }
-    h3.center {
-      font-weight: bold;
-      color: rgb(27, 15, 15) !important;
-      font-size: 3vw !important;
-    }
-    h3.right {
-      font-weight: bold;
-      color: black !important;
-      font-size: 3vw !important;
-      text-align: right !important;
-    }
+  }
+  h3.center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 3vw !important;
+  }
+  h3.right {
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
+  }
+  h3.left {
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
   }
 }

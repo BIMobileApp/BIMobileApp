@@ -51,6 +51,7 @@ export class CetegoryTaxPage {
     console.log(this.offcode);
   }
 
+
   TableGetData(){
     this.webapi.getData('TaxCurYear').then((data)=>{
       this.responseData = data;
