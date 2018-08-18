@@ -62,6 +62,7 @@ import { TaxCoutrySection8Page } from '../pages/tax-coutry-section8/tax-coutry-s
 import { TaxCoutrySection9Page } from '../pages/tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../pages/tax-coutry-section10/tax-coutry-section10';
 import { Test3Page } from '../pages/test3/test3';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { Test3Page } from '../pages/test3/test3';
     TaxCoutrySection9Page,
     TaxCoutrySection10Page,
     Test1Page,
-    Test3Page
+    Test3Page,
+    WelcomePage
     
 
   ],
@@ -197,7 +199,8 @@ import { Test3Page } from '../pages/test3/test3';
     TaxCoutrySection9Page,
     TaxCoutrySection10Page,
     Test1Page,
-    Test3Page
+    Test3Page,
+    WelcomePage
   ],
   providers: [
     StatusBar,
