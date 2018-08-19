@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>แยกตามสำนัก</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+    <h2>Gauge สำนักมาตรฐานภาษี</h2>
+  </ion-item>
+
+  <ion-item>
+    <ion-label text-center> สินค้า : </ion-label>
+    <ion-select disabled=true>
+        <ion-option [selected]="true">ภาษีเบียร์</ion-option>
+    </ion-select>
+ </ion-item>
+
+  <ion-card>
+    <ion-item style="background-color:#E6E6FA;;font-size: 20px;" text-center>
+      <h2>ปีนี้</h2>
+    </ion-item>
+  </ion-card>
+     <div id="chart_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div>  
+
+     <ion-card>
+    <ion-item style="background-color:#E6E6FA;;font-size: 20px;" text-center>
+      <h2>ปีก่อน</h2>
+    </ion-item>
+    </ion-card>
+     <div id="chart_div1" style="width: 300px; height: 250px;  padding-left: 80px; padding-top:10px;"></div>  
+
+     <ion-card>
+    <ion-item style="background-color:#E6E6FA;;font-size: 20px;" text-center>
+      <h2>ปีประมาณการ</h2>
+    </ion-item>
+    </ion-card>
+    <div id="chart_div2" style="width: 300px; height: 250px; padding-left: 80px; padding-top:10px;"></div>  
+</ion-content>
