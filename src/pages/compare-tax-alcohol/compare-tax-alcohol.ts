@@ -42,7 +42,6 @@ export class CompareTaxAlcoholPage {
   }
 
   getTableTAX() {
-    this.TAX = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].TAX/1000000;
@@ -56,7 +55,6 @@ export class CompareTaxAlcoholPage {
 
 
   getTableTAX_LY() {
-    this.TAX_LY = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].TAX_LY/1000000;
@@ -68,7 +66,6 @@ export class CompareTaxAlcoholPage {
   }
 
   getTableEST() {
-    this.EST = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].ESTIMATE/1000000
@@ -80,7 +77,6 @@ export class CompareTaxAlcoholPage {
   }
 
   getTableCOMPARE() {
-    this.EST = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].COMPARE_ESTIMATE_DIFF/1000000
