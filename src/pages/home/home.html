@@ -18,41 +18,97 @@
     <ion-grid>
       <ion-row align-items-center>
 
-        <ion-col></ion-col>
-        <ion-col (click)="LineFollowProduct()"><img src="../../assets/imgs/AreaTAX.png"></ion-col>
-        <ion-col (click)="LineFollowProduct()"><img src="../../assets/imgs/DataStatus.png"></ion-col>
-        <ion-col (click)="LineFollowProduct()"><img src="../../assets/imgs/MonthTAX.png"></ion-col>
-        <ion-col ></ion-col>
+
+        <ion-col (click)="LineFollowProduct()">
+          <div style="text-align: center;">
+            <img class="iconStyle" src="../../assets/imgs/AreaTAX.png">
+          </div>
+        </ion-col>
+
+        <ion-col col-1></ion-col>
+        <ion-col (click)="LineFollowProduct()">
+          <div style="text-align: center;">
+            <img class="iconStyle" src="../../assets/imgs/DataStatus.png">
+          </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col (click)="LineFollowProduct()">
+          <div style="text-align: center;">
+            <img class="iconStyle" src="../../assets/imgs/MonthTAX.png">
+          </div>
+        </ion-col>
+
 
       </ion-row>
 
       <ion-row align-items-center>
+        <ion-col>
+          <div style="text-align: center;">
+            <h4 text-center>ที่ตั้ง</h4>
+          </div>
+        </ion-col>
 
-          <ion-col></ion-col>
-          <ion-col ><h4 text-center>ที่ตั้ง</h4></ion-col>
-          <ion-col ><h4 text-center>ที่มา</h4></ion-col>
-          <ion-col ><h4 text-center>เดือนนี้</h4></ion-col>
-          <ion-col ></ion-col>
-  
-        </ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col>
+          <div style="text-align: center;">
+            <h4 text-center>ที่มา</h4>
+          </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col>
+          <div style="text-align: center;">
+            <h4 text-center>เดือนนี้</h4>
+          </div>
+        </ion-col>
 
 
-      <ion-row align-items-center>
-        <ion-col ></ion-col>
-        <ion-col (click)="LineFollowProduct()"><img src="../../assets/imgs/yearTAX.png"></ion-col>
-        <ion-col (click)="LineFollowProduct()"><img src="../../assets/imgs/earlyYear.png"></ion-col>
-        <ion-col (click)="LineFollowProduct()"><img src="../../assets/imgs/Advice.png"></ion-col>
-        <ion-col ></ion-col>
       </ion-row>
 
-      <ion-row align-items-center>
 
-          <ion-col></ion-col>
-          <ion-col > <h4 text-center>รายเดือนทั้งปี</h4></ion-col>
-          <ion-col ><h4 text-center>ตั้งแต่ต้นปี</h4></ion-col>
-          <ion-col ><h4 text-center>คำแนะนำ</h4></ion-col>
-          <ion-col ></ion-col>
-  
+      <ion-row align-items-center>
+        <ion-col (click)="LineFollowProduct()">
+          <div style="text-align: center;">
+            <img class="iconStyle" src="../../assets/imgs/yearTAX.png">
+          </div>
+        </ion-col>
+
+        <ion-col col-1></ion-col>
+        <ion-col (click)="LineFollowProduct()">
+          <div style="text-align: center;">
+            <img class="iconStyle" src="../../assets/imgs/earlyYear.png">
+          </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col (click)="LineFollowProduct()">
+          <div style="text-align: center;">
+            <img class="iconStyle" src="../../assets/imgs/Advice.png">
+          </div>
+        </ion-col>
+
+      </ion-row>
+
+
+        <ion-row align-items-center>
+          <ion-col>
+            <div style="text-align: center;">
+              <h4 text-center>รายเดือนทั้งปี</h4>
+            </div>
+          </ion-col>
+
+          <ion-col col-1></ion-col>
+          <ion-col>
+            <div style="text-align: center;">
+              <h4 text-center>ตั้งแต่ต้นปี</h4>
+            </div>
+          </ion-col>
+          <ion-col col-1></ion-col>
+          <ion-col>
+            <div style="text-align: center;">
+              <h4 text-center>คำแนะนำ</h4>
+            </div>
+          </ion-col>
+
+
         </ion-row>
     </ion-grid>
 

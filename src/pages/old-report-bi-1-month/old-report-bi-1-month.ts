@@ -25,55 +25,66 @@ export class OldReportBi_1MonthPage {
     this.responseData = data;
     console.log(this.responseData);
     this.getTableTAX();
+    this.getTableESTIMATE();
     this.getTableTAX_LY();
-    this.getTableEST();
-    this.getTableCOMPARE();
+    this.getTableCOMPARE_EST();
+    this.getTableCOMPARE_TAX();
   });
 }
 
   getTableTAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX/1000000;
+      val = this.responseData[i].TAX_NETTAX_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX = val;
-     // console.log(this.responseData);
+      this.responseData[i].TAX_NETTAX_AMT = val;
     }
   }
 
   
 
-  getTableTAX_LY() {
+  getTableESTIMATE() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX_LY/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX_LY = val;
-      //console.log(this.responseData);
-    }
-  }
-
-  getTableEST() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].ESTIMATE/1000000
+      val = this.responseData[i].ESTIMATE/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].ESTIMATE = val;
-      //console.log(this.responseData);
     }
   }
 
-  getTableCOMPARE() {
+  getTableTAX_LY() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].COMPARE_ESTIMATE_DIFF/1000000
+      val = this.responseData[i].LAST_TAX_NETTAX_AMT/1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].COMPARE_ESTIMATE_DIFF = val;
+      this.responseData[i].LAST_TAX_NETTAX_AMT = val;
     }
   }
+
+  getTableCOMPARE_EST() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].COMPARE_ESTIMATE/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].COMPARE_ESTIMATE = val;
+    }
+  }
+
+
+  getTableCOMPARE_TAX() {
+    let val;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].COMPARE_TAX/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.responseData[i].COMPARE_TAX = val;
+    }
+  }
+  
+
 
 }

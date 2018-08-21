@@ -3,12 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>ระบบสารสนเทศเพื่อการบริการ</ion-title>
+    <ion-title>ระบบสารสนเทศเพื่อการบริหาร
+      <br> กรมสรรพสามิต</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  
+
   <!--<ion-card>
       <ion-item  style="background-color:#D0DFE6;font-size: 20px;" text-center>
       <h1><b>รายได้</b></h1>
@@ -37,52 +38,121 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-item>
-          <span ion-text color="primary"><h1>ภาพรวม</h1></span>
-        </ion-item>
+        <span ion-text color="title">
+          <h1>การจัดเก็บภาษี</h1>
+        </span>
       </ion-col>
     </ion-row>
-    <ion-row >
-          <ion-col (click)="gotoCategoryTax()"  text-center >
-              <img  src="../assets/imgs/department.png">
-            </ion-col>
-      
-      <ion-col (click)="gotoDepartmentList()" text-center>
+    <ion-row>
+      <ion-col (click)="gotoCategoryTax()" text-center>
+        <img src="../assets/imgs/department.png">
+      </ion-col>
+
+      <ion-col (click)="gotoDepartmentReport()" text-center>
         <img src="../assets/imgs/category.png">
       </ion-col>
-      <ion-col (click)="gotoDepartmentReport()"  text-center>
+      <ion-col  (click)="gotoDepartmentList()" text-center>
         <img src="../assets/imgs/if_courthouse.png">
       </ion-col>
     </ion-row>
+
+
     <ion-row>
-      <ion-col><p text-center>การจัดเก็บภาษี</p></ion-col>
-      <ion-col><p text-center>แยกตามหมวดหมู่</p></ion-col>
-      <ion-col><p text-center>แยกตามตามสำนัก</p></ion-col>
+      <ion-col>
+        <p text-center>การจัดเก็บภาษี</p>
+      </ion-col>
+      <ion-col>
+        <p text-center>ตามหมวดหมู่</p>
+      </ion-col>
+      <ion-col>
+        <p text-center>ตาม Profile</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <span ion-text color="title">
+          <h1>ใบอนุญาต</h1>
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="gotoCategoryTax()" text-center>
+        <img src="../assets/imgs/department.png">
+      </ion-col>
+
+      <ion-col (click)="gotoDepartmentList()" text-center>
+        <img src="../assets/imgs/category.png">
+      </ion-col>
+
+      <ion-col></ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <p text-center>สถิติใบอนุญาต</p>
+      </ion-col>
+      <ion-col>
+        <p text-center>กราฟเปรียบเทียบใบอนุญาต</p>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+          <span ion-text color="title">
+            <h1>คดีและปราบปราม</h1>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col (click)="gotoCategoryTax()" text-center>
+          <img src="../assets/imgs/if_11_61475 (1).png">
+        </ion-col>
+  
+        <ion-col (click)="gotoDepartmentList()" text-center>
+          <img src="../assets/imgs/if_11_61475 (1).png">
+        </ion-col>
+  
+        <ion-col></ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <p text-center>สถิติคดีตามพื้นที่</p>
+        </ion-col>
+        <ion-col>
+          <p text-center>สถิติของกลาง</p>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <span ion-text color="title">
+          <h1>ลงรายละเอียด</h1>
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="thisYaerReport()" text-center>
+        <img src="../assets/imgs/overall.png">
+      </ion-col>
+      <ion-col (click)="beforReport()" text-center>
+        <img src="../assets/imgs/detail.png">
+      </ion-col>
+      <ion-col></ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-item>
-          
-          <span ion-text color="primary"><h1>ลงรายละเอียด</h1></span>
-       
-        </ion-item>
+        <p text-center>ต้นปี-ปัจจุบัน</p>
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col (click)="thisYaerReport()"  text-center>
-        <img src="../assets/imgs/overall.png">
+      <ion-col>
+        <p text-center>ต้นปี-เดือนก่อน</p>
       </ion-col>
-      <ion-col (click)="beforReport()"  text-center>
-        <img src="../assets/imgs/detail.png">
-      </ion-col>
-      <ion-col (click)="caseReport()"  text-center>
-        <img src="../assets/imgs/if_11_61475 (1).png">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col><p text-center>ต้นปี-ปัจจุบัน</p></ion-col>
-      <ion-col><p text-center>ต้นปี-เดือนก่อน</p></ion-col>
-      <ion-col><p text-center>คดี</p></ion-col>
+      <ion-col></ion-col>
     </ion-row>
   </ion-grid>
 
