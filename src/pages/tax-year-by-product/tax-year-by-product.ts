@@ -35,14 +35,24 @@ export class TaxYearByProductPage {
       range.push( {"key":this.year_th,"value": this.year_en});
     }
     this.summaryDate = range;
+    this.getDataAll();
+  }
+
+  getDataAll(){
+      this.webapi.getData('TaxProductGroupByYear').then((data)=>{
+         this.responseData = data;
+       });
   }
 
   dataYear:any;
   getDashboardItemsByDate(dataYear){
-   this.webapi.getData('TaxProductGroupByYear?year='+dataYear).then((data)=>{
-      this.responseData = data;
-      console.log(this.responseData);
-    });
+    if(dataYear == ""){
+      this.getDataAll();
+    }else{
+    this.webapi.getData('TaxProductGroupByYear?year='+dataYear).then((data)=>{
+        this.responseData = data;
+      });
+   }
   }
 
   getTableOCT() {

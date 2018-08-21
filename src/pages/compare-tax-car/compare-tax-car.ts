@@ -54,9 +54,7 @@ export class CompareTaxCarPage {
     }
   }
 
-
-
-  getTableTAX_LY() {
+getTableTAX_LY() {
     this.TAX_LY = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {

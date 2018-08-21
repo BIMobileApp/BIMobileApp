@@ -38,8 +38,7 @@ page-tax-year-by-product {
     font-weight: bold;
     color: black !important;
     font-size: 3vw !important;
-    text-align: left !important;
-    
+    text-align: left !important;    
   }
   ion-item.size{
     width: 50%;
@@ -50,4 +49,24 @@ page-tax-year-by-product {
     color: black ;
     font-size: 4vw ;
   }
+  p.center  {
+    text-overflow: ellipsis;
+    color: black !important;
+    font-size: 3vw !important;
+  }
+
+  p.right  {
+    text-overflow: ellipsis;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
+  }
+
+  p.left  {
+    text-overflow: ellipsis;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: left !important;    
+  }
+
 }

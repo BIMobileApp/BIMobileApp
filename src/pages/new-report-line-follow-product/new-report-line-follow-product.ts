@@ -5,14 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 
-
-/**
- * Generated class for the NewReportLineFollowProductPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-new-report-line-follow-product',
@@ -111,9 +103,9 @@ export class NewReportLineFollowProductPage {
     console.log(this.lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
-
-  
+    
   createChart() {
+
     this.lineChart = new Chart(this.LineCanvas.nativeElement, {
       type: 'line',
       data: {

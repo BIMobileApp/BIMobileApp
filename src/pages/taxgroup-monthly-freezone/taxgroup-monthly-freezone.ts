@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
 
 declare var google;
-
 
 @IonicPage()
 @Component({
@@ -11,95 +11,72 @@ declare var google;
 })
 export class TaxgroupMonthlyFreezonePage {
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  respondData:any;
+  area:any;
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public webapi: RestProvider) {
   }
 
   ionViewDidLoad() {
-    this.taxchart1();
-    this.taxchart2();
-    this.taxchart3();
   }
 
-    taxchart1(){
-      var data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Rank', 50 ]
-      ]);
-      var options = {
-        width: 250,
-        height: 250,
-        redFrom: 0,
-        redTo: 10,
-        yellowFrom: 10,
-        yellowTo: 15,
-        greenFrom: 15,
-        greenTo: 20,
-        minorTicks: 20,
-        majorTicks: ['0', '100'],
-      };
-    
-      var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-      chart.draw(data, options);
+  getAreaCharge(area){
 
-      setInterval(function() {
-        data.setValue(0, 1,  50);
-        chart.draw(data, options);
+    if(area == ""){
+    }else{
+      this.webapi.getData('taxPercentByArea?area='+area).then((data) => {
+        this.respondData = data;
+        this.getTAX();
       });
     }
+  }
 
-    taxchart2(){
-      var data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Rank', 50 ]
-      ]);
-      var options = {
-        width: 250,
-        height: 250,
-        redFrom: 0,
-        redTo: 10,
-        yellowFrom: 10,
-        yellowTo: 15,
-        greenFrom: 15,
-        greenTo: 20,
-        minorTicks: 20,
-        majorTicks: ['0', '100'],
-      };
-    
-      var chart = new google.visualization.Gauge(document.getElementById('chart_div1'));
-      chart.draw(data, options);
+  getTAX() {
 
-      setInterval(function() {
-        data.setValue(0, 1,  50);
-        chart.draw(data, options);
-      });
+    let tax_val;
+    let taxly_val;
+    let taxest_val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      tax_val = this.respondData[i].TAX_PERCENT;
+      taxly_val = this.respondData[i].TAX_LY_PERCENT;
+      taxest_val = this.respondData[i].TAX_ESTIMATE_PERCENT;
+    }
+    this.showgaugechartTax(tax_val,taxly_val,taxest_val);
+  }
+
+  showgaugechartTax(tax_val,taxly_val,taxest_val){
+    let taxext_percent;
+    let taxly_from;
+    let taxly_to;
+    if(taxest_val <= 100){
+      taxext_percent = 100;
+    }else{
+      taxext_percent = taxest_val;
     }
 
-    taxchart3(){
-      var data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Rank', 50 ]
-      ]);
-      var options = {
-        width: 250,
-        height: 250,
-        redFrom: 0,
-        redTo: 10,
-        yellowFrom: 10,
-        yellowTo: 15,
-        greenFrom: 15,
-        greenTo: 20,
-        minorTicks: 20,
-        majorTicks: ['0', '100'],
-      };
-    
-      var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
-      chart.draw(data, options);
-
-      setInterval(function() {
-        data.setValue(0, 1,  50);
-        chart.draw(data, options);
-      });
+    if(taxly_val < 0){
+      taxly_from =  taxly_val;
+      taxly_to = 0;
+    }else{
+      taxly_from = 0;
+      taxly_to = taxly_val;
     }
+
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['ปีนี้', tax_val],
+    ]);
+    var options = {
+           width: 200, height: 200,
+          redFrom: taxly_from, redTo: taxly_to,
+          minorTicks: 5,
+          majorTicks: ['0', taxext_percent],
+    };
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
 }
    

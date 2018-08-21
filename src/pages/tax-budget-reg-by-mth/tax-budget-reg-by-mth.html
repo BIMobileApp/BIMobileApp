@@ -11,6 +11,7 @@
     <ion-item  class="size">
         <ion-label >เดือน : </ion-label>
         <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="selectDate(item.value)" >
+            <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
             <ion-option value="1" >มกราคม</ion-option>
             <ion-option value="2">กุมภาพันธ์</ion-option>
             <ion-option value="3">มีนาคม</ion-option>
@@ -29,22 +30,22 @@
       <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
       <ion-card>           
         <ion-card-content no-padding>     
-                        <div class="table-responsive">
-                               <table class="table" style="width: 100%;">
-                                <thead>
-                                     <tr style="background-color: #F78B26; ">
-                                            <th width="10%"><h3 class="center">ลำดับ</h3></th>
-                                            <th><h3 class="center">ผู้ประกอบการ</h3></th>
-                                            <th><h3 class="center">ภาษีปีนี้</h3></th>
-                                    </tr>
-                            </thead>
-                            <tbody>
-                                    <tr *ngFor="let data of responseData">
-                                            <td width="10%"><h3 class="center">{{data.SORT}}</h3></td>
-                                            <td><h3 class="left">{{data.REG_NAME}}</h3></td>
-                                            <td><h3 class="right">{{data.TAX}}</h3></td>
-                                    </tr>
-                            </tbody>
+                <div class="table-responsive">
+                        <table class="table" style="width: 100%;">
+                        <thead>
+                                <tr style="background-color: #F78B26; ">
+                                        <th width="10%"><h3 class="center">ลำดับ</h3></th>
+                                        <th><h3 class="center">ผู้ประกอบการ</h3></th>
+                                        <th><h3 class="center">ภาษีปีนี้</h3></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let data of responseData">
+                                        <td width="10%"><h3 class="center">{{data.SORT}}</h3></td>
+                                        <td><h3 class="left">{{data.REG_NAME}}</h3></td>
+                                        <td><h3 class="right">{{data.TAX}}</h3></td>
+                                </tr>
+                        </tbody>
                     </table>
                 </div>
                 

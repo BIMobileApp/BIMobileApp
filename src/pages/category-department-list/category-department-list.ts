@@ -32,7 +32,7 @@ export class CategoryDepartmentListPage {
     this.app.getRootNav().push(TaxbudgetyearPage); 
   }
 
-  TaxRegTable(){
+  TaxTopRegTable(){
     this.app.getRootNav().push(TaxBudgetRegPage); 
   }
 

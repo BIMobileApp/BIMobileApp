@@ -18,18 +18,28 @@ export class TaxBudgetRegByMthPage {
   }
 
   ionViewDidLoad() {
+    this.selectDataAll();
   }
 
   summaryDate: any;
-  selectDate(summaryDate){
-  
-    this.webapi.getData('TaxBudgetRegByMth?mth='+summaryDate).then((data)=>{
+
+  selectDataAll(){  
+    this.webapi.getData('TaxBudgetRegByMth').then((data)=>{
       this.responseData = data;
       this.getTableTAX();
     });
+  }
 
-    console.log(this.responseData);
-
+  selectDate(summaryDate){
+  
+    if(summaryDate == ""){
+      this.selectDataAll();
+    }else
+      this.webapi.getData('TaxBudgetRegByMth?mth='+summaryDate).then((data)=>{
+        this.responseData = data;
+        this.getTableTAX();
+      });
+   
   }
 
   getTableTAX() {
@@ -39,7 +49,7 @@ export class TaxBudgetRegByMthPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TAX = val;
-      console.log(this.responseData);
+
     }
   }
 }

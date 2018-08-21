@@ -32,7 +32,6 @@ export class TaxGroupSourcePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].INCOME = val;
-      console.log(this.responseData);
     }
   }
   getTableIMPORT() {
@@ -42,7 +41,6 @@ export class TaxGroupSourcePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].IMPORT = val;
-      console.log(this.responseData);
     }
   }
   getTableSUM_ALL() {
@@ -52,7 +50,6 @@ export class TaxGroupSourcePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].SUM_ALL = val;
-      console.log(this.responseData);
     }
   }
 }

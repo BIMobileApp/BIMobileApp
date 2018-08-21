@@ -22,7 +22,6 @@ export class IncomerealtimePage {
       this.respondData = data;
       this.getTableTAX();
     });
-    console.log(this.respondData);
   }
   getTableTAX() {
     let val;
@@ -31,7 +30,6 @@ export class IncomerealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.respondData[i].TAX = val;
-      console.log(this.respondData);
     }
   }
 }
