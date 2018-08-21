@@ -1,0 +1,65 @@
+<ion-header>
+
+  <ion-navbar color="navber" >
+    <ion-title>ผลการจัดเก็บภาษีตามประเภทสินค้า</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  
+  <div text-center>
+      <h2><strong>ผลการจัดเก็บภาษีตามประเภทสินค้า</strong></h2>
+          <h3>ตั้งแต่ต้นปี ถึง 19 สิงหาคม 2561</h3>
+  </div>
+  <ion-item  style="background-color:#E6E6FA;">
+      <ion-label  center><strong>สถิติการจัดเก็บภาษีรายสินค้า</strong></ion-label>
+    </ion-item>
+  
+  <ion-card-content no-padding>
+    <ion-grid>
+      <ion-row>
+       
+        <ion-col><img (click)="OldReportBi_1Month();" class="iconStyle" src="../../assets/imgs/MonthTAX.png" /></ion-col>
+        <ion-col><img (click)="OldReportBi_1MonthGraph()" class="iconStyle" src="../../assets/imgs/compareGraph.png" /></ion-col>
+        <ion-col><img (click)="OldReportBi_1MonthGraphRatio()" class="iconStyle" src="../../assets/imgs/pieGraph.png" /></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    
+
+      <ion-row>
+        
+          <ion-col><img (click)="OldReportBi_2Year()" class="iconStyle" src="../../assets/imgs/earlyYear.png" /></ion-col>
+          <ion-col><img (click)="OldReportBi_1_12MonthGraph()" class="iconStyle" src="../../assets/imgs/compareGraph.png" /></ion-col>
+          <ion-col><img (click)="OldReportBi_1_12MonthGraph2()" class="iconStyle" src="../../assets/imgs/pieGraph.png" /></ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+
+        <ion-row>
+          
+            <ion-col><img (click)="OldReportBi_3_12Month()" class="iconStyle" src="../../assets/imgs/yearTAX.png" /></ion-col>
+            <ion-col><img (click)="OldReportBi_3_12Graph()" class="iconStyle" src="../../assets/imgs/compareGraphMonth.png" /></ion-col>
+            <ion-col><img (click)="OldReportBi_3_12MonthLast()" class="iconStyle" src="../../assets/imgs/MonthTAXlastYear.png" /></ion-col>
+            <ion-col><img (click)="OldReportBi_5_10Year()" class="iconStyle" src="../../assets/imgs/earlyCompare8.png" /></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-item  style="background-color:#E6E6FA;">
+              <ion-label  center><strong>เป้าหมาย</strong></ion-label>
+            </ion-item>
+          <ion-row>
+            
+              <ion-col><img (click)="OldReportMobile1_6Year()" class="iconStyle" src="../../assets/imgs/Target.png" /></ion-col>
+              <ion-col></ion-col>
+              <ion-col></ion-col>
+              <ion-col></ion-col>
+              <ion-col></ion-col>
+            </ion-row>
+
+    </ion-grid>
+
+
+
+  </ion-card-content>
+</ion-content>

@@ -71,6 +71,30 @@ import { NewReportGaugeTaxBeerPage } from '../pages/new-report-gauge-tax-beer/ne
 import { NewReportGaugeTaxDrinkPage } from '../pages/new-report-gauge-tax-drink/new-report-gauge-tax-drink';
 import { NewReportGaugeQuantityDrinkPage } from '../pages/new-report-gauge-quantity-drink/new-report-gauge-quantity-drink';
 import { NewReportGaugeQuantityBeerPage } from '../pages/new-report-gauge-quantity-beer/new-report-gauge-quantity-beer';
+import { OldReportBi_1_10_4_1AllPage } from '../pages/old-report-bi-1-10-4-1-all/old-report-bi-1-10-4-1-all';
+import { OldReportBi_1_10_4_1AllGraphPage } from '../pages/old-report-bi-1-10-4-1-all-graph/old-report-bi-1-10-4-1-all-graph';
+import { OldReportBi_1_10_4_6Page } from '../pages/old-report-bi-1-10-4-6/old-report-bi-1-10-4-6';
+import { OldReportBi_1_12MonthGraphPage } from '../pages/old-report-bi-1-12-month-graph/old-report-bi-1-12-month-graph';
+import { OldReportBi_1_12MonthGraph2Page } from '../pages/old-report-bi-1-12-month-graph2/old-report-bi-1-12-month-graph2';
+import { OldReportBi_1MonthPage } from '../pages/old-report-bi-1-month/old-report-bi-1-month';
+import { OldReportBi_1MonthGraphPage } from '../pages/old-report-bi-1-month-graph/old-report-bi-1-month-graph';
+import { OldReportBi_1MonthGraphRatioPage } from '../pages/old-report-bi-1-month-graph-ratio/old-report-bi-1-month-graph-ratio';
+import { OldReportBi_2YearPage } from '../pages/old-report-bi-2-year/old-report-bi-2-year';
+import { OldReportBi_3_12GraphPage } from '../pages/old-report-bi-3-12-graph/old-report-bi-3-12-graph';
+import { OldReportBi_3_12MonthPage } from '../pages/old-report-bi-3-12-month/old-report-bi-3-12-month';
+import { OldReportBi_3_12MonthLastPage } from '../pages/old-report-bi-3-12-month-last/old-report-bi-3-12-month-last';
+import { OldReportBi_5_10YearPage } from '../pages/old-report-bi-5-10-year/old-report-bi-5-10-year';
+import { OldReportBiDomestic2_1Page } from '../pages/old-report-bi-domestic2-1/old-report-bi-domestic2-1';
+import { OldReportBiDomestic2_1_12MonthPage } from '../pages/old-report-bi-domestic2-1-12-month/old-report-bi-domestic2-1-12-month';
+import { OldReportBiDomestic2_1_12GraphPage } from '../pages/old-report-bi-domestic2-1-12-graph/old-report-bi-domestic2-1-12-graph';
+import { OldReportBiDomestic2_1GraphPage } from '../pages/old-report-bi-domestic2-1-graph/old-report-bi-domestic2-1-graph';
+import { OldReportBiRegion_4_1Page } from '../pages/old-report-bi-region-4-1/old-report-bi-region-4-1';
+import { OldReportBiRegion_4_1GraphPage } from '../pages/old-report-bi-region-4-1-graph/old-report-bi-region-4-1-graph';
+import { OldReportDomesticGroupPage } from '../pages/old-report-domestic-group/old-report-domestic-group';
+import { OldReportMobile1_6YearPage } from '../pages/old-report-mobile1-6-year/old-report-mobile1-6-year';
+import { OldReportFollowProductGroupPage } from '../pages/old-report-follow-product-group/old-report-follow-product-group';
+import { OldReportRegionGroupPage } from '../pages/old-report-region-group/old-report-region-group';
+import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-group/old-report-section1-10-group';
 
 @NgModule({
   declarations: [
@@ -139,7 +163,31 @@ import { NewReportGaugeQuantityBeerPage } from '../pages/new-report-gauge-quanti
     NewReportGaugeTaxBeerPage,
     NewReportGaugeQuantityBeerPage,
     NewReportGaugeTaxDrinkPage,
-    NewReportGaugeQuantityDrinkPage
+    NewReportGaugeQuantityDrinkPage,
+    OldReportBi_1_10_4_1AllPage,
+    OldReportBi_1_10_4_1AllGraphPage,
+    OldReportBi_1_10_4_6Page,
+    OldReportBi_1_12MonthGraphPage,
+    OldReportBi_1_12MonthGraph2Page,
+    OldReportBi_1MonthPage,
+    OldReportBi_1MonthGraphPage,
+    OldReportBi_1MonthGraphRatioPage,
+    OldReportBi_2YearPage,
+    OldReportBi_3_12GraphPage,
+    OldReportBi_3_12MonthPage,
+    OldReportBi_3_12MonthLastPage,
+    OldReportBi_5_10YearPage,
+    OldReportBiDomestic2_1Page,
+    OldReportBiDomestic2_1_12MonthPage,
+    OldReportBiDomestic2_1_12GraphPage,
+    OldReportBiDomestic2_1GraphPage,
+    OldReportBiRegion_4_1Page,
+    OldReportBiRegion_4_1GraphPage,
+    OldReportMobile1_6YearPage,
+    OldReportDomesticGroupPage,
+    OldReportFollowProductGroupPage,
+    OldReportRegionGroupPage,
+    OldReportSection1_10GroupPage
   ],
   imports: [
     BrowserModule,
@@ -222,7 +270,31 @@ import { NewReportGaugeQuantityBeerPage } from '../pages/new-report-gauge-quanti
     NewReportGaugeTaxBeerPage,
     NewReportGaugeQuantityBeerPage,
     NewReportGaugeTaxDrinkPage,
-    NewReportGaugeQuantityDrinkPage
+    NewReportGaugeQuantityDrinkPage,
+    OldReportBi_1_10_4_1AllPage,
+    OldReportBi_1_10_4_1AllGraphPage,
+    OldReportBi_1_10_4_6Page,
+    OldReportBi_1_12MonthGraphPage,
+    OldReportBi_1_12MonthGraph2Page,
+    OldReportBi_1MonthPage,
+    OldReportBi_1MonthGraphPage,
+    OldReportBi_1MonthGraphRatioPage,
+    OldReportBi_2YearPage,
+    OldReportBi_3_12GraphPage,
+    OldReportBi_3_12MonthPage,
+    OldReportBi_3_12MonthLastPage,
+    OldReportBi_5_10YearPage,
+    OldReportBiDomestic2_1Page,
+    OldReportBiDomestic2_1_12MonthPage,
+    OldReportBiDomestic2_1_12GraphPage,
+    OldReportBiDomestic2_1GraphPage,
+    OldReportBiRegion_4_1Page,
+    OldReportBiRegion_4_1GraphPage,
+    OldReportMobile1_6YearPage,
+    OldReportDomesticGroupPage,
+    OldReportFollowProductGroupPage,
+    OldReportRegionGroupPage,
+    OldReportSection1_10GroupPage
   ],
   providers: [
     StatusBar,
