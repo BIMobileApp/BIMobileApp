@@ -12,7 +12,7 @@ import { MenuGroupOldReportPage } from '../pages/menu-group-old-report/menu-grou
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = MenuGroupOldReportPage;
+  rootPage:any = WelcomePage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
