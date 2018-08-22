@@ -20,6 +20,7 @@ import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-secti
 export class CetegoryTaxPage {
   //map parm
   offcode: any;
+  offcode_full:any;
 
   //guage parm
   TaxGauge: any;
@@ -28,10 +29,15 @@ export class CetegoryTaxPage {
 
   //Table parm
   responseData: any;
+  DataProduct: any;
   Data = [];
   TAX = [];
   TAX_LY = [];
   EST = [];
+
+   ProdTAX = [];
+   ProdTAX_LY = [];
+   ProdEST = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,39 +47,36 @@ export class CetegoryTaxPage {
 
   ionViewDidLoad() {
     this.UserAthu();
-    
-
+  
   }
 
   UserAthu() {
-    this.offcode = localStorage.offcode;
-    this.offcode = this.offcode.substring(0, 2);
+    this.offcode_full = localStorage.offcode;
+    this.offcode = this.offcode_full.substring(0, 2);
     console.log(this.offcode);
     this.GaugeGetData();
     this.TableGetData();
-
+    this.TableProductGetData();
   }
 
   GaugeGetData(){
-    this.webapi.getData('GaugeOverviewRegion?offcode ='+ this.offcode).then((data)=>{
+    this.webapi.getData('GaugeOverviewRegion?offcode='+this.offcode_full).then((data)=>{
       this.responseData = data;
       console.log(this.responseData);
     });
   }
 
   TableGetData(){
-    this.webapi.getData('TaxCurYear?offcode ='+ this.offcode).then((data)=>{
+    this.webapi.getData('TaxCurYear?offcode='+this.offcode_full).then((data)=>{
       this.responseData = data;
-
-      console.log(this.responseData);
       this.getTAX();
-      this.getTAX_LY();
+      this.getLAST_TAX();
       this.getEST();
+      console.log(this.responseData);
     });
   }
 
   getTAX() {
-    this.TAX = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].TAX/1000000;
@@ -84,26 +87,68 @@ export class CetegoryTaxPage {
     }
   }
 
-  getTAX_LY() {
-    this.TAX_LY = [];
+  getLAST_TAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX_LY/1000000;
+      val = this.responseData[i].LAST_TAX/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX_LY = val;
+      this.responseData[i].LAST_TAX = val;
       //console.log(this.responseData);
     }
   }
 
   getEST() {
-    this.EST = [];
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].ESTIMATE/1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].ESTIMATE = val;
+      //console.log(this.responseData);
+    }
+  }
+
+  TableProductGetData(){
+    this.webapi.getData('TaxProductCurYear?offcode='+ this.offcode_full).then((data)=>{
+      this.DataProduct = data;
+
+      console.log(this.DataProduct);
+      this.getProductTAX();
+      this.getProductLAST_TAX();
+      this.getProductEST();
+    });
+  }
+
+  getProductTAX() {
+    let val;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      val = this.DataProduct[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProduct[i].TAX = val;
+     // console.log(this.responseData);
+    }
+  }
+
+  getProductLAST_TAX() {
+    let val;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      val = this.DataProduct[i].LAST_TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProduct[i].LAST_TAX = val;
+      //console.log(this.responseData);
+    }
+  }
+
+  getProductEST() {
+    let val;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      val = this.DataProduct[i].ESTIMATE/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProduct[i].ESTIMATE = val;
       //console.log(this.responseData);
     }
   }
