@@ -6,13 +6,13 @@
   
   <ion-content> 
       <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
-                <h3 class="center">รายงานติดตามการชำระภาษี</h3>
-             </ion-item>
-            
+          <h3 class="center">รายงานติดตามการชำระภาษี</h3>
+       </ion-item>
 
       <ion-item class="size">
           <ion-label  text-center>เดือน : </ion-label>
           <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
+            <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
             <ion-option value="1" >มกราคม</ion-option>
             <ion-option value="2">กุมภาพันธ์</ion-option>
             <ion-option value="3">มีนาคม</ion-option>
@@ -31,27 +31,27 @@
      <ion-card>
         <ion-card-content no-padding>
           <div class="table-responsive">
-                                        <table class="table" style="width: 100%;">
-                                          <thead>
-                                            <tr style="background-color: #F78B26; ">
-                                                <th width="15%"><h3 class="center">วันที่</h3></th>
-                                                <th><h3 class="center">ในประเทศ</h3></th>
-                                                <th><h3 class="center">ต่างประเทศ</h3></th>
-                                                <th><h3 class="center">FreeZone</h3></th>
-                                                <th><h3 class="center">นำเข้าชำระในพื้นที่</h3></th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                        <tr *ngFor="let data of responseData">
-                                                <td width="15%" ><h3 class="center">{{data.DAY_ID}}</h3></td>
-                                                <td><h3 class="right">{{data.CD_INCOME}}</h3></td>
-                                                <td><h3 class="right">{{data.INCOME}}</h3></td>
-                                                <td><h3 class="right">{{data.IMPORT}}</h3></td>
-                                                <td><h3 class="right">{{data.SUM_ALL}}</h3></td>
-                                        </tr>
-                                </tbody>
-                        </table>
-                    </div>
+                  <table class="table" style="width: 100%;">
+                              <thead>
+                                <tr style="background-color: #F78B26; ">
+                                    <th width="15%"><h3 class="center">วันที่</h3></th>
+                                    <th><h3 class="center">ในประเทศ</h3></th>
+                                    <th><h3 class="center">ต่างประเทศ</h3></th>
+                                    <th><h3 class="center">FreeZone</h3></th>
+                                    <th><h3 class="center">นำเข้าชำระในพื้นที่</h3></th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                            <tr *ngFor="let data of responseData">
+                                    <td width="15%" ><h3 class="center">{{data.TIME_ID | date: "dd/MM/yyyy" }}</h3></td>
+                                    <td><h3 class="right">{{data.CD_INCOME}}</h3></td>
+                                    <td><h3 class="right">{{data.INCOME}}</h3></td>
+                                    <td><h3 class="right">{{data.IMPORT}}</h3></td>
+                                    <td><h3 class="right">{{data.SUM_ALL}}</h3></td>
+                            </tr>
+                    </tbody>
+            </table>
+        </div>
 
         </ion-card-content>
       </ion-card>

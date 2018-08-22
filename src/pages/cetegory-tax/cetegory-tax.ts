@@ -51,6 +51,12 @@ export class CetegoryTaxPage {
     console.log(this.offcode);
   }
 
+  GaugeGetData(){
+    this.webapi.getData('TaxCurYear?offcode ='+ this.offcode).then((data)=>{
+      this.responseData = data;
+      console.log(this.responseData);
+    });
+  }
 
   TableGetData(){
     this.webapi.getData('TaxCurYear').then((data)=>{

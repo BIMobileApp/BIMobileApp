@@ -17,18 +17,38 @@ export class FollowTaxRealtimePage {
   }
 
   ionViewDidLoad() {
-    
- 
+    this.geDataAll();
   }
 
-  getDashboardItemsByDate(month){
-    this.webapi.getData('FollowPayTaxRealtime?month='+month).then((data)=>{
+  geDataAll(){
+    let month = '';
+    var d = new Date(); 
+    var nt = d.getFullYear()+543;
+
+    this.webapi.getData('FollowPayTaxRealtimeAll?year='+nt).then((data)=>{
       this.responseData = data;
       this.getTableCD_INCOME();
       this.getTableINCOME();
       this.getTableIMPORT();
       this.getTableSUM_ALL();
     });
+  }
+
+  getDashboardItemsByDate(month){
+
+    var d = new Date(); 
+    var nt = d.getFullYear()+543;
+    if(month== ""){
+      this.geDataAll();
+    }else{
+      this.webapi.getData('FollowPayTaxRealtime?month='+month+'&year='+nt).then((data)=>{
+        this.responseData = data;
+        this.getTableCD_INCOME();
+        this.getTableINCOME();
+        this.getTableIMPORT();
+        this.getTableSUM_ALL();
+      });
+    }
   }
   getTableCD_INCOME() {
     let val;
@@ -37,7 +57,6 @@ export class FollowTaxRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].CD_INCOME = val;
-      console.log(this.responseData);
     }
   }
   getTableINCOME() {
@@ -47,7 +66,6 @@ export class FollowTaxRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].INCOME = val;
-      console.log(this.responseData);
     }
   }
   getTableIMPORT() {
@@ -57,7 +75,6 @@ export class FollowTaxRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].IMPORT = val;
-      console.log(this.responseData);
     }
   }
   getTableSUM_ALL() {
@@ -67,7 +84,6 @@ export class FollowTaxRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].SUM_ALL = val;
-      console.log(this.responseData);
     }
   }
 }

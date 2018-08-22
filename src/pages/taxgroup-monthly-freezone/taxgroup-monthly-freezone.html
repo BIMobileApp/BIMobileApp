@@ -1,5 +1,3 @@
-
-
 <ion-header>
   <ion-navbar color="navber">
     <ion-title>แยกตามหมวดหมู่</ion-title>
@@ -14,71 +12,48 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-                <ion-item>
-                    <ion-label  text-center>เดือน : </ion-label>
-                    <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
-                    <ion-option value="1" >มกราคม</ion-option>
-                    <ion-option value="2">กุมภาพันธ์</ion-option>
-                    <ion-option value="3">มีนาคม</ion-option>
-                    <ion-option value="4">เมษายน</ion-option>
-                    <ion-option value="5">พฤษภาคม</ion-option>
-                    <ion-option value="6">มิถุนายน</ion-option>
-                    <ion-option value="7">กรกฎาคม</ion-option>
-                    <ion-option value="8">สิงหาคม</ion-option>
-                    <ion-option value="9">กันยายน</ion-option>
-                    <ion-option value="10">ตุลาคม</ion-option>
-                    <ion-option value="11">พฤศจิกายน</ion-option>
-                    <ion-option value="12">ธันวาคม</ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-col>
-
-            <ion-col>
-                <ion-item>
-                        <ion-label  text-center>ภาค : </ion-label>
-                    <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
-                        <ion-option value="1" >ภาค1</ion-option>
-                        <ion-option value="1" >ภาค2</ion-option>
-                        <ion-option value="1" >ภาค3</ion-option>
-                        <ion-option value="1" >ภาค4</ion-option>
-                        <ion-option value="1" >ภาค5</ion-option>
-                        <ion-option value="1" >ภาค6</ion-option>
-                        <ion-option value="1" >ภาค7</ion-option>
-                        <ion-option value="1" >ภาค8</ion-option>
-                        <ion-option value="1" >ภาค9</ion-option>
+                <ion-item class="size">
+                <ion-label  text-center>ภาค : </ion-label>
+                    <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getAreaCharge(item.value)" >
+                      <ion-option value=" "  [selected]="true">...กรุณาเลือกภาค...</ion-option>
+                        <ion-option value="010000" >ภาค1</ion-option>
+                        <ion-option value="020000" >ภาค2</ion-option>
+                        <ion-option value="030000" >ภาค3</ion-option>
+                        <ion-option value="040000" >ภาค4</ion-option>
+                        <ion-option value="050000" >ภาค5</ion-option>
+                        <ion-option value="060000" >ภาค6</ion-option>
+                        <ion-option value="070000" >ภาค7</ion-option>
+                        <ion-option value="080000" >ภาค8</ion-option>
+                        <ion-option value="090000" >ภาค9</ion-option>
+                        <ion-option value="100000" >ภาค10</ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
         </ion-row>
      </ion-grid>
 
+     <div id="chart_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div>
+
+     <ion-list  *ngFor="let data of respondData">
+            <ion-item>
+              <ion-label><strong>สรุปมาตรฐานภาษี</strong></ion-label>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label color="primary" fixed>ปีนี้ :</ion-label>
+            <ion-label>ร้อยละ {{data.TAX_PERCENT}}</ion-label>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label color="primary" fixed>ปีก่อน :</ion-label>
+            <ion-label>ร้อยละ {{data.TAX_LY_PERCENT}}</ion-label>
+          </ion-item>
+    
+          <ion-item>
+              <ion-label color="primary" fixed>ปีประมาณการ :</ion-label>
+              <ion-label>ร้อยละ {{data.TAX_ESTIMATE_PERCENT}}</ion-label>
+          </ion-item>
+    
+          </ion-list>
  
-
-
-        <ion-card style="height: 350px;"> 
-            <ion-item  style="background-color:#E6E6FA;">
-                <ion-label  center><strong>ปีนี้</strong></ion-label>
-            </ion-item> <br/>
-            <div class="gauge" style="padding-left: 20px;">
-                    <div id="chart_div" style="width: 400px; height: 400px;"></div>
-            </div>
-        </ion-card>  
-
-        <ion-card style="height: 350px;"> 
-        <ion-item  style="background-color:#E6E6FA;">
-                <ion-label  center><strong>ปีก่อน</strong></ion-label>
-            </ion-item> <br/>
-            <div class="gauge" style="padding-left: 20px;">
-                    <div id="chart_div1" style="width: 400px; height: 400px;"></div>
-            </div>
-        </ion-card>
-
-        <ion-card style="height: 350px;"> 
-            <ion-item  style="background-color:#E6E6FA;">
-                    <ion-label  center><strong>ปีประมาณการ</strong></ion-label>
-                </ion-item> <br/>
-                <div class="gauge" style="padding-left: 20px;">
-                        <div id="chart_div2" style="width: 400px; height: 400px;"></div>
-                </div>
-        </ion-card>
 </ion-content>

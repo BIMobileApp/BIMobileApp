@@ -7,30 +7,10 @@
   
   <ion-content>
       <ion-item  style="background-color:#D0DFE6;font-size: 20px;" text-center>
-        <h2>Gauge ภาษีประจำเดือนแต่ละพื้นที่</h2>
+        <h2>Gauge ภาษีประจำเดือนแต่ละพื้นที่1</h2>
       </ion-item>
       <ion-grid>
           <ion-row>
-              <!--<ion-col>
-                    <ion-item>
-                        <ion-label  text-center>เดือน : </ion-label>
-                        <ion-select [(ngModel)]="summaryDate"  #month (ionChange)="getTaxCharge(month.value)" >
-                            <ion-option value="1" >มกราคม</ion-option>
-                            <ion-option value="2">กุมภาพันธ์</ion-option>
-                            <ion-option value="3">มีนาคม</ion-option>
-                            <ion-option value="4">เมษายน</ion-option>
-                            <ion-option value="5">พฤษภาคม</ion-option>
-                            <ion-option value="6">มิถุนายน</ion-option>
-                            <ion-option value="7">กรกฎาคม</ion-option>
-                            <ion-option value="8">สิงหาคม</ion-option>
-                            <ion-option value="9">กันยายน</ion-option>
-                            <ion-option value="10">ตุลาคม</ion-option>
-                            <ion-option value="11">พฤศจิกายน</ion-option>
-                            <ion-option value="12">ธันวาคม</ion-option>
-                        </ion-select>
-                        </ion-item>
-                </ion-col>-->
-  
                     <ion-col>
                     <ion-item>
                         <ion-label  text-center>ภาค : </ion-label>
@@ -51,12 +31,30 @@
              </ion-row>
        </ion-grid>
   
-       <ion-card>
-        <ion-item style="background-color:#E6E6FA;;font-size: 20px;" text-center>
-          <h2>ปีนี้</h2>
-        </ion-item>
-      </ion-card>
-         <div id="chart_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div>      
+        <div id="chart_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div>
+
+        <ion-list  *ngFor="let data of respondData">
+                <ion-item>
+                  <ion-label><strong>สรุปมาตรฐานภาษี</strong></ion-label>
+              </ion-item>
+        
+              <ion-item>
+                <ion-label color="primary" fixed>ปีนี้ :</ion-label>
+                <ion-label>ร้อยละ {{data.TAX_PERCENT}}</ion-label>
+              </ion-item>
+            
+              <ion-item>
+                <ion-label color="primary" fixed>ปีก่อน :</ion-label>
+                <ion-label>ร้อยละ {{data.TAX_LY_PERCENT}}</ion-label>
+              </ion-item>
+        
+              <ion-item>
+                  <ion-label color="primary" fixed>ปีประมาณการ :</ion-label>
+                  <ion-label>ร้อยละ {{data.TAX_ESTIMATE_PERCENT}}</ion-label>
+              </ion-item>
+        
+              </ion-list>
+        
         
   </ion-content>
   

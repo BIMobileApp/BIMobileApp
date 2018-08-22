@@ -8,56 +8,58 @@
       <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
                 <h3 class="center">รายงานประมาณการปีงบประมาณ</h3>
      </ion-item>
-     <ion-card>
+    
 
         <ion-item  class="size">
             <ion-label >ปี : </ion-label>
             <ion-select  [(ngModel)]="dataYear"   (ionChange)="getDashboardItemsByDate(dataYear)" >
-              <ion-option  *ngFor="let item of summaryDate"  value="{{item.value}}">{{item.key}}</ion-option>
+              <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+              <ion-option  *ngFor="let item of summaryDate"  value="{{item.key}}">{{item.key}}</ion-option>
             </ion-select>
         </ion-item>
         <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
+        <ion-card>
         <ion-card-content no-padding>
-                        <div class="table-responsive">
-                                        <table class="table" style="width: 100%;">
-                                          <thead>
-                                            <tr style="background-color: #F78B26; ">
-                                                <th><h3 class="center">ลำดับ</h3></th>
-                                                <th><h3 class="center">กลุ่มสินค้า</h3></th>
-                                                <th><h3 class="center">ต.ค</h3></th>
-                                                <th><h3 class="center">พ.ย</h3></th>
-                                                <th><h3 class="center">ธ.ค</h3></th>
-                                                <th><h3 class="center">ม.ค</h3></th>
-                                                <th><h3 class="center">ก.พ</h3></th>
-                                                <th><h3 class="center">มี.ค</h3></th>
-                                                <th><h3 class="center">เม.ย</h3></th>
-                                                <th><h3 class="center">พ.ค</h3></th>
-                                                <th><h3 class="center">มิ.ย</h3></th>
-                                                <th><h3 class="center">ก.ค</h3></th>
-                                                <th><h3 class="center">ส.ค</h3></th>
-                                                <th><h3 class="center">ก.ย</h3></th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                        <tr *ngFor="let data of responseData">
-                                                <td><h3 class="center">{{data.SORT}}</h3></td>
-                                                <td><h3 class="left">{{data.GROUP_NAME}}</h3></td>
-                                                <td><h3 class="right">{{data.OCT}}</h3></td>
-                                                <td><h3 class="right">{{data.NOV}}</h3></td>
-                                                <td><h3 class="right">{{data.DEC}}</h3></td>
-                                                <td><h3 class="right">{{data.JAN}}</h3></td>
-                                                <td><h3 class="right">{{data.FAB}}</h3></td>
-                                                <td><h3 class="right">{{data.MAR}}</h3></td>
-                                                <td><h3 class="right">{{data.APR}}</h3></td>
-                                                <td><h3 class="right">{{data.MAY}}</h3></td>
-                                                <td><h3 class="right">{{data.JUN}}</h3></td>
-                                                <td><h3 class="right">{{data.JUL}}</h3></td>
-                                                <td><h3 class="right">{{data.AUG}}</h3></td>
-                                                <td><h3 class="right">{{data.SEP}}</h3></td>
-                                        </tr>
-                                </tbody>
-                        </table>
-                    </div>  
+                <div class="table-responsive">
+                                <table class="table" style="width: 100%;">
+                                  <thead>
+                                    <tr style="background-color: #F78B26; ">
+                                        <th><h3 class="center">ลำดับ</h3></th>
+                                        <th><h3 class="center">กลุ่มสินค้า</h3></th>
+                                        <th><h3 class="center">ต.ค</h3></th>
+                                        <th><h3 class="center">พ.ย</h3></th>
+                                        <th><h3 class="center">ธ.ค</h3></th>
+                                        <th><h3 class="center">ม.ค</h3></th>
+                                        <th><h3 class="center">ก.พ</h3></th>
+                                        <th><h3 class="center">มี.ค</h3></th>
+                                        <th><h3 class="center">เม.ย</h3></th>
+                                        <th><h3 class="center">พ.ค</h3></th>
+                                        <th><h3 class="center">มิ.ย</h3></th>
+                                        <th><h3 class="center">ก.ค</h3></th>
+                                        <th><h3 class="center">ส.ค</h3></th>
+                                        <th><h3 class="center">ก.ย</h3></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let data of responseData">
+                                        <td><p class="center">{{data.SORT}}</p></td>
+                                        <td><p class="left">{{data.GROUP_NAME}}</p></td>
+                                        <td><p class="right">{{data.OCT}}</p></td>
+                                        <td><p class="right">{{data.NOV}}</p></td>
+                                        <td><p class="right">{{data.DEC}}</p></td>
+                                        <td><p class="right">{{data.JAN}}</p></td>
+                                        <td><p class="right">{{data.FAB}}</p></td>
+                                        <td><p class="right">{{data.MAR}}</p></td>
+                                        <td><p class="right">{{data.APR}}</p></td>
+                                        <td><p class="right">{{data.MAY}}</p></td>
+                                        <td><p class="right">{{data.JUN}}</p></td>
+                                        <td><p class="right">{{data.JUL}}</p></td>
+                                        <td><p class="right">{{data.AUG}}</p></td>
+                                        <td><p class="right">{{data.SEP}}</p></td>
+                                </tr>
+                        </tbody>
+                </table>
+            </div>  
         </ion-card-content>
       </ion-card>
   

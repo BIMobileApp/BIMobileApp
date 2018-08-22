@@ -33,7 +33,6 @@ export class TaxBudgetProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TAX = val;
-      console.log(this.responseData);
     }
   }
   getTableTAX_LY() {
@@ -43,7 +42,6 @@ export class TaxBudgetProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TAX_LY = val;
-      console.log(this.responseData);
     }
   }
   getTableESTIMATE() {
@@ -53,7 +51,6 @@ export class TaxBudgetProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].ESTIMATE = val;
-      console.log(this.responseData);
     }
   }
 

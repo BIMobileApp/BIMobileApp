@@ -40,6 +40,7 @@
   <h2>
     <strong>Gauge ภาษีประจำเดือนแต่ละพื้นที่</strong>
   </h2>
+  <!--
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -80,7 +81,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
+-->
 
   <ion-card>
     <ion-card-content>
@@ -135,4 +136,67 @@
       </div>
     </ion-card-content>
   </ion-card>
+
+  <h2>
+      <strong>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</strong>
+    </h2>
+    <ion-card>
+      <ion-card-content no-padding>
+        <div class="table-responsive">
+          <table style="width: 100%;" >
+            <thead>
+              <tr style="background-color: #F78B26; ">
+                <th><h3 class='center'>เดือน</h3></th>
+                <th><h3 class='center'>ปีนี้</h3></th>
+                <th><h3 class='center'>ปีก่อน</h3></th>
+                <th><h3 class='center'>ประมาณการ</h3></th>
+                <th><h3 class='center'>+/-</h3></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of responseData">
+                <td ><h3 class='center'>{{data.MONTH_SHORT_DESC}}</h3></td>
+                <td ><h3 class='right'>{{data.TAX}}</h3></td>
+                <td><h3 class='right'>{{data.TAX_LY}}</h3></td>
+                <td><h3 class='right'>{{data.ESTIMATE}}</h3></td>
+                <td><h3 class='center'><img class="size" src="../../assets/imgs/red.png" /></h3></td>
+            <!--    <td><h3 class='center'><img src="../../assets/imgs/{{data.compare}}.png" /></h3></td>-->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  
+    <!--////////////////////////////////////////////////  Table ////////////////////////////////////////////////////-->
+    <h2>
+        <strong>ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามรายสินค้า</strong>
+      </h2>
+      <ion-card>
+        <ion-card-content no-padding>
+          <div class="table-responsive">
+            <table style="width: 100%;" >
+              <thead>
+                <tr style="background-color: #F78B26; ">
+                  <th><h3 class='center'>เดือน</h3></th>
+                  <th><h3 class='center'>ปีนี้</h3></th>
+                  <th><h3 class='center'>ปีก่อน</h3></th>
+                  <th><h3 class='center'>ประมาณการ</h3></th>
+                  <th><h3 class='center'>+/-</h3></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of responseData">
+                  <td ><h3 class='center'>{{data.MONTH_SHORT_DESC}}</h3></td>
+                  <td ><h3 class='right'>{{data.TAX}}</h3></td>
+                  <td><h3 class='right'>{{data.TAX_LY}}</h3></td>
+                  <td><h3 class='right'>{{data.ESTIMATE}}</h3></td>
+                  <td><h3 class='center'><img class="size" src="../../assets/imgs/red.png" /></h3></td>
+              <!--    <td><h3 class='center'><img src="../../assets/imgs/{{data.compare}}.png" /></h3></td>-->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
 </ion-content>

@@ -19,17 +19,38 @@ export class TaxEdRealtimePage {
   }
 
   ionViewDidLoad() {
- 
+    this.getdataAll();
   }
 
-  getDashboardItemsByDate(month){
-    this.webapi.getData('TaxRealtimeFreezone?month='+month).then((data)=>{
+  getdataAll(){
+    var d = new Date(); 
+    var nt = d.getFullYear()+543;
+
+    this.webapi.getData('TaxRealtimeFreezoneAll?year='+nt).then((data)=>{
       this.responseData = data;
       this.getTableCD_INCOME();
       this.getTableINCOME();
       this.getTableIMPORT();
     });
   }
+  
+  getDashboardItemsByDate(month){
+    var d = new Date(); 
+    var nt = d.getFullYear()+543;
+
+    if(month == ""){
+      this.getdataAll();
+    }
+    else{
+        this.webapi.getData('TaxRealtimeFreezone?month='+month+'&year='+nt).then((data)=>{
+          this.responseData = data;
+          this.getTableCD_INCOME();
+          this.getTableINCOME();
+          this.getTableIMPORT();
+        });
+   }
+  }
+
   getTableCD_INCOME() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -37,7 +58,6 @@ export class TaxEdRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].CD_INCOME = val;
-      console.log(this.responseData);
     }
   }
   getTableINCOME() {
@@ -47,7 +67,7 @@ export class TaxEdRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].INCOME = val;
-      console.log(this.responseData);
+   
     }
   }
   getTableIMPORT() {
@@ -57,7 +77,7 @@ export class TaxEdRealtimePage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].IMPORT = val;
-      console.log(this.responseData);
+
     }
   }
 
