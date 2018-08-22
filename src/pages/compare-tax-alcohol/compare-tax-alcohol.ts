@@ -10,15 +10,30 @@ import { Chart } from 'chart.js';
   templateUrl: 'compare-tax-alcohol.html',
 })
 export class CompareTaxAlcoholPage {
-  @ViewChild('LineCanvas') LineCanvas;
+  @ViewChild('LineCanvasTax') LineCanvasTax;
+  @ViewChild('LineCanvasVol') LineCanvasVol;
+  //Table Pram
   responseData: any;
-  lineChart: any;
-  LineData: any;
-  TAX = [];
-  TAX_LY = [];
-  EST = [];
-  ComEst = [];
-  lebel = [];
+
+  ProductType: any;
+
+  //Line Tax
+  TaxlineChart: any;
+  TaxLineData: any;
+  TaxCode: any;
+  tax_TAX = [];
+  tax_TAX_LY = [];
+  tax_lebel = [];
+  
+
+
+  //Line Vol
+  VollineChart: any;
+  VolLineData: any;
+  VolCode: any;
+  vol_TAX = [];
+  vol_TAX_LY = [];
+  vol_lebel = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,44 +42,52 @@ export class CompareTaxAlcoholPage {
 
   ionViewDidLoad() {
     this.getTableData();
-    this.getLineData();
+    this.getProductType();
   }
   getTableData() {
-      let grp_name = 'ภาษีสุรา';
-      this.webapi.getData('CompareTax?grp_name=' + grp_name).then((data) => {
+      this.webapi.getData('CompareTaxSura').then((data) => {
       this.responseData = data;
+      this.ProductType = data;
       console.log(this.responseData);
+      console.log('ProductType'+this.ProductType);
+      
       this.getTableTAX();
       this.getTableTAX_LY();
-      this.getTableEST();
-      this.getTableCOMPARE();
     });
   }
+
+  getProductType() {
+    this.webapi.getData('CompareTaxSuraLineGraph').then((data) => {
+    this.ProductType = data;
+    console.log(this.ProductType);
+    
+    
+  });
+}
+
+  
 
   getTableTAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX/1000000;
+      val = this.responseData[i].TOTAL_TAX_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX = val;
-     // console.log(this.responseData);
+      this.responseData[i].TOTAL_TAX_AMT = val;
     }
   }
-
-
 
   getTableTAX_LY() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX_LY/1000000;
+      val = this.responseData[i].LAST_TOTAL_TAX_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX_LY = val;
-      //console.log(this.responseData);
+      this.responseData[i].LAST_TOTAL_TAX_AMT = val;
     }
   }
 
+  /*
   getTableEST() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -85,45 +108,42 @@ export class CompareTaxAlcoholPage {
       this.responseData[i].COMPARE_ESTIMATE_DIFF = val;
     }
   }
+  */
 
 
-  getLineData() {
-    let grp_id = "7002";
-    this.webapi.getData('CompareTaxLineGraph?id=' + grp_id).then((data) => {
-      this.LineData = data;
-      console.log(this.LineData);
-      this.getTAX();
-      this.getTAX_LY();
-      this.getEST();
-      this.getComEst();
-      this.getLebel();
-      this.createChart();
+ getLineTaxData(TaxCode) {
+    this.webapi.getData('CompareTaxSuraLineGraph?code='+TaxCode).then((data) => {
+      this.TaxLineData = data;
+      console.log(this.TaxLineData);
+      this.TaxgetTAX();
+      this.TaxgetTAX_LY();
+      this.TaxgetLebel();
+      this.TaxCreateChart();
     });
 
 
   }
 
+
   //----------------------- Start Manage Data from API-------------------------//
 
-  getTAX() {
-    this.TAX = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.TAX.push(this.LineData[i].TAX);
+  TaxgetTAX() {
+    this.tax_TAX = [];
+    for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
     }
-    this.TAX = JSON.parse(JSON.stringify(this.TAX));
-    console.log("tax" + this.TAX);
+    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
   }
 
-  getTAX_LY() {
-    this.TAX_LY = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.TAX_LY.push(this.LineData[i].TAX_LY);
+  TaxgetTAX_LY() {
+    this.tax_TAX_LY = [];
+    for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
     }
-    this.TAX_LY = JSON.parse(JSON.stringify(this.TAX_LY));
-    console.log("lastyear" + this.TAX_LY);
+    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
 
   }
-
+/*
   getEST() {
     this.EST = [];
     for (var i = 0; i < this.LineData.length; i++) {
@@ -140,25 +160,25 @@ export class CompareTaxAlcoholPage {
     }
     this.ComEst = JSON.parse(JSON.stringify(this.ComEst));
     console.log("com" + this.ComEst);
-  }
+  }*/
 
-  getLebel() {
-    this.lebel = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.lebel.push(this.LineData[i].MONTH_SHORT_DESC);
+  TaxgetLebel() {
+    this.tax_lebel = [];
+    for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
-    this.lebel = JSON.parse(JSON.stringify(this.lebel));
-    console.log(this.lebel);
+    this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
+    console.log(this.tax_lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
 
 
 
-  createChart() {
-    this.lineChart = new Chart(this.LineCanvas.nativeElement, {
+  TaxCreateChart() {
+    this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.lebel,
+        labels: this.tax_lebel,
         datasets: [
           {
             label: "ปีนี้",
@@ -180,7 +200,7 @@ export class CompareTaxAlcoholPage {
             pointHoverBorderWidth: 3,
             pointRadius: 2,
             pointHitRadius: 10,
-            data: this.TAX,
+            data: this.tax_TAX,
             spanGaps: false,
           },
           {
@@ -203,9 +223,9 @@ export class CompareTaxAlcoholPage {
             pointHoverBorderWidth: 3,
             pointRadius: 2,
             pointHitRadius: 10,
-            data: this.TAX_LY,
+            data: this.tax_TAX_LY,
             spanGaps: false,
-          },
+          }/*,
           {
             label: "ประมาณการ",
             fill: false,
@@ -251,6 +271,153 @@ export class CompareTaxAlcoholPage {
             pointHitRadius: 10,
             data: this.ComEst,
             spanGaps: false,
+          }*/
+        ]
+      },
+      options: {
+        legend: {
+          display: true,
+          labels: {
+              boxWidth: 10,
+          }
+      },
+      tooltips: {
+        mode: 'index',
+        label: 'myLabel',
+        callbacks: {
+          label: function (tooltipItem, data) {
+            if (tooltipItem.yLabel > 999999) {
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+            } else {
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+            }
+
+            return value;
+          }
+        } // end callbacks:
+      }, //end tooltip
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              userCallback: function (value, index, values) {
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return value;
+              }
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'ล้านบาท'
+            }
+          }
+          ],
+          xAxes: [{
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 0
+            }
+          }]
+        }
+      }
+
+    });
+  }
+
+  getLineVolData(VolCode) {
+    this.webapi.getData('CompareTaxSuraLineGraph?code='+VolCode).then((data) => {
+      this.VolLineData = data;
+      console.log(this.TaxLineData);
+      this.VolgetTAX();
+      this.VolgetTAX_LY();
+      this.VolgetLebel();
+      this.VolCreateChart();
+    });
+
+
+  }
+
+  //----------------------- Start Manage Data from API-------------------------//
+
+  VolgetTAX() {
+    this.vol_TAX = [];
+    for (var i = 0; i < this.VolLineData.length; i++) {
+      this.vol_TAX.push(this.VolLineData[i].TOTAL_VOLUME_TAX_AMT);
+    }
+    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
+  }
+
+  VolgetTAX_LY() {
+    this.vol_TAX_LY = [];
+    for (var i = 0; i < this.VolLineData.length; i++) {
+      this.vol_TAX_LY.push(this.VolLineData[i].LAST_TOTAL_VOLUME_TAX_AMT);
+    }
+    this.vol_TAX_LY = JSON.parse(JSON.stringify(this.vol_TAX_LY));
+
+  }
+
+  VolgetLebel() {
+    this.vol_lebel = [];
+    for (var i = 0; i < this.VolLineData.length; i++) {
+      this.vol_lebel.push(this.VolLineData[i].MONTH);
+    }
+    this.vol_lebel = JSON.parse(JSON.stringify(this.vol_lebel));
+    console.log(this.vol_lebel);
+  }
+  //----------------------- End Manage Data from API-------------------------//
+
+  VolCreateChart() {
+    this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
+      type: 'line',
+      data: {
+        labels: this.vol_lebel,
+        datasets: [
+          {
+            label: "ปีนี้",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "#00818A",
+            borderColor: "#00818A",
+            borderWidth: 2,
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "#00818A",
+            pointBackgroundColor: "#00818A",
+            pointBorderWidth: 3,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#00818A",
+            pointHoverBorderColor: "#00818A",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
+            pointHitRadius: 10,
+            data: this.vol_TAX,
+            spanGaps: false,
+          },
+          {
+            label: "ปีก่อน",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "#b8d00a",
+            borderColor: "#b8d00a",
+            borderWidth: 2,
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "#b8d00a",
+            pointBackgroundColor: "#b8d00a",
+            pointBorderWidth: 3,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#b8d00a",
+            pointHoverBorderColor: "#b8d00a",
+            pointHoverBorderWidth: 3,
+            pointRadius: 2,
+            pointHitRadius: 10,
+            data: this.vol_TAX_LY,
+            spanGaps: false,
           }
         ]
       },
@@ -267,9 +434,9 @@ export class CompareTaxAlcoholPage {
         callbacks: {
           label: function (tooltipItem, data) {
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
             }
 
             return value;
