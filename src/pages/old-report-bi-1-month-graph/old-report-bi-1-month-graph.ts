@@ -53,6 +53,7 @@ export class OldReportBi_1MonthGraphPage {
      }
     this.label_group_name = this.group_name;
   }
+ 
 
   tax_load(){
     for (var i = 0; i < this.respondData.length; i++) {

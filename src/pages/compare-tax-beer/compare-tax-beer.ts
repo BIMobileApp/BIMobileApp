@@ -51,8 +51,6 @@ export class CompareTaxBeerPage {
     }
   }
 
-
-
   getTableTAX_LY() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {

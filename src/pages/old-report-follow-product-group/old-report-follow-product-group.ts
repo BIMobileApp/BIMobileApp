@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
-import { HomePage } from '../home/home';
 import { OldReportBi_1MonthPage } from '../old-report-bi-1-month/old-report-bi-1-month';
 import { OldReportBi_1MonthGraphPage } from '../old-report-bi-1-month-graph/old-report-bi-1-month-graph';
 import { OldReportBi_1MonthGraphRatioPage } from '../old-report-bi-1-month-graph-ratio/old-report-bi-1-month-graph-ratio';

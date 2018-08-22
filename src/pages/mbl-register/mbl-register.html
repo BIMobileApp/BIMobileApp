@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color="navber">
+    <ion-title>ตาม Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+      <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+          <h3 class="center">รายงานผู้ประกอบการ</h3>
+      </ion-item>
+  
+      <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
+  <ion-card>           
+      <ion-card-content no-padding>       
+              <div class="table-responsive">
+                      <table class="table" style="width: 100%;">
+                        <thead>
+                          <tr style="background-color: #F78B26; ">
+                                    <th><h3 class="center">ประเภทสินค้า</h3></th>
+                                    <th><h3 class="center">ผู้ประกอบการนำเข้า</h3></th>
+                                    <th><h3 class="center">ผู้ประกอบการในปะเทศ</h3></th>
+                                    <th><h3 class="center">รวม</h3></th>
+                            </tr>
+                              </thead>
+                              <tbody>
+                                      <tr *ngFor="let data of responseData">
+                                              <td><h3 class="left">{{data.GROUP_DESC}}</h3></td>
+                                              <td><h3 class="right">{{data.IMP_REGISTER | number : fractionSize}}</h3></td>
+                                              <td><h3 class="right">{{data.IN_REGISTER | number : fractionSize}}</h3></td>
+                                              <td><h3 class="right">{{data.TOTAL_REGISTER | number : fractionSize}}</h3></td>
+                                      </tr>
+                              </tbody>
+                      </table>
+                  </div>                     
+          </ion-card-content>
+
+    </ion-card>
+
+    <ion-scroll scrollX="true">
+          <ion-card >
+          
+                  <ion-card-content no-padding>       
+                       
+                      <ion-grid >    
+                          <ion-row nowrap>
+                            <ion-col  ><img src="../../assets/imgs/mobileelscover.png"/></ion-col>
+                          </ion-row>
+                          
+                      </ion-grid>
+                      
+                  </ion-card-content>
+           
+                </ion-card>
+      </ion-scroll>
+    
+   
+     
+ 
+
+</ion-content>

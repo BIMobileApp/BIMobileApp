@@ -33,9 +33,6 @@ import { TaxEdRealtimePage } from '../pages/tax-ed-realtime/tax-ed-realtime';
 import { TaxgroupMonthlyFreezonePage } from '../pages/taxgroup-monthly-freezone/taxgroup-monthly-freezone';
 import { TaxAllCountryPage } from '../pages/tax-all-country/tax-all-country';
 import { TaxMonthlyFreezonePage } from '../pages/tax-monthly-freezone/tax-monthly-freezone';
-
-import { HttpClientModule } from '@angular/common/http';
-import { RestProvider } from '../providers/rest/rest';
 import { FollowTaxMthPage } from '../pages/follow-tax-mth/follow-tax-mth';
 import { Test1Page } from '../pages/test1/test1';
 import { Test2Page } from '../pages/test2/test2';
@@ -95,6 +92,10 @@ import { OldReportMobile1_6YearPage } from '../pages/old-report-mobile1-6-year/o
 import { OldReportFollowProductGroupPage } from '../pages/old-report-follow-product-group/old-report-follow-product-group';
 import { OldReportRegionGroupPage } from '../pages/old-report-region-group/old-report-region-group';
 import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-group/old-report-section1-10-group';
+import { MblRegisterPage } from '../pages/mbl-register/mbl-register';
+
+import { HttpClientModule } from '@angular/common/http';
+import { RestProvider } from '../providers/rest/rest';
 
 @NgModule({
   declarations: [
@@ -187,7 +188,8 @@ import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-g
     OldReportDomesticGroupPage,
     OldReportFollowProductGroupPage,
     OldReportRegionGroupPage,
-    OldReportSection1_10GroupPage
+    OldReportSection1_10GroupPage,
+    MblRegisterPage
   ],
   imports: [
     BrowserModule,
@@ -294,7 +296,8 @@ import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-g
     OldReportDomesticGroupPage,
     OldReportFollowProductGroupPage,
     OldReportRegionGroupPage,
-    OldReportSection1_10GroupPage
+    OldReportSection1_10GroupPage,
+    MblRegisterPage
   ],
   providers: [
     StatusBar,

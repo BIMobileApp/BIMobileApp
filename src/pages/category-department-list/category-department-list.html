@@ -1,14 +1,55 @@
 <ion-header>
     <ion-navbar color="navber">
-      <ion-title>แยกตามหมวดหมู่</ion-title>
+      <ion-title>ตาม Profile</ion-title>
     </ion-navbar>
   </ion-header>
    
   <ion-content>
 
-      <ion-card-content no-padding> 
+      <ion-card-content no-padding>
+                <ion-item style="background-color:#E6E6FA;">
+                  <ion-label class="shelf-title">ผู้ประกอบการ</ion-label>
+                </ion-item>
+            
+                <ion-grid>
+            
+                    <ion-row>
+                        <ion-col (click)="TaxTopRegTable(0501)" text-center >
+                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileCar.png"/>
+                              <p class="content-center">รถยนต์</p> 
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                        <ion-col (click)="TaxTopRegTable(70021)" text-center>
+                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileAlcohol.png">
+                              <p class="content-center">สุรา</p> 
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                        <ion-col (click)="TaxTopRegTable(7001)" text-center>
+                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileBeer.png">
+                              <p class="content-center">เบียร์</p> 
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col (click)="TaxTopRegTable(0201)" text-center >
+                                <img no-padding class="iconStyle" src="../../assets/imgs/ProfileDrink.png"/>
+                                <p class="content-center">เครื่องดื่ม</p> 
+                          </ion-col>
+                          <ion-col col-1></ion-col>
+                          <ion-col (click)="MBLRegisterLink()" text-center>
+                                <img no-padding class="iconStyle" src="../../assets/imgs/ProfileLic.png">
+                                <p class="content-center">จดทะเบียน</p> 
+                          </ion-col>
+                          <ion-col col-1></ion-col>
+                          <ion-col><img class="iconStyle"></ion-col>
+                          
+                        </ion-row>
+                    </ion-grid>
+         </ion-card-content>
+
+
+         <!--/////////////////////////////////////////////ของเก่าาาาาา///////////////////////////////////////-->
       
-          <ion-card-content no-padding>
+          <!--<ion-card-content no-padding>
               <ion-item  style="background-color:#E6E6FA;">
                 <ion-label  center>รายเดือน</ion-label>
               </ion-item>
@@ -80,9 +121,7 @@
                     <ion-col col-3>รายงานที่ 23 ภาษีสรรพสามิตนำเข้าแยกรายวัน</ion-col>
                   </ion-row>
                </ion-grid>
-          </ion-card-content>
-
-      </ion-card-content>
+          </ion-card-content>-->
 
     </ion-content>
   

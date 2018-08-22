@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { MenuGroupOldReportPage } from '../pages/menu-group-old-report/menu-group-old-report';
+import { MenuGroupNewReportPage } from '../pages/menu-group-new-report/menu-group-new-report';
 @Component({
   templateUrl: 'app.html'
 })
