@@ -41,7 +41,7 @@ export class CetegoryTaxPage {
 
   ionViewDidLoad() {
     this.UserAthu();
-    this.TableGetData();
+    
 
   }
 
@@ -49,22 +49,25 @@ export class CetegoryTaxPage {
     this.offcode = localStorage.offcode;
     this.offcode = this.offcode.substring(0, 2);
     console.log(this.offcode);
+    this.GaugeGetData();
+    this.TableGetData();
+
   }
 
   GaugeGetData(){
-    this.webapi.getData('TaxCurYear?offcode ='+ this.offcode).then((data)=>{
+    this.webapi.getData('GaugeOverviewRegion?offcode ='+ this.offcode).then((data)=>{
       this.responseData = data;
       console.log(this.responseData);
     });
   }
 
   TableGetData(){
-    this.webapi.getData('TaxCurYear').then((data)=>{
+    this.webapi.getData('TaxCurYear?offcode ='+ this.offcode).then((data)=>{
       this.responseData = data;
 
       console.log(this.responseData);
       this.getTAX();
-      this. getTAX_LY();
+      this.getTAX_LY();
       this.getEST();
     });
   }
