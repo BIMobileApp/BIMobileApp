@@ -1,64 +1,62 @@
 <ion-header>
-    <ion-navbar color="navber">
-      <ion-title>รายงานเก่า</ion-title>
-    </ion-navbar>
-  </ion-header>
-   
-  <ion-content>
-      <ion-card-content no-padding>
-          <ion-item  style="background-color:#E6E6FA;">
-            <ion-label  center>ผลการจัดเก็บภาษีทั่วประเทศ</ion-label>
-          </ion-item>
-          <ion-grid>
-              <ion-row>
-                <ion-col col-3 (click)="oldReportFollowProductGroup()"><img src="../assets/imgs/money.png"></ion-col>
-                <ion-col col-3 (click)="oldReportDomesticGroup()"><img src="../assets/imgs/money.png"></ion-col>
-                <ion-col col-3 (click)="oldReportSection1_10Group()"><img src="../assets/imgs/money.png"></ion-col>
-                <ion-col col-3 (click)="oldReportRegionGroup()"><img src="../assets/imgs/money.png"></ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-3>ตามประเภทสินค้า</ion-col>
-                <ion-col col-3>ในประเทศและนำเข้า</ion-col>
-                <ion-col col-3>ภาค 1-10</ion-col>
-                <ion-col col-3>พื้นที่</ion-col>
-              </ion-row>
-           </ion-grid>
-   </ion-card-content>
+  <ion-navbar color="navber">
+    <ion-title>รายงานเก่า</ion-title>
+  </ion-navbar>
+</ion-header>
 
-   <ion-card-content no-padding>
-      <ion-item  style="background-color:#E6E6FA;">
-        <ion-label  center>รายงานสถิติแยกตามหน่วยงาน</ion-label>
-      </ion-item>
-      <ion-grid>
-          <ion-row>
-            <ion-col col-3><img src="../assets/imgs/case.png"></ion-col>
-            <ion-col col-3><img src="../assets/imgs/case.png"></ion-col>
-            <ion-col col-3><img src="../assets/imgs/case.png"></ion-col>
-            <ion-col col-3><img src="../assets/imgs/case.png"></ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-3>สำนักแผนภาษี</ion-col>
-            <ion-col col-3>สำนักมาตรฐาน 1</ion-col>
-            <ion-col col-3>สำนักมาตรฐาน 2</ion-col>
-            <ion-col col-3>สตป.</ion-col>
-          </ion-row>
-       </ion-grid>
-</ion-card-content>
+<ion-content>
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label class="shelf-title">ผลการจัดเก็บภาษีทั่วประเทศ</ion-label>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
 
-<ion-card-content no-padding>
-    <ion-item  style="background-color:#E6E6FA;">
-      <ion-label  center>สถิติคดีและค่าปรับ</ion-label>
+        <ion-col (click)="oldReportFollowProductGroup()" text-center>
+          <img no-padding class="iconStyle" src="../../assets/imgs/ByCategory.png" />
+          <p class="content-center">ตามประเภทสินค้า</p>
+        </ion-col>
+        <ion-col (click)="oldReportDomesticGroup()" text-center>
+          <img no-padding class="iconStyle" src="../../assets/imgs/inOutTAX.png" />
+          <p class="content-center">ในประเทศและนำเข้า</p>
+        </ion-col>
+        <ion-col (click)="oldReportSection1_10Group()" text-center>
+          <img no-padding class="iconStyle" src="../../assets/imgs/section1_10.png" />
+          <p class="content-center">ภาค 1-10</p>
+        </ion-col>
+        <ion-col (click)="oldReportRegionGroup()" text-center>
+          <img no-padding class="iconStyle" src="../../assets/imgs/AreaTAX.png" />
+          <p class="content-center">พื้นที่</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card-content>
+
+  <ion-card-content no-padding>
+    <ion-item style="background-color:#E6E6FA;">
+      <ion-label class="shelf-title">รายงานสถิติแยกตามหน่วยงาน</ion-label>
     </ion-item>
     <ion-grid>
         <ion-row>
-          <ion-col col-3><img src="../assets/imgs/if_11_61475.png"></ion-col>
+          <ion-col (click)="oldReportRegionGroup()" text-center>
+            <img no-padding class="iconStyle" src="../../assets/imgs/AreaTAX.png" />
+            <p class="content-center">สำนักแผนภาษี</p>
+          </ion-col>
+          <ion-col (click)="oldReportRegionGroup()" text-center>
+            <img no-padding class="iconStyle" src="../../assets/imgs/ByCategory.png" />
+            <p class="content-center">สำนักมาตรฐาน 1</p>
+          </ion-col>
+          <ion-col (click)="oldReportRegionGroup()" text-center>
+            <img no-padding class="iconStyle" src="../../assets/imgs/ByCategory.png" />
+            <p class="content-center">สำนักมาตรฐาน 2</p>
+          </ion-col>
+          <ion-col (click)="oldReportRegionGroup()" text-center>
+            <img no-padding class="iconStyle" src="../../assets/imgs/Fine.png" />
+            <p class="content-center">สตป.</p>
+          </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col col-3>คดีและค่าปรับ</ion-col>
-        </ion-row>
-     </ion-grid>
-</ion-card-content>
+    </ion-grid>
+  </ion-card-content>
 
-
-    </ion-content>
-  
+</ion-content>

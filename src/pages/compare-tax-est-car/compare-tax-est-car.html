@@ -3,27 +3,51 @@
         <ion-title>แยกตามสำนัก</ion-title>
       </ion-navbar>
 </ion-header>
-
-
 <ion-content>
-    <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
-        <h2>กราฟเส้นแสดงภาษีและประมาณการตามสินค้า (รถยนต์)</h2>
-    </ion-item>
+        <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+                <h2 class="header-style">รายงานการเปรียบเทียบปีก่อน (รถยนต์)</h2>
+             </ion-item>
+             <h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3>
+          <ion-card>
+             <ion-card-content no-padding> 
+                      <div class="table-responsive">     
+                             <table class="table" style="width: 100%;">
+                                     <thead>
+                                             <tr style="background-color: #F78B26; ">
+                                                     <th width="30%"><h3 class="th-center">กลุ่มสินค้า</h3></th>
+                                                     <th><h3 class="th-center">ปีนี้</h3></th>
+                                                     <th><h3 class="th-center">ปีก่อน</h3></th>
+                                             </tr>
+                                     </thead>
+                                     <tbody>
+                                             <tr *ngFor="let data of responseData">
+                                                     <td width="30%"><h3 class="td-left">{{data.I_TYPE_DESC}}</h3></td>
+                                                     <td><h3 class="td-right">{{data.TOTAL_TAX_AMT}}</h3></td>
+                                                     <td><h3 class="td-right">{{data.LAST_TOTAL_TAX_AMT}}</h3></td>
+                                             </tr>
+                                     </tbody>
+                             </table>
+                         </div>
+             </ion-card-content>
+           </ion-card>
 
-    <ion-item class="size">
-        <ion-label>สินค้า : </ion-label>
-        <ion-select disabled="true">
-            <ion-option [selected]="true" value="">รถยนต์</ion-option>
-        </ion-select>
-    </ion-item>
-
-
-        <ion-card>
-           
-            <ion-card-content>
-                    <canvas #LineCanvas></canvas>
-            </ion-card-content>
-
-        </ion-card>
+           <ion-card>
+              
+                <ion-card-content>
+                        <h2 class="header-style">กราฟเส้นการเปรียบเทียบภาษีปีก่อน (รถยนต์)</h2>
+                        <ion-item class="size">
+                                
+                                <ion-label>กลุ่มสินค้า : </ion-label>
+                                <ion-select [(ngModel)]="TaxCode" (ionChange)="getLineTaxData(TaxCode)">
+                                        <ion-option *ngFor="let data of ProductType" value="{{data.I_TYPE_CODE}}">
+                                        {{data.I_TYPE_DESC}}
+                                        </ion-option>
+                                </ion-select>
+                        </ion-item>
+                        <canvas #LineCanvasTax></canvas>
+                  
+                    </ion-card-content>
+             </ion-card>
+        
 
 </ion-content>
