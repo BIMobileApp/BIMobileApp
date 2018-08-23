@@ -9,24 +9,6 @@ import { Chart } from 'chart.js';
   templateUrl: 'compare-tax-est-car.html',
 })
 export class CompareTaxEstCarPage {
-<<<<<<< HEAD
-  @ViewChild('LineCanvas') LineCanvas;
-  responseData: any;
-  lineChart: any;
-  GaugeChart: any;
-
-  LineData: any;
-  TAX = [];
-  TAX_LY = [];
-  EST = [];
-  ComEst = [];
-  lebel = [];
-  prod: any;
-  product: any;
-  id:any;
-  grp_id:any;
-  offcode: any;
-=======
   @ViewChild('LineCanvasTax') LineCanvasTax;
    //Table Pram
    responseData: any;
@@ -41,33 +23,17 @@ export class CompareTaxEstCarPage {
   tax_TAX_LY = [];
   tax_lebel = [];
   
->>>>>>> 53486c0e909302627874662226a8ef460dc07400
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.grp_id = this.navParams.get('grp_name');
-      this.offcode = localStorage.offcode;
-    }
+  }
 
   ionViewDidLoad() {
     this.getTableData();
     this.getProductType();
     
   }
-<<<<<<< HEAD
-  getLineData() {
-
-    this.webapi.getData('CompareTaxLineGraph?group_name=' +this. grp_id+'&offcode='+this.offcode).then((data) => {
-      this.LineData = data;
-      console.log(this.LineData);
-      this.getTAX();
-      this.getEST();
-      this.getLebel();
-      this.createChart();
-    });
-  }
-=======
 
   getTableData() {
     this.webapi.getData('CompareTaxCar').then((data) => {
@@ -84,7 +50,6 @@ getProductType() {
   console.log(this.ProductType);
 });
 }
->>>>>>> 53486c0e909302627874662226a8ef460dc07400
 
 getTableTAX() {
   let val;

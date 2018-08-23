@@ -97,6 +97,10 @@ import { TaxProductByMthPage } from '../pages/tax-product-by-mth/tax-product-by-
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
+import { IncDataMthPage } from '../pages/inc-data-mth/inc-data-mth';
+import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
+import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
 
 
 @NgModule({
@@ -192,7 +196,11 @@ import { RestProvider } from '../providers/rest/rest';
     OldReportRegionGroupPage,
     OldReportSection1_10GroupPage,
     MblRegisterPage,
-    TaxProductByMthPage
+    TaxProductByMthPage,
+    IncDataAreaPage,
+    IncDataMthPage,
+    LawDataAreaPage,
+    LawDataMthPage
   ],
   imports: [
     BrowserModule,
@@ -301,7 +309,11 @@ import { RestProvider } from '../providers/rest/rest';
     OldReportRegionGroupPage,
     OldReportSection1_10GroupPage,
     MblRegisterPage,
-    TaxProductByMthPage
+    TaxProductByMthPage,
+    IncDataAreaPage,
+    IncDataMthPage,
+    LawDataAreaPage,
+    LawDataMthPage
   ],
   providers: [
     StatusBar,
