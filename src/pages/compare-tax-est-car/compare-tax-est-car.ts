@@ -9,6 +9,27 @@ import { Chart } from 'chart.js';
   templateUrl: 'compare-tax-est-car.html',
 })
 export class CompareTaxEstCarPage {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  @ViewChild('LineCanvas') LineCanvas;
+  responseData: any;
+  lineChart: any;
+  GaugeChart: any;
+
+  LineData: any;
+  TAX = [];
+  TAX_LY = [];
+  EST = [];
+  ComEst = [];
+  lebel = [];
+  prod: any;
+  product: any;
+  id:any;
+  grp_id:any;
+  offcode: any;
+=======
+>>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
   @ViewChild('LineCanvasTax') LineCanvasTax;
    //Table Pram
    responseData: any;
@@ -23,17 +44,39 @@ export class CompareTaxEstCarPage {
   tax_TAX_LY = [];
   tax_lebel = [];
   
+<<<<<<< HEAD
+=======
+>>>>>>> 53486c0e909302627874662226a8ef460dc07400
+>>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-  }
+      this.grp_id = this.navParams.get('grp_name');
+      this.offcode = localStorage.offcode;
+    }
 
   ionViewDidLoad() {
     this.getTableData();
     this.getProductType();
     
   }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  getLineData() {
+
+    this.webapi.getData('CompareTaxLineGraph?group_name=' +this. grp_id+'&offcode='+this.offcode).then((data) => {
+      this.LineData = data;
+      console.log(this.LineData);
+      this.getTAX();
+      this.getEST();
+      this.getLebel();
+      this.createChart();
+    });
+  }
+=======
+>>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
 
   getTableData() {
     this.webapi.getData('CompareTaxCar').then((data) => {
@@ -43,6 +86,7 @@ export class CompareTaxEstCarPage {
     this.getTableTAX_LY();
   });
 }
+<<<<<<< HEAD
 
 getProductType() {
   this.webapi.getData('CompareTaxCarMonth').then((data) => {
@@ -51,6 +95,17 @@ getProductType() {
 });
 }
 
+=======
+
+getProductType() {
+  this.webapi.getData('CompareTaxCarMonth').then((data) => {
+  this.ProductType = data;
+  console.log(this.ProductType);
+});
+}
+>>>>>>> 53486c0e909302627874662226a8ef460dc07400
+
+>>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
 getTableTAX() {
   let val;
   for (var i = 0; i < this.responseData.length; i++) {
@@ -192,10 +247,16 @@ TaxCreateChart() {
           ticks: {
             beginAtZero: true,
             userCallback: function (value, index, values) {
+<<<<<<< HEAD
                 value = (value / 1000000);
                 value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 return value;
              
+=======
+              value = (value / 1000000);
+              value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              return value;
+>>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
             }
           },
           scaleLabel: {

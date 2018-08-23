@@ -300,6 +300,7 @@ export class CompareTaxAlcoholPage {
                   value = (value / 1000000);
                   value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                   return value;
+
               }
             },
             scaleLabel: {

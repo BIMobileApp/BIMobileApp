@@ -24,6 +24,10 @@ import { NewReportGaugeTaxBeerPage } from '../new-report-gauge-tax-beer/new-repo
 import { NewReportGaugeQuantityBeerPage } from '../new-report-gauge-quantity-beer/new-report-gauge-quantity-beer';
 import { NewReportGaugeTaxDrinkPage } from '../new-report-gauge-tax-drink/new-report-gauge-tax-drink';
 import { NewReportGaugeQuantityDrinkPage } from '../new-report-gauge-quantity-drink/new-report-gauge-quantity-drink';
+import { TaxEdRealtimePage } from '../tax-ed-realtime/tax-ed-realtime';
+import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtime';
+import { TaxYearByProductPage } from '../tax-year-by-product/tax-year-by-product';
+import { TaxProductByMthPage } from '../tax-product-by-mth/tax-product-by-mth';
 
 @IonicPage()
 @Component({
@@ -81,7 +85,7 @@ export class MenuGroupNewReportPage {
   reportGaugeQuanCar(){
     this.app.getRootNav().push(NewReportGaugeQuantityCarPage);  
   }
-  reportGaugeTaxAol(){
+  reportGaugeTaxAol(grp_name){
     this.app.getRootNav().push(NewReportGaugeTaxAlcoholPage);  
   }
   reportGaugeQuanAol(){
@@ -98,6 +102,26 @@ export class MenuGroupNewReportPage {
   }
   reportGaugeQuanDrink(){
     this.app.getRootNav().push(NewReportGaugeQuantityDrinkPage);
+  }
+
+  FollowTaxRealtime(){
+    this.app.getRootNav().push(FollowTaxRealtimePage);
+  }
+
+  TaxYearByProduct(){
+    this.app.getRootNav().push(TaxYearByProductPage);
+  }
+
+  TaxMthByProduct(){
+    this.app.getRootNav().push(TaxProductByMthPage);
+  }
+
+  IncomeRealTimeTable(){
+    this.app.getRootNav().push(IncomerealtimePage);
+  }
+
+  TaxEdRealtime(){
+    this.app.getRootNav().push(TaxEdRealtimePage);
   }
 
 }

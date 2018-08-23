@@ -12,80 +12,74 @@ export class TaxEdRealtimePage {
   responseData:any;
   month:any;
   textmsg: any;
+  offcode:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider,
     public alertCtrl: AlertController) {
+      this.offcode = localStorage.offcode;
   }
 
   ionViewDidLoad() {
-    this.getdataAll();
+      this.geDataAll();
   }
 
-  getdataAll(){
-    var d = new Date(); 
-    var nt = d.getFullYear()+543;
-
-    this.webapi.getData('TaxRealtimeFreezoneAll?year='+nt).then((data)=>{
-      this.responseData = data;
-      this.getTableCD_INCOME();
-      this.getTableINCOME();
-      this.getTableIMPORT();
-    });
-  }
-  
-  getDashboardItemsByDate(month){
-    var d = new Date(); 
-    var nt = d.getFullYear()+543;
-
-    if(month == ""){
-      this.getdataAll();
-    }
-    else{
-        this.webapi.getData('TaxRealtimeFreezone?month='+month+'&year='+nt).then((data)=>{
-          this.responseData = data;
-          this.getTableCD_INCOME();
-          this.getTableINCOME();
-          this.getTableIMPORT();
-        });
-   }
-  }
-
-  getTableCD_INCOME() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].CD_INCOME/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].CD_INCOME = val;
-    }
-  }
-  getTableINCOME() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].INCOME/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].INCOME = val;
+  geDataAll(){
    
-    }
-  }
-  getTableIMPORT() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].IMPORT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].IMPORT = val;
+     this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode).then((data)=>{
+       this.responseData = data;
+       this.getTableFZ_EXCISE();
+       this.getTableIN_EXCISE();
+       this.getTableEXCISE();
+       this.getDateFormat();
+     });
+   }  
 
-    }
-  }
+   getTableFZ_EXCISE() {
+     let val;
+     for (var i = 0; i < this.responseData.length; i++) {
+       val = this.responseData[i].FZ_EXCISE_AMT/1000000;
+       val = val.toFixed(2);
+       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       this.responseData[i].FZ_EXCISE_AMT = val;
+     }
+   }
 
-  showfullmsg(textmsg){
-    let alert = this.alertCtrl.create({
-      title: textmsg
-    });
-    alert.present();
-  }
+   getTableIN_EXCISE() {
+     let val;
+     for (var i = 0; i < this.responseData.length; i++) {
+       val = this.responseData[i].IN_EXCISE_AMT/1000000;
+       val = val.toFixed(2);
+       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       this.responseData[i].IN_EXCISE_AMT = val;
+     }
+   }
+   
+   getTableEXCISE() {
+     let val;
+     for (var i = 0; i < this.responseData.length; i++) {
+       val = this.responseData[i].EXCISE_AMT/1000000;
+       val = val.toFixed(2);
+       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       this.responseData[i].EXCISE_AMT = val;
+     }
+   }
+
+   getDateFormat(){
+     let val;
+     let date;
+     let month;
+     let year;
+     for (var i = 0; i < this.responseData.length; i++) {
+       val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+       year = val.substring(0,4);
+       month = val.substring(6,4);
+       date = val.substring(6,8);
+       val = date+'/'+month+'/'+year;
+ 
+       this.responseData[i].DIM_DATA_DATE_ID = val;
+     }
+   }
 
 }

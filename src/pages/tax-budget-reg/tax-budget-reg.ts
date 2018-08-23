@@ -11,14 +11,19 @@ export class TaxBudgetRegPage {
 
   responseData: any;
   summaryDate:any;
+  offcode: any;
   year:any;
+  grp_id:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
+     this.grp_id = this.navParams.get('group_id');
+     this.offcode = localStorage.offcode;
   }
  
   ionViewDidLoad() {
+    
     var d = new Date(); 
     var n = d.getFullYear();
     var nt = d.getFullYear()+543;
@@ -37,10 +42,13 @@ export class TaxBudgetRegPage {
 
     this.selectDataAll();
   } 
-  selectDataAll(){
-    this.webapi.getData('TaxBudgetReg').then((data)=>{
+
+selectDataAll(){
+
+    this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id).then((data)=>{
       this.responseData = data;
-      this.getTableTAX();
+     
+      if (!this.responseData){}else{ this.getTableTAX();}    
     });
   }
 
@@ -48,9 +56,10 @@ export class TaxBudgetRegPage {
     if(year == ""){
       this.selectDataAll();
     }else{  
-     this.webapi.getData('TaxBudgetReg?year='+year).then((data)=>{
+     this.webapi.getData('TaxBudgetReg?offcode='+this.offcode+'&group_id='+this.grp_id+'&year='+year).then((data)=>{
       this.responseData = data;
-      this.getTableTAX();
+
+      if (!this.responseData){}else{ this.getTableTAX();}
     });
    }
   }

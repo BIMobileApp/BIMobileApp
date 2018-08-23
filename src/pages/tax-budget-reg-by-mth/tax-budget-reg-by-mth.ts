@@ -10,35 +10,36 @@ import { RestProvider } from '../../providers/rest/rest';
 export class TaxBudgetRegByMthPage {
 
   responseData: any;
+  summaryDate: any;
+  offcode: any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider ) {
-
+      this.offcode = localStorage.offcode;
   }
 
   ionViewDidLoad() {
-    this.selectDataAll();
+    //this.selectDate(this.summaryDate);
   }
 
-  summaryDate: any;
-
-  selectDataAll(){  
-    this.webapi.getData('TaxBudgetRegByMth').then((data)=>{
+  /*selectDataAll(){  
+    this.webapi.getData('TaxBudgetRegByMth?offcode='+this.offcode+'&grpup_id='+this.grp_id).then((data)=>{
       this.responseData = data;
       this.getTableTAX();
     });
-  }
+  }*/
 
   selectDate(summaryDate){
   
     if(summaryDate == ""){
-      this.selectDataAll();
-    }else
-      this.webapi.getData('TaxBudgetRegByMth?mth='+summaryDate).then((data)=>{
+     // this.selectDataAll();
+    }else{
+      this.webapi.getData('TaxBudgetRegByMth?offcode='+this.offcode+'&month='+summaryDate).then((data)=>{
         this.responseData = data;
-        this.getTableTAX();
+        //this.getTableTAX();
       });
+    }
    
   }
 

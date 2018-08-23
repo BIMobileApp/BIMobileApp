@@ -1,5 +1,5 @@
-page-tax-year-by-product {
-  table,
+page-mbl-register {
+ table,
   th,
   td {
     border: 0px solid #ffffff !important;
@@ -12,6 +12,7 @@ page-tax-year-by-product {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+
   table>tbody>tr>td>p {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -27,6 +28,8 @@ page-tax-year-by-product {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
     font-size: 3vw !important;
+    text-align: center !important;
+    
   }
   h3.right {
     font-weight: bold;
@@ -38,15 +41,8 @@ page-tax-year-by-product {
     font-weight: bold;
     color: black !important;
     font-size: 3vw !important;
-    text-align: left !important;    
-  }
-  h3.table-title{
-    font-weight: bold;
-    color: rgb(27, 15, 15) !important;
-    font-size: 3vw !important;
-    -ms-transform: rotate(-40deg); /* IE 9 */
-    -webkit-transform: rotate(-40deg); /* Safari 3-8 */
-    transform: rotate(-40deg);
+    text-align: left !important;
+    
   }
   ion-item.size{
     width: 50%;
@@ -57,25 +53,4 @@ page-tax-year-by-product {
     color: black ;
     font-size: 4vw ;
   }
-  p.center  {
-    text-overflow: ellipsis;
-    color: black !important;
-    font-size: 3vw !important;
-  }
-
-  p.right  {
-    text-overflow: ellipsis;
-    color: black !important;
-    font-size: 3vw !important;
-    text-align: right !important;
-  }
-
-  p.left  {
-    text-overflow: ellipsis;
-    color: black !important;
-    font-size: 3vw !important;
-    text-align: left !important;    
-  }
-
 }
-
