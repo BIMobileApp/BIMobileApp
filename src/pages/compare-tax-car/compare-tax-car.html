@@ -1,53 +1,30 @@
+
 <ion-header>
-  <ion-navbar color="navber">
-    <ion-title>แยกตามสำนัก</ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar color="navber">
+      <ion-title>กราฟเปรียบเทียบกับปีก่อน</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content >   
+      
+      <ion-card>
+              
+        <ion-card-content>
+                <h2 class="header-style">กราฟเส้นการเปรียบเทียบภาษีปีก่อน (รถยนต์)</h2>
+                
+                <canvas #LineCanvasTax></canvas>
+          
+            </ion-card-content>
+     </ion-card>
 
-<ion-content>
-  <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
-    <h3 class="center">รายงานการเปรียบเทียบปีก่อน (รถยนต์)</h3>
- </ion-item>
+     <ion-card>
+                <ion-card-content>
+                        <h2 class="header-style">กราฟเส้นการเปรียบเทียบปริมาณปีก่อน (รถยนต์)</h2>
+                        
+                        <canvas #LineCanvasVol></canvas>
+                  
+                    </ion-card-content>
+         </ion-card>
 
- <ion-item class="size">
-    <ion-label>สินค้า : </ion-label>
-    <ion-select disabled="true">
-      <ion-option [selected]="true" value="">รถยนต์</ion-option>
-    </ion-select>
-</ion-item>
-
-  <ion-card>
-    <ion-card-content no-padding>
-      <div class="table-responsive">
-        <table style="width: 100%;">
-          <thead>
-              <tr style="background-color: #F78B26; ">
-              <th><h3 class="center">กลุ่มสินค้า</h3></th>
-              <th><h3 class="center">ปีนี้</h3></th>
-              <th><h3 class="center">ปีก่อน</h3></th>
-              <th><h3 class="center">ประมาณการ</h3></th>
-              <th><h3 class="center">เปรียบเทียบประมาณการ</h3></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let data of responseData">
-              <td><h3 class="left">{{data.TYPE_NAME}}</h3></td>
-              <td><h3 class="right">{{data.TAX}}</h3></td>
-              <td><h3 class="right">{{data.TAX_LY}}</h3></td>
-              <td><h3 class="right">{{data.ESTIMATE}}</h3></td>
-              <td><h3 class="right">{{data.COMPARE_ESTIMATE_DIFF}}</h3></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-       <canvas #LineCanvas></canvas>
- 
-    </ion-card-content>
-  </ion-card>
-
-</ion-content>
+  </ion-content>
+  
