@@ -7,8 +7,9 @@ import { RestProvider } from '../../providers/rest/rest';
   selector: 'page-old-report-bi-law2-1',
   templateUrl: 'old-report-bi-law2-1.html',
 })
-export class OldReportBi_Law21Page {
-  responseData: any;
+export class OldReportBi_Law21Page{
+  responseData: any;  
+  dateDisplay = "";
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -17,6 +18,7 @@ export class OldReportBi_Law21Page {
 
   ionViewDidLoad() {
     this.getTableData();
+    this.displayDate();
   }
 
   getTableData() {
@@ -30,8 +32,25 @@ export class OldReportBi_Law21Page {
     this.getTableCOMPARE_TARGET();
     this.getTableCOMPARE_TAX();
   });
-}
-
+} 
+  displayDate() {
+    var now=new Date();  
+    var buddhayear = now.getFullYear()+543;    
+    var last  =  new Date(now.getFullYear(),now.getMonth(),0); //th 
+    var budgetyear =  0;
+    if (now.getMonth() >= 10) {budgetyear= buddhayear;}
+    else {budgetyear=buddhayear-1;}
+    
+    var thmonth = new Array ("มกราคม","กุมภาพันธ์","มีนาคม",
+    "เมษายน","พฤษภาคม","มิถุนายน", "กรกฎาคม","สิงหาคม","กันยายน",
+    "ตุลาคม","พฤศจิกายน","ธันวาคม");
+    
+    if((now.getDate()-1) < 1){
+      this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-2] ) +" " +  (now.getMonth()-2  < 0 ? buddhayear- 1 : buddhayear ); 
+      }else{
+        this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()-1] ) +" " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
+      }
+    }
   getTableLAW_AMT() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {      

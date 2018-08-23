@@ -8,7 +8,9 @@ import { RestProvider } from '../../providers/rest/rest';
   templateUrl: 'old-report-bi-law3-1.html',
 })
 export class OldReportBi_Law31Page {
-  responseData: any;
+  responseData: any;  
+  dateDisplay = "";
+  test = "";
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -17,6 +19,7 @@ export class OldReportBi_Law31Page {
 
   ionViewDidLoad() {
     this.getTableData();
+    this.displayDate();
   }
 
   getTableData() {
@@ -31,9 +34,29 @@ export class OldReportBi_Law31Page {
     this.getTableCOMPARE_TAX();
   });
 }
+ displayDate() {
+  var now=new Date();  
+  var buddhayear = now.getFullYear()+543;
+  
+  var last  =  new Date(now.getFullYear(),now.getMonth(),0); //th 
+  var budgetyear =  0;
+  if (now.getMonth() >= 10) {budgetyear= buddhayear;}
+  else {budgetyear=buddhayear-1;}
+  
+  var thmonth = new Array ("มกราคม","กุมภาพันธ์","มีนาคม",
+  "เมษายน","พฤษภาคม","มิถุนายน", "กรกฎาคม","สิงหาคม","กันยายน",
+  "ตุลาคม","พฤศจิกายน","ธันวาคม");
+  
+  if((now.getDate()-1) < 1){
+    this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-2] ) +" " +  (now.getMonth()-2  < 0 ? buddhayear- 1 : buddhayear ); 
+     }else{
+      this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()-1] ) +" " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
+     }
+  }
 
   getTableLAW_AMT() {
     let val;
+    let valOfRname;      
     for (var i = 0; i < this.responseData.length; i++) {      
        let val2;
        val2 = this.responseData[i].LAW_TYPE;  
@@ -43,15 +66,12 @@ export class OldReportBi_Law31Page {
           val = this.responseData[i].LAW_AMT/1000000;
         }
 
-        let valOfRname;        
-        if (valOfRname != this.responseData[i].REGION_SHORT_NAME){
-          valOfRname = this.responseData[i].REGION_SHORT_NAME;
+        if (valOfRname == this.responseData[i].REGION_SHORT_NAME){
           
+          this.responseData[i].REGION_SHORT_NAME="";
         }else{
-          valOfRname = "";
+          valOfRname =this.responseData[i].REGION_SHORT_NAME; 
         }
-        this.responseData[i].REGION_SHORT_NAM=valOfRname;
-
 
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
