@@ -11,9 +11,12 @@ export class FollowTaxRealtimePage {
 
   responseData: any;
   month:any;
+  offcode:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
+      this.offcode = localStorage.offcode;
   }
 
   ionViewDidLoad() {
@@ -21,20 +24,21 @@ export class FollowTaxRealtimePage {
   }
 
   geDataAll(){
-    let month = '';
+   /* let month = '';
     var d = new Date(); 
-    var nt = d.getFullYear()+543;
+    var nt = d.getFullYear()+543;*/
 
-    this.webapi.getData('FollowPayTaxRealtimeAll?year='+nt).then((data)=>{
+    this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode).then((data)=>{
       this.responseData = data;
-      this.getTableCD_INCOME();
-      this.getTableINCOME();
-      this.getTableIMPORT();
-      this.getTableSUM_ALL();
+      this.getTableFZ_EXCISE();
+      this.getTableIN_EXCISE();
+      this.getTableEXCISE();
+      this.getTableSTAMP();
+      this.getDateFormat();
     });
-  }
+  }  
 
-  getDashboardItemsByDate(month){
+  /* getDashboardItemsByDate(month){
 
     var d = new Date(); 
     var nt = d.getFullYear()+543;
@@ -49,41 +53,59 @@ export class FollowTaxRealtimePage {
         this.getTableSUM_ALL();
       });
     }
-  }
-  getTableCD_INCOME() {
+  }*/
+
+  getTableFZ_EXCISE() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].CD_INCOME/1000000;
+      val = this.responseData[i].FZ_EXCISE_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].CD_INCOME = val;
+      this.responseData[i].FZ_EXCISE_AMT = val;
     }
   }
-  getTableINCOME() {
+  getTableIN_EXCISE() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].INCOME/1000000;
+      val = this.responseData[i].IN_EXCISE_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].INCOME = val;
+      this.responseData[i].IN_EXCISE_AMT = val;
     }
   }
-  getTableIMPORT() {
+  getTableEXCISE() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].IMPORT/1000000;
+      val = this.responseData[i].EXCISE_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].IMPORT = val;
+      this.responseData[i].EXCISE_AMT = val;
     }
   }
-  getTableSUM_ALL() {
+
+  getTableSTAMP() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].SUM_ALL/1000000;
+      val = this.responseData[i].STAMP_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].SUM_ALL = val;
+      this.responseData[i].STAMP_AMT = val;
+    }
+  }
+
+  getDateFormat(){
+    let val;
+    let date;
+    let month;
+    let year;
+    for (var i = 0; i < this.responseData.length; i++) {
+      val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+      year = val.substring(0,4);
+      month = val.substring(6,4);
+      date = val.substring(6,8);
+      val = date+'/'+month+'/'+year;
+
+      this.responseData[i].DIM_DATA_DATE_ID = val;
     }
   }
 }

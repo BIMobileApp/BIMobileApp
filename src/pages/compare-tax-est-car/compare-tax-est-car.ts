@@ -23,11 +23,15 @@ export class CompareTaxEstCarPage {
   prod: any;
   product: any;
   id:any;
+  grp_id:any;
+  offcode: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-  }
+      this.grp_id = this.navParams.get('grp_name');
+      this.offcode = localStorage.offcode;
+    }
 
   ionViewDidLoad() {
     this.getProduct();
@@ -36,8 +40,8 @@ export class CompareTaxEstCarPage {
     
   }
   getLineData() {
-    let grp_id = "0501";
-    this.webapi.getData('CompareTaxLineGraph?id=' + grp_id).then((data) => {
+
+    this.webapi.getData('CompareTaxLineGraph?group_name=' +this. grp_id+'&offcode='+this.offcode).then((data) => {
       this.LineData = data;
       console.log(this.LineData);
       this.getTAX();
@@ -45,8 +49,6 @@ export class CompareTaxEstCarPage {
       this.getLebel();
       this.createChart();
     });
-
-
   }
 
   getProduct() {

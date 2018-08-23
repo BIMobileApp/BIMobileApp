@@ -93,9 +93,11 @@ import { OldReportFollowProductGroupPage } from '../pages/old-report-follow-prod
 import { OldReportRegionGroupPage } from '../pages/old-report-region-group/old-report-region-group';
 import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-group/old-report-section1-10-group';
 import { MblRegisterPage } from '../pages/mbl-register/mbl-register';
+import { TaxProductByMthPage } from '../pages/tax-product-by-mth/tax-product-by-mth';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+
 
 @NgModule({
   declarations: [
@@ -189,7 +191,8 @@ import { RestProvider } from '../providers/rest/rest';
     OldReportFollowProductGroupPage,
     OldReportRegionGroupPage,
     OldReportSection1_10GroupPage,
-    MblRegisterPage
+    MblRegisterPage,
+    TaxProductByMthPage
   ],
   imports: [
     BrowserModule,
@@ -297,7 +300,8 @@ import { RestProvider } from '../providers/rest/rest';
     OldReportFollowProductGroupPage,
     OldReportRegionGroupPage,
     OldReportSection1_10GroupPage,
-    MblRegisterPage
+    MblRegisterPage,
+    TaxProductByMthPage
   ],
   providers: [
     StatusBar,

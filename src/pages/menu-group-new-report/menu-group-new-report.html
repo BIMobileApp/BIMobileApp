@@ -13,19 +13,18 @@
     </ion-item>
 
     <ion-grid>
-
         <ion-row>
-            <ion-col (click)="LineFollowProduct()" text-center >
+            <ion-col (click)="TaxMthByProduct()" text-center >
                   <img no-padding class="iconStyle" src="../../assets/imgs/byMonth.png"/>
                   <p class="content-center">แยกตามเดือน</p> 
             </ion-col>
             <ion-col col-1></ion-col>
-            <ion-col (click)="LineFollowProduct()" text-center>
+            <ion-col (click)="TaxYearByProduct()" text-center>
                   <img no-padding class="iconStyle" src="../../assets/imgs/byYear.png">
                   <p class="content-center">ตามปีงบประมาณ</p> 
             </ion-col>
             <ion-col col-1></ion-col>
-            <ion-col (click)="LineFollowProduct()" text-center>
+            <ion-col (click)="FollowTaxRealtime()" text-center>
                   <img no-padding class="iconStyle" src="../../assets/imgs/byIncomeDay.png">
                   <p class="content-center">นำเข้าแยกรายวัน</p> 
             </ion-col>
@@ -37,8 +36,7 @@
             <ion-label class="shelf-title">ตามรายสินค้า</ion-label>
         </ion-item>
 
-            <ion-grid>
-        
+            <ion-grid>       
                 <ion-row>
                     <ion-col (click)="reportCar3();" text-center >
                         <img no-padding class="iconStyle" src="../../assets/imgs/CarSegment.png"/>
@@ -116,12 +114,12 @@
                 <ion-grid>
 
                     <ion-row>
-                        <ion-col (click)="LineFollowProduct()" text-center >
+                        <ion-col (click)="IncomeRealTimeTable()" text-center >
                               <img no-padding class="iconStyle" src="../../assets/imgs/realtimeInCountry.png"/>
                               <p class="content-center">ในประเทศ</p> 
                         </ion-col>
                         <ion-col col-1></ion-col>
-                        <ion-col (click)="LineFollowProduct()" text-center>
+                        <ion-col (click)="TaxEdRealtime()" text-center>
                               <img no-padding class="iconStyle" src="../../assets/imgs/realtimeOutCountry.png">
                               <p class="content-center">นำเข้า</p> 
                         </ion-col>
@@ -136,7 +134,7 @@
 
 
               <!--//////////////////////////////////////////////////////ของเก่าาาาาา////////////////////-->
-              <ion-item style="background-color:#E6E6FA;">
+        <!-- <ion-item style="background-color:#E6E6FA;">
                   <ion-label class="shelf-title">ตามรายสินค้า</ion-label>
               </ion-item>
       
@@ -295,7 +293,7 @@
           <p>Gauge สำนักมาตรฐานปริมาณแยกตามสินค้า</p>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid>-->
   </ion-card-content>
 
 </ion-content>

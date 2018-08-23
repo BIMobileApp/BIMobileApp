@@ -11,10 +11,12 @@ export class TaxYearByProductPage {
 
   summaryDate:any;
   responseData: any;
+  offcode: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi:RestProvider) {
+      this.offcode = localStorage.offcode;
   }
 
    year_en:any;
@@ -24,7 +26,6 @@ export class TaxYearByProductPage {
     var d = new Date(); 
     var n = d.getFullYear();
     var nt = d.getFullYear()+543;
- 
 
     var range = [];
     for(var i=0;i<10;i++) {
@@ -35,26 +36,50 @@ export class TaxYearByProductPage {
       range.push( {"key":this.year_th,"value": this.year_en});
     }
     this.summaryDate = range;
-    this.getDataAll();
+    this.getDataAll();    
   }
 
   getDataAll(){
-      this.webapi.getData('TaxProductGroupByYear').then((data)=>{
+      this.webapi.getData('TaxProductGroupByYearAll?offcode='+this.offcode).then((data)=>{
          this.responseData = data;
+         this.getTableOCT();
+         this.getTableNOV();
+         this.getTableDEC();
+         this.getTableJAN();
+         this.getTableFAB();
+         this.getTableMAR();
+         this.getTableAPR();
+         this.getTableMAY();
+         this.getTableJUN();
+         this.getTableJUL();
+         this.getTableAUG();
+         this.getTableSEP();
        });
   }
 
-  dataYear:any;
-  getDashboardItemsByDate(dataYear){
+  getitemsByDate(dataYear){
     if(dataYear == ""){
       this.getDataAll();
     }else{
-    this.webapi.getData('TaxProductGroupByYear?year='+dataYear).then((data)=>{
+    this.webapi.getData('TaxProductGroupByYear?offcode='+this.offcode+'&year='+dataYear).then((data)=>{
         this.responseData = data;
+
+      this.getTableOCT();
+      this.getTableNOV();
+      this.getTableDEC();
+      this.getTableJAN();
+      this.getTableFAB();
+      this.getTableMAR();
+      this.getTableAPR();
+      this.getTableMAY();
+      this.getTableJUN();
+      this.getTableJUL();
+      this.getTableAUG();
+      this.getTableSEP();
       });
    }
   }
-
+ 
   getTableOCT() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -62,9 +87,9 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].OCT = val;
-      console.log(this.responseData);
     }
   }
+
   getTableNOV() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -72,9 +97,9 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].NOV = val;
-      console.log(this.responseData);
     }
   }
+
   getTableDEC() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -82,9 +107,9 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].DEC = val;
-      console.log(this.responseData);
     }
   }
+
   getTableJAN() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -92,9 +117,9 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].JAN = val;
-      console.log(this.responseData);
     }
   }
+
   getTableFAB(){
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -102,7 +127,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].FAB = val;
-      console.log(this.responseData);
     }
   }
   getTableMAR() {
@@ -112,7 +136,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].MAR = val;
-      console.log(this.responseData);
     }
   }
   getTableAPR() {
@@ -122,7 +145,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].APR = val;
-      console.log(this.responseData);
     }
   }
   getTableMAY() {
@@ -132,7 +154,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].MAY = val;
-      console.log(this.responseData);
     }
   }
   getTableJUN() {
@@ -142,9 +163,9 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].JUN = val;
-      console.log(this.responseData);
     }
   }
+  
   getTableJUL() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -152,7 +173,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].JUL = val;
-      console.log(this.responseData);
     }
   }
   getTableAUG() {
@@ -162,7 +182,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].AUG = val;
-      console.log(this.responseData);
     }
   }
 
@@ -173,7 +192,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].SEP = val;
-      console.log(this.responseData);
     }
   }
 

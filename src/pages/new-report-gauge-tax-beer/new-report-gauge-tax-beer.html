@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="navber">
     <ion-title>แยกตามสำนัก</ion-title>
   </ion-navbar>
 </ion-header>
@@ -28,14 +28,29 @@
     
       <ion-item>
         <ion-label color="primary" fixed>ปีก่อน :</ion-label>
-        <ion-label>ร้อยละ {{data.TAX_LY_PERCENT}}</ion-label>
+        <ion-label>ร้อยละ {{data.LAST_TAX_PERCENT}}</ion-label>
       </ion-item>
 
       <ion-item>
           <ion-label color="primary" fixed>ปีประมาณการ :</ion-label>
-          <ion-label>ร้อยละ {{data.TAX_ESTIMATE_PERCENT}}</ion-label>
+          <ion-label>ร้อยละ {{data.EST_PERCENT}}</ion-label>
       </ion-item>
 
       </ion-list>
+
+      <div id="chart_quan_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div>
+     
+      <ion-list  *ngFor="let data of respondData2">
+         <ion-item>
+           <ion-label><strong>สรุปปริมาณ</strong></ion-label>
+       </ion-item>
+   
+       <ion-item>
+         <ion-label color="primary" fixed>ปีนี้ :</ion-label>
+         <ion-label>ร้อยละ {{data.QUAN_PERCENT}}</ion-label>
+       </ion-item>
+     
+   
+       </ion-list>
      
 </ion-content>
