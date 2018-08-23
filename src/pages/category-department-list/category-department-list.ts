@@ -11,6 +11,7 @@ import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtim
 import { TaxEdRealtimePage } from '../tax-ed-realtime/tax-ed-realtime';
 import { TaxgroupMonthlyFreezonePage } from '../taxgroup-monthly-freezone/taxgroup-monthly-freezone';
 import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
+import { MblRegisterPage } from '../mbl-register/mbl-register';
 
 @IonicPage()
 @Component({
@@ -32,8 +33,12 @@ export class CategoryDepartmentListPage {
     this.app.getRootNav().push(TaxbudgetyearPage); 
   }
 
-  TaxTopRegTable(){
-    this.app.getRootNav().push(TaxBudgetRegPage); 
+  TaxTopRegTable(grp_id){
+    this.app.getRootNav().push(TaxBudgetRegPage,{group_id:grp_id}); 
+  }
+
+  MBLRegisterLink(){
+    this.app.getRootNav().push(MblRegisterPage); 
   }
 
   TaxTopMthTable(){
