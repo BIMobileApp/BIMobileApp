@@ -192,9 +192,10 @@ TaxCreateChart() {
           ticks: {
             beginAtZero: true,
             userCallback: function (value, index, values) {
-              value = (value / 1000000);
-              value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-              return value;
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return value;
+             
             }
           },
           scaleLabel: {

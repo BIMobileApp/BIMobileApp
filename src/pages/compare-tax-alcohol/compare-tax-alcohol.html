@@ -4,26 +4,38 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content >   
-        
-      <ion-card>
-              
-        <ion-card-content>
-                <h2 class="header-style">กราฟเส้นการเปรียบเทียบภาษีปีก่อน (สุรา)</h2>
-               
-                <canvas #LineCanvasTax></canvas>
-          
-            </ion-card-content>
-     </ion-card>
-
-     <ion-card>
-                <ion-card-content>
-                        <h2 class="header-style">กราฟเส้นการเปรียบเทียบปริมาณปีก่อน (สุรา)</h2>
-                       
-                        <canvas #LineCanvasVol></canvas>
-                  
-                    </ion-card-content>
-         </ion-card>
-
+  <ion-content>
+  
+    <ion-card>
+  
+      <ion-card-content>
+        <h2 class="header-style">กราฟเส้นการเปรียบเทียบภาษีปีก่อน (สุรา)</h2>
+        <div *ngIf="textDataNotValid=='0' ">
+          <br><br><br><br>
+          <h2 style="text-align: center; color: rgb(107, 105, 105)">ไม่มีข้อมูลในฐานข้อมูล</h2>
+          <br><br><br><br>
+        </div>
+        <div *ngIf="textDataNotValid!='0' ">
+          <canvas #LineCanvasTax></canvas>
+        </div>
+  
+  
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-card>
+      <ion-card-content>
+        <h2 class="header-style">กราฟเส้นการเปรียบเทียบปริมาณปีก่อน (สุรา)</h2>
+        <div *ngIf="textDataNotValid=='0' ">
+          <br><br><br><br>
+          <h2 style="text-align: center; color: rgb(107, 105, 105)">ไม่มีข้อมูลในฐานข้อมูล</h2>
+          <br><br><br><br>
+        </div>
+        <div *ngIf="textDataNotValid!='0' ">
+          <canvas #LineCanvasVol></canvas>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  
   </ion-content>
   

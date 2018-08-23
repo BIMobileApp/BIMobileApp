@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 
-/**
- * Generated class for the CompareTaxEstAlcoholPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-est-alcohol',
@@ -29,7 +22,8 @@ export class CompareTaxEstAlcoholPage {
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
-
+  yAxesticks= [];
+  textDataNotValid: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -85,11 +79,17 @@ getTableTAX_LY() {
 getLineTaxData(TaxCode) {
   this.webapi.getData('CompareTaxSuraMonth?code='+TaxCode+'&&offcode='+this.offcode).then((data) => {
     this.TaxLineData = data;
-    console.log(this.TaxLineData);
-    this.TaxgetTAX();
-    this.TaxgetTAX_LY();
-    this.TaxgetLebel();
-    this.TaxCreateChart();
+    if(this.TaxLineData.length > 0){
+      console.log(this.TaxLineData);
+      this.TaxgetTAX();
+      this.TaxgetTAX_LY();
+      this.TaxgetLebel();
+      this.TaxCreateChart();
+      console.log(this.yAxesticks);
+      
+    }else{
+      this.textDataNotValid = 0;
+    }
   });
 }
 
@@ -202,14 +202,17 @@ TaxCreateChart() {
           ticks: {
             beginAtZero: true,
             userCallback: function (value, index, values) {
-              value = (value / 1000000);
-              value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-              return value;
+              
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return value;
+              
+             
             }
           },
           scaleLabel: {
             display: true,
-            labelString: 'ล้านบาท'
+            labelString: "ล้านบาท",
           }
         }
         ],

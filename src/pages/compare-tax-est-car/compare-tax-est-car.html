@@ -44,8 +44,14 @@
                                         </ion-option>
                                 </ion-select>
                         </ion-item>
-                        <canvas #LineCanvasTax></canvas>
-                  
+                        <div *ngIf="textDataNotValid=='0' ">
+                                        <br><br><br><br>
+                                        <h2 style="text-align: center; color: rgb(107, 105, 105)">ไม่มีข้อมูลในฐานข้อมูล</h2>
+                                        <br><br><br><br>
+                                      </div>
+                                      <div *ngIf="textDataNotValid!='0' ">
+                                        <canvas #LineCanvasTax></canvas>
+                                      </div>
                     </ion-card-content>
              </ion-card>
         
