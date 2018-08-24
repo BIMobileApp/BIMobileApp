@@ -9,7 +9,6 @@ import { Chart } from 'chart.js';
   templateUrl: 'compare-tax-est-car.html',
 })
 export class CompareTaxEstCarPage {
-
   @ViewChild('LineCanvasTax') LineCanvasTax;
   //Table Pram
   responseData: any;
@@ -23,6 +22,7 @@ export class CompareTaxEstCarPage {
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
+  
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,45 +32,44 @@ export class CompareTaxEstCarPage {
   ionViewDidLoad() {
     this.getTableData();
     this.getProductType();
-
   }
-
 
   getTableData() {
     this.webapi.getData('CompareTaxCar').then((data) => {
-      this.responseData = data;
-      console.log(this.responseData);
-      this.getTableTAX();
-      this.getTableTAX_LY();
-    });
+    this.responseData = data;
+    console.log(this.responseData);
+    this.getTableTAX();
+    this.getTableTAX_LY();
+  });
+}
+
+getProductType() {
+  this.webapi.getData('CompareTaxCarMonth').then((data) => {
+  this.ProductType = data;
+  console.log(this.ProductType);
+});
+}
+
+getTableTAX() {
+  let val;
+  for (var i = 0; i < this.responseData.length; i++) {
+    val = this.responseData[i].TOTAL_TAX_AMT/1000000;
+    val = val.toFixed(2);
+    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.responseData[i].TOTAL_TAX_AMT = val;
   }
+}
 
-  getProductType() {
-    this.webapi.getData('CompareTaxCarMonth').then((data) => {
-      this.ProductType = data;
-      console.log(this.ProductType);
-    });
+getTableTAX_LY() {
+  let val;
+  for (var i = 0; i < this.responseData.length; i++) {
+    val = this.responseData[i].LAST_TOTAL_TAX_AMT/1000000;
+    val = val.toFixed(2);
+    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.responseData[i].LAST_TOTAL_TAX_AMT = val;
   }
+}
 
-    getTableTAX() {
-      let val;
-      for (var i = 0; i < this.responseData.length; i++) {
-        val = this.responseData[i].TOTAL_TAX_AMT / 1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.responseData[i].TOTAL_TAX_AMT = val;
-      }
-    }
-
-    getTableTAX_LY() {
-      let val;
-      for (var i = 0; i < this.responseData.length; i++) {
-        val = this.responseData[i].LAST_TOTAL_TAX_AMT / 1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.responseData[i].LAST_TOTAL_TAX_AMT = val;
-      }
-    }
     getLineTaxData(TaxCode) {
       this.webapi.getData('CompareTaxCarMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
@@ -109,8 +108,6 @@ export class CompareTaxEstCarPage {
       console.log(this.tax_lebel);
     }
     //----------------------- End Manage Data from API-------------------------//
-
-
 
     TaxCreateChart() {
       this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {

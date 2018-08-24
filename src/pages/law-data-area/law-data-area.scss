@@ -1,4 +1,4 @@
-page-old-report-bi-law3-1{
+page-law-data-area {
     table,
     th,
     td {
@@ -26,7 +26,7 @@ page-old-report-bi-law3-1{
     .desc-right{
       font-weight: bold;
       color: black !important;
-      font-size: 2vw !important;
+      font-size: 3vw !important;
       text-align: right !important;
     }
     h2.header-style{
@@ -35,62 +35,39 @@ page-old-report-bi-law3-1{
       font-size: 4vw !important;
       text-align: center !important;
     }
-    h3.header-style{
-      color: black !important;
-      font-size: 3vw !important;
-      padding: 0%;
-      text-align: center !important; 
-    }
     .td-right {
+      font-weight: bold;
       color: black !important;
-      font-size: 2vw !important;
+      font-size:3vw !important;
       text-align: right !important;
     }
     .td-left {
+      font-weight: bold;
       color: black !important;
-      font-size: 2vw !important;
+      font-size: 3vw !important;
       text-align: left !important;
     }
     .td-center{
+      font-weight: bold;
         color: rgb(27, 15, 15) !important;
-        font-size: 2vw !important;
+        font-size: 3vw !important;
         text-align: center !important;
       }
     
     .th-center{
       font-weight: bold;
       color: rgb(27, 15, 15) !important;
-      font-size: 2vw !important;
+      font-size: 3vw !important;
       text-align: center !important;
     }
 
-    .right-Green{
-      color: rgb(54, 121, 10) !important;
-      font-size: 2vw !important;
-      text-align: right !important;
-    }
-    .right-red{
-      color: rgb(233, 35, 35) !important;
-      font-size: 2vw !important;
-      text-align: right !important;
-    }
-    .right-moreGreen{
-      color: rgb(88, 185, 24)  !important;
-      font-size: 2vw !important;
-      text-align: right !important;
-    }
-    .right-yellow{
-      color: rgb(218, 214, 25)  !important;
-      font-size: 2vw !important;
-      text-align: right !important;
-    }
-    .DataStatus-font{
-      font-weight: bold;
-      color: rgb(29, 97, 160) !important;
-      font-size: 2vw !important;
-      text-align: left !important;
-    }
-    .row-blue{
-      background-color: rgb(205, 227, 252) !important;
-    }
+  ion-item.size{
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    color: black ;
+    font-size: 4vw ;
+  }
 }

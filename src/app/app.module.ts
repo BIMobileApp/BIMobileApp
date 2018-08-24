@@ -99,6 +99,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { OldReportBi_Law21Page } from '../pages/old-report-bi-law2-1/old-report-bi-law2-1';
 import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-bi-law3-1';
+import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
+import { IncDataMthPage } from '../pages/inc-data-mth/inc-data-mth';
+import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
+import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
 
 
 @NgModule({
@@ -196,7 +200,11 @@ import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-
     MblRegisterPage,
     TaxProductByMthPage,
     OldReportBi_Law21Page,
-    OldReportBi_Law31Page
+    OldReportBi_Law31Page,
+    IncDataAreaPage,
+    IncDataMthPage,
+    LawDataAreaPage,
+    LawDataMthPage
   ],
   imports: [
     BrowserModule,
@@ -307,7 +315,11 @@ import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-
     MblRegisterPage,
     TaxProductByMthPage,
     OldReportBi_Law21Page,
-    OldReportBi_Law31Page
+    OldReportBi_Law31Page,
+    IncDataAreaPage,
+    IncDataMthPage,
+    LawDataAreaPage,
+    LawDataMthPage
   ],
   providers: [
     StatusBar,
