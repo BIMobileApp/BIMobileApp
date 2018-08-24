@@ -94,13 +94,14 @@ import { OldReportRegionGroupPage } from '../pages/old-report-region-group/old-r
 import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-group/old-report-section1-10-group';
 import { MblRegisterPage } from '../pages/mbl-register/mbl-register';
 import { TaxProductByMthPage } from '../pages/tax-product-by-mth/tax-product-by-mth';
-
-import { HttpClientModule } from '@angular/common/http';
-import { RestProvider } from '../providers/rest/rest';
 import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
 import { IncDataMthPage } from '../pages/inc-data-mth/inc-data-mth';
 import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
 import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
+import { NewsEventPage } from '../pages/news-event/news-event';
+
+import { HttpClientModule } from '@angular/common/http';
+import { RestProvider } from '../providers/rest/rest';
 
 
 @NgModule({
@@ -200,7 +201,8 @@ import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
     IncDataAreaPage,
     IncDataMthPage,
     LawDataAreaPage,
-    LawDataMthPage
+    LawDataMthPage,
+    NewsEventPage
   ],
   imports: [
     BrowserModule,
@@ -213,7 +215,6 @@ import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition'
-      
     }
   )],
   bootstrap: [IonicApp],
@@ -313,7 +314,8 @@ import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
     IncDataAreaPage,
     IncDataMthPage,
     LawDataAreaPage,
-    LawDataMthPage
+    LawDataMthPage,
+    NewsEventPage
   ],
   providers: [
     StatusBar,

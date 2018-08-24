@@ -25,6 +25,8 @@ export class CompareTaxCarPage {
   vol_TAX = [];
   vol_TAX_LY = [];
 
+  textDataNotValid : any;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
@@ -36,18 +38,25 @@ export class CompareTaxCarPage {
 
   UserAthu() {
     this.offcode = localStorage.offcode;
-    this.getLineVolData();
     this.getLineTaxData();
   }
 
  getLineTaxData() {
     this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode).then((data) => {
       this.TaxLineData = data;
-      console.log(this.TaxLineData);
-      this.TaxgetTAX();
-      this.TaxgetTAX_LY();
-      this.TaxgetLebel();
-      this.TaxCreateChart();
+      if(this.TaxLineData.length > 0){
+        console.log(this.TaxLineData);
+        this.TaxgetTAX();
+        this.TaxgetTAX_LY();
+        this.TaxgetLebel();
+        this.TaxCreateChart();
+        this.VolgetTAX();
+        this.VolgetTAX_LY();
+        this.VolCreateChart();
+      }else{
+        this.textDataNotValid = 0;
+      }
+     
     });
   }
 
@@ -160,9 +169,13 @@ export class CompareTaxCarPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = (value / 1000000);
-                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return value;
+                if(value >= 1000000){
+                  value = (value / 1000000);
+                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return value;
+                }else{
+                  return value;
+                }
               }
             },
             scaleLabel: {
@@ -184,12 +197,7 @@ export class CompareTaxCarPage {
     });
   }
 
-  getLineVolData() {
-      this.VolgetTAX();
-      this.VolgetTAX_LY();
-      this.VolCreateChart();
-  }
-
+  
   //----------------------- Start Manage Data from API-------------------------//
 
   VolgetTAX() {
@@ -291,9 +299,10 @@ export class CompareTaxCarPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = (value / 1000000);
-                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return value;
+                  value = (value / 1000000);
+                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return value;
+               
               }
             },
             scaleLabel: {

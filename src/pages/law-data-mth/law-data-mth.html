@@ -1,18 +1,41 @@
-<!--
-  Generated template for the LawDataMthPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>law_data_mth</ion-title>
+  <ion-navbar color="navber">
+    <ion-title>สถิติและปราบปราม</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
+<ion-content>
+  <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+          <h2 class="header-style">สถิติคดีตามรายเดือน</h2>
+       </ion-item>
+       <h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3>
+    <ion-card>
+       <ion-card-content no-padding> 
+                <div class="table-responsive">     
+                       <table class="table" style="width: 100%;">
+                               <thead>
+                                       <tr style="background-color: #F78B26; ">
+                                               <th width="10%"><h3 class="th-center">เดือน</h3></th>
+                                               <th><h3 class="th-center">จำนวนคดี</h3></th>
+                                               <th><h3 class="th-center">ค่าปรับ</h3></th>
+                                               <th><h3 class="th-center">เป้าจำนวนคดี</h3></th>
+                                               <th><h3 class="th-center">เป้าค่าปรับ</h3></th>
+                                               <th><h3 class="th-center">เงินส่งคลัง</h3></th>
+                                       </tr>
+                               </thead>
+                               <tbody>
+                                       <tr *ngFor="let data of responseData">
+                                               <td width="10%"><h3 class="td-center">{{data.MONTH}}</h3></td>
+                                               <td><h3 class="td-right">{{data.LAW_QTY}}</h3></td>
+                                               <td><h3 class="td-right">{{data.TARGET_QTY}}</h3></td>
+                                               <td><h3 class="td-right">{{data.LAW_AMT}}</h3></td>
+                                               <td><h3 class="td-right">{{data.TARGET_AMT}}</h3></td>
+                                               <td><h3 class="td-right">{{data.TREASURY_MONEY}}</h3></td>
+                                       </tr>
+                               </tbody>
+                       </table>
+                   </div>
+       </ion-card-content>
+     </ion-card>
 
 </ion-content>
