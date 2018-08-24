@@ -9,272 +9,212 @@ import { Chart } from 'chart.js';
   templateUrl: 'compare-tax-est-car.html',
 })
 export class CompareTaxEstCarPage {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  @ViewChild('LineCanvas') LineCanvas;
-  responseData: any;
-  lineChart: any;
-  GaugeChart: any;
 
-  LineData: any;
-  TAX = [];
-  TAX_LY = [];
-  EST = [];
-  ComEst = [];
-  lebel = [];
-  prod: any;
-  product: any;
-  id:any;
-  grp_id:any;
-  offcode: any;
-=======
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
   @ViewChild('LineCanvasTax') LineCanvasTax;
-   //Table Pram
-   responseData: any;
-   ProductType: any;
-   offcode: any;
+  //Table Pram
+  responseData: any;
+  ProductType: any;
+  offcode: any;
 
- //Line Tax
+  //Line Tax
   TaxlineChart: any;
   TaxLineData: any;
   TaxCode: any;
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
-  
-<<<<<<< HEAD
-=======
->>>>>>> 53486c0e909302627874662226a8ef460dc07400
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.grp_id = this.navParams.get('grp_name');
-      this.offcode = localStorage.offcode;
-    }
+  }
 
   ionViewDidLoad() {
     this.getTableData();
     this.getProductType();
-    
-  }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  getLineData() {
 
-    this.webapi.getData('CompareTaxLineGraph?group_name=' +this. grp_id+'&offcode='+this.offcode).then((data) => {
-      this.LineData = data;
-      console.log(this.LineData);
-      this.getTAX();
-      this.getEST();
-      this.getLebel();
-      this.createChart();
-    });
   }
-=======
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
+
 
   getTableData() {
     this.webapi.getData('CompareTaxCar').then((data) => {
-    this.responseData = data;
-    console.log(this.responseData);
-    this.getTableTAX();
-    this.getTableTAX_LY();
-  });
-}
-<<<<<<< HEAD
-
-getProductType() {
-  this.webapi.getData('CompareTaxCarMonth').then((data) => {
-  this.ProductType = data;
-  console.log(this.ProductType);
-});
-}
-
-=======
-
-getProductType() {
-  this.webapi.getData('CompareTaxCarMonth').then((data) => {
-  this.ProductType = data;
-  console.log(this.ProductType);
-});
-}
->>>>>>> 53486c0e909302627874662226a8ef460dc07400
-
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
-getTableTAX() {
-  let val;
-  for (var i = 0; i < this.responseData.length; i++) {
-    val = this.responseData[i].TOTAL_TAX_AMT/1000000;
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.responseData[i].TOTAL_TAX_AMT = val;
+      this.responseData = data;
+      console.log(this.responseData);
+      this.getTableTAX();
+      this.getTableTAX_LY();
+    });
   }
-}
 
-getTableTAX_LY() {
-  let val;
-  for (var i = 0; i < this.responseData.length; i++) {
-    val = this.responseData[i].LAST_TOTAL_TAX_AMT/1000000;
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.responseData[i].LAST_TOTAL_TAX_AMT = val;
+  getProductType() {
+    this.webapi.getData('CompareTaxCarMonth').then((data) => {
+      this.ProductType = data;
+      console.log(this.ProductType);
+    });
   }
-}
-getLineTaxData(TaxCode) {
-  this.webapi.getData('CompareTaxCarMonth?code='+TaxCode+'&&offcode='+this.offcode).then((data) => {
-    this.TaxLineData = data;
-    console.log(this.TaxLineData);
-    this.TaxgetTAX();
-    this.TaxgetTAX_LY();
-    this.TaxgetLebel();
-    this.TaxCreateChart();
-  });
-}
-//----------------------- Start Manage Data from API-------------------------//
 
-TaxgetTAX() {
-  this.tax_TAX = [];
-  for (var i = 0; i < this.TaxLineData.length; i++) {
-    this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
-  }
-  this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
-}
-
-TaxgetTAX_LY() {
-  this.tax_TAX_LY = [];
-  for (var i = 0; i < this.TaxLineData.length; i++) {
-    this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
-  }
-  this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
-
-}
-
-TaxgetLebel() {
-  this.tax_lebel = [];
-  for (var i = 0; i < this.TaxLineData.length; i++) {
-    this.tax_lebel.push(this.TaxLineData[i].MONTH);
-  }
-  this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
-  console.log(this.tax_lebel);
-}
-//----------------------- End Manage Data from API-------------------------//
-
-
-
-TaxCreateChart() {
-  this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
-    type: 'line',
-    data: {
-      labels: this.tax_lebel,
-      datasets: [
-        {
-          label: "ปีนี้",
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: "#00818A",
-          borderColor: "#00818A",
-          borderWidth: 2,
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: "#00818A",
-          pointBackgroundColor: "#00818A",
-          pointBorderWidth: 3,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "#00818A",
-          pointHoverBorderColor: "#00818A",
-          pointHoverBorderWidth: 3,
-          pointRadius: 2,
-          pointHitRadius: 10,
-          data: this.tax_TAX,
-          spanGaps: false,
-        },
-        {
-          label: "ปีก่อน",
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: "#b8d00a",
-          borderColor: "#b8d00a",
-          borderWidth: 2,
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: "#b8d00a",
-          pointBackgroundColor: "#b8d00a",
-          pointBorderWidth: 3,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "#b8d00a",
-          pointHoverBorderColor: "#b8d00a",
-          pointHoverBorderWidth: 3,
-          pointRadius: 2,
-          pointHitRadius: 10,
-          data: this.tax_TAX_LY,
-          spanGaps: false,
-        }
-      ]
-    },
-    options: {
-      legend: {
-        display: true,
-        labels: {
-            boxWidth: 10,
-        }
-    },
-    tooltips: {
-      mode: 'index',
-      label: 'myLabel',
-      callbacks: {
-        label: function (tooltipItem, data) {
-          if (tooltipItem.yLabel > 999999) {
-            var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
-          } else {
-            var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
-          }
-
-          return value;
-        }
-      } // end callbacks:
-    }, //end tooltip
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            userCallback: function (value, index, values) {
-<<<<<<< HEAD
-                value = (value / 1000000);
-                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return value;
-             
-=======
-              value = (value / 1000000);
-              value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-              return value;
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'ล้านบาท'
-          }
-        }
-        ],
-        xAxes: [{
-          ticks: {
-            autoSkip: false,
-            maxRotation: 90,
-            minRotation: 0
-          }
-        }]
+    getTableTAX() {
+      let val;
+      for (var i = 0; i < this.responseData.length; i++) {
+        val = this.responseData[i].TOTAL_TAX_AMT / 1000000;
+        val = val.toFixed(2);
+        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        this.responseData[i].TOTAL_TAX_AMT = val;
       }
     }
 
-  });
-}
-}
+    getTableTAX_LY() {
+      let val;
+      for (var i = 0; i < this.responseData.length; i++) {
+        val = this.responseData[i].LAST_TOTAL_TAX_AMT / 1000000;
+        val = val.toFixed(2);
+        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        this.responseData[i].LAST_TOTAL_TAX_AMT = val;
+      }
+    }
+    getLineTaxData(TaxCode) {
+      this.webapi.getData('CompareTaxCarMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+        this.TaxLineData = data;
+        console.log(this.TaxLineData);
+        this.TaxgetTAX();
+        this.TaxgetTAX_LY();
+        this.TaxgetLebel();
+        this.TaxCreateChart();
+      });
+    }
+    //----------------------- Start Manage Data from API-------------------------//
+
+    TaxgetTAX() {
+      this.tax_TAX = [];
+      for (var i = 0; i < this.TaxLineData.length; i++) {
+        this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
+      }
+      this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
+    }
+
+    TaxgetTAX_LY() {
+      this.tax_TAX_LY = [];
+      for (var i = 0; i < this.TaxLineData.length; i++) {
+        this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
+      }
+      this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
+
+    }
+
+    TaxgetLebel() {
+      this.tax_lebel = [];
+      for (var i = 0; i < this.TaxLineData.length; i++) {
+        this.tax_lebel.push(this.TaxLineData[i].MONTH);
+      }
+      this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
+      console.log(this.tax_lebel);
+    }
+    //----------------------- End Manage Data from API-------------------------//
+
+
+
+    TaxCreateChart() {
+      this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
+        type: 'line',
+        data: {
+          labels: this.tax_lebel,
+          datasets: [
+            {
+              label: "ปีนี้",
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: "#00818A",
+              borderColor: "#00818A",
+              borderWidth: 2,
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "#00818A",
+              pointBackgroundColor: "#00818A",
+              pointBorderWidth: 3,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#00818A",
+              pointHoverBorderColor: "#00818A",
+              pointHoverBorderWidth: 3,
+              pointRadius: 2,
+              pointHitRadius: 10,
+              data: this.tax_TAX,
+              spanGaps: false,
+            },
+            {
+              label: "ปีก่อน",
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: "#b8d00a",
+              borderColor: "#b8d00a",
+              borderWidth: 2,
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "#b8d00a",
+              pointBackgroundColor: "#b8d00a",
+              pointBorderWidth: 3,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#b8d00a",
+              pointHoverBorderColor: "#b8d00a",
+              pointHoverBorderWidth: 3,
+              pointRadius: 2,
+              pointHitRadius: 10,
+              data: this.tax_TAX_LY,
+              spanGaps: false,
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 10,
+            }
+          },
+          tooltips: {
+            mode: 'index',
+            label: 'myLabel',
+            callbacks: {
+              label: function (tooltipItem, data) {
+                if (tooltipItem.yLabel > 999999) {
+                  var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+                } else {
+                  var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+                }
+
+                return value;
+              }
+            } // end callbacks:
+          }, //end tooltip
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                userCallback: function (value, index, values) {
+                  value = (value / 1000000);
+                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return value;
+
+                }
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'ล้านบาท'
+              }
+            }
+            ],
+            xAxes: [{
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90,
+                minRotation: 0
+              }
+            }]
+          }
+        }
+
+      });
+    }
+  }

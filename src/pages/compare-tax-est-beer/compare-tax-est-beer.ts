@@ -32,7 +32,6 @@ export class CompareTaxEstBeerPage {
   ionViewDidLoad() {
     this.UserAthu();
 
-<<<<<<< HEAD
   }
   UserAthu() {
     this.offcode = localStorage.offcode;
@@ -47,22 +46,6 @@ export class CompareTaxEstBeerPage {
   });
 }
 
-=======
-  }
-  UserAthu() {
-    this.offcode = localStorage.offcode;
-    this.getTableData();
-    this.getProductType();
-  }
-
-  getProductType() {
-    this.webapi.getData('CompareTaxBeerMonth').then((data) => {
-    this.ProductType = data;
-    console.log(this.ProductType);
-  });
-}
-
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
   getTableData() {
     this.webapi.getData('CompareTaxBeer').then((data) => {
     this.responseData = data;
@@ -210,17 +193,9 @@ TaxCreateChart() {
           ticks: {
             beginAtZero: true,
             userCallback: function (value, index, values) {
-<<<<<<< HEAD
-
-                value = (value / 1000000);
-                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return value;
-           
-=======
               value = (value / 1000000);
               value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               return value;
->>>>>>> ecd3808100f343848e8cfd506e08e00e58bed87c
             }
           },
           scaleLabel: {
