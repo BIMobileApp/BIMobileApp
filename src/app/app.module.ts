@@ -103,6 +103,7 @@ import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
 import { IncDataMthPage } from '../pages/inc-data-mth/inc-data-mth';
 import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
 import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
+import { DataStatusPage } from '../pages/data-status/data-status';
 
 
 @NgModule({
@@ -204,7 +205,8 @@ import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
     IncDataAreaPage,
     IncDataMthPage,
     LawDataAreaPage,
-    LawDataMthPage
+    LawDataMthPage,
+    DataStatusPage
   ],
   imports: [
     BrowserModule,
@@ -319,7 +321,8 @@ import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
     IncDataAreaPage,
     IncDataMthPage,
     LawDataAreaPage,
-    LawDataMthPage
+    LawDataMthPage,
+    DataStatusPage
   ],
   providers: [
     StatusBar,

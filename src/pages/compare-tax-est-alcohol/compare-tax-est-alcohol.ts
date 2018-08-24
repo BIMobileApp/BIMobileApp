@@ -48,7 +48,7 @@ export class CompareTaxEstAlcoholPage {
 }
 
   getTableData() {
-    this.webapi.getData('CompareTaxSura').then((data) => {
+    this.webapi.getData('CompareTaxSura?offcode='+this.offcode).then((data) => {
     this.responseData = data;
     console.log(this.responseData);
     this.getTableTAX();

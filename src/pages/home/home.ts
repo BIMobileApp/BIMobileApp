@@ -9,6 +9,7 @@ import { GaugechartPage } from '../gaugechart/gaugechart';
 import { DashboardPage } from '../dashboard/dashboard';
 import { MenuGroupPage } from '../menu-group/menu-group';
 import { Test3Page } from '../test3/test3';
+import { DataStatusPage } from '../data-status/data-status';
 
 @Component({
   selector: 'page-home',
@@ -72,11 +73,13 @@ export class HomePage {
   }
 
   test(){
-    this.app.getRootNav().push( MenuGroupPage);  
+    this.app.getRootNav().push(MenuGroupPage);  
   }
   //this.app.getRootNav().push(MenuGroupPage); 
 
-
+  DataStatus(){
+    this.app.getRootNav().push(DataStatusPage);  
+  }
 
 
  /*login(){

@@ -47,7 +47,7 @@ export class CompareTaxEstBeerPage {
 }
 
   getTableData() {
-    this.webapi.getData('CompareTaxBeer').then((data) => {
+    this.webapi.getData('CompareTaxBeer?offcode='+this.offcode).then((data) => {
     this.responseData = data;
     console.log(this.responseData);
     this.getTableTAX();

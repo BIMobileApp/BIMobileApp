@@ -35,7 +35,7 @@ export class CompareTaxEstCarPage {
   }
 
   getTableData() {
-    this.webapi.getData('CompareTaxCar').then((data) => {
+    this.webapi.getData('CompareTaxCar?offcode='+this.offcode).then((data) => {
     this.responseData = data;
     console.log(this.responseData);
     this.getTableTAX();
