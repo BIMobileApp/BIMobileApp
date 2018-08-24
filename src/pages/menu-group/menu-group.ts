@@ -8,6 +8,8 @@ import { ContactPage } from '../contact/contact';
 import { CetegoryTaxPage } from '../cetegory-tax/cetegory-tax';
 import { CategoryDepartmentListPage } from '../category-department-list/category-department-list';
 import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone';
+import { OldReportBi_Law21Page } from '../old-report-bi-law2-1/old-report-bi-law2-1';
+import { OldReportBi_Law31Page } from '../old-report-bi-law3-1/old-report-bi-law3-1';
 
 @IonicPage()
 @Component({
@@ -74,6 +76,13 @@ export class MenuGroupPage {
 
   gotoDepartmentReport(){
     this.app.getRootNav().push(MenuGroupNewReportPage); 
+  }
+  gotoCategoryLawTax(){
+    this.app.getRootNav().push(OldReportBi_Law21Page); 
+  }
+
+  gotoCategoryFinesTax(){
+    this.app.getRootNav().push(OldReportBi_Law31Page); 
   }
 
 }

@@ -1,0 +1,102 @@
+<ion-header>
+
+  <ion-navbar color="navber">
+    <ion-title>สถิติผลคดีและค่าปรับ ภาค 1-10</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  
+    <h2 class="header-style">สถิติผลคดีและค่าปรับ ภาค 1-10</h2>
+    <h3 class="header-style" > {{dateDisplay}} </h3> 
+  <h3 style="padding-right: 2%;line-height:0.3vw;" class="desc-right">หน่วย :     คดี : ราย</h3>
+  <h3 style="padding-right: 2%;line-height:0.3vw;" class="desc-right">ค่าปรับ : ล้านบาท</h3>
+  <h3 style="padding-right: 2%;line-height:0.3vw;" class="desc-right">ส่งคลัง : ล้านบาท</h3>
+  <ion-card>
+    <ion-card-content no-padding>
+      <!-- <<ion-scroll scrollX="true" style="width:100%; height:50px">-->
+      <div class="table-responsive">
+        <table class="table" style="width: 100%;">
+          <thead>
+            <tr style="background-color: #F78B26; ">
+              <th width="9%"><h3 class="th-center">ภาค</h3></th> 
+              <th><h3 class="th-center">ประเภท</h3></th>
+              <th><h3 class="th-center">ปีนี้</h3></th>
+              <th><h3 class="th-center">เป้าหมาย</h3></th>
+              <th width="8%"><h3 class="th-center">ปีก่อน</h3></th>
+              <th><h3 class="th-center">+/-</h3></th>
+              <th width="8%"><h3 class="th-center">เป้าหมาย(%)</h3></th>              
+              <th><h3 class="th-center">+/-</h3></th>
+              <th width="8%"><h3 class="th-center">ปีก่อน(%)</h3></th>
+            
+            </tr>
+          </thead>
+          <tbody> 
+           
+                <tr  *ngFor="let data of responseData; index as i" >
+                
+              <td  *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990'"><h3 class="td-left">{{data.REGION_SHORT_NAME}}</h3></td>
+               <td *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' "><h3 class="td-left">{{data.LAW_TYPE}}</h3></td>
+               <td *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' "><h3 class="td-right">{{data.LAW_AMT}}</h3></td>
+               <td *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' "><h3 class="td-right">{{data.TARGET_AMT}}</h3></td>
+               <td *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' "><h3 class="td-right">{{data.L_LAW_AMT}}</h3></td>
+               <td *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' ">
+                 <h3 *ngIf="data.TARGET_PERCENTAGE > 0 && data.TARGET_PERCENTAGE <= 5" class="right-Green">{{data.COMPARE_TARGET}}</h3>
+                 <h3 *ngIf="data.TARGET_PERCENTAGE > 5 " class="right-moreGreen">{{data.COMPARE_TARGET}}</h3>
+                 <h3 *ngIf="data.TARGET_PERCENTAGE <= 0 && data.TARGET_PERCENTAGE > -5 " class="right-yellow">{{data.COMPARE_TARGET}}</h3>
+                 <h3 *ngIf="data.TARGET_PERCENTAGE <= -5  " class="right-red">{{data.COMPARE_TARGET}}</h3>
+               </td>
+               <td width="8%"  *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' ">
+                 <h3 *ngIf="data.TARGET_PERCENTAGE == 0 "  class="td-right">-</h3>
+                 <h3 *ngIf="data.TARGET_PERCENTAGE > 0 " class="td-right">{{data.TARGET_PERCENTAGE}}</h3> 
+               </td>
+ 
+               <td width="8%"  *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' ">
+                 <h3 *ngIf="data.LAST_TAX_PERCENTAGE > 0 && data.LAST_TAX_PERCENTAGE <= 5" class="right-Green">{{data.COMPARE_TAX}}</h3>
+                 <h3 *ngIf="data.LAST_TAX_PERCENTAGE > 5 " class="right-moreGreen">{{data.compare_tax}}</h3>
+                 <h3 *ngIf="data.LAST_TAX_PERCENTAGE <= 0 && data.LAST_TAX_PERCENTAGE > -5 " class="right-yellow">{{data.COMPARE_TAX}}</h3>
+                 <h3 *ngIf="data.LAST_TAX_PERCENTAGE <= -5  " class="right-red">{{data.COMPARE_TAX}}</h3>
+               </td>
+               <td width="8%"  *ngIf="data.REGION_CD !='000000'  && data.REGION_CD !='099990' ">
+                 <h3 *ngIf="data.LAST_TAX_PERCENTAGE == 0 "  class="td-right">-</h3>
+                 <h3 *ngIf="data.LAST_TAX_PERCENTAGE > 0 " class="td-right">{{data.LAST_TAX_PERCENTAGE}}</h3> 
+               </td>   
+ <!--start set sum colrum color-->
+                <td  *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue"  ><h3 class="td-left">{{data.REGION_SHORT_NAME}}</h3></td>
+                <td  *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue"><h3 class="td-left">{{data.LAW_TYPE}}</h3></td> 
+                <td *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue"><h3 class="td-right">{{data.LAW_AMT}}</h3></td>          
+                <td  *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue"><h3 class="td-right">{{data.TARGET_AMT}}</h3></td>
+                <td *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue"><h3 class="td-right">{{data.L_LAW_AMT}}</h3></td>
+                <td *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue">
+                  <h3 *ngIf="data.TARGET_PERCENTAGE > 0 && data.TARGET_PERCENTAGE <= 5" class="right-Green">{{data.COMPARE_TARGET}}</h3>
+                  <h3 *ngIf="data.TARGET_PERCENTAGE > 5 " class="right-moreGreen">{{data.COMPARE_TARGET}}</h3>
+                  <h3 *ngIf="data.TARGET_PERCENTAGE <= 0 && data.TARGET_PERCENTAGE > -5 " class="right-yellow">{{data.COMPARE_TARGET}}</h3>
+                  <h3 *ngIf="data.TARGET_PERCENTAGE <= -5  " class="right-red">{{data.COMPARE_TARGET}}</h3>
+                </td>
+                <td width="8%" *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue" >
+                  <h3 *ngIf="data.TARGET_PERCENTAGE == 0 "  class="td-right">-</h3>
+                  <h3 *ngIf="data.TARGET_PERCENTAGE > 0 " class="td-right">{{data.TARGET_PERCENTAGE}}</h3> 
+                </td>
+
+                <td width="8%"  *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue">
+                  <h3 *ngIf="data.LAST_TAX_PERCENTAGE > 0 && data.LAST_TAX_PERCENTAGE <= 5" class="right-Green">{{data.COMPARE_TAX}}</h3>
+                  <h3 *ngIf="data.LAST_TAX_PERCENTAGE > 5 " class="right-moreGreen">{{data.compare_tax}}</h3>
+                  <h3 *ngIf="data.LAST_TAX_PERCENTAGE <= 0 && data.LAST_TAX_PERCENTAGE > -5 " class="right-yellow">{{data.COMPARE_TAX}}</h3>
+                  <h3 *ngIf="data.LAST_TAX_PERCENTAGE <= -5  " class="right-red">{{data.COMPARE_TAX}}</h3>
+                </td>
+                <td width="8%"  *ngIf="data.REGION_CD =='000000' || data.REGION_CD =='099990' " class="row-blue">
+                  <h3 *ngIf="data.LAST_TAX_PERCENTAGE == 0 "  class="td-right">-</h3>
+                  <h3 *ngIf="data.LAST_TAX_PERCENTAGE > 0 " class="td-right">{{data.LAST_TAX_PERCENTAGE}}</h3> 
+                </td>  
+  <!-- end set sum colrum color-->
+            </tr>  
+          </tbody>
+        </table>
+      </div>
+      <!-- </ion-scroll>-->
+    </ion-card-content>
+  </ion-card>
+ 
+
+</ion-content>
