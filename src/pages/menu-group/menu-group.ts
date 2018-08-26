@@ -31,7 +31,6 @@ export class MenuGroupPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuGroupPage');
   }
 
   openMenu() {

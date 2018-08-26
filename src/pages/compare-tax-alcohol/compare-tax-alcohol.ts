@@ -46,7 +46,6 @@ export class CompareTaxAlcoholPage {
     this.webapi.getData('CompareTaxVolSura?offcode='+this.offcode).then((data) => {
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
-        console.log(this.TaxLineData);
         this.TaxgetTAX();
         this.TaxgetTAX_LY();
         this.TaxgetLebel();
@@ -162,8 +161,8 @@ export class CompareTaxAlcoholPage {
 
             return value;
           }
-        } // end callbacks:
-      }, //end tooltip
+        }
+      },
         scales: {
           yAxes: [{
             ticks: {

@@ -11,13 +11,6 @@ import { TaxCoutrySection8Page } from '../tax-coutry-section8/tax-coutry-section
 import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
 
-/**
- * Generated class for the TaxAllCountryPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-tax-all-country',
@@ -41,7 +34,6 @@ export class TaxAllCountryPage {
 
   UserAthu() {
     this.offcode = this.offcode.substring(0, 2);
-    console.log(this.offcode );
   }
 
   section1() {

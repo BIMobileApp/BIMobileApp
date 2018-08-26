@@ -46,7 +46,6 @@ export class NewReportLineTaxEstProdPage {
   getProduct() {
     this.webapi.getData('getProduct').then((data) => {
       this.prod = data;
-      console.log(this.prod);
 
     });
   }
@@ -55,7 +54,6 @@ export class NewReportLineTaxEstProdPage {
     this.other = [];
     this.webapi.getData('newReportLineFollowProd?id=' + id).then((data) => {
       this.respondData = data;
-      console.log(this.respondData);
       for (var i = 0; i < this.respondData.length; i++) {
         this.other.push(this.respondData[i]);
       }
@@ -75,7 +73,6 @@ export class NewReportLineTaxEstProdPage {
       this.prod.push(this.other[i].GRP_NAME);
     }
     this.prod = JSON.parse(JSON.stringify(this.prod));
-    console.log(this.prod);
   }
 
 
@@ -85,7 +82,6 @@ export class NewReportLineTaxEstProdPage {
       this.TAX.push(this.other[i].TAX);
     }
     this.TAX = JSON.parse(JSON.stringify(this.TAX));
-    console.log(this.TAX);
 
   }
 
@@ -95,7 +91,6 @@ export class NewReportLineTaxEstProdPage {
       this.EST.push(this.other[i].EST);
     }
     this.EST = JSON.parse(JSON.stringify(this.EST));
-    console.log(this.EST);
   }
 
   getLebel() {
@@ -104,7 +99,6 @@ export class NewReportLineTaxEstProdPage {
       this.lebel.push(this.other[i].MONTH);
     }
     this.lebel = JSON.parse(JSON.stringify(this.lebel));
-    console.log(this.lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
 

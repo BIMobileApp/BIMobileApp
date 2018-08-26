@@ -42,14 +42,12 @@ export class CompareTaxEstBeerPage {
   getProductType() {
     this.webapi.getData('CompareTaxBeerMonth').then((data) => {
     this.ProductType = data;
-    console.log(this.ProductType);
   });
 }
 
   getTableData() {
     this.webapi.getData('CompareTaxBeer?offcode='+this.offcode).then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableTAX();
     this.getTableTAX_LY();
   });
@@ -78,7 +76,6 @@ getTableTAX_LY() {
 getLineTaxData(TaxCode) {
   this.webapi.getData('CompareTaxBeerMonth?code='+TaxCode+'&&offcode='+this.offcode).then((data) => {
     this.TaxLineData = data;
-    console.log('TaxLineData     '+this.TaxLineData);
     this.TaxgetTAX();
     this.TaxgetTAX_LY();
     this.TaxgetLebel();

@@ -21,7 +21,6 @@ export class DataStatusPage {
     getTableData() {
       this.webapi.getData('DataStatus').then((data) => {
       this.responseData = data;
-      console.log(this.responseData);
     });
 }
 }

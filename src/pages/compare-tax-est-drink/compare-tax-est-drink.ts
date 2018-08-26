@@ -38,7 +38,6 @@ export class CompareTaxEstDrinkPage {
   getTableData() {
     this.webapi.getData('CompareTaxDrink?offcode='+this.offcode).then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableTAX();
     this.getTableTAX_LY();
   });
@@ -47,7 +46,6 @@ export class CompareTaxEstDrinkPage {
 getProductType() {
   this.webapi.getData('CompareTaxDrinkMonth').then((data) => {
   this.ProductType = data;
-  console.log(this.ProductType);
 });
 }
 
@@ -73,7 +71,6 @@ getTableTAX_LY() {
 getLineTaxData(TaxCode) {
   this.webapi.getData('CompareTaxDrinkMonth?code='+TaxCode+'&&offcode='+this.offcode).then((data) => {
     this.TaxLineData = data;
-    console.log(this.TaxLineData);
     this.TaxgetTAX();
     this.TaxgetTAX_LY();
     this.TaxgetLebel();
@@ -105,7 +102,6 @@ TaxgetLebel() {
     this.tax_lebel.push(this.TaxLineData[i].MONTH);
   }
   this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
-  console.log(this.tax_lebel);
 }
 //----------------------- End Manage Data from API-------------------------//
 

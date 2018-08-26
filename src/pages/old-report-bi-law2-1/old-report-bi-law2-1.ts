@@ -25,7 +25,6 @@ export class OldReportBi_Law21Page{
 
     this.webapi.getData('OldREPORT_BI_Law2_1').then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableLAW_AMT();
     this.getTableTARGET_AMT();
     this.getTableL_LAW_AMT();

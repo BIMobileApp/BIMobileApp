@@ -52,11 +52,7 @@ export class FollowTaxMthPage {
     let amts = [];
 
     for (var i = 0; i < this.respondData.length; i++) {
-      //for(let data of this.respondData) {
         other.push(this.respondData[i]);
-    
-        //console.log(this.respondData[i]);
-      //  return this.respondData[i];
     } 
     
       for (var i = 0; i < other.length; i++) {
@@ -64,12 +60,10 @@ export class FollowTaxMthPage {
       }
 
       return JSON.stringify(amts);
-   // console.log(JSON.stringify(amts));
     }
 
 testgraph(){
   let other =  JSON.parse(this.showStreets());
-  console.log(other);
 
   this.lineChart = new Chart(this.lineCanvas.nativeElement, {
     type: 'line',
