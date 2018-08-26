@@ -82,14 +82,6 @@ export class MenuGroupPage {
   gotoDepartmentReport(){
     this.app.getRootNav().push(MenuGroupNewReportPage); 
   }
-  
-  gotoCategoryLawTax(){
-    this.app.getRootNav().push(OldReportBi_Law21Page); 
-  }
-
-  gotoCategoryFinesTax(){
-    this.app.getRootNav().push(OldReportBi_Law31Page); 
-  }
 
   LawDataArea(){
     this.app.getRootNav().push(LawDataAreaPage); 

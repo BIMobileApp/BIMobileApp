@@ -36,7 +36,7 @@ export class NewReportGaugeTaxDrinkPage {
   getTAX() {
 
     let tax_val;
-    let taxly_val;8
+    let taxly_val;
     let taxest_val;
     for (var i = 0; i < this.respondData.length; i++) {
       tax_val = this.respondData[i].TAX_PERCENT;

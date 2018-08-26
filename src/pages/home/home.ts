@@ -4,12 +4,12 @@ import { RestProvider } from '../../providers/rest/rest';
 import { FollowTaxMthPage } from '../follow-tax-mth/follow-tax-mth';
 import { Test2Page } from '../test2/test2';
 import { TabGaugeAllmthSectionTaxPage } from '../tab-gauge-allmth-section-tax/tab-gauge-allmth-section-tax';
-
 import { GaugechartPage } from '../gaugechart/gaugechart';
 import { DashboardPage } from '../dashboard/dashboard';
 import { MenuGroupPage } from '../menu-group/menu-group';
 import { Test3Page } from '../test3/test3';
 import { DataStatusPage } from '../data-status/data-status';
+import { NewsEventPage } from '../news-event/news-event';
 
 @Component({
   selector: 'page-home',
@@ -72,6 +72,10 @@ export class HomePage {
     
   }
 
+  NewsEvent(){
+    this.app.getRootNav().push(NewsEventPage);  
+  }
+  
   test(){
     this.app.getRootNav().push(MenuGroupPage);  
   }

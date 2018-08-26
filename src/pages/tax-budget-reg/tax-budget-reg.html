@@ -12,7 +12,7 @@
             <ion-label>ปีงบประมาณ : </ion-label>
             <ion-select [(ngModel)]="year"  #item (ionChange)="selectDate(item.value)">
                 <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
-                <ion-option  *ngFor="let data of summaryDate" value="{{data.value}}" >{{data.key}}</ion-option>
+                <ion-option  *ngFor="let data of summaryDate" value="{{data.key}}" >{{data.key}}</ion-option>
             </ion-select>
         </ion-item>
         <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>

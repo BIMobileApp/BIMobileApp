@@ -1,79 +1,51 @@
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h1 class="header-title">ระบบสารสนเทศเพื่อการบริการ<br>กรมสรรพสามิต</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <img no-padding class="icon-krom-style" src="../../assets/imgs/AIconkrom174x214px.png" />
-      </ion-col>
-    </ion-row>
-    <ion-row>
+  <div style="background-color: rgb(238, 238, 238);">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 class="header-title">ระบบสารสนเทศเพื่อการบริการ
+            <br>กรมสรรพสามิต</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <img no-padding class="icon-krom-style" src="../../assets/imgs/AIconkrom174x214px.png" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col (click)="DataStatus()" text-center>
-          <img class="icon-menu-style" src="../../assets/imgs/AStatus.png" />
-          <p class="content-center">แหล่งที่มา</p> 
+          <img class="icon-menu-style" src="../../assets/imgs/AStatus2.png" />
+          <p class="content-center">แหล่งที่มา</p>
         </ion-col>
         <ion-col (click)="TaxMthByProduct()" text-center>
-            <img class="icon-menu-style" src="../../assets/imgs/AManual.png" />
-            <p class="content-center">คู่มือติดตั้ง</p> 
-          </ion-col>
-          <ion-col (click)="TaxMthByProduct()" text-center>
-              <img class="icon-menu-style" src="../../assets/imgs/ANew.png" />
-              <p class="content-center">ข่าวสาร</p> 
-            </ion-col>
+          <img class="icon-menu-style" src="../../assets/imgs/AManual2.png" />
+          <p class="content-center">คู่มือติดตั้ง</p>
+        </ion-col>
+        <ion-col (click)="NewsEvent()" text-center>
+          <img class="icon-menu-style" src="../../assets/imgs/ANew2.png" />
+          <p class="content-center">ข่าวสาร</p>
+        </ion-col>
       </ion-row>
-  </ion-grid>
-
-  <header padding>
-      <div>
-         <span class="spacer"></span>
-           <h1>เข้าสู่ระบบ</h1>
-         <span class="spacer"></span>
-      </div>
-      </header>
-  <ion-item>
-    <ion-label floating>
-      <ion-icon name="mail" item-start class="text-primary"></ion-icon>
-      ชื่อผู้ใช้
-    </ion-label>
-    <ion-input type="taxt" [(ngModel)]="userData.username"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>
-      <ion-icon name="lock" item-start class="text-primary"></ion-icon>
-      รหัสผ่าน
-    </ion-label>
-    <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
-  </ion-item>
-  <!-- </form> -->
-
-  
-
-
-  <div>
-    <button ion-button icon-start block color="dark" tappable (click)="login()">
-      <ion-icon name="log-in"></ion-icon>
-      เข้าสู่ระบบ
-    </button>
-
-    <!--<p text-center ion-text color="secondary">Or Sign in with:</p>-->
-
-
-
+    </ion-grid>
   </div>
 
+  <header padding>
+    <div>
+      <span class="spacer"></span>
+      <h1>เข้าสู่ระบบ</h1>
+      <span class="spacer"></span>
+    </div>
+  </header>
 
-  <!-- Other links -->
-  <!--<div text-center margin-top>
-        <span ion-text color="secondary" tappable (click)="register()">New here? <strong>Sign up</strong></span>
-      </div>-->
+  <div padding>
+    <ion-input class="box-style" placeholder="Username" [(ngModel)]="userData.username"></ion-input>
+    <br>
+    <ion-input class="box-style" type="password" placeholder="Password" [(ngModel)]="userData.password"></ion-input>
+    <br>
+    <button class="box" ion-button color="navber" (click)="login()">Login</button>
+  </div>
 
-
-
-  <button ion-button round outline menuClose="left" (click)=test()>GotoGauge</button>
+  <button ion-button round outline menuClose="left" (click)=test()>Shortcut</button>
 
 </ion-content>

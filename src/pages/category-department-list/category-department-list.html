@@ -13,29 +13,29 @@
             
                 <ion-grid>            
                     <ion-row>
-                        <ion-col (click)="TaxTopRegTable(0501)" text-center >
-                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileCar.png"/>
+                        <ion-col (click)="TaxTopRegTable('ภาษีรถยนต์')" text-center >
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DCar.png"/>
                               <p class="content-center">รถยนต์</p> 
                         </ion-col>
                         <ion-col col-1></ion-col>
-                        <ion-col (click)="TaxTopRegTable(70021)" text-center>
-                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileAlcohol.png">
+                        <ion-col (click)="TaxTopRegTable('ภาษีสุรา')" text-center>
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DSura.png">
                               <p class="content-center">สุรา</p> 
                         </ion-col>
                         <ion-col col-1></ion-col>
-                        <ion-col (click)="TaxTopRegTable(7001)" text-center>
-                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileBeer.png">
+                        <ion-col (click)="TaxTopRegTable('ภาษีเบียร์')" text-center>
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DBeer.png">
                               <p class="content-center">เบียร์</p> 
                         </ion-col>
                       </ion-row>
                       <ion-row>
-                          <ion-col (click)="TaxTopRegTable(0201)" text-center >
-                                <img no-padding class="iconStyle" src="../../assets/imgs/ProfileDrink.png"/>
+                          <ion-col (click)="TaxTopRegTable('ภาษีเครื่องดื่ม')" text-center >
+                                <img no-padding class="iconStyle" src="../../assets/imgs/DDrink.png"/>
                                 <p class="content-center">เครื่องดื่ม</p> 
                           </ion-col>
                           <ion-col col-1></ion-col>
                           <ion-col (click)="MBLRegisterLink()" text-center>
-                                <img no-padding class="iconStyle" src="../../assets/imgs/ProfileLic.png">
+                                <img no-padding class="iconStyle" src="../../assets/imgs/DLic.png">
                                 <p class="content-center">จดทะเบียน</p> 
                           </ion-col>
                           <ion-col col-1></ion-col>
@@ -50,90 +50,13 @@
                     <ion-grid>            
                     <ion-row>
                         <ion-col col-3 (click)="TaxTopMthTable()" text-center >
-                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileDrink.png"/>
-                              <p class="content-center">เครื่องดื่ม</p> 
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DReg.png"/>
+                              <p class="content-center">ผู้ประกอบการรายเดือน</p> 
                         </ion-col>                  
                       </ion-row>
                   </ion-grid>
                              
          </ion-card-content>
-
-
-         <!--/////////////////////////////////////////////ของเก่าาาาาา///////////////////////////////////////-->
-      
-          <!--<ion-card-content no-padding>
-              <ion-item  style="background-color:#E6E6FA;">
-                <ion-label  center>รายเดือน</ion-label>
-              </ion-item>
-              <ion-grid>
-                  <ion-row>
-                    <ion-col col-3 (click)="TaxMonthlyFreezone()"><img src="../assets/imgs/graph.png"></ion-col>
-                    <ion-col col-3 (click)="TaxThisYearTable()"><img src="../assets/imgs/graph.png"></ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-3>รายงานที่ 1 ภาษีประจำเดือนแต่ละพื้นที่</ion-col>
-                    <ion-col col-3>รายงานที่ 2 ภาษีประจำงบประมาณปัจจุบัน</ion-col>
-                  </ion-row>
-               </ion-grid>
-          </ion-card-content>
-
-          <ion-card-content no-padding>
-              <ion-item  style="background-color:#E6E6FA;">
-                <ion-label  center>ผู้ประกอบการ</ion-label>
-              </ion-item>
-              <ion-grid>
-                  <ion-row>
-                    <ion-col col-3 (click)="TaxTopRegTable();"><img src="../assets/imgs/graph.png"></ion-col>
-                    <ion-col col-3 (click)="TaxTopMthTable();"><img src="../assets/imgs/graph.png"></ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-3>รายงานที่ 19 TOP 10 ผู้ประกอบการปีงบประมาณ</ion-col>
-                    <ion-col col-3>รายงานที่ 20 TOP 10 ผู้ประกอบการรายเดือน</ion-col>
-                  </ion-row>
-               </ion-grid>
-          </ion-card-content>
-
-          <ion-card-content no-padding>
-              <ion-item  style="background-color:#E6E6FA;">
-                <ion-label  center>รายสินค้า</ion-label>
-              </ion-item>
-              <ion-grid>
-                  <ion-row>
-                    <ion-col col-3 (click)="TaxYearByProduct()"><img src="../assets/imgs/graph.png"></ion-col>
-                    <ion-col col-3 (click)="TaxGroupSource()"><img src="../assets/imgs/graph.png"></ion-col>
-                    <ion-col col-3 (click)="TaxAndEstimateProductLine()"><img src="../assets/imgs/graph.png"></ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-3>รายงานที่ 18 ประมาณการปีงบประมาณ</ion-col>
-                    <ion-col col-3>รายงานที่ 21 ยอดภาษีกลุ่มสถานะในประเทศ/นำเข้า </ion-col>
-                    <ion-col col-3>รายงานที่ 3 ภาษีและประมาณการตามสินค้า</ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col col-3 (click)="TaxCompareProductTable()"><img src="../assets/imgs/graph.png"></ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col col-3>รายงานที่ 15 ตารางสินค้า</ion-col>
-                    </ion-row>
-               </ion-grid>
-          </ion-card-content>
-
-          <ion-card-content no-padding>
-              <ion-item  style="background-color:#E6E6FA;">
-                <ion-label  center>Real Time</ion-label>
-              </ion-item>
-              <ion-grid>
-                  <ion-row>
-                    <ion-col col-3 (click)="FollowTaxRealtime()"><img src="../assets/imgs/graph.png"></ion-col>
-                    <ion-col col-3 (click)="IncomeRealTimeTable()"><img src="../assets/imgs/graph.png"></ion-col>
-                    <ion-col col-3 (click)="TaxEdRealtime()"><img src="../assets/imgs/graph.png"></ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-3>รายงานที่ 17 ติดตามการชำระภาษี</ion-col> 
-                    <ion-col col-3>รายงานที่ 22 รับเงินรายได้ Real Time</ion-col>
-                    <ion-col col-3>รายงานที่ 23 ภาษีสรรพสามิตนำเข้าแยกรายวัน</ion-col>
-                  </ion-row>
-               </ion-grid>
-          </ion-card-content>-->
 
     </ion-content>
   
