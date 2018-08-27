@@ -47,10 +47,10 @@ export class TaxBudgetRegByMthPage {
   getTableTAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX_NETTAX_AMT/1000000;
+      val = this.responseData[i].TAX/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX_NETTAX_AMT = val;
+      this.responseData[i].TAX = val;
     
     }
     console.log(this.responseData);
