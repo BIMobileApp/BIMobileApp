@@ -46,7 +46,6 @@ export class CompareTaxDrinkPage {
     this.webapi.getData('CompareTaxVolDrink?offcode='+this.offcode).then((data) => {
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
-        console.log(this.TaxLineData);
         this.TaxgetTAX();
         this.TaxgetTAX_LY();
         this.TaxgetLebel();
@@ -84,7 +83,6 @@ export class CompareTaxDrinkPage {
       this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
-    console.log(this.tax_lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
 

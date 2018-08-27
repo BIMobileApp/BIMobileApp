@@ -22,7 +22,8 @@ export class CompareTaxEstAlcoholPage {
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
-
+  yAxesticks= [];
+  textDataNotValid: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,14 +43,12 @@ export class CompareTaxEstAlcoholPage {
   getProductType() {
     this.webapi.getData('CompareTaxSuraMonth').then((data) => {
     this.ProductType = data;
-    console.log(this.ProductType);
   });
 }
 
   getTableData() {
-    this.webapi.getData('CompareTaxSura').then((data) => {
+    this.webapi.getData('CompareTaxSura?offcode='+this.offcode).then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableTAX();
     this.getTableTAX_LY();
   });
@@ -78,11 +77,15 @@ getTableTAX_LY() {
 getLineTaxData(TaxCode) {
   this.webapi.getData('CompareTaxSuraMonth?code='+TaxCode+'&&offcode='+this.offcode).then((data) => {
     this.TaxLineData = data;
-    console.log(this.TaxLineData);
-    this.TaxgetTAX();
-    this.TaxgetTAX_LY();
-    this.TaxgetLebel();
-    this.TaxCreateChart();
+    if(this.TaxLineData.length > 0){
+      this.TaxgetTAX();
+      this.TaxgetTAX_LY();
+      this.TaxgetLebel();
+      this.TaxCreateChart();
+      
+    }else{
+      this.textDataNotValid = 0;
+    }
   });
 }
 
@@ -111,7 +114,6 @@ TaxgetLebel() {
     this.tax_lebel.push(this.TaxLineData[i].MONTH);
   }
   this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
-  console.log(this.tax_lebel);
 }
 
 TaxCreateChart() {
@@ -195,14 +197,17 @@ TaxCreateChart() {
           ticks: {
             beginAtZero: true,
             userCallback: function (value, index, values) {
-              value = (value / 1000000);
-              value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-              return value;
+              
+                value = (value / 1000000);
+                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return value;
+              
+             
             }
           },
           scaleLabel: {
             display: true,
-            labelString: 'ล้านบาท'
+            labelString: "ล้านบาท",
           }
         }
         ],

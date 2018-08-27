@@ -1,9 +1,10 @@
 page-old-report-follow-product-group {
     .iconStyle{
-        width: 70%;
+        width: 60%;
         height: auto;
+        margin: auto;
         
-    }   
+    }     
     .bg{
         background-image: url('../../assets/imgs/titlebar2.png');
         background-size: cover !important;
@@ -19,6 +20,19 @@ page-old-report-follow-product-group {
             }
         }
     }  
+
+    h1.header-style{
+        font-weight: bold;
+        color: black !important;
+        font-size: 4vw !important;
+        text-align: center !important;
+      }
+      h2.header-style{
+        font-weight: bold;
+        color: black !important;
+        font-size: 4vw !important;
+        text-align: left !important;
+      }
 
     .shelf {
     

@@ -1,22 +1,23 @@
 page-welcome {
    
  img.img-size{
-    height: 95%;
+    height: 90%;
     width: auto;
  }
- button{
-    width: 70%;
-    height: 20%;
-    text-align: center;
-    font-weight: bold;
-    //font-size: 2em !important;
-    font-size: 5.9vw;
+ .nav-login{
+
+    font-size: 2em;
+    color: rgb(32, 91, 201);
+    text-decoration: underline;
     
  }
  .bg{
     background-image: url('../../assets/imgs/WelcomeBG.png');
     background-size: cover !important;
  }
-
+.middle-on-screen{
+    padding-top: 4em;
+    height: 100%; 
+}
  
 }

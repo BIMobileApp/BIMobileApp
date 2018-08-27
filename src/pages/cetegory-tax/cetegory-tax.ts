@@ -23,6 +23,7 @@ export class CetegoryTaxPage {
   //map parm
   offcode: any;
   offcode_full:any;
+  pak: any;
 
   //guage parm
   TaxGauge: any;
@@ -56,6 +57,7 @@ export class CetegoryTaxPage {
   UserAthu() {
     this.offcode_full = localStorage.offcode;
     this.offcode = this.offcode_full.substring(0, 2);
+    this.pak = parseInt("01", 10);
     this.GaugeGetData();
     this.TableGetData();
     this.TableProductGetData();
@@ -84,7 +86,6 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TAX = val;
-     // console.log(this.responseData);
     }
   }
 
@@ -95,7 +96,6 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].LAST_TAX = val;
-      //console.log(this.responseData);
     }
   }
 
@@ -106,15 +106,12 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].ESTIMATE = val;
-      //console.log(this.responseData);
     }
   }
 
   TableProductGetData(){
     this.webapi.getData('TaxProductCurYear?offcode='+ this.offcode_full).then((data)=>{
       this.DataProduct = data;
-
-      console.log(this.DataProduct);
       this.getProductTAX();
       this.getProductLAST_TAX();
       this.getProductEST();
@@ -128,7 +125,6 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].TAX = val;
-     // console.log(this.responseData);
     }
   }
 
@@ -139,7 +135,6 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].LAST_TAX = val;
-      //console.log(this.responseData);
     }
   }
 
@@ -150,14 +145,12 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].ESTIMATE = val;
-      //console.log(this.responseData);
     }
   }
 
   REP02_GUAGE_REG(){
     this.webapi.getData('REP02_GUAGE_REG?area='+this.offcode).then((data)=>{
       this.DataGauge = data;
-      console.log(this.DataGauge);
       this.getGaugeTAX();
 
     });
@@ -240,31 +233,3 @@ export class CetegoryTaxPage {
   }
 
 }
-
-
-
-/*export class CetegoryTaxPage {
-
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public app:App) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CetegoryTaxPage');
-  }
-
-  TaxThisyearTable(){
-    this.app.getRootNav().push(TaxbudgetyearPage); 
-  }
-
-  TaxAllCountry(){
-    this.app.getRootNav().push(TaxAllCountryPage); 
-  }
-
-  TaxMonthlyFreezone(){
-    this.app.getRootNav().push(TaxMonthlyFreezonePage); 
-  }
-
-}
-*/

@@ -45,7 +45,6 @@ export class OldReportBarAllTaxPage {
   getData() {
     this.webapi.getData('OldBarAllTax').then((data) => {
       this.respondData = data;
-      // console.log(this.respondData);
       for (var i = 0; i < this.respondData.length; i++) {
         this.other.push(this.respondData[i]);
       }
@@ -61,7 +60,6 @@ export class OldReportBarAllTaxPage {
       this.TAX.push(this.other[i].TAX);
     }
     this.TAX = JSON.parse(JSON.stringify(this.TAX));
-    // console.log(this.TAX);
 
   }
 
@@ -70,7 +68,6 @@ export class OldReportBarAllTaxPage {
       this.TAX_LY.push(this.other[i].TAX_LY);
     }
     this.TAX_LY = JSON.parse(JSON.stringify(this.TAX_LY));
-    //console.log(this.TAX_LY);
   }
 
   getEST() {
@@ -78,7 +75,6 @@ export class OldReportBarAllTaxPage {
       this.EST.push(this.other[i].EST);
     }
     this.EST = JSON.parse(JSON.stringify(this.EST));
-    //console.log(this.EST);
   }
 
   getLebel() {
@@ -86,7 +82,6 @@ export class OldReportBarAllTaxPage {
       this.lebel.push(this.other[i].GRP_NAME);
     }
     this.lebel = JSON.parse(JSON.stringify(this.lebel));
-    //console.log(this.lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
 

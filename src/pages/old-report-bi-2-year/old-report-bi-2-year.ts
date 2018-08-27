@@ -23,14 +23,11 @@ export class OldReportBi_2YearPage {
 
     this.webapi.getData('OldREPORT_BI_2_YEAR').then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableTAX();
     this.getTableESTIMATE();
     this.getTableTAX_LY();
     this.getTableCOMPARE_EST();
     this.getTableCOMPARE_TAX();
-   /* this.getTableESTIMATE_PER();
-    this.getTableLAST_TAX_PER();*/
   });
 }
 

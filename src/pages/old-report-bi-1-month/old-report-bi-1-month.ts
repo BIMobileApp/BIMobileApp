@@ -23,7 +23,6 @@ export class OldReportBi_1MonthPage {
 
     this.webapi.getData('OldREPORT_BI_1_MONTH').then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableTAX();
     this.getTableESTIMATE();
     this.getTableTAX_LY();

@@ -30,7 +30,6 @@ export class LawDataAreaPage {
   getTableData() {
     this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data) => {
     this.responseData = data;
-    console.log(this.responseData);
     this.getTableLaw_qty();
     this.getTableTarget_qty();
     this.getTableLaw_amt();

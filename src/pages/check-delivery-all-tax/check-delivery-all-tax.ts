@@ -32,8 +32,6 @@ export class CheckDeliveryAllTaxPage {
 
     this.webapi.getData('CheckDelivery?st_date='+st_date_res+"&en_date="+en_date_res).then((data)=>{
       this.responseData = data;
-     // return  JSON.stringify(this.respondData);
-      //console.log(this.respondData);
     });
   }
   

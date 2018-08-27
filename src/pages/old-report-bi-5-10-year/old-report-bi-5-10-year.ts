@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the OldReportBi_5_10YearPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-old-report-bi-5-10-year',
@@ -19,7 +12,6 @@ export class OldReportBi_5_10YearPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OldReportBi_5_10YearPage');
   }
 
 }
