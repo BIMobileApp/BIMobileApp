@@ -94,8 +94,6 @@ import { OldReportRegionGroupPage } from '../pages/old-report-region-group/old-r
 import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-group/old-report-section1-10-group';
 import { MblRegisterPage } from '../pages/mbl-register/mbl-register';
 import { TaxProductByMthPage } from '../pages/tax-product-by-mth/tax-product-by-mth';
-import { HttpClientModule } from '@angular/common/http';
-import { RestProvider } from '../providers/rest/rest';
 import { OldReportBi_Law21Page } from '../pages/old-report-bi-law2-1/old-report-bi-law2-1';
 import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-bi-law3-1';
 import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
@@ -104,6 +102,14 @@ import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
 import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
 import { DataStatusPage } from '../pages/data-status/data-status';
 import { NewsEventPage } from '../pages/news-event/news-event';
+
+import { HttpClientModule } from '@angular/common/http';
+import { RestProvider } from '../providers/rest/rest';
+
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { DocumentViewer } from '@ionic-native/document-viewer';
+import { Geolocation } from '@ionic-native/geolocation'; 
 
 @NgModule({
   declarations: [
@@ -320,7 +326,11 @@ import { NewsEventPage } from '../pages/news-event/news-event';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RestProvider
+    RestProvider,
+    File,
+    DocumentViewer,
+    FileTransfer,
+    Geolocation
   ]
 })
 
