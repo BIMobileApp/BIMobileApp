@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar color="navber">
+      <ion-title>แหล่งที่มาของข้อมูล</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+  <ion-card>
+     <ion-card-content no-padding> 
+              <div class="table-responsive">     
+                     <table class="table" style="width: 100%;">
+                             <thead>
+                                     <tr style="background-color: #F78B26; ">
+                                             <th colspan="2"><h3 class="th-center">ระบบสารสนเทศเพื่อการบริการกรมสรรพสามิต มีแหล่งที่มาและสถานะข้อมูลดังนี้</h3></th>
+                                     </tr>
+                             </thead>
+                             <tbody>
+                                     <tr *ngFor="let data of responseData">
+                                             <td><h3 class="td-left">{{data.GROP_NAME}}</h3></td>
+                                             <td><h3 class="td-right">{{data.DATE_AS_OF}}</h3></td>
+                                     </tr>
+                             </tbody>
+                     </table>
+                 </div>
+     </ion-card-content>
+   </ion-card>
+</ion-content>

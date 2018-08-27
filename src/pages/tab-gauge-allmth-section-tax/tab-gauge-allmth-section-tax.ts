@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';
 
-/**
- * Generated class for the TabGaugeAllmthSectionTaxPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 declare var google;
 
 @IonicPage()
@@ -36,7 +30,6 @@ export class TabGaugeAllmthSectionTaxPage {
   getData() {
     this.webapi.getData('GaugeMthSectionTax').then((data)=>{
       this.respondData = data;
-      console.log(this.respondData);
     });
     }
 

@@ -26,7 +26,6 @@ export class CategoryDepartmentListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoryDepartmentListPage');
   }
 
   TaxThisYearTable(){

@@ -7,11 +7,22 @@ import { HomePage } from '../home/home';
 import { ContactPage } from '../contact/contact';
 import { CetegoryTaxPage } from '../cetegory-tax/cetegory-tax';
 import { CategoryDepartmentListPage } from '../category-department-list/category-department-list';
+<<<<<<< HEAD
 import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone'; 
 import { LawDataAreaPage } from '../law-data-area/law-data-area';
 import { LawDataMthPage } from '../law-data-mth/law-data-mth';
 import { IncDataAreaPage } from '../inc-data-area/inc-data-area';
 import { IncDataMthPage } from '../inc-data-mth/inc-data-mth';
+=======
+import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone';
+
+import { LawDataMthPage } from '../law-data-mth/law-data-mth';
+import { IncDataAreaPage } from '../inc-data-area/inc-data-area';
+import { IncDataMthPage } from '../inc-data-mth/inc-data-mth';
+import { OldReportBi_Law21Page } from '../old-report-bi-law2-1/old-report-bi-law2-1';
+import { LawDataAreaPage } from '../law-data-area/law-data-area';
+import { OldReportBi_Law31Page } from '../old-report-bi-law3-1/old-report-bi-law3-1';
+>>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
 
 @IonicPage()
 @Component({
@@ -28,7 +39,6 @@ export class MenuGroupPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuGroupPage');
   }
 
   openMenu() {
@@ -78,7 +88,11 @@ export class MenuGroupPage {
 
   gotoDepartmentReport(){
     this.app.getRootNav().push(MenuGroupNewReportPage); 
+<<<<<<< HEAD
   } 
+=======
+  }
+>>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
 
   LawDataArea(){
     this.app.getRootNav().push(LawDataAreaPage); 
@@ -95,5 +109,5 @@ export class MenuGroupPage {
   IncDataMth(){
     this.app.getRootNav().push(IncDataMthPage); 
   }
-
+  
 }

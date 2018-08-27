@@ -45,6 +45,7 @@ export class TaxBudgetRegPage {
 
 selectDataAll(){
 
+  
     this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id).then((data)=>{
       this.responseData = data;
      

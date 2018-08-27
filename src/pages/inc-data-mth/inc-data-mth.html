@@ -1,18 +1,50 @@
-<!--
-  Generated template for the IncDataMthPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>inc_data_mth</ion-title>
+  <ion-navbar color="navber">
+    <ion-title>ใบอนุญาต</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-item style="background-color:#D0DFE6;" text-center>
+      <h2 class="header-style">สถิติใบอนุญาตตามเดือน</h2>
+    </ion-item>
+  <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
+
+  <ion-card>
+    <ion-card-content no-padding>
+      <div class="table-responsive">
+        <table class="table" style="width: 100%;">
+          <thead>
+            <tr style="background-color: #F78B26; " class="solid-head">
+              <th rowspan="2" width="10%"><h3 class="center">ภาค</h3></th>
+              <th colspan="2"><h3 class="center">สุรา</h3></th>
+              <th colspan="2"><h3 class="center">ยาสูบ</h3></th>
+              <th colspan="2"><h3 class="center">ไพ่</h3></th>
+            </tr>
+            <tr style="background-color: #F78B26; ">
+              <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+              <th><h3 class="center">จำนวนเงิน</h3></th>
+              <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+              <th><h3 class="center">จำนวนเงิน</h3></th>
+              <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+              <th><h3 class="center">จำนวนเงิน</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of responseData">
+              <td width="10%"><h3 class="center">{{data.MONTH_DESC}}</h3></td>
+              <td> <h3 class="right">{{data.NUM_OF_LIC_SURA}}</h3></td>
+              <td> <h3 class="right">{{data.AMT_OF_LIC_SURA}}</h3></td>
+              <td><h3 class="right">{{data.NUM_OF_LIC_TOBBACO}}</h3></td>
+              <td> <h3 class="right">{{data.AMT_OF_LIC_TOBBACO}}</h3></td>
+              <td> <h3 class="right">{{data.NUM_OF_LIC_CARD}}</h3></td>
+              <td><h3 class="right">{{data.AMT_OF_LIC_CARD}}</h3></td>
+            </tr>
+          </tbody>
+        </table>
+      </div> 
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
