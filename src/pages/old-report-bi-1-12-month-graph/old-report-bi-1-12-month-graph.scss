@@ -1,10 +1,15 @@
 page-old-report-bi-1-12-month-graph {
-    h3.right {
-        font-weight: bold;
-        color: black !important;
-        font-size: 3vw !important;
-        text-align: right !important;
-      }
+  h2.header-style{
+    font-weight: bold;
+    color: black !important;
+    font-size: 6vw !important;
+    text-align: center !important;
+  }
+  h3.header-style{
+    color: black !important;
+    font-size: 5vw !important;
+    text-align: center !important;
+  }
 
       .remark-font{
         font-weight: bold;
@@ -20,4 +25,11 @@ page-old-report-bi-1-12-month-graph {
         border-right: 0px;
         border-bottom: 0px;
         }
+        
+      .DataStatus-font{
+        font-weight: bold;
+        color: rgb(29, 97, 160) !important;
+        font-size: 3vw !important;
+        text-align: left !important;
+      }
 }

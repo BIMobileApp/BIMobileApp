@@ -36,6 +36,7 @@ export class OldReportBi_1MonthGraphRatioPage {
         this.group_name.push(this.respondData[i].GROUP_NAME_NEW);
         this.total_tax.push(this.respondData[i].TOTAL_TAX);
     }
+    console.log(this.total_tax);
  }
 
  loadtax(){
@@ -48,11 +49,11 @@ export class OldReportBi_1MonthGraphRatioPage {
             label:this.group_name,
             data: this.total_tax,
             backgroundColor: [
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)'
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
             ],
             hoverBackgroundColor: [
                 "#FFCE56",
