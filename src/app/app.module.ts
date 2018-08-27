@@ -93,11 +93,17 @@ import { OldReportFollowProductGroupPage } from '../pages/old-report-follow-prod
 import { OldReportRegionGroupPage } from '../pages/old-report-region-group/old-report-region-group';
 import { OldReportSection1_10GroupPage } from '../pages/old-report-section1-10-group/old-report-section1-10-group';
 import { MblRegisterPage } from '../pages/mbl-register/mbl-register';
+import { TaxProductByMthPage } from '../pages/tax-product-by-mth/tax-product-by-mth';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { OldReportBi_Law21Page } from '../pages/old-report-bi-law2-1/old-report-bi-law2-1';
 import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-bi-law3-1';
+import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
+import { IncDataMthPage } from '../pages/inc-data-mth/inc-data-mth';
+import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
+import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
+
 
 @NgModule({
   declarations: [
@@ -193,7 +199,12 @@ import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-
     OldReportSection1_10GroupPage,
     MblRegisterPage,
     OldReportBi_Law21Page,
-    OldReportBi_Law31Page
+    OldReportBi_Law31Page,
+    TaxProductByMthPage,
+    IncDataAreaPage,
+    IncDataMthPage,
+    LawDataAreaPage,
+    LawDataMthPage
   ],
   imports: [
     BrowserModule,
@@ -303,7 +314,12 @@ import { OldReportBi_Law31Page } from '../pages/old-report-bi-law3-1/old-report-
     OldReportSection1_10GroupPage,
     MblRegisterPage,
     OldReportBi_Law21Page,
-    OldReportBi_Law31Page
+    OldReportBi_Law31Page,
+    TaxProductByMthPage,
+    IncDataAreaPage,
+    IncDataMthPage,
+    LawDataAreaPage,
+    LawDataMthPage
   ],
   providers: [
     StatusBar,

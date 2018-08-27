@@ -12,34 +12,46 @@ declare var google;
 export class NewReportGaugeTaxDrinkPage {
 
   respondData:any;
+  respondData2:any;
+  offcode: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
+      this.offcode = localStorage.offcode;
   }
 
   ionViewDidLoad() {
-    let grp_id = "0201";
-    let tax_year = new Date();
-    var tax_year_th = tax_year.getFullYear()+543;
-
-    this.webapi.getData('taxPercentByProductGroup?year='+tax_year_th+'&grp_id='+grp_id).then((data) => {
+    this.webapi.getData('taxPercentDrink?offcode='+this.offcode).then((data) => {
       this.respondData = data;
       this.getTAX();
-    });     
+    });
+
+    this.webapi.getData('QuantityDrink?offcode='+this.offcode).then((data) => {
+      this.respondData2 = data;
+      this.getTAX2();
+    });
   }
 
   getTAX() {
 
     let tax_val;
-    let taxly_val;
+    let taxly_val;8
     let taxest_val;
     for (var i = 0; i < this.respondData.length; i++) {
       tax_val = this.respondData[i].TAX_PERCENT;
-      taxly_val = this.respondData[i].TAX_LY_PERCENT;
-      taxest_val = this.respondData[i].TAX_ESTIMATE_PERCENT;
+      taxly_val =  this.respondData[i].LAST_TAX_PERCENT;
+      taxest_val = this.respondData[i].EST_PERCENT;
     }
     this.showgaugechartTax(tax_val,taxly_val,taxest_val);
+  }
+
+  getTAX2(){
+    let tax_val;
+    for (var i = 0; i < this.respondData2.length; i++) {
+      tax_val = this.respondData2[i].QUAN_PERCENT;
+    }
+    this.showgaugechartTax2(tax_val);
   }
 
   showgaugechartTax(tax_val,taxly_val,taxest_val){
@@ -73,5 +85,20 @@ export class NewReportGaugeTaxDrinkPage {
   
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
-  }  
+  }
+
+  showgaugechartTax2(tax_val){
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['ปีนี้', tax_val],
+    ]);
+    var options = {
+           width: 200, height: 200,
+          minorTicks: 5,
+          majorTicks: ['0', '100'],
+    };
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_quan_div'));
+    chart.draw(data, options);
+  }
 }

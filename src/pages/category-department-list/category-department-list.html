@@ -11,8 +11,7 @@
                   <ion-label class="shelf-title">ผู้ประกอบการ</ion-label>
                 </ion-item>
             
-                <ion-grid>
-            
+                <ion-grid>            
                     <ion-row>
                         <ion-col (click)="TaxTopRegTable(0501)" text-center >
                               <img no-padding class="iconStyle" src="../../assets/imgs/ProfileCar.png"/>
@@ -40,10 +39,23 @@
                                 <p class="content-center">จดทะเบียน</p> 
                           </ion-col>
                           <ion-col col-1></ion-col>
-                          <ion-col><img class="iconStyle"></ion-col>
-                          
+                          <ion-col><img class="iconStyle"></ion-col>                          
                         </ion-row>
                     </ion-grid>
+
+                    <ion-item style="background-color:#E6E6FA;">
+                      <ion-label class="shelf-title">ผู้ประกอบการรายเดือน</ion-label>
+                    </ion-item>
+
+                    <ion-grid>            
+                    <ion-row>
+                        <ion-col col-3 (click)="TaxTopMthTable()" text-center >
+                              <img no-padding class="iconStyle" src="../../assets/imgs/ProfileDrink.png"/>
+                              <p class="content-center">เครื่องดื่ม</p> 
+                        </ion-col>                  
+                      </ion-row>
+                  </ion-grid>
+                             
          </ion-card-content>
 
 

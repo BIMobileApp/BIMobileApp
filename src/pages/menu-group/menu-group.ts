@@ -7,9 +7,11 @@ import { HomePage } from '../home/home';
 import { ContactPage } from '../contact/contact';
 import { CetegoryTaxPage } from '../cetegory-tax/cetegory-tax';
 import { CategoryDepartmentListPage } from '../category-department-list/category-department-list';
-import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone';
-import { OldReportBi_Law21Page } from '../old-report-bi-law2-1/old-report-bi-law2-1';
-import { OldReportBi_Law31Page } from '../old-report-bi-law3-1/old-report-bi-law3-1';
+import { TaxMonthlyFreezonePage } from '../tax-monthly-freezone/tax-monthly-freezone'; 
+import { LawDataAreaPage } from '../law-data-area/law-data-area';
+import { LawDataMthPage } from '../law-data-mth/law-data-mth';
+import { IncDataAreaPage } from '../inc-data-area/inc-data-area';
+import { IncDataMthPage } from '../inc-data-mth/inc-data-mth';
 
 @IonicPage()
 @Component({
@@ -76,13 +78,22 @@ export class MenuGroupPage {
 
   gotoDepartmentReport(){
     this.app.getRootNav().push(MenuGroupNewReportPage); 
-  }
-  gotoCategoryLawTax(){
-    this.app.getRootNav().push(OldReportBi_Law21Page); 
+  } 
+
+  LawDataArea(){
+    this.app.getRootNav().push(LawDataAreaPage); 
   }
 
-  gotoCategoryFinesTax(){
-    this.app.getRootNav().push(OldReportBi_Law31Page); 
+  LawDataMth(){
+    this.app.getRootNav().push(LawDataMthPage); 
+  }
+
+  IncDataArea(){
+    this.app.getRootNav().push(IncDataAreaPage); 
+  }
+
+  IncDataMth(){
+    this.app.getRootNav().push(IncDataMthPage); 
   }
 
 }

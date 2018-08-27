@@ -12,28 +12,19 @@ import { Chart } from 'chart.js';
 export class CompareTaxAlcoholPage {
   @ViewChild('LineCanvasTax') LineCanvasTax;
   @ViewChild('LineCanvasVol') LineCanvasVol;
-  //Table Pram
-  responseData: any;
-
-  ProductType: any;
-
+ 
+  offcode:any;
   //Line Tax
   TaxlineChart: any;
   TaxLineData: any;
-  TaxCode: any;
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
   
-
-
   //Line Vol
   VollineChart: any;
-  VolLineData: any;
-  VolCode: any;
   vol_TAX = [];
   vol_TAX_LY = [];
-  vol_lebel = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,78 +32,17 @@ export class CompareTaxAlcoholPage {
   }
 
   ionViewDidLoad() {
-    this.getTableData();
-    this.getProductType();
-  }
-  getTableData() {
-      this.webapi.getData('CompareTaxSura').then((data) => {
-      this.responseData = data;
-      this.ProductType = data;
-      console.log(this.responseData);
-      console.log('ProductType'+this.ProductType);
-      
-      this.getTableTAX();
-      this.getTableTAX_LY();
-    });
+    this.UserAthu();
   }
 
-  getProductType() {
-    this.webapi.getData('CompareTaxSuraLineGraph').then((data) => {
-    this.ProductType = data;
-    console.log(this.ProductType);
-    
-    
-  });
-}
-
-  
-
-  getTableTAX() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TOTAL_TAX_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TOTAL_TAX_AMT = val;
-    }
+  UserAthu() {
+    this.offcode = localStorage.offcode;
+    this.getLineVolData();
+    this.getLineTaxData();
   }
 
-  getTableTAX_LY() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].LAST_TOTAL_TAX_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].LAST_TOTAL_TAX_AMT = val;
-    }
-  }
-
-  /*
-  getTableEST() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].ESTIMATE/1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].ESTIMATE = val;
-      //console.log(this.responseData);
-    }
-  }
-
-  getTableCOMPARE() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].COMPARE_ESTIMATE_DIFF/1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].COMPARE_ESTIMATE_DIFF = val;
-    }
-  }
-  */
-
-
- getLineTaxData(TaxCode) {
-    this.webapi.getData('CompareTaxSuraLineGraph?code='+TaxCode).then((data) => {
+ getLineTaxData() {
+    this.webapi.getData('CompareTaxVolSura?offcode='+this.offcode).then((data) => {
       this.TaxLineData = data;
       console.log(this.TaxLineData);
       this.TaxgetTAX();
@@ -120,10 +50,7 @@ export class CompareTaxAlcoholPage {
       this.TaxgetLebel();
       this.TaxCreateChart();
     });
-
-
   }
-
 
   //----------------------- Start Manage Data from API-------------------------//
 
@@ -141,26 +68,7 @@ export class CompareTaxAlcoholPage {
       this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
     }
     this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
-
   }
-/*
-  getEST() {
-    this.EST = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.EST.push(this.LineData[i].EST);
-    }
-    this.EST = JSON.parse(JSON.stringify(this.EST));
-    console.log("est" + this.EST);
-  }
-
-  getComEst() {
-    this.ComEst = [];
-    for (var i = 0; i < this.LineData.length; i++) {
-      this.ComEst.push(this.LineData[i].COMPARE_ESTIMATE_DIFF);
-    }
-    this.ComEst = JSON.parse(JSON.stringify(this.ComEst));
-    console.log("com" + this.ComEst);
-  }*/
 
   TaxgetLebel() {
     this.tax_lebel = [];
@@ -171,8 +79,6 @@ export class CompareTaxAlcoholPage {
     console.log(this.tax_lebel);
   }
   //----------------------- End Manage Data from API-------------------------//
-
-
 
   TaxCreateChart() {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
@@ -225,53 +131,7 @@ export class CompareTaxAlcoholPage {
             pointHitRadius: 10,
             data: this.tax_TAX_LY,
             spanGaps: false,
-          }/*,
-          {
-            label: "ประมาณการ",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "#F78D3F",
-            borderColor: "#F78D3F",
-            borderWidth: 2,
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "#F78D3F",
-            pointBackgroundColor: "#F78D3F",
-            pointBorderWidth: 3,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#F78D3F",
-            pointHoverBorderColor: "#F78D3F",
-            pointHoverBorderWidth: 3,
-            pointRadius: 2,
-            pointHitRadius: 10,
-            data: this.EST,
-            spanGaps: false,
-          },
-          {
-            label: "เปรียบเทียบประมาณการ",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "#D74B4B",
-            borderColor: "#D74B4B",
-            borderWidth: 2,
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "#D74B4B",
-            pointBackgroundColor: "#D74B4B",
-            pointBorderWidth: 3,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#D74B4B",
-            pointHoverBorderColor: "#D74B4B",
-            pointHoverBorderWidth: 3,
-            pointRadius: 2,
-            pointHitRadius: 10,
-            data: this.ComEst,
-            spanGaps: false,
-          }*/
+          }
         ]
       },
       options: {
@@ -325,53 +185,37 @@ export class CompareTaxAlcoholPage {
     });
   }
 
-  getLineVolData(VolCode) {
-    this.webapi.getData('CompareTaxSuraLineGraph?code='+VolCode).then((data) => {
-      this.VolLineData = data;
-      console.log(this.TaxLineData);
+  getLineVolData() {
       this.VolgetTAX();
       this.VolgetTAX_LY();
-      this.VolgetLebel();
       this.VolCreateChart();
-    });
-
-
   }
 
   //----------------------- Start Manage Data from API-------------------------//
 
   VolgetTAX() {
     this.vol_TAX = [];
-    for (var i = 0; i < this.VolLineData.length; i++) {
-      this.vol_TAX.push(this.VolLineData[i].TOTAL_VOLUME_TAX_AMT);
+    for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
     }
     this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
   }
 
   VolgetTAX_LY() {
     this.vol_TAX_LY = [];
-    for (var i = 0; i < this.VolLineData.length; i++) {
-      this.vol_TAX_LY.push(this.VolLineData[i].LAST_TOTAL_VOLUME_TAX_AMT);
+    for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.vol_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_VOLUMN_CAPA);
     }
     this.vol_TAX_LY = JSON.parse(JSON.stringify(this.vol_TAX_LY));
-
   }
 
-  VolgetLebel() {
-    this.vol_lebel = [];
-    for (var i = 0; i < this.VolLineData.length; i++) {
-      this.vol_lebel.push(this.VolLineData[i].MONTH);
-    }
-    this.vol_lebel = JSON.parse(JSON.stringify(this.vol_lebel));
-    console.log(this.vol_lebel);
-  }
   //----------------------- End Manage Data from API-------------------------//
 
   VolCreateChart() {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.vol_lebel,
+        labels: this.tax_lebel,
         datasets: [
           {
             label: "ปีนี้",

@@ -40,6 +40,14 @@ page-tax-year-by-product {
     font-size: 3vw !important;
     text-align: left !important;    
   }
+  h3.table-title{
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 3vw !important;
+    -ms-transform: rotate(-40deg); /* IE 9 */
+    -webkit-transform: rotate(-40deg); /* Safari 3-8 */
+    transform: rotate(-40deg);
+  }
   ion-item.size{
     width: 50%;
     display: block;
@@ -70,3 +78,4 @@ page-tax-year-by-product {
   }
 
 }
+

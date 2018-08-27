@@ -15,17 +15,11 @@ export class MblRegisterPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
+      this.offcode = localStorage.offcode;
   }
 
   ionViewDidLoad() {
-    this.UserAthu();
     this.selectDataAll();
-  }
-
-  UserAthu() {
-    this.offcode = localStorage.offcode;
-    this.offcode = this.offcode.substring(0, 2);
-    console.log(this.offcode);
   }
 
   selectDataAll(){

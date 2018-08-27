@@ -11,7 +11,7 @@
     <ion-item  class="size">
         <ion-label >เดือน : </ion-label>
         <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="selectDate(item.value)" >
-            <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+            <ion-option value=" "  [selected]="true">..กรุณาเลือก..</ion-option>
             <ion-option value="1" >มกราคม</ion-option>
             <ion-option value="2">กุมภาพันธ์</ion-option>
             <ion-option value="3">มีนาคม</ion-option>
