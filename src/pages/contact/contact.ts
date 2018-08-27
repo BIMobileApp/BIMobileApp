@@ -3,10 +3,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 declare let google;
 
 >>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
+=======
+declare let google;
+
+>>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
 @IonicPage()
 @Component({
   selector: 'page-contact',

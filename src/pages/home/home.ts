@@ -3,9 +3,13 @@ import { NavController, App, NavParams, AlertController,Platform } from 'ionic-a
 import { RestProvider } from '../../providers/rest/rest';
 import { MenuGroupPage } from '../menu-group/menu-group';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { DataStatusPage } from '../data-status/data-status';
 =======
 >>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
+=======
+import { DataStatusPage } from '../data-status/data-status';
+>>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
 import { NewsEventPage } from '../news-event/news-event';
 import { Http, ResponseContentType } from '@angular/http';
 
@@ -52,9 +56,12 @@ export class HomePage {
     this.webapi.getData('TMP_USER?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {
       this.userDB = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      // console.log(this.userDB.length);
 >>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
+=======
+>>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
 
       
       if (this.userDB.length!=0) {
@@ -84,7 +91,10 @@ export class HomePage {
   
   test(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
     this.app.getRootNav().push( MenuGroupPage);  
   }
   //this.app.getRootNav().push(MenuGroupPage); 
@@ -116,12 +126,15 @@ export class HomePage {
  }
 
  /*login(){
+<<<<<<< HEAD
 >>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
+=======
+>>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
     this.app.getRootNav().push(MenuGroupPage);  
   }
 
   DataStatus(){
     this.app.getRootNav().push(DataStatusPage);  
-  }
+  }*/
 
 }
