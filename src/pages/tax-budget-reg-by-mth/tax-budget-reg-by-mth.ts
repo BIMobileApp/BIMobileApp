@@ -37,6 +37,7 @@ export class TaxBudgetRegByMthPage {
     }else{
       this.webapi.getData('TaxBudgetRegByMth?offcode='+this.offcode+'&month='+summaryDate).then((data)=>{
         this.responseData = data;
+        this.getTableTAX();
         //this.getTableTAX();
       });
     }
@@ -46,11 +47,12 @@ export class TaxBudgetRegByMthPage {
   getTableTAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX/1000000;
+      val = this.responseData[i].TAX_NETTAX_AMT/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX = val;
-
+      this.responseData[i].TAX_NETTAX_AMT = val;
+    
     }
+    console.log(this.responseData);
   }
 }
