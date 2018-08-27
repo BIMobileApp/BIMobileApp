@@ -21,30 +21,30 @@
         <ion-card>
         <ion-card-content no-padding>
           
-            <ion-scroll scrollX="true" scrollY="true" width="400px;" height="400px;">
+    
                 <div class="table-responsive">
-                                <table class="table" style="width: 100%;">
-                                  <thead>
-                                    <tr style="background-color: #F78B26; ">
-                                        <th ><h3 class="table-title">ลำดับ</h3></th>
-                                        <th ><h3 class="table-title">กลุ่มสินค้า</h3></th>
-                                        <th><h3 class="table-title">ต.ค</h3></th>
-                                        <th><h3 class="table-title">พ.ย</h3></th>
-                                        <th><h3 class="table-title">ธ.ค</h3></th>
-                                        <th><h3 class="table-title">ม.ค</h3></th>
-                                        <th><h3 class="table-title">ก.พ</h3></th>
-                                        <th><h3 class="table-title">มี.ค</h3></th>
-                                        <th><h3 class="table-title">เม.ย</h3></th>
-                                        <th><h3 class="table-title">พ.ค</h3></th>
-                                        <th><h3 class="table-title">มิ.ย</h3></th>
-                                        <th><h3 class="table-title">ก.ค</h3></th>
-                                        <th><h3 class="table-title">ส.ค</h3></th>
-                                        <th><h3 class="table-title">ก.ย</h3></th>
-                                </tr>
+                        <table class="table" style="width: 100%;">
+                            <thead>
+                              <tr style="background-color: #F78B26; ">
+                                  <!--<th ><h3 class="table-title">ลำดับ</h3></th>-->
+                                  <th width="20%"><h3 class="table-title">กลุ่มสินค้า</h3></th>
+                                  <th><h3 class="table-title">ต.ค</h3></th>
+                                  <th><h3 class="table-title">พ.ย</h3></th>
+                                  <th><h3 class="table-title">ธ.ค</h3></th>
+                                  <th><h3 class="table-title">ม.ค</h3></th>
+                                  <th><h3 class="table-title">ก.พ</h3></th>
+                                  <th><h3 class="table-title">มี.ค</h3></th>
+                                  <th><h3 class="table-title">เม.ย</h3></th>
+                                  <th><h3 class="table-title">พ.ค</h3></th>
+                                  <th><h3 class="table-title">มิ.ย</h3></th>
+                                  <th><h3 class="table-title">ก.ค</h3></th>
+                                  <th><h3 class="table-title">ส.ค</h3></th>
+                                  <th><h3 class="table-title">ก.ย</h3></th>
+                          </tr>
                         </thead>
                         <tbody>
                                 <tr *ngFor="let data of responseData">
-                                        <td ><p class="center">{{data.SORT}}</p></td>
+                                       <!-- <td ><p class="center">{{data.SORT}}</p></td>-->
                                         <td ><p class="left">{{data.GROUP_NAME}}</p></td>
                                         <td><p class="right">{{data.OCT}}</p></td>
                                         <td><p class="right">{{data.NOV}}</p></td>
@@ -62,7 +62,7 @@
                         </tbody>
                 </table>
             </div> 
-          </ion-scroll> 
+    
 
         </ion-card-content>
       </ion-card>

@@ -24,8 +24,8 @@ export class ContactPage {
   }
   
  loadMap() {
-  this.geolocation.getCurrentPosition().then((position) => {      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);      let mapOptions = {        center: latLng,        zoom: 15,        mapTypeId: google.maps.MapTypeId.ROADMAP      }     
-  this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);    }, (err) => {      console.log(err);    }); 
+ // this.geolocation.getCurrentPosition().then((position) => {      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);      let mapOptions = {        center: latLng,        zoom: 15,        mapTypeId: google.maps.MapTypeId.ROADMAP      }     
+ // this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);    }, (err) => {      console.log(err);    }); 
    /* let lat = 13.7620638;
     let ing = 100.5577409;
     let latLng = new google.maps.LatLng(lat, ing);   
