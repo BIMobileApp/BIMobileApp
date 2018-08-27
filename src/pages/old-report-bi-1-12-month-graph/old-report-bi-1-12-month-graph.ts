@@ -43,7 +43,7 @@ export class OldReportBi_1_12MonthGraphPage {
   }
   loadGroupName(){
     for (var i = 0; i < this.respondData.length; i++) {
-      this.group_name.push(this.respondData[i].GROUP_NAME_NEW); 
+      this.group_name.push(this.respondData[i].GROUP_NAME); 
      }
     this.label_group_name = this.group_name;
   }
