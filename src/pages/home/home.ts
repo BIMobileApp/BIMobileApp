@@ -105,13 +105,4 @@ export class HomePage {
       this.document.viewDocument(url, 'application/pdf', {});
     });
  }
-
- /*login(){
-    this.app.getRootNav().push(MenuGroupPage);  
-  }
-
-  DataStatus(){
-    this.app.getRootNav().push(DataStatusPage);  
-  }*/
-
 }
