@@ -17,6 +17,8 @@ export class OldReportBi_1MonthGraphRatioPage {
   total_tax = [];
 
   doughnutChart:any;
+  flag=0;
+  isZero: any;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -27,16 +29,22 @@ export class OldReportBi_1MonthGraphRatioPage {
     this.webapi.getData('OldREPORT_BI_1_MONTH_GRAPH_RATIO').then((data) => {
       this.respondData = data;
       this.loadData();
-      this.loadtax();
     }); 
   }
 
   loadData(){
     for (var i = 0; i < this.respondData.length; i++) {
-        this.group_name.push(this.respondData[i].GROUP_NAME_NEW);
+        this.group_name.push(this.respondData[i].GROUP_NAME);
         this.total_tax.push(this.respondData[i].TOTAL_TAX);
+        if(this.respondData[i].TOTAL_TAX !== 0) {
+          this.flag = 1;
+          break;
+        }
     }
- }
+     if(this.flag == 1){
+      this.loadtax();
+     }
+  }
 
  loadtax(){
   this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
@@ -48,11 +56,11 @@ export class OldReportBi_1MonthGraphRatioPage {
             label:this.group_name,
             data: this.total_tax,
             backgroundColor: [
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)'
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
             ],
             hoverBackgroundColor: [
                 "#FFCE56",

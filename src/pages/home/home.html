@@ -4,7 +4,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="header-title">ระบบสารสนเทศเพื่อการบริการ
+          <h1 class="header-title">ระบบสารสนเทศเพื่อการบริหาร
             <br>กรมสรรพสามิต</h1>
         </ion-col>
       </ion-row>
@@ -39,11 +39,11 @@
   </header>
 
   <div padding>
-    <ion-input class="box-style" placeholder="Username" [(ngModel)]="userData.username"></ion-input>
+    <ion-input class="box-style" placeholder="ชื่อผู้ใช้" [(ngModel)]="userData.username"></ion-input>
     <br>
-    <ion-input class="box-style" type="password" placeholder="Password" [(ngModel)]="userData.password"></ion-input>
+    <ion-input class="box-style" type="password" placeholder="รหัสผ่าน" [(ngModel)]="userData.password"></ion-input>
     <br>
-    <button class="box" ion-button color="navber" (click)="login()">Login</button>
+    <button class="box" ion-button color="navber" (click)="login()">เข้าสู่ระบบ</button>
   </div>
 
   
