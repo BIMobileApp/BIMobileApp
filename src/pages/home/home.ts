@@ -112,6 +112,6 @@ export class HomePage {
 
   DataStatus(){
     this.app.getRootNav().push(DataStatusPage);  
-  }
+  }*/
 
 }
