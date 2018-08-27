@@ -9,7 +9,6 @@ import { Chart } from 'chart.js';
   templateUrl: 'old-report-bi-1-12-month-graph2.html',
 })
 export class OldReportBi_1_12MonthGraph2Page {
-
   @ViewChild('doughnutCanvas') doughnutCanvas;
 
   respondData: any;
@@ -48,19 +47,19 @@ export class OldReportBi_1_12MonthGraph2Page {
       }
     }
 
-    
+    if(this.flag == 1){
+      this.loadtax();
+    }
   }
-
-
   loadtax(){
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
   
       type: 'pie',
       data: {
-          labels: ["3","4","5","6"],
+          labels: this.group_name,
           datasets: [{
-              label: ["3","4","5","6"],
-              data: ["30","40","20","10"],
+              label: this.group_name,
+              data: this.total_tax,
               backgroundColor: [
                   'rgba(255, 159, 64, 1)',
                   'rgba(255, 99, 132, 1)',
@@ -81,34 +80,5 @@ export class OldReportBi_1_12MonthGraph2Page {
     });
    }
 
-   createChart(){
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
- 
-      type: 'doughnut',
-      data: {
-          labels: ["BJP", "Congress", "AAP", "CPM", "SP"],
-          datasets: [{
-              label: '# of Votes',
-              data: [50, 29, 15, 10, 7],
-              backgroundColor: [
-                  'rgba(255, 159, 64, 0.2)',
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)'
-              ],
-              hoverBackgroundColor: [
-                  "#FFCE56",
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56",
-                  "#FF6384" 
-              ]
-          }]
-      }
-
-  });
-   }
-  
   }
   

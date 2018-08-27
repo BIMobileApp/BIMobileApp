@@ -78,6 +78,10 @@ export class HomePage {
   test(){
     this.app.getRootNav().push( MenuGroupPage);  
   }
+
+  DataStatus(){
+    this.app.getRootNav().push(DataStatusPage);  
+  }
   //this.app.getRootNav().push(MenuGroupPage); 
   
 
