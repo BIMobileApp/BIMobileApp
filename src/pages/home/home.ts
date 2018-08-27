@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-import { NavController, App, NavParams, AlertController } from 'ionic-angular';
+import { NavController, App, NavParams, AlertController,Platform } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { MenuGroupPage } from '../menu-group/menu-group';
+<<<<<<< HEAD
 import { DataStatusPage } from '../data-status/data-status';
+=======
+>>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
 import { NewsEventPage } from '../news-event/news-event';
+import { Http, ResponseContentType } from '@angular/http';
+
+import { File } from '@ionic-native/file';
+import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 @Component({
   selector: 'page-home',
@@ -19,15 +27,21 @@ export class HomePage {
   offcode: any;
   offdesc: any;
   username: any;
+ 
 
   constructor(public navCtrl: NavController,
     public app: App,
     public restProvider: RestProvider,
     public alertCtrl: AlertController,
     public navParams: NavParams,
-    public webapi: RestProvider) {
-
+    public webapi: RestProvider,
+    private document: DocumentViewer,
+     private file: File, 
+     private transfer: FileTransfer,
+     private platform: Platform) {
+      
   }
+
 
   ionViewDidLoad() {
    
@@ -37,6 +51,10 @@ export class HomePage {
 
     this.webapi.getData('TMP_USER?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {
       this.userDB = data;
+<<<<<<< HEAD
+=======
+     // console.log(this.userDB.length);
+>>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
 
       
       if (this.userDB.length!=0) {
@@ -65,6 +83,40 @@ export class HomePage {
   }
   
   test(){
+<<<<<<< HEAD
+=======
+    this.app.getRootNav().push( MenuGroupPage);  
+  }
+  //this.app.getRootNav().push(MenuGroupPage); 
+  
+
+  openLocalPdf() {
+    const options: DocumentViewerOptions = {
+      title: 'My PDF'
+    }
+    this.document.viewDocument('assets/5-tools.pdf', 'application/pdf', options);
+  }
+
+  dowload_file() {
+ 
+   let path = null;
+
+    if (this.platform.is('ios')) {
+      path = this.file.documentsDirectory;
+    } else if (this.platform.is('android')) {
+      path = this.file.dataDirectory;
+    }
+
+    path = this.file.documentsDirectory;
+    const transfer = this.transfer.create();
+    transfer.download('../src/assets/document/user_guide.pdf', path + 'user_guide.pdf').then(entry => {
+      let url = entry.toURL();
+      this.document.viewDocument(url, 'application/pdf', {});
+    });
+ }
+
+ /*login(){
+>>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
     this.app.getRootNav().push(MenuGroupPage);  
   }
 

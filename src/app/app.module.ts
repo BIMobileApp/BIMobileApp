@@ -102,12 +102,8 @@ import { IncDataAreaPage } from '../pages/inc-data-area/inc-data-area';
 import { IncDataMthPage } from '../pages/inc-data-mth/inc-data-mth';
 import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
 import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
-<<<<<<< HEAD
-
-=======
 import { DataStatusPage } from '../pages/data-status/data-status';
 import { NewsEventPage } from '../pages/news-event/news-event';
->>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
 
 @NgModule({
   declarations: [
@@ -198,24 +194,15 @@ import { NewsEventPage } from '../pages/news-event/news-event';
     OldReportRegionGroupPage,
     OldReportSection1_10GroupPage,
     MblRegisterPage,
-<<<<<<< HEAD
-    OldReportBi_Law21Page,
-    OldReportBi_Law31Page,
-=======
->>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
     TaxProductByMthPage,
     OldReportBi_Law21Page,
     OldReportBi_Law31Page,
     IncDataAreaPage,
     IncDataMthPage,
     LawDataAreaPage,
-<<<<<<< HEAD
-    LawDataMthPage
-=======
     LawDataMthPage,
     DataStatusPage,
     NewsEventPage
->>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
   ],
   imports: [
     BrowserModule,
@@ -319,24 +306,15 @@ import { NewsEventPage } from '../pages/news-event/news-event';
     OldReportRegionGroupPage,
     OldReportSection1_10GroupPage,
     MblRegisterPage,
-<<<<<<< HEAD
-    OldReportBi_Law21Page,
-    OldReportBi_Law31Page,
-=======
->>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
     TaxProductByMthPage,
     OldReportBi_Law21Page,
     OldReportBi_Law31Page,
     IncDataAreaPage,
     IncDataMthPage,
     LawDataAreaPage,
-<<<<<<< HEAD
-    LawDataMthPage
-=======
     LawDataMthPage,
     DataStatusPage,
     NewsEventPage
->>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
   ],
   providers: [
     StatusBar,
