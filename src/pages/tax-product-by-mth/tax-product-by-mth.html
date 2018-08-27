@@ -35,8 +35,8 @@
                 <div class="table-responsive">
                       <table class="table" style="width: 100%;">
                         <thead>
-                              <tr>
-                                  <th><h3 class="center">ลำดับ</h3></th>
+                               <tr style="background-color: #F78B26; ">
+                                  <th width="10%"><h3 class="center">ลำดับ</h3></th>
                                   <th><h3 class="center">กลุ่มสินค้า</h3></th>
                                   <th><h3 class="center">ปีนี้</h3></th>
                                   <th><h3 class="center">ปีก่อน</h3></th>
@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                                 <tr *ngFor="let data of responseData">
-                                        <td><h3 class="center">{{data.SORT}}</h3></td>
+                                        <td width="10%"><h3 class="center">{{data.SORT}}</h3></td>
                                         <td><h3 class="left">{{data.GROUP_NAME}}</h3></td>
                                         <td><h3 class="right">{{data.TAX}}</h3></td>
                                         <td><h3 class="right">{{data.LAST_TAX}}</h3></td>
