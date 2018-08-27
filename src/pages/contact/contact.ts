@@ -1,13 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-declare let google;
+import { Geolocation } from '@ionic-native/geolocation';
 
-/**
- * Generated class for the ContactPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+declare let google;
 
 @IonicPage()
 @Component({
@@ -15,34 +10,35 @@ declare let google;
   templateUrl: 'contact.html',
 })
 export class ContactPage {
-  /*@ViewChild('map') mapElement: ElementRef;
-  map:any;*/
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('map') mapElement: ElementRef; 
+  map: any; 
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public geolocation: Geolocation) {
   }
 
   ionViewDidLoad() {
-   // this.loadMap();
+   this.loadMap();
   }
   
-/*  loadMap() {
-    let lat = 13.7620638;
-    let lng = 100.5577409;
-    let latLng = new google.maps.LatLng(lat,lng);
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+ loadMap() {
+  this.geolocation.getCurrentPosition().then((position) => {      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);      let mapOptions = {        center: latLng,        zoom: 15,        mapTypeId: google.maps.MapTypeId.ROADMAP      }     
+  this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);    }, (err) => {      console.log(err);    }); 
+   /* let lat = 13.7620638;
+    let ing = 100.5577409;
+    let latLng = new google.maps.LatLng(lat, ing);   
+    let mapOptions = {center: latLng, zoom: 15, mapTypeId: google.maps.MapTypeId.ROADMAP }    
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    //new google map marker
-    new google.maps.Marker({
-      position: latLng,
-      map: this.map,
-      icon: "https://image.flaticon.com/icons/png/128/149/149060.png"
 
-    })
-  }*/
+    //Marker
+    new google.maps.Marker({
+      position:latLng,
+      map:this.map,
+      icon:"../assets/icon/iconShop.png"
+    });*/
+  }
 
 }
 

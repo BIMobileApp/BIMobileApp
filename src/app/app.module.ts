@@ -103,6 +103,10 @@ import { NewsEventPage } from '../pages/news-event/news-event';
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { DocumentViewer } from '@ionic-native/document-viewer';
+import { Geolocation } from '@ionic-native/geolocation'; 
 
 @NgModule({
   declarations: [
@@ -321,7 +325,11 @@ import { RestProvider } from '../providers/rest/rest';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RestProvider
+    RestProvider,
+    File,
+    DocumentViewer,
+    FileTransfer,
+    Geolocation
   ]
 })
 
