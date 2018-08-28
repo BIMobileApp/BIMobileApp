@@ -1,3 +1,4 @@
+<!--
 <ion-header>
   <ion-navbar color="navber">
     <ion-title>แยกตามสินค้า</ion-title>
@@ -25,8 +26,7 @@
     <ion-card *ngIf="flag==1 ">
         <ion-card-content no-padding>
             <div style="display: block">
-dsfsdf
-                <canvas #doughnutCanvas></canvas>
+                <canvas #pieCanvas></canvas>
 
               </div>
           </ion-card-content>
@@ -40,4 +40,36 @@ dsfsdf
         </p>
       </div>
 
+</ion-content>
+-->
+
+<ion-header>
+  <ion-navbar color="navber">
+    <ion-title>แยกตามสินค้า</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+     <ion-item style="background-color:#D0DFE6;" text-center text-wrap>
+      <h2 class="header-style">กราฟแสดงผลการจัดเก็บภาษีสรรพสามิตทุกปประเภท เปรียบเทียบปีก่อน และประมาณการ</h2>
+      <h3 class="header-style">ตั้งแต่ต้นปีถึง ปัจจุบัน</h3>
+   </ion-item>
+     
+     <ion-card>
+        <ion-card-content no-padding>
+            <div style="display: block">
+
+              <canvas #barCanvas></canvas>
+            </div>
+          </ion-card-content>
+      </ion-card>
+
+      <div padding>
+        <p class="DataStatus-font"> หมายเหตุ: ภาษี = ภาษีในประเทศ+ภาษีนำเข้า
+          <br> ที่มาข้อมูล : ภาษีในประเทศจากระบบรับเงินรายได้ ภาษีนำเข้าจากกรมศุลกากร
+          <br> ข้อมูล ณ วันที่ 24 สิงหาคม 2561
+        </p>
+      </div>
+     
 </ion-content>
