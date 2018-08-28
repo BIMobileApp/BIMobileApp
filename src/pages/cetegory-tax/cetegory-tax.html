@@ -9,7 +9,7 @@
     <h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี</h1>
     <h2 class="header-style">ตั้งแต่ต้นปีงบประมาณ ถึงปัจจุบัน</h2>
 
-  <div *ngIf="offcode=='00' ">
+  <div *ngIf="off=='00' ">
     <img src="../../assets/imgs/thailandhello1.png" />
     <h2 class="header-style">ตามรายภาค</h2>
     <button ion-button (click)="section1()">ภาค 1</button>
@@ -24,9 +24,9 @@
     <button ion-button (click)="section10()">ภาค 10</button><br>
   </div>
 
-  <div *ngIf="offcode!='00' ">
+  <div *ngIf="off!='00' ">
       <h1 class="header-style">ภาค : {{pak}}</h1>
-      <img src="../../assets/imgs/pak{{offcode}}.png" />
+      <img src="../../assets/imgs/pak{{off}}.png" />
   </div>
 
   <!--/////////////////////////////// Gauge ///////////////////////////////////////////////-->
@@ -71,7 +71,7 @@
         <table style="width: 100%;" >
           <thead>
             <tr style="background-color: #F78B26; ">
-              <th><h3 class='th-center'>เดือน</h3></th>
+              <th width="10%"><h3 class='th-center'>เดือน</h3></th>
               <th><h3 class='th-center'>ปีนี้</h3></th>
               <th><h3 class='th-center'>ปีก่อน</h3></th>
               <th><h3 class='th-center'>ประมาณการ</h3></th>
@@ -79,22 +79,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of responseData">
-              <td><h3 class='td-left'>{{data.BUDGET_MONTH_DESC}}</h3></td>
+            <tr *ngFor="let data of DataCurYear">
+              <td width="10%"><h3 class='td-center'>{{data.BUDGET_MONTH_DESC}}</h3></td>
               <td><h3 class='td-right'>{{data.TAX}}</h3></td>
               <td><h3 class='td-right'>{{data.LAST_TAX}}</h3></td>
               <td><h3 class='td-right'>{{data.ESTIMATE}}</h3></td>
           <td width="10%">
-            <h3 *ngIf="data.MAP_COLOR == 1" class='td-center'>
+            <h3 *ngIf="data.MAP_COLOR1 == 1" class='td-center'>
               <img class="img-size" src="../../assets/imgs/red1.png" />
             </h3>
-            <h3 *ngIf="data.MAP_COLOR == 2 " class='td-center'>
+            <h3 *ngIf="data.MAP_COLOR1 == 2 " class='td-center'>
               <img class="img-size" src="../../assets/imgs/yellow1.png" />
             </h3>
-            <h3 *ngIf="data.MAP_COLOR == 3 " class='td-center'>
+            <h3 *ngIf="data.MAP_COLOR1 == 3 " class='td-center'>
               <img class="img-size" src="../../assets/imgs/green1.png" />
             </h3>
-            <h3 *ngIf="data.MAP_COLOR == 4 " class='td-center'>
+            <h3 *ngIf="data.MAP_COLOR1 == 4 " class='td-center'>
               <img class="img-size" src="../../assets/imgs/green2.png" />
             </h3>
           </td>           
