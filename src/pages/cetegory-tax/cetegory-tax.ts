@@ -152,7 +152,9 @@ export class CetegoryTaxPage {
     this.webapi.getData('REP02_GUAGE_REG?area='+this.offcode).then((data)=>{
       this.DataGauge = data;
       this.getGaugeTAX();
-
+      this.get_tax_amt();
+      this.get_taly_amt();
+      this.get_est_amt();
     });
   }
 
@@ -168,33 +170,93 @@ export class CetegoryTaxPage {
     this.showgaugechartTax(tax_val,taxly_val,taxest_val);
   }
 
+  get_tax_amt(){
+    let val;
+    for (var i = 0; i < this.DataGauge.length; i++) {
+      val = this.DataGauge[i].TAX/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataGauge[i].TAX = val;
+    }
+  }
+
+  get_taly_amt(){
+    let val;
+    for (var i = 0; i < this.DataGauge.length; i++) {
+      val = this.DataGauge[i].TAX_LY/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataGauge[i].TAX_LY = val;
+    }
+  }
+
+  get_est_amt(){
+    let val;
+    for (var i = 0; i < this.DataGauge.length; i++) {
+      val = this.DataGauge[i].EST/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataGauge[i].EST = val;
+    }
+  }
+
   showgaugechartTax(tax_val,taxly_val,taxest_val){
     let taxext_percent;
-    let taxly_from;
-    let taxly_to;
-    if(taxest_val <= 100){
+    let green_taxly_from;
+    let green_taxly_to;
+    let yellow_taxly_from;
+    let yellow_taxly_to;
+    let red_taxly_from;
+    let red_taxly_to;
+
+   /* if(taxest_val <= 100){
       taxext_percent = 100;
     }else{
       taxext_percent = taxest_val;
+    }*/
+
+    if(taxly_val <= 40){
+      green_taxly_from = 0;
+      green_taxly_to = taxly_val;
+      yellow_taxly_from  = 0;
+      yellow_taxly_to = 0;
+      red_taxly_from = 0;
+      red_taxly_to = 0;
+    }else if(taxly_val <= 75){
+      green_taxly_from = 0;
+      green_taxly_to = 0;
+      yellow_taxly_from = 0;
+      yellow_taxly_to = taxly_val;
+      red_taxly_from = 0;
+      red_taxly_to = 0;
+    }else{
+      green_taxly_from = 0;
+      green_taxly_to = 0;
+      yellow_taxly_from = 0;
+      yellow_taxly_to = 0;
+      red_taxly_from = 0;
+      red_taxly_to = taxly_val;
     }
 
-    if(taxly_val < 0){
+    /*if(taxly_val < 0){
       taxly_from =  taxly_val;
       taxly_to = 0;
     }else{
       taxly_from = 0;
       taxly_to = taxly_val;
-    }
+    }*/
 
     var data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
       ['ปีนี้', tax_val],
     ]);
     var options = {
-           width: 200, height: 200,
-          redFrom: taxly_from, redTo: taxly_to,
+          width: 200, height: 200,
+          greenFrom:green_taxly_from,greenTo:green_taxly_to,
+          yellowFrom:yellow_taxly_from,yellowTo:yellow_taxly_to,
+          redFrom: red_taxly_from, redTo: red_taxly_to,
           minorTicks: 5,
-          majorTicks: ['0', taxext_percent],
+          majorTicks: ['0', taxext_percent], 
     };
   
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));

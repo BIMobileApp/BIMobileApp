@@ -25,11 +25,16 @@ export class NewReportGaugeTaxCarPage {
     this.webapi.getData('taxPercentCar?offcode='+this.offcode).then((data) => {
       this.respondData = data;
       this.getTAX();
+      this.get_tax_amt();
+      this.get_taly_amt();
+      this.get_est_amt();
     });
 
     this.webapi.getData('QuantityCar?offcode='+this.offcode).then((data) => {
       this.respondData2 = data;
       this.getTAX2();
+      this.get_tax_quan();
+      this.get_taxly_quan();
     });
   }
 
@@ -38,6 +43,7 @@ export class NewReportGaugeTaxCarPage {
     let tax_val;
     let taxly_val;
     let taxest_val;
+
     for (var i = 0; i < this.respondData.length; i++) {
       tax_val = this.respondData[i].TAX_PERCENT;
       taxly_val =  this.respondData[i].LAST_TAX_PERCENT;
@@ -58,7 +64,14 @@ export class NewReportGaugeTaxCarPage {
     let taxext_percent;
     let taxly_from;
     let taxly_to;
-    if(taxest_val <= 100){
+    let green_taxly_from;
+    let green_taxly_to;
+    let yellow_taxly_from;
+    let yellow_taxly_to;
+    let red_taxly_from;
+    let red_taxly_to;
+
+   /* if(taxest_val <= 100){
       taxext_percent = 100;
     }else{
       taxext_percent = taxest_val;
@@ -70,6 +83,29 @@ export class NewReportGaugeTaxCarPage {
     }else{
       taxly_from = 0;
       taxly_to = taxly_val;
+    }*/
+
+    if(taxly_val <= 40){
+      green_taxly_from = 0;
+      green_taxly_to = taxly_val;
+      yellow_taxly_from  = 0;
+      yellow_taxly_to = 0;
+      red_taxly_from = 0;
+      red_taxly_to = 0;
+    }else if(taxly_val <= 75){
+      green_taxly_from = 0;
+      green_taxly_to = 0;
+      yellow_taxly_from = 0;
+      yellow_taxly_to = taxly_val;
+      red_taxly_from = 0;
+      red_taxly_to = 0;
+    }else{
+      green_taxly_from = 0;
+      green_taxly_to = 0;
+      yellow_taxly_from = 0;
+      yellow_taxly_to = 0;
+      red_taxly_from = 0;
+      red_taxly_to = taxly_val;
     }
 
     var data = google.visualization.arrayToDataTable([
@@ -78,7 +114,9 @@ export class NewReportGaugeTaxCarPage {
     ]);
     var options = {
            width: 200, height: 200,
-          redFrom: taxly_from, redTo: taxly_to,
+          rgreenFrom:green_taxly_from,greenTo:green_taxly_to,
+          yellowFrom:yellow_taxly_from,yellowTo:yellow_taxly_to,
+          redFrom: red_taxly_from, redTo: red_taxly_to,
           minorTicks: 5,
           majorTicks: ['0', taxext_percent],
     };
@@ -100,6 +138,56 @@ export class NewReportGaugeTaxCarPage {
   
     var chart = new google.visualization.Gauge(document.getElementById('chart_quan_div'));
     chart.draw(data, options);
+  }
+
+  get_tax_amt(){
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].TAX/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData[i].TAX = val;
+    }
+  }
+
+  get_taly_amt(){
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].TAX_LY/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData[i].TAX_LY = val;
+    }
+  }
+
+  get_est_amt(){
+    let val;
+    for (var i = 0; i < this.respondData.length; i++) {
+      val = this.respondData[i].EST/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData[i].EST = val;
+    }
+  }
+
+  get_tax_quan(){
+    let val;
+    for (var i = 0; i < this.respondData2.length; i++) {
+      val = this.respondData2[i].TOTAL_VOLUMN_CAPA/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData2[i].TOTAL_VOLUMN_CAPA = val;
+    }
+  }
+
+  get_taxly_quan(){
+    let val;
+    for (var i = 0; i < this.respondData2.length; i++) {
+      val = this.respondData2[i].LAST_TOTAL_VOLUMN_CAPA/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData2[i].LAST_TOTAL_VOLUMN_CAPA = val;
+    }
   }
 
 }

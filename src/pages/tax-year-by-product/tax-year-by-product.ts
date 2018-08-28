@@ -76,6 +76,7 @@ export class TaxYearByProductPage {
       this.getTableJUL();
       this.getTableAUG();
       this.getTableSEP();
+
       });
    }
   }
@@ -154,6 +155,7 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].MAY = val;
+      console.log(val);
     }
   }
   getTableJUN() {

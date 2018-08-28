@@ -28,7 +28,6 @@ export class TaxProductByMthPage {
        this.getTAX();
        this.getTAX_Ly();
        this.getTAX_Est();
-
      });
   }
 
