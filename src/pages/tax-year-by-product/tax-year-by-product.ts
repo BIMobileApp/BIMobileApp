@@ -48,7 +48,7 @@ export class TaxYearByProductPage {
          this.getTableJAN();
          this.getTableFAB();
          this.getTableMAR();
-         this.getTableAPR();
+         this.getTableAPL();
          this.getTableMAY();
          this.getTableJUN();
          this.getTableJUL();
@@ -70,7 +70,7 @@ export class TaxYearByProductPage {
       this.getTableJAN();
       this.getTableFAB();
       this.getTableMAR();
-      this.getTableAPR();
+      this.getTableAPL();
       this.getTableMAY();
       this.getTableJUN();
       this.getTableJUL();
@@ -139,13 +139,13 @@ export class TaxYearByProductPage {
       this.responseData[i].MAR = val;
     }
   }
-  getTableAPR() {
+  getTableAPL() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].APR/1000000;
+      val = this.responseData[i].APL/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].APR = val;
+      this.responseData[i].APL = val;
     }
   }
   getTableMAY() {

@@ -61,15 +61,7 @@ page-compare-tax-est-drink {
     text-align: center !important;
   }
 
-ion-item.size{
-  width: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: bold;
-  color: black ;
-  font-size: 4vw ;
-}
+
 
 h3.center {
   font-weight: bold;
@@ -90,5 +82,18 @@ h3.left {
   text-align: left !important;
   
 }
+ion-item.size{
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  color: black ;
+  font-size: 4vw ;
+}
+ion-select {
+  max-width: 80% !important;
+    white-space: normal!important;
+  }
 
 }

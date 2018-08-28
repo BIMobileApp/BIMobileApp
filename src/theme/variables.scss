@@ -31,7 +31,13 @@ $toolbar-wp-title-font-size: 6vw;
   .alert-radio-group {
     max-height: 120px;
     height: 120px;
+    max-width: 240px;
+    width: 240px;
   }
+}
+
+.alert-radio-label {
+  white-space: normal!important;
 }
 
 // Named Color Variables

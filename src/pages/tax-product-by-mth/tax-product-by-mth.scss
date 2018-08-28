@@ -50,14 +50,19 @@ page-tax-product-by-mth {
     
   }
   
-  ion-item.size{
+  ion-item.size {
     width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
-    color: black ;
-    font-size: 4vw ;
+    color: black;
+    font-size: 4vw;
+  }
+  
+  ion-select {
+  max-width: 80% !important;
+    white-space: normal!important;
   }
 
 }

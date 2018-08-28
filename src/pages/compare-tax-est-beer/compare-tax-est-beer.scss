@@ -62,7 +62,7 @@ page-compare-tax-est-beer {
     }
 
   ion-item.size{
-    width: 50%;
+    width: 80%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -70,4 +70,8 @@ page-compare-tax-est-beer {
     color: black ;
     font-size: 4vw ;
   }
+  ion-select {
+    max-width: 80% !important;
+      white-space: normal!important;
+    }
 }
