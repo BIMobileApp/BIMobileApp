@@ -1,10 +1,9 @@
 page-tax-year-by-product {
-  table,
-  th,
-  td {
-    border: 0px solid #ffffff !important;
+  table, th, td, tr {
+    border: 1px solid #ffffff;
     border-collapse: collapse;
     table-layout: fixed;
+    
   }
   table tbody tr:nth-child(odd) {
     background-color: rgb(250, 220, 137) !important;
@@ -12,75 +11,57 @@ page-tax-year-by-product {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
-  table>tbody>tr>td>p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 10em;
-  }
-  @media only screen and (orientation: landscape) {
-    table>tbody>tr>td>p {
-      width: 90%;
-    }
-  }
-  h2.header-style{
-    font-weight: bold;
-    color: black !important;
-    font-size: 6vw !important;
-    text-align: center !important;
-  }
-  h3.center {
+  .td-center{
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
     font-size: 3vw !important;
   }
-  h3.right {
+  .td-right{
     font-weight: bold;
     color: black !important;
     font-size: 3vw !important;
     text-align: right !important;
   }
-  h3.left {
-    font-weight: bold;
-    color: black !important;
-    font-size: 3vw !important;
-    text-align: left !important;    
-  }
-  h3.table-title{
-    font-weight: bold;
-    color: rgb(27, 15, 15) !important;
-    font-size: 3vw !important;
-    -ms-transform: rotate(-40deg); /* IE 9 */
-    -webkit-transform: rotate(-40deg); /* Safari 3-8 */
-    transform: rotate(-40deg);
-  }
-  ion-item.size{
-    width: 50%;
+  .img-size{
+    width: 30%;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+  }
+  .td-left {
     font-weight: bold;
-    color: black ;
-    font-size: 4vw ;
-  }
-  p.center  {
-    text-overflow: ellipsis;
     color: black !important;
     font-size: 3vw !important;
+    text-align: left !important;
+    
   }
-
-  p.right  {
-    text-overflow: ellipsis;
+  
+  .th-center{
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 3vw !important;
+    text-align: center !important;
+  }
+  h1.header-style{
+    font-weight: bold;
+    color: black !important;
+    font-size: 4vw !important;
+    text-align: center !important;
+  }
+  h2.header-style{
     color: black !important;
     font-size: 3vw !important;
-    text-align: right !important;
+    text-align: center !important;
   }
-
-  p.left  {
-    text-overflow: ellipsis;
-    color: black !important;
+  .DataStatus-font{
+    font-weight: bold;
+    color: rgb(29, 97, 160) !important;
     font-size: 3vw !important;
-    text-align: left !important;    
+    text-align: left !important;
+  }
+  .desc-img-size{
+    width: 2%;
   }
 
 }

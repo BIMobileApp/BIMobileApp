@@ -13,6 +13,19 @@ export class TaxYearByProductPage {
   responseData: any;
   offcode: any;
 
+  //Table parm
+  DataCurYear: any;
+  DataProduct: any;
+  DataGauge:any;
+  Data = [];
+  TAX = [];
+  TAX_LY = [];
+  EST = [];
+
+   ProdTAX = [];
+   ProdTAX_LY = [];
+   ProdEST = [];
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi:RestProvider) {
@@ -22,7 +35,13 @@ export class TaxYearByProductPage {
    year_en:any;
    year_th:any;
 
+   ionViewDidLoad(){
+    this.TableGetData();
+    this.TableProductGetData();
+   }
+/*
   ionViewDidLoad() {
+    
     var d = new Date(); 
     var n = d.getFullYear();
     var nt = d.getFullYear()+543;
@@ -38,6 +57,86 @@ export class TaxYearByProductPage {
     this.summaryDate = range;
     this.getDataAll();    
   }
+*/
+  TableGetData(){
+    this.webapi.getData('TaxCurYear?offcode='+this.offcode).then((data)=>{
+      this.DataCurYear = data;
+      this.getTAX();
+      this.getLAST_TAX();
+      this.getEST();
+    });
+  }
+
+  getTAX() {
+    let val;
+    for (var i = 0; i < this.DataCurYear.length; i++) {
+      val = this.DataCurYear[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataCurYear[i].TAX = val;
+    }
+  }
+
+  getLAST_TAX() {
+    let val;
+    for (var i = 0; i < this.DataCurYear.length; i++) {
+      val = this.DataCurYear[i].LAST_TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataCurYear[i].LAST_TAX = val;
+    }
+  }
+
+  getEST() {
+    let val;
+    for (var i = 0; i < this.DataCurYear.length; i++) {
+      val = this.DataCurYear[i].ESTIMATE/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataCurYear[i].ESTIMATE = val;
+    }
+  }
+
+  TableProductGetData(){
+    this.webapi.getData('TaxProductCurYear?offcode='+ this.offcode).then((data)=>{
+      this.DataProduct = data;
+      this.getProductTAX();
+      this.getProductLAST_TAX();
+      this.getProductEST();
+    });
+  }
+
+  getProductTAX() {
+    let val;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      val = this.DataProduct[i].TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProduct[i].TAX = val;
+    }
+  }
+
+  getProductLAST_TAX() {
+    let val;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      val = this.DataProduct[i].LAST_TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProduct[i].LAST_TAX = val;
+    }
+  }
+
+  getProductEST() {
+    let val;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      val = this.DataProduct[i].ESTIMATE/1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProduct[i].ESTIMATE = val;
+    }
+  }
+}
+  /*
 
   getDataAll(){
       this.webapi.getData('TaxProductGroupByYearAll?offcode='+this.offcode).then((data)=>{
@@ -48,7 +147,7 @@ export class TaxYearByProductPage {
          this.getTableJAN();
          this.getTableFAB();
          this.getTableMAR();
-         this.getTableAPR();
+         this.getTableAPL();
          this.getTableMAY();
          this.getTableJUN();
          this.getTableJUL();
@@ -70,7 +169,7 @@ export class TaxYearByProductPage {
       this.getTableJAN();
       this.getTableFAB();
       this.getTableMAR();
-      this.getTableAPR();
+      this.getTableAPL();
       this.getTableMAY();
       this.getTableJUN();
       this.getTableJUL();
@@ -124,10 +223,10 @@ export class TaxYearByProductPage {
   getTableFAB(){
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].FAB/1000000;
+      val = this.responseData[i].FEB/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].FAB = val;
+      this.responseData[i].FEB = val;
     }
   }
   getTableMAR() {
@@ -139,13 +238,13 @@ export class TaxYearByProductPage {
       this.responseData[i].MAR = val;
     }
   }
-  getTableAPR() {
+  getTableAPL() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].APR/1000000;
+      val = this.responseData[i].APL/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].APR = val;
+      this.responseData[i].APL = val;
     }
   }
   getTableMAY() {
@@ -155,7 +254,6 @@ export class TaxYearByProductPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].MAY = val;
-      console.log(val);
     }
   }
   getTableJUN() {
@@ -197,4 +295,4 @@ export class TaxYearByProductPage {
     }
   }
 
-}
+}*/

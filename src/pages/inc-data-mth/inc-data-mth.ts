@@ -43,19 +43,20 @@ export class IncDataMthPage {
   }
 
   selectionArea(){
-    this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('SelectionMthArea?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
 
  selectionProvince(){
-    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('SelectionMthProvince?offcode='+this.offcode).then((data) => {
       this.responseProvince = data;
+      console.log(this.responseProvince);
     });
   }
 
   selectionGeoupName(){
-    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('SelectionMthGroupName?offcode='+this.offcode).then((data) => {
       this.responseGroupName = data;
     });
   }
@@ -70,24 +71,7 @@ export class IncDataMthPage {
   }
 
   getitemsGroupName(area,province,group_name,month){
-   
-    /*if(area == 'undefined'){
-      area = "";
-    }
-
-    if(province == 'undefined'){ 
-      province = ""; 
-    }
-
-    if(group_name == 'undefined'){
-      group_name = "";
-    }
-
-    if(month == 'undefined'){
-      month = "";
-    }*/
-
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
+      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
       this.repondProduct = data;
       this.loadData();
       this.getAmt();

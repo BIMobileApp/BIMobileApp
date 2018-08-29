@@ -118,18 +118,18 @@
       <div class="table-responsive">     
           <table class="table" style="width: 100%;">
                   <thead>
-                          <tr style="background-color: #F78B26; ">
-                              <th><h3 class="th-center">ประเภท</h3></th>
-                              <th><h3 class="th-center">จำนวนเงิน</h3></th>
-                              <th><h3 class="th-center">จำนวนใบอนุญาต</h3></th>
-                          </tr>
+                      <tr style="background-color: #F78B26; ">
+                          <th><h3 class="center">ประเภท</h3></th>
+                          <th><h3 class="center">จำนวนเงิน</h3></th>
+                          <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+                      </tr>
                   </thead>
                   <tbody>
-                          <tr *ngFor="let data of repondProduct">
-                              <td><h3 class="td-left">{{data.TYPE_DESC}}</h3></td>
-                              <td><h3 class="td-right">{{data.AMT}}</h3></td>
-                              <td><h3 class="td-left">{{data.COUNT}}</h3></td>
-                          </tr>
+                      <tr *ngFor="let data of repondProduct">
+                          <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
+                          <td><h3 class="right">{{data.AMT}}</h3></td>
+                          <td><h3 class="right">{{data.COUNT}}</h3></td>
+                      </tr>
                   </tbody>
           </table>
   </div>

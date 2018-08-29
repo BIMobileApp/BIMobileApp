@@ -29,10 +29,16 @@ page-compare-tax-est-car {
     font-size: 4vw !important;
     text-align: right !important;
   }
-  h2.header-style {
+  h1.header-style {
     font-weight: bold;
     color: black !important;
     font-size: 6vw !important;
+    text-align: center !important;
+  }
+  h2.header-style {
+    font-weight: bold;
+    color: black !important;
+    font-size: 5vw !important;
     text-align: center !important;
   }
   .td-right {
@@ -60,12 +66,17 @@ page-compare-tax-est-car {
     text-align: center !important;
   }
   ion-item.size {
-    width: 50%;
+    width: 90%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
     color: black;
     font-size: 4vw;
+  }
+  
+  ion-select {
+  max-width: 70% !important;
+    white-space: normal!important;
   }
 }

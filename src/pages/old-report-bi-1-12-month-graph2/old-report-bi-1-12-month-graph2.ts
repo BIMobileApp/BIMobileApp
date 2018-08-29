@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+
+import { Component,ViewChild  } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
@@ -9,8 +10,7 @@ import { Chart } from 'chart.js';
   templateUrl: 'old-report-bi-1-12-month-graph2.html',
 })
 export class OldReportBi_1_12MonthGraph2Page {
-
-  @ViewChild('doughnutCanvas') doughnutCanvas;
+  @ViewChild('pieCanvas') pieCanvas;
 
   respondData: any;
   group_name = [];
@@ -29,7 +29,7 @@ export class OldReportBi_1_12MonthGraph2Page {
     this.webapi.getData('OldREPORT_BI_1_12MONTH_GRAPH2').then((data) => {
       this.respondData = data;
       this.loadData();
-
+      this.loadtax();
     });
   }
 
@@ -41,26 +41,22 @@ export class OldReportBi_1_12MonthGraph2Page {
       this.total_tax.push(this.respondData[i].TOTAL_TAX);
     }
 
-    for (var i = 0; i < this.total_tax.length; i++) {
-      if (this.total_tax[i] != 0) {
+    for (var j = 0; j < this.total_tax.length; j++) {
+      if (this.total_tax[j] != 0) {
         this.flag = 1;
         break;
       }
     }
 
-    
   }
-
-
   loadtax(){
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-  
+    this.pieCanvas = new Chart(this.pieCanvas.nativeElement, {
       type: 'pie',
       data: {
-          labels: ["3","4","5","6"],
+          labels: this.group_name,
           datasets: [{
-              label: ["3","4","5","6"],
-              data: ["30","40","20","10"],
+              label: this.group_name,
+              data: this.total_tax,
               backgroundColor: [
                   'rgba(255, 159, 64, 1)',
                   'rgba(255, 99, 132, 1)',
@@ -75,40 +71,16 @@ export class OldReportBi_1_12MonthGraph2Page {
                   "#FFCE56",
                   "#FF6384" 
               ]
-          }]
+          }],
+          options: {
+            responsive: true
+          }
       }
   
     });
    }
 
-   createChart(){
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
- 
-      type: 'doughnut',
-      data: {
-          labels: ["BJP", "Congress", "AAP", "CPM", "SP"],
-          datasets: [{
-              label: '# of Votes',
-              data: [50, 29, 15, 10, 7],
-              backgroundColor: [
-                  'rgba(255, 159, 64, 0.2)',
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)'
-              ],
-              hoverBackgroundColor: [
-                  "#FFCE56",
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56",
-                  "#FF6384" 
-              ]
-          }]
-      }
-
-  });
-   }
-  
   }
+  
+
   
