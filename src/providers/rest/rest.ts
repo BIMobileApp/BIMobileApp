@@ -10,9 +10,9 @@ export class RestProvider {
   constructor(public http: HttpClient,
     public toast:ToastController) {
    //this.baseUrl = "http://192.168.188.236:8090/api/";
-    //this.baseUrl = "http://localhost:62657/api/";
+    this.baseUrl = "http://localhost:62657/api/";
    // console.log('Hello RestProvider Provider');
-   this.baseUrl = "http://192.168.41.101/BIWebService/api/";
+   //this.baseUrl = "http://192.168.41.101/BIWebService/api/";
    //this.baseUrl = "http://192.168.41.101:8080/api/";
   } 
 

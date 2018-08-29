@@ -14,6 +14,7 @@ export class IncDataAreaPage {
   responseArea: any;
   responseProvince: any;
   responseGroupName: any;
+  repondProduct:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -22,56 +23,88 @@ export class IncDataAreaPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
     this.selectionArea();
     this.selectionProvince();
-   this.selectionGeoupName();
+    this.selectionGeoupName();
+    this.IncProductAll();
   }
 
   selectionArea(){
     this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
-
-      console.log( this.responseArea);
     });
   }
 
  selectionProvince(){
     this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
       this.responseProvince = data;
-      console.log( this.responseProvince);
     });
   }
 
   selectionGeoupName(){
     this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
       this.responseGroupName = data;
-      console.log( this.responseGroupName);
-      //this.loadData(area,province,group_name);
     });
   }
 
-  getitemArea(area){
+  getitemsGroupName(area,province,group_name){
 
-    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
-      this.responseProvince = data;
-      console.log( this.responseProvince);
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
     });
   }
 
-  getitemsProvince(province){
-    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
-      this.responseGroupName = data;
-      console.log( this.responseGroupName);
+  getitemsRegion(area,province,group_name){
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
     });
   }
 
-  getitemsGroupName(group_name){
-
+  getitemsProvince(area,province,group_name){
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
   }
 
-  /*loadData(area,province,group_name){
+  IncProductAll(){
+    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
+  }
 
-    this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data)=>{
+  getAmt(){
+    let val;
+    for (var i = 0; i < this.repondProduct.length; i++) {
+      val = this.repondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.repondProduct[i].AMT = val;
+    }
+  }
+
+  getCount(){
+    let val;
+    for (var i = 0; i < this.repondProduct.length; i++) {
+      val = this.repondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.repondProduct[i].COUNT = val;
+    }
+  }
+
+  loadData(){
+    this.webapi.getData('IncArea?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
       this.getNumSURA();
       this.getNumTOBBACO();
@@ -80,8 +113,7 @@ export class IncDataAreaPage {
       this.getAmtTOBBACO();
       this.getAmtCARD();   
     });
-
-  }*/
+  }
 
   getNumSURA() {
     let val;
