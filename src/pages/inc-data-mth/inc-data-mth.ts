@@ -11,6 +11,10 @@ export class IncDataMthPage {
 
   offcode: any;
   responseData: any;
+  responseArea: any;
+  responseProvince: any;
+  responseGroupName: any;
+  repondProduct:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -19,6 +23,14 @@ export class IncDataMthPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+    this.selectionArea();
+    this.selectionProvince();
+    this.selectionGeoupName(); 
+   this.IncProductAll();
+  }
+
+  loadData(){
     this.webapi.getData('IncDataMonth?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
       this.getNumSURA();
@@ -28,6 +40,93 @@ export class IncDataMthPage {
       this.getAmtTOBBACO();
       this.getAmtCARD();
     });
+  }
+
+  selectionArea(){
+    this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+      console.log(this.responseArea);
+    });
+  }
+
+ selectionProvince(){
+    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
+      this.responseProvince = data;
+    });
+  }
+
+  selectionGeoupName(){
+    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+      this.responseGroupName = data;
+    });
+  }
+
+  IncProductAll(){
+    this.webapi.getData('IncProductByMthAll?offcode='+this.offcode).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
+  }
+
+  getitemsGroupName(area,province,group_name,month){
+    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
+
+  }
+
+  getitemsRegion(area,province,group_name,month){
+    console.log(province);
+    console.log(group_name);
+    console.log(month);
+
+    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
+  }
+
+  getitemsProvince(area,province,group_name,month){
+    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
+  }
+
+  getitemMonth(area,province,group_name,month){
+    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
+      this.repondProduct = data;
+      this.loadData();
+      this.getAmt();
+      this.getCount();
+    });
+  }
+
+  getAmt(){
+    let val;
+    for (var i = 0; i < this.repondProduct.length; i++) {
+      val = this.repondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.repondProduct[i].AMT = val;
+    }
+  }
+
+  getCount(){
+    let val;
+    for (var i = 0; i < this.repondProduct.length; i++) {
+      val = this.repondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.repondProduct[i].COUNT = val;
+    }
   }
 
   getNumSURA() {
