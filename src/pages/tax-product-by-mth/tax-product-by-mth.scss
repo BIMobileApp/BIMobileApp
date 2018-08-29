@@ -30,10 +30,16 @@ page-tax-product-by-mth {
     font-size: 3vw !important;
     text-align: center !important;
   }
-  h2.header-style{
+  h1.header-style{
     font-weight: bold;
     color: black !important;
     font-size: 6vw !important;
+    text-align: center !important;
+  }
+  h2.header-style{
+    font-weight: bold;
+    color: black !important;
+    font-size: 5vw !important;
     text-align: center !important;
   }
   h3.right {
@@ -51,7 +57,7 @@ page-tax-product-by-mth {
   }
   
   ion-item.size {
-    width: 50%;
+    width: 60%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -61,7 +67,7 @@ page-tax-product-by-mth {
   }
   
   ion-select {
-  max-width: 80% !important;
+  max-width: 70% !important;
     white-space: normal!important;
   }
 

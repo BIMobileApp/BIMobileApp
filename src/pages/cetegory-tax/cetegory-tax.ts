@@ -280,9 +280,9 @@ export class CetegoryTaxPage {
     "ตุลาคม","พฤศจิกายน","ธันวาคม");
     
     if((now.getDate()-1) < 1){
-      this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-2] ) +" " +  (now.getMonth()-2  < 0 ? buddhayear- 1 : buddhayear ); 
+      this.dateDisplay="ตั้งแต่ต้นปีงบประมาณ ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-2] ) +" " +  (now.getMonth()-2  < 0 ? buddhayear- 1 : buddhayear ); 
       }else{
-        this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()-1] ) +" " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
+        this.dateDisplay="ตั้งแต่ต้นปีงบประมาณ ถึง "+ (now.getDate()-1) +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()] ) +" " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
       }
     }
 
