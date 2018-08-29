@@ -44,6 +44,8 @@ export class CetegoryTaxPage {
    ProdTAX_LY = [];
    ProdEST = [];
 
+   dateDisplay = "";
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public app: App,
@@ -52,6 +54,7 @@ export class CetegoryTaxPage {
 
   ionViewDidLoad() {
     this.UserAthu();
+    this.displayDate();
   
   }
 
@@ -74,7 +77,6 @@ export class CetegoryTaxPage {
   TableGetData(){
     this.webapi.getData('TaxCurYear?offcode='+this.offcode).then((data)=>{
       this.DataCurYear = data;
-      console.log(this.DataCurYear);
       this.getTAX();
       this.getLAST_TAX();
       this.getEST();
@@ -264,6 +266,25 @@ export class CetegoryTaxPage {
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
   }
+
+  displayDate() {
+    var now=new Date();  
+    var buddhayear = now.getFullYear()+543;    
+    var last  =  new Date(now.getFullYear(),now.getMonth(),0); //th 
+    var budgetyear =  0;
+    if (now.getMonth() >= 10) {budgetyear= buddhayear;}
+    else {budgetyear=buddhayear-1;}
+    
+    var thmonth = new Array ("มกราคม","กุมภาพันธ์","มีนาคม",
+    "เมษายน","พฤษภาคม","มิถุนายน", "กรกฎาคม","สิงหาคม","กันยายน",
+    "ตุลาคม","พฤศจิกายน","ธันวาคม");
+    
+    if((now.getDate()-1) < 1){
+      this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-2] ) +" " +  (now.getMonth()-2  < 0 ? buddhayear- 1 : buddhayear ); 
+      }else{
+        this.dateDisplay="ตั้งแต่ต้นปี ถึง "+ last.getDate() +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()-1] ) +" " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
+      }
+    }
 
   section1() {
     this.app.getRootNav().push(TaxCoutrySection1Page);
