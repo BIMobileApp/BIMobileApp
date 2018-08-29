@@ -5,9 +5,22 @@
   </ion-header>
   
 <ion-content>
-    <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</h1>
+   
+   
+    <ion-item style="background-color:#D0DFE6;" text-center>
+        <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</h1>
+        <h1 class="header-style">ข้อมูล ณ วันที่ {{dateDisplay}} </h1>
+      </ion-item>
+    
     <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
     <ion-card>
+        <ion-item  class="size" >
+            <ion-label style="max-width: 8vw !important;">ปี : </ion-label>
+            <ion-select  [(ngModel)]="TaxYear" (ionChange)="getItemTax(TaxYear)" >
+              <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+              <ion-option  *ngFor="let item of YearTax"  value="{{item.BUDGET_YEAR}}">{{item.BUDGET_YEAR}}</ion-option>
+            </ion-select>
+        </ion-item>
       <ion-card-content no-padding>
         <div class="table-responsive">
           <table style="width: 100%;" >
@@ -50,6 +63,14 @@
     <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามประเภทสินค้า</h1>
       <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
       <ion-card>
+          <ion-item  class="size">
+              <ion-label style="max-width: 8vw !important;">ปี : </ion-label>
+              <ion-select  [(ngModel)]="prodYear" (ionChange)="getitemsProd(prodYear)" >
+                <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+                <ion-option  *ngFor="let item of YearProduct"  value="{{item.BUDGET_YEAR}}">{{item.BUDGET_YEAR}}</ion-option>
+              </ion-select>
+          </ion-item>
+          
         <ion-card-content no-padding>
           <div class="table-responsive">
             <table style="width: 100%;" >

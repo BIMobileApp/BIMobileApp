@@ -18,6 +18,7 @@ page-compare-tax-est-beer {
       overflow: hidden;
       width: 10em;
     }
+    table tbody tr:last-child { background:#a7d8ff !important; }
     @media only screen and (orientation: landscape) {
       table>tbody>tr>td>p {
         width: 90%;

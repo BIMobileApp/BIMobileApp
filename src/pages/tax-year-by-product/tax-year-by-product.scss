@@ -15,6 +15,7 @@ page-tax-year-by-product {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
     font-size: 3vw !important;
+    text-align: center;
   }
   .td-right{
     font-weight: bold;
@@ -64,5 +65,19 @@ page-tax-year-by-product {
     width: 2%;
   }
 
+  /* ion-select {
+    max-width: 80% !important;
+      white-space: normal !important;
+      
+      max-width: 100%!important;
+      width: 100%!important;
+      right: auto!important;
+      direction: ltr!important;
+      padding-left: 0!important;
+    }
+    ion-item.ion-label {
+      max-width: 7vw !important;
+      border: solid;
+    } */
 }
 
