@@ -10,6 +10,9 @@ import { RestProvider } from '../../providers/rest/rest';
 export class LawDataAreaPage {
   //Table Pram
   responseData: any;
+  responseArea: any;
+  responseProvince: any;
+  responseGroupName: any;
   offcode: any;
 
   constructor(
@@ -24,11 +27,31 @@ export class LawDataAreaPage {
   }
   UserAthu() {
     this.offcode = localStorage.offcode;
-    this.getTableData();
+    this.selectionArea();
+    //this.getTableData();
   }
 
-  getTableData() {
+  selectionArea(){
     this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+    });
+  }
+
+  selectionProvince(){
+    this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data) => {
+      this.responseProvince = data;
+    });
+  }
+
+  selectionGeoupName(){
+    this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data) => {
+      this.responseGroupName = data;
+
+    });
+  }
+
+  getTableData(region,province,group_desc) {
+    this.webapi.getData('LawReportArea?offcode='+this.offcode+'&region='+region+"&province="+province+"&group_desc="+group_desc ).then((data) => {
     this.responseData = data;
     this.getTableLaw_qty();
     this.getTableTarget_qty();

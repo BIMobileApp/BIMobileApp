@@ -11,6 +11,9 @@ export class IncDataAreaPage {
 
   offcode: any;
   responseData: any;
+  responseArea: any;
+  responseProvince: any;
+  responseGroupName: any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -19,7 +22,56 @@ export class IncDataAreaPage {
   }
 
   ionViewDidLoad() {
-    this.webapi.getData('IncArea?offcode='+this.offcode).then((data)=>{
+    this.selectionArea();
+    //this.selectionProvince();
+   // this.selectionGeoupName();
+  }
+
+  selectionArea(){
+    this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+
+      console.log( this.responseArea);
+    });
+  }
+
+ /* selectionProvince(){
+    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
+      this.responseProvince = data;
+      console.log( this.responseProvince);
+    });
+  }
+
+  selectionGeoupName(){
+    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+      this.responseGroupName = data;
+      console.log( this.responseGroupName);
+      //this.loadData(area,province,group_name);
+    });
+  }*/
+
+  getitemArea(area){
+
+    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
+      this.responseProvince = data;
+      console.log( this.responseProvince);
+    });
+  }
+
+  getitemsProvince(province){
+    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+      this.responseGroupName = data;
+      console.log( this.responseGroupName);
+    });
+  }
+
+  getitemsGroupName(group_name){
+
+  }
+
+  /*loadData(area,province,group_name){
+
+    this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
       this.getNumSURA();
       this.getNumTOBBACO();
@@ -28,7 +80,8 @@ export class IncDataAreaPage {
       this.getAmtTOBBACO();
       this.getAmtCARD();   
     });
-  }
+
+  }*/
 
   getNumSURA() {
     let val;
@@ -86,5 +139,5 @@ export class IncDataAreaPage {
       this.responseData[i].AMT_OF_LIC_CARD = val;
     }
   }
-
+  
 }

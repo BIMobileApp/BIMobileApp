@@ -53,6 +53,5 @@ export class TaxBudgetRegByMthPage {
       this.responseData[i].TAX = val;
     
     }
-    console.log(this.responseData);
   }
 }

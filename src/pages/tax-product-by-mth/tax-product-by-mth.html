@@ -10,24 +10,71 @@
     <h2 class="header-style">รายงานประมาณการภาษีรายเดือน</h2>
   </ion-item>
 
-  <ion-item  class="size">
-    <ion-label >เดือน : </ion-label>
-    <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="selectDate(item.value)" >
-        <ion-option value=" "  [selected]="true">...ทั้งหมด...</ion-option>
-        <ion-option value="มกราคม" >มกราคม</ion-option>
-        <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
-        <ion-option value="มีนาคม">มีนาคม</ion-option>
-        <ion-option value="เมษายน">เมษายน</ion-option>
-        <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
-        <ion-option value="มิถุนายน">มิถุนายน</ion-option>
-        <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
-        <ion-option value="สิงหาคม">สิงหาคม</ion-option>
-        <ion-option value="กันยายน">กันยายน</ion-option>
-        <ion-option value="ตุลาคม">ตุลาคม</ion-option>
-        <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
-        <ion-option value="ธันวาคม">ธันวาคม</ion-option>
-    </ion-select>
-  </ion-item>
+  <!--<ion-grid>
+    <ion-col>
+      <ion-row>ปี : </ion-row>
+      <ion-row> 
+          <ion-select  [(ngModel)]="year"   (ionChange)="getitemsByDate(year)" >
+            <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+            <ion-option  *ngFor="let item of summaryDate"  value="{{item.key}}">{{item.key}}</ion-option>
+          </ion-select>
+      </ion-row>
+    </ion-col>
+    <ion-col>
+      <ion-row>เดือน :</ion-row>
+      <ion-row>
+          <ion-select [(ngModel)]="month"  #item (ionChange)="selectDate(item.value)" >
+              <ion-option value=" "  [selected]="true">...ทั้งหมด...</ion-option>
+              <ion-option value="มกราคม" >มกราคม</ion-option>
+              <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
+              <ion-option value="มีนาคม">มีนาคม</ion-option>
+              <ion-option value="เมษายน">เมษายน</ion-option>
+              <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
+              <ion-option value="มิถุนายน">มิถุนายน</ion-option>
+              <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
+              <ion-option value="สิงหาคม">สิงหาคม</ion-option>
+              <ion-option value="กันยายน">กันยายน</ion-option>
+              <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+              <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+              <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+          </ion-select>
+      </ion-row>
+    </ion-col>
+  </ion-grid>-->
+
+  <ion-grid>
+      <ion-col>
+
+          <ion-item>
+              <ion-label>ปี : </ion-label>
+              <ion-select  [(ngModel)]="year"   (ionChange)="getitemsByDate(year)" >
+                <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+                <ion-option  *ngFor="let item of summaryDate"  value="{{item.key}}">{{item.key}}</ion-option>
+              </ion-select>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+              <ion-item>
+              <ion-label>เดือน : </ion-label>
+              <ion-select [(ngModel)]="month"  #item (ionChange)="selectDate(item.value)" >
+                  <ion-option value=" "  [selected]="true">...ทั้งหมด...</ion-option>
+                  <ion-option value="มกราคม" >มกราคม</ion-option>
+                  <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
+                  <ion-option value="มีนาคม">มีนาคม</ion-option>
+                  <ion-option value="เมษายน">เมษายน</ion-option>
+                  <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
+                  <ion-option value="มิถุนายน">มิถุนายน</ion-option>
+                  <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
+                  <ion-option value="สิงหาคม">สิงหาคม</ion-option>
+                  <ion-option value="กันยายน">กันยายน</ion-option>
+                  <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+                  <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+                  <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+              </ion-select>
+            </ion-item>
+
+  </ion-col>  
+</ion-grid>
   
   <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
         <ion-card>
