@@ -26,6 +26,9 @@ $toolbar-ios-title-font-size: 6vw;
 $toolbar-md-title-font-size: 6vw;
 $toolbar-wp-title-font-size: 6vw;
 
+$toolbar-ios-height: 80px;
+$toolbar-md-height: 80px;
+$toolbar-wp-height: 40px;
 
 @media(max-height: 480px) {
   .alert-radio-group {
@@ -34,7 +37,27 @@ $toolbar-wp-title-font-size: 6vw;
   }
 }
 
+ion-select {
+  max-width: 60% !important;
+  white-space: normal !important;
+  width: 100% !important;
+  right: auto !important;
+  direction: ltr !important;
+  padding-left: 0 !important;
+} 
 
+ion-item.size{
+  width: 70%;
+  font-weight: bold;
+  color: black ;
+  font-size: 4vw ;
+
+  display: block;
+  right: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
 
 // Named Color Variables
 // --------------------------------------------------

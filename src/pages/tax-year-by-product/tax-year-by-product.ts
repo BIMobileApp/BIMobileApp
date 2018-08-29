@@ -9,57 +9,82 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class TaxYearByProductPage {
 
-  summaryDate:any;
+  summaryDate: any;
   responseData: any;
   offcode: any;
 
   //Table parm
   DataCurYear: any;
   DataProduct: any;
-  DataGauge:any;
+  DataGauge: any;
   Data = [];
   TAX = [];
   TAX_LY = [];
   EST = [];
 
-   ProdTAX = [];
-   ProdTAX_LY = [];
-   ProdEST = [];
+  ProdTAX = [];
+  ProdTAX_LY = [];
+  ProdEST = [];
+
+  YearTax: any;
+  YearProduct: any;
+  dateDisplay: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public webapi:RestProvider) {
-      this.offcode = localStorage.offcode;
+    public webapi: RestProvider) {
+    this.offcode = localStorage.offcode;
   }
 
-   year_en:any;
-   year_th:any;
-
-   ionViewDidLoad(){
+  year_en: any;
+  year_th: any;
+  ionViewDidLoad() {
     this.TableGetData();
     this.TableProductGetData();
-   }
-/*
-  ionViewDidLoad() {
-    
-    var d = new Date(); 
-    var n = d.getFullYear();
-    var nt = d.getFullYear()+543;
-
-    var range = [];
-    for(var i=0;i<10;i++) {
-
-     this.year_en = n-i;
-     this.year_th = nt-i;
-
-      range.push( {"key":this.year_th,"value": this.year_en});
-    }
-    this.summaryDate = range;
-    this.getDataAll();    
+    this.getTaxCurYear();
+    this.getTaxProdYear();
+    this.dateDisplay = localStorage.last_update_date;
   }
-*/
-  TableGetData(){
-    this.webapi.getData('TaxCurYear?offcode='+this.offcode).then((data)=>{
+  getTaxCurYear() {
+    this.webapi.getData('TaxCurYear').then((data) => {
+      this.YearTax = data;
+    });
+  }
+
+  getItemTax(TaxYear) {
+    if (TaxYear != "") {
+      this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&year=' + TaxYear).then((data) => {
+        this.DataCurYear = data;
+        this.getTAX();
+        this.getLAST_TAX();
+        this.getEST();
+      });
+    } else {
+      this.TableGetData();
+    }
+  }
+
+  getitemsProd(prodYear) {
+    if (prodYear != "") {
+      this.webapi.getData('TaxProductCurYearbyYear?offcode=' + this.offcode + '&year=' + prodYear).then((data) => {
+        this.DataProduct = data;
+        this.getProductTAX();
+        this.getProductLAST_TAX();
+        this.getProductEST();
+      });
+    } else {
+      this.TableProductGetData();
+    }
+  }
+
+  getTaxProdYear() {
+    this.webapi.getData('TaxProductCurYear').then((data) => {
+      this.YearProduct = data;
+    });
+  }
+
+  TableGetData() {
+    this.webapi.getData('TaxCurYear?offcode=' + this.offcode).then((data) => {
       this.DataCurYear = data;
       this.getTAX();
       this.getLAST_TAX();
@@ -70,7 +95,7 @@ export class TaxYearByProductPage {
   getTAX() {
     let val;
     for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].TAX/1000000;
+      val = this.DataCurYear[i].TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataCurYear[i].TAX = val;
@@ -80,7 +105,7 @@ export class TaxYearByProductPage {
   getLAST_TAX() {
     let val;
     for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].LAST_TAX/1000000;
+      val = this.DataCurYear[i].LAST_TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataCurYear[i].LAST_TAX = val;
@@ -90,15 +115,15 @@ export class TaxYearByProductPage {
   getEST() {
     let val;
     for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].ESTIMATE/1000000
+      val = this.DataCurYear[i].ESTIMATE / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataCurYear[i].ESTIMATE = val;
     }
   }
 
-  TableProductGetData(){
-    this.webapi.getData('TaxProductCurYear?offcode='+ this.offcode).then((data)=>{
+  TableProductGetData() {
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode).then((data) => {
       this.DataProduct = data;
       this.getProductTAX();
       this.getProductLAST_TAX();
@@ -109,7 +134,7 @@ export class TaxYearByProductPage {
   getProductTAX() {
     let val;
     for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].TAX/1000000;
+      val = this.DataProduct[i].TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].TAX = val;
@@ -119,7 +144,7 @@ export class TaxYearByProductPage {
   getProductLAST_TAX() {
     let val;
     for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].LAST_TAX/1000000;
+      val = this.DataProduct[i].LAST_TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].LAST_TAX = val;
@@ -129,7 +154,7 @@ export class TaxYearByProductPage {
   getProductEST() {
     let val;
     for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].ESTIMATE/1000000
+      val = this.DataProduct[i].ESTIMATE / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].ESTIMATE = val;
