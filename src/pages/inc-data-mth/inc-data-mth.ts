@@ -102,40 +102,40 @@ export class IncDataMthPage {
     });
   }
 
-  getitemsTypeNameSura(area,province,type_name){
-      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
+  getitemsTypeNameSura(SuraArea,SuraProvince,type_name){
+      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.loadData();
       this.getAmtSura();
       this.getCountSura();
     });
-    this.getitemsSumSura(area,province,type_name);
+    this.getitemsSumSura(SuraArea,SuraProvince,type_name);
   }
 
-  getitemsRegionSura(area,province,type_name){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา' ).then((data) => {
+  getitemsRegionSura(SuraArea,SuraProvince,type_name){
+    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+type_name+'&group_name=สุรา' ).then((data) => {
       this.repondProductSura = data;
       this.loadData();
       this.getAmtSura();
       this.getCountSura();
     });
-    this.selectionProvince(area);
-    this.getitemsSumSura(area,province,type_name);
+    this.selectionProvince(SuraArea);
+    this.getitemsSumSura(SuraArea,SuraProvince,type_name);
     //this.selectionProvinceChage(area);
   }
 
-  getitemsProvinceSura(area,province,type_name){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
+  getitemsProvinceSura(SuraArea,SuraProvince,type_name){
+    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.loadData();
       this.getAmtSura();
       this.getCountSura();
     });
-    this.getitemsSumSura(area,province,type_name);
+    this.getitemsSumSura(SuraArea,SuraProvince,type_name);
   }
 
-  getitemsSumSura(area,province,type_name){
-    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
+  getitemsSumSura(SuraArea,SuraProvince,type_name){
+    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
       this.repondSumProductSura = data;
       this.loadData();
       this.getSumAmtSura();    

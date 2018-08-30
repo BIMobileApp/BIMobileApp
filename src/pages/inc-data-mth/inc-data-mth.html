@@ -87,7 +87,7 @@
                 <ion-col>
                     <ion-item  class="size">
                       <ion-label> ภาค : </ion-label>
-                        <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegionSura(area,province,type_name)" >
+                        <ion-select  [(ngModel)]="SuraArea" (ionChange)="getitemsRegionSura(SuraArea,SuraProvince,type_name)" >
                           <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                           <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
                         </ion-select>
@@ -97,7 +97,7 @@
                 <ion-col>
                     <ion-item  class="size">
                         <ion-label>จังหวัด : </ion-label>
-                            <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvinceSura(area,province,type_name)">
+                            <ion-select  [(ngModel)]="SuraProvince" (ionChange)="getitemsProvinceSura(SuraArea,SuraProvince,type_name)">
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                                   <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                           </ion-select>
