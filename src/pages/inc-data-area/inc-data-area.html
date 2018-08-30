@@ -72,18 +72,24 @@
         <ion-grid>
             <ion-row>
               <ion-col>
-                  <ion-item  class="size">
+               <!--    <ion-item  class="size">
                       <ion-label>กลุ่มสินค้า : </ion-label>
                       <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
-                              <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                              <ion-option value="undefined"  [selected]="true">สุรา</ion-option>
                               <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
                       </ion-select>
-                    </ion-item>
+                    </ion-item> -->
+                    <ion-item class="size">
+                        <ion-label> สินค้า : </ion-label>
+                        <ion-select disabled=true >
+                            <ion-option [selected]="true">สุรา</ion-option>
+                        </ion-select>
+                      </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item  class="size">
                       <ion-label> ภาค : </ion-label>
-                      <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                      <ion-select  [(ngModel)]="SuraArea" (ionChange)="SuraGetitems(SuraArea,SuraProvince,SuraMonth)" >
                               <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                               <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
                       </ion-select>
@@ -95,16 +101,16 @@
              <ion-col>
                 <ion-item  class="size">
                     <ion-label>จังหวัด : </ion-label>
-                    <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
+                    <ion-select  [(ngModel)]="SuraProvince" (ionChange)="SuraGetitems(SuraArea,SuraProvince,SuraMonth)">
                           <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
-                            <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                            <ion-option  *ngFor="let item1 of SuraResponseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                     </ion-select>
                 </ion-item>
              </ion-col>  
              <ion-col>
                 <ion-item  class="size">
                     <ion-label >เดือน : </ion-label>
-                      <ion-select [(ngModel)]="month" (ionChange)="getitemMonth(area,province,group_name,month)" >
+                      <ion-select [(ngModel)]="SuraMonth" (ionChange)="SuraGetitems(SuraArea,SuraProvince,SuraMonth)" >
                           <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                           <ion-option value="มกราคม" >มกราคม</ion-option>
                           <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
@@ -135,7 +141,7 @@
                               </tr>
                       </thead>
                       <tbody>
-                              <tr *ngFor="let data of repondProduct">
+                              <tr *ngFor="let data of SuraRepondProduct">
                                   <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
                                   <td><h3 class="right">{{data.COUNT}}</h3></td>
                                   <td><h3 class="right">{{data.AMT}}</h3></td>
@@ -190,18 +196,24 @@
           <ion-grid>
               <ion-row>
                 <ion-col>
-                    <ion-item  class="size">
+                  <!--   <ion-item  class="size">
                         <ion-label>กลุ่มสินค้า : </ion-label>
                         <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                 <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
+                        </ion-select>
+                      </ion-item> -->
+                      <ion-item class="size">
+                        <ion-label> สินค้า : </ion-label>
+                        <ion-select disabled=true>
+                            <ion-option [selected]="true">ยาสูบ</ion-option>
                         </ion-select>
                       </ion-item>
                 </ion-col>
                 <ion-col>
                     <ion-item  class="size">
                         <ion-label> ภาค : </ion-label>
-                        <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                        <ion-select  [(ngModel)]="TOBBACOArea" (ionChange)="TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth)" >
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                 <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
                         </ion-select>
@@ -213,7 +225,7 @@
                <ion-col>
                   <ion-item  class="size">
                       <ion-label>จังหวัด : </ion-label>
-                      <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
+                      <ion-select  [(ngModel)]="TOBBACOProvince" (ionChange)="TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth)">
                             <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                               <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                       </ion-select>
@@ -222,7 +234,7 @@
                <ion-col>
                   <ion-item  class="size">
                       <ion-label >เดือน : </ion-label>
-                        <ion-select [(ngModel)]="month" (ionChange)="getitemMonth(area,province,group_name,month)" >
+                        <ion-select [(ngModel)]="TOBBACOMonth" (ionChange)="TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth)" >
                             <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                             <ion-option value="มกราคม" >มกราคม</ion-option>
                             <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
@@ -253,7 +265,7 @@
                                 </tr>
                         </thead>
                         <tbody>
-                                <tr *ngFor="let data of repondProduct">
+                                <tr *ngFor="let data of TOBBACORepondProduct">
                                     <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
                                     <td><h3 class="right">{{data.COUNT}}</h3></td>
                                     <td><h3 class="right">{{data.AMT}}</h3></td>
@@ -276,18 +288,24 @@
               <ion-grid>
                   <ion-row>
                     <ion-col>
-                        <ion-item  class="size">
+                       <!--  <ion-item  class="size">
                             <ion-label>กลุ่มสินค้า : </ion-label>
                             <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
                                     <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                     <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
+                            </ion-select>
+                          </ion-item> -->
+                          <ion-item class="size">
+                            <ion-label> สินค้า : </ion-label>
+                            <ion-select disabled=true>
+                                <ion-option [selected]="true">ไพ่</ion-option>
                             </ion-select>
                           </ion-item>
                     </ion-col>
                     <ion-col>
                         <ion-item  class="size">
                             <ion-label> ภาค : </ion-label>
-                            <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                            <ion-select  [(ngModel)]="CardArea" (ionChange)="CardGetitems(CardArea,CardProvince,CardMonth)" >
                                     <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                     <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
                             </ion-select>
@@ -299,7 +317,7 @@
                    <ion-col>
                       <ion-item  class="size">
                           <ion-label>จังหวัด : </ion-label>
-                          <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
+                          <ion-select  [(ngModel)]="CardProvince" (ionChange)="CardGetitems(CardArea,CardProvince,CardMonth)">
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                                   <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                           </ion-select>
@@ -308,7 +326,7 @@
                    <ion-col>
                       <ion-item  class="size">
                           <ion-label >เดือน : </ion-label>
-                            <ion-select [(ngModel)]="month" (ionChange)="getitemMonth(area,province,group_name,month)" >
+                            <ion-select [(ngModel)]="CardMonth" (ionChange)="CardGetitems(CardArea,CardProvince,CardMonth)" >
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                 <ion-option value="มกราคม" >มกราคม</ion-option>
                                 <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
@@ -339,7 +357,7 @@
                                     </tr>
                             </thead>
                             <tbody>
-                                    <tr *ngFor="let data of repondProduct">
+                                    <tr *ngFor="let data of CardRepondProduct">
                                         <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
                                         <td><h3 class="right">{{data.COUNT}}</h3></td>
                                         <td><h3 class="right">{{data.AMT}}</h3></td>

@@ -14,7 +14,7 @@ import { MenuGroupNewReportPage } from '../pages/menu-group-new-report/menu-grou
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = WelcomePage;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(
     public platform: Platform, 
@@ -24,9 +24,9 @@ export class MyApp {
     this.initializeApp();
      // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'หน้าแรก', component: HomePage },
-      { title: 'ติดต่อเรา', component: ContactPage },
-      { title: 'ออกจากระบบ', component: HomePage }
+      { title: 'หน้าแรก', component: HomePage,icon: 'BHome'},
+      { title: 'ติดต่อเรา', component: ContactPage,icon: 'BContact' },
+      { title: 'ออกจากระบบ', component: HomePage,icon: 'BSignOut' }
     ];
     
   }
