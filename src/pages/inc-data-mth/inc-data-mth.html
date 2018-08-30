@@ -263,15 +263,10 @@
                       <td> <h3 class="right">{{data.COUNT}}</h3></td>
                       <td> <h3 class="right">{{data.AMT}}</h3></td>
                   </tr>
-                <tr *ngFor="let data of repondSumProductSura">
-                  <td><h3 class="left">รวม</h3></td>
-                  <td><h3 class="right">{{data.COUNT}}</h3></td>
-                  <td><h3 class="right">{{data.AMT}}</h3></td>
-                </tr>
-                <tr *ngFor="let data of repondSumProductCard">
-                    <td><h3 class="center">รวม</h3></td>
-                    <td><h3 class="right">{{data.COUNT}}</h3></td>
-                    <td><h3 class="right">{{data.AMT}}</h3></td>
+                  <tr *ngFor="let data of repondSumProductCard">
+                      <td><h3 class="center">รวม</h3></td>
+                      <td><h3 class="right">{{data.COUNT}}</h3></td>
+                      <td><h3 class="right">{{data.AMT}}</h3></td>
                   </tr>
                 </tbody>
               </table>

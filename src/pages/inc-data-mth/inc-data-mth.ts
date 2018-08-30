@@ -76,10 +76,9 @@ export class IncDataMthPage {
       this.getSumNumSURA();
       this.getSumNumTOBBACO();
       this.getSumNumCARD();
-      this.getSumAmtSURA();
+      this.getSumAmtAreaSURA();
       this.getSumAmtTOBBACO();
-      this.getSumAmtCARD();
-
+      this.getSumAmtAreaCARD();
     });
   }
 
@@ -138,8 +137,8 @@ export class IncDataMthPage {
     this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
       this.repondSumProductSura = data;
       this.loadData();
-      this.getSumAmtSura();    
-      this.getSumCountSura(); 
+      //this.getSumAmtSura();    
+     // this.getSumCountSura(); 
     });
   }
 
@@ -234,8 +233,8 @@ export class IncDataMthPage {
     this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ').then((data) => {
       this.repondSumProductSica = data;
       this.loadData();
-      this.getSumAmtSica();    
-      this.getSumCountSica(); 
+      //this.getSumAmtSica();    
+      //this.getSumCountSica(); 
     });
   }
 
@@ -343,8 +342,8 @@ export class IncDataMthPage {
       this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ').then((data) => {
         this.repondSumProductCard = data;
         this.loadData();
-        this.getSumAmtCard();    
-        this.getSumCountCard(); 
+       // this.getSumAmtCard();    
+        //this.getSumCountCard(); 
       });
     }
 
@@ -474,7 +473,7 @@ export class IncDataMthPage {
     }
   }
 
-  getSumAmtSURA() {
+  getSumAmtAreaSURA() {
     let val;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       val = this.responseSumArea[i].AMT_OF_LIC_SURA/1000000;
@@ -494,7 +493,7 @@ export class IncDataMthPage {
     }
   }
 
-  getSumAmtCARD() {
+  getSumAmtAreaCARD() {
     let val;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       val = this.responseSumArea[i].AMT_OF_LIC_CARD/1000000;
@@ -503,4 +502,5 @@ export class IncDataMthPage {
       this.responseSumArea[i].AMT_OF_LIC_CARD = val;
     }
   }
+
 }
