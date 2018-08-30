@@ -2,7 +2,7 @@
         <ion-header >
           <ion-toolbar color="navber">
             <ion-title>
-                <p class="menu-css">คุณ satit_nan <br>
+                <p class="menu-css">คุณสามัคคี จงใจรักษ์<br>
                   กรมสรรพสามิต กรุงเทพมหานคร</p>
             </ion-title>
           </ion-toolbar>
@@ -11,9 +11,11 @@
         <ion-content>
           <ion-list>
             <button style="border-bottom: 1px solid #bdbdbd" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" >
-               <img style="width: 10%" src="../assets/imgs/{{p.icon}}.png" />
+  
+              <img style="width: 10%" src="../assets/imgs/{{p.icon}}.png" />
                 <!-- <p style="font-weight: bold">{{p.title}}</p> -->
                 {{p.title}}
+          
             </button>
           </ion-list>
         </ion-content>
