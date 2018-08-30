@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-inc-data-area',
@@ -10,6 +12,8 @@ import { RestProvider } from '../../providers/rest/rest';
 export class IncDataAreaPage {
 
   offcode: any;
+  dateDisplay:any;
+  dateAsOff:any;
   responseData: any;
   responseArea: any;
   responseProvince: any;
@@ -20,6 +24,8 @@ export class IncDataAreaPage {
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
+      this.dateDisplay = localStorage.last_update_date;
+      this.dateAsOff =  dateDisplayAll;
   }
 
 

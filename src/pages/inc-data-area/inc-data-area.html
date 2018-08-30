@@ -6,7 +6,7 @@
 
 <ion-content>
     <ion-item style="background-color:#D0DFE6;" text-center>
-        <h2 class="header-style">สถิติใบอนุญาตตามพื้นที่</h2>
+        <h2 class="header-style">สถิติใบอนุญาตแยกตามหน่วยงาน</h2>
       </ion-item>
    <!-- <ion-item  class="size">
       <ion-label>ภาค : </ion-label>
@@ -18,7 +18,10 @@
       <ion-card-content no-padding>
 
       <ion-item>
-          <ion-label><strong>สถิติใบอนุญาตตามพื้นที่</strong></ion-label>
+          <ion-label text-center><strong>สถิติใบอนุญาตแยกตามภาค</strong></ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
       </ion-item>
 
       <h3 style="padding-right: 2%" class="right">หน่วย ใบ/ล้านบาท</h3>
@@ -60,26 +63,29 @@
     <ion-card>
       <ion-card-content no-padding>
         <ion-item>
-            <ion-label><strong>สถิติใบอนุญาตตามสินค้า</strong></ion-label>
+            <ion-label text-center><strong>สถิติใบอนุญาตแยกตามประเภทสินค้าสุรา</strong></ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
         </ion-item>
 
         <ion-grid>
             <ion-row>
               <ion-col>
                   <ion-item  class="size">
-                    <ion-label> ภาค : </ion-label>
-                      <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                      <ion-label>กลุ่มสินค้า : </ion-label>
+                      <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
                               <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                              <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
+                              <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
                       </ion-select>
                     </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item  class="size">
-                      <ion-label>จังหวัด : </ion-label>
-                      <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
-                            <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
-                              <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                      <ion-label> ภาค : </ion-label>
+                      <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                              <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                              <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
                       </ion-select>
                     </ion-item>
                 </ion-col>
@@ -88,14 +94,32 @@
            <ion-row>
              <ion-col>
                 <ion-item  class="size">
-                <ion-label>กลุ่มสินค้า : </ion-label>
-                  <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
-                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                          <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
-                  </ion-select>
+                    <ion-label>จังหวัด : </ion-label>
+                    <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
+                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
+                            <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                    </ion-select>
                 </ion-item>
              </ion-col>  
              <ion-col>
+                <ion-item  class="size">
+                    <ion-label >เดือน : </ion-label>
+                      <ion-select [(ngModel)]="month" (ionChange)="getitemMonth(area,province,group_name,month)" >
+                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                          <ion-option value="มกราคม" >มกราคม</ion-option>
+                          <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
+                          <ion-option value="มีนาคม">มีนาคม</ion-option>
+                          <ion-option value="เมษายน">เมษายน</ion-option>
+                          <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
+                          <ion-option value="มิถุนายน">มิถุนายน</ion-option>
+                          <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
+                          <ion-option value="สิงหาคม">สิงหาคม</ion-option>
+                          <ion-option value="กันยายน">กันยายน</ion-option>
+                          <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+                          <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+                          <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+                      </ion-select>
+                  </ion-item>
             </ion-col>
             </ion-row>
         </ion-grid>
@@ -106,19 +130,19 @@
                       <thead>
                               <tr style="background-color: #F78B26; ">
                                   <th><h3 class="center">ประเภท</h3></th>
-                                  <th><h3 class="center">จำนวนเงิน</h3></th>
                                   <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+                                  <th><h3 class="center">จำนวนเงิน</h3></th>
                               </tr>
                       </thead>
                       <tbody>
                               <tr *ngFor="let data of repondProduct">
                                   <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                  <td><h3 class="right">{{data.AMT}}</h3></td>
                                   <td><h3 class="right">{{data.COUNT}}</h3></td>
+                                  <td><h3 class="right">{{data.AMT}}</h3></td>
                               </tr>
                       </tbody>
               </table>
-      </div>
+          </div>
         
        
         
@@ -153,5 +177,177 @@
 
       </ion-card-content>
     </ion-card>
+
+    <ion-card>
+        <ion-card-content no-padding>
+          <ion-item>
+              <ion-label text-center><strong>สถิติใบอนุญาตแยกตามประเภทสินค้ายาสูบ</strong></ion-label>
+          </ion-item>
+          <ion-item>
+              <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
+          </ion-item>
+  
+          <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-item  class="size">
+                        <ion-label>กลุ่มสินค้า : </ion-label>
+                        <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
+                                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                                <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
+                        </ion-select>
+                      </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item  class="size">
+                        <ion-label> ภาค : </ion-label>
+                        <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                                <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
+                        </ion-select>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+  
+             <ion-row>
+               <ion-col>
+                  <ion-item  class="size">
+                      <ion-label>จังหวัด : </ion-label>
+                      <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
+                            <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
+                              <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                      </ion-select>
+                  </ion-item>
+               </ion-col>  
+               <ion-col>
+                  <ion-item  class="size">
+                      <ion-label >เดือน : </ion-label>
+                        <ion-select [(ngModel)]="month" (ionChange)="getitemMonth(area,province,group_name,month)" >
+                            <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                            <ion-option value="มกราคม" >มกราคม</ion-option>
+                            <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
+                            <ion-option value="มีนาคม">มีนาคม</ion-option>
+                            <ion-option value="เมษายน">เมษายน</ion-option>
+                            <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
+                            <ion-option value="มิถุนายน">มิถุนายน</ion-option>
+                            <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
+                            <ion-option value="สิงหาคม">สิงหาคม</ion-option>
+                            <ion-option value="กันยายน">กันยายน</ion-option>
+                            <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+                            <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+                            <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+                        </ion-select>
+                    </ion-item>
+              </ion-col>
+              </ion-row>
+          </ion-grid>
+  
+          <h3 style="padding-right: 2%" class="right">หน่วย บาท/ใบ</h3>
+            <div class="table-responsive">     
+                <table class="table" style="width: 100%;">
+                        <thead>
+                                <tr style="background-color: #F78B26; ">
+                                    <th><h3 class="center">ประเภท</h3></th>
+                                    <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+                                    <th><h3 class="center">จำนวนเงิน</h3></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let data of repondProduct">
+                                    <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
+                                    <td><h3 class="right">{{data.COUNT}}</h3></td>
+                                    <td><h3 class="right">{{data.AMT}}</h3></td>
+                                </tr>
+                        </tbody>
+                </table>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        
+        <ion-card>
+            <ion-card-content no-padding>
+              <ion-item>
+                  <ion-label text-center><strong>สถิติใบอนุญาตแยกตามประเภทสินค้าไพ่</strong></ion-label>
+              </ion-item>
+              <ion-item>
+                  <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
+              </ion-item>
+      
+              <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                        <ion-item  class="size">
+                            <ion-label>กลุ่มสินค้า : </ion-label>
+                            <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
+                                    <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                                    <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
+                            </ion-select>
+                          </ion-item>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item  class="size">
+                            <ion-label> ภาค : </ion-label>
+                            <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province,group_name)" >
+                                    <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                                    <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
+                            </ion-select>
+                          </ion-item>
+                      </ion-col>
+                  </ion-row>
+      
+                 <ion-row>
+                   <ion-col>
+                      <ion-item  class="size">
+                          <ion-label>จังหวัด : </ion-label>
+                          <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province,group_name)">
+                                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
+                                  <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                          </ion-select>
+                      </ion-item>
+                   </ion-col>  
+                   <ion-col>
+                      <ion-item  class="size">
+                          <ion-label >เดือน : </ion-label>
+                            <ion-select [(ngModel)]="month" (ionChange)="getitemMonth(area,province,group_name,month)" >
+                                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                                <ion-option value="มกราคม" >มกราคม</ion-option>
+                                <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
+                                <ion-option value="มีนาคม">มีนาคม</ion-option>
+                                <ion-option value="เมษายน">เมษายน</ion-option>
+                                <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
+                                <ion-option value="มิถุนายน">มิถุนายน</ion-option>
+                                <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
+                                <ion-option value="สิงหาคม">สิงหาคม</ion-option>
+                                <ion-option value="กันยายน">กันยายน</ion-option>
+                                <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+                                <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+                                <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+                            </ion-select>
+                        </ion-item>
+                  </ion-col>
+                  </ion-row>
+              </ion-grid>
+      
+              <h3 style="padding-right: 2%" class="right">หน่วย บาท/ใบ</h3>
+                <div class="table-responsive">     
+                    <table class="table" style="width: 100%;">
+                            <thead>
+                                    <tr style="background-color: #F78B26; ">
+                                        <th><h3 class="center">ประเภท</h3></th>
+                                        <th><h3 class="center">จำนวนใบอนุญาต</h3></th>
+                                        <th><h3 class="center">จำนวนเงิน</h3></th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                    <tr *ngFor="let data of repondProduct">
+                                        <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
+                                        <td><h3 class="right">{{data.COUNT}}</h3></td>
+                                        <td><h3 class="right">{{data.AMT}}</h3></td>
+                                    </tr>
+                            </tbody>
+                    </table>
+                </div>
+          </ion-card-content>
+     </ion-card>
 
 </ion-content>
