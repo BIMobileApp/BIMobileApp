@@ -16,8 +16,14 @@ export class IncDataAreaPage {
   dateAsOff:any;
   responseData: any;
   responseArea: any;
-  responseProvince: any;
+  Area: any;
+  SuraResponseProvince: any;
+  CardResponseProvince: any;
+  TobResponseProvince: any;
   responseGroupName: any;
+  SuraRepondProduct:any;
+  CardRepondProduct:any;
+  TOBBACORepondProduct:any;
   repondProduct:any;
 
   constructor(public navCtrl: NavController, 
@@ -32,20 +38,21 @@ export class IncDataAreaPage {
   ionViewDidLoad() {
     this.loadData();
     this.selectionArea();
-    this.selectionProvince();
     this.selectionGeoupName();
-    this.IncProductAll();
+   /*  this.IncProductAll(); */
   }
 
   selectionArea(){
     this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
+     
     });
+    
   }
 
- selectionProvince(){
-    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
-      this.responseProvince = data;
+ SuraSelectionProvince(){
+    this.webapi.getData('SelectionProvince?offcode='+this.offcode+'&area='+this.Area).then((data) => {
+      this.SuraResponseProvince = data;
     });
   }
 
@@ -55,51 +62,127 @@ export class IncDataAreaPage {
     });
   }
 
-  getitemsGroupName(area,province,group_name){
 
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
-      this.repondProduct = data;
-      this.loadData();
-      this.getAmt();
-      this.getCount();
+  //---------------------------------------------------------SURA------------------------------------------------------------//
+  SuraGetitems(SuraArea,SuraProvince,SuraMonth){
+    var group_name = "สุรา";
+    var old_area = SuraArea;
+    //this.selectionProvinceChange(area);
+    //this.selectionGeoupName();
+    if(SuraArea != 'undefined' || SuraArea != old_area){
+      this.Area = SuraArea
+      this.SuraSelectionProvince();
+      SuraProvince = 'undefined';
+    }
+    console.log(SuraProvince);
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+SuraArea+"&province="+SuraProvince+"&group_desc="+group_name +"&month="+SuraMonth).then((data) => {
+      this.SuraRepondProduct = data;
+
+      this.getSuraAmt();
+      this.getSuraCount();
     });
   }
+ //---------------------------------------------------------Card------------------------------------------------------------//
+ TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
+  console.log(TOBBACOArea);
+  console.log(TOBBACOProvince);
+  console.log(TOBBACOMonth);
+  var group_name = "ยาสูบ";
+  //this.selectionProvinceChange(area);
+  //this.selectionGeoupName();
 
-  getitemsRegion(area,province,group_name){
+  this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+TOBBACOArea+"&province="+TOBBACOProvince+"&group_desc="+group_name +"&month="+TOBBACOMonth).then((data) => {
+    this.TOBBACORepondProduct = data;
 
+    this.getTobAmt();
+    this.getTobCount();
+  });
+}
+
+  //---------------------------------------------------------Card------------------------------------------------------------//
+  CardGetitems(CardArea,CardProvince,CardMonth){
+    console.log(CardArea);
+    console.log(CardProvince);
+    console.log(CardMonth);
+    var group_name = "ไพ่";
     //this.selectionProvinceChange(area);
     //this.selectionGeoupName();
 
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
-      this.repondProduct = data;
-      this.loadData();
-      this.getAmt();
-      this.getCount();
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {
+      this.CardRepondProduct = data;
+
+      this.getCardAmt();
+      this.getCardCount();
     });
   }
 
-  selectionProvinceChange(area){
+
+ /*  selectionProvinceChange(area){
     this.webapi.getData('SelectionProvinceChange?offcode='+this.offcode+'&region'+area).then((data) => {
       this.responseProvince = data;
     });
-  }
-
-  getitemsProvince(area,province,group_name){
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
-      this.repondProduct = data;
-      this.loadData();
-      this.getAmt();
-      this.getCount();
-    });
-  }
+  } */
 
   IncProductAll(){
     this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode).then((data) => {
       this.repondProduct = data;
-      this.loadData();
       this.getAmt();
       this.getCount();
     });
+  }
+
+  getSuraAmt(){
+    let val;
+    for (var i = 0; i < this.SuraRepondProduct.length; i++) {
+      val = this.SuraRepondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.SuraRepondProduct[i].AMT = val;
+    }
+  }
+
+  getSuraCount(){
+    let val;
+    for (var i = 0; i < this.SuraRepondProduct.length; i++) {
+      val = this.SuraRepondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.SuraRepondProduct[i].COUNT = val;
+    }
+  }
+
+  getCardAmt(){
+    let val;
+    for (var i = 0; i < this.CardRepondProduct.length; i++) {
+      val = this.CardRepondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.CardRepondProduct[i].AMT = val;
+    }
+  }
+
+  getCardCount(){
+    let val;
+    for (var i = 0; i < this.CardRepondProduct.length; i++) {
+      val = this.CardRepondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.CardRepondProduct[i].COUNT = val;
+    }
+  }
+
+  getTobAmt(){
+    let val;
+    for (var i = 0; i < this.TOBBACORepondProduct.length; i++) {
+      val = this.TOBBACORepondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.TOBBACORepondProduct[i].AMT = val;
+    }
+  }
+
+  getTobCount(){
+    let val;
+    for (var i = 0; i < this.TOBBACORepondProduct.length; i++) {
+      val = this.TOBBACORepondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.TOBBACORepondProduct[i].COUNT = val;
+    }
   }
 
   getAmt(){
