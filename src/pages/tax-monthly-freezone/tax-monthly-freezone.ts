@@ -11,11 +11,12 @@ declare var google;
 })
 export class TaxMonthlyFreezonePage {
   respondData:any;
-
+  username:any;
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
       public webapi: RestProvider) {
+        this.username = localStorage.userData;
     }
 
   ionViewDidLoad() {

@@ -12,7 +12,7 @@ export class FollowTaxRealtimePage {
   responseData: any;
   month:any;
   offcode:any;
-
+  username:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
@@ -21,6 +21,7 @@ export class FollowTaxRealtimePage {
 
   ionViewDidLoad() {
     this.geDataAll();
+    this.username = localStorage.userData;
   }
 
   geDataAll(){

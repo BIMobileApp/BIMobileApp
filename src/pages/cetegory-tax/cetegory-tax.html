@@ -1,19 +1,21 @@
 <ion-header>
   <ion-navbar color="navber">
     <ion-title>
-      ผลการจัดเก็บภาษีกรมสรรพสามิต
+      ผลการจัดเก็บภาษีกรมสรรพสามิต<br>
+      ชื่อผู้ใช้งาน : {{username}}
     </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding text-center>
-    <h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี  </h1>
-    <h2 class="header-style"><br>{{dateAsOff}}<br>ข้อมูล ณ วันที่ {{dateDisplay}} </h2>
+    <h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี </h1>
+    <h2 class="header-style">{{dateAsOff}}</h2>
 
-  <div *ngIf="off=='00' ">
+ <!--  <div *ngIf="off=='00' "> -->
     <img src="../../assets/imgs/thailandhello1.png" />
     <h2 class="header-style">ตามรายภาค</h2>
+    <div *ngIf="off=='00' ">
     <button ion-button (click)="section1()">ภาค 1</button>
     <button ion-button (click)="section2()">ภาค 2</button>
     <button ion-button (click)="section3()">ภาค 3</button>
@@ -25,14 +27,15 @@
     <button ion-button (click)="section9()">ภาค 9</button>
     <button ion-button (click)="section10()">ภาค 10</button><br>
   </div>
-
+<!--   </div> -->
+<!-- 
   <div *ngIf="off!='00' ">
       <h1 class="header-style">ภาค : {{pak}}</h1>
       <img src="../../assets/imgs/pak{{off}}.png" />
-  </div>
+  </div> -->
 
   <!--/////////////////////////////// Gauge ///////////////////////////////////////////////-->
-
+<!--
       <div id="chart_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div> 
     
       <ion-list  *ngFor="let data of DataGauge">
@@ -61,8 +64,24 @@
            <ion-label text-left><h3>{{data.EST}}</h3></ion-label>
        </ion-item>
        </ion-list>
+-->
 
+<!--/////////////////////////////////////////////////// Bar Chart ///////////////////////////////////////////////-->
+<h1 class="header-style">กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</h1>
+<h2 class="header-style">{{dateAsOff}}</h2>
 
+<ion-card>
+  <ion-card-content>
+      <div *ngIf="barIsNull=='0' ">
+          <br><br><br><br>
+          <h2 style="text-align: center; color: rgb(107, 105, 105)">ไม่มีข้อมูลในฐานข้อมูล</h2>
+          <br><br><br><br>
+        </div>
+        <div *ngIf="barIsNull=='1' ">
+          <canvas #barCanvas></canvas>
+        </div>
+  </ion-card-content>
+</ion-card>
 
   <!--////////////////////////////////////////////////  Table ////////////////////////////////////////////////////-->
   <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</h1>
@@ -78,7 +97,7 @@
               <th><h3 class='th-center'>ปีนี้</h3></th>
               <th><h3 class='th-center'>ปีก่อน</h3></th>
               <th><h3 class='th-center'>ประมาณการ</h3></th>
-              <th  width="10%"><h3 class='th-center'>+/-</h3></th>
+              <th width="15%"><h3 class='th-center'>+/-</h3></th>
             </tr>
           </thead>
           <tbody>
@@ -87,7 +106,7 @@
               <td><h3 class='td-right'>{{data.TAX}}</h3></td>
               <td><h3 class='td-right'>{{data.LAST_TAX}}</h3></td>
               <td><h3 class='td-right'>{{data.ESTIMATE}}</h3></td>
-          <td width="10%">
+         <!--  <td width="10%">
             <h3 *ngIf="data.MAP_COLOR1 == 1" class='td-center'>
               <img class="img-size" src="../../assets/imgs/red1.png" />
             </h3>
@@ -100,7 +119,13 @@
             <h3 *ngIf="data.MAP_COLOR1 == 4 " class='td-center'>
               <img class="img-size" src="../../assets/imgs/green2.png" />
             </h3>
-          </td>           
+          </td>  --> 
+          <td width="15%">
+              <h3 *ngIf="data.MAP_COLOR1 == 1 " class='td-right font-red'>{{data.PERCENT_TAX}}</h3>
+              <h3 *ngIf="data.MAP_COLOR1 == 2 " class='td-right font-yellow'>{{data.PERCENT_TAX}}</h3>
+              <h3 *ngIf="data.MAP_COLOR1 == 3 " class='td-right font-green'>{{data.PERCENT_TAX}}</h3>
+              <h3 *ngIf="data.MAP_COLOR1 == 4 " class='td-right font-green2'>{{data.PERCENT_TAX}}</h3>
+            </td>
         </tr>
           </tbody>
         </table>

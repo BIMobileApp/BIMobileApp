@@ -23,7 +23,7 @@ export class CompareTaxEstDrinkPage {
   tax_TAX_LY = [];
   tax_lebel = [];
   textDataInValid: any;
-  
+  username:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -31,6 +31,7 @@ export class CompareTaxEstDrinkPage {
   }
   ionViewDidLoad() {
     this.UserAthu();
+    this.username = localStorage.userData;
   }
   UserAthu() {
     this.offcode = localStorage.offcode;

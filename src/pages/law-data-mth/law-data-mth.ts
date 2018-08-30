@@ -11,6 +11,7 @@ export class LawDataMthPage {
 //Table Pram
 responseData: any;
 offcode: any;
+username:any;
 
 constructor(
   public navCtrl: NavController, 
@@ -20,6 +21,7 @@ constructor(
 
 ionViewDidLoad() {
   this.UserAthu();
+  this.username = localStorage.userData;
 
 }
 UserAthu() {

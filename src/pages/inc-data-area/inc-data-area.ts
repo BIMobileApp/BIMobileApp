@@ -25,6 +25,7 @@ export class IncDataAreaPage {
   CardRepondProduct:any;
   TOBBACORepondProduct:any;
   repondProduct:any;
+  username:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -32,6 +33,7 @@ export class IncDataAreaPage {
       this.offcode = localStorage.offcode;
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.username = localStorage.userData;
   }
 
 

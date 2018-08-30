@@ -10,12 +10,13 @@ import { CheckDeliveryAllTaxPage } from '../check-delivery-all-tax/check-deliver
   templateUrl: 'old-report-menu-group1.html',
 })
 export class OldReportMenuGroup1Page {
-
+  username:any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public app:App
   ) {
+    this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {

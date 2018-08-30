@@ -29,11 +29,12 @@ export class TaxYearByProductPage {
   YearTax: any;
   YearProduct: any;
   dateDisplay: any;
-
+  username:any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
+    this.username = localStorage.userData;
   }
 
   year_en: any;

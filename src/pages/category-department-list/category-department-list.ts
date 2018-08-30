@@ -19,13 +19,14 @@ import { MblRegisterPage } from '../mbl-register/mbl-register';
   templateUrl: 'category-department-list.html',
 })
 export class CategoryDepartmentListPage {
-
+  username:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public app:App) {
   }
 
   ionViewDidLoad() {
+    this.username = localStorage.userData;
   }
 
   TaxThisYearTable(){

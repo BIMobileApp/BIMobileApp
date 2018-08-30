@@ -12,9 +12,11 @@ declare var google;
 export class NewReportGaugeQuantityBeerPage {
 
   respondData:any;
+  username:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
+      this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {

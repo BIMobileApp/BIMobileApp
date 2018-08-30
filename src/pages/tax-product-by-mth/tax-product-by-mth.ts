@@ -15,11 +15,12 @@ export class TaxProductByMthPage {
   criteRia:any;
   year_en:any;
   year_th:any;
-
+  username:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
+      this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {
