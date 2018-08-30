@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-inc-data-mth',
@@ -15,11 +17,15 @@ export class IncDataMthPage {
   responseProvince: any;
   responseGroupName: any;
   repondProduct:any;
+  dateDisplay:any;
+  dateAsOff:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
+      this.dateDisplay = localStorage.last_update_date;
+      this.dateAsOff =  dateDisplayAll;
   }
 
   ionViewDidLoad() {
@@ -51,7 +57,6 @@ export class IncDataMthPage {
  selectionProvince(){
     this.webapi.getData('SelectionMthProvince?offcode='+this.offcode).then((data) => {
       this.responseProvince = data;
-      console.log(this.responseProvince);
     });
   }
 
