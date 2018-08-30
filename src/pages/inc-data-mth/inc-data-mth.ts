@@ -27,7 +27,7 @@ export class IncDataMthPage {
     this.selectionArea();
     this.selectionProvince();
     this.selectionGeoupName(); 
-   this.IncProductAll();
+    this.IncProductAll();
   }
 
   loadData(){
@@ -43,20 +43,20 @@ export class IncDataMthPage {
   }
 
   selectionArea(){
-    this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('SelectionMthArea?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
-      console.log(this.responseArea);
     });
   }
 
  selectionProvince(){
-    this.webapi.getData('SelectionProvince?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('SelectionMthProvince?offcode='+this.offcode).then((data) => {
       this.responseProvince = data;
+      console.log(this.responseProvince);
     });
   }
 
   selectionGeoupName(){
-    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('SelectionMthGroupName?offcode='+this.offcode).then((data) => {
       this.responseGroupName = data;
     });
   }
@@ -71,7 +71,7 @@ export class IncDataMthPage {
   }
 
   getitemsGroupName(area,province,group_name,month){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
+      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
       this.repondProduct = data;
       this.loadData();
       this.getAmt();
@@ -81,10 +81,6 @@ export class IncDataMthPage {
   }
 
   getitemsRegion(area,province,group_name,month){
-    console.log(province);
-    console.log(group_name);
-    console.log(month);
-
     this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
       this.repondProduct = data;
       this.loadData();

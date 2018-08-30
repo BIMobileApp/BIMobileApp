@@ -22,6 +22,7 @@ export class IncDataAreaPage {
       this.offcode = localStorage.offcode;
   }
 
+
   ionViewDidLoad() {
     this.loadData();
     this.selectionArea();
@@ -59,11 +60,21 @@ export class IncDataAreaPage {
   }
 
   getitemsRegion(area,province,group_name){
+
+    //this.selectionProvinceChange(area);
+    //this.selectionGeoupName();
+
     this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+area+"&province="+province+"&group_desc="+group_name ).then((data) => {
       this.repondProduct = data;
       this.loadData();
       this.getAmt();
       this.getCount();
+    });
+  }
+
+  selectionProvinceChange(area){
+    this.webapi.getData('SelectionProvinceChange?offcode='+this.offcode+'&region'+area).then((data) => {
+      this.responseProvince = data;
     });
   }
 
