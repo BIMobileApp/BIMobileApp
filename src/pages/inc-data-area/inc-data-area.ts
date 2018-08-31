@@ -30,6 +30,9 @@ export class IncDataAreaPage {
   province:any;
   defaultSelectQuestion:any;
   questionArray:any;
+  username:any;
+  respondProduct:any;
+  defaultSelectProduct:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -45,6 +48,7 @@ export class IncDataAreaPage {
 
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {
@@ -160,7 +164,6 @@ TOBBACOGetitembyProvince(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
   }
   CardGetitembyProvince(CardArea,CardProvince,CardMonth){
     var group_name = "ไพ่";
-    console.log(CardArea);
     //this.selectionProvinceChange(area);
     //this.selectionGeoupName();
     this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {

@@ -5,7 +5,6 @@ import { MenuGroupPage } from '../menu-group/menu-group';
 import { DataStatusPage } from '../data-status/data-status';
 import { NewsEventPage } from '../news-event/news-event';
 import { Http, ResponseContentType } from '@angular/http';
-
 import { File } from '@ionic-native/file';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';

@@ -7,8 +7,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tax-coutry-section3.html',
 })
 export class TaxCoutrySection3Page {
-
+  username:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {

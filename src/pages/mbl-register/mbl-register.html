@@ -1,12 +1,16 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>ผู้ประกอบการ</ion-title>
+    <ion-title>ผู้ประกอบการ <br>
+      ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-      <ion-item style="background-color:#D0DFE6;" text-center>
+      <ion-item text-center style="background-color:#D0DFE6;" text-center>
           <h2 class="header-style">รายงานผู้ประกอบการ</h2>
       </ion-item>
+      <ion-item>
+        <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
+    </ion-item>
   
       <h3 style="padding-right: 2%" class="right">หน่วย : โรง</h3>
   <ion-card>           

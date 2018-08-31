@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Chart } from 'chart.js';
 import { RestProvider } from '../../providers/rest/rest';
 import { TaxCoutrySection1Page } from '../tax-coutry-section1/tax-coutry-section1';
 import { TaxCoutrySection2Page } from '../tax-coutry-section2/tax-coutry-section2';
@@ -13,7 +14,7 @@ import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section
 import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
 
 declare var google;
-declare var dateDisplayAll : any;
+declare var dateDisplayAll: any;
 
 @IonicPage()
 @Component({
@@ -21,10 +22,12 @@ declare var dateDisplayAll : any;
   templateUrl: 'cetegory-tax.html',
 })
 export class CetegoryTaxPage {
+  @ViewChild('barCanvas') barCanvas;
   //map parm
   offcode: any;
-  off:any;
+  off: any;
   pak: any;
+  username: any;
 
   //guage parm
   TaxGauge: any;
@@ -32,63 +35,170 @@ export class CetegoryTaxPage {
   TaxEstGauge: any;
   responseData: any;
 
+  barChart: any;
+  bargetTax = [];
+  bargetLAST_TAX = [];
+  bargetESTIMATE = [];
+  barIsNull = 1;
+
   //Table parm
   DataCurYear: any;
   DataProduct: any;
-  DataGauge:any;
+  DataGauge: any;
   Data = [];
   TAX = [];
   TAX_LY = [];
   EST = [];
 
-   ProdTAX = [];
-   ProdTAX_LY = [];
-   ProdEST = [];
+  ProdTAX = [];
+  ProdTAX_LY = [];
+  ProdEST = [];
 
-   //dateDisplay = localStorage.getItem("last_update_date");
-   dateDisplay ="";
-   dateAsOff="";
+  //dateDisplay = localStorage.getItem("last_update_date");
+  dateDisplay = "";
+  dateAsOff = "";
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public app: App,
-    public webapi:RestProvider) {
+    public webapi: RestProvider) {
   }
 
   ionViewDidLoad() {
     this.UserAthu();
     this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff =  dateDisplayAll;
+    this.dateAsOff = dateDisplayAll;
+    this.username = localStorage.userData;
+
   }
 
   UserAthu() {
     this.offcode = localStorage.offcode;
     this.off = this.offcode.substring(0, 2);
     this.pak = parseInt(this.offcode, 10);
-    this.GaugeGetData();
     this.TableGetData();
     this.TableProductGetData();
-    this.REP02_GUAGE_REG();
+    this.BarGetData();
   }
 
-  GaugeGetData(){
-    this.webapi.getData('GaugeOverviewRegion?offcode='+this.offcode).then((data)=>{
+  BarGetData() {
+    this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
+      if(this.responseData[0].TAX != null){
+        this.createBarChart();
+      }else{
+        this.barIsNull = 0;
+      }
     });
   }
 
-  TableGetData(){
-    this.webapi.getData('TaxCurYear?offcode='+this.offcode).then((data)=>{
+  createBarChart() {
+   this.barChart = new Chart(this.barCanvas.nativeElement, {
+      type: 'horizontalBar',
+      data: {
+        labels: ["ปีนี้","ปีก่อน","ประมาณการ"],
+        datasets: [{
+    
+          data: [
+            this.responseData[0].TAX,
+            this.responseData[0].LAST_TAX,
+            this.responseData[0].ESTIMATE
+          ],
+          backgroundColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 159, 64, 1)',
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 159, 64, 1)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        legend: {
+          display: false,
+          labels: {
+              boxWidth: 5,
+          }
+      },
+      tooltips: {
+        mode: 'index',
+        label: 'myLabel',
+        callbacks: {
+          label: function (tooltipItem, data) {
+            if (tooltipItem.xLabel > 999999) {
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+            } else {
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+            }
+
+            return value;
+          }
+        }
+      },
+        scales: {
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+              userCallback: function (value, index, values) {
+                if(value >= 1000000){
+                  value = (value / 1000000);
+                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return value;
+                }else{
+                  return value;
+                }
+              }
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'ล้านบาท'
+            }
+          }
+          ],
+          yAxes: [{
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 0
+            }
+          }]
+        }
+      }
+
+    });
+  }  
+
+ /* GaugeGetData() {
+    this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
+      this.responseData = data;
+    });
+  } */
+
+  TableGetData() {
+    this.webapi.getData('TaxCurYear?offcode=' + this.offcode).then((data) => {
       this.DataCurYear = data;
       this.getTAX();
       this.getLAST_TAX();
       this.getEST();
+      this.getPercent();
     });
+  }
+
+  getPercent(){
+    for (var i = 0; i < this.DataCurYear.length; i++) {
+      if(this.DataCurYear[i].PERCENT_TAX != null){
+        this.DataCurYear[i].PERCENT_TAX = this.DataCurYear[i].PERCENT_TAX.toFixed(2);
+      }
+    }
   }
 
   getTAX() {
     let val;
     for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].TAX/1000000;
+      val = this.DataCurYear[i].TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataCurYear[i].TAX = val;
@@ -98,7 +208,7 @@ export class CetegoryTaxPage {
   getLAST_TAX() {
     let val;
     for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].LAST_TAX/1000000;
+      val = this.DataCurYear[i].LAST_TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataCurYear[i].LAST_TAX = val;
@@ -108,26 +218,27 @@ export class CetegoryTaxPage {
   getEST() {
     let val;
     for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].ESTIMATE/1000000
+      val = this.DataCurYear[i].ESTIMATE / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataCurYear[i].ESTIMATE = val;
     }
   }
 
-  TableProductGetData(){
-    this.webapi.getData('TaxProductCurYear?offcode='+ this.offcode).then((data)=>{
+  TableProductGetData() {
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode).then((data) => {
       this.DataProduct = data;
       this.getProductTAX();
       this.getProductLAST_TAX();
       this.getProductEST();
+      this.getProductPERCENT_TAX();
     });
   }
 
   getProductTAX() {
     let val;
     for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].TAX/1000000;
+      val = this.DataProduct[i].TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].TAX = val;
@@ -137,7 +248,7 @@ export class CetegoryTaxPage {
   getProductLAST_TAX() {
     let val;
     for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].LAST_TAX/1000000;
+      val = this.DataProduct[i].LAST_TAX / 1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].LAST_TAX = val;
@@ -147,15 +258,23 @@ export class CetegoryTaxPage {
   getProductEST() {
     let val;
     for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].ESTIMATE/1000000
+      val = this.DataProduct[i].ESTIMATE / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].ESTIMATE = val;
     }
   }
 
-  REP02_GUAGE_REG(){
-    this.webapi.getData('REP02_GUAGE_REG?area='+this.offcode).then((data)=>{
+  getProductPERCENT_TAX(){
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      if(this.DataProduct[i].PERCENT_TAX != null){
+        this.DataProduct[i].PERCENT_TAX = this.DataProduct[i].PERCENT_TAX.toFixed(2);
+      }
+    }
+  }
+
+  REP02_GUAGE_REG() {
+    this.webapi.getData('REP02_GUAGE_REG?area=' + this.offcode).then((data) => {
       this.DataGauge = data;
       this.getGaugeTAX();
       this.get_tax_amt();
@@ -170,43 +289,43 @@ export class CetegoryTaxPage {
     let taxest_val;
     for (var i = 0; i < this.DataGauge.length; i++) {
       tax_val = this.DataGauge[i].TAX_PERCENT;
-      taxly_val =  this.DataGauge[i].LAST_TAX_PERCENT;
+      taxly_val = this.DataGauge[i].LAST_TAX_PERCENT;
       taxest_val = this.DataGauge[i].EST_PERCENT;
     }
-    this.showgaugechartTax(tax_val,taxly_val,taxest_val);
+    this.showgaugechartTax(tax_val, taxly_val, taxest_val);
   }
 
-  get_tax_amt(){
+  get_tax_amt() {
     let val;
     for (var i = 0; i < this.DataGauge.length; i++) {
-      val = this.DataGauge[i].TAX/1000000
+      val = this.DataGauge[i].TAX / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataGauge[i].TAX = val;
     }
   }
 
-  get_taly_amt(){
+  get_taly_amt() {
     let val;
     for (var i = 0; i < this.DataGauge.length; i++) {
-      val = this.DataGauge[i].TAX_LY/1000000
+      val = this.DataGauge[i].TAX_LY / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataGauge[i].TAX_LY = val;
     }
   }
 
-  get_est_amt(){
+  get_est_amt() {
     let val;
     for (var i = 0; i < this.DataGauge.length; i++) {
-      val = this.DataGauge[i].EST/1000000
+      val = this.DataGauge[i].EST / 1000000
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataGauge[i].EST = val;
     }
   }
 
-  showgaugechartTax(tax_val,taxly_val,taxest_val){
+  showgaugechartTax(tax_val, taxly_val, taxest_val) {
     let taxext_percent;
     let green_taxly_from;
     let green_taxly_to;
@@ -215,27 +334,27 @@ export class CetegoryTaxPage {
     let red_taxly_from;
     let red_taxly_to;
 
-   /* if(taxest_val <= 100){
-      taxext_percent = 100;
-    }else{
-      taxext_percent = taxest_val;
-    }*/
+    /* if(taxest_val <= 100){
+       taxext_percent = 100;
+     }else{
+       taxext_percent = taxest_val;
+     }*/
 
-    if(taxly_val <= 40){
+    if (taxly_val <= 40) {
       green_taxly_from = 0;
       green_taxly_to = taxly_val;
-      yellow_taxly_from  = 0;
+      yellow_taxly_from = 0;
       yellow_taxly_to = 0;
       red_taxly_from = 0;
       red_taxly_to = 0;
-    }else if(taxly_val <= 75){
+    } else if (taxly_val <= 75) {
       green_taxly_from = 0;
       green_taxly_to = 0;
       yellow_taxly_from = 0;
       yellow_taxly_to = taxly_val;
       red_taxly_from = 0;
       red_taxly_to = 0;
-    }else{
+    } else {
       green_taxly_from = 0;
       green_taxly_to = 0;
       yellow_taxly_from = 0;
@@ -257,19 +376,19 @@ export class CetegoryTaxPage {
       ['ปีนี้', tax_val],
     ]);
     var options = {
-          width: 200, height: 200,
-          greenFrom:green_taxly_from,greenTo:green_taxly_to,
-          yellowFrom:yellow_taxly_from,yellowTo:yellow_taxly_to,
-          redFrom: red_taxly_from, redTo: red_taxly_to,
-          minorTicks: 5,
-          majorTicks: ['0', taxext_percent], 
+      width: 200, height: 200,
+      greenFrom: green_taxly_from, greenTo: green_taxly_to,
+      yellowFrom: yellow_taxly_from, yellowTo: yellow_taxly_to,
+      redFrom: red_taxly_from, redTo: red_taxly_to,
+      minorTicks: 5,
+      majorTicks: ['0', taxext_percent],
     };
-  
+
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
   }
 
- 
+
 
   section1() {
     this.app.getRootNav().push(TaxCoutrySection1Page);

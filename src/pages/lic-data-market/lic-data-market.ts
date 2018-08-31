@@ -16,6 +16,7 @@ export class LicDataMarketPage {
   offcode:any;
   dateDisplay:any;
   dateAsOff:any;
+  username:any;
   
 
   constructor(public navCtrl: NavController,
@@ -24,6 +25,7 @@ export class LicDataMarketPage {
       this.offcode = localStorage.offcode;
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {

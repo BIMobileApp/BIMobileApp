@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-law-data-area',
@@ -15,12 +17,19 @@ export class LawDataAreaPage {
   responseGroupName: any;
   repondProduct:any;
   offcode: any;
+  username:any;
+
+  dateDisplay:any;
+  dateAsOff:any;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
       this.offcode = localStorage.offcode;
+      this.dateDisplay = localStorage.last_update_date;
+      this.dateAsOff =  dateDisplayAll;
+      this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {

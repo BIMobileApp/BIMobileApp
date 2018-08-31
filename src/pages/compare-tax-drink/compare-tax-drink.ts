@@ -26,6 +26,7 @@ export class CompareTaxDrinkPage {
   vol_TAX_LY = [];
 
   textDataNotValid:any;
+  username: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,6 +35,7 @@ export class CompareTaxDrinkPage {
 
   ionViewDidLoad() {
     this.UserAthu();
+    this.username = localStorage.userData;
   }
 
   UserAthu() {

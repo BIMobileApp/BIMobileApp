@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>ใบอนุญาต</ion-title>
+    <ion-title>ใบอนุญาต <br>
+      ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -90,7 +91,7 @@
                     <ion-item  class="size">
                       <ion-label> ภาค : </ion-label>
                         <ion-select  [(ngModel)]="SuraArea" (ionChange)="getitemsRegionSura(SuraArea,SuraProvince,SuraTypeName)"  placeholder="กรุณาเลือก">                     
-                                <!--<ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>-->
+                            <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                             <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>                                                                         
                         </ion-select>
                       </ion-item>

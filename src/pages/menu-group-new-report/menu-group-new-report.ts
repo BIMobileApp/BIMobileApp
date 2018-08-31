@@ -1,17 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { IncomerealtimePage } from '../incomerealtime/incomerealtime';
-import { TaxbudgetyearPage } from '../taxbudgetyear/taxbudgetyear';
-import { TaxBudgetProductPage } from '../tax-budget-product/tax-budget-product';
-import { TaxBudgetRegPage } from '../tax-budget-reg/tax-budget-reg';
-import { TaxBudgetRegByMthPage } from '../tax-budget-reg-by-mth/tax-budget-reg-by-mth';
 import { CompareTaxAlcoholPage } from '../compare-tax-alcohol/compare-tax-alcohol';
 import { CompareTaxBeerPage } from '../compare-tax-beer/compare-tax-beer';
 import { CompareTaxCarPage } from '../compare-tax-car/compare-tax-car';
 import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
-import { NewReportLineTaxEstProdPage } from '../new-report-line-tax-est-prod/new-report-line-tax-est-prod';
-import { NewReportLineFollowProductPage } from '../new-report-line-follow-product/new-report-line-follow-product';
-import { ChartPage } from '../chart/chart';
 import { CompareTaxEstCarPage } from '../compare-tax-est-car/compare-tax-est-car';
 import { CompareTaxEstBeerPage } from '../compare-tax-est-beer/compare-tax-est-beer';
 import { CompareTaxEstDrinkPage } from '../compare-tax-est-drink/compare-tax-est-drink';
@@ -37,11 +30,13 @@ import { TaxProductByMthPage } from '../tax-product-by-mth/tax-product-by-mth';
 export class MenuGroupNewReportPage {
 
   offcode:any;
+  username:any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public app:App) {
   }
    ionViewDidLoad() { 
+    this.username = localStorage.userData;
    }
 
 

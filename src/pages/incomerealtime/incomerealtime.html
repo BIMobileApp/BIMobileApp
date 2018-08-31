@@ -1,13 +1,14 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>Real Time</ion-title>
+    <ion-title>Real Time <br>
+      ชื่อผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-item style="background-color:#D0DFE6;" text-center>
     <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
-    <h2 class="header-style">ตั้งแต่วันที่ .........</h2>
+    <h2 class="header-style">ตั้งแต่วันที่ {{dateDisplay}}</h2>
   </ion-item>
   <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
   <ion-card>

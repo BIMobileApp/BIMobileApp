@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var google;
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-new-report-gauge-tax-beer',
@@ -14,11 +16,18 @@ export class NewReportGaugeTaxBeerPage {
   respondData:any;
   respondData2:any;
   offcode: any;
+  username:any;
+
+  dateDisplay:any;
+  dateAsOff:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
       this.offcode = localStorage.offcode;
+      this.username = localStorage.userData;
+      this.dateDisplay = localStorage.last_update_date;
+      this.dateAsOff =  dateDisplayAll;
   }
 
   ionViewDidLoad() {

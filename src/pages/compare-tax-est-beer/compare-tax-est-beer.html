@@ -1,14 +1,15 @@
 <ion-header>
 
   <ion-navbar color="navber">
-    <ion-title>ตามรายสินค้า</ion-title>
+    <ion-title>ตามรายสินค้า<br>
+      ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 <ion-content>
   <ion-item style="background-color:#D0DFE6;" text-center>
     <h1 class="header-style">รายงานการเปรียบเทียบปีก่อน (เบียร์)</h1>
-    <h2 class="header-style">ตั้งแต่วันที่ .........</h2>
+    <h2 class="header-style">{{dateAsOff}}</h2>
   </ion-item>
   <ion-card>
       <ion-card-content>

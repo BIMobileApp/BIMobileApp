@@ -38,6 +38,7 @@ export class IncDataMthPage {
   defaultSelectQuestion:any;
   defaultSelectProvinceSura:any;
   questionArray:any;
+  username :any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -47,10 +48,11 @@ export class IncDataMthPage {
      // this.province = this.offcode.substring(0, 2);
      // this.branch = this.offcode.substring(4, 2);
 
-      this.disoffcode = this.stroffcode;
+      //this.disoffcode = this.stroffcode;
 
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.username = localStorage.userData;
   }
 
 

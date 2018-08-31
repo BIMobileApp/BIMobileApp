@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>สถิติและปราบปราม</ion-title>
+    <ion-title>สถิติและปราบปราม <br>
+        ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,6 +9,9 @@
   <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
           <h2 class="header-style">สถิติคดีตามรายเดือน</h2>
        </ion-item>
+       <ion-item>
+                <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
+        </ion-item>
        <h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3>
     <ion-card>
        <ion-card-content no-padding> 

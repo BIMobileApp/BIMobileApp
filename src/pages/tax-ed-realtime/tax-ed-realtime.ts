@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-tax-ed-realtime',
@@ -13,12 +15,20 @@ export class TaxEdRealtimePage {
   month:any;
   textmsg: any;
   offcode:any;
+  username:any;
+  dateDisplay:any;
+  dateAsOff:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider,
     public alertCtrl: AlertController) {
       this.offcode = localStorage.offcode;
+    this.username = localStorage.userData;
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff =  dateDisplayAll;
+
+
   }
 
   ionViewDidLoad() {

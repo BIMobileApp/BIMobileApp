@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-est-beer',
@@ -24,7 +26,10 @@ export class CompareTaxEstBeerPage {
   tax_TAX_LY = [];
   tax_lebel = [];
   textDataInValid: any;
+  username:any;
 
+  dateDisplay:any;
+  dateAsOff:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,9 +38,14 @@ export class CompareTaxEstBeerPage {
 
   ionViewDidLoad() {
     this.UserAthu();
+    this.username = localStorage.userData;
+
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff =  dateDisplayAll;
   }
   
   UserAthu() {
+    
     this.offcode = localStorage.offcode;
     this.getTableData();
     this.getProductType();

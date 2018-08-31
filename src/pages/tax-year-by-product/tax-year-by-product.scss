@@ -11,6 +11,9 @@ page-tax-year-by-product {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+  table tbody tr:last-child {
+    background: #a7d8ff !important;
+  }
   .td-center{
     font-weight: bold;
     color: rgb(27, 15, 15) !important;

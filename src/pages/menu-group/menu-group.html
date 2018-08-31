@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>ระบบสารสนเทศเพื่อการบริหาร กรมสรรพสามิต</ion-title>
+    <ion-title>ระบบสารสนเทศเพื่อการบริหาร กรมสรรพสามิต<br>ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -45,7 +45,7 @@
         <p class="content-center">สถิติใบอนุญาตตามเดือน</p>
       </ion-col>
       <ion-col (click)="IncDataMarket()" text-center>
-          <img class="icon-menu-style" src="../../assets/imgs/lic_market.png" />
+          <img class="icon-menu-style" src="../../assets/imgs/C-V5.png" />
           <p class="content-center">สถิติใบอนุญาตตามร้านค้า</p>
       </ion-col>
     </ion-row>
@@ -67,6 +67,7 @@
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
+
     <br>
 
     <ion-row>
