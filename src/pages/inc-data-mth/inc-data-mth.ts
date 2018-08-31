@@ -4,7 +4,6 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
 
-
 @IonicPage()
 @Component({
   selector: 'page-inc-data-mth',
@@ -45,19 +44,9 @@ export class IncDataMthPage {
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
      
-      this.province = this.offcode.substring(0, 2);
-      this.branch = this.offcode.substring(4, 2);
+     // this.province = this.offcode.substring(0, 2);
+     // this.branch = this.offcode.substring(4, 2);
 
-      if(this.province == "00"){
-        this.defaultSelectQuestion = -1; 
-        this.defaultSelectProvinceSura = -1;
-        this.stroffcode = true;
-      }else{
-        this.defaultSelectQuestion = 0;
-        this.defaultSelectProvinceSura = 0;
-        this.stroffcode = false;
-      }
-      
       this.disoffcode = this.stroffcode;
 
       this.dateDisplay = localStorage.last_update_date;
@@ -142,7 +131,7 @@ export class IncDataMthPage {
 
     //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
       this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+SuraTypeName+'&group_name=สุรา').then((data) => {
-      this.repondProductSura = data; console.log(this.repondProductSura);
+      this.repondProductSura = data;
 
       this.loadData();
       this.getAmtProdSura();
@@ -155,12 +144,8 @@ export class IncDataMthPage {
      this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
   }
 
-
-
   getitemsRegionSura(SuraArea,SuraProvince,SuraTypeName){
-   
-
-
+  
     this.selectionProvince(SuraArea);
     this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
 
@@ -219,8 +204,7 @@ export class IncDataMthPage {
       }
     }
 
-    /////end สุรา//////
-
+/////end สุรา//////
 
  /////ยาสูบ//////
  selectionTypeNameSica(){
@@ -246,14 +230,9 @@ export class IncDataMthPage {
 
   getitemsRegionSica(SicaRegion,SicaProvince,SicaType){
     this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
-    SicaRegion =this.questionArray[this.defaultSelectQuestion];
   }
 
   getitemsProvinceSica(SicaRegion,SicaProvince,SicaType){    
-    console.log(SicaRegion);
-    console.log(SicaProvince);
-    console.log(SicaType);
-    console.log('end');
     this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
     //SicaProvince =this.questionArray[this.defaultSelectProvinceSura];
   }
@@ -303,10 +282,8 @@ export class IncDataMthPage {
     }
 
     selectionProvince(area){
-      console.log(area);
       this.webapi.getData('SelectionMthProvince?offcode='+this.offcode+'&region='+area).then((data) => {
         this.responseProvince = data;
-        console.log(this.responseProvince);
       });
     }
 
@@ -346,15 +323,11 @@ export class IncDataMthPage {
   
     getitemsRegionCard(CardRegion,CardProvince,CardType){
       this.IncProductAllCard(CardRegion,CardProvince,CardType);
-
       this.selectionProvince(CardRegion);
-
-      CardRegion =this.questionArray[this.defaultSelectQuestion];
     }
   
     getitemsProvinceCard(CardRegion,CardProvince,CardType){      
       this.IncProductAllCard(CardRegion,CardProvince,CardType); 
-      CardProvince =this.questionArray[this.defaultSelectQuestion];
     }
   
     getitemsSumCard(area,province,type_name){
