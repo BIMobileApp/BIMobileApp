@@ -7,7 +7,7 @@
 
 
 <ion-content>
-  <ion-item style="background-color:#D0DFE6;" text-center>
+    <ion-item style="background-color:#D0DFE6;" text-center>
       <h2 class="header-style">สถิติใบอนุญาตแยกตามเดือน</h2>
     </ion-item>
 
@@ -66,7 +66,9 @@
   <ion-card>
       <ion-card-content no-padding>
           <ion-item>
-              <ion-label text-center><strong>สถิติใบอนุญาตแยกตามเดือน กลุ่มสินค้าสุรา</strong></ion-label>
+              <ion-label text-center><strong>สถิติใบอนุญาตแยกตามเดือน กลุ่มสินค้าสุรา</strong>
+              
+            </ion-label>
           </ion-item>
           <ion-item>
               <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
@@ -76,7 +78,7 @@
                   <ion-col>
                       <ion-item  class="size">
                           <ion-label>ประเภทสินค้า : </ion-label>
-                              <ion-select  [(ngModel)]="type_name" (ionChange)="getitemsTypeNameSura(area,province,type_name)">
+                              <ion-select  [(ngModel)]="SuraTypeName" (ionChange)="getitemsTypeNameSura(SuraArea,SuraProvince,SuraTypeName)">
                                    <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                                     <ion-option  *ngFor="let item1 of responseTypeSura"  value="{{item1.TYPE_DESC}}">{{item1.TYPE_DESC}}</ion-option>            
                             </ion-select>
@@ -88,19 +90,18 @@
                 <ion-col>
                     <ion-item  class="size">
                       <ion-label> ภาค : </ion-label>
-                        <ion-select  [(ngModel)]="SuraArea" (ionChange)="getitemsRegionSura(SuraArea,SuraProvince,type_name)" >
-                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                          <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
+                        <ion-select  [(ngModel)]="SuraArea" (ionChange)="getitemsRegionSura(SuraArea,SuraProvince,SuraTypeName)"  placeholder="กรุณาเลือก">                     
+                                <!--<ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>-->
+                            <ion-option  *ngFor="let item of responseArea; let i = index "  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>                                                                         
                         </ion-select>
                       </ion-item>
                 </ion-col>
-        
+              
                 <ion-col>
                     <ion-item  class="size">
                         <ion-label>จังหวัด : </ion-label>
-                            <ion-select  [(ngModel)]="SuraProvince" (ionChange)="getitemsProvinceSura(SuraArea,SuraProvince,type_name)">
-                                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
-                                  <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                            <ion-select  [(ngModel)]="SuraProvince" (ionChange)="getitemsProvinceSura(SuraArea,SuraProvince,SuraTypeName)" placeholder="กรุณาเลือก">
+                                <ion-option  *ngFor="let item1 of responseProvince; let i=index"  value="{{item1.PROVINCE_NAME}}" selected="{{(i==defaultSelectProvinceSura).toString()}}">{{item1.PROVINCE_NAME}}</ion-option>            
                           </ion-select>
                       </ion-item>
                   </ion-col>
@@ -147,7 +148,7 @@
                     <ion-col>
                         <ion-item  class="size">
                             <ion-label>ประเภทสินค้า : </ion-label>
-                                <ion-select  [(ngModel)]="type_name" (ionChange)="selectionTypeNameSica(area,province,type_name)">
+                                <ion-select  [(ngModel)]="SicaType" (ionChange)="selectionTypeNameSica(SicaRegion,SicaProvince,SicaType)">
                                     <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                                       <ion-option  *ngFor="let item1 of responseTypeSica"  value="{{item1.TYPE_DESC}}">{{item1.TYPE_DESC}}</ion-option>            
                               </ion-select>
@@ -159,9 +160,8 @@
                   <ion-col>
                       <ion-item  class="size">
                         <ion-label> ภาค : </ion-label>
-                          <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegionSica(area,province,group_name)" >
-                            <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                            <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
+                          <ion-select  [(ngModel)]="SicaRegion" (ionChange)="getitemsRegionSica(SicaRegion,SicaProvince,SicaType)"  placeholder="กรุณาเลือก">
+                            <ion-option  *ngFor="let item of responseArea let i=index"  value="{{item.REGION_NAME}}" selected="{{(i==defaultSelectQuestion).toString()}}">{{item.REGION_NAME}}</ion-option>              
                           </ion-select>
                         </ion-item>
                   </ion-col>
@@ -169,9 +169,8 @@
                   <ion-col>
                       <ion-item  class="size">
                           <ion-label>จังหวัด : </ion-label>
-                              <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvinceSica(area,province,group_name)">
-                                  <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
-                                    <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                              <ion-select  [(ngModel)]="SicaProvince" (ionChange)="getitemsProvinceSica(SicaRegion,SicaProvince,SicaType)" placeholder="กรุณาเลือก">
+                                    <ion-option  *ngFor="let item1 of responseProvince let i=index"  value="{{item1.PROVINCE_NAME}}" selected="{{(i==defaultSelectProvinceSura).toString()}}">{{item1.PROVINCE_NAME}}</ion-option>            
                             </ion-select>
                         </ion-item>
                     </ion-col>
@@ -205,7 +204,7 @@
         </ion-card-content>
       </ion-card>
 
-      <ion-card>
+     <ion-card>
           <ion-card-content no-padding>
               <ion-item>
                   <ion-label text-center><strong>สถิติใบอนุญาตแยกตามเดือน กลุ่มสินค้าไพ่</strong></ion-label>
@@ -218,7 +217,7 @@
                       <ion-col>
                           <ion-item  class="size">
                               <ion-label>ประเภทสินค้า : </ion-label>
-                                  <ion-select  [(ngModel)]="type_name" (ionChange)="getitemsTypeNameCard(area,province,type_name)">
+                                  <ion-select  [(ngModel)]="CardType" (ionChange)="getitemsTypeNameCard(CardRegion,CardProvince,CardType)">
                                       <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                                         <ion-option  *ngFor="let item1 of responseTypeCard"  value="{{item1.TYPE_DESC}}">{{item1.TYPE_DESC}}</ion-option>            
                                 </ion-select>
@@ -229,9 +228,8 @@
                     <ion-col>
                         <ion-item  class="size">
                           <ion-label> ภาค : </ion-label>
-                            <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegionCard(area,province,group_name)" >
-                              <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                              <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>              
+                            <ion-select  [(ngModel)]="CardRegion" (ionChange)="getitemsRegionCard(CardRegion,CardProvince,CardType)"  placeholder="ทั้งหมด">
+                              <ion-option  *ngFor="let item of responseArea let i=index"  value="{{item.REGION_NAME}}" selected="{{(i==defaultSelectQuestion).toString()}}">{{item.REGION_NAME}}</ion-option>              
                             </ion-select>
                           </ion-item>
                     </ion-col>
@@ -239,9 +237,8 @@
                     <ion-col>
                         <ion-item  class="size">
                             <ion-label>จังหวัด : </ion-label>
-                                <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvinceCard(area,province,group_name)">
-                                    <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
-                                      <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                                <ion-select  [(ngModel)]="CardProvince" (ionChange)="getitemsProvinceCard(CardRegion,CardProvince,CardType)" placeholder="ทั้งหมด">
+                                      <ion-option  *ngFor="let item1 of responseProvince let i=index"  value="{{item1.PROVINCE_NAME}}" selected="{{(i==defaultSelectQuestion).toString()}}">{{item1.PROVINCE_NAME}}</ion-option>            
                               </ion-select>
                           </ion-item>
                       </ion-col>

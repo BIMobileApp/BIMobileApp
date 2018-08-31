@@ -14,14 +14,14 @@ export class TaxEdRealtimePage {
   textmsg: any;
   offcode:any;
   username:any;
+  dateDisplay = "";
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider,
     public alertCtrl: AlertController) {
-      this.offcode = localStorage.offcode;
+    this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
-
-
+    this.dateDisplay = localStorage.last_update_date;
   }
 
   ionViewDidLoad() {

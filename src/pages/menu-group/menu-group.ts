@@ -12,6 +12,7 @@ import { LawDataAreaPage } from '../law-data-area/law-data-area';
 import { LawDataMthPage } from '../law-data-mth/law-data-mth';
 import { IncDataAreaPage } from '../inc-data-area/inc-data-area';
 import { IncDataMthPage } from '../inc-data-mth/inc-data-mth';
+import { LicDataMarketPage } from '../lic-data-market/lic-data-market';
 
 @IonicPage()
 @Component({
@@ -94,6 +95,10 @@ username:any;
 
   IncDataMth(){
     this.app.getRootNav().push(IncDataMthPage); 
+  }
+
+  IncDataMarket(){
+    this.app.getRootNav().push(LicDataMarketPage); 
   }
   
 }

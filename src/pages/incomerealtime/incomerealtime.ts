@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll: any;
+
 @IonicPage()
 @Component({
   selector: 'page-incomerealtime',
@@ -13,12 +15,16 @@ export class IncomerealtimePage {
   respondSumData: any;
   offcode: any;
   username:any;
+  dateAsOff = "";
+  dateDisplay = "";
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
+      this.dateAsOff = dateDisplayAll;
+      this.dateDisplay = localStorage.last_update_date;
   }
 
   ionViewDidLoad() {
