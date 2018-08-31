@@ -15,6 +15,7 @@ import { IncDataMthPage } from '../inc-data-mth/inc-data-mth';
 import { OldReportBi_Law21Page } from '../old-report-bi-law2-1/old-report-bi-law2-1';
 import { LawDataAreaPage } from '../law-data-area/law-data-area';
 import { OldReportBi_Law31Page } from '../old-report-bi-law3-1/old-report-bi-law3-1';
+import { LicDataMarketPage } from '../lic-data-market/lic-data-market';
 
 @IonicPage()
 @Component({
@@ -96,6 +97,10 @@ export class MenuGroupPage {
 
   IncDataMth(){
     this.app.getRootNav().push(IncDataMthPage); 
+  }
+
+  IncDataMarket(){
+    this.app.getRootNav().push(LicDataMarketPage); 
   }
   
 }

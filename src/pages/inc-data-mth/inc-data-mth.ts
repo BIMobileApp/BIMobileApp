@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
 
+
 @IonicPage()
 @Component({
   selector: 'page-inc-data-mth',
@@ -29,26 +30,50 @@ export class IncDataMthPage {
   repondProduct:any;
   dateDisplay:any;
   dateAsOff:any;
+  disoffcode:any;
+
+  stroffcode:any;
+  province:any;
+  branch:any;
+
+  defaultSelectQuestion:any;
+  defaultSelectProvinceSura:any;
+  questionArray:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
+     
+      this.province = this.offcode.substring(0, 2);
+      this.branch = this.offcode.substring(4, 2);
+
+      if(this.province == "00"){
+        this.defaultSelectQuestion = -1; 
+        this.defaultSelectProvinceSura = -1;
+        this.stroffcode = true;
+      }else{
+        this.defaultSelectQuestion = 0;
+        this.defaultSelectProvinceSura = 0;
+        this.stroffcode = false;
+      }
+      
+      this.disoffcode = this.stroffcode;
+
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
   }
 
+
   ionViewDidLoad() {
     this.loadData();
-    this.selectionSumArea();
-    this.selectionArea();
-    //this.selectionProvince();
+
     this.selectionTypeNameSura(); 
     this.selectionTypeNameSica();
     this.selectionTypeNameCard();
-   // this.IncProductAllSura();
-    //this.IncProductAllSica();
-   // this.IncProductAllCard();
+
+    this.selectionArea();
+    this.selectionAllProvince();
   }
 
   loadData(){
@@ -60,18 +85,39 @@ export class IncDataMthPage {
       this.getAmtSURA();
       this.getAmtTOBBACO();
       this.getAmtCARD();
+      this.selectionSumArea();
     });
   }
 
+  ///select all///
   selectionArea(){
     this.webapi.getData('SelectionMthArea?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
+     // this.getitemsRegionSica(data[0].REGION_NAME,'undefined','undefined');
+      this.selectionRegionLoad(data[0].REGION_NAME);
+    });
+  }
+
+  selectionAllProvince(){   
+    this.webapi.getData('SelectionAllProvince?offcode='+this.offcode).then((data) => {
+      this.responseProvince = data;
+    });
+  }
+
+  selectionRegionLoad(area){
+    this.webapi.getData('SelectionMthProvince?offcode='+this.offcode+'&region='+area).then((data) => {
+      this.responseProvince = data;
+
+      this.IncProductAllSura(area,data[0].PROVINCE_NAME,'undefined');
+      this.IncProductAllSica(area,data[0].PROVINCE_NAME,'undefined');
+      this.IncProductAllCard(area,data[0].PROVINCE_NAME,'undefined');
+
     });
   }
 
   selectionSumArea(){
     this.webapi.getData('IncSumDataByMonth?offcode='+this.offcode).then((data) => {
-      this.responseSumArea = data;
+      this.responseSumArea = data; 
 
       this.getSumNumSURA();
       this.getSumNumTOBBACO();
@@ -82,67 +128,62 @@ export class IncDataMthPage {
     });
   }
 
-
+    ///end select all///
 
   /////สุรา//////
 
   selectionTypeNameSura(){
     this.webapi.getData('SelectionMthGroupName?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
       this.responseTypeSura = data;
-    });
+    }); 
   }
 
-  IncProductAllSura(){
-    this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
-      this.repondProductSura = data;
+ IncProductAllSura(SuraArea,SuraProvince,SuraTypeName){
+
+    //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
+      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+SuraTypeName+'&group_name=สุรา').then((data) => {
+      this.repondProductSura = data; console.log(this.repondProductSura);
+
       this.loadData();
-      this.getAmtSura();
-      this.getCountSura();
+      this.getAmtProdSura();
+      this.getCountProdSura();
+      this.getitemsSumSura(SuraArea,SuraProvince,SuraTypeName);
     });
   }
 
-  getitemsTypeNameSura(area,province,type_name){
-      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
-      this.repondProductSura = data;
-      this.loadData();
-      this.getAmtSura();
-      this.getCountSura();
-    });
-    this.getitemsSumSura(area,province,type_name);
+  getitemsTypeNameSura(SuraArea,SuraProvince,SuraTypeName){
+     this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
   }
 
-  getitemsRegionSura(area,province,type_name){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา' ).then((data) => {
-      this.repondProductSura = data;
-      this.loadData();
-      this.getAmtSura();
-      this.getCountSura();
-    });
-    this.selectionProvince(area);
-    this.getitemsSumSura(area,province,type_name);
-    //this.selectionProvinceChage(area);
+
+
+  getitemsRegionSura(SuraArea,SuraProvince,SuraTypeName){
+   
+
+
+    this.selectionProvince(SuraArea);
+    this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
+
+   // SuraArea =this.questionArray[this.defaultSelectQuestion];
+   // this.getitemsProvinceSura(SuraArea,SuraProvince,SuraTypeName);
   }
 
-  getitemsProvinceSura(area,province,type_name){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
-      this.repondProductSura = data;
-      this.loadData();
-      this.getAmtSura();
-      this.getCountSura();
-    });
-    this.getitemsSumSura(area,province,type_name);
+  questionArrayProvince:any;
+  getitemsProvinceSura(SuraArea,SuraProvince,SuraTypeName){
+      this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
+
+   // SuraProvince =this.questionArrayProvince[this.defaultSelectProvinceSura];
   }
 
-  getitemsSumSura(area,province,type_name){
-    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=สุรา').then((data) => {
+  getitemsSumSura(SuraArea,SuraProvince,SuraTypeName){
+    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+SuraTypeName+'&group_name=สุรา').then((data) => {
       this.repondSumProductSura = data;
-      this.loadData();
-      //this.getSumAmtSura();    
-     // this.getSumCountSura(); 
+      this.getSumAmtSura();    
+      this.getSumCountSura(); 
     });
   }
 
-    getAmtSura(){
+  getAmtProdSura(){
       let val;
       for (var i = 0; i < this.repondProductSura.length; i++) {
         val = this.repondProductSura[i].AMT;
@@ -151,7 +192,7 @@ export class IncDataMthPage {
       }
     }
   
-    getCountSura(){
+    getCountProdSura(){
       let val;
       for (var i = 0; i < this.repondProductSura.length; i++) {
         val = this.repondProductSura[i].COUNT;
@@ -182,59 +223,46 @@ export class IncDataMthPage {
 
 
  /////ยาสูบ//////
-
  selectionTypeNameSica(){
   this.webapi.getData('SelectionMthGroupName?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
     this.responseTypeSica = data;
   });
 }
 
-  IncProductAllSica(){
-    this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
+  IncProductAllSica(SicaRegion,SicaProvince,SicaType){
+    //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
+     this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+SicaRegion+'&province='+SicaProvince+'&type_name='+SicaType+'&group_name=ยาสูบ').then((data) => {
       this.repondProductSica = data;
       this.loadData();
       this.getAmtSica();
       this.getCountSica();
+      this.getitemsSumSica(SicaRegion,SicaProvince,SicaType);
     });
   }
 
-  getitemsTypeNameSica(area,province,type_name){
-      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ').then((data) => {
-      this.repondProductSica = data;
-      this.loadData();
-      this.getAmtSica();
-      this.getCountSica();
-      this.getitemsSumSica(area,province,type_name);
-    });
+  getitemsTypeNameSica(SicaRegion,SicaProvince,SicaType){
+     this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
   }
 
-  getitemsRegionSica(area,province,type_name){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ' ).then((data) => {
-      this.repondProductSica = data;
-      this.loadData();
-      this.getAmtSica();
-      this.getCountSica();
-      this.getitemsSumSica(area,province,type_name);
-    });
-    this.selectionProvince(area);
+  getitemsRegionSica(SicaRegion,SicaProvince,SicaType){
+    this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
+    SicaRegion =this.questionArray[this.defaultSelectQuestion];
   }
 
-  getitemsProvinceSica(area,province,type_name){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ').then((data) => {
-      this.repondProductSica = data;
-      this.loadData();
-      this.getAmtSica();
-      this.getCountSica();
-      this.getitemsSumSica(area,province,type_name);
-    });
+  getitemsProvinceSica(SicaRegion,SicaProvince,SicaType){    
+    console.log(SicaRegion);
+    console.log(SicaProvince);
+    console.log(SicaType);
+    console.log('end');
+    this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
+    //SicaProvince =this.questionArray[this.defaultSelectProvinceSura];
   }
 
-  getitemsSumSica(area,province,type_name){
-    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ').then((data) => {
+  getitemsSumSica(SicaRegion,SicaProvince,SicaType){
+    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SicaRegion+'&province='+SicaProvince+'&type_name='+SicaType+'&group_name=ยาสูบ').then((data) => {
       this.repondSumProductSica = data;
-      this.loadData();
-      //this.getSumAmtSica();    
-      //this.getSumCountSica(); 
+      this.getSumAmtSica();    
+      this.getSumCountSica(); 
     });
   }
 
@@ -275,10 +303,13 @@ export class IncDataMthPage {
     }
 
     selectionProvince(area){
+      console.log(area);
       this.webapi.getData('SelectionMthProvince?offcode='+this.offcode+'&region='+area).then((data) => {
         this.responseProvince = data;
+        console.log(this.responseProvince);
       });
     }
+
     /////end ยาสูบ//////
 
  /* getitemMonth(area,province,group_name,month){
@@ -298,52 +329,39 @@ export class IncDataMthPage {
     });
    }
 
-    IncProductAllCard(){
-      this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
+    IncProductAllCard(CardRegion,CardProvince,CardType){
+      //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
+        this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+CardRegion+'&province='+CardProvince+'&type_name='+CardType+'&group_name=ไพ่').then((data) => {
         this.repondProductCard = data;
         this.loadData();
         this.getAmtCard();
         this.getCountCard();
+        this.getitemsSumCard(CardRegion,CardProvince,CardType);
       });
     }
   
-    getitemsTypeNameCard(area,province,type_name){
-        this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ไพ่').then((data) => {
-        this.repondProductCard = data;
-        this.loadData();
-       this.getAmtCard();
-       this.getCountCard();
-      });
-      this.getitemsSumCard(area,province,type_name);
+    getitemsTypeNameCard(CardRegion,CardProvince,CardType){
+       this.IncProductAllCard(CardRegion,CardProvince,CardType); 
     }
   
-    getitemsRegionCard(area,province,type_name){
-      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ไพ่' ).then((data) => {
-        this.repondProductCard = data;
-        this.loadData();
-       this.getAmtCard();
-       this.getCountCard();
-      });
-      this.selectionProvince(area);
-      this.getitemsSumCard(area,province,type_name);
+    getitemsRegionCard(CardRegion,CardProvince,CardType){
+      this.IncProductAllCard(CardRegion,CardProvince,CardType);
+
+      this.selectionProvince(CardRegion);
+
+      CardRegion =this.questionArray[this.defaultSelectQuestion];
     }
   
-    getitemsProvinceCard(area,province,type_name){
-      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ไพ่').then((data) => {
-        this.repondProductCard = data;
-        this.loadData();
-       this.getAmtCard();
-       this.getCountCard();
-      });
-      this.getitemsSumCard(area,province,type_name);
+    getitemsProvinceCard(CardRegion,CardProvince,CardType){      
+      this.IncProductAllCard(CardRegion,CardProvince,CardType); 
+      CardProvince =this.questionArray[this.defaultSelectQuestion];
     }
   
     getitemsSumCard(area,province,type_name){
-      this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ยาสูบ').then((data) => {
+      this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ไพ่').then((data) => {
         this.repondSumProductCard = data;
-        this.loadData();
-       // this.getSumAmtCard();    
-        //this.getSumCountCard(); 
+        this.getSumAmtCard();    
+        this.getSumCountCard(); 
       });
     }
 
@@ -384,8 +402,6 @@ export class IncDataMthPage {
   }
 
     /////end ไพ่//////
-
-  
 
   getNumSURA() {
     let val;
