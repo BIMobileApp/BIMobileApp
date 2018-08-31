@@ -193,7 +193,6 @@ export class CetegoryTaxPage {
         this.DataCurYear[i].PERCENT_TAX = this.DataCurYear[i].PERCENT_TAX.toFixed(2);
       }
     }
-    console.log(this.DataCurYear);
   }
 
   getTAX() {
@@ -232,6 +231,8 @@ export class CetegoryTaxPage {
       this.getProductTAX();
       this.getProductLAST_TAX();
       this.getProductEST();
+      this.getProductPERCENT_TAX();
+      console.log(this.DataProduct);
     });
   }
 
@@ -262,6 +263,14 @@ export class CetegoryTaxPage {
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.DataProduct[i].ESTIMATE = val;
+    }
+  }
+
+  getProductPERCENT_TAX(){
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      if(this.DataProduct[i].PERCENT_TAX != null){
+        this.DataProduct[i].PERCENT_TAX = this.DataProduct[i].PERCENT_TAX.toFixed(2);
+      }
     }
   }
 
