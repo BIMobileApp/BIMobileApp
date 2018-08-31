@@ -1,14 +1,15 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>รายงานรับเงินรายได้</ion-title>
+    <ion-title>Real Time</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-item style="background-color:#D0DFE6;" text-center>
-    <h2 class="header-style">รายงานรับเงินรายได้ Real Time</h2>
+    <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
+    <h2 class="header-style">ตั้งแต่วันที่ .........</h2>
   </ion-item>
-  <h3 style="padding-right: 2%" class="right">หน่วย : บาท</h3>
+  <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
   <ion-card>
     <ion-card-content no-padding>
       <div class="table-responsive">
@@ -37,6 +38,10 @@
               <td width="30%">
                 <h3 class="right">{{data.TAX}}</h3>
               </td>
+            </tr>
+            <tr  *ngFor="let data of respondSumData">
+              <td colspan="2"> <h3 class="center">รวม</h3></td>
+              <td>  <h3 class="right">{{data.SUM_TAX}}</h3></td>
             </tr>
           </tbody>
         </table>

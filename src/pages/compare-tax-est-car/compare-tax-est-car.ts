@@ -22,6 +22,7 @@ export class CompareTaxEstCarPage {
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
+  textDataInValid: any;
   
 
   constructor(public navCtrl: NavController,
@@ -29,9 +30,56 @@ export class CompareTaxEstCarPage {
     public webapi: RestProvider) {
   }
 
-  ionViewDidLoad() {
+ ionViewDidLoad() {
+    this.UserAthu();
+  }
+  
+  UserAthu() {
+    this.offcode = localStorage.offcode;
     this.getTableData();
     this.getProductType();
+    this.getLineAll();
+  }
+
+  getProductType() {
+    this.webapi.getData('getTypeNameCarMonth?offcode=' + this.offcode).then((data) => {
+      this.ProductType = data;
+    });
+  }
+
+ 
+  getLineTaxData(TaxCode) {
+    if (TaxCode != "") {
+      this.webapi.getData('CompareTaxCarMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+        this.TaxLineData = data;
+        if (this.TaxLineData.length > 0) {
+          this.TaxgetTAX();
+          this.TaxgetTAX_LY();
+          this.TaxgetLebel();
+          this.TaxCreateChart();
+    
+        } else {
+          this.textDataInValid = 0;
+        }
+      });
+    } else {
+     this.getLineAll();
+    }
+  }
+
+  getLineAll(){
+    this.webapi.getData('CompareTaxCarMonthAll?offcode=' + this.offcode).then((data) => {
+      this.TaxLineData = data;
+      if (this.TaxLineData.length > 0) {
+        this.TaxgetTAX();
+        this.TaxgetTAX_LY();
+        this.TaxgetLebel();
+        this.TaxCreateChart();
+  
+      } else {
+        this.textDataInValid = 0;
+      }
+    });
   }
 
   getTableData() {
@@ -42,11 +90,6 @@ export class CompareTaxEstCarPage {
   });
 }
 
-getProductType() {
-  this.webapi.getData('CompareTaxCarMonth').then((data) => {
-  this.ProductType = data;
-});
-}
 
 getTableTAX() {
   let val;
@@ -68,15 +111,7 @@ getTableTAX_LY() {
   }
 }
 
-    getLineTaxData(TaxCode) {
-      this.webapi.getData('CompareTaxCarMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
-        this.TaxLineData = data;
-        this.TaxgetTAX();
-        this.TaxgetTAX_LY();
-        this.TaxgetLebel();
-        this.TaxCreateChart();
-      });
-    }
+  
     //----------------------- Start Manage Data from API-------------------------//
 
     TaxgetTAX() {

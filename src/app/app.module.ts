@@ -102,9 +102,8 @@ import { LawDataAreaPage } from '../pages/law-data-area/law-data-area';
 import { LawDataMthPage } from '../pages/law-data-mth/law-data-mth';
 import { DataStatusPage } from '../pages/data-status/data-status';
 import { NewsEventPage } from '../pages/news-event/news-event';
+import { LicDataMarketPage } from '../pages/lic-data-market/lic-data-market';
 
-<<<<<<< HEAD
-=======
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 
@@ -113,7 +112,6 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { Geolocation } from '@ionic-native/geolocation'; 
 
->>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
 @NgModule({
   declarations: [
     MyApp,
@@ -211,7 +209,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     LawDataAreaPage,
     LawDataMthPage,
     DataStatusPage,
-    NewsEventPage
+    NewsEventPage,
+    LicDataMarketPage
   ],
   imports: [
     BrowserModule,
@@ -323,7 +322,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     LawDataAreaPage,
     LawDataMthPage,
     DataStatusPage,
-    NewsEventPage
+    NewsEventPage,
+    LicDataMarketPage
   ],
   providers: [
     StatusBar,

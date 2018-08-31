@@ -12,6 +12,7 @@ page-incomerealtime{
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+  table tbody tr:last-child { background:#a7d8ff !important; }
   table>tbody>tr>td>p {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -23,10 +24,16 @@ page-incomerealtime{
       width: 90%;
     }
   }
-  h2.header-style{
+  h1.header-style{
     font-weight: bold;
     color: black !important;
     font-size: 6vw !important;
+    text-align: center !important;
+  }
+  h2.header-style{
+    font-weight: bold;
+    color: black !important;
+    font-size: 5vw !important;
     text-align: center !important;
   }
   h3.center {

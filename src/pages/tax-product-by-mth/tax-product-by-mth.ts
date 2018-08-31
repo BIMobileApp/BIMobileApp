@@ -10,7 +10,11 @@ import { RestProvider } from '../../providers/rest/rest';
 export class TaxProductByMthPage {
 
   responseData: any;
+  summaryDate:any;
   offcode: any;
+  criteRia:any;
+  year_en:any;
+  year_th:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -19,7 +23,22 @@ export class TaxProductByMthPage {
   }
 
   ionViewDidLoad() {
-      this.getDataAll();
+   var d = new Date(); 
+    var n = d.getFullYear();
+    var nt = d.getFullYear()+543;
+    console.log(nt);
+    var range = [];
+    for(var i=0;i<10;i++) {
+
+     this.year_en = n-i;
+     this.year_th = nt-i;
+
+      range.push( {"key":this.year_th,"value": this.year_en});
+    }
+    this.summaryDate = range;
+    console.log(this.summaryDate);
+
+    this.getDataAll();
   }
 
   getDataAll(){
@@ -28,11 +47,10 @@ export class TaxProductByMthPage {
        this.getTAX();
        this.getTAX_Ly();
        this.getTAX_Est();
-
      });
   }
 
-  selectDate(mth){
+  selectDate(mth, ){
     this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&month='+mth).then((data)=>{
       this.responseData = data;
       this.getTAX();

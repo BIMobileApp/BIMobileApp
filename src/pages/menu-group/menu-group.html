@@ -38,13 +38,16 @@
     <ion-row style="border-bottom: 1px solid rgb(175, 175, 175);">
       <ion-col (click)="IncDataArea()" text-center>
         <img class="icon-menu-style" src="../../assets/imgs/CV1.png" />
-        <p class="content-center">สถิติใบอนุญาตตามพื้นที่</p>
+        <p class="content-center">สถิติใบอนุญาตตามหน่วยงาน</p>
       </ion-col>
       <ion-col (click)="IncDataMth()" text-center>
         <img class="icon-menu-style" src="../../assets/imgs/CV3.png" />
         <p class="content-center">สถิติใบอนุญาตตามเดือน</p>
       </ion-col>
-      <ion-col></ion-col>
+      <ion-col (click)="IncDataMarket()" text-center>
+          <img class="icon-menu-style" src="../../assets/imgs/lic_market.png" />
+          <p class="content-center">สถิติใบอนุญาตตามร้านค้า</p>
+      </ion-col>
     </ion-row>
     <br>
 
@@ -63,9 +66,7 @@
         <p class="content-center">สถิติคดีรายเดือน</p>
       </ion-col>
       <ion-col></ion-col>
-    </ion-row>
-<<<<<<< HEAD
-
+    </ion-row> 
     <ion-row>
         <ion-col>
           <span ion-text color="title">
@@ -74,19 +75,13 @@
         </ion-col>
       </ion-row>
       <ion-row>
-<<<<<<< HEAD
-        <ion-col (click)="gotoCategoryLawTax()" text-center>
-          <img src="../assets/imgs/if_11_61475 (1).png">
-        </ion-col>
-  
-        <ion-col (click)="gotoCategoryFinesTax()" text-center>
-=======
+
+
         <ion-col (click)="LawDataArea()" text-center>
           <img src="../assets/imgs/if_11_61475 (1).png">
         </ion-col>
   
         <ion-col (click)="LawDataMth()" text-center>
->>>>>>> 6b0dc8721599b62c1e7dc7edf5bd796319a4d130
           <img src="../assets/imgs/if_11_61475 (1).png">
         </ion-col>
   
@@ -103,9 +98,7 @@
         <ion-col></ion-col>
       </ion-row>
 
-=======
     <br>
->>>>>>> 21eb69cd85720ecbf12a4fbb733bca967a42dd9a
 
     <ion-row>
       <ion-col>
@@ -117,7 +110,9 @@
         <img class="icon-menu-style" src="../../assets/imgs/CV1.png" />
         <p class="content-center">ต้นปี-ปัจจุบัน</p>
       </ion-col>
-      <ion-col (click)="beforReport()" text-center>
+      
+    <!--  <ion-col (click)="beforReport()" text-center>-->
+        <ion-col text-center>
         <img class="icon-menu-style" src="../../assets/imgs/CV3.png" />
         <p class="content-center">ต้นปี-เดือนก่อน</p>
       </ion-col>

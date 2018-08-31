@@ -26,6 +26,7 @@ export class HomePage {
   offcode: any;
   offdesc: any;
   username: any;
+  lastUpdateDate: any;
  
 
   constructor(public navCtrl: NavController,
@@ -52,16 +53,19 @@ export class HomePage {
       this.userDB = data;
 
       
-      if (this.userDB.length!=0) {
-       this.offcode = this.userDB[0].OFFCODE;
-       this.offdesc = this.userDB[0].OFFDESC;
-       this.username = this.userDB[0].USERNAME;
-        //บันทึกข้อมูลของ local storage
-        localStorage.setItem("userData", this.userData.username);
-        localStorage.setItem("offcode", this.offcode);
-        //ปิดหน้า login และกลับไปหน้าหลัง
-        this.navCtrl.setRoot(MenuGroupPage);
-      } else {
+     if (this.userDB.length!=0) {
+        this.offcode = this.userDB[0].OFFCODE;
+        this.offdesc = this.userDB[0].OFFDESC;
+        this.username = this.userDB[0].USERNAME;       
+        this.lastUpdateDate = this.userDB[0].LAST_UPDATE_DATE;
+         //บันทึกข้อมูลของ local storage
+         localStorage.setItem("userData", this.userData.username);
+         localStorage.setItem("offcode", this.offcode);
+         localStorage.setItem("last_update_date", this.lastUpdateDate);
+         //ปิดหน้า login และกลับไปหน้าหลัง
+         console.log(localStorage.last_update_date)
+         this.navCtrl.setRoot(MenuGroupPage);
+       }else {
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
           subTitle: 'กรุณากรอกข้อมูลอีกครั้ง',
@@ -79,6 +83,10 @@ export class HomePage {
   
   test(){
     this.app.getRootNav().push( MenuGroupPage);  
+  }
+
+  DataStatus(){
+    this.app.getRootNav().push(DataStatusPage);  
   }
   //this.app.getRootNav().push(MenuGroupPage); 
   
@@ -107,17 +115,4 @@ export class HomePage {
       this.document.viewDocument(url, 'application/pdf', {});
     });
  }
-
- /*login(){
-<<<<<<< HEAD
->>>>>>> cd968405eaac6f7e4e52101aef859a4632643452
-=======
->>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
-    this.app.getRootNav().push(MenuGroupPage);  
-  }
-
-  DataStatus(){
-    this.app.getRootNav().push(DataStatusPage);  
-  }*/
-
 }

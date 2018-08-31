@@ -10,6 +10,7 @@ import { RestProvider } from '../../providers/rest/rest';
 export class IncomerealtimePage {
   
   respondData: any;
+  respondSumData: any;
   offcode: any;
 
   constructor(public navCtrl: NavController,
@@ -23,14 +24,31 @@ export class IncomerealtimePage {
       this.respondData = data;
       this.getTableTAX();
     });
+
+    this.webapi.getData('SumIncomeList?offcode='+this.offcode).then((data)=>{
+      this.respondSumData = data;
+      this.getTableSumTAX();
+     });
   }
+
   getTableTAX() {
     let val;
     for (var i = 0; i < this.respondData.length; i++) {
-      val = this.respondData[i].TAX;
+      val = this.respondData[i].TAX/1000000;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.respondData[i].TAX = val;
     }
   }
+
+  getTableSumTAX(){
+    let val;
+    for (var i = 0; i < this.respondSumData.length; i++) {
+      val = this.respondSumData[i].SUM_TAX/1000000;
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondSumData[i].SUM_TAX = val;
+    }
+  }
+
 }

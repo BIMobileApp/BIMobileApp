@@ -4,7 +4,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="header-title">ระบบสารสนเทศเพื่อการบริการ
+          <h1 class="header-title">ระบบสารสนเทศเพื่อการบริหาร
             <br>กรมสรรพสามิต</h1>
         </ion-col>
       </ion-row>
@@ -18,18 +18,13 @@
           <img class="icon-menu-style" src="../../assets/imgs/AStatus2.png" />
           <p class="content-center">แหล่งที่มา</p>
         </ion-col>
-<<<<<<< HEAD
+ 
 
         <ion-col col-1></ion-col>
-        <ion-col (click)="dowload_file()">
-          <div style="text-align: center;">
-            <img class="iconStyle" src="../../assets/imgs/earlyYear.png">
-          </div>
-=======
-        <ion-col (click)="TaxMthByProduct()" text-center>
+ 
+        <ion-col (click)="dowload_file()" text-center> 
           <img class="icon-menu-style" src="../../assets/imgs/AManual2.png" />
-          <p class="content-center">คู่มือติดตั้ง</p>
->>>>>>> f3812276120e39062cb7df4a27b41b2cd4d04d51
+          <p class="content-center">คู่มือติดตั้ง</p> 
         </ion-col>
         <ion-col (click)="NewsEvent()" text-center>
           <img class="icon-menu-style" src="../../assets/imgs/ANew2.png" />
@@ -48,13 +43,13 @@
   </header>
 
   <div padding>
-    <ion-input class="box-style" placeholder="Username" [(ngModel)]="userData.username"></ion-input>
+    <ion-input class="box-style" placeholder="ชื่อผู้ใช้" [(ngModel)]="userData.username"></ion-input>
     <br>
-    <ion-input class="box-style" type="password" placeholder="Password" [(ngModel)]="userData.password"></ion-input>
+    <ion-input class="box-style" type="password" placeholder="รหัสผ่าน" [(ngModel)]="userData.password"></ion-input>
     <br>
-    <button class="box" ion-button color="navber" (click)="login()">Login</button>
+    <button class="box" ion-button color="navber" (click)="login()">เข้าสู่ระบบ</button>
   </div>
 
-  <button ion-button round outline menuClose="left" (click)=test()>Shortcut</button>
+  
 
 </ion-content>

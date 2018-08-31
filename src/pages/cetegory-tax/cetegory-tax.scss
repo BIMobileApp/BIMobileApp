@@ -12,6 +12,7 @@ page-cetegory-tax {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+  table tbody tr:last-child { background:#a7d8ff !important; }
   .td-center{
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
@@ -47,12 +48,21 @@ page-cetegory-tax {
   h1.header-style{
     font-weight: bold;
     color: black !important;
-    font-size: 4vw !important;
+    font-size: 5vw !important;
     text-align: center !important;
   }
   h2.header-style{
     color: black !important;
     font-size: 3vw !important;
     text-align: center !important;
+  }
+  .DataStatus-font{
+    font-weight: bold;
+    color: rgb(29, 97, 160) !important;
+    font-size: 3vw !important;
+    text-align: left !important;
+  }
+  .desc-img-size{
+    width: 2%;
   }
 }

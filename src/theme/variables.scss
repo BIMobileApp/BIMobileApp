@@ -22,16 +22,41 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-$toolbar-ios-title-font-size: 2rem;
-$toolbar-md-title-font-size: 3rem;
-$toolbar-wp-title-font-size: 2.5rem;
+$toolbar-ios-title-font-size: 5vw;
+$toolbar-md-title-font-size: 5vw;
+$toolbar-wp-title-font-size: 6vw;
 
+$toolbar-ios-height: 40px;
+$toolbar-md-height: 50px;
+$toolbar-wp-height: 55px;
 
 @media(max-height: 480px) {
   .alert-radio-group {
     max-height: 120px;
     height: 120px;
   }
+}
+
+ion-select {
+  max-width: 60% !important;
+  white-space: normal !important;
+  width: 100% !important;
+  right: auto !important;
+  direction: ltr !important;
+  padding-left: 0 !important;
+} 
+
+ion-item.size{
+  width: 70%;
+  font-weight: bold;
+  color: black ;
+  font-size: 4vw ;
+
+  display: block;
+  right: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 // Named Color Variables

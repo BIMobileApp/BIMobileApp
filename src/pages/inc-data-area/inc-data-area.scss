@@ -12,6 +12,8 @@ page-inc-data-area {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+  table tbody tr:last-child { background:#a7d8ff !important; }
+
 
   table>tbody>tr>td>p {
     white-space: nowrap;
@@ -50,6 +52,16 @@ page-inc-data-area {
     
   }
   .solid-head{
-    border-bottom: 1px solid black;
+    border-bottom: 0.3px solid rgb(255, 255, 255);
+
+  }
+  ion-item.size{
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    color: black ;
+    font-size: 4vw ;
   }
 }

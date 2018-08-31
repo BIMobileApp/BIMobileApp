@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-inc-data-area',
@@ -10,15 +12,252 @@ import { RestProvider } from '../../providers/rest/rest';
 export class IncDataAreaPage {
 
   offcode: any;
+  dateDisplay:any;
+  dateAsOff:any;
   responseData: any;
+  responseArea: any;
+  Area: any;
+  SuraResponseProvince: any;
+  CardResponseProvince: any;
+  TobResponseProvince: any;
+  responseGroupName: any;
+  SuraRepondProduct:any;
+  CardRepondProduct:any;
+  TOBBACORepondProduct:any;
+  repondProduct:any;
+  defaultSelectProvince:any;
+
+  province:any;
+  defaultSelectQuestion:any;
+  questionArray:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
+      this.province = this.offcode.substring(0, 2);
+
+      if( this.province == "00"){
+        this.defaultSelectQuestion = -1; 
+      }else{
+        this.defaultSelectQuestion = 0;
+      }
+
+      this.dateDisplay = localStorage.last_update_date;
+      this.dateAsOff =  dateDisplayAll;
   }
 
   ionViewDidLoad() {
+    this.loadData();
+    this.selectionArea();
+    this.selectionGeoupName();
+   /*  this.IncProductAll(); */
+  }
+
+  selectionArea(){
+    this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+     
+    });
+    
+  }
+
+ SuraSelectionProvince(){
+    this.webapi.getData('SelectionProvince?offcode='+this.offcode+'&area='+this.Area).then((data) => {
+      this.SuraResponseProvince = data;
+    });
+  }
+
+  selectionGeoupName(){
+    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+      this.responseGroupName = data;
+    });
+  }
+
+
+  //---------------------------------------------------------SURA------------------------------------------------------------//
+  SuraGetitems(SuraArea,SuraProvince,SuraMonth){
+    var group_name = "สุรา";
+    var old_area = SuraArea;
+    //this.selectionProvinceChange(area);
+    //this.selectionGeoupName();
+    if(SuraArea != 'undefined' || SuraArea != old_area){
+      this.Area = SuraArea
+      this.SuraSelectionProvince();
+      SuraProvince = 'undefined';
+    }
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+SuraArea+"&province="+SuraProvince+"&group_desc="+group_name +"&month="+SuraMonth).then((data) => {
+      this.SuraRepondProduct = data;
+
+      this.getSuraAmt();
+      this.getSuraCount();
+    });
+  }
+
+  SuraGetitembyProvince(SuraArea,SuraProvince,SuraMonth){
+    console.log(SuraArea);
+    var group_name = "สุรา";
+    console.log("จังหวัด"+SuraProvince);
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+SuraArea+"&province="+SuraProvince+"&group_desc="+group_name +"&month="+SuraMonth).then((data) => {
+      this.SuraRepondProduct = data;
+
+      this.getSuraAmt();
+      this.getSuraCount();
+    });
+
+    SuraArea =this.questionArray[this.defaultSelectQuestion];
+  }
+ //---------------------------------------------------------Card------------------------------------------------------------//
+ TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
+ 
+  var group_name = "ยาสูบ";
+  var old_area = TOBBACOArea;
+  //this.selectionProvinceChange(area);
+  //this.selectionGeoupName();
+  if(TOBBACOArea != 'undefined' || TOBBACOArea != old_area){
+    this.Area = TOBBACOArea
+    this.SuraSelectionProvince();
+    TOBBACOProvince = 'undefined';
+  }
+  this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+TOBBACOArea+"&province="+TOBBACOProvince+"&group_desc="+group_name +"&month="+TOBBACOMonth).then((data) => {
+    this.TOBBACORepondProduct = data;
+
+    this.getTobAmt();
+    this.getTobCount();
+  });
+}
+
+TOBBACOGetitembyProvince(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
+  var group_name = "ยาสูบ";
+  //this.selectionProvinceChange(area);
+  //this.selectionGeoupName();
+
+  this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+TOBBACOArea+"&province="+TOBBACOProvince+"&group_desc="+group_name +"&month="+TOBBACOMonth).then((data) => {
+    this.TOBBACORepondProduct = data;
+
+    this.getTobAmt();
+    this.getTobCount();
+  });
+}
+  //---------------------------------------------------------Card------------------------------------------------------------//
+  CardGetitems(CardArea,CardProvince,CardMonth){
+
+    var group_name = "ไพ่";
+    var old_area = CardArea;
+    //this.selectionProvinceChange(area);
+    //this.selectionGeoupName();
+    if(CardArea != 'undefined' || CardArea != old_area){
+      this.Area = CardArea
+      this.SuraSelectionProvince();
+      CardProvince = 'undefined';
+    }
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {
+    this.CardRepondProduct = data;
+
+      this.getCardAmt();
+      this.getCardCount();
+    });
+  }
+  CardGetitembyProvince(CardArea,CardProvince,CardMonth){
+    var group_name = "ไพ่";
+    console.log(CardArea);
+    //this.selectionProvinceChange(area);
+    //this.selectionGeoupName();
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {
+      this.CardRepondProduct = data;
+
+      this.getCardAmt();
+      this.getCardCount();
+    });
+  }
+
+ /*  selectionProvinceChange(area){
+    this.webapi.getData('SelectionProvinceChange?offcode='+this.offcode+'&region'+area).then((data) => {
+      this.responseProvince = data;
+    });
+  } */
+
+  IncProductAll(){
+    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode).then((data) => {
+      this.repondProduct = data;
+      this.getAmt();
+      this.getCount();
+    });
+  }
+
+  getSuraAmt(){
+    let val;
+    for (var i = 0; i < this.SuraRepondProduct.length; i++) {
+      val = this.SuraRepondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.SuraRepondProduct[i].AMT = val;
+    }
+  }
+
+  getSuraCount(){
+    let val;
+    for (var i = 0; i < this.SuraRepondProduct.length; i++) {
+      val = this.SuraRepondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.SuraRepondProduct[i].COUNT = val;
+    }
+  }
+
+  getCardAmt(){
+    let val;
+    for (var i = 0; i < this.CardRepondProduct.length; i++) {
+      val = this.CardRepondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.CardRepondProduct[i].AMT = val;
+    }
+  }
+
+  getCardCount(){
+    let val;
+    for (var i = 0; i < this.CardRepondProduct.length; i++) {
+      val = this.CardRepondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.CardRepondProduct[i].COUNT = val;
+    }
+  }
+
+  getTobAmt(){
+    let val;
+    for (var i = 0; i < this.TOBBACORepondProduct.length; i++) {
+      val = this.TOBBACORepondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.TOBBACORepondProduct[i].AMT = val;
+    }
+  }
+
+  getTobCount(){
+    let val;
+    for (var i = 0; i < this.TOBBACORepondProduct.length; i++) {
+      val = this.TOBBACORepondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.TOBBACORepondProduct[i].COUNT = val;
+    }
+  }
+
+  getAmt(){
+    let val;
+    for (var i = 0; i < this.repondProduct.length; i++) {
+      val = this.repondProduct[i].AMT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.repondProduct[i].AMT = val;
+    }
+  }
+
+  getCount(){
+    let val;
+    for (var i = 0; i < this.repondProduct.length; i++) {
+      val = this.repondProduct[i].COUNT;
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.repondProduct[i].COUNT = val;
+    }
+  }
+
+  loadData(){
     this.webapi.getData('IncArea?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
       this.getNumSURA();
@@ -86,5 +325,5 @@ export class IncDataAreaPage {
       this.responseData[i].AMT_OF_LIC_CARD = val;
     }
   }
-
+  
 }

@@ -23,6 +23,15 @@
     font-style: normal;
 }
 
-  body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title{
+  body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title,ion-input{
     font-family: 'TH K2D July8' !important;
     }
+
+    .menu-css{
+      font-weight: bold;
+      font-size: 6vw;
+    }
+
+  .bg-color{
+    background-color: rgb(216, 216, 216)
+  }

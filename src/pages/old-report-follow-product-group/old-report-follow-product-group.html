@@ -7,10 +7,10 @@
 </ion-header>
 
 <ion-content>
-
-  <h1 class="header-style">ผลการจัดเก็บภาษีตามประเภทสินค้า</h1>
-
-  <ion-card-content no-padding>
+  <ion-item style="background-color:#D0DFE6;" text-center>
+    <h1 class="header-style">ผลการจัดเก็บภาษีตามประเภทสินค้า</h1>
+ </ion-item>
+ 
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -19,42 +19,42 @@
       </ion-row>
       <ion-row>
         <ion-col (click)="OldReportBi_1Month()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/MonthTAX.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldMonth.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_1MonthGraph()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/compareGraph.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldGraph.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_1MonthGraphRatio()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/pieGraph.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldGraphCircle.png" />
         </ion-col>
         <ion-col class="iconStyle"></ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col (click)="OldReportBi_2Year()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/earlyYear.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldJan.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_1_12MonthGraph()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/compareGraph.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldGraph.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_1_12MonthGraph2()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/pieGraph.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldGraphCircle.png" />
         </ion-col>
         <ion-col class="iconStyle"></ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col (click)="OldReportBi_3_12Month()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/yearTAX.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldYear.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_3_12Graph()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/compareGraphMonth.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldGraph.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_3_12MonthLast()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/MonthTAXlastYear.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldLastyear.png" />
         </ion-col>
         <ion-col (click)="OldReportBi_5_10Year()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/earlyCompare8.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldJan.png" />
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -67,7 +67,7 @@
       </ion-row>
       <ion-row>
         <ion-col (click)="OldReportMobile1_6Year()" text-center>
-          <img no-padding class="iconStyle" src="../../assets/imgs/Target.png" />
+          <img no-padding class="iconStyle" src="../../assets/imgs/OldTarget.png" />
         </ion-col>
         <ion-col class="iconStyle"></ion-col>
         <ion-col class="iconStyle"></ion-col>
@@ -75,5 +75,4 @@
       </ion-row>
     </ion-grid>
 
-  </ion-card-content>
 </ion-content>

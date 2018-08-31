@@ -79,7 +79,7 @@ export class MenuGroupNewReportPage {
   reportGaugeQuanCar(){
     this.app.getRootNav().push(NewReportGaugeQuantityCarPage);  
   }
-  reportGaugeTaxAol(grp_name){
+  reportGaugeTaxAol(){
     this.app.getRootNav().push(NewReportGaugeTaxAlcoholPage);  
   }
   reportGaugeQuanAol(){
