@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var dateDisplayAll: any;
 declare var google;
 @IonicPage()
 @Component({
@@ -9,20 +9,21 @@ declare var google;
   templateUrl: 'new-report-gauge-quantity-alcohol.html',
 })
 export class NewReportGaugeQuantityAlcoholPage {
-
+  dateAsOff = "";
   respondData:any;
   username:any;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public webapi: RestProvider) {
       this.username = localStorage.userData;
+      this.dateAsOff = dateDisplayAll;
   }
 
   ionViewDidLoad() {
     let grp_id = "7002";
     let tax_year = new Date();
     var tax_year_th = tax_year.getFullYear()+543;
-
+ 
     this.webapi.getData('taxQuantityByProductGroup?year='+tax_year_th+'&grp_id='+grp_id).then((data) => {
       this.respondData = data;
       this.getTAX();
