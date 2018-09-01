@@ -13,7 +13,7 @@ export class RestProvider {
    
   //this.baseUrl = "http://localhost:62657/api/";
    // console.log('Hello RestProvider Provider');
-   this.baseUrl = "http://192.168.41.101/BIWebService/api/";
+   this.baseUrl = "http://192.168.10.250/BIWebService/api/";
    //this.baseUrl = "http://192.168.41.101:8080/api/";
   } 
 

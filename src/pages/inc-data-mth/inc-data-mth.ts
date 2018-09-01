@@ -99,9 +99,9 @@ export class IncDataMthPage {
     this.webapi.getData('SelectionMthProvince?offcode='+this.offcode+'&region='+area).then((data) => {
       this.responseProvince = data;
 
-      this.IncProductAllSura(area,data[0].PROVINCE_NAME,'undefined');
+      /*this.IncProductAllSura(area,data[0].PROVINCE_NAME,'undefined');
       this.IncProductAllSica(area,data[0].PROVINCE_NAME,'undefined');
-      this.IncProductAllCard(area,data[0].PROVINCE_NAME,'undefined');
+      this.IncProductAllCard(area,data[0].PROVINCE_NAME,'undefined');*/
 
     });
   }
