@@ -236,7 +236,6 @@ export class CetegoryTaxPage {
       this.getProductLAST_TAX();
       this.getProductEST();
       this.getProductPERCENT_TAX();
-      console.log(this.DataProduct);
     });
   }
 

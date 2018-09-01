@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-law-data-mth',
@@ -12,11 +14,13 @@ export class LawDataMthPage {
 responseData: any;
 offcode: any;
 username:any;
+dateAsOff:any;
 
 constructor(
   public navCtrl: NavController, 
   public navParams: NavParams,
   public webapi: RestProvider) {
+    
 }
 
 ionViewDidLoad() {
@@ -26,10 +30,11 @@ ionViewDidLoad() {
 }
 UserAthu() {
   this.offcode = localStorage.offcode;
+  this.dateAsOff =  dateDisplayAll;
   this.getTableData();
 }
 
-getTableData() {
+getTableData() { 
   this.webapi.getData('LawReportMth?offcode='+this.offcode).then((data) => {
   this.responseData = data;
   this.getTableLaw_qty();

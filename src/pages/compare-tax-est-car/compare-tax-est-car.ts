@@ -24,7 +24,10 @@ export class CompareTaxEstCarPage {
   tax_lebel = [];
   textDataInValid: any;
   username:any;
-  dateAsOff = "";
+
+  dateDisplay:any;
+  dateAsOff:any;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
@@ -33,7 +36,8 @@ export class CompareTaxEstCarPage {
  ionViewDidLoad() {
     this.UserAthu();
     this.username = localStorage.userData;
-    this.dateAsOff = dateDisplayAll;
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff =  dateDisplayAll;
   }
   
   UserAthu() {

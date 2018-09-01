@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll: any;
 declare var google;
+declare var dateDisplayAll:any;
 
 @IonicPage()
 @Component({
@@ -15,6 +16,8 @@ export class NewReportGaugeTaxAlcoholPage {
   respondData2:any;
   offcode: any;
   username:any;
+  dateDisplay:any;
+  
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {

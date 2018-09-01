@@ -27,6 +27,7 @@
     <button ion-button (click)="section9()">ภาค 9</button>
     <button ion-button (click)="section10()">ภาค 10</button><br>
   </div>
+
 <!--   </div> -->
 <!-- 
   <div *ngIf="off!='00' ">
@@ -107,20 +108,6 @@
               <td><h3 class='td-right'>{{data.TAX}}</h3></td>
               <td><h3 class='td-right'>{{data.LAST_TAX}}</h3></td>
               <td><h3 class='td-right'>{{data.ESTIMATE}}</h3></td>
-         <!--  <td width="10%">
-            <h3 *ngIf="data.MAP_COLOR1 == 1" class='td-center'>
-              <img class="img-size" src="../../assets/imgs/red1.png" />
-            </h3>
-            <h3 *ngIf="data.MAP_COLOR1 == 2 " class='td-center'>
-              <img class="img-size" src="../../assets/imgs/yellow1.png" />
-            </h3>
-            <h3 *ngIf="data.MAP_COLOR1 == 3 " class='td-center'>
-              <img class="img-size" src="../../assets/imgs/green1.png" />
-            </h3>
-            <h3 *ngIf="data.MAP_COLOR1 == 4 " class='td-center'>
-              <img class="img-size" src="../../assets/imgs/green2.png" />
-            </h3>
-          </td>  --> 
           <td width="15%">
               <h3 *ngIf="data.PERCENT_TAX > 5 " class='td-right font-green2'>{{data.PERCENT_TAX}}</h3>
               <h3 *ngIf="data.PERCENT_TAX <= 5 && data.PERCENT_TAX > 0 " class='td-right font-green'>{{data.PERCENT_TAX}}</h3>
@@ -156,20 +143,6 @@
                 <td><h3 class='td-right'>{{data.TAX}}</h3></td>
                 <td><h3 class='td-right'>{{data.LAST_TAX}}</h3></td>
                 <td><h3 class='td-right'>{{data.ESTIMATE}}</h3></td>
-               <!--  <td width="10%">
-                    <h3 *ngIf="data.MAP_COLOR == 1" class='td-center'>
-                      <img class="img-size" src="../../assets/imgs/red1.png" />
-                    </h3>
-                    <h3 *ngIf="data.MAP_COLOR == 2 " class='td-center'>
-                      <img class="img-size" src="../../assets/imgs/yellow1.png" />
-                    </h3>
-                    <h3 *ngIf="data.MAP_COLOR == 3 " class='td-center'>
-                      <img class="img-size" src="../../assets/imgs/green1.png" />
-                    </h3>
-                    <h3 *ngIf="data.MAP_COLOR == 4 " class='td-center'>
-                      <img class="img-size" src="../../assets/imgs/green2.png" />
-                    </h3>
-                  </td>          -->
                   <td width="15%">
                     <h3 *ngIf="data.PERCENT_TAX > 5 " class='td-right font-green2'>{{data.PERCENT_TAX}}</h3>
                     <h3 *ngIf="data.PERCENT_TAX <= 5 && data.PERCENT_TAX > 0 " class='td-right font-green'>{{data.PERCENT_TAX}}</h3>

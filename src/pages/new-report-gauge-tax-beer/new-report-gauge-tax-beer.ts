@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll: any;
 declare var google;
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-new-report-gauge-tax-beer',
@@ -15,6 +17,8 @@ export class NewReportGaugeTaxBeerPage {
   respondData2:any;
   offcode: any;
   username:any;
+
+  dateDisplay:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,

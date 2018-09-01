@@ -25,12 +25,14 @@ export class IncDataAreaPage {
   CardRepondProduct:any;
   TOBBACORepondProduct:any;
   repondProduct:any;
-  username:any;
   defaultSelectProvince:any;
 
   province:any;
   defaultSelectQuestion:any;
   questionArray:any;
+  username:any;
+  respondProduct:any;
+  defaultSelectProduct:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -38,11 +40,11 @@ export class IncDataAreaPage {
       this.offcode = localStorage.offcode;
       this.province = this.offcode.substring(0, 2);
 
-      if( this.province == "00"){
+      /*if( this.province == "00"){
         this.defaultSelectQuestion = -1; 
       }else{
         this.defaultSelectQuestion = 0;
-      }
+      }*/
 
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
@@ -107,7 +109,7 @@ export class IncDataAreaPage {
       this.getSuraCount();
     });
 
-    SuraArea =this.questionArray[this.defaultSelectQuestion];
+    //SuraArea =this.questionArray[this.defaultSelectQuestion];
   }
  //---------------------------------------------------------Card------------------------------------------------------------//
  TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
@@ -162,7 +164,6 @@ TOBBACOGetitembyProvince(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
   }
   CardGetitembyProvince(CardArea,CardProvince,CardMonth){
     var group_name = "ไพ่";
-    console.log(CardArea);
     //this.selectionProvinceChange(area);
     //this.selectionGeoupName();
     this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {
