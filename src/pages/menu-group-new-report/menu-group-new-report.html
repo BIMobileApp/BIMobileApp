@@ -38,16 +38,19 @@
                   <img no-padding class="iconStyle" src="../../assets/imgs/byMonth.png"/>
                   <p class="content-center">แยกตามเดือน</p> 
             </ion-col>
-            <ion-col col-1></ion-col>
-            <ion-col (click)="TaxYearByProduct()" text-center>
-                  <img no-padding class="iconStyle" src="../../assets/imgs/byYear.png">
-                  <p class="content-center">ตามปีงบประมาณ</p> 
-            </ion-col>
+           
             <ion-col col-1></ion-col>
             <ion-col (click)="FollowTaxRealtime()" text-center>
                   <img no-padding class="iconStyle" src="../../assets/imgs/byIncomeDay.png">
                   <p class="content-center">นำเข้าแยกรายวัน</p> 
             </ion-col>
+
+            <ion-col col-1></ion-col>
+            <ion-col (click)="TaxYearByProduct()" text-center>
+                 <!-- <img no-padding class="iconStyle" src="../../assets/imgs/byYear.png">
+                  <p class="content-center">ตามปีงบประมาณ</p> -->
+            </ion-col>
+
           </ion-row>
         </ion-grid>
 
@@ -62,15 +65,17 @@
                         <img no-padding class="iconStyle" src="../../assets/imgs/CarSegment.png"/>
                         <p class="content-center">รถยนต์ตาม Segment</p> 
                   </ion-col>
-                    <ion-col col-1></ion-col>
-                    <ion-col (click)="reportGaugeTaxCar();" text-center>
-                          <img class="iconStyle" src="../../assets/imgs/CarGauge.png">
-                          <p class="content-center">มาตรวัดการจัดเก็บ</p> 
-                    </ion-col>
+
                     <ion-col col-1></ion-col>
                     <ion-col (click)="reportCar27_31();" text-center>
                           <img class="iconStyle" src="../../assets/imgs/CarLastGraph.png">
                           <p class="content-center">กราฟเปรียบเทียบกับปีก่อน</p> 
+                    </ion-col>
+
+                    <ion-col col-1></ion-col>
+                    <ion-col (click)="reportGaugeTaxCar();" text-center>
+                         <!-- <img class="iconStyle" src="../../assets/imgs/CarGauge.png">
+                          <p class="content-center">มาตรวัดการจัดเก็บ</p> -->
                     </ion-col>
                   </ion-row>
 
@@ -79,16 +84,18 @@
                           <img no-padding class="iconStyle" src="../../assets/imgs/AlcoholSegment.png"/>
                           <p class="content-center">สุราตาม Segment</p> 
                     </ion-col>
-                      <ion-col col-1></ion-col>
-                      <ion-col (click)="reportGaugeTaxAol();" text-center>
-                            <img class="iconStyle" src="../../assets/imgs/AlcoholGauge.png">
-                            <p class="content-center">มาตรวัดการจัดเก็บ</p> 
-                      </ion-col>
+  
                       <ion-col col-1></ion-col>
                       <ion-col (click)="reportAlcohol26_30();" text-center>
                             <img class="iconStyle" src="../../assets/imgs/AlcoholLastGraph.png">
                             <p class="content-center">กราฟเปรียบเทียบกับปีก่อน</p> 
                       </ion-col>
+                   
+                      <ion-col col-1></ion-col>
+                      <ion-col (click)="reportGaugeTaxAol();" text-center>
+                            <!--<img class="iconStyle" src="../../assets/imgs/AlcoholGauge.png">
+                            <p class="content-center">มาตรวัดการจัดเก็บ</p> -->
+                      </ion-col>-
                     </ion-row>
 
                     <ion-row>  
@@ -96,16 +103,18 @@
                             <img no-padding class="iconStyle" src="../../assets/imgs/BeerSegment.png"/>
                             <p class="content-center">เบียร์ตาม Segment</p> 
                       </ion-col>
-                        <ion-col col-1></ion-col>
-                        <ion-col (click)="reportGaugeTaxBeer();" text-center>
-                              <img class="iconStyle" src="../../assets/imgs/BeerGauge.png">
-                              <p class="content-center">มาตรวัดการจัดเก็บ</p> 
-                        </ion-col>
+ 
                         <ion-col col-1></ion-col>
                         <ion-col (click)="reportBeer28_32();" text-center>
                               <img class="iconStyle" src="../../assets/imgs/BeerLastGraph.png">
                               <p class="content-center">กราฟเปรียบเทียบกับปีก่อน</p> 
                         </ion-col>
+                         <ion-col col-1></ion-col>
+                        <ion-col (click)="reportGaugeTaxBeer();" text-center>
+                              <!--<img class="iconStyle" src="../../assets/imgs/BeerGauge.png">
+                              <p class="content-center">มาตรวัดการจัดเก็บ</p> -->
+                        </ion-col>
+
                       </ion-row>
 
                       <ion-row>  
@@ -113,15 +122,16 @@
                               <img no-padding class="iconStyle" src="../../assets/imgs/DrinkSegment.png"/>
                               <p class="content-center">เครื่องดื่มตาม Segment</p> 
                         </ion-col>
-                          <ion-col col-1></ion-col>
-                          <ion-col (click)="reportGaugeTaxDrink();" text-center>
-                                <img class="iconStyle" src="../../assets/imgs/DrinkGauge.png">
-                                <p class="content-center">มาตรวัดการจัดเก็บ</p> 
-                          </ion-col>
+                         
                           <ion-col col-1></ion-col>
                           <ion-col (click)="reportDrink29_33();" text-center>
                                 <img class="iconStyle" src="../../assets/imgs/DrinkLastGraph.png">
                                 <p class="content-center">กราฟเปรียบเทียบกับปีก่อน</p> 
+                          </ion-col>
+                          <ion-col col-1></ion-col>
+                          <ion-col (click)="reportGaugeTaxDrink();" text-center>
+                                <!--<img class="iconStyle" src="../../assets/imgs/DrinkGauge.png">
+                                <p class="content-center">มาตรวัดการจัดเก็บ</p> -->
                           </ion-col>
                         </ion-row>
               </ion-grid>

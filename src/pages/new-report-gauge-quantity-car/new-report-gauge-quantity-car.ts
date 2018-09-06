@@ -10,28 +10,28 @@ declare var google;
   templateUrl: 'new-report-gauge-quantity-car.html',
 })
 export class NewReportGaugeQuantityCarPage {
-  dateAsOff = "";
+  /* dateAsOff = "";
   respondData:any;
-  username:any;
+  username:any; */
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.username = localStorage.userData;
-      this.dateAsOff = dateDisplayAll;
+      /* this.username = localStorage.userData;
+      this.dateAsOff = dateDisplayAll; */
   }
 
   ionViewDidLoad() {
-    let grp_id = "0501";
+   /*  let grp_id = "0501";
     let tax_year = new Date();
     var tax_year_th = tax_year.getFullYear()+543;
 
     this.webapi.getData('taxQuantityByProductGroup?year='+tax_year_th+'&grp_id='+grp_id).then((data) => {
       this.respondData = data;
       this.getTAX();
-    });
+    }); */
   }
  
-  getTAX() {
+  /* getTAX() {
 
     let tax_val;
     let taxly_val;
@@ -75,6 +75,6 @@ export class NewReportGaugeQuantityCarPage {
   
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
-  }
+  } */
   
 }

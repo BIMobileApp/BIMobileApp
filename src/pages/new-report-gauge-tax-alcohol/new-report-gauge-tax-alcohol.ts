@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-declare var dateDisplayAll: any;
+/* declare var dateDisplayAll: any;
 declare var google;
-declare var dateDisplayAll:any;
+declare var dateDisplayAll:any; */
 
 @IonicPage()
 @Component({
@@ -11,24 +11,24 @@ declare var dateDisplayAll:any;
   templateUrl: 'new-report-gauge-tax-alcohol.html',
 })
 export class NewReportGaugeTaxAlcoholPage {
-  dateAsOff = "";
+/*   dateAsOff = "";
   respondData:any;
   respondData2:any;
   offcode: any;
   username:any;
-  dateDisplay:any;
+  dateDisplay:any; */
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.offcode = localStorage.offcode;
+      /* this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
-      this.dateAsOff = dateDisplayAll;
+      this.dateAsOff = dateDisplayAll; */
   }
 
-  ionViewDidLoad() {
-    //let tax_year = new Date();
-    //var tax_year_th = tax_year.getFullYear()+543;
+  ionViewDidLoad() { 
+    /* let tax_year = new Date();
+    var tax_year_th = tax_year.getFullYear()+543;
     this.webapi.getData('taxPercentSura?offcode='+this.offcode).then((data) => {
       this.respondData = data;
       this.getTAX();
@@ -42,10 +42,10 @@ export class NewReportGaugeTaxAlcoholPage {
       this.getTAX2();
       this.get_tax_quan();
       this.get_taxly_quan();
-    });
+    }); */
   }
 
-  getTAX() {
+ /*  getTAX() {
 
     let tax_val;
     let taxly_val;
@@ -76,7 +76,7 @@ export class NewReportGaugeTaxAlcoholPage {
     let yellow_taxly_to;
     let red_taxly_from;
     let red_taxly_to;
-
+ */
 
    /* if(taxest_val <= 100){
       taxext_percent = 100;
@@ -90,7 +90,7 @@ export class NewReportGaugeTaxAlcoholPage {
     }else{
       taxly_from = 0;
       taxly_to = taxly_val;
-    }*/
+    }
 
     if(taxly_val <= 40){
       green_taxly_from = 0;
@@ -195,5 +195,5 @@ export class NewReportGaugeTaxAlcoholPage {
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.respondData2[i].LAST_TOTAL_VOLUMN_CAPA = val;
     }
-  }
+  }*/
 }

@@ -13,6 +13,9 @@ export class IncomerealtimePage {
   
   respondData: any;
   respondSumData: any;
+  responseRegion:any;
+  ResponseProvince:any;
+
   offcode: any;
   username:any;
   dateAsOff = "";
@@ -28,35 +31,83 @@ export class IncomerealtimePage {
   }
 
   ionViewDidLoad() {
-    this.webapi.getData('SourceImcome?offcode='+this.offcode).then((data)=>{
-      this.respondData = data;
-      this.getTableTAX();
-    });
-
-    this.webapi.getData('SumIncomeList?offcode='+this.offcode).then((data)=>{
-      this.respondSumData = data;
-      this.getTableSumTAX();
-     });
+    let Region = 'undefined';
+    let Province = 'undefined';
+    this.getData(Region,Province);
+    this.selectionAreaAll();
   }
+
+  selectionAreaAll(){
+
+    this.webapi.getData('TaxRealtimeRegion?offcode='+this.offcode).then((data) => {
+      this.responseRegion = data;      
+      this.selectionProvinceFill(data[0].REGION_NAME);
+    });
+  }
+
+  selectionProvinceFill(Region){  
+
+    this.webapi.getData('TaxRealtimeProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+      this.ResponseProvince = data;
+    }); 
+  }
+
+  selectRegion(Region,Province){
+    Province = [];
+
+    this.selectionProvinceFill(Region);
+   this.getData(Region,Province);
+  }
+   
+  getData(Region,Province){
+      this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
+          this.respondData = data;
+   
+          //this.getTableTAX();
+      });
+     /* this.webapi.getData('SumIncomeList?offcode='+this.offcode).then((data)=>{
+          this.respondSumData = data;
+          //this.getTableSumTAX();
+        });*/
+  }
+
+
+  selectionProvince(Region,Province){
+
+    this.getData(Region,Province);
+    /*this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
+      this.respondData = data;
+
+       // this.getTableTAX();
+      
+  });*/
+  /*this.webapi.getData('SumIncomeList?offcode='+this.offcode).then((data)=>{
+      this.respondSumData = data;
+
+        this.getTableSumTAX();
+      
+    });*/
+  }
+ 
 
   getTableTAX() {
     let val;
     for (var i = 0; i < this.respondData.length; i++) {
-      val = this.respondData[i].TAX/1000000;
-      val = val.toFixed(2);
+      val = this.respondData[i].TAX;
+     // val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.respondData[i].TAX = val;
     }
   }
 
-  getTableSumTAX(){
+  /*getTableSumTAX(){
     let val;
     for (var i = 0; i < this.respondSumData.length; i++) {
-      val = this.respondSumData[i].SUM_TAX/1000000;
-      val = val.toFixed(2);
+      val = this.respondSumData[i].SUM_TAX;
+     // val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.respondSumData[i].SUM_TAX = val;
     }
-  }
+  }*/
 
 }

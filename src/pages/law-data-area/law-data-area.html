@@ -8,37 +8,33 @@
 <ion-content>
 <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
         <h2 class="header-style">สถิติคดีตามพื้นที่</h2>
+        <h2 class="header-style">{{dateAsOff}}</h2>
 </ion-item>
 
 <ion-card>
         <ion-card-content no-padding>
-                <ion-item>
-                        <ion-label><strong>สถิติคดีตามพื้นที่</strong></ion-label>
-                </ion-item>
-                <ion-item>
-                        <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
-                </ion-item>
+             
 
                 <div class="table-responsive">     
                        <table class="table" style="width: 100%;">
                                <thead>
                                        <tr style="background-color: #F78B26; ">
-                                               <th width="30%"><h3 class="center">พื้นที่</h3></th>
-                                               <th><h3 class="center">จำนวนคดี</h3></th>
-                                               <th><h3 class="center">ค่าปรับ</h3></th>
-                                               <th><h3 class="center">เป้าจำนวนคดี</h3></th>
-                                               <th><h3 class="center">เป้าค่าปรับ</h3></th>
-                                               <th><h3 class="center">เงินส่งคลัง</h3></th>
+                                               <th width="30%"><h3 class="th-center">พื้นที่</h3></th>
+                                               <th><h3 class="th-center">จำนวนคดี</h3></th>
+                                               <th><h3 class="th-center">ค่าปรับ</h3></th>
+                                               <th><h3 class="th-center">เป้าจำนวนคดี</h3></th>
+                                               <th><h3 class="th-center">เป้าค่าปรับ</h3></th>
+                                               <th><h3 class="th-center">เงินส่งคลัง</h3></th>
                                        </tr>
                                </thead>
                                <tbody>
                                        <tr *ngFor="let data of responseData">
-                                               <td width="30%"><h3 class="left">{{data.REGION_DESC}}</h3></td>
-                                               <td><h3 class="right">{{data.LAW_QTY}}</h3></td>
-                                               <td><h3 class="right">{{data.TARGET_QTY}}</h3></td>
-                                               <td><h3 class="right">{{data.LAW_AMT}}</h3></td>
-                                               <td><h3 class="right">{{data.TARGET_AMT}}</h3></td>
-                                               <td><h3 class="right">{{data.TREASURY_MONEY}}</h3></td>
+                                               <td width="30%"><h3 class="td-left">{{data.REGION_DESC}}</h3></td>
+                                               <td><h3 class="td-right">{{data.LAW_QTY}}</h3></td>
+                                               <td><h3 class="td-right">{{data.TARGET_QTY}}</h3></td>
+                                               <td><h3 class="td-right">{{data.LAW_AMT}}</h3></td>
+                                               <td><h3 class="td-right">{{data.TARGET_AMT}}</h3></td>
+                                               <td><h3 class="td-right">{{data.TREASURY_MONEY}}</h3></td>
                                        </tr>
                                </tbody>
                        </table>

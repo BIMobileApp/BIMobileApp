@@ -80,17 +80,17 @@ export class IncDataAreaPage {
 
 
   //---------------------------------------------------------SURA------------------------------------------------------------//
-  SuraGetitems(SuraArea,SuraProvince,SuraMonth){
-    var group_name = "สุรา";
-    var old_area = SuraArea;
+  Getitems(Area,Province,Month){
+    var sura = "สุรา";
+    var old_area = Area;
     //this.selectionProvinceChange(area);
     //this.selectionGeoupName();
-    if(SuraArea != 'undefined' || SuraArea != old_area){
-      this.Area = SuraArea
+    if(Area != 'undefined' || Area != old_area){
+      this.Area = Area
       this.SuraSelectionProvince();
-      SuraProvince = 'undefined';
+      Province = 'undefined';
     }
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+SuraArea+"&province="+SuraProvince+"&group_desc="+group_name +"&month="+SuraMonth).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc="+sura +"&month="+Month).then((data) => {
       this.SuraRepondProduct = data;
 
       this.getSuraAmt();
@@ -98,11 +98,11 @@ export class IncDataAreaPage {
     });
   }
 
-  SuraGetitembyProvince(SuraArea,SuraProvince,SuraMonth){
-    console.log(SuraArea);
-    var group_name = "สุรา";
-    console.log("จังหวัด"+SuraProvince);
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+SuraArea+"&province="+SuraProvince+"&group_desc="+group_name +"&month="+SuraMonth).then((data) => {
+  GetitembyProvince(Area,Province,Month){
+    console.log(Area);
+    var sura = "สุรา";
+    console.log("จังหวัด"+Province);
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc="+sura +"&month="+Month).then((data) => {
       this.SuraRepondProduct = data;
 
       this.getSuraAmt();

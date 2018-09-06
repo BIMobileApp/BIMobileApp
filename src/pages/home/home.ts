@@ -63,7 +63,7 @@ export class HomePage {
          localStorage.setItem("username", this.username); 
          
          //ปิดหน้า login และกลับไปหน้าหลัง
-         console.log(localStorage);
+
          this.navCtrl.setRoot(MenuGroupPage);
        }else {
         const alert = this.alertCtrl.create({
