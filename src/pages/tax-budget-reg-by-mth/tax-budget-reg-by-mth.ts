@@ -28,7 +28,8 @@ export class TaxBudgetRegByMthPage {
   }
 
   ionViewDidLoad() {
-    //this.selectDate(this.summaryDate);
+    let date;
+    this.selectDate(date);
   }
 
   /*selectDataAll(){  

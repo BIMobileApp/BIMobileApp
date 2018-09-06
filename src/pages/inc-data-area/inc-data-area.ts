@@ -34,17 +34,27 @@ export class IncDataAreaPage {
   respondProduct:any;
   defaultSelectProduct:any;
 
+  str_offcode:any;
+  str_head_offcode:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
-      this.province = this.offcode.substring(0, 2);
+      this.str_offcode = localStorage.offcode.toString().substring(0, 2);
 
-      if( this.province == "00"){
+      if( this.str_offcode == "00")
+      {
+        this.str_head_offcode = "ภาค";
+      }else{
+        this.str_head_offcode = "พื้นที่";
+      }
+
+      /*if( this.province == "00"){
         this.defaultSelectQuestion = -1; 
       }else{
         this.defaultSelectQuestion = 0;
-      }
+      }*/
 
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
@@ -109,7 +119,7 @@ export class IncDataAreaPage {
       this.getSuraCount();
     });
 
-    SuraArea =this.questionArray[this.defaultSelectQuestion];
+    //SuraArea =this.questionArray[this.defaultSelectQuestion];
   }
  //---------------------------------------------------------Card------------------------------------------------------------//
  TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){

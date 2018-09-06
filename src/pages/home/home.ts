@@ -53,14 +53,17 @@ export class HomePage {
      if (this.userDB.length!=0) {
         this.offcode = this.userDB[0].OFFCODE;
         this.offdesc = this.userDB[0].OFFDESC;
-        this.username = this.userDB[0].USERNAME;       
+        this.username = this.userDB[0].NAME;       
         this.lastUpdateDate = this.userDB[0].LAST_UPDATE_DATE;
          //บันทึกข้อมูลของ local storage
          localStorage.setItem("userData", this.userData.username);
          localStorage.setItem("offcode", this.offcode);
          localStorage.setItem("last_update_date", this.lastUpdateDate);
+         localStorage.setItem("offdesc", this.offdesc);
+         localStorage.setItem("username", this.username); 
+         
          //ปิดหน้า login และกลับไปหน้าหลัง
-         console.log(localStorage.last_update_date)
+
          this.navCtrl.setRoot(MenuGroupPage);
        }else {
         const alert = this.alertCtrl.create({

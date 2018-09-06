@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var dateDisplayAll: any;
 @IonicPage()
 @Component({
   selector: 'page-tax-product-by-mth',
@@ -9,6 +9,7 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class TaxProductByMthPage {
 
+  dateAsOff = "";
   responseData: any;
   summaryDate:any;
   offcode: any;
@@ -21,6 +22,7 @@ export class TaxProductByMthPage {
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
+    this.dateAsOff = dateDisplayAll;
   }
 
   ionViewDidLoad() {

@@ -2,9 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
-
-declare var dateDisplayAll:any;
-
+declare var dateDisplayAll: any;
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-est-car',

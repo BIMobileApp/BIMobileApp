@@ -13,6 +13,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = WelcomePage;
   pages: Array<{title: string, component: any, icon: string}>;
+  offdesc = localStorage.offdesc;
+  name = localStorage.username;
 
   constructor(
     public platform: Platform, 

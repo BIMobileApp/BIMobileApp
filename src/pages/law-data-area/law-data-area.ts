@@ -21,12 +21,24 @@ export class LawDataAreaPage {
 
   dateDisplay:any;
   dateAsOff:any;
+  str_offcode:any;
+  str_head_offcode:any;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
       this.offcode = localStorage.offcode;
+
+      this.str_offcode = localStorage.offcode.toString().substring(0, 2);
+
+      if( this.str_offcode == "00")
+      {
+        this.str_head_offcode = "ภาค";
+      }else{
+        this.str_head_offcode = "พื้นที่";
+      }
+      
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
       this.username = localStorage.userData;

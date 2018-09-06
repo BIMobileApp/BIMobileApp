@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var dateDisplayAll: any;
 declare var google;
 declare var dateDisplayAll:any;
 
@@ -11,13 +11,12 @@ declare var dateDisplayAll:any;
   templateUrl: 'new-report-gauge-tax-drink.html',
 })
 export class NewReportGaugeTaxDrinkPage {
-
+  dateAsOff = "";
   respondData:any;
   respondData2:any;
   offcode: any;
   username:any;
 
-  dateAsOff:any;
   dateDisplay:any;
 
   constructor(public navCtrl: NavController,

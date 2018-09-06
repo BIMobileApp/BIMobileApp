@@ -7,18 +7,16 @@
 
 <ion-content>
 <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
-        <h2 class="header-style">สถิติคดีตามพื้นที่</h2>
+        <h2 class="header-style">สถิติคดีตาม  {{str_head_offcode}}</h2>
 </ion-item>
 
 <ion-card>
         <ion-card-content no-padding>
                 <ion-item>
-                        <ion-label><strong>สถิติคดีตามพื้นที่</strong></ion-label>
-                </ion-item>
-                <ion-item>
                         <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
                 </ion-item>
 
+                <h3 style="padding-right: 2%" class="right">หน่วย ใบ/ล้านบาท</h3>
                 <div class="table-responsive">     
                        <table class="table" style="width: 100%;">
                                <thead>
