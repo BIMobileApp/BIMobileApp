@@ -38,6 +38,7 @@ export class IncDataMthPage {
   defaultSelectQuestion:any;
   defaultSelectProvinceSura:any;
   questionArray:any;
+  username :any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -47,10 +48,11 @@ export class IncDataMthPage {
      // this.province = this.offcode.substring(0, 2);
      // this.branch = this.offcode.substring(4, 2);
 
-      this.disoffcode = this.stroffcode;
+      //this.disoffcode = this.stroffcode;
 
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.username = localStorage.userData;
   }
 
 
@@ -97,9 +99,9 @@ export class IncDataMthPage {
     this.webapi.getData('SelectionMthProvince?offcode='+this.offcode+'&region='+area).then((data) => {
       this.responseProvince = data;
 
-      this.IncProductAllSura(area,data[0].PROVINCE_NAME,'undefined');
+      /*this.IncProductAllSura(area,data[0].PROVINCE_NAME,'undefined');
       this.IncProductAllSica(area,data[0].PROVINCE_NAME,'undefined');
-      this.IncProductAllCard(area,data[0].PROVINCE_NAME,'undefined');
+      this.IncProductAllCard(area,data[0].PROVINCE_NAME,'undefined');*/
 
     });
   }
@@ -163,8 +165,8 @@ export class IncDataMthPage {
   getitemsSumSura(SuraArea,SuraProvince,SuraTypeName){
     this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+SuraTypeName+'&group_name=สุรา').then((data) => {
       this.repondSumProductSura = data;
-      this.getSumAmtSura();    
-      this.getSumCountSura(); 
+      //this.getSumAmtSura();    
+      //this.getSumCountSura(); 
     });
   }
 
@@ -240,8 +242,8 @@ export class IncDataMthPage {
   getitemsSumSica(SicaRegion,SicaProvince,SicaType){
     this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SicaRegion+'&province='+SicaProvince+'&type_name='+SicaType+'&group_name=ยาสูบ').then((data) => {
       this.repondSumProductSica = data;
-      this.getSumAmtSica();    
-      this.getSumCountSica(); 
+      //this.getSumAmtSica();    
+      //this.getSumCountSica(); 
     });
   }
 
@@ -333,8 +335,8 @@ export class IncDataMthPage {
     getitemsSumCard(area,province,type_name){
       this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ไพ่').then((data) => {
         this.repondSumProductCard = data;
-        this.getSumAmtCard();    
-        this.getSumCountCard(); 
+        //this.getSumAmtCard();    
+        //this.getSumCountCard(); 
       });
     }
 

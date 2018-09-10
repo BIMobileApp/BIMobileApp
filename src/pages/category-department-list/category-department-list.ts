@@ -19,21 +19,22 @@ import { MblRegisterPage } from '../mbl-register/mbl-register';
   templateUrl: 'category-department-list.html',
 })
 export class CategoryDepartmentListPage {
-
+  username:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public app:App) {
   }
 
   ionViewDidLoad() {
+    this.username = localStorage.userData;
   }
 
   TaxThisYearTable(){
     this.app.getRootNav().push(TaxbudgetyearPage); 
   }
 
-  TaxTopRegTable(grp_id){
-    this.app.getRootNav().push(TaxBudgetRegPage,{group_id:grp_id}); 
+  TaxTopRegTable(group_id){
+    this.app.getRootNav().push(TaxBudgetRegPage,{group_id:group_id}); 
   }
 
   MBLRegisterLink(){

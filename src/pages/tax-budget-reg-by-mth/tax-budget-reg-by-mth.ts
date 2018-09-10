@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll:any;
+
 @IonicPage()
 @Component({
   selector: 'page-tax-budget-reg-by-mth',
@@ -13,14 +15,21 @@ export class TaxBudgetRegByMthPage {
   summaryDate: any;
   offcode: any;
 
+  dateDisplay:any;
+  dateAsOff:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider ) {
       this.offcode = localStorage.offcode;
+
+      this.dateDisplay = localStorage.last_update_date;
+      this.dateAsOff =  dateDisplayAll;
   }
 
   ionViewDidLoad() {
-    //this.selectDate(this.summaryDate);
+    let date;
+    this.selectDate(date);
   }
 
   /*selectDataAll(){  

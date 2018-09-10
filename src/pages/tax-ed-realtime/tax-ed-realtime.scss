@@ -13,6 +13,10 @@ page-tax-ed-realtime {
     background-color: rgb(255, 255, 255) !important;
   }
 
+  table tbody tr:last-child {
+    background: #a7d8ff !important;
+  }
+
   table>tbody>tr>td>p {
     white-space: nowrap;
     text-overflow: ellipsis;

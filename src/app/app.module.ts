@@ -329,7 +329,11 @@ import { Geolocation } from '@ionic-native/geolocation';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RestProvider
+    RestProvider,
+    File,
+    DocumentViewer,
+    FileTransfer,
+    Geolocation
   ]
 })
 

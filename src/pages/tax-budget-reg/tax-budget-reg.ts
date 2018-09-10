@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var dateDisplayAll: any;
+
 @IonicPage()
 @Component({
   selector: 'page-tax-budget-reg',
@@ -11,15 +13,21 @@ export class TaxBudgetRegPage {
 
   responseData: any;
   summaryDate:any;
+  responseRegion:any;
+  ResponseProvince:any;
   offcode: any;
   year:any;
   grp_id:any;
+  dateAsOff = "";
+  dateDisplay = "";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
      this.grp_id = this.navParams.get('group_id');
      this.offcode = localStorage.offcode;
+     this.dateAsOff = dateDisplayAll;
+     this.dateDisplay = localStorage.last_update_date;
   }
  
   ionViewDidLoad() {
@@ -40,22 +48,53 @@ export class TaxBudgetRegPage {
     }
     this.summaryDate = range;
 
-    this.selectDataAll();
+    //this.selectDataAll();
+    this.selectRegionAll();
+    this.selectionProvinceAll();
   } 
 
-selectDataAll(){
-
-  
-    this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id).then((data)=>{
-      this.responseData = data;
-     
-      if (!this.responseData){}else{ this.getTableTAX();}    
+  selectRegionAll(){
+    this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
+      this.responseRegion = data;
+      //this.selectionProvinceFill(data[0].REGION_CD);
     });
   }
 
-  selectDate(year){
+  selectionProvinceAll(){
+   let  Region = 'undefined';
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+      this.ResponseProvince = data;
+    }); 
+  }
+
+  selectRegion(Region,Province){
+    this.selectionProvinceFill(Region);
+    this.selectDataAll(Region,Province);
+  }
+
+  selectionProvinceFill(Region){  
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+      this.ResponseProvince = data;
+    }); 
+  }
+
+  selectionProvince(Region,Province){
+  
+    this.selectionProvinceFill(Region);
+    this.selectDataAll(Region,Province);
+  }
+
+  selectDataAll(Region,Province){   
+      this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province).then((data)=>{
+        this.responseData = data;
+      
+        if (!this.responseData){}else{ this.getTableTAX();}    
+         });
+   }
+
+   selectDate(year){
     if(year == ""){
-      this.selectDataAll();
+    //  this.selectDataAll();
     }else{  
      this.webapi.getData('TaxBudgetReg?offcode='+this.offcode+'&group_id='+this.grp_id+'&year='+year).then((data)=>{
       this.responseData = data;

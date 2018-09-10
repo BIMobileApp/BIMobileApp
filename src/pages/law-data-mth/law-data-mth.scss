@@ -1,68 +1,91 @@
 page-law-data-mth {
-    table,
-    th,
-    td {
-      border: 0px solid #ffffff !important;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-    table tbody tr:nth-child(odd) {
-      background-color: rgb(255, 230, 160) !important;
-    }
-    table tbody tr:nth-child(even) {
-      background-color: rgb(255, 255, 255) !important;
-    }
+  table,
+  th,
+  td {
+    border: 0px solid #ffffff !important;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  table tbody tr:nth-child(odd) {
+    background-color: rgb(255, 230, 160) !important;
+  }
+  table tbody tr:nth-child(even) {
+    background-color: rgb(255, 255, 255) !important;
+  }
+  table>tbody>tr>td>p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 10em;
+  }
+
+  table tbody tr:last-child { background:#a7d8ff !important; }
+  
+  @media only screen and (orientation: landscape) {
     table>tbody>tr>td>p {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      width: 10em;
+      width: 90%;
     }
-    @media only screen and (orientation: landscape) {
-      table>tbody>tr>td>p {
-        width: 90%;
-      }
-    }
-    .desc-right{
-      font-weight: bold;
-      color: black !important;
-      font-size: 4vw !important;
-      text-align: right !important;
-    }
-    h2.header-style{
-      font-weight: bold;
-      color: black !important;
-      font-size: 6vw !important;
-      text-align: center !important;
-    }
-    .td-right {
-      font-weight: bold;
-      color: black !important;
-      font-size:3vw !important;
-      text-align: right !important;
-    }
-    .td-left {
-      font-weight: bold;
-      color: black !important;
-      font-size: 3vw !important;
-      text-align: left !important;
-    }
-    .td-center{
-      font-weight: bold;
-        color: rgb(27, 15, 15) !important;
-        font-size: 3vw !important;
-        text-align: center !important;
-      }
-    
-    .th-center{
-      font-weight: bold;
+  }
+  .desc-right{
+    font-weight: bold;
+    color: black !important;
+    font-size: 4vw !important;
+    text-align: right !important;
+  }
+  h2.header-style{
+    font-weight: bold;
+    color: black !important;
+    font-size: 6vw !important;
+    text-align: center !important;
+  }
+  .td-right {
+    font-weight: bold;
+    color: black !important;
+    font-size:4vw !important;
+    text-align: right !important;
+  }
+  .td-left {
+    font-weight: bold;
+    color: black !important;
+    font-size: 4vw !important;
+    text-align: left !important;
+  }
+  .td-center{
+    font-weight: bold;
       color: rgb(27, 15, 15) !important;
-      font-size: 3vw !important;
+      font-size: 4vw !important;
       text-align: center !important;
     }
+  
+  .th-center{
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 4vw !important;
+    text-align: center !important;
+  }
+
+  h3.center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    font-size: 3vw !important;
+    text-align: center !important;
+  }
+  h3.right {
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: right !important;
+  }
+  h3.left {
+    font-weight: bold;
+    color: black !important;
+    font-size: 3vw !important;
+    text-align: left !important;
+    
+  }
 
   ion-item.size{
-    width: 50%;
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -70,4 +93,17 @@ page-law-data-mth {
     color: black ;
     font-size: 4vw ;
   }
+
+h2.header-style{
+  font-weight: bold;
+  color: black !important;
+  font-size: 6vw !important;
+  text-align: center !important;
+}
+h3.header-style{
+  font-weight: bold;
+  color: black !important;
+  font-size: 5vw !important;
+  text-align: center !important;
+}
 }

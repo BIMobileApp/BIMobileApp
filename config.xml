@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.sakamoto.helloitsme" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Hello,It's Me</name>
-    <description>An awesome Hello. Sakamoto is come back!</description>
+<widget id="com.excise.ExciseBI" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Excise BI</name>
+    <description>This is Excise BI</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -85,6 +85,6 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-document-viewer" spec="^0.9.10" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
-    <engine name="android" spec="7.0.0" />
-    <engine name="ios" spec="4.5.5" />
+    <engine name="ios" spec="~4.5.5" />
+    <engine name="android" spec="~7.0.0" />
 </widget>

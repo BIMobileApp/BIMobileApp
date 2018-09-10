@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
-
+declare var dateDisplayAll: any;
 
 @IonicPage()
 @Component({
@@ -25,9 +25,9 @@ export class CompareTaxBeerPage {
   VollineChart: any;
   vol_TAX = [];
   vol_TAX_LY = [];
-
+  dateAsOff = "";
   textDataNotValid:any;
-
+  username:any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
@@ -35,6 +35,8 @@ export class CompareTaxBeerPage {
 
   ionViewDidLoad() {
     this.UserAthu();
+    this.username = localStorage.userData;
+    this.dateAsOff = dateDisplayAll;
   }
 
   UserAthu() {

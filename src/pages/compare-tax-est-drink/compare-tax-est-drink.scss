@@ -88,7 +88,7 @@ h3.left {
   
 }
 ion-item.size{
-  width: 80%;
+  width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -96,9 +96,5 @@ ion-item.size{
   color: black ;
   font-size: 4vw ;
 }
-ion-select {
-  max-width: 80% !important;
-    white-space: normal!important;
-  }
 
 }

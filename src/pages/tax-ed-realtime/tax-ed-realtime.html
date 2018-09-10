@@ -1,15 +1,39 @@
 <ion-header>
     <ion-navbar color="navber">
-      <ion-title>Real Time</ion-title>
+      <ion-title>Real Time <br>
+        ผู้ใช้งาน : {{username}}</ion-title>
     </ion-navbar>
   </ion-header>
   
   <ion-content> 
-      <ion-item style="background-color:#D0DFE6;" text-center>
+        <ion-item style="background-color:#D0DFE6;" text-center>
           <h1 class="header-style">รายงานแสดงยอดภาษีกลุ่มสถานะในประเทศ/นำเข้า</h1>
-          <h2 class="header-style">ตั้งแต่วันที่ .........</h2>
+          <h2 class="header-style">ข้อมูล ณ วันที่ {{dateDisplay}}</h2>
         </ion-item>
-
+    
+        <ion-grid>
+          <ion-row>      
+           <ion-col>
+             <ion-item  class="size">
+                 <ion-label> ภาค : </ion-label>
+                 <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)">
+                       <!-- <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>-->
+                         <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
+                 </ion-select>
+               </ion-item>
+           </ion-col>       
+           <ion-col>
+             <ion-item  class="size">
+                 <ion-label>จังหวัด : </ion-label>
+                 <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)">
+                       <!--<ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >-->
+                         <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                 </ion-select>
+             </ion-item>
+          </ion-col>        
+          </ion-row>
+       </ion-grid>
+        
      <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
      <ion-card>
         <ion-card-content no-padding>
@@ -30,6 +54,14 @@
                                 <td><h3 class="right">{{data.FZ_EXCISE_AMT}}</h3></td>
                                 <td><h3 class="right">{{data.IN_EXCISE_AMT}}</h3></td>
                             </tr>
+
+                            <tr *ngFor="let item of responseSumData">
+                                <td width="20%" ><h3 class="center">รวม</h3></td>
+                                <td><h3 class="right">{{item.EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{item.FZ_EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{item.IN_EXCISE_AMT}}</h3></td>
+                          </tr>
+
                     </tbody>
             </table>
         </div>

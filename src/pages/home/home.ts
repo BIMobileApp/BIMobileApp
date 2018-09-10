@@ -2,12 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, App, NavParams, AlertController,Platform } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { MenuGroupPage } from '../menu-group/menu-group';
-
 import { DataStatusPage } from '../data-status/data-status';
-
 import { NewsEventPage } from '../news-event/news-event';
 import { Http, ResponseContentType } from '@angular/http';
-
 import { File } from '@ionic-native/file';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';
@@ -56,14 +53,17 @@ export class HomePage {
      if (this.userDB.length!=0) {
         this.offcode = this.userDB[0].OFFCODE;
         this.offdesc = this.userDB[0].OFFDESC;
-        this.username = this.userDB[0].USERNAME;       
+        this.username = this.userDB[0].NAME;       
         this.lastUpdateDate = this.userDB[0].LAST_UPDATE_DATE;
          //บันทึกข้อมูลของ local storage
          localStorage.setItem("userData", this.userData.username);
          localStorage.setItem("offcode", this.offcode);
          localStorage.setItem("last_update_date", this.lastUpdateDate);
+         localStorage.setItem("offdesc", this.offdesc);
+         localStorage.setItem("username", this.username); 
+         
          //ปิดหน้า login และกลับไปหน้าหลัง
-         console.log(localStorage.last_update_date)
+
          this.navCtrl.setRoot(MenuGroupPage);
        }else {
         const alert = this.alertCtrl.create({

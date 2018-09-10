@@ -12,6 +12,9 @@ page-tax-product-by-mth {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+  table tbody tr:last-child {
+    background: #a7d8ff !important;
+  }
 
   table>tbody>tr>td>p {
     white-space: nowrap;
@@ -55,20 +58,13 @@ page-tax-product-by-mth {
     text-align: left !important;
     
   }
-  
-  ion-item.size {
-    width: 60%;
+  ion-item.size{
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
-    color: black;
-    font-size: 4vw;
+    color: black ;
+    font-size: 4vw ;
   }
-  
-  ion-select {
-  max-width: 70% !important;
-    white-space: normal!important;
-  }
-
 }

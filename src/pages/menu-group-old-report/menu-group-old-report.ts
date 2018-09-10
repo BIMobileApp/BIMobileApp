@@ -13,13 +13,13 @@ import { OldReportBi_Law31Page } from '../old-report-bi-law3-1/old-report-bi-law
   templateUrl: 'menu-group-old-report.html',
 })
 export class MenuGroupOldReportPage {
-
+  username:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public app:App) {
   }
 
   ionViewDidLoad() {
-
+    this.username = localStorage.userData;
   }
 
   oldReportFollowProductGroup() {
