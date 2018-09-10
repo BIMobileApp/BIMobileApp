@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-declare var dateDisplayAll: any;
-declare var google;
+/* declare var dateDisplayAll: any;
+declare var google; */
 @IonicPage()
 @Component({
   selector: 'page-new-report-gauge-quantity-alcohol',
   templateUrl: 'new-report-gauge-quantity-alcohol.html',
 })
 export class NewReportGaugeQuantityAlcoholPage {
-  dateAsOff = "";
+  /* dateAsOff = "";
   respondData:any;
   username:any;
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public webapi: RestProvider) {
       this.username = localStorage.userData;
-      this.dateAsOff = dateDisplayAll;
-  }
+      this.dateAsOff = dateDisplayAll; 
+  }*/
 
   ionViewDidLoad() {
-    let grp_id = "7002";
+    /* let grp_id = "7002";
     let tax_year = new Date();
     var tax_year_th = tax_year.getFullYear()+543;
  
@@ -28,10 +28,10 @@ export class NewReportGaugeQuantityAlcoholPage {
       this.respondData = data;
       this.getTAX();
 
-    }); 
+    });  */
   }
 
-  getTAX() {
+  /* getTAX() {
 
     let tax_val;
     let taxly_val;
@@ -75,6 +75,6 @@ export class NewReportGaugeQuantityAlcoholPage {
   
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
-  }
+  } */
 
 }

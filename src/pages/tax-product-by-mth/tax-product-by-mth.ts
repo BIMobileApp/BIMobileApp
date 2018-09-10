@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-declare var dateDisplayAll: any;
+
 @IonicPage()
 @Component({
   selector: 'page-tax-product-by-mth',
@@ -9,23 +9,29 @@ declare var dateDisplayAll: any;
 })
 export class TaxProductByMthPage {
 
-  dateAsOff = "";
   responseData: any;
   summaryDate:any;
   offcode: any;
   criteRia:any;
   year_en:any;
   year_th:any;
+  selectMTFrom:any;
+  selectMTTo:any;
+  oldArea:any;
   username:any;
+  area:any;
+  Province:any;
+  responseArea:any;
+  responseProvince:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
-    this.dateAsOff = dateDisplayAll;
   }
 
   ionViewDidLoad() {
+    this.selectMTFrom ="";
    var d = new Date(); 
     var n = d.getFullYear();
     var nt = d.getFullYear()+543;
@@ -40,7 +46,9 @@ export class TaxProductByMthPage {
     }
     this.summaryDate = range;
     console.log(this.summaryDate);
-
+    this.selectionArea();
+    var area="undefined";
+    var Province="undefined"; 
     this.getDataAll();
   }
 
@@ -53,13 +61,56 @@ export class TaxProductByMthPage {
      });
   }
 
-  selectDate(mth, ){
-    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&month='+mth).then((data)=>{
+  selectMonthFrom(mthFrom){ 
+    this.selectMTTo = mthFrom;
+    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+mthFrom+'&monthTo=').then((data)=>{
+      this.selectMTFrom =mthFrom;
       this.responseData = data;
       this.getTAX();
       this.getTAX_Ly();
       this.getTAX_Est();
+      this.selectMonthTo(mthFrom);
     });
+  }
+
+  selectMonthTo(mthTo){ 
+    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+mthTo).then((data)=>{
+      this.selectMTTo =mthTo;
+      this.responseData = data;
+      this.getTAX();
+      this.getTAX_Ly(); 
+      this.getTAX_Est();
+    });
+  }
+  selectionArea(){
+    this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+    });
+  }
+   
+   selectionProvince(area,Province){   
+    console.log(area,Province);
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
+      this.responseProvince = data;
+
+    });
+    this.getTableData(area,Province);
+  }
+  getTableData(area,Province) {
+    
+    if(area != this.oldArea){
+      Province = 'undefined';
+    } 
+    this.area=area;
+    this.Province=Province;
+    this.webapi.getData('TaxProductGroupByMth?area='+area+'&Province='+Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+this.selectMTTo).then((data) => {
+      this.responseData = data;
+      this.getTAX();
+      this.getTAX_Ly(); 
+      this.getTAX_Est();
+      
+    });
+   this.oldArea = area;
   }
 
   getTAX() {

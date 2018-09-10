@@ -35,7 +35,6 @@ export class FollowTaxRealtimePage {
    /* let month = '';
     var d = new Date(); 
     var nt = d.getFullYear()+543;*/
-
     this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode).then((data)=>{
       this.responseData = data;
       this.getTableFZ_EXCISE();

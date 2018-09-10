@@ -13,7 +13,7 @@ import { TaxCoutrySection8Page } from '../tax-coutry-section8/tax-coutry-section
 import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
 
-declare var google;
+/* declare var google; */
 declare var dateDisplayAll: any;
 
 @IonicPage()
@@ -47,6 +47,7 @@ export class CetegoryTaxPage {
   DataCurYear: any;
   DataProduct: any;
   DataGauge: any;
+  DataProvince: any;
   Data = [];
   TAX = [];
   TAX_LY = [];
@@ -55,6 +56,10 @@ export class CetegoryTaxPage {
   ProdTAX = [];
   ProdTAX_LY = [];
   ProdEST = [];
+  responseArea:any;
+  responseProvince:any;
+  oldArea:any;
+  brance = 0;
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -76,13 +81,60 @@ export class CetegoryTaxPage {
   }
 
   UserAthu() {
-    this.offcode = localStorage.offcode;
+   this.offcode = localStorage.offcode;
     this.off = this.offcode.substring(0, 2);
     this.pak = parseInt(this.offcode, 10);
-    this.TableGetData();
-    this.TableProductGetData();
+    //this.TableProductGetData();
     this.BarGetData();
+    this.selectionArea();
+    this.TableGetDataAll();
   }
+
+  selectionArea(){
+    this.webapi.getData('getAreaProvinceTaxCurYear?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+    });
+  }
+
+  selectionProvince(area,Province){   
+    
+    this.webapi.getData('getAreaProvinceTaxCurYear?offcode='+this.offcode+'&area='+area).then((data) => {
+      this.responseProvince = data;
+    });
+    this.TableGetData(area,Province);
+    this.GetProvinceTable(area);
+    this.brance = 2;
+  }
+
+  TableGetDataAll(){
+    this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode).then((data) => {
+      this.DataCurYear = data;
+      this.getTAX();
+      this.getLAST_TAX();
+      this.getEST();
+      this.getPercent();
+    });
+    this.webapi.getData('TaxProductCurYearbyYear?offcode=' + this.offcode).then((data) => {
+      this.DataProduct = data;
+      this.getProductTAX();
+      this.getProductLAST_TAX();
+      this.getProductEST();
+      this.getProductPERCENT_TAX();
+    });
+  }
+
+GetProvinceTable(area){
+  this.webapi.getData('TaxProvinceCurYear?area=' + area).then((data) => {
+    this.DataProvince = data;
+    this.getProvinceTAX();
+    this.getProvinceLAST_TAX();
+    this.getProvinceEST();
+    this.getProvincePERCENT_TAX();
+  });
+}
+
+
+
 
   BarGetData() {
     this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
@@ -181,14 +233,28 @@ export class CetegoryTaxPage {
     });
   } */
 
-  TableGetData() {
-    this.webapi.getData('TaxCurYear?offcode=' + this.offcode).then((data) => {
+  TableGetData(area,Province) {
+    this.brance = 1;
+    console.log("area : "+area);
+    if(area != this.oldArea){
+      Province = 'undefined';
+    }
+    console.log("Province : "+Province);
+    this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
       this.DataCurYear = data;
       this.getTAX();
       this.getLAST_TAX();
       this.getEST();
       this.getPercent();
     });
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
+      this.DataProduct = data;
+      this.getProductTAX();
+      this.getProductLAST_TAX();
+      this.getProductEST();
+      this.getProductPERCENT_TAX();
+    });
+    this.oldArea = area
   }
 
   getPercent(){
@@ -229,8 +295,13 @@ export class CetegoryTaxPage {
     }
   }
 
-  TableProductGetData() {
-    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode).then((data) => {
+  TableProductGetData(area,Province) {
+    console.log("area : "+area);
+    if(area != this.oldArea){
+      Province = 'undefined';
+    }
+    console.log("Province : "+Province);
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
       this.DataProduct = data;
       this.getProductTAX();
       this.getProductLAST_TAX();
@@ -277,7 +348,42 @@ export class CetegoryTaxPage {
     }
   }
 
-  REP02_GUAGE_REG() {
+  getProvinceTAX(){
+    let val;
+    for (var i = 0; i < this.DataProvince.length; i++) {
+      val = this.DataProvince[i].TAX / 1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProvince[i].TAX = val;
+    }
+  }
+  getProvinceLAST_TAX(){
+    let val;
+    for (var i = 0; i < this.DataProvince.length; i++) {
+      val = this.DataProvince[i].LAST_TAX / 1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProvince[i].LAST_TAX = val;
+    }
+  }
+  getProvinceEST(){
+    let val;
+    for (var i = 0; i < this.DataProvince.length; i++) {
+      val = this.DataProvince[i].ESTIMATE / 1000000
+      val = val.toFixed(2);
+      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.DataProvince[i].ESTIMATE = val;
+    }
+  }
+  getProvincePERCENT_TAX(){
+    for (var i = 0; i < this.DataProvince.length; i++) {
+      if(this.DataProvince[i].PERCENT_TAX != null){
+        this.DataProvince[i].PERCENT_TAX = this.DataProvince[i].PERCENT_TAX.toFixed(2);
+      }
+    }
+  }
+
+  /* REP02_GUAGE_REG() {
     this.webapi.getData('REP02_GUAGE_REG?area=' + this.offcode).then((data) => {
       this.DataGauge = data;
       this.getGaugeTAX();
@@ -285,9 +391,9 @@ export class CetegoryTaxPage {
       this.get_taly_amt();
       this.get_est_amt();
     });
-  }
+  } */
 
-  getGaugeTAX() {
+/*   getGaugeTAX() {
     let tax_val;
     let taxly_val;
     let taxest_val;
@@ -337,14 +443,14 @@ export class CetegoryTaxPage {
     let yellow_taxly_to;
     let red_taxly_from;
     let red_taxly_to;
-
+ */
     /* if(taxest_val <= 100){
        taxext_percent = 100;
      }else{
        taxext_percent = taxest_val;
      }*/
 
-    if (taxly_val <= 40) {
+   /*  if (taxly_val <= 40) {
       green_taxly_from = 0;
       green_taxly_to = taxly_val;
       yellow_taxly_from = 0;
@@ -365,7 +471,7 @@ export class CetegoryTaxPage {
       yellow_taxly_to = 0;
       red_taxly_from = 0;
       red_taxly_to = taxly_val;
-    }
+    } */
 
     /*if(taxly_val < 0){
       taxly_from =  taxly_val;
@@ -375,7 +481,7 @@ export class CetegoryTaxPage {
       taxly_to = taxly_val;
     }*/
 
-    var data = google.visualization.arrayToDataTable([
+    /* var data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
       ['ปีนี้', tax_val],
     ]);
@@ -390,7 +496,7 @@ export class CetegoryTaxPage {
 
     var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
     chart.draw(data, options);
-  }
+  } */
 
 
 

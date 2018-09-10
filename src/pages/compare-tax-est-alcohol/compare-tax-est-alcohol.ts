@@ -51,10 +51,10 @@ export class CompareTaxEstAlcoholPage {
     this.getLineAll();
     this.selectionProviceFirst();
     this.selectionArea();
-    var subarea= this.offcode.substring(0, 2);
+    var area="undefined";
     var Province="undefined";
    
-    this.getTableData(subarea,Province);
+    this.getTableData(area,Province);
   }
 
   selectionArea(){
@@ -65,7 +65,6 @@ export class CompareTaxEstAlcoholPage {
   selectionProviceFirst(){
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area=undefined').then((data) => {
       this.responseProvince = data;
-
     });
   }
   selectionProvince(area,Province){  
@@ -75,39 +74,26 @@ export class CompareTaxEstAlcoholPage {
     });
     this.getTableData(area,Province);
   }
+
   getTableData(area,Province) {
 
-    console.log(area+/.../+Province);
-    var subarea;
-    var subprovince;
-    //console.log(area,Province);
-    if(area != undefined){
-      subarea = area.toString().substring(0, 2);
-    }
+   /* if(area != this.oldArea){
+      Province = undefined;
+    }*/
 
-    if(Province != undefined){    
-      subprovince = Province.toString().substring(3, 4);
-    }
-
-    if(subarea != this.oldArea){
-      Province = 'undefined';
-    }
-    if (subarea == '00' ){
-      subarea = 'undefined';
-    }
-    this.webapi.getData('CompareTaxSura?area='+subarea+'&Province='+Province+'&offcode='+this.offcode).then((data) => {
+    this.webapi.getData('CompareTaxSura?area='+area+'&Province='+Province+'&offcode='+this.offcode).then((data) => {
       this.responseData = data;
       this.getTableTAX();
-      this.getTableTAX_LY();
-      
+      this.getTableTAX_LY();     
     });
-   this.oldArea = subarea;
-  }
+   this.oldArea = area;
 
+  }
+  //-----------------------------------------------------------------------------------------------------------//
   getTableTAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TOTAL_TAX_AMT / 1000000;
+      val = this.responseData[i].TOTAL_TAX_AMT;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].TOTAL_TAX_AMT = val;
@@ -117,7 +103,7 @@ export class CompareTaxEstAlcoholPage {
   getTableTAX_LY() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].LAST_TOTAL_TAX_AMT / 1000000;
+      val = this.responseData[i].LAST_TOTAL_TAX_AMT;
       val = val.toFixed(2);
       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.responseData[i].LAST_TOTAL_TAX_AMT = val;

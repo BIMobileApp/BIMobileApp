@@ -66,18 +66,13 @@ page-compare-tax-est-car {
     font-size: 4vw !important;
     text-align: center !important;
   }
-  ion-item.size {
-    width: 90%;
+  ion-item.size{
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
-    color: black;
-    font-size: 4vw;
-  }
-  
-  ion-select {
-  max-width: 70% !important;
-    white-space: normal!important;
+    color: black ;
+    font-size: 4vw ;
   }
 }
