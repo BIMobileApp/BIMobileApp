@@ -9,6 +9,14 @@
 </ion-header>
 
 <ion-content padding text-center>
+    <div id="mapContent"  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+        <ion-item>
+              <ion-label class="toggleLabel">แผนที่แสดงผลการจัดเก็บภาษี ทั่วประเทศ</ion-label>
+              <ion-toggle [(ngModel)]="toggleMap"></ion-toggle>
+        </ion-item>
+    </div>
+  <div *ngIf="toggleMap">
+    <br>
     <h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี ทั่วประเทศ</h1>
     <h2 class="header-style">{{dateAsOff}}</h2>
  <!--  <div *ngIf="off=='00' "> -->
@@ -25,8 +33,8 @@
     <button ion-button (click)="section8()">ภาค 8</button>
     <button ion-button (click)="section9()">ภาค 9</button>
     <button ion-button (click)="section10()">ภาค 10</button><br>
-  </div>
-
+  </div><br>
+</div>
 <!--   </div> -->
 <!-- 
   <div *ngIf="off!='00' ">
@@ -67,6 +75,14 @@
 -->
 
 <!--/////////////////////////////////////////////////// Bar Chart ///////////////////////////////////////////////-->
+<div id="mapContent"  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item>
+          <ion-label class="toggleLabel">กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</ion-label>
+          <ion-toggle [(ngModel)]="toggleBar" (click)="toggleBarShow(toggleBar)"></ion-toggle>
+    </ion-item>
+</div>
+<div *ngIf="toggleBar">
+  <br>
 <h1 class="header-style">กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
 
@@ -82,9 +98,16 @@
         </div>
   </ion-card-content>
 </ion-card>
-
+<br>
+</div>
   <!--////////////////////////////////////////////////  Table ////////////////////////////////////////////////////-->
-    
+  <div id="mapContent"  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+      <ion-item>
+            <ion-label class="toggleLabel">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
+            <ion-toggle [(ngModel)]="toggleTable1"></ion-toggle>
+      </ion-item>
+  </div>
+  <div *ngIf="toggleTable1">
   <ion-grid>
 
     <ion-row>
@@ -109,7 +132,7 @@
         </ion-col>
   </ion-row>     
 </ion-grid>
-  <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</h1>
+  <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามรายเดือน</h1>
   <h2 class="header-style">{{dateAsOff}}</h2>
   <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
   <ion-card>
@@ -179,6 +202,7 @@
         </div>
       </ion-card-content>
     </ion-card>
+    
 
     <div *ngIf="brance=='2' " >
         <br>
@@ -269,5 +293,5 @@
           <br><img class="desc-img-size" src="../../assets/imgs/red1.png" />&nbsp;ต่ำกว่าประมาณการ -5%
         </p>
       </div>
-  
+    </div>
 </ion-content>

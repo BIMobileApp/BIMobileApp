@@ -48,7 +48,7 @@
                                         <ion-label> ภาค : </ion-label>
                                           <ion-select  [(ngModel)]="area" (ionChange)="selectionProvince(area,Province)" >                     
                                               <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                                              <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_CD}}">{{item.REGION_NAME}}</ion-option>                                                                         
+                                              <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>                                                                         
                                           </ion-select>
                                         </ion-item>
                                   </ion-col>
@@ -58,12 +58,13 @@
                                           <ion-label>จังหวัด : </ion-label>
                                               <ion-select  [(ngModel)]="Province" (ionChange)="getTableData(area,Province)">
                                                   <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                                                  <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_CD}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                                                  <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                                             </ion-select>
                                         </ion-item>
                                     </ion-col>
                               </ion-row>     
                             </ion-grid>
+                            <h2 class="header-style">รายงานเปรียบเทียบภาษีปีก่อน แยกตามประเภทสินค้า</h2>
              <h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3>
           <ion-card>
              <ion-card-content no-padding> 
@@ -87,6 +88,41 @@
                          </div>
              </ion-card-content>
            </ion-card>
+
+           <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</h2>
+<!-- <ion-item class="size">
+<ion-label>ปีงบประมาณ : </ion-label>
+<ion-select [(ngModel)]="year"  #item (ionChange)="selectDate(item.value)">
+    <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
+    <ion-option  *ngFor="let data of summaryDate" value="{{data.key}}" >{{data.key}}</ion-option>
+</ion-select>
+</ion-item> -->
+<h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3>
+<ion-card>           
+<ion-card-content no-padding>       
+    <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+              <thead>
+                <tr style="background-color: #F78B26; ">
+                                    <th width="10%"><h3 class="th-center">ลำดับ</h3></th>
+                                    <th><h3 class="th-center">ผู้ประกอบการ</h3></th>
+                                    <th width="30%"><h3 class="th-center">ภาษีปีนี้</h3></th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                            <tr *ngFor="let data of responseRegData">
+                                    <td width="10%"><h3 class="td-center">{{data.SORT}}</h3></td>
+                                    <td><h3 class="td-left">{{data.REG_NAME}}</h3></td>
+                                    <td width="30%"><h3 class="td-right">{{data.TAX}}</h3></td>
+                            </tr>
+                    </tbody>
+            </table>
+            </div>
+           
+</ion-card-content>
+
+</ion-card>
+
      
   </ion-content>
   

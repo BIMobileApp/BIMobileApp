@@ -51,7 +51,6 @@ export class CompareTaxEstBeerPage {
   }
 
   ionViewDidLoad() {
-    //this.UserAthu();
     this.getProductType();
     this.getLineAll();
     var area = undefined;
@@ -59,11 +58,11 @@ export class CompareTaxEstBeerPage {
     this.selectionProviceFirst();
     this.selectionArea();
     this.getTableData(area, Province);
-    this.selectDataAll();
+    this.selectDataAll(area, Province);
 
   }
-  selectDataAll() {
-    this.webapi.getData('TaxBudgetRegAll?offcode=' + this.offcode + '&group_id=' + this.grp_id).then((data) => {
+  selectDataAll(area, Province) {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(); }
     });
@@ -91,7 +90,6 @@ export class CompareTaxEstBeerPage {
     });
   }
   selectionProvince(area, Province) {
-
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
 
@@ -106,14 +104,15 @@ export class CompareTaxEstBeerPage {
     }
     this.webapi.getData('CompareTaxBeer?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      console.log(this.responseData);
-
       this.getTableTAX();
       this.getTableTAX_LY();
 
     });
+    this.selectDataAll(area, Province);
     this.oldArea = area;
   }
+
+  
   //-----------------------------------------------------------------------------------------------------------//
   getTableTAX() {
     let val;

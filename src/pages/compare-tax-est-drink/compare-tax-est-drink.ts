@@ -32,29 +32,49 @@ export class CompareTaxEstDrinkPage {
   dateAsOff:any;
   oldArea="";
   subArea:any;
+    //Table reg
+    responseRegData: any;
+    grp_id: any;
   
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
+      this.offcode = localStorage.offcode;
+    this.username = localStorage.userData;
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff = dateDisplayAll;
+    this.grp_id = 'ภาษีเครื่องดื่ม';
+    this.offcode = localStorage.offcode;
   }
 
   ionViewDidLoad() {
-    this.UserAthu();
-    this.username = localStorage.userData;
-    this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff =  dateDisplayAll;
-  }
-  
-  UserAthu() {
-    this.offcode = localStorage.offcode;
     this.getProductType();
     this.getLineAll();
+    var area = undefined;
+    var Province = undefined;
     this.selectionProviceFirst();
     this.selectionArea();
-    var subarea= this.offcode.substring(0, 2);
-    var Province="undefined";
-   
-    this.getTableData(subarea,Province);
+    this.getTableData(area, Province);
+    this.selectDataAll(area, Province);
+  }
+  
+  selectDataAll(area, Province) {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+      this.responseRegData = data;
+      if (!this.responseRegData) { } else { this.getTableRegTAX(); }
+    });
+  }
+  getTableRegTAX() {
+    let val;
+    for (var i = 0; i < this.responseRegData.length; i++) {
+      val = this.responseRegData[i].TAX;
+      if(val != null){
+        val = val/1000000;
+        val = val.toFixed(2);
+        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }     
+      this.responseRegData[i].TAX = val;
+    }
   }
 
   selectionArea(){
@@ -76,40 +96,31 @@ export class CompareTaxEstDrinkPage {
     this.getTableData(area,Province);
   }
   //-----------------------------------------------------------------------------------------------------------//
-  getTableData(area,Province) {
-    var subarea;
-    var subprovince;
-    console.log(area,Province);
-    if(area != undefined || area != 'undefined'){
-      subarea = area.toString().substring(0, 2);
-    }
-    if(Province != undefined || Province != 'undefined'){
-      subprovince = Province.toString().substring(3, 4);
-      subprovince = area + subprovince;
-      console.log(subprovince);
-    }
-    if(subarea != this.oldArea){
+  getTableData(area, Province) {
+    console.log("area: " + area);
+    if (area != this.oldArea) {
       Province = undefined;
     }
-    if (subarea == '00' ){
-      subarea = undefined;
-    }
-    console.log("subarea "+subarea+" Province "+ Province);
-    this.webapi.getData('CompareTaxSura?area='+subarea+'&Province='+subprovince+'&offcode='+this.offcode).then((data) => {
+    this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
       this.getTableTAX();
       this.getTableTAX_LY();
-      
+
     });
-   this.oldArea = subarea;
+    this.selectDataAll(area, Province);
+    this.oldArea = area;
   }
+
   //-----------------------------------------------------------------------------------------------------------//
   getTableTAX() {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].TOTAL_TAX_AMT;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (val != null) {
+        val = val / 1000000;
+        val = val.toFixed(2);
+        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
       this.responseData[i].TOTAL_TAX_AMT = val;
     }
   }
@@ -118,14 +129,17 @@ export class CompareTaxEstDrinkPage {
     let val;
     for (var i = 0; i < this.responseData.length; i++) {
       val = this.responseData[i].LAST_TOTAL_TAX_AMT;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (val != null) {
+        val = val / 1000000;
+        val = val.toFixed(2);
+        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
       this.responseData[i].LAST_TOTAL_TAX_AMT = val;
     }
   }
 
   getProductType() {
-    this.webapi.getData('getTypeNameSuraMonth?offcode=' + this.offcode).then((data) => {
+    this.webapi.getData('getTypeNameDrinkMonth?offcode=' + this.offcode).then((data) => {
       this.ProductType = data;
     });
   }
@@ -133,7 +147,7 @@ export class CompareTaxEstDrinkPage {
  
   getLineTaxData(TaxCode) {
     if (TaxCode != "") {
-      this.webapi.getData('CompareTaxSuraMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+      this.webapi.getData('CompareTaxDrinkMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();
@@ -153,7 +167,7 @@ export class CompareTaxEstDrinkPage {
   }
 
   getLineAll(){
-    this.webapi.getData('CompareTaxSuraMonthAll?offcode=' + this.offcode).then((data) => {
+    this.webapi.getData('CompareTaxDrinkMonthAll?offcode=' + this.offcode).then((data) => {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
