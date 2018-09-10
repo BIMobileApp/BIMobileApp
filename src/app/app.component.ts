@@ -6,12 +6,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { MenuGroupPage } from '../pages/menu-group/menu-group';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = WelcomePage;
+  rootPage:any = MenuGroupPage;
   pages: Array<{title: string, component: any, icon: string}>;
   offdesc = localStorage.offdesc;
   name = localStorage.username;
