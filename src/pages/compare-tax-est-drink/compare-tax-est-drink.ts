@@ -59,7 +59,7 @@ export class CompareTaxEstDrinkPage {
   }
   
   selectDataAll(area, Province) {
-    this.webapi.getData('TaxBudgetReg?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(); }
     });
@@ -97,7 +97,7 @@ export class CompareTaxEstDrinkPage {
   }
   //-----------------------------------------------------------------------------------------------------------//
   getTableData(area, Province) {
-    console.log("area: " + area);
+   
     if (area != this.oldArea) {
       Province = undefined;
     }

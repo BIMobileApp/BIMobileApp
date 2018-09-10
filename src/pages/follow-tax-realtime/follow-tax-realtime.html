@@ -10,25 +10,30 @@
           <h1 class="header-style">รายงานภาษีสรรพสามิตนำเข้าแยกรายวัน</h1>
           <h2 class="header-style">ข้อมูล ณ วันที่ {{dateDisplay}}</h2>
        </ion-item>
+      <!--  <ion-grid no-padding>
 
-     <!-- <ion-item class="size">
-          <ion-label  text-center>เดือน : </ion-label>
-          <ion-select [(ngModel)]="summaryDate"  #item (ionChange)="getDashboardItemsByDate(item.value)" >
-            <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
-            <ion-option value="1" >มกราคม</ion-option>
-            <ion-option value="2">กุมภาพันธ์</ion-option>
-            <ion-option value="3">มีนาคม</ion-option>
-            <ion-option value="4">เมษายน</ion-option>
-            <ion-option value="5">พฤษภาคม</ion-option>
-            <ion-option value="6">มิถุนายน</ion-option>
-            <ion-option value="7">กรกฎาคม</ion-option>
-            <ion-option value="8">สิงหาคม</ion-option>
-            <ion-option value="9">กันยายน</ion-option>
-            <ion-option value="10">ตุลาคม</ion-option>
-            <ion-option value="11">พฤศจิกายน</ion-option>
-            <ion-option value="12">ธันวาคม</ion-option>
-          </ion-select>
-        </ion-item>-->
+        <ion-row>
+          <ion-col>
+              <ion-item class="size">
+                <ion-label> ภาค : </ion-label>
+                  <ion-select  [(ngModel)]="area" (ionChange)="selectionProvince(area,Province)" >                     
+                      <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                      <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_CD}}">{{item.REGION_NAME}}</ion-option>                                                                         
+                  </ion-select>
+                </ion-item>
+          </ion-col>
+        
+          <ion-col>
+              <ion-item  class="size">
+                  <ion-label>จังหวัด : </ion-label>
+                      <ion-select  [(ngModel)]="Province" (ionChange)="getTableData(area,Province)">
+                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                          <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_CD}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+      </ion-row>     
+    </ion-grid> -->
      <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
      <ion-card>
         <ion-card-content no-padding>

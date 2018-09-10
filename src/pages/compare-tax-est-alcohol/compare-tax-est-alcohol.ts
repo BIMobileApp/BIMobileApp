@@ -59,7 +59,7 @@ export class CompareTaxEstAlcoholPage {
     this.selectDataAll(area, Province);
   }
   selectDataAll(area, Province) {
-    this.webapi.getData('TaxBudgetReg?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(); }
     });
@@ -95,19 +95,19 @@ export class CompareTaxEstAlcoholPage {
     this.getTableData(area,Province);
   }
 
-  getTableData(area,Province) {
-
-   /* if(area != this.oldArea){
+  getTableData(area, Province) {
+    console.log("area: " + area);
+    if (area != this.oldArea) {
       Province = undefined;
-    }*/
-
-    this.webapi.getData('CompareTaxSura?area='+area+'&Province='+Province+'&offcode='+this.offcode).then((data) => {
+    }
+    this.webapi.getData('CompareTaxSura?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
       this.getTableTAX();
-      this.getTableTAX_LY();     
-    });
-   this.oldArea = area;
+      this.getTableTAX_LY();
 
+    });
+    this.selectDataAll(area, Province);
+    this.oldArea = area;
   }
   //-----------------------------------------------------------------------------------------------------------//
   getTableTAX() {

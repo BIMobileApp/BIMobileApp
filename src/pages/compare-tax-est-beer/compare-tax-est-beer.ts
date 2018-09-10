@@ -62,7 +62,7 @@ export class CompareTaxEstBeerPage {
 
   }
   selectDataAll(area, Province) {
-    this.webapi.getData('TaxBudgetReg?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(); }
     });

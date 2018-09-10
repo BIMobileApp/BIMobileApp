@@ -311,7 +311,7 @@ export class CompareTaxAlcoholPage {
             },
             scaleLabel: {
               display: true,
-              labelString: 'ล้านบาท'
+              labelString: 'ลิตร'
             }
           }
           ],
