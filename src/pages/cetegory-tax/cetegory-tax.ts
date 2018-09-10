@@ -79,13 +79,18 @@ export class CetegoryTaxPage {
     this.name = localStorage.username;
 
   }
+  toggleBarShow(toggleBar){
+    if(toggleBar){
+      console.log("toggleBar : "+ toggleBar);
+      this.BarGetData();
+    }
+  }
 
   UserAthu() {
    this.offcode = localStorage.offcode;
     this.off = this.offcode.substring(0, 2);
     this.pak = parseInt(this.offcode, 10);
     //this.TableProductGetData();
-    this.BarGetData();
     this.selectionArea();
     this.TableGetDataAll();
   }
@@ -133,9 +138,6 @@ GetProvinceTable(area){
   });
 }
 
-
-
-
   BarGetData() {
     this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
@@ -160,13 +162,13 @@ GetProvinceTable(area){
             this.responseData[0].ESTIMATE
           ],
           backgroundColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
+            '#00818A',
+            '#b8d00a',
             'rgba(255, 159, 64, 1)',
           ],
           borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
+            '#00818A',
+            '#b8d00a',
             'rgba(255, 159, 64, 1)',
           ],
           borderWidth: 1
@@ -184,10 +186,11 @@ GetProvinceTable(area){
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            var value;
             if (tooltipItem.xLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              value = tooltipItem.yLabel + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              value = tooltipItem.yLabel + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
             }
 
             return value;
@@ -196,6 +199,10 @@ GetProvinceTable(area){
       },
         scales: {
           xAxes: [{
+            gridLines: {
+              color: 'rgba(171,171,171,1)',
+              lineWidth: 1
+            },
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
@@ -215,6 +222,7 @@ GetProvinceTable(area){
           }
           ],
           yAxes: [{
+            barThickness : 15,
             ticks: {
               autoSkip: false,
               maxRotation: 90,
@@ -530,5 +538,6 @@ GetProvinceTable(area){
   section10() {
     this.app.getRootNav().push(TaxCoutrySection10Page);
   }
+
 
 }
