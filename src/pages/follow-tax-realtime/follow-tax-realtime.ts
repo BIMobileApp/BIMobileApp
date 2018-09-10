@@ -17,6 +17,9 @@ export class FollowTaxRealtimePage {
   username:any;
   dateDisplay:any;
   dateAsOff:any;
+  responseArea:any;
+  responseProvince:any;
+  oldArea="";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -27,24 +30,49 @@ export class FollowTaxRealtimePage {
   }
 
   ionViewDidLoad() {
-    this.geDataAll();
+    var area = undefined;
+    var Province = undefined;
+    this.geDataAll(area,Province);
+    this.selectionProviceFirst();
+    this.selectionArea();
     this.username = localStorage.userData;
   }
 
-  geDataAll(){
-   /* let month = '';
-    var d = new Date(); 
-    var nt = d.getFullYear()+543;*/
-    this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode).then((data)=>{
-      this.responseData = data;
-      this.getTableFZ_EXCISE();
-      this.getTableIN_EXCISE();
-      this.getTableEXCISE();
-      this.getTableSTAMP();
-      this.getDateFormat();
-    });
-  }  
 
+  selectionArea(){
+    this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
+      this.responseArea = data;
+    });
+  }
+  selectionProviceFirst(){
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area=undefined').then((data) => {
+      this.responseProvince = data;
+
+    });
+  }
+  selectionProvince(area,Province){  
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
+      this.responseProvince = data;
+
+    });
+    this.geDataAll(area,Province);
+  }
+
+  
+  geDataAll(area,Province){
+    if (area != this.oldArea) {
+      Province = undefined;
+    }
+     this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+area+'&province='+Province).then((data)=>{
+       this.responseData = data;
+       this.getTableFZ_EXCISE();
+       this.getTableIN_EXCISE();
+       this.getTableEXCISE();
+       this.getTableSTAMP();
+       this.getDateFormat();
+     });
+     this.oldArea = area;
+   }  
   /* getDashboardItemsByDate(month){
 
     var d = new Date(); 

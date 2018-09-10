@@ -308,7 +308,7 @@ export class CompareTaxBeerPage {
             },
             scaleLabel: {
               display: true,
-              labelString: 'ล้านบาท'
+              labelString: 'ลิตร'
             }
           }
           ],
