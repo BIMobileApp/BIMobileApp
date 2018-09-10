@@ -39,6 +39,7 @@ export class TaxYearByProductPage {
 
   year_en: any;
   year_th: any;
+  
   ionViewDidLoad() {
     this.TableGetData();
     this.TableProductGetData();

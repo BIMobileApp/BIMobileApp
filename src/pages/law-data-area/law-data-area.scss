@@ -18,6 +18,9 @@ page-law-data-area {
       overflow: hidden;
       width: 10em;
     }
+
+    table tbody tr:last-child { background:#a7d8ff !important; }
+    
     @media only screen and (orientation: landscape) {
       table>tbody>tr>td>p {
         width: 90%;
@@ -61,13 +64,46 @@ page-law-data-area {
       text-align: center !important;
     }
 
-  ion-item.size{
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    h3.center {
+      font-weight: bold;
+      color: rgb(27, 15, 15) !important;
+      font-size: 3vw !important;
+      text-align: center !important;
+    }
+    h3.right {
+      font-weight: bold;
+      color: black !important;
+      font-size: 3vw !important;
+      text-align: right !important;
+    }
+    h3.left {
+      font-weight: bold;
+      color: black !important;
+      font-size: 3vw !important;
+      text-align: left !important;
+      
+    }
+
+    ion-item.size{
+      width: 100%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: bold;
+      color: black ;
+      font-size: 4vw ;
+    }
+
+  h2.header-style{
     font-weight: bold;
-    color: black ;
-    font-size: 4vw ;
+    color: black !important;
+    font-size: 6vw !important;
+    text-align: center !important;
+  }
+  h3.header-style{
+    font-weight: bold;
+    color: black !important;
+    font-size: 5vw !important;
+    text-align: center !important;
   }
 }

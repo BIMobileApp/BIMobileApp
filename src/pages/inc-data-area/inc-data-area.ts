@@ -34,11 +34,26 @@ export class IncDataAreaPage {
   respondProduct:any;
   defaultSelectProduct:any;
 
+  str_offcode:any;
+  str_head_offcode:any;
+
+  repondProductSura:any;
+  repondProductSica:any;
+  repondProductCard:any;
+  responseProvince:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
-      this.province = this.offcode.substring(0, 2);
+      this.str_offcode = localStorage.offcode.toString().substring(0, 2);
+
+      if( this.str_offcode == "00")
+      {
+        this.str_head_offcode = "ภาค";
+      }else{
+        this.str_head_offcode = "พื้นที่";
+      }
 
       /*if( this.province == "00"){
         this.defaultSelectQuestion = -1; 
@@ -55,20 +70,28 @@ export class IncDataAreaPage {
     this.loadData();
     this.selectionArea();
     this.selectionGeoupName();
-   /*  this.IncProductAll(); */
+    this.selectionProvinceAll();
+
+    this.ProductSuraAll();
+    this.ProductSicaAll();
+    this.ProductCardAll();
   }
 
   selectionArea(){
     this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
-      this.responseArea = data;
-     
+      this.responseArea = data;     
+    });   
+  }
+
+  selectionProvinceAll(){
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
+      this.responseProvince = data;
     });
-    
   }
 
  SuraSelectionProvince(){
     this.webapi.getData('SelectionProvince?offcode='+this.offcode+'&area='+this.Area).then((data) => {
-      this.SuraResponseProvince = data;
+      this.responseProvince = data;
     });
   }
 
@@ -77,11 +100,10 @@ export class IncDataAreaPage {
       this.responseGroupName = data;
     });
   }
-
-
   //---------------------------------------------------------SURA------------------------------------------------------------//
   Getitems(Area,Province,Month){
-    var sura = "สุรา";
+    Province = undefined;
+   /* var sura = "สุรา";
     var old_area = Area;
     //this.selectionProvinceChange(area);
     //this.selectionGeoupName();
@@ -89,89 +111,40 @@ export class IncDataAreaPage {
       this.Area = Area
       this.SuraSelectionProvince();
       Province = 'undefined';
-    }
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc="+sura +"&month="+Month).then((data) => {
-      this.SuraRepondProduct = data;
-
-      this.getSuraAmt();
-      this.getSuraCount();
-    });
+    }*/
+    this.getProduct(Area,Province,Month);
   }
 
   GetitembyProvince(Area,Province,Month){
-    console.log(Area);
-    var sura = "สุรา";
-    console.log("จังหวัด"+Province);
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc="+sura +"&month="+Month).then((data) => {
-      this.SuraRepondProduct = data;
-
-      this.getSuraAmt();
-      this.getSuraCount();
+    
+    Province = undefined;
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Area).then((data) => {
+      this.responseProvince = data;
     });
 
-    //SuraArea =this.questionArray[this.defaultSelectQuestion];
+    this.getProduct(Area,Province,Month);
   }
- //---------------------------------------------------------Card------------------------------------------------------------//
- TOBBACOGetitems(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
- 
-  var group_name = "ยาสูบ";
-  var old_area = TOBBACOArea;
-  //this.selectionProvinceChange(area);
-  //this.selectionGeoupName();
-  if(TOBBACOArea != 'undefined' || TOBBACOArea != old_area){
-    this.Area = TOBBACOArea
-    this.SuraSelectionProvince();
-    TOBBACOProvince = 'undefined';
+
+  GetitemsMonth(Area,Province,Month){
+    this.GetitembyProvince(Area,Province,Month);
+    this.getProduct(Area,Province,Month);
   }
-  this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+TOBBACOArea+"&province="+TOBBACOProvince+"&group_desc="+group_name +"&month="+TOBBACOMonth).then((data) => {
-    this.TOBBACORepondProduct = data;
 
-    this.getTobAmt();
-    this.getTobCount();
-  });
-}
-
-TOBBACOGetitembyProvince(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
-  var group_name = "ยาสูบ";
-  //this.selectionProvinceChange(area);
-  //this.selectionGeoupName();
-
-  this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+TOBBACOArea+"&province="+TOBBACOProvince+"&group_desc="+group_name +"&month="+TOBBACOMonth).then((data) => {
-    this.TOBBACORepondProduct = data;
-
-    this.getTobAmt();
-    this.getTobCount();
-  });
-}
-  //---------------------------------------------------------Card------------------------------------------------------------//
-  CardGetitems(CardArea,CardProvince,CardMonth){
-
-    var group_name = "ไพ่";
-    var old_area = CardArea;
-    //this.selectionProvinceChange(area);
-    //this.selectionGeoupName();
-    if(CardArea != 'undefined' || CardArea != old_area){
-      this.Area = CardArea
-      this.SuraSelectionProvince();
-      CardProvince = 'undefined';
-    }
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {
-    this.CardRepondProduct = data;
-
-      this.getCardAmt();
-      this.getCardCount();
+  getProduct(Area,Province,Month){
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=สุรา&month="+Month).then((data) => {
+      this.repondProductSura = data;
+      //this.getSuraAmt();
+     // this.getSuraCount();
     });
-  }
-  CardGetitembyProvince(CardArea,CardProvince,CardMonth){
-    var group_name = "ไพ่";
-    //this.selectionProvinceChange(area);
-    //this.selectionGeoupName();
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+CardArea+"&province="+CardProvince+"&group_desc="+group_name +"&month="+CardMonth).then((data) => {
-      this.CardRepondProduct = data;
 
-      this.getCardAmt();
-      this.getCardCount();
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=ยาสูบ&month="+Month).then((data) => {
+      this.repondProductSica = data;
     });
+
+    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=ไพ่&month="+Month).then((data) => {
+      this.repondProductCard = data;
+    });
+
   }
 
  /*  selectionProvinceChange(area){
@@ -180,13 +153,30 @@ TOBBACOGetitembyProvince(TOBBACOArea,TOBBACOProvince,TOBBACOMonth){
     });
   } */
 
-  IncProductAll(){
-    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode).then((data) => {
-      this.repondProduct = data;
-      this.getAmt();
-      this.getCount();
+///get all product///
+   ProductSuraAll(){
+    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
+      this.repondProductSura = data;
+    });
+
+    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
+      this.repondProductSica = data;
+    });
+
+    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
+      this.repondProductCard = data;
     });
   }
+
+  ProductSicaAll(){
+   
+  }
+
+  ProductCardAll(){
+    
+  }
+
+  ///end get all product///
 
   getSuraAmt(){
     let val;

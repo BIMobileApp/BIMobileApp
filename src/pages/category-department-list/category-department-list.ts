@@ -33,8 +33,8 @@ export class CategoryDepartmentListPage {
     this.app.getRootNav().push(TaxbudgetyearPage); 
   }
 
-  TaxTopRegTable(grp_id){
-    this.app.getRootNav().push(TaxBudgetRegPage,{group_id:grp_id}); 
+  TaxTopRegTable(group_id){
+    this.app.getRootNav().push(TaxBudgetRegPage,{group_id:group_id}); 
   }
 
   MBLRegisterLink(){

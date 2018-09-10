@@ -5,9 +5,10 @@
     </ion-navbar>
   </ion-header>
   <ion-content>
-        <ion-item style="background-color:#D0DFE6;" text-center>
+             <ion-item style="background-color:#D0DFE6;" text-center>
                 <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</h2>
               </ion-item>
+
         <ion-item class="size">
             <ion-label>ปีงบประมาณ : </ion-label>
             <ion-select [(ngModel)]="year"  #item (ionChange)="selectDate(item.value)">
@@ -15,6 +16,30 @@
                 <ion-option  *ngFor="let data of summaryDate" value="{{data.key}}" >{{data.key}}</ion-option>
             </ion-select>
         </ion-item>
+
+        <ion-grid>
+            <ion-row>
+             <ion-col>
+               <ion-item  class="size">
+                   <ion-label> ภาค : </ion-label>
+                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)">
+                         <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
+                           <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
+                   </ion-select>
+                 </ion-item>
+             </ion-col>        
+             <ion-col>
+               <ion-item  class="size">
+                   <ion-label>จังหวัด : </ion-label>
+                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)">
+                           <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
+                           <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                   </ion-select>
+               </ion-item>
+            </ion-col>         
+            </ion-row>
+         </ion-grid>
+
         <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
     <ion-card>           
         <ion-card-content no-padding>       
