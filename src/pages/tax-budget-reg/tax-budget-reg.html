@@ -11,7 +11,7 @@
 
         <ion-item class="size">
             <ion-label>ปีงบประมาณ : </ion-label>
-            <ion-select [(ngModel)]="year"  #item (ionChange)="selectDate(item.value)">
+            <ion-select [(ngModel)]="Year"  (ionChange)="selectRegion(Region,Province,Year)">
                 <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
                 <ion-option  *ngFor="let data of summaryDate" value="{{data.key}}" >{{data.key}}</ion-option>
             </ion-select>
@@ -22,7 +22,7 @@
              <ion-col>
                <ion-item  class="size">
                    <ion-label> ภาค : </ion-label>
-                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)">
+                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,Year)">
                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                            <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
                    </ion-select>
@@ -31,7 +31,7 @@
              <ion-col>
                <ion-item  class="size">
                    <ion-label>จังหวัด : </ion-label>
-                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)">
+                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,Year)">
                            <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                            <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                    </ion-select>

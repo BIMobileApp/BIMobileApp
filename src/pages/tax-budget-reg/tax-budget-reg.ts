@@ -48,7 +48,11 @@ export class TaxBudgetRegPage {
     }
     this.summaryDate = range;
 
-    //this.selectDataAll();
+    let Region = 'undefined';
+    let Province = 'undefined';
+    let Year = 'undefined';
+
+    this.selectDataAll(Region,Province,Year);
     this.selectRegionAll();
     this.selectionProvinceAll();
   } 
@@ -67,9 +71,9 @@ export class TaxBudgetRegPage {
     }); 
   }
 
-  selectRegion(Region,Province){
+  selectRegion(Region,Province,Year){
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Region,Province,Year);
   }
 
   selectionProvinceFill(Region){  
@@ -78,14 +82,14 @@ export class TaxBudgetRegPage {
     }); 
   }
 
-  selectionProvince(Region,Province){
+  selectionProvince(Region,Province,Year){
   
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Region,Province,Year);
   }
 
-  selectDataAll(Region,Province){   
-      this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province).then((data)=>{
+  selectDataAll(Region,Province,Year){   
+      this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province+'&year='+Year).then((data)=>{
         this.responseData = data;
       
         if (!this.responseData){}else{ this.getTableTAX();}    
