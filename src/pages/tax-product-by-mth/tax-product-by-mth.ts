@@ -103,7 +103,7 @@ export class TaxProductByMthPage {
     } 
     this.area=area;
     this.Province=Province;
-    this.webapi.getData('TaxProductGroupByMth?area='+area+'&Province='+Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+this.selectMTTo).then((data) => {
+    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+area+'&province='+Province+'&monthFrom='+ this.selectMTFrom+'&monthTo='+this.selectMTTo).then((data) => {
       this.responseData = data;
       this.getTAX();
       this.getTAX_Ly(); 
