@@ -17,7 +17,7 @@
              <ion-item  class="size">
                  <ion-label> ภาค : </ion-label>
                  <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)">
-                       <!-- <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>-->
+                       <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                          <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
                  </ion-select>
                </ion-item>
@@ -26,7 +26,7 @@
              <ion-item  class="size">
                  <ion-label>จังหวัด : </ion-label>
                  <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)">
-                       <!--<ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >-->
+                       <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                          <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                  </ion-select>
              </ion-item>
