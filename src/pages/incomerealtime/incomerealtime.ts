@@ -53,7 +53,8 @@ export class IncomerealtimePage {
   }
 
   selectRegion(Region,Province){
-    Province = [];
+  
+    Province =  'undefined';
 
     this.selectionProvinceFill(Region);
    this.getData(Region,Province);

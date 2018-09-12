@@ -19,6 +19,8 @@ export class NewReportGaugeTaxCarPage {
 
   dateDisplay:any; 
 
+  arrayToDataTable:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {

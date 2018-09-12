@@ -35,7 +35,7 @@ export class TaxProductByMthPage {
    var d = new Date(); 
     var n = d.getFullYear();
     var nt = d.getFullYear()+543;
-    console.log(nt);
+    
     var range = [];
     for(var i=0;i<10;i++) {
 
@@ -45,7 +45,7 @@ export class TaxProductByMthPage {
       range.push( {"key":this.year_th,"value": this.year_en});
     }
     this.summaryDate = range;
-    console.log(this.summaryDate);
+    
     this.selectionArea();
     var area="undefined";
     var Province="undefined"; 
@@ -61,49 +61,51 @@ export class TaxProductByMthPage {
      });
   }
 
-  selectMonthFrom(mthFrom){ 
-    this.selectMTTo = mthFrom;
-    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+mthFrom+'&monthTo=').then((data)=>{
-      this.selectMTFrom =mthFrom;
+  selectMonthFrom(area,Province,monthFrom,monthTo){ 
+   
+    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+monthFrom+'&monthTo='+monthTo).then((data)=>{
+    //  this.selectMTFrom =monthFrom;
       this.responseData = data;
       this.getTAX();
       this.getTAX_Ly();
       this.getTAX_Est();
-      this.selectMonthTo(mthFrom);
+     // this.selectMonthTo(area,Province,monthFrom,monthTo);
     });
   }
 
-  selectMonthTo(mthTo){ 
-    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+mthTo).then((data)=>{
-      this.selectMTTo =mthTo;
+  selectMonthTo(area,Province,monthFrom,monthTo){ 
+    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+monthTo).then((data)=>{
+      this.selectMTTo =monthTo;
       this.responseData = data;
       this.getTAX();
       this.getTAX_Ly(); 
       this.getTAX_Est();
     });
+
+    this.getTableData(area,Province,monthFrom,monthTo) ;
   }
   selectionArea(){
     this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
     });
-
   }
-   
-   selectionProvince(area,Province){   
+
+  selectionProvince(area,Province,monthFrom,monthTo){   
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
-
     });
-    this.getTableData(area,Province);
+    this.getTableData(area,Province,monthFrom,monthTo);
   }
-  getTableData(area,Province) {
+
+  getTableData(area,Province,monthFrom,monthTo) {
     
     if(area != this.oldArea){
       Province = 'undefined';
-    } 
+    }
+
     this.area=area;
     this.Province=Province;
-    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+area+'&province='+Province+'&monthFrom='+ this.selectMTFrom+'&monthTo='+this.selectMTTo).then((data) => {
+    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+area+'&province='+Province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
       this.responseData = data;
       this.getTAX();
       this.getTAX_Ly(); 

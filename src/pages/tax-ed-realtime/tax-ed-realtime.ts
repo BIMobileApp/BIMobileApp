@@ -51,8 +51,9 @@ export class TaxEdRealtimePage {
   }
 
   selectRegion(Region,Province){
-    Province = [];
-
+  
+    Province = 'undefined'
+  
     this.selectionProvinceFill(Region);
    this.getData(Region,Province);
   }
