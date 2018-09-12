@@ -74,13 +74,6 @@ export class TaxProductByMthPage {
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo){ 
-    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+monthTo).then((data)=>{
-      this.selectMTTo =monthTo;
-      this.responseData = data;
-      this.getTAX();
-      this.getTAX_Ly(); 
-      this.getTAX_Est();
-    });
 
     this.getTableData(area,Province,monthFrom,monthTo) ;
   }
@@ -90,6 +83,10 @@ export class TaxProductByMthPage {
     });
   }
 
+  selectionRegion(area,Province,monthFrom,monthTo){
+    this.selectionProvince(area,Province,monthFrom,monthTo);
+  }
+
   selectionProvince(area,Province,monthFrom,monthTo){   
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
@@ -97,14 +94,15 @@ export class TaxProductByMthPage {
     this.getTableData(area,Province,monthFrom,monthTo);
   }
 
+
   getTableData(area,Province,monthFrom,monthTo) {
     
-    if(area != this.oldArea){
+  /*  if(area != this.oldArea){
       Province = 'undefined';
     }
 
     this.area=area;
-    this.Province=Province;
+    this.Province=Province;*/
     this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+area+'&province='+Province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
       this.responseData = data;
       this.getTAX();
@@ -112,7 +110,7 @@ export class TaxProductByMthPage {
       this.getTAX_Est();
       
     });
-   this.oldArea = area;
+   //his.oldArea = area;
   }
 
   getTAX() {

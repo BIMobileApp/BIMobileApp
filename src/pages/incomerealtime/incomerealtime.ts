@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll: any;
+declare var dateDisplayNow:any;
 
 @IonicPage()
 @Component({
@@ -20,6 +21,8 @@ export class IncomerealtimePage {
   username:any;
   dateAsOff = "";
   dateDisplay = "";
+  dateNow = "";
+  time : any;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -28,6 +31,10 @@ export class IncomerealtimePage {
       this.username = localStorage.userData;
       this.dateAsOff = dateDisplayAll;
       this.dateDisplay = localStorage.last_update_date;
+      this.dateNow = dateDisplayNow;
+
+      var d = new Date();
+      this.time = d.getHours() + " : " +  d.getMinutes();
   }
 
   ionViewDidLoad() {
@@ -38,6 +45,8 @@ export class IncomerealtimePage {
   }
 
   selectionAreaAll(){
+
+
 
     this.webapi.getData('TaxRealtimeRegion?offcode='+this.offcode).then((data) => {
       this.responseRegion = data;      
