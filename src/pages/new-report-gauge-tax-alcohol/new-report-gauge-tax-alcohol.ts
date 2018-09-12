@@ -21,9 +21,9 @@ export class NewReportGaugeTaxAlcoholPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
-      /* this.offcode = localStorage.offcode;
+      this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
-      this.dateAsOff = dateDisplayAll; */
+      this.dateAsOff = dateDisplayAll;
   }
 
   ionViewDidLoad() { 
