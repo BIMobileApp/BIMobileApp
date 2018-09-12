@@ -86,10 +86,10 @@ export class TaxProductByMthPage {
     this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
     });
+
   }
    
    selectionProvince(area,Province){   
-    console.log(area,Province);
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
 
