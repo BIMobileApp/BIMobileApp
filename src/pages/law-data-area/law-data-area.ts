@@ -75,10 +75,14 @@ export class LawDataAreaPage {
     });
     this.getitemsProvince(area,province);
     this.getTableDataSura(area,province);
+
+    
   }
 
   getitemsProvince(area,province){
     province = [];
+    province = 'undefined';
+
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
