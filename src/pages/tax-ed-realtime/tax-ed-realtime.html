@@ -50,16 +50,16 @@
                     <tbody>
                             <tr *ngFor="let data of responseData">
                                 <td width="20%" ><h3 class="center">{{data.DIM_DATA_DATE_ID}}</h3></td>
-                                <td><h3 class="right">{{data.EXCISE_AMT}}</h3></td>
-                                <td><h3 class="right">{{data.FZ_EXCISE_AMT}}</h3></td>
                                 <td><h3 class="right">{{data.IN_EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{data.FZ_EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{data.EXCISE_AMT}}</h3></td>
                             </tr>
 
                             <tr *ngFor="let item of responseSumData">
                                 <td width="20%" ><h3 class="center">รวม</h3></td>
-                                <td><h3 class="right">{{item.EXCISE_AMT}}</h3></td>
-                                <td><h3 class="right">{{item.FZ_EXCISE_AMT}}</h3></td>
                                 <td><h3 class="right">{{item.IN_EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{item.FZ_EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{item.EXCISE_AMT}}</h3></td>
                           </tr>
 
                     </tbody>
