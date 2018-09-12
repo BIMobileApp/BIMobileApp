@@ -124,8 +124,8 @@
                                     <tbody>
                                             <tr *ngFor="let data of repondProductSura">
                                                 <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                <td><h3 class="right">{{data.COUNT}}</h3></td>
-                                                <td><h3 class="right">{{data.AMT}}</h3></td>
+                                                <td><h3 class="right">{{data.COUNT  | number : fractionSize}}</h3></td>
+                                                <td><h3 class="right">{{data.AMT  | number : fractionSize}}</h3></td>
                                             </tr>
                                     </tbody>
                             </table>
@@ -244,8 +244,8 @@
                                     <tbody>
                                             <tr *ngFor="let data of repondProductSica">
                                                 <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                <td><h3 class="right">{{data.COUNT}}</h3></td>
-                                                <td><h3 class="right">{{data.AMT}}</h3></td>
+                                                <td><h3 class="right">{{data.COUNT  | number : fractionSize}}</h3></td>
+                                                <td><h3 class="right">{{data.AMT  | number : fractionSize}}</h3></td>
                                             </tr>
                                     </tbody>
                             </table>
@@ -332,8 +332,8 @@
                                     <tbody>
                                             <tr *ngFor="let data of repondProductCard">
                                                 <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                <td><h3 class="right">{{data.COUNT}}</h3></td>
-                                                <td><h3 class="right">{{data.AMT}}</h3></td>
+                                                <td><h3 class="right">{{data.COUNT  | number : fractionSize}}</h3></td>
+                                                <td><h3 class="right">{{data.AMT  | number : fractionSize}}</h3></td>
                                             </tr>
                                     </tbody>
                             </table>

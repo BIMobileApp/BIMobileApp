@@ -102,7 +102,8 @@ export class IncDataAreaPage {
   }
   //---------------------------------------------------------SURA------------------------------------------------------------//
   Getitems(Area,Province,Month){
-    Province = undefined;
+    Province = 'undefined';
+    this.GetitembyProvince(Area,Province,Month);
    /* var sura = "สุรา";
     var old_area = Area;
     //this.selectionProvinceChange(area);
@@ -112,6 +113,7 @@ export class IncDataAreaPage {
       this.SuraSelectionProvince();
       Province = 'undefined';
     }*/
+
     this.getProduct(Area,Province,Month);
   }
 
