@@ -1,7 +1,9 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>Real Time <br>
-      ผู้ใช้งาน : {{username}}</ion-title>
+    <ion-title text-wrap>Real Time <br>
+      ผู้ใช้งาน : {{username}} <br>
+   
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,9 +19,9 @@
     <ion-col>
       <ion-item  class="size">
           <ion-label> ภาค : </ion-label>
-          <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,typeCur)">
-                <!-- <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>-->
-                  <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
+          <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)" disabled={{isEnable}}>
+                  <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
+                  <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}"  [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
           </ion-select>
         </ion-item>
     </ion-col>
@@ -27,9 +29,9 @@
     <ion-col>
       <ion-item  class="size">
           <ion-label>จังหวัด : </ion-label>
-          <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,typeCur)">
-                <!--<ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >-->
-                  <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+          <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)" disabled={{isEnableProv}}>
+                <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                  <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
           </ion-select>
       </ion-item>
    </ion-col>  

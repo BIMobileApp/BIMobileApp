@@ -79,14 +79,14 @@
         <ion-card>
                 <ion-card-content  no-padding>
 
-                        <h3 class="header-style">สถิติคดีแยกตามประเภทสินค้าสุรา</h3>
+                        <h3 class="header-style">สถิติคดีแยกตามประเภทสินค้า</h3>
 
-                        <h3 style="padding-right: 2%" class="desc-right">หน่วย : คดี/ล้านบาท</h3>
+                        <h3 style="padding-right: 2%" class="desc-right">หน่วย : คดี/บาท</h3>
                         <div class="table-responsive">     
                                 <table class="table" style="width: 100%;">
                                         <thead>
                                                 <tr style="background-color: #F78B26; ">                    
-                                                        <th><h3 class="center">ประเภท</h3></th>
+                                                        <th  width="15%"><h3 class="center">ประเภทสินค้า</h3></th>
                                                         <th><h3 class="center">จำนวนคดี</h3></th>
                                                         <th><h3 class="center">ค่าปรับ</h3></th>
                                                         <th><h3 class="center">เป้าจำนวนคดี</h3></th>
@@ -96,12 +96,12 @@
                                         </thead>
                                         <tbody>
                                                 <tr *ngFor="let data of repondProductSura">       
-                                                        <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                        <td><h3 class="right">{{data.LAW_QTY}}</h3></td>
-                                                        <td><h3 class="right">{{data.LAW_AMT}}</h3></td>
-                                                        <td><h3 class="right">{{data.TARGET_QTY}}</h3></td>
-                                                        <td><h3 class="right">{{data.TARGET_AMT}}</h3></td>
-                                                        <td><h3 class="right">{{data.TREASURY_MONEY}}</h3></td>
+                                                        <td  width="15%"><h3 class="left">{{data.GROUP_DESC}}</h3></td>
+                                                        <td><h3 class="right">{{data.LAW_QTY | number : fractionSize}}</h3></td>
+                                                        <td><h3 class="right">{{data.LAW_AMT | number : fractionSize}}</h3></td>
+                                                        <td><h3 class="right">{{data.TARGET_QTY | number : fractionSize}}</h3></td>
+                                                        <td><h3 class="right">{{data.TARGET_AMT | number : fractionSize}}</h3></td>
+                                                        <td><h3 class="right">{{data.TREASURY_MONEY | number : fractionSize}}</h3></td>
                                                 </tr>
                                         </tbody>
                                 </table>
@@ -109,7 +109,7 @@
                  </ion-card-content>
          </ion-card>
 
-        <ion-card>
+        <!--<ion-card>
                 <ion-card-content  no-padding>
                         
                         <h3 class="header-style">สถิติคดีแยกตามประเภทสินค้ายาสูบ</h3>
@@ -172,7 +172,7 @@
                                         </table>
                                 </div>
                         </ion-card-content>
-                 </ion-card>
+                 </ion-card>-->
 
         </ion-card-content>
 </ion-card>
