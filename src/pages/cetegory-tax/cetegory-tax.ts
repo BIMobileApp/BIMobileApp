@@ -13,7 +13,8 @@ import { TaxCoutrySection8Page } from '../tax-coutry-section8/tax-coutry-section
 import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
 
-/* declare var google; */
+declare var notRound: any;
+declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 
 @IonicPage()
@@ -59,10 +60,10 @@ export class CetegoryTaxPage {
   ProdTAX = [];
   ProdTAX_LY = [];
   ProdEST = [];
-  responseArea:any;
-  responseProvince:any;
-  oldArea:any;
-  brance = 0;
+  responseArea: any;
+  responseProvince: any;
+  oldArea: any;
+  hideTableBrance = 0;
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -71,121 +72,219 @@ export class CetegoryTaxPage {
     public navParams: NavParams,
     public app: App,
     public webapi: RestProvider) {
-  }
-
-  ionViewDidLoad() {
-    this.UserAthu();
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
     this.username = localStorage.userData;
     this.offdesc = localStorage.offdesc;
     this.name = localStorage.username;
-
-  }
-
-  toggleBarShow(){
-  if(this.toggleBar == 0){
-    this.BarGetData();
-    this.toggleBar =1; 
-  }else{
-    this.toggleBar =0; 
-  }
-  }
-
-  toggleMapShow(){
-    if(this.toggleMap== 0){
-      this.toggleMap =1; 
-    }else{
-      this.toggleMap =0; 
-    }
-  }
-
-  toggleTableShow(){
-    if(this.toggleTable== 0){
-      this.toggleTable =1; 
-    }else{
-      this.toggleTable =0; 
-    }
-  }
-
-  UserAthu() {
-   this.offcode = localStorage.offcode;
+    this.offcode = localStorage.offcode;
     this.off = this.offcode.substring(0, 2);
     this.pak = parseInt(this.offcode, 10);
-    //this.TableProductGetData();
+  }
+
+  ionViewDidLoad() {
     this.selectionArea();
-    var area = undefined;
-    var Province = undefined;
-    this.TableGetData(area,Province);
-    this.brance = 0;
     this.selectionProviceFirst();
+    let area = undefined;
+    let Province = undefined;
+    let typeCur = 'B';
+    this.TableGetData(area, Province, typeCur);
+    this.hideTableBrance = 0;
   }
 
-  /* selectionArea(){
-    this.webapi.getData('getAreaProvinceTaxCurYear?offcode='+this.offcode).then((data) => {
+  toggleBarShow() {
+    if (this.toggleBar == 0) {
+      this.BarGetData();
+      this.toggleBar = 1;
+    } else {
+      this.toggleBar = 0;
+    }
+  }
+
+  toggleMapShow() {
+    if (this.toggleMap == 0) {
+      this.toggleMap = 1;
+    } else {
+      this.toggleMap = 0;
+    }
+  }
+
+  toggleTableShow() {
+    if (this.toggleTable == 0) {
+      this.toggleTable = 1;
+    } else {
+      this.toggleTable = 0;
+    }
+  }
+
+
+  selectionArea() {
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
+  selectionProviceFirst() {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
+      this.responseProvince = data;
+    });
+  }
 
-  selectionProvince(area,Province){   
+  selectionProvince(area, Province, typeCur) {
     
-    this.webapi.getData('getAreaProvinceTaxCurYear?offcode='+this.offcode+'&area='+area).then((data) => {
+    Province = undefined;
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
-    this.TableGetData(area,Province);
-    this.GetProvinceTable(area);
-    this.brance = 2;
-  } */
-
-  selectionArea(){
-    this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
-      this.responseArea = data;
-    });
-  }
-  selectionProviceFirst(){
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area=undefined').then((data) => {
-      this.responseProvince = data;
-    });
-  }
-  selectionProvince(area,Province){  
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
-      this.responseProvince = data;
-
-    });
-    this.TableGetData(area,Province);
-    this.GetProvinceTable(area);
-    this.brance = 2;
+    this.TableGetData(area, Province, typeCur);
+    this.GetProvinceTable(area, typeCur);
+    this.hideTableBrance = 2;
   }
 
+  GetProvinceTable(area, typeCur) {
+    this.webapi.getData('TaxProvinceCurYear?area=' + area).then((data) => {
+      this.DataProvince = data;
+      this.getProvinceTAX(typeCur);
+    });
+  }
 
-GetProvinceTable(area){
-  this.webapi.getData('TaxProvinceCurYear?area=' + area).then((data) => {
-    this.DataProvince = data;
-    this.getProvinceTAX();
-    this.getProvinceLAST_TAX();
-    this.getProvinceEST();
-    this.getProvincePERCENT_TAX();
-  });
-}
+  TableGetData(area, Province, typeCur) {
+    if (area != this.oldArea) {
+      Province = 'undefined';
+    }
+    this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
+      this.DataCurYear = data;
+      this.getTAX(typeCur);
+    });
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
+      this.DataProduct = data;
+      this.getProductTAX(typeCur);
+      this.getProductPERCENT_TAX();
+    });
+    this.oldArea = area
+    if (Province != undefined) {
+      this.hideTableBrance = 1;
+    }
+  }
 
+  getPercent() {
+    for (var i = 0; i < this.DataCurYear.length; i++) {
+      if (this.DataCurYear[i].PERCENT_TAX != null) {
+        this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
+      }
+    }
+  }
+
+  getTAX(typeCur) {
+    let tax;
+    let last_tax;
+    let est;
+    for (var i = 0; i < this.DataCurYear.length; i++) {
+      tax = this.DataCurYear[i].TAX;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.DataCurYear[i].TAX = tax;
+
+      last_tax = this.DataCurYear[i].LAST_TAX;
+      if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+      this.DataCurYear[i].LAST_TAX = last_tax;
+
+      est = this.DataCurYear[i].ESTIMATE;
+      if (est != null) { est = changeCurrency(est, typeCur); }
+      this.DataCurYear[i].ESTIMATE = est;
+    }
+  }
+
+  TableProductGetData(area, Province, typeCur) {
+    if (area != this.oldArea) {
+      Province = 'undefined';
+    }
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
+      this.DataProduct = data;
+      this.getProductTAX(typeCur);
+      this.getProductPERCENT_TAX();
+    });
+  }
+
+  getProductTAX(typeCur) {
+    let tax;
+    let last_tax;
+    let est;
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      tax = this.DataProduct[i].TAX;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.DataProduct[i].TAX = tax;
+
+      last_tax = this.DataProduct[i].LAST_TAX;
+      if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+      this.DataProduct[i].LAST_TAX = last_tax;
+
+      est = this.DataProduct[i].ESTIMATE;
+      if (est != null) { est = changeCurrency(est, typeCur); }
+      this.DataProduct[i].ESTIMATE = est;
+    }
+  }
+
+
+  getProductPERCENT_TAX() {
+    for (var i = 0; i < this.DataProduct.length; i++) {
+      if (this.DataProduct[i].PERCENT_TAX != null) {
+        this.DataProduct[i].PERCENT_TAX = notRound(this.DataProduct[i].PERCENT_TAX);
+      }
+    }
+  }
+
+  getProvinceTAX(typeCur) {
+    let tax;
+    let last_tax;
+    let est;
+    for (var i = 0; i < this.DataProvince.length; i++) {
+      tax = this.DataProvince[i].TAX;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.DataProvince[i].TAX = tax;
+
+      last_tax = this.DataProvince[i].LAST_TAX;
+      if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+      this.DataProvince[i].LAST_TAX = last_tax;
+
+      est = this.DataProvince[i].ESTIMATE;
+      if (est != null) { est = changeCurrency(est, typeCur); }
+      this.DataProvince[i].ESTIMATE = est;
+
+      if (this.DataProvince[i].PERCENT_TAX != null) {
+        this.DataProvince[i].PERCENT_TAX = notRound(this.DataProvince[i].PERCENT_TAX);
+      }
+    }
+  }
+
+  ChangeCurrency(area, Province, typeCur) {
+    if (this.hideTableBrance == 0) {
+      this.TableGetData(area, Province, typeCur);
+    } else if (this.hideTableBrance == 1) {
+      this.TableGetData(area, Province, typeCur);
+    } else {
+      Province = undefined;
+      this.TableGetData(area, Province, typeCur);
+      this.GetProvinceTable(area, typeCur);
+    }
+  }
+  
   BarGetData() {
     this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      if(this.responseData[0].TAX != null){
+      if (this.responseData[0].TAX != null) {
         this.createBarChart();
-      }else{
+      } else {
         this.barIsNull = 0;
       }
     });
   }
 
   createBarChart() {
-   this.barChart = new Chart(this.barCanvas.nativeElement, {
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'horizontalBar',
       data: {
-        labels: ["ปีนี้","ปีก่อน","ประมาณการ"],
+        labels: ["ปีนี้", "ปีก่อน", "ประมาณการ"],
         datasets: [{
-    
+
           data: [
             this.responseData[0].TAX,
             this.responseData[0].LAST_TAX,
@@ -208,25 +307,25 @@ GetProvinceTable(area){
         legend: {
           display: false,
           labels: {
-              boxWidth: 5,
+            boxWidth: 5,
           }
-      },
-      tooltips: {
-        mode: 'index',
-        label: 'myLabel',
-        callbacks: {
-          label: function (tooltipItem, data) {
-            var value;
-            if (tooltipItem.xLabel > 999999) {
-              value = tooltipItem.yLabel + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
-            } else {
-              value = tooltipItem.yLabel + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
-            }
+        },
+        tooltips: {
+          mode: 'index',
+          label: 'myLabel',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var value;
+              if (tooltipItem.xLabel > 999999) {
+                value = tooltipItem.yLabel + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              } else {
+                value = tooltipItem.yLabel + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              }
 
-            return value;
+              return value;
+            }
           }
-        }
-      },
+        },
         scales: {
           xAxes: [{
             gridLines: {
@@ -236,11 +335,11 @@ GetProvinceTable(area){
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                if(value >= 1000000){
+                if (value >= 1000000) {
                   value = (value / 1000000);
                   value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                   return value;
-                }else{
+                } else {
                   return value;
                 }
               }
@@ -252,7 +351,7 @@ GetProvinceTable(area){
           }
           ],
           yAxes: [{
-            barThickness : 15,
+            barThickness: 15,
             ticks: {
               autoSkip: false,
               maxRotation: 90,
@@ -263,160 +362,8 @@ GetProvinceTable(area){
       }
 
     });
-  }  
-
- /* GaugeGetData() {
-    this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
-      this.responseData = data;
-    });
-  } */
-
-  TableGetData(area,Province) {
-    this.brance = 1;
-    if(area != this.oldArea){
-      Province = 'undefined';
-    }
-    this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
-      this.DataCurYear = data;
-      this.getTAX();
-      this.getLAST_TAX();
-      this.getEST();
-      this.getPercent();
-    });
-    
-    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
-      this.DataProduct = data;
-      this.getProductTAX();
-      this.getProductLAST_TAX();
-      this.getProductEST();
-      this.getProductPERCENT_TAX();
-    });
-    this.oldArea = area
   }
 
-  getPercent(){
-    for (var i = 0; i < this.DataCurYear.length; i++) {
-      if(this.DataCurYear[i].PERCENT_TAX != null){
-        this.DataCurYear[i].PERCENT_TAX = this.DataCurYear[i].PERCENT_TAX.toFixed(2);
-      }
-    }
-  }
-
-  getTAX() {
-    let val;
-    for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].TAX / 1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataCurYear[i].TAX = val;
-    }
-  }
-
-  getLAST_TAX() {
-    let val;
-    for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].LAST_TAX / 1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataCurYear[i].LAST_TAX = val;
-    }
-  }
-
-  getEST() {
-    let val;
-    for (var i = 0; i < this.DataCurYear.length; i++) {
-      val = this.DataCurYear[i].ESTIMATE / 1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataCurYear[i].ESTIMATE = val;
-    }
-  }
-
-  TableProductGetData(area,Province) {
-    if(area != this.oldArea){
-      Province = 'undefined';
-    }
-    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
-      this.DataProduct = data;
-      this.getProductTAX();
-      this.getProductLAST_TAX();
-      this.getProductEST();
-      this.getProductPERCENT_TAX();
-    });
-  }
-
-  getProductTAX() {
-    let val;
-    for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].TAX / 1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataProduct[i].TAX = val;
-    }
-  }
-
-  getProductLAST_TAX() {
-    let val;
-    for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].LAST_TAX / 1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataProduct[i].LAST_TAX = val;
-    }
-  }
-
-  getProductEST() {
-    let val;
-    for (var i = 0; i < this.DataProduct.length; i++) {
-      val = this.DataProduct[i].ESTIMATE / 1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataProduct[i].ESTIMATE = val;
-    }
-  }
-
-  getProductPERCENT_TAX(){
-    for (var i = 0; i < this.DataProduct.length; i++) {
-      if(this.DataProduct[i].PERCENT_TAX != null){
-        this.DataProduct[i].PERCENT_TAX = this.DataProduct[i].PERCENT_TAX.toFixed(2);
-      }
-    }
-  }
-
-  getProvinceTAX(){
-    let val;
-    for (var i = 0; i < this.DataProvince.length; i++) {
-      val = this.DataProvince[i].TAX / 1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataProvince[i].TAX = val;
-    }
-  }
-  getProvinceLAST_TAX(){
-    let val;
-    for (var i = 0; i < this.DataProvince.length; i++) {
-      val = this.DataProvince[i].LAST_TAX / 1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataProvince[i].LAST_TAX = val;
-    }
-  }
-  getProvinceEST(){
-    let val;
-    for (var i = 0; i < this.DataProvince.length; i++) {
-      val = this.DataProvince[i].ESTIMATE / 1000000
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.DataProvince[i].ESTIMATE = val;
-    }
-  }
-  getProvincePERCENT_TAX(){
-    for (var i = 0; i < this.DataProvince.length; i++) {
-      if(this.DataProvince[i].PERCENT_TAX != null){
-        this.DataProvince[i].PERCENT_TAX = this.DataProvince[i].PERCENT_TAX.toFixed(2);
-      }
-    }
-  }
   section1() {
     this.app.getRootNav().push(TaxCoutrySection1Page);
   }

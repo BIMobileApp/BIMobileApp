@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+declare var changeCurrency: any;
+declare var dateDisplayNow: any;
 declare var dateDisplayAll: any;
-declare var dateDisplayNow:any;
 
 @IonicPage()
 @Component({
@@ -11,11 +12,11 @@ declare var dateDisplayNow:any;
   templateUrl: 'incomerealtime.html',
 })
 export class IncomerealtimePage {
-  
+
   respondData: any;
   respondSumData: any;
-  responseRegion:any;
-  ResponseProvince:any;
+  responseRegion: any;
+  ResponseProvince: any;
 
   offcode: any;
   offdesc:any;
@@ -25,7 +26,10 @@ export class IncomerealtimePage {
   dateAsOff = "";
   dateDisplay = "";
   dateNow = "";
-  time : any;
+  unitType: any;
+  Region: any;
+  Province: any;
+  time: any;
 
   region:any;
   province:any;
@@ -85,7 +89,8 @@ export class IncomerealtimePage {
   ionViewDidLoad() {
     let Region = 'undefined';
     let Province = 'undefined';
-    this.getData(Region,Province);
+    let typeCur = "B";
+    this.getData(Region, Province);
     this.selectionAreaAll();
     this.selectionProvinceAll();
   }
@@ -103,7 +108,7 @@ export class IncomerealtimePage {
     }
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+region).then((data) => {
       this.ResponseProvince = data;
-    }); 
+    });
   }
 
   selectRegion(Region,Province){  
@@ -137,14 +142,7 @@ export class IncomerealtimePage {
     }
   }
 
-  /*getTableSumTAX(){
-    let val;
-    for (var i = 0; i < this.respondSumData.length; i++) {
-      val = this.respondSumData[i].SUM_TAX;
-     // val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.respondSumData[i].SUM_TAX = val;
-    }
-  }*/
+
+
 
 }
