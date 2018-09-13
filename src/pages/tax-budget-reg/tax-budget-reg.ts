@@ -21,6 +21,8 @@ export class TaxBudgetRegPage {
   dateAsOff = "";
   dateDisplay = "";
 
+  select_province:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
@@ -52,7 +54,7 @@ export class TaxBudgetRegPage {
     let Province = 'undefined';
     let Year = 'undefined';
 
-    this.selectDataAll(Region,Province,Year);
+    this.selectDataAll(Region,Province);
     this.selectRegionAll();
     this.selectionProvinceAll();
   } 
@@ -65,15 +67,18 @@ export class TaxBudgetRegPage {
   }
 
   selectionProvinceAll(){
-   let  Region = 'undefined';
+    let  Region = 'undefined';
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
       this.ResponseProvince = data;
     }); 
   }
 
-  selectRegion(Region,Province,Year){
+  selectRegion(Region,Province){
+    this.select_province = true;
+    Province = 'undefined';
+
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province,Year);
+    this.selectDataAll(Region,Province);
   }
 
   selectionProvinceFill(Region){  
@@ -82,14 +87,14 @@ export class TaxBudgetRegPage {
     }); 
   }
 
-  selectionProvince(Region,Province,Year){
+  selectionProvince(Region,Province){
   
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province,Year);
+    this.selectDataAll(Region,Province);
   }
 
-  selectDataAll(Region,Province,Year){   
-      this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province+'&year='+Year).then((data)=>{
+  selectDataAll(Region,Province){   
+      this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province).then((data)=>{
         this.responseData = data;
       
         if (!this.responseData){}else{ this.getTableTAX();}    
@@ -117,6 +122,4 @@ export class TaxBudgetRegPage {
       this.responseData[i].TAX = val;
     }
   }
-
-
 }
