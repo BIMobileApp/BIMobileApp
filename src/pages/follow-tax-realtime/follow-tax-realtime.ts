@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
+declare var dateDisplayNow:any;
 
 @IonicPage()
 @Component({
@@ -20,6 +21,7 @@ export class FollowTaxRealtimePage {
   responseArea:any;
   responseProvince:any;
   oldArea="";
+  dateNow = "";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -27,6 +29,7 @@ export class FollowTaxRealtimePage {
       this.offcode = localStorage.offcode;
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.dateNow = dateDisplayNow;
   }
 
   ionViewDidLoad() {
@@ -134,12 +137,16 @@ export class FollowTaxRealtimePage {
     let month;
     let year;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].DIM_DATA_DATE_ID.toString();
-      year = val.substring(0,4);
-      month = val.substring(6,4);
-      date = val.substring(6,8);
-      val = date+'/'+month+'/'+year;
-
+    
+        val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+        if(val != 'รวม'){
+          year = val.substring(0,4);
+          month = val.substring(6,4);
+          date = val.substring(6,8);
+          val = date+'/'+month+'/'+year;
+        }
+       
+       
       this.responseData[i].DIM_DATA_DATE_ID = val;
     }
   }

@@ -69,11 +69,12 @@ getitemsRegion(area,province){
     this.getTableDataSica(area,province);
     this.getTableDataCard(area,province);
   });
+  province = 'undefined';
 
 }
 
 getitemsProvince(area,province){
-  province = [];
+ 
   this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
     this.responseProvince = data;
   });

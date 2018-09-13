@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angul
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
+declare var dateDisplayNow:any;
 
 @IonicPage()
 @Component({
@@ -20,6 +21,9 @@ export class TaxEdRealtimePage {
   offcode:any;
   username:any;
   dateDisplay = "";
+  dateNow = "";
+  time : any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider,
@@ -27,6 +31,10 @@ export class TaxEdRealtimePage {
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
+    this.dateNow = dateDisplayNow;
+
+    var d = new Date();
+    this.time = d.getHours() + " : " +  d.getMinutes();
   }
 
   ionViewDidLoad() {

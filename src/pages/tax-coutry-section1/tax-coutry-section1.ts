@@ -68,7 +68,7 @@ export class TaxCoutrySection1Page {
     });
     this.webapi.getData('TaxProductCurYearbyYear?offcode=' + this.offcode).then((data) => {
       this.DataProduct = data;
-      this.getProductTAX();
+     this.getProductTAX();
       this.getProductLAST_TAX();
       this.getProductEST();
       this.getProductPERCENT_TAX();
