@@ -40,18 +40,16 @@ if((now.getDate()-1) < 1){
   dateDisplayNow =  " ข้อมูล ณ วันที่ "+now.getDate() +" "+   (now.getMonth() < 0 ?thmonth[11] : thmonth[now.getMonth()] ) +" ปีงบฯ " +  (now.getMonth()  < 0 ? buddhayear- 1 : buddhayear );
 
     //ฟังก์ชั่น เปลี่ยนบาทเป็นล้านบาท
-  function changeMillion(val,typeNow) {
+  function changeCurrency(val,typeNow) {
     try {
-  
         var result = 0; 
-  
-        if (typeNow  == 'M') {
-          result = val/1000000;
-          result = notRound(result, 2);
-        }else{
-
-          result = result * 1;
+        if (typeNow == 'M') {
+          val = val/1000000;
+          result = notRound(val);
+        }else {
+          result = notRound(val);
         } 
+        result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
         return result;
     }
     catch (e) {
@@ -59,10 +57,23 @@ if((now.getDate()-1) < 1){
     }
   }
  //ฟังก์ชั่น ไม่ปัดเศษ
-function notRound(number, precision){
+/* function notRound(number, precision){
     var factor = Math.pow(10, precision);
     var tempNumber = number * factor;
     var roundedTempNumber = Math.floor(tempNumber);
     return roundedTempNumber / factor;
+} */
+
+function notRound(val){
+  var returnVal;  
+  var res = val.toString().split("."); 
+  if(res.length == 1){
+  	returnVal = res + ".00" ;
+  }else if(res[1].length < 2){
+       returnVal =res[0]+ "." + res[1] + "0";
+  }else{
+       returnVal = res[0] + "." + res[1].substring(0, 2);
+  }
+  return returnVal;
 }
 
