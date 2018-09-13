@@ -44,7 +44,7 @@ export class IncomerealtimePage {
     let Region = 'undefined';
     let Province = 'undefined';
     let typeCur = "B";
-    this.getData(Region, Province,typeCur);
+    this.getData(Region, Province);
     this.selectionAreaAll();
     
   }
@@ -65,16 +65,16 @@ export class IncomerealtimePage {
     });
   }
 
-  selectRegion(Region, Province,typeCur) {
+  selectRegion(Region, Province) {
     Province = 'undefined';
     this.selectionProvinceFill(Region);
-    this.getData(Region, Province, typeCur);
+    this.getData(Region, Province,);
   }
 
-  getData(Region, Province,typeCur) {
+  getData(Region, Province) {
     this.webapi.getData('SourceImcome?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province).then((data) => {
       this.respondData = data;
-      this.getTableTAX(typeCur);
+     
     });
     /* this.webapi.getData('SumIncomeList?offcode='+this.offcode).then((data)=>{
          this.respondSumData = data;
@@ -95,42 +95,12 @@ export class IncomerealtimePage {
     });
   } */
 
-  selectionProvince(Region, Province,typeCur) {
-    this.getData(Region, Province,typeCur);
-    /*this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
-      this.respondData = data;
-
-       // this.getTableTAX();
-      
-  });*/
-    /*this.webapi.getData('SumIncomeList?offcode='+this.offcode).then((data)=>{
-        this.respondSumData = data;
-  
-          this.getTableSumTAX();
-        
-      });*/
+  selectionProvince(Region, Province) {
+    this.getData(Region, Province);
+    
   }
 
 
-  getTableTAX(typeCur) {
-    let val;
-    for (var i = 0; i < this.respondData.length; i++) {
-      val = this.respondData[i].TAX;
-      if(val != null){
-        val = changeCurrency(val, typeCur);
-      }
-      this.respondData[i].TAX = val;
-    }
-  }
 
-  /*getTableSumTAX(){
-    let val;
-    for (var i = 0; i < this.respondSumData.length; i++) {
-      val = this.respondSumData[i].SUM_TAX;
-     // val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.respondSumData[i].SUM_TAX = val;
-    }
-  }*/
 
 }
