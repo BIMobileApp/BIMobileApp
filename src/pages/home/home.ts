@@ -17,7 +17,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 export class HomePage {
   userData = {
     "username": "",
-    "password": "user123"
+    "password": ""
   };
   userDB: any;
   offcode: any;

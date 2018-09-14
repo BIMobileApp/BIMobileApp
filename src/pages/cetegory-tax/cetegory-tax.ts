@@ -130,14 +130,21 @@ export class CetegoryTaxPage {
   }
 
   selectionProvince(area, Province, typeCur) {
-    
     Province = undefined;
+    alert(area+" -- "+Province+" -- "+typeCur);
+    this.responseProvince = [];
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
-    this.TableGetData(area, Province, typeCur);
-    this.GetProvinceTable(area, typeCur);
-    this.hideTableBrance = 2;
+    if (area !== "undefined") {
+      this.TableGetData(area, Province, typeCur);
+      this.GetProvinceTable(area, typeCur);
+      this.hideTableBrance = 2;
+     
+    }else{
+      this.TableGetData(area, Province, typeCur);
+      this.hideTableBrance = 0;
+    }
   }
 
   GetProvinceTable(area, typeCur) {
@@ -148,8 +155,8 @@ export class CetegoryTaxPage {
   }
 
   TableGetData(area, Province, typeCur) {
-    if (area != this.oldArea) {
-      Province = 'undefined';
+    if (area !== this.oldArea) {
+      Province = undefined;
     }
     this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
       this.DataCurYear = data;
@@ -158,19 +165,10 @@ export class CetegoryTaxPage {
     this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
       this.DataProduct = data;
       this.getProductTAX(typeCur);
-      this.getProductPERCENT_TAX();
     });
     this.oldArea = area
-    if (Province != undefined) {
+    if (Province !== "undefined") {
       this.hideTableBrance = 1;
-    }
-  }
-
-  getPercent() {
-    for (var i = 0; i < this.DataCurYear.length; i++) {
-      if (this.DataCurYear[i].PERCENT_TAX != null) {
-        this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
-      }
     }
   }
 
@@ -190,18 +188,11 @@ export class CetegoryTaxPage {
       est = this.DataCurYear[i].ESTIMATE;
       if (est != null) { est = changeCurrency(est, typeCur); }
       this.DataCurYear[i].ESTIMATE = est;
-    }
-  }
 
-  TableProductGetData(area, Province, typeCur) {
-    if (area != this.oldArea) {
-      Province = 'undefined';
+      if (this.DataCurYear[i].PERCENT_TAX != null) {
+        this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
+      }
     }
-    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
-      this.DataProduct = data;
-      this.getProductTAX(typeCur);
-      this.getProductPERCENT_TAX();
-    });
   }
 
   getProductTAX(typeCur) {
@@ -220,17 +211,14 @@ export class CetegoryTaxPage {
       est = this.DataProduct[i].ESTIMATE;
       if (est != null) { est = changeCurrency(est, typeCur); }
       this.DataProduct[i].ESTIMATE = est;
-    }
-  }
 
-
-  getProductPERCENT_TAX() {
-    for (var i = 0; i < this.DataProduct.length; i++) {
       if (this.DataProduct[i].PERCENT_TAX != null) {
         this.DataProduct[i].PERCENT_TAX = notRound(this.DataProduct[i].PERCENT_TAX);
       }
     }
   }
+
+
 
   getProvinceTAX(typeCur) {
     let tax;
@@ -266,7 +254,7 @@ export class CetegoryTaxPage {
       this.GetProvinceTable(area, typeCur);
     }
   }
-  
+
   BarGetData() {
     this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
