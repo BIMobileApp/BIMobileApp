@@ -74,7 +74,7 @@ export class TaxBudgetRegPage {
   }
 
   selectRegion(Region,Province){
-    this.select_province = true;
+    //this.select_province = true;
     Province = 'undefined';
 
     this.selectionProvinceFill(Region);

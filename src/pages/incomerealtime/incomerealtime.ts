@@ -40,6 +40,7 @@ export class IncomerealtimePage {
   select_province:any;
   isEnable:any;
   isEnableProv:any;
+  oldRegion:any;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -67,7 +68,7 @@ export class IncomerealtimePage {
         this.select_all_value = true;
         this.isEnable  = false;
       }
-   ///end ตรวจสอบภาคเพื่อ default selection
+    ///end ตรวจสอบภาคเพื่อ default selection
 
     /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
@@ -90,17 +91,15 @@ export class IncomerealtimePage {
     let Region = 'undefined';
     let Province = 'undefined';
     let typeCur = "B";
-    this.getData(Region, Province);
+    this.getData(Region, Province, typeCur);
     this.selectionAreaAll();
     this.selectionProvinceAll();
   }
-
   selectionAreaAll(){
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseRegion = data;
     });
   }
-
   selectionProvinceAll(){ 
     let region;
     if(this.region != "00"){
@@ -111,34 +110,40 @@ export class IncomerealtimePage {
     });
   }
 
-  selectRegion(Region,Province){  
+  selectRegion(Region,Province,typeCur){  
     Province =  'undefined';
-    this.selectionProvince(Region,Province);
-    this.getData(Region,Province);
+    //alert(Region+" -- "+Province+" -- "+typeCur);
+    this.selectionProvince(Region,Province,typeCur);
+    //this.getData(Region,Province,typeCur);
   }
 
-  selectionProvince(Region,Province){
+  selectionProvince(Region,Province,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
     //console.log(Region);
-    this.getData(Region,Province);
+    this.getData(Region,Province,typeCur);
   }
    
-  getData(Region,Province){
+  getData(Region,Province,typeCur){
+    //alert(this.oldRegion + " -- " + Region);
+    if (Region !== this.oldRegion) {
+      Province = undefined;
+    }
       this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
           this.respondData = data;
-          //this.getTableTAX();
+          this.getTableTAX(typeCur);
       });
+      this.oldRegion = Region;
+     // alert(this.oldRegion + " -- " + Region);
   }
 
-  getTableTAX() {
-    let val;
+  getTableTAX(typeCur) {
+    let tax;
     for (var i = 0; i < this.respondData.length; i++) {
-      val = this.respondData[i].TAX;
-     // val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.respondData[i].TAX = val;
+       tax = this.respondData[i].TAX;
+       if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.respondData[i].TAX = tax;
     }
   }
 
