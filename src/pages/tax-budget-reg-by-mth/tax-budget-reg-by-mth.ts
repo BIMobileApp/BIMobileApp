@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -29,13 +30,14 @@ export class TaxBudgetRegByMthPage {
 
   ionViewDidLoad() {
     let datetime =  new Date();
-    console.log(datetime);
+   
     let datenow = datetime.getMonth();
    // let datenow = datetime.getMonth();
-    console.log(datenow);
 
     let date;
-    this.selectDate(date);
+    let summaryDate = 2;
+    let typeCur = "B";
+    this.selectDate(summaryDate,typeCur);
   }
 
   /*selectDataAll(){  
@@ -45,28 +47,20 @@ export class TaxBudgetRegByMthPage {
     });
   }*/
 
-  selectDate(summaryDate){
-  
-    if(summaryDate == ""){
-     // this.selectDataAll();
-    }else{
+  selectDate(summaryDate,typeCur){ 
       this.webapi.getData('TaxBudgetRegByMth?offcode='+this.offcode+'&month='+summaryDate).then((data)=>{
         this.responseData = data;
-        this.getTableTAX();
-        //this.getTableTAX();
-      });
-    }
-   
+        this.getTableTAX(typeCur);
+      });      
   }
 
-  getTableTAX() {
-    let val;
+  getTableTAX(typeCur) {
+    let tax;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX = val;
-    
+      tax = this.responseData[i].TAX;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); console.log(tax);}
+     this.responseData[i].TAX = tax;
     }
   }
+
 }

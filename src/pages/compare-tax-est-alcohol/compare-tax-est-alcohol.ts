@@ -96,7 +96,7 @@ export class CompareTaxEstAlcoholPage {
   }
 
   getTableData(area, Province) {
-    console.log("area: " + area);
+
     if (area != this.oldArea) {
       Province = undefined;
     }

@@ -21,6 +21,7 @@ import { TaxEdRealtimePage } from '../tax-ed-realtime/tax-ed-realtime';
 import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtime';
 import { TaxYearByProductPage } from '../tax-year-by-product/tax-year-by-product';
 import { TaxProductByMthPage } from '../tax-product-by-mth/tax-product-by-mth';
+import { DimensionTime_03Page } from '../dimension-time-03/dimension-time-03';
 
 @IonicPage()
 @Component({
@@ -97,8 +98,11 @@ export class MenuGroupNewReportPage {
     this.app.getRootNav().push(FollowTaxRealtimePage);
   }
 
-  TaxYearByProduct(){
+  /*TaxYearByProduct(){
     this.app.getRootNav().push(TaxYearByProductPage);
+  }*/
+  DimentionTime03(){
+    this.app.getRootNav().push(DimensionTime_03Page);
   }
 
   TaxMthByProduct(){
