@@ -36,6 +36,8 @@ export class TaxEdRealtimePage {
   select_province:any;
   isEnable:any;
   isEnableProv:any;
+  oldRegion:any;
+  oldtypeCur:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -123,10 +125,16 @@ export class TaxEdRealtimePage {
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
+      this.responseProvince = data;
+    }); 
     this.getData(Region,Province,typeCur);
   }
 
   getData(Region,Province,typeCur){ 
+    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
+      Province = undefined;
+    }
      this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode+'&region='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
 
@@ -134,6 +142,8 @@ export class TaxEdRealtimePage {
        this.getDateFormat();
        this.sumtax(Region,Province,typeCur);
      });
+     this.oldRegion = Region;
+     this.oldtypeCur = typeCur;
    }  
 
    sumtax(Region,Province,typeCur){

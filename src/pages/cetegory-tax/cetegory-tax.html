@@ -11,7 +11,7 @@
 <ion-content padding text-center>
     <div id="mapContent"  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
         <ion-item (click)="toggleMapShow()">
-              <ion-label class="toggleLabel">แผนที่แสดงผลการจัดเก็บภาษี ทั่วประเทศ</ion-label>
+              <ion-label class="toggleLabel"> >> แผนที่แสดงผลการจัดเก็บภาษี ทั่วประเทศ</ion-label>
         </ion-item>
     </div>
   <div *ngIf="toggleMap==1">
@@ -76,12 +76,12 @@
 <!--/////////////////////////////////////////////////// Bar Chart ///////////////////////////////////////////////-->
 <div id="mapContent"  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
     <ion-item  (click)="toggleBarShow()">
-          <ion-label class="toggleLabel">กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</ion-label>
+          <ion-label class="toggleLabel"> >> กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</ion-label>
     </ion-item>
 </div>
 <div *ngIf="toggleBar==1">
   <br>
-<h1 class="header-style">กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</h1>
+<h1 class="header-style"> กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
 
 <ion-card>
@@ -101,7 +101,7 @@
   <!--////////////////////////////////////////////////  Table ////////////////////////////////////////////////////-->
   <div id="mapContent"  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
       <ion-item  (click)="toggleTableShow()">
-            <ion-label class="toggleLabel">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
+            <ion-label class="toggleLabel"> >> ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
       </ion-item>
   </div>
   <div *ngIf="toggleTable==1">

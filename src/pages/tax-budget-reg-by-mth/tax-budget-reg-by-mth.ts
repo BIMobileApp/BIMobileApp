@@ -28,6 +28,12 @@ export class TaxBudgetRegByMthPage {
   }
 
   ionViewDidLoad() {
+    let datetime =  new Date();
+    console.log(datetime);
+    let datenow = datetime.getMonth();
+   // let datenow = datetime.getMonth();
+    console.log(datenow);
+
     let date;
     this.selectDate(date);
   }

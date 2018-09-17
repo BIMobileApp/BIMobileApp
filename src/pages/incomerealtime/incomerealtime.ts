@@ -41,6 +41,7 @@ export class IncomerealtimePage {
   isEnable:any;
   isEnableProv:any;
   oldRegion:any;
+  oldtypeCur:any;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -112,7 +113,6 @@ export class IncomerealtimePage {
 
   selectRegion(Region,Province,typeCur){  
     Province =  'undefined';
-    alert(Region+" -- "+Province+" -- "+typeCur);
     this.selectionProvince(Region,Province,typeCur);
     //this.getData(Region,Province,typeCur);
   }
@@ -126,8 +126,7 @@ export class IncomerealtimePage {
   }
    
   getData(Region,Province,typeCur){
-    alert(this.oldRegion + " -- " + Region);
-    if (Region !== this.oldRegion) {
+    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
       this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
@@ -135,7 +134,7 @@ export class IncomerealtimePage {
           this.getTableTAX(typeCur);
       });
       this.oldRegion = Region;
-      alert(this.oldRegion + " -- " + Region);
+      this.oldtypeCur = typeCur;
   }
 
   getTableTAX(typeCur) {
