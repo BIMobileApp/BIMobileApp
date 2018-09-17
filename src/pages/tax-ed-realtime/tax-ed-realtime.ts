@@ -116,13 +116,15 @@ export class TaxEdRealtimePage {
   selectRegion(Region,Province){
     Province =  'undefined';
     this.selectionProvince(Region,Province);
-    this.getData(Region,Province);
   }
 
   selectionProvince(Region,Province){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
+      this.responseProvince = data;
+    }); 
     this.getData(Region,Province);
   }
 
