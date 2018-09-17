@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var changeCurrency: any;
 declare var dateDisplayNow:any;
 
 @IonicPage()
@@ -84,7 +84,7 @@ export class TaxEdRealtimePage {
 
   ionViewDidLoad() {
       let Province = 'undefined';
-
+      let typeCur = 'B';
       let region;
       if(this.region != "00"){
         region = localStorage.region_desc;
@@ -92,7 +92,7 @@ export class TaxEdRealtimePage {
         region = 'undefined';
       }
 
-      this.getData(region,Province);
+      this.getData(region,Province,typeCur);
       this.selectionAreaAll();
       this.selectionProvinceAll();
   }
@@ -113,70 +113,55 @@ export class TaxEdRealtimePage {
     }); 
   }
 
-  selectRegion(Region,Province){
+  selectRegion(Region,Province,typeCur){
     Province =  'undefined';
-    this.selectionProvince(Region,Province);
-    this.getData(Region,Province);
+    this.selectionProvince(Region,Province,typeCur);
+    this.getData(Region,Province,typeCur);
   }
 
-  selectionProvince(Region,Province){
+  selectionProvince(Region,Province,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
-    this.getData(Region,Province);
+    this.getData(Region,Province,typeCur);
   }
 
-  getData(Region,Province){ 
+  getData(Region,Province,typeCur){ 
      this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode+'&region='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
 
-       this.getTableFZ_EXCISE();
-       this.getTableIN_EXCISE();
-       this.getTableEXCISE();
+       this.getTableFZ_EXCISE(typeCur);
        this.getDateFormat();
-       this.sumtax(Region,Province);
+       this.sumtax(Region,Province,typeCur);
      });
    }  
 
-   sumtax(Region,Province){
+   sumtax(Region,Province,typeCur){
     this.webapi.getData('SumFollowPayTaxRealtime?offcode='+this. offcode+'&region='+Region+'&province='+Province).then((data)=>{
-      this.responseSumData = data;
-        
-      this.getSumTableFZ_EXCISE();
-      this.getSumTableIN_EXCISE();
-      this.getSumTableEXCISE();
+      this.responseSumData = data; 
+      this.getSumTableFZ_EXCISE(typeCur);
     });
   }
 
-   getTableFZ_EXCISE() {
-     let val;
+   getTableFZ_EXCISE(typeCur) {
+     let FZ;
+     let IN;
+     let AMT;
      for (var i = 0; i < this.responseData.length; i++) {
-       val = this.responseData[i].FZ_EXCISE_AMT/1000000;
-       val = val.toFixed(2);
-       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       this.responseData[i].FZ_EXCISE_AMT = val;
+      FZ = this.responseData[i].FZ_EXCISE_AMT;
+       if (FZ != null) { FZ = changeCurrency(FZ, typeCur); }
+       this.responseData[i].FZ_EXCISE_AMT = FZ;
+
+       IN = this.responseData[i].IN_EXCISE_AMT;
+       if (IN != null) { IN = changeCurrency(IN, typeCur); }
+       this.responseData[i].IN_EXCISE_AMT = IN;
+
+       AMT = this.responseData[i].EXCISE_AMT;
+       if (AMT != null) { AMT = changeCurrency(AMT, typeCur); }
+       this.responseData[i].EXCISE_AMT = AMT;
      }
    }
 
-   getTableIN_EXCISE() {
-     let val;
-     for (var i = 0; i < this.responseData.length; i++) {
-       val = this.responseData[i].IN_EXCISE_AMT/1000000;
-       val = val.toFixed(2);
-       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       this.responseData[i].IN_EXCISE_AMT = val;
-     }
-   }
-   
-   getTableEXCISE() {
-     let val;
-     for (var i = 0; i < this.responseData.length; i++) {
-       val = this.responseData[i].EXCISE_AMT/1000000;
-       val = val.toFixed(2);
-       val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       this.responseData[i].EXCISE_AMT = val;
-     }
-   }
 
    getDateFormat(){
      let val;
@@ -185,6 +170,7 @@ export class TaxEdRealtimePage {
      let year;
      for (var i = 0; i < this.responseData.length; i++) {
        val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+       
        year = val.substring(0,4);
        month = val.substring(6,4);
        date = val.substring(6,8);
@@ -196,33 +182,22 @@ export class TaxEdRealtimePage {
 
    ///get sum
 
-   getSumTableFZ_EXCISE() {
-    let val;
+   getSumTableFZ_EXCISE(typeCur) {
+     let FZ;
+     let IN;
+     let AMT;
     for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].FZ_EXCISE_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].FZ_EXCISE_AMT = val;
-    }
-  }
+      FZ = this.responseSumData[i].FZ_EXCISE_AMT;
+      if (FZ != null) { FZ = changeCurrency(FZ, typeCur); }
+      this.responseSumData[i].FZ_EXCISE_AMT = FZ;
 
-  getSumTableIN_EXCISE() {
-    let val;
-    for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].IN_EXCISE_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].IN_EXCISE_AMT = val;
-    }
-  }
-  
-  getSumTableEXCISE() {
-    let val;
-    for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].EXCISE_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].EXCISE_AMT = val;
+      IN = this.responseSumData[i].IN_EXCISE_AMT;
+      if (IN != null) { IN = changeCurrency(IN, typeCur); }
+      this.responseSumData[i].IN_EXCISE_AMT = IN;
+
+      AMT = this.responseSumData[i].EXCISE_AMT;
+      if (AMT != null) { AMT = changeCurrency(AMT, typeCur); }
+      this.responseSumData[i].EXCISE_AMT = AMT;
     }
   }
 
