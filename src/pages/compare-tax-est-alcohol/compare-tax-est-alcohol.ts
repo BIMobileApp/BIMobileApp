@@ -131,9 +131,10 @@ export class CompareTaxEstAlcoholPage {
   }
 
  
-  getLineTaxData(TaxCode) {
-    if (TaxCode != "") {
-      this.webapi.getData('CompareTaxSuraMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+  getLineTaxData(TYPE_DESC) {
+    this.TaxLineData = [];
+    if (TYPE_DESC != "") {
+      this.webapi.getData('CompareTaxSuraMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();

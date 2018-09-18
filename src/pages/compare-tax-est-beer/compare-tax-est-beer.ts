@@ -135,9 +135,9 @@ export class CompareTaxEstBeerPage {
   }
 
 
-  getLineTaxData(TaxCode) {
-    if (TaxCode != "") {
-      this.webapi.getData('CompareTaxBeerMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+  getLineTaxData(TYPE_DESC) {
+    if (TYPE_DESC != "") {
+      this.webapi.getData('CompareTaxBeerMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();

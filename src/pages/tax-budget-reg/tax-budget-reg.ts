@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -21,7 +22,18 @@ export class TaxBudgetRegPage {
   dateAsOff = "";
   dateDisplay = "";
 
+  region:any;
+  province:any;
+  branch:any;
+
+  select_region:any;
+  select_all_value:any;
+  select_all_prov_value:any;
   select_province:any;
+  isEnable:any;
+  isEnableProv:any;
+  oldRegion:any;
+  oldtypeCur:any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -47,16 +59,50 @@ export class TaxBudgetRegPage {
      year_th = nt-i;
 
       range.push( {"key":year_th,"value": year_en});
+
+      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+     this.region = localStorage.offcode.substring(0, 2);
+     this.province = localStorage.offcode.substring(2, 4);
+     this.branch =  localStorage.offcode.substring(4, 6);
+   /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+    ///ตรวจสอบภาคเพื่อ default selection
+    if(this.region != "00"){
+      this.select_region = localStorage.region_desc;
+      this.select_all_value = false;    
+      this.isEnable  = true;        
+    }else{
+      this.select_all_value = true;
+      this.isEnable  = false;
     }
+ ///end ตรวจสอบภาคเพื่อ default selection
+
+  /// ตรวจสอบสาขาเพื่อ default selection
+  var res = "";
+  if(this.branch != "00"){          
+     res =  localStorage.offdesc.split(" ");
+     this.select_province  = res[0];
+     this.select_all_prov_value = false;
+     this.isEnableProv = true;
+   }else{
+     this.select_all_prov_value = true;
+     this.isEnableProv = false;
+   }
+  ///end  ตรวจสอบสาขาเพื่อ default selection
+
+  }
     this.summaryDate = range;
 
-    let Region = 'undefined';
-    let Province = 'undefined';
-    let Year = 'undefined';
-
-    this.selectDataAll(Region,Province);
     this.selectRegionAll();
     this.selectionProvinceAll();
+
+    let Region;
+    let Province;
+    let Year = 'undefined';
+    let typeCur = 'B';
+    
+    this.selectDataAll(Region,Province,typeCur);
+ 
   } 
 
   selectRegionAll(){
@@ -67,18 +113,31 @@ export class TaxBudgetRegPage {
   }
 
   selectionProvinceAll(){
-    let  Region = 'undefined';
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+    let region;
+    if(this.region != "00"){
+      region = localStorage.region_desc;
+    }
+    //let  Region = 'undefined';
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+region).then((data) => {
       this.ResponseProvince = data;
     }); 
   }
 
-  selectRegion(Region,Province){
-    //this.select_province = true;
-    Province = 'undefined';
+  selectRegion(Region,Province,typeCur){
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region = 'undefined';
+    }
+
+    if(this.branch != "00"){    
+      Province =  this.select_province;
+    }else{
+      Province = 'undefined';
+    }
 
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Region,Province,typeCur);
   }
 
   selectionProvinceFill(Region){  
@@ -87,39 +146,51 @@ export class TaxBudgetRegPage {
     }); 
   }
 
-  selectionProvince(Region,Province){
-  
+  selectionProvince(Region,Province,typeCur){  
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region = 'undefined';
+    }
+
+    if(this.branch != "00"){    
+      Province =  this.select_province;
+    }else{
+      Province = 'undefined';
+    }
+
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Region,Province,typeCur);
   }
 
-  selectDataAll(Region,Province){   
+  selectDataAll(Region,Province,typeCur){ 
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region = 'undefined';
+    }
+
+    if(this.branch != "00"){    
+      Province =  this.select_province;
+    }else{
+      Province = 'undefined';
+    }  
       this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province).then((data)=>{
         this.responseData = data;
       
-        if (!this.responseData){}else{ this.getTableTAX();}    
-         });
+        if (!this.responseData){}else{ 
+          this.getTableTAX(typeCur);}    
+        });
    }
 
-   selectDate(year){
-    if(year == ""){
-    //  this.selectDataAll();
-    }else{  
-     this.webapi.getData('TaxBudgetReg?offcode='+this.offcode+'&group_id='+this.grp_id+'&year='+year).then((data)=>{
-      this.responseData = data;
-
-      if (!this.responseData){}else{ this.getTableTAX();}
-    });
-   }
-  }
-
-  getTableTAX() {
-    let val;
+  getTableTAX(typeCur) {
+    let tax;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX = val;
+
+      tax = this.responseData[i].TAX;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.responseData[i].TAX = tax;
     }
   }
+
 }

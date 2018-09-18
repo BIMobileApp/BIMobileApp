@@ -18,9 +18,9 @@
         <ion-item class="size">
           <ion-label>กลุ่มสินค้า : </ion-label>
 
-          <ion-select [(ngModel)]="TaxCode" (ionChange)="getLineTaxData(TaxCode)">
+          <ion-select [(ngModel)]="TYPE_DESC" (ionChange)="getLineTaxData(TYPE_DESC)">
               <ion-option value="" [selected]="true">ทั้งหมด</ion-option>
-            <ion-option *ngFor="let data of ProductType" value="{{data.I_TYPE_CODE}}">
+            <ion-option *ngFor="let data of ProductType" value="{{data.I_TYPE_DESC}}">
               {{data.I_TYPE_DESC}}
             </ion-option>
           </ion-select>

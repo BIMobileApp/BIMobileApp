@@ -133,9 +133,9 @@ export class CompareTaxEstCarPage {
     });
   }
 
-  getLineTaxData(TaxCode) {
-    if (TaxCode != "") {
-      this.webapi.getData('CompareTaxCarMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+  getLineTaxData(TYPE_DESC) {
+    if (TYPE_DESC != "") {
+      this.webapi.getData('CompareTaxCarMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();

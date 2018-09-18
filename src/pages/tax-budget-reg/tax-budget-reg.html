@@ -24,25 +24,34 @@
              <ion-col>
                <ion-item  class="size">
                    <ion-label> ภาค : </ion-label>
-                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)">
-                         <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                           <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
+                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,typeCur)" disabled={{isEnable}}>
+                        <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
+                        <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
                    </ion-select>
                  </ion-item>
              </ion-col>        
              <ion-col>
                <ion-item  class="size">
                    <ion-label>จังหวัด : </ion-label>
-                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)">
-                           <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
-                           <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,typeCur)" disabled={{isEnableProv}}>
+                        <ion-option value="undefined"   [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                        <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}"  [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
                    </ion-select>
                </ion-item>
             </ion-col>         
             </ion-row>
          </ion-grid>
 
-        <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
+        <h3 style="padding-left: 60%; padding-top: 0px; margin-top: 0px;padding-right: 2%; "> 
+                <ion-item class="unit">
+                    <ion-label> หน่วย : </ion-label>
+                    <ion-select [(ngModel)]="typeCur" (ionChange)="selectDataAll(Region, Province, typeCur)">
+                        <ion-option value="B" [selected]="true">บาท</ion-option>
+                        <ion-option value="M">ล้านบาท</ion-option>
+                    </ion-select>
+                </ion-item>
+        </h3>
+
     <ion-card>           
         <ion-card-content no-padding>       
                 <div class="table-responsive">
