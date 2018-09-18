@@ -14,7 +14,13 @@
       <ion-item>
           <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
       </ion-item>
-
+      <ion-item class="sizemini" no-lines>
+            <ion-label> หน่วย : </ion-label>
+            <ion-select [(ngModel)]="typeCur" #item (ionChange)="ChangeCurrency(Area,Province,Month,typeCur)">
+              <ion-option value="B" [selected]="true">บาท</ion-option>
+              <ion-option value="M">ล้านบาท</ion-option>
+            </ion-select>
+          </ion-item>
       <h3 style="padding-right: 2%" class="right">หน่วย ใบ/ล้านบาท</h3>
        <div class="table-responsive">
           <table class="table" style="width: 100%;">
@@ -66,7 +72,7 @@
                     <ion-col>
                         <ion-item  class="size">
                             <ion-label> ภาค : </ion-label>
-                            <ion-select  [(ngModel)]="Area" (ionChange)="Getitems(Area,Province,Month)">
+                            <ion-select  [(ngModel)]="Area" (ionChange)="Getitems(Area,Province,Month,typeCur)">
                                     <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                     <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
                             </ion-select>
@@ -75,7 +81,7 @@
                     <ion-col>
                         <ion-item  class="size">
                             <ion-label>จังหวัด : </ion-label>
-                            <ion-select  [(ngModel)]="Province" (ionChange)="GetitembyProvince(Area,Province,Month)">
+                            <ion-select  [(ngModel)]="Province" (ionChange)="GetitembyProvince(Area,Province,Month,typeCur)">
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >
                                     <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
                             </ion-select>
@@ -86,7 +92,7 @@
                     <ion-col>
                         <ion-item  class="size">
                             <ion-label >เดือน : </ion-label>
-                            <ion-select [(ngModel)]="Month" (ionChange)="GetitemsMonth(Area,Province,Month)" >
+                            <ion-select [(ngModel)]="Month" (ionChange)="GetitemsMonth(Area,Province,Month,typeCur)" >
                                 <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
                                 <ion-option value="มกราคม" >มกราคม</ion-option>
                                 <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
@@ -124,8 +130,8 @@
                                     <tbody>
                                             <tr *ngFor="let data of repondProductSura">
                                                 <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                <td><h3 class="right">{{data.COUNT  | number : fractionSize}}</h3></td>
-                                                <td><h3 class="right">{{data.AMT  | number : fractionSize}}</h3></td>
+                                                <td><h3 class="right">{{data.COUNT}}</h3></td>
+                                                <td><h3 class="right">{{data.AMT}}</h3></td>
                                             </tr>
                                     </tbody>
                             </table>
@@ -244,8 +250,8 @@
                                     <tbody>
                                             <tr *ngFor="let data of repondProductSica">
                                                 <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                <td><h3 class="right">{{data.COUNT  | number : fractionSize}}</h3></td>
-                                                <td><h3 class="right">{{data.AMT  | number : fractionSize}}</h3></td>
+                                                <td><h3 class="right">{{data.COUNT}}</h3></td>
+                                                <td><h3 class="right">{{data.AMT}}</h3></td>
                                             </tr>
                                     </tbody>
                             </table>
@@ -332,8 +338,8 @@
                                     <tbody>
                                             <tr *ngFor="let data of repondProductCard">
                                                 <td><h3 class="left">{{data.TYPE_DESC}}</h3></td>
-                                                <td><h3 class="right">{{data.COUNT  | number : fractionSize}}</h3></td>
-                                                <td><h3 class="right">{{data.AMT  | number : fractionSize}}</h3></td>
+                                                <td><h3 class="right">{{data.COUNT}}</h3></td>
+                                                <td><h3 class="right">{{data.AMT}}</h3></td>
                                             </tr>
                                     </tbody>
                             </table>

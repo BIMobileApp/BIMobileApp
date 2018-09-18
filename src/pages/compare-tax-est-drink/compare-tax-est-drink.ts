@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
+declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 @IonicPage()
 @Component({
@@ -30,8 +31,10 @@ export class CompareTaxEstDrinkPage {
 
   dateDisplay:any;
   dateAsOff:any;
-  oldArea="";
   subArea:any;
+
+  oldArea: any;
+  oldtypeCur : any; 
     //Table reg
     responseRegData: any;
     grp_id: any;
@@ -50,21 +53,22 @@ export class CompareTaxEstDrinkPage {
   ionViewDidLoad() {
     this.getProductType();
     this.getLineAll();
-    var area = undefined;
-    var Province = undefined;
+    let area = undefined;
+    let Province = undefined;
+    let typeCur = 'B';
     this.selectionProviceFirst();
     this.selectionArea();
-    this.getTableData(area, Province);
-    this.selectDataAll(area, Province);
+    this.getTableData(area, Province,typeCur);
+    this.selectDataAll(area, Province,typeCur);
   }
   
-  selectDataAll(area, Province) {
+  selectDataAll(area, Province,typeCur) {
     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
-      if (!this.responseRegData) { } else { this.getTableRegTAX(); }
+      if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
   }
-  getTableRegTAX() {
+  getTableRegTAX(typeCur) {
     let val;
     for (var i = 0; i < this.responseRegData.length; i++) {
       val = this.responseRegData[i].TAX;
@@ -88,53 +92,40 @@ export class CompareTaxEstDrinkPage {
 
     });
   }
-  selectionProvince(area,Province){  
+  selectionProvince(area,Province,typeCur){  
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
 
     });
-    this.getTableData(area,Province);
+    this.getTableData(area,Province,typeCur);
   }
   //-----------------------------------------------------------------------------------------------------------//
-  getTableData(area, Province) {
+  getTableData(area, Province,typeCur) {
    
-    if (area != this.oldArea) {
+    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
     this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      this.getTableTAX();
-      this.getTableTAX_LY();
-
+      this.getTableTAX(typeCur);
     });
-    this.selectDataAll(area, Province);
+    this.selectDataAll(area, Province,typeCur);
     this.oldArea = area;
+    this.oldtypeCur = typeCur;
   }
 
   //-----------------------------------------------------------------------------------------------------------//
-  getTableTAX() {
-    let val;
+  getTableTAX(typeCur) {
+    let tax;
+    let last_tax;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TOTAL_TAX_AMT;
-      if (val != null) {
-        val = val / 1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
-      this.responseData[i].TOTAL_TAX_AMT = val;
-    }
-  }
+      tax = this.responseData[i].TOTAL_TAX_AMT;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.responseData[i].TOTAL_TAX_AMT = tax;
 
-  getTableTAX_LY() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].LAST_TOTAL_TAX_AMT;
-      if (val != null) {
-        val = val / 1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
-      this.responseData[i].LAST_TOTAL_TAX_AMT = val;
+      last_tax = this.responseData[i].LAST_TOTAL_TAX_AMT;
+      if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+      this.responseData[i].LAST_TOTAL_TAX_AMT = last_tax;
     }
   }
 

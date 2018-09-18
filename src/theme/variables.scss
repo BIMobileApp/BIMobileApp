@@ -28,6 +28,31 @@ $toolbar-wp-height: 55px;
   }
 
 }
+@media only screen and (orientation: landscape) {
+  table>tbody>tr>td>p {
+    width: 90%;
+  }
+}
+table,
+  th,
+  td,
+  tr {
+    border: 1px solid #ffffff;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  table tbody tr:nth-child(odd) {
+    background-color: rgb(250, 220, 137) !important;
+  }
+
+  table tbody tr:nth-child(even) {
+    background-color: rgb(255, 255, 255) !important;
+  }
+
+  table tbody tr:last-child {
+    background: #a7d8ff !important;
+  }
 
 ion-select {
   max-width: 60% !important;
@@ -38,15 +63,25 @@ ion-select {
   padding-left: 0 !important;
 }
 
-ion-item.size {
-  width: 70%;
-  font-weight: bold;
-  color: black;
-  font-size: 4vw;
+
+
+ion-item.size{
+  width: 100%;
   display: block;
-  right: auto !important;
   margin-left: auto;
   margin-right: auto;
+  font-weight: bold;
+  color: black ;
+  font-size: 4vw ;
+}
+ion-item.sizemini {
+  border: solid #222;
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  font-weight: bold;
+  color: black ;
+  font-size: 3vw ;
 }
 
 // Named Color Variables

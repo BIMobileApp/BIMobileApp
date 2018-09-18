@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var changeCurrency: any;
 declare var dateDisplayAll:any;
 declare var dateDisplayNow:any;
 
@@ -18,7 +18,6 @@ export class FollowTaxRealtimePage {
   username:any;
   dateDisplay:any;
   dateAsOff:any;
-  oldArea="";
   dateNow = "";
 
   region:any;
@@ -33,6 +32,8 @@ export class FollowTaxRealtimePage {
 
   responseRegion:any;
   responseProvince:any;
+  oldRegion: any;
+  oldtypeCur : any;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -79,10 +80,10 @@ export class FollowTaxRealtimePage {
   ionViewDidLoad() {
     this.selectionAreaAll();
     this.selectionProvinceAll();
-
-    var Region = undefined;
-    var Province = undefined;
-    this.geDataAll(Region,Province);    
+    let typeCur = 'B';
+    let Region = undefined;
+    let Province = undefined;
+    this.getData(Region,Province,typeCur);    
   }
 
   selectionAreaAll(){
@@ -101,12 +102,12 @@ export class FollowTaxRealtimePage {
     }); 
   }
 
-  selectRegion(Region,Province){
+  selectRegion(Region,Province,typeCur){
     Province =  'undefined';
-    this.selectionProvince(Region,Province);
+    this.selectionProvince(Region,Province,typeCur);
   }
 
-  selectionProvince(Region,Province){
+  selectionProvince(Region,Province,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -114,10 +115,10 @@ export class FollowTaxRealtimePage {
       this.responseProvince = data;
     }); 
 
-    this.geDataAll(Region,Province);
+    this.getData(Region,Province,typeCur);
   }
 
-  geDataAll(Region,Province){
+  getData(Region,Province,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -125,17 +126,16 @@ export class FollowTaxRealtimePage {
     if(this.branch != "00"){     
       Province =  this.select_province;
     }
-    /*if (Region != this.oldArea) {
+    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
-    }*/
+    }
      this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
-       this.getTableFZ_EXCISE();
-       this.getTableIN_EXCISE();
-       this.getTableEXCISE();
-       this.getTableSTAMP();
+       this.getTableAmt(typeCur);
        this.getDateFormat();
      });
+     this.oldRegion = Region;
+     this.oldtypeCur = typeCur;
    }  
   /* getDashboardItemsByDate(month){
 
@@ -154,44 +154,30 @@ export class FollowTaxRealtimePage {
     }
   }*/
 
-  getTableFZ_EXCISE() {
-    let val;
+  getTableAmt(typeCur) {
+    let FZ;
+    let IN;
+    let AMT;
+    let STAMP;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].FZ_EXCISE_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].FZ_EXCISE_AMT = val;
-    }
-  }
-  getTableIN_EXCISE() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].IN_EXCISE_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].IN_EXCISE_AMT = val;
-    }
-  }
-  getTableEXCISE() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].EXCISE_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].EXCISE_AMT = val;
-    }
-  }
+      FZ = this.responseData[i].FZ_EXCISE_AMT;
+      if (FZ != null) { FZ = changeCurrency(FZ, typeCur); }
+      this.responseData[i].FZ_EXCISE_AMT = FZ;
 
-  getTableSTAMP() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].STAMP_AMT/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].STAMP_AMT = val;
+      IN = this.responseData[i].IN_EXCISE_AMT;
+      if (IN != null) { IN = changeCurrency(IN, typeCur); }
+      this.responseData[i].IN_EXCISE_AMT = IN;
+
+      AMT = this.responseData[i].EXCISE_AMT;
+      if (AMT != null) { AMT = changeCurrency(AMT, typeCur); }
+      this.responseData[i].EXCISE_AMT = AMT;
+
+      STAMP = this.responseData[i].STAMP_AMT;
+      if (STAMP != null) { STAMP = changeCurrency(STAMP, typeCur); }
+      this.responseData[i].STAMP_AMT = STAMP;
     }
   }
-
+  
   getDateFormat(){
     let val;
     let date;
