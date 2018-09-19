@@ -85,26 +85,14 @@ export class DimensionTime_03Page {
     this.selectionAreaAll();
     this.selectionProvinceAll();
 
-    let Region;
-    let Province;
+    let Region = 'undefined';
+    let Province = 'undefined';
     let typeCur = "B";
     let month = 'undefined';
 
-    if(this.region != "00"){
-      Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
-    }
-
-    if(this.branch != "00"){    
-      Province =  this.select_province;
-    }else{
-      Province = 'undefined';
-    }
-   
     this.getAllData(Region,Province,month,typeCur);
-    var d = new Date(); 
-    var n = d.getMonth();
+    //var d = new Date(); 
+   // var n = d.getMonth();
   }
 
   selectionAreaAll(){
@@ -118,71 +106,48 @@ export class DimensionTime_03Page {
     if(this.region != "00"){
       region = localStorage.region_desc;
     }
+
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+region).then((data) => {
       this.ResponseProvince = data;
     });
   }
 
   selectRegion(Region,Province,month,typeCur){  
+    Province = 'undefined';
+    this.select_all_value = true;
+    this.select_all_prov_value = false;
+
     if(this.region != "00"){
       Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
     }
+    this.selectionProvinceFill(Region);
+    this.getAllData(Region,Province,month,typeCur);
+  }
 
-    if(this.branch != "00"){    
-      Province =  this.select_province;
-    }else{
-      Province = 'undefined';
-    }
-    this.selectionProvince(Region,Province,month,typeCur);
+  selectionProvinceFill(Region){  
+
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+      this.ResponseProvince = data;
+    }); 
   }
 
   selectionProvince(Region,Province,month,typeCur){
-    if(this.region != "00"){
-      Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
-    }
-
-    if(this.branch != "00"){    
-      Province =  this.select_province;
-    }else{
-      Province = 'undefined';
-    }
-    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
-      this.ResponseProvince = data;
-    });
     this.getAllData(Region,Province,month,typeCur);
   }
 
   selectMonth(Region,Province,month,typeCur){
-    if(this.region != "00"){
-      Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
-    }
-
-    if(this.branch != "00"){    
-      Province =  this.select_province;
-    }else{
-      Province = 'undefined';
-    }
     this.getAllData(Region,Province,month,typeCur);
   }
    
   getAllData(Region,Province,month,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
     }
 
     if(this.branch != "00"){    
       Province =  this.select_province;
-    }else{
-      Province = 'undefined';
     }
+
     this.webapi.getData('DimansionTime03?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month='+month).then((data)=>{
       this.respondData = data; 
       this.getTableTAX(typeCur);

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -20,8 +21,20 @@ responseArea:any;
 responseProvince:any;
 
 repondProductSura:any;
-repondProductSica:any;
-repondProductCard:any;
+
+  region:any;
+  province:any;
+  branch:any;
+
+  select_region:any;
+  select_all_value:any;
+  select_all_prov_value:any;
+  select_province:any;
+  isEnable:any;
+  isEnableProv:any;
+  oldRegion:any;
+  oldtypeCur:any;
+
 
 constructor(
   public navCtrl: NavController, 
@@ -31,19 +44,50 @@ constructor(
     this.username = localStorage.userData;
     this.offcode = localStorage.offcode;
     this.dateAsOff =  dateDisplayAll;
+
+     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+     this.region = localStorage.offcode.substring(0, 2);
+     this.province = localStorage.offcode.substring(2, 4);
+     this.branch =  localStorage.offcode.substring(4, 6);
+   /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+    ///ตรวจสอบภาคเพื่อ default selection
+    if(this.region != "00"){
+      this.select_region = localStorage.region_desc;
+      this.select_all_value = false;    
+      this.isEnable  = true;        
+    }else{
+      this.select_all_value = true;
+      this.isEnable  = false;
+    }
+  ///end ตรวจสอบภาคเพื่อ default selection
+
+  /// ตรวจสอบสาขาเพื่อ default selection
+  var res = "";
+  if(this.branch != "00"){          
+    res =  localStorage.offdesc.split(" ");
+    this.select_province  = res[0];
+    this.select_all_prov_value = false;
+    this.isEnableProv = true;
+  }else{
+    this.select_all_prov_value = true;
+    this.isEnableProv = false;
+  } console.log(this.select_all_prov_value);
+  ///end  ตรวจสอบสาขาเพื่อ default selection
 }
 
 ionViewDidLoad() {
+  let typeCur = 'B';
+  let typeCurFirst = 'B';
+
   this.selectionAreaAll();
   this.selectionProvinceAll();
-  this.getTableData();
-  this.getProductSuraAll();
-  this.getProductSicaAll();
-  this.getProductCardAll();
+  this.getTableData(typeCurFirst);
 
-  let area = 'undefined';
-  let province = 'undefined';
-  this.getProductAll(area,province);
+  let SRegion;
+  let SProvince; 
+ 
+  this.getProductAll(SRegion,SProvince,typeCur);
 }
 
 selectionAreaAll(){
@@ -53,203 +97,120 @@ selectionAreaAll(){
 }
 
 selectionProvinceAll(){
-  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
+  let area;
+  if(this.region != "00"){
+    area = localStorage.region_desc;
+  }
+
+  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+area).then((data) => {
     this.responseProvince = data;
-    /*this.getProductLaw_qty();
-    this.getProductTarget_qty();
-    this.getProductLaw_amt();
-    this.getProductTarget_amt();
-    this.getProductTrea_money();*/
   });
 }
 
 
-getitemsRegion(area,province){
-  //province = undefined;
-  //console.info("Selected:",province);
+getitemsRegion(SRegion,SProvince,typeCur){
+  SProvince = 'undefined';
 
-  //province = localStorage.getItem('index');
-
-  this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
-    this.responseArea = data;
-
-    /*this.getitemsProvince(area,province);
-    this.getTableDataSura(area,province);
-    this.getTableDataSica(area,province);
-    this.getTableDataCard(area,province);*/
-  });
-  province = [];
-  province = 'undefined'; 
-  this.getitemsProvince(area,province);
-  
+  this.getitemsProvince(SRegion,SProvince,typeCur);
+  //this.getProductAll(area,province,typeCur);
 }
 
-getitemsProvince(area,province){
-  
- 
-  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
+getitemsProvince(SRegion,SProvince,typeCur){ 
+
+  if(this.region != "00"){
+    SRegion = localStorage.region_desc;
+  }
+
+  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + SRegion).then((data) => {
     this.responseProvince = data;
   });
 
-  this.getProductAll(area,province);
-  /*this.getTableDataSura(area,province);
-  this.getTableDataSica(area,province);
-  this.getTableDataCard(area,province);*/
+  this.getProductAll(SRegion,SProvince,typeCur);
 }
 
-getTableData() { 
+getTableData(typeCurFirst) { 
   this.webapi.getData('LawReportMth?offcode='+this.offcode).then((data) => {
-  this.responseData = data;
-  this.getTableLaw_qty();
-  this.getTableTarget_qty();
-  this.getTableLaw_amt();
-  this.getTableTarget_amt();
-  this.getTableTrea_money();
-});
+    this.responseData = data;
+    this.getTableLaw(typeCurFirst);
+  });
 }
 
 ///select all product///
-getProductAll(area,province){
-  this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+area+'&province='+province).then((data) => {
-    this.repondProductSura = data;
-  });
-}
-  ///Sura
-  getProductSuraAll(){
-    this.webapi.getData('LawProductByMthAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
-      this.repondProductSura = data;
-    });
+getProductAll(SRegion,SProvince,typeCur){
+  
+  if(this.region != "00"){
+    SRegion = localStorage.region_desc;
+  }else{
+    SRegion = SRegion;
   }
 
-   ///Sica
-  getProductSicaAll(){
-    this.webapi.getData('LawProductByMthAll?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
-      this.repondProductSica = data;
-    });
+  if(this.branch != "00"){
+    SProvince = this.select_province;
+  }else{
+    SProvince = SProvince;
   }
 
-  ///Card
-  getProductCardAll(){
-    this.webapi.getData('LawProductByMthAll?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
-      this.repondProductCard = data;
-    });
-  }
-///end select all product///
-
-
-/// fillter  Product ///
-
-getTableDataSura(area,province){
-  this.webapi.getData('LawProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc=สุรา').then((data) => {
-    this.repondProductSura = data;
+  this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
+    this.repondProductSura = data; 
+    this.getTableTAX(typeCur);
   });
 }
 
-getTableDataSica(area,province){
-  this.webapi.getData('LawProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc=ยาสูบ').then((data) => {
-    this.repondProductSica = data;
-  });
-}
+getTableTAX(typeCur){
+  let law_qty;
+  let tar_qty;
+  let law_amt;
+  let tar_amt;
+  let money;
 
-getTableDataCard(area,province){
-  this.webapi.getData('LawProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc=ไพ่').then((data) => {
-    this.repondProductCard = data;
-  });
-}
-
-/// end fillter  Product ///
-
-getTableLaw_qty() {
-let val;
-for (var i = 0; i < this.responseData.length; i++) {
-  val = this.responseData[i].LAW_QTY
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.responseData[i].LAW_QTY = val;
-}
-}
-
-getTableTarget_qty() {
-let val;
-for (var i = 0; i < this.responseData.length; i++) {
-  val = this.responseData[i].TARGET_QTY;
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.responseData[i].TARGET_QTY = val;
-}
-}
-
-getTableLaw_amt() {
-let val;
-for (var i = 0; i < this.responseData.length; i++) {
-  val = this.responseData[i].LAW_AMT/1000000;
-  val = val.toFixed(2);
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.responseData[i].LAW_AMT = val;
-}
-}
-
-getTableTarget_amt() {
-let val;
-for (var i = 0; i < this.responseData.length; i++) {
-  val = this.responseData[i].TARGET_AMT/1000000;
-  val = val.toFixed(2);
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.responseData[i].TARGET_AMT = val;
-}
-}
-
-getTableTrea_money() {
-let val;
-for (var i = 0; i < this.responseData.length; i++) {
-  val = this.responseData[i].TREASURY_MONEY/1000000;
-  val = val.toFixed(2);
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.responseData[i].TREASURY_MONEY = val;
-}
-}
-///product
-
-getProductLaw_qty(){
-  let val;
-for (var i = 0; i < this.repondProductSura.length; i++) {
-  val = this.repondProductSura[i].LAW_QTY
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.repondProductSura[i].LAW_QTY = val;
-}
-}
-getProductTarget_qty(){
-  let val;
-for (var i = 0; i < this.repondProductSura.length; i++) {
-  val = this.repondProductSura[i].TARGET_QTY;
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.repondProductSura[i].TARGET_QTY = val;
-}
-}
-getProductLaw_amt(){
-  let val;
   for (var i = 0; i < this.repondProductSura.length; i++) {
-    val = this.repondProductSura[i].LAW_AMT/1000000;
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.repondProductSura[i].LAW_AMT = val;
+    law_qty = this.repondProductSura[i].LAW_QTY;
+    tar_qty = this.repondProductSura[i].TARGET_QTY;
+    law_amt = this.repondProductSura[i].LAW_AMT;
+    tar_amt = this.repondProductSura[i].TARGET_AMT;
+    money = this.repondProductSura[i].TREASURY_MONEY;
+
+    if (law_qty != null) { law_qty = changeCurrency(law_qty, typeCur); }
+    if (tar_qty != null) { tar_qty = changeCurrency(tar_qty, typeCur); }
+    if (law_amt != null) { law_amt = changeCurrency(law_amt, typeCur); }
+    if (tar_amt != null) { tar_amt = changeCurrency(tar_amt, typeCur); }
+    if (money != null) { money = changeCurrency(money, typeCur); }
+
+    this.repondProductSura[i].LAW_QTY = law_qty;
+    this.repondProductSura[i].TARGET_QTY = tar_qty;
+    this.repondProductSura[i].LAW_AMT = law_amt;
+    this.repondProductSura[i].TARGET_AMT = tar_amt;
+    this.repondProductSura[i].TREASURY_MONEY = money;
   }
 }
-getProductTarget_amt(){
-  let val;
-for (var i = 0; i < this.repondProductSura.length; i++) {
-  val = this.repondProductSura[i].TARGET_AMT/1000000;
-  val = val.toFixed(2);
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.repondProductSura[i].TARGET_AMT = val;
-}
-}
-getProductTrea_money(){
-  let val;
-for (var i = 0; i < this.repondProductSura.length; i++) {
-  val = this.repondProductSura[i].TREASURY_MONEY/1000000;
-  val = val.toFixed(2);
-  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  this.repondProductSura[i].TREASURY_MONEY = val;
-}
+
+getTableLaw(typeCurFirst){
+  let law_qty;
+  let tar_qty;
+  let law_amt;
+  let tar_amt;
+  let money;
+
+  for (var i = 0; i < this.responseData.length; i++) {
+    law_qty = this.responseData[i].LAW_QTY;
+    tar_qty = this.responseData[i].TARGET_QTY;
+    law_amt = this.responseData[i].LAW_AMT;
+    tar_amt = this.responseData[i].TARGET_AMT;
+    money = this.responseData[i].TREASURY_MONEY;
+
+    if (law_qty != null) { law_qty = changeCurrency(law_qty, typeCurFirst); }
+    if (tar_qty != null) { tar_qty = changeCurrency(tar_qty, typeCurFirst); }
+    if (law_amt != null) { law_amt = changeCurrency(law_amt, typeCurFirst); }
+    if (tar_amt != null) { tar_amt = changeCurrency(tar_amt, typeCurFirst); }
+    if (money != null) { money = changeCurrency(money, typeCurFirst); }
+
+    this.responseData[i].LAW_QTY = law_qty;
+    this.responseData[i].TARGET_QTY = tar_qty;
+    this.responseData[i].LAW_AMT = law_amt;
+    this.responseData[i].TARGET_AMT = tar_amt;
+    this.responseData[i].TREASURY_MONEY = money;
+  }
 }
 
+ 
 }
