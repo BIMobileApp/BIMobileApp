@@ -22,7 +22,7 @@
     <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
       <ion-card>
         <ion-card-content>
-          <h2 class="header-style" [style.fontSize]="fontSize">กราฟเปรียบเทียบภาษีปีก่อน (รถยนต์)</h2>
+          <h2 class="header-style" >กราฟเปรียบเทียบภาษีปีก่อน (รถยนต์)</h2>
           <ion-item class="size">
             <ion-label>กลุ่มสินค้า : </ion-label>
             <ion-select [(ngModel)]="TYPE_DESC" (ionChange)="getLineTaxData(TYPE_DESC)" class="itemStyle">
@@ -32,7 +32,7 @@
               </ion-option>
             </ion-select>
           </ion-item>
-          <div *ngIf="textDataNotValid=='0' "  [style.fontSize]="fontSize">
+          <div *ngIf="textDataNotValid=='0' " >
             <br>
             <br>
             <br>
@@ -85,7 +85,7 @@
         </ion-row>
       </ion-grid>
 
-      <h2 class="header-style"  [style.fontSize]="fontSize">รายงานเปรียบเทียบภาษีปีก่อน แยกตามประเภทสินค้า</h2>
+      <h2 class="header-style" >รายงานเปรียบเทียบภาษีปีก่อน แยกตามประเภทสินค้า</h2>
       
       <ion-item class="sizemini" no-lines>
         <ion-label> หน่วย : </ion-label>

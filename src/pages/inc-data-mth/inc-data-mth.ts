@@ -3,7 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
-
+/* start for pinch */
+const MAX_SCALE = 11.1;
+const MIN_SCALE = 0.9;
+const BASE_SCALE = 1.3;
+/* end  */
 @IonicPage()
 @Component({
   selector: 'page-inc-data-mth',
@@ -46,6 +50,12 @@ export class IncDataMthPage {
   unitTG2 = "ใบ";
   toggleTable2 = 0;
   toggleTable1 = 0;
+  /* start for pinch */
+  public fontSize = `${BASE_SCALE}rem`;
+  private scale = BASE_SCALE;
+  private alreadyScaled = BASE_SCALE;
+  public isScaling = false;
+  /* end  */
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -74,7 +84,7 @@ export class IncDataMthPage {
     this.selectionArea();
     this.selectionAllProvince();
   }
-  toggleTable2Show(){
+  toggleTable2Show() {
     if (this.toggleTable2 == 0) {
       this.toggleTable2 = 1;
     } else {
@@ -82,7 +92,7 @@ export class IncDataMthPage {
     }
   }
 
-  toggleTable1Show(){
+  toggleTable1Show() {
     if (this.toggleTable1 == 0) {
       this.toggleTable1 = 1;
     } else {
@@ -106,7 +116,7 @@ export class IncDataMthPage {
   }
 
   selectionProvinceFill(Region) {
-    
+
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
@@ -114,7 +124,7 @@ export class IncDataMthPage {
   }
 
   selectRegion(Region, Province, Month, typeCur) {
-    Province =  'undefined';
+    Province = 'undefined';
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
@@ -128,9 +138,9 @@ export class IncDataMthPage {
     this.IncProductAll(Region, Province, Month, typeCur);
   }
 
-  
-  ChangeCur(Region,Province,Month,typeCur) {
-    this.IncProductAll(Region,Province,Month,typeCur);
+
+  ChangeCur(Region, Province, Month, typeCur) {
+    this.IncProductAll(Region, Province, Month, typeCur);
     this.loadData(typeCur);
   }
 
@@ -169,10 +179,10 @@ export class IncDataMthPage {
     });
     this.oldArea = Region;
     this.oldtypeCur = typeCur;
-    if(typeCur == "M"){
+    if (typeCur == "M") {
       this.curTG = "ล้านบาท";
       this.unitTG2 = "ล้านใบ";
-    }else{
+    } else {
       this.curTG = "บาท";
       this.unitTG2 = "ใบ";
     }
@@ -192,7 +202,7 @@ export class IncDataMthPage {
     }
   }
 
-  getCountAmtSica(typeCur){
+  getCountAmtSica(typeCur) {
     let amt;
     let count;
     for (var i = 0; i < this.repondProductSica.length; i++) {
@@ -300,5 +310,29 @@ export class IncDataMthPage {
 
   }
 
+  /* start for pinch */
+  public onPinchStart(e) {
+    this.isScaling = true;
+  }
+  public onPinchEnd(e) {
+    this.isScaling = false;
+    this.alreadyScaled = this.scale * this.alreadyScaled;
+  }
+  public onPinchMove(e) {
+    this.scale = e.scale;
+    let totalScaled = this.alreadyScaled * e.scale;
+    if (totalScaled >= MAX_SCALE) {
+      this.scale = MAX_SCALE / this.alreadyScaled;
+      totalScaled = MAX_SCALE;
+    } else if (totalScaled <= MIN_SCALE) {
+      this.scale = MIN_SCALE / this.alreadyScaled;
+      totalScaled = MIN_SCALE;
+    }
 
+    let fontSize = Math.round(totalScaled * 10) / 10;
+    if ((fontSize * 10) % 3 === 0) {
+      this.fontSize = `${fontSize}rem`;
+    }
+  }
+  /* end  */
 }
