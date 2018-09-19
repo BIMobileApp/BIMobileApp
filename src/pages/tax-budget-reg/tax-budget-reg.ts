@@ -124,16 +124,12 @@ export class TaxBudgetRegPage {
   }
 
   selectRegion(Region,Province,typeCur){
+    Province = 'undefined';
+    this.select_all_value = true;
+    this.select_all_prov_value = false;
+
     if(this.region != "00"){
       Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
-    }
-
-    if(this.branch != "00"){    
-      Province =  this.select_province;
-    }else{
-      Province = 'undefined';
     }
 
     this.selectionProvinceFill(Region);
@@ -147,19 +143,7 @@ export class TaxBudgetRegPage {
   }
 
   selectionProvince(Region,Province,typeCur){  
-    if(this.region != "00"){
-      Region = localStorage.region_desc;
-    }else{
-      Region = 'undefined';
-    }
-
-    if(this.branch != "00"){    
-      Province =  this.select_province;
-    }else{
-      Province = 'undefined';
-    }
-
-    this.selectionProvinceFill(Region);
+    //this.selectionProvinceFill(Region);
     this.selectDataAll(Region,Province,typeCur);
   }
 
@@ -167,21 +151,19 @@ export class TaxBudgetRegPage {
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{
-      Region = 'undefined';
+      Region =Region;
     }
-
     if(this.branch != "00"){    
       Province =  this.select_province;
     }else{
-      Province = 'undefined';
+      Province = Province;
     }  
-      this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province).then((data)=>{
+    
+    this.webapi.getData('TaxBudgetRegAll?offcode='+this.offcode+'&group_id='+this.grp_id+'&region='+Region+'&province='+Province).then((data)=>{
         this.responseData = data;
-      
-        if (!this.responseData){}else{ 
-          this.getTableTAX(typeCur);}    
-        });
-   }
+        this.getTableTAX(typeCur);        
+      });
+    }
 
   getTableTAX(typeCur) {
     let tax;
