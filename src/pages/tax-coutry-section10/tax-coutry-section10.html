@@ -1,11 +1,8 @@
-
 <ion-header>
-
     <ion-navbar color="navber">
         <ion-title>ตามรายภาค 10 <br>
             ผู้ใช้งาน : {{username}}</ion-title>
       </ion-navbar>
-
 </ion-header>
 
 
@@ -17,7 +14,15 @@
     
  <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามจังหวัด</h1>
  <h2 class="header-style">{{dateAsOff}}</h2>
-   <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
+   
+ <ion-item class="sizemini" no-lines>
+  <ion-label> หน่วย : </ion-label>
+  <ion-select [(ngModel)]="typeCurFirst" #item (ionChange)="ChangeUnitFirst(typeCurFirst)">
+    <ion-option value="B" [selected]="true">บาท</ion-option>
+    <ion-option value="M">ล้านบาท</ion-option>
+  </ion-select>
+</ion-item>
+
    <ion-card>
      <ion-card-content no-padding>
        <div class="table-responsive">
@@ -67,7 +72,15 @@
 
 <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
-<h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
+
+<ion-item class="sizemini" no-lines>
+  <ion-label> หน่วย : </ion-label>
+  <ion-select [(ngModel)]="typeCur" #item (ionChange)="ChangeUnit(typeCur)">
+    <ion-option value="B" [selected]="true">บาท</ion-option>
+    <ion-option value="M">ล้านบาท</ion-option>
+  </ion-select>
+</ion-item>
+
 <ion-card>
  <ion-card-content no-padding>
    
@@ -103,7 +116,7 @@
 
 <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามประเภทสินค้า</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
- <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
+ <h3 style="padding-right: 2%" class="td-right">หน่วย : {{curTG}}</h3>
  <ion-card>
    <ion-card-content no-padding>
      <div class="table-responsive">
@@ -182,7 +195,7 @@
  <div padding>
      <p class="DataStatus-font"> หมายเหตุ : 
        <br><img class="desc-img-size" src="../../assets/imgs/green2.png" />&nbsp;สูงกว่าประมาณการ 5%
-       <br><img class="desc-img-size" src="../../assets/imgs/green1.png" />&nbsp;มากว่า 0 น้อยกว่า 5%
+       <br><img class="desc-img-size" src="../../assets/imgs/green1.png" />&nbsp;มากกว่า 0 น้อยกว่า 5%
        <br><img class="desc-img-size" src="../../assets/imgs/yellow1.png" />&nbsp;0 ถึง -5%
        <br><img class="desc-img-size" src="../../assets/imgs/red1.png" />&nbsp;ต่ำกว่าประมาณการ -5%
      </p>
