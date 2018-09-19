@@ -23,6 +23,7 @@ export class CompareTaxEstCarPage {
   offcode: any;
   responseArea: any;
   responseProvince: any;
+  curTG = "บาท";
 
   //Line Tax
   TaxlineChart: any;
@@ -142,6 +143,11 @@ export class CompareTaxEstCarPage {
     this.selectDataAll(area, Province, typeCur);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
   }
 
   //-----------------------------------------------------------------------------------------------------------//

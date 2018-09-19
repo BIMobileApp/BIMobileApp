@@ -42,6 +42,10 @@ export class IncDataMthPage {
 
   oldArea: any;
   oldtypeCur: any;
+  curTG = "บาท";
+  unitTG2 = "ใบ";
+  toggleTable2 = 0;
+  toggleTable1 = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,7 +65,8 @@ export class IncDataMthPage {
 
   ionViewDidLoad() {
     let typeCur = 'B';
-    this.loadData(typeCur);
+    let typeCur2 = 'B';
+    this.loadData(typeCur2);
     let Region = 'undefined';
     let Province = 'undefined';
     let Month = 'undefined';
@@ -69,13 +74,27 @@ export class IncDataMthPage {
     this.selectionArea();
     this.selectionAllProvince();
   }
+  toggleTable2Show(){
+    if (this.toggleTable2 == 0) {
+      this.toggleTable2 = 1;
+    } else {
+      this.toggleTable2 = 0;
+    }
+  }
 
-  loadData(typeCur) {
+  toggleTable1Show(){
+    if (this.toggleTable1 == 0) {
+      this.toggleTable1 = 1;
+    } else {
+      this.toggleTable1 = 0;
+    }
+  }
+  loadData(typeCur2) {
     this.webapi.getData('IncDataMonth?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      this.getAmtProduct(typeCur)
-      this.getNumProduct();
-      this.selectionSumArea(typeCur);
+      this.getAmtProduct(typeCur2)
+      this.getNumProduct(typeCur2);
+      this.selectionSumArea(typeCur2);
     });
   }
 
@@ -121,11 +140,11 @@ export class IncDataMthPage {
     });
   }
 
-  selectionSumArea(typeCur) {
+  selectionSumArea(typeCur2) {
     this.webapi.getData('IncSumDataByMonth?offcode=' + this.offcode).then((data) => {
       this.responseSumArea = data;
-      this.getSumNumProduct(typeCur);
-      this.getSumAmtAreaProduct(typeCur);
+      this.getSumNumProduct(typeCur2);
+      this.getSumAmtAreaProduct(typeCur2);
     });
   }
 
@@ -150,6 +169,13 @@ export class IncDataMthPage {
     });
     this.oldArea = Region;
     this.oldtypeCur = typeCur;
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+      this.unitTG2 = "ล้านใบ";
+    }else{
+      this.curTG = "บาท";
+      this.unitTG2 = "ใบ";
+    }
   }
 
   getCountAmtProdSura(typeCur) {
@@ -161,7 +187,7 @@ export class IncDataMthPage {
       this.repondProductSura[i].AMT = amt;
 
       count = this.repondProductSura[i].COUNT;
-      if (count != null) { count = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (count != null) { count = changeCurrency(count, typeCur); }
       this.repondProductSura[i].COUNT = count;
     }
   }
@@ -175,7 +201,7 @@ export class IncDataMthPage {
       this.repondProductSica[i].AMT = amt;
 
       count = this.repondProductSica[i].COUNT;
-      if (count != null) { count = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (count != null) { count = changeCurrency(count, typeCur); }
       this.repondProductSica[i].COUNT = count;
     }
   }
@@ -189,88 +215,89 @@ export class IncDataMthPage {
       this.repondProductCard[i].AMT = amt;
 
       count = this.repondProductCard[i].COUNT;
-      if (count != null) { count = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (count != null) { count = changeCurrency(count, typeCur); }
       this.repondProductCard[i].COUNT = count;
     }
   }
 
-  getNumProduct() {
+  getNumProduct(typeCur2) {
     let sura;
     let top;
     let card;
     for (var i = 0; i < this.responseData.length; i++) {
       sura = this.responseData[i].NUM_OF_LIC_SURA;
-      if (sura != null) { sura = sura.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
       this.responseData[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      if (top != null) { top = top.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (top != null) { top = changeCurrency(top, typeCur2); }
       this.responseData[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseData[i].NUM_OF_LIC_CARD;
-      if (card != null) { card = card.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseData[i].NUM_OF_LIC_CARD = card;
     }
   }
 
-  getAmtProduct(typeCur) {
+  getAmtProduct(typeCur2) {
     let sura;
     let top;
     let card;
     for (var i = 0; i < this.responseData.length; i++) {
       sura = this.responseData[i].AMT_OF_LIC_SURA;
-      if (sura != null) { sura = changeCurrency(sura, typeCur); }
+      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
       this.responseData[i].AMT_OF_LIC_SURA = sura;
 
       top = this.responseData[i].AMT_OF_LIC_TOBBACO;
-      if (top != null) { top = changeCurrency(top, typeCur); }
+      if (top != null) { top = changeCurrency(top, typeCur2); }
       this.responseData[i].AMT_OF_LIC_TOBBACO = top;
 
       card = this.responseData[i].AMT_OF_LIC_CARD;
-      if (card != null) { card = changeCurrency(card, typeCur); }
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseData[i].AMT_OF_LIC_CARD = card;
     }
   }
 
 
   ///get sum area///
-  getSumNumProduct(typeCur) {
+  getSumNumProduct(typeCur2) {
     let sura;
     let top;
     let card;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       sura = this.responseSumArea[i].NUM_OF_LIC_SURA;
-      if (sura != null) { sura = sura.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
       this.responseSumArea[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseSumArea[i].NUM_OF_LIC_TOBBACO;
-      if (top != null) { top = top.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (top != null) { top = changeCurrency(top, typeCur2); }
       this.responseSumArea[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseSumArea[i].NUM_OF_LIC_CARD;
-      if (card != null) { card = card.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseSumArea[i].NUM_OF_LIC_CARD = card;
     }
   }
 
-  getSumAmtAreaProduct(typeCur) {
+  getSumAmtAreaProduct(typeCur2) {
     let sura;
     let top;
     let card;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       sura = this.responseSumArea[i].AMT_OF_LIC_SURA;
-      if (sura != null) { sura = changeCurrency(sura, typeCur); }
+      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
       this.responseSumArea[i].AMT_OF_LIC_SURA = sura;
 
       top = this.responseSumArea[i].AMT_OF_LIC_TOBBACO;
-      if (top != null) { top = changeCurrency(top, typeCur); }
+      if (top != null) { top = changeCurrency(top, typeCur2); }
       this.responseSumArea[i].AMT_OF_LIC_TOBBACO = top;
 
       card = this.responseSumArea[i].AMT_OF_LIC_CARD;
-      if (card != null) { sura = changeCurrency(card, typeCur); }
+      if (card != null) { sura = changeCurrency(card, typeCur2); }
       this.responseSumArea[i].AMT_OF_LIC_CARD = card;
 
     }
+
   }
 
 

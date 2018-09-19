@@ -13,51 +13,56 @@ page-inc-data-mth {
     background-color: rgb(255, 255, 255) !important;
   }
   table tbody tr:last-child { background:#a7d8ff !important; }
-  table>tbody>tr>td>p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 10em;
-  }
-
-  table>tbody>tr>td>p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 10em;
-  }
+ 
   @media only screen and (orientation: landscape) {
     table>tbody>tr>td>p {
       width: 90%;
     }
   }
-  h2.header-style{
+  ion-content.disable-scrolling .scroll-content {
+    overflow-y: hidden;
+}
+.desc-right{
+  font-weight: bold;
+  color: black !important;
+  font-size: 4vw !important;
+  text-align: right !important;
+}
+  h1.header-style {
     font-weight: bold;
     color: black !important;
     font-size: 6vw !important;
     text-align: center !important;
   }
-  h3.center {
+  h2.header-style {
     font-weight: bold;
-    color: rgb(27, 15, 15) !important;
-    font-size: 3vw !important;
+    color: black !important;
+    font-size: 5vw !important;
     text-align: center !important;
   }
-  h3.right {
+  .td-right {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    //font-size: 4vw !important;
     text-align: right !important;
   }
-  h3.left {
+  .td-left {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    //font-size: 4vw !important;
     text-align: left !important;
-    
   }
-  .solid-head{
-    border-bottom: 1px solid black;
+  .td-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    //font-size: 4vw !important;
+    text-align: center !important;
+  }
+  .th-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    //font-size: 4vw !important;
+    text-align: center !important;
   }
 
 }

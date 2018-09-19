@@ -169,11 +169,9 @@ export class CetegoryTaxPage {
     });
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-    alert(" Province -- "+Province);
     if (Province !== undefined) {
       this.hideTableBrance = 1;
     }
-    alert(" hideTableBrance -- "+this.hideTableBrance);
     if(typeCur == "M"){
       this.curTG = "ล้านบาท";
     }else{
@@ -253,7 +251,6 @@ export class CetegoryTaxPage {
   }
 
   ChangeCur(area, Province, typeCur) {
-    alert(this.hideTableBrance );
     if (this.hideTableBrance == 0) {
       this.TableGetData(area, Province, typeCur);
     } else if (this.hideTableBrance == 1) {

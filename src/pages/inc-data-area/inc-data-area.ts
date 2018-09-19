@@ -46,8 +46,8 @@ export class IncDataAreaPage {
   oldtypeCur : any; 
   toggleTable2 = 0;
   toggleTable1 = 0;
-  curTG1 = "บาท";
   curTG2 = "บาท";
+  unitTG2 = "ใบ";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -157,7 +157,6 @@ export class IncDataAreaPage {
     if (Area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
-    alert(Area +" -- "+ Province+" -- "+Month+" -- "+typeCur);
     this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=สุรา&month="+Month).then((data) => {
       this.repondProductSura = data;
       this.getSuraAmt(typeCur);
@@ -176,8 +175,10 @@ export class IncDataAreaPage {
     this.oldtypeCur = typeCur;
     if(typeCur == "M"){
       this.curTG2 = "ล้านบาท";
+      this.unitTG2 = "ล้านใบ";
     }else{
       this.curTG2 = "บาท";
+      this.unitTG2 = "ใบ";
     }
 
   }
@@ -256,7 +257,7 @@ export class IncDataAreaPage {
     this.webapi.getData('IncArea?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
       this.getProductAmt(typeCur2);
-      this.getProductNum();
+      this.getProductNum(typeCur2);
     });
   }
 
@@ -281,34 +282,23 @@ export class IncDataAreaPage {
     }
   }
 
-  getProductNum(){
+  getProductNum(typeCur2){
     let sura;
     let top;
     let card;
     for (var i = 0; i < this.responseData.length; i++) {
       sura = this.responseData[i].NUM_OF_LIC_SURA;
-      sura = sura.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
       this.responseData[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      top = top.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (top != null) { top = changeCurrency(top, typeCur2); }
       this.responseData[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseData[i].NUM_OF_LIC_CARD;
-      card = card.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseData[i].NUM_OF_LIC_CARD = card;
     }
   }
 
-  ChangeCur(Area,Province,Month,typeCur) {
-    this.getProduct(Area,Province,Month,typeCur);
-  }
-  ChangeCurOverview(typeCur2) {
-    this.loadData(typeCur2);
-    if(typeCur2 == "M"){
-      this.curTG1 = "ล้านบาท";
-    }else{
-      this.curTG1 = "บาท";
-    }
-  }
 }
