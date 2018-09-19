@@ -5,7 +5,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding
+[class.disable-scrolling]='isScaling'
+[style.fontSize]="fontSize">
+
+<div pinch
+(pinchstart)="onPinchStart($event)"
+(pinchend)="onPinchEnd($event)"
+(pinchmove)="onPinchMove($event)">
   <ion-item style="background-color:#D0DFE6;" text-center>
     <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
     <h2 class="header-style">ข้อมูล ณ วันที่ {{dateDisplay}}</h2>
@@ -37,18 +44,19 @@
    </ion-row>
 </ion-grid>
 
-<ion-grid>
+ <ion-grid>
   <ion-row>
    <ion-col>
-     <ion-item  class="padding-right: 2%">
+    <ion-item  class="size">
          <ion-label> หน่วย : </ion-label>
-         <ion-select [(ngModel)]="BathToMillion" class="right"  #item (ionChange)="changeTHBToMTHB(item.value)" >
-          <ion-option value=""  [selected]="true">บาท</ion-option>
-          <ion-option value="1" >ล้านบาท</ion-option> 
-       </ion-item>
+         <ion-select [(ngModel)]="BathToMillion"  #item (ionChange)="changeTHBToMTHB(item.value)" >
+          <ion-option value="B"  [selected]="true">บาท</ion-option>
+          <ion-option value="M" >ล้านบาท</ion-option> 
+      </ion-select>
+    </ion-item> 
    </ion-col>   
   </ion-row>
-</ion-grid>
+</ion-grid>  
   
   <ion-card>
     <ion-card-content no-padding>
@@ -85,4 +93,5 @@
 
     </ion-card-content>
   </ion-card>
+  </div>
 </ion-content>
