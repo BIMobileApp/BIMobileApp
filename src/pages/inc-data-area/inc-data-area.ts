@@ -300,10 +300,10 @@ export class IncDataAreaPage {
     }
   }
 
-  ChangeCurrency(Area,Province,Month,typeCur) {
+  ChangeCur(Area,Province,Month,typeCur) {
     this.getProduct(Area,Province,Month,typeCur);
   }
-  ChangeCurrencyOverview(typeCur2) {
+  ChangeCurOverview(typeCur2) {
     this.loadData(typeCur2);
     if(typeCur2 == "M"){
       this.curTG1 = "ล้านบาท";

@@ -110,7 +110,7 @@ export class IncDataMthPage {
   }
 
   
-  ChangeCurrency(Region,Province,Month,typeCur) {
+  ChangeCur(Region,Province,Month,typeCur) {
     this.IncProductAll(Region,Province,Month,typeCur);
     this.loadData(typeCur);
   }

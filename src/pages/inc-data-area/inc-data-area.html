@@ -22,7 +22,7 @@
         </ion-item>
         <ion-item class="sizemini" no-lines>
           <ion-label> หน่วย : </ion-label>
-          <ion-select [(ngModel)]="typeCur2" #item (ionChange)="ChangeCurrencyOverview(typeCur2)">
+          <ion-select [(ngModel)]="typeCur2" #item (ionChange)="ChangeCurOverview(typeCur2)">
             <ion-option value="B" [selected]="true">บาท</ion-option>
             <ion-option value="M">ล้านบาท</ion-option>
           </ion-select>
@@ -161,7 +161,7 @@
 
         <ion-item class="sizemini" no-lines>
                 <ion-label> หน่วย : </ion-label>
-                <ion-select [(ngModel)]="typeCur" #item (ionChange)="ChangeCurrency(Area,Province,Month,typeCur)">
+                <ion-select [(ngModel)]="typeCur" #item (ionChange)="ChangeCur(Area,Province,Month,typeCur)">
                   <ion-option value="B" [selected]="true">บาท</ion-option>
                   <ion-option value="M">ล้านบาท</ion-option>
                 </ion-select>

@@ -12,7 +12,6 @@ export class RestProvider {
     
    //this.baseUrl = "http://localhost:62657/api/";
    this.baseUrl = "http://192.168.41.101/BIWebService/api/";
-
   } 
 
    // GET Method
