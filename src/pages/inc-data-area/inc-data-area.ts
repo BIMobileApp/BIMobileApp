@@ -44,6 +44,10 @@ export class IncDataAreaPage {
 
   oldArea: any;
   oldtypeCur : any; 
+  toggleTable2 = 0;
+  toggleTable1 = 0;
+  curTG1 = "บาท";
+  curTG2 = "บาท";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -71,12 +75,29 @@ export class IncDataAreaPage {
 
   ionViewDidLoad() {
     let typeCur = 'B';
-    this.loadData(typeCur);
+    let typeCur2 = 'B';
+    this.loadData(typeCur2);
     this.selectionArea();
     this.selectionGeoupName();
     this.selectionProvinceAll();
 
     this.ProductAll(typeCur);
+  }
+
+  toggleTable2Show(){
+    if (this.toggleTable2 == 0) {
+      this.toggleTable2 = 1;
+    } else {
+      this.toggleTable2 = 0;
+    }
+  }
+
+  toggleTable1Show(){
+    if (this.toggleTable1 == 0) {
+      this.toggleTable1 = 1;
+    } else {
+      this.toggleTable1 = 0;
+    }
   }
 
   selectionArea(){
@@ -104,7 +125,7 @@ export class IncDataAreaPage {
   }
   //---------------------------------------------------------SURA------------------------------------------------------------//
   Getitems(Area,Province,Month, typeCur){
-    Province = 'undefined';
+    
     this.GetitembyProvince(Area,Province,Month,typeCur);
    /* var sura = "สุรา";
     var old_area = Area;
@@ -115,8 +136,6 @@ export class IncDataAreaPage {
       this.SuraSelectionProvince();
       Province = 'undefined';
     }*/
-
-    this.getProduct(Area,Province,Month,typeCur);
   }
 
   GetitembyProvince(Area,Province,Month,typeCur){
@@ -128,15 +147,17 @@ export class IncDataAreaPage {
   }
 
   GetitemsMonth(Area,Province,Month,typeCur){
+
     this.GetitembyProvince(Area,Province,Month,typeCur);
     this.getProduct(Area,Province,Month,typeCur);
   }
 
   getProduct(Area,Province,Month,typeCur){
+   
     if (Area !== this.oldArea || typeCur !== this.oldtypeCur) {
-      this.Province = undefined;
       Province = undefined;
     }
+    alert(Area +" -- "+ Province+" -- "+Month+" -- "+typeCur);
     this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=สุรา&month="+Month).then((data) => {
       this.repondProductSura = data;
       this.getSuraAmt(typeCur);
@@ -153,6 +174,11 @@ export class IncDataAreaPage {
     });
     this.oldArea = Area;
     this.oldtypeCur = typeCur;
+    if(typeCur == "M"){
+      this.curTG2 = "ล้านบาท";
+    }else{
+      this.curTG2 = "บาท";
+    }
 
   }
 
@@ -226,15 +252,15 @@ export class IncDataAreaPage {
     }
   }
 
-  loadData(typeCur){
+  loadData(typeCur2){
     this.webapi.getData('IncArea?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
-      this.getProductAmt(typeCur);
+      this.getProductAmt(typeCur2);
       this.getProductNum();
     });
   }
 
-  getProductAmt(typeCur) {
+  getProductAmt(typeCur2) {
    
     let suraAmt;
     let topAmt;
@@ -242,15 +268,15 @@ export class IncDataAreaPage {
     for (var i = 0; i < this.responseData.length; i++) {
 
       suraAmt = this.responseData[i].AMT_OF_LIC_SURA;
-      if (suraAmt != null) { suraAmt = changeCurrency(suraAmt, typeCur); }
+      if (suraAmt != null) { suraAmt = changeCurrency(suraAmt, typeCur2); }
       this.responseData[i].AMT_OF_LIC_SURA = suraAmt;
 
       topAmt = this.responseData[i].AMT_OF_LIC_TOBBACO;
-      if (topAmt != null) { topAmt = changeCurrency(topAmt, typeCur); }
+      if (topAmt != null) { topAmt = changeCurrency(topAmt, typeCur2); }
       this.responseData[i].AMT_OF_LIC_TOBBACO = topAmt;
 
       cardAmt = this.responseData[i].AMT_OF_LIC_CARD;
-      if (cardAmt != null) { cardAmt = changeCurrency(cardAmt, typeCur); }
+      if (cardAmt != null) { cardAmt = changeCurrency(cardAmt, typeCur2); }
       this.responseData[i].AMT_OF_LIC_CARD = cardAmt;
     }
   }
@@ -276,6 +302,13 @@ export class IncDataAreaPage {
 
   ChangeCurrency(Area,Province,Month,typeCur) {
     this.getProduct(Area,Province,Month,typeCur);
-    this.loadData(typeCur);
+  }
+  ChangeCurrencyOverview(typeCur2) {
+    this.loadData(typeCur2);
+    if(typeCur2 == "M"){
+      this.curTG1 = "ล้านบาท";
+    }else{
+      this.curTG1 = "บาท";
+    }
   }
 }

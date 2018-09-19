@@ -34,7 +34,8 @@ export class CompareTaxEstBeerPage {
   subArea: any;
   oldArea: any;
   oldtypeCur : any; 
-
+  toggleLine = 0;
+  toggleTable = 0;
   //Table reg
   responseRegData: any;
   grp_id: any;
@@ -54,7 +55,6 @@ export class CompareTaxEstBeerPage {
 
   ionViewDidLoad() {
     this.getProductType();
-    this.getLineAll();
     let area = undefined;
     let Province = undefined;
     let typeCur = 'B';
@@ -63,6 +63,22 @@ export class CompareTaxEstBeerPage {
     this.getTableData(area, Province, typeCur);
     this.selectDataAll(area, Province, typeCur);
 
+  }
+  toggleLineShow(){
+    if (this.toggleLine == 0) {
+      this.getLineAll();
+      this.toggleLine = 1;
+    } else {
+      this.toggleLine = 0;
+    }
+  }
+
+  toggleTableShow(){
+    if (this.toggleTable == 0) {
+      this.toggleTable = 1;
+    } else {
+      this.toggleTable = 0;
+    }
   }
   selectDataAll(area, Province, typeCur) {
     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
@@ -249,10 +265,11 @@ export class CompareTaxEstBeerPage {
           label: 'myLabel',
           callbacks: {
             label: function (tooltipItem, data) {
+              let value;
               if (tooltipItem.yLabel > 999999) {
-                var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+                 value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
               } else {
-                var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+                 value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
               }
 
               return value;

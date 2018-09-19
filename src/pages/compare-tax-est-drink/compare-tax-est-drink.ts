@@ -32,7 +32,8 @@ export class CompareTaxEstDrinkPage {
   dateDisplay:any;
   dateAsOff:any;
   subArea:any;
-
+  toggleLine = 0;
+  toggleTable = 0;
   oldArea: any;
   oldtypeCur : any; 
     //Table reg
@@ -52,7 +53,7 @@ export class CompareTaxEstDrinkPage {
 
   ionViewDidLoad() {
     this.getProductType();
-    this.getLineAll();
+    
     let area = undefined;
     let Province = undefined;
     let typeCur = 'B';
@@ -62,6 +63,23 @@ export class CompareTaxEstDrinkPage {
     this.selectDataAll(area, Province,typeCur);
   }
   
+  toggleLineShow(){
+    if (this.toggleLine == 0) {
+      this.getLineAll();
+      this.toggleLine = 1;
+    } else {
+      this.toggleLine = 0;
+    }
+  }
+
+  toggleTableShow(){
+    if (this.toggleTable == 0) {
+      this.toggleTable = 1;
+    } else {
+      this.toggleTable = 0;
+    }
+  }
+
   selectDataAll(area, Province,typeCur) {
     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
@@ -72,11 +90,7 @@ export class CompareTaxEstDrinkPage {
     let val;
     for (var i = 0; i < this.responseRegData.length; i++) {
       val = this.responseRegData[i].TAX;
-      if(val != null){
-        val = val/1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }     
+      if (val != null) { val = changeCurrency(val, typeCur); }
       this.responseRegData[i].TAX = val;
     }
   }

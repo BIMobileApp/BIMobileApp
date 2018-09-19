@@ -4,7 +4,13 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+/* start for pinch */
+const MAX_SCALE = 11.1;
+const MIN_SCALE = 0.9;
+const BASE_SCALE = 1.5;
+/* end  */
 @IonicPage()
+
 @Component({
   selector: 'page-compare-tax-est-car',
   templateUrl: 'compare-tax-est-car.html',
@@ -15,8 +21,8 @@ export class CompareTaxEstCarPage {
   responseData: any;
   ProductType: any;
   offcode: any;
-  responseArea:any;
-  responseProvince:any;
+  responseArea: any;
+  responseProvince: any;
 
   //Line Tax
   TaxlineChart: any;
@@ -27,45 +33,71 @@ export class CompareTaxEstCarPage {
   tax_lebel = [];
   yAxesticks = [];
   textDataInValid: any;
-  username:any;
+  username: any;
 
-  dateDisplay:any;
-  dateAsOff:any;
-  subArea:any;
+  dateDisplay: any;
+  dateAsOff: any;
+  subArea: any;
 
   oldArea: any;
-  oldtypeCur : any; 
-  Province : any;
+  oldtypeCur: any;
+  Province: any;
+  toggleLine = 0;
+  toggleTable = 0;
 
-    //Table reg
-    responseRegData: any;
-    grp_id: any;
-  
+  //Table reg
+  responseRegData: any;
+  grp_id: any;
+
+  /* start for pinch */
+  public fontSize = `${BASE_SCALE}rem`;
+  private scale = BASE_SCALE;
+  private alreadyScaled = BASE_SCALE;
+  public isScaling = false;
+  /* end  */
+
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.offcode = localStorage.offcode;
-      this.username = localStorage.userData;
-      this.dateDisplay = localStorage.last_update_date;
-      this.dateAsOff = dateDisplayAll;
-      this.grp_id = 'ภาษีรถยนต์';
-      this.offcode = localStorage.offcode;
-  
+    this.offcode = localStorage.offcode;
+    this.username = localStorage.userData;
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff = dateDisplayAll;
+    this.grp_id = 'ภาษีรถยนต์';
+    this.offcode = localStorage.offcode;
+
   }
 
   ionViewDidLoad() {
     this.getProductType();
-    this.getLineAll();
     let area = undefined;
     let Province = undefined;
     let typeCur = 'B';
     this.selectionProviceFirst();
     this.selectionArea();
-    this.getTableData(area, Province,typeCur);
-    this.selectDataAll(area, Province,typeCur);
+    this.getTableData(area, Province, typeCur);
+    this.selectDataAll(area, Province, typeCur);
   }
-  selectDataAll(area, Province,typeCur) {
-    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+  toggleLineShow() {
+    if (this.toggleLine == 0) {
+      this.getLineAll();
+      this.toggleLine = 1;
+    } else {
+      this.toggleLine = 0;
+    }
+  }
+
+  toggleTableShow() {
+    if (this.toggleTable == 0) {
+      this.toggleTable = 1;
+    } else {
+      this.toggleTable = 0;
+    }
+  }
+
+  selectDataAll(area, Province, typeCur) {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&area=' + area + '&province=' + Province).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
@@ -89,15 +121,15 @@ export class CompareTaxEstCarPage {
       this.responseProvince = data;
     });
   }
-  selectionProvince(area, Province,typeCur) {
+  selectionProvince(area, Province, typeCur) {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
 
     });
-    this.getTableData(area, Province,typeCur);
+    this.getTableData(area, Province, typeCur);
   }
   //-----------------------------------------------------------------------------------------------------------//
-  getTableData(area, Province,typeCur) {
+  getTableData(area, Province, typeCur) {
     if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       this.Province = undefined;
       Province = undefined;
@@ -107,13 +139,13 @@ export class CompareTaxEstCarPage {
       this.getTableTAX(typeCur);
 
     });
-    this.selectDataAll(area, Province,typeCur);
+    this.selectDataAll(area, Province, typeCur);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
   }
 
   //-----------------------------------------------------------------------------------------------------------//
-   getTableTAX(typeCur) {
+  getTableTAX(typeCur) {
     let tax;
     let last_tax;
     for (var i = 0; i < this.responseData.length; i++) {
@@ -142,17 +174,17 @@ export class CompareTaxEstCarPage {
           this.TaxgetTAX_LY();
           this.TaxgetLebel();
           this.TaxCreateChart();
-    
+
         } else {
           this.textDataInValid = 0;
         }
       });
     } else {
-     this.getLineAll();
+      this.getLineAll();
     }
   }
 
-  getLineAll(){
+  getLineAll() {
     this.webapi.getData('CompareTaxCarMonthAll?offcode=' + this.offcode).then((data) => {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
@@ -160,7 +192,7 @@ export class CompareTaxEstCarPage {
         this.TaxgetTAX_LY();
         this.TaxgetLebel();
         this.TaxCreateChart();
-  
+
       } else {
         this.textDataInValid = 0;
       }
@@ -300,5 +332,29 @@ export class CompareTaxEstCarPage {
 
     });
   }
+/* start for pinch */
+  public onPinchStart(e) {
+    this.isScaling = true;
+  }
+  public onPinchEnd(e) {
+    this.isScaling = false;
+    this.alreadyScaled = this.scale * this.alreadyScaled;
+  }
+  public onPinchMove(e) {
+    this.scale = e.scale;
+    let totalScaled = this.alreadyScaled * e.scale;
+    if (totalScaled >= MAX_SCALE) {
+      this.scale = MAX_SCALE / this.alreadyScaled;
+      totalScaled = MAX_SCALE;
+    } else if (totalScaled <= MIN_SCALE) {
+      this.scale = MIN_SCALE / this.alreadyScaled;
+      totalScaled = MIN_SCALE;
+    }
 
+    let fontSize = Math.round(totalScaled * 10) / 10;
+    if ((fontSize * 10) % 3 === 0) {
+      this.fontSize = `${fontSize}rem`;
+    }
+  }
+  /* end  */
 }

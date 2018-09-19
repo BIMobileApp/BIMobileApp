@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { Chart } from 'chart.js';
 import { ViewChild,ElementRef } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';

@@ -9,8 +9,8 @@
 </ion-header>
 
 <ion-content padding text-center>
-  <div id="mapContent" style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
-    <ion-item (click)="toggleMapShow()">
+  <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleMapShow()" no-lines>
       <ion-label class="toggleLabel"> >> แผนที่แสดงผลการจัดเก็บภาษี ทั่วประเทศ</ion-label>
     </ion-item>
   </div>
@@ -74,8 +74,8 @@
 -->
 
   <!--/////////////////////////////////////////////////// Bar Chart ///////////////////////////////////////////////-->
-  <div id="mapContent" style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
-    <ion-item (click)="toggleBarShow()">
+  <div  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleBarShow()" no-lines>
       <ion-label class="toggleLabel"> >> กราฟเปรียบเทียบสรุปการจัดเก็บภาษี</ion-label>
     </ion-item>
   </div>
@@ -99,8 +99,8 @@
     <br>
   </div>
   <!--////////////////////////////////////////////////  Table ////////////////////////////////////////////////////-->
-  <div id="mapContent" style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
-    <ion-item (click)="toggleTableShow()">
+  <div  style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleTableShow()" no-lines>
       <ion-label class="toggleLabel"> >> ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</ion-label>
     </ion-item>
   </div>
@@ -138,7 +138,7 @@
       </ion-item>
     <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามรายเดือน</h1>
     <h2 class="header-style">{{dateAsOff}}</h2>
-   
+    <h3 style="padding-right: 2%" class="td-right">หน่วย : {{curTG}}</h3>
     <ion-card>
       <ion-card-content no-padding>
 
@@ -192,7 +192,7 @@
 
     <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามประเภทสินค้า</h1>
     <h2 class="header-style">{{dateAsOff}}</h2>
-   <!--  <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3> -->
+    <h3 style="padding-right: 2%" class="td-right">หน่วย : {{curTG}}</h3>
     <ion-card>
       <ion-card-content no-padding>
         <div class="table-responsive">
@@ -248,7 +248,7 @@
       <br>
       <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามจังหวัด</h1>
       <h2 class="header-style">{{dateAsOff}}</h2>
-     <!--  <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3> -->
+      <h3 style="padding-right: 2%" class="td-right">หน่วย : {{curTG}}</h3>
       <ion-card>
         <ion-card-content no-padding>
           <div class="table-responsive">
@@ -304,7 +304,7 @@
       <br>
       <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามสาขา</h1>
       <h2 class="header-style">{{dateAsOff}}</h2>
-     <!--  <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3> -->
+      <h3 style="padding-right: 2%" class="td-right">หน่วย : {{curTG}}</h3>
       <ion-card>
         <ion-card-content no-padding>
           <div class="table-responsive">

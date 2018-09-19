@@ -29,7 +29,7 @@ export class CetegoryTaxPage {
   off: any;
   pak: any;
   username: any;
-
+  curTG = "บาท";
   //guage parm
   TaxGauge: any;
   TaxlyGauge: any;
@@ -65,6 +65,7 @@ export class CetegoryTaxPage {
   oldArea: any;
   oldtypeCur : any;
   hideTableBrance = 0;
+
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -171,6 +172,12 @@ export class CetegoryTaxPage {
     if (Province !== "undefined") {
       this.hideTableBrance = 1;
     }
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
+    alert(this.curTG);
   }
 
   getTAX(typeCur) {

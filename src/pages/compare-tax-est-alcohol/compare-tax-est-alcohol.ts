@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-est-alcohol',
@@ -15,8 +16,8 @@ export class CompareTaxEstAlcoholPage {
   responseData: any;
   ProductType: any;
   offcode: any;
-  responseArea:any;
-  responseProvince:any;
+  responseArea: any;
+  responseProvince: any;
 
   //Line Tax
   TaxlineChart: any;
@@ -27,15 +28,16 @@ export class CompareTaxEstAlcoholPage {
   tax_lebel = [];
   yAxesticks = [];
   textDataInValid: any;
-  username:any;
+  username: any;
 
-  dateDisplay:any;
-  dateAsOff:any;
-  subArea:any;
-
+  dateDisplay: any;
+  dateAsOff: any;
+  subArea: any;
+  toggleLine = 0;
+  toggleTable = 0;
   oldArea: any;
-  oldtypeCur : any; 
-  
+  oldtypeCur: any;
+
   //Table reg
   responseRegData: any;
   grp_id: any;
@@ -43,7 +45,7 @@ export class CompareTaxEstAlcoholPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.offcode = localStorage.offcode;
+    this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
@@ -53,7 +55,7 @@ export class CompareTaxEstAlcoholPage {
 
   ionViewDidLoad() {
     this.getProductType();
-    this.getLineAll();
+
     let area = undefined;
     let Province = undefined;
     let typeCur = 'B';
@@ -62,8 +64,24 @@ export class CompareTaxEstAlcoholPage {
     this.getTableData(area, Province, typeCur);
     this.selectDataAll(area, Province, typeCur);
   }
+  toggleLineShow() {
+    if (this.toggleLine == 0) {
+      this.getLineAll();
+      this.toggleLine = 1;
+    } else {
+      this.toggleLine = 0;
+    }
+  }
+
+  toggleTableShow() {
+    if (this.toggleTable == 0) {
+      this.toggleTable = 1;
+    } else {
+      this.toggleTable = 0;
+    }
+  }
   selectDataAll(area, Province, typeCur) {
-    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&area=' + area + '&province=' + Province).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
@@ -77,22 +95,22 @@ export class CompareTaxEstAlcoholPage {
     }
   }
 
-  selectionArea(){
-    this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
+  selectionArea() {
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
-  selectionProviceFirst(){
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area=undefined').then((data) => {
+  selectionProviceFirst() {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
       this.responseProvince = data;
     });
   }
-  selectionProvince(area,Province, typeCur){  
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
+  selectionProvince(area, Province, typeCur) {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
 
     });
-    this.getTableData(area,Province, typeCur);
+    this.getTableData(area, Province, typeCur);
   }
 
   getTableData(area, Province, typeCur) {
@@ -130,7 +148,7 @@ export class CompareTaxEstAlcoholPage {
     });
   }
 
- 
+
   getLineTaxData(TYPE_DESC) {
     this.TaxLineData = [];
     if (TYPE_DESC != "") {
@@ -141,27 +159,27 @@ export class CompareTaxEstAlcoholPage {
           /* this.TaxgetTAX_LY();
           this.TaxgetLebel(); */
           this.TaxCreateChart();
-    
+
         } else {
           this.textDataInValid = 0;
         }
       });
     } else {
-     this.getLineAll();
+      this.getLineAll();
     }
 
 
   }
 
-  getLineAll(){
+  getLineAll() {
     this.webapi.getData('CompareTaxSuraMonthAll?offcode=' + this.offcode).then((data) => {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
-       /*  this.TaxgetTAX_LY();
-        this.TaxgetLebel(); */
+        /*  this.TaxgetTAX_LY();
+         this.TaxgetLebel(); */
         this.TaxCreateChart();
-  
+
       } else {
         this.textDataInValid = 0;
       }
