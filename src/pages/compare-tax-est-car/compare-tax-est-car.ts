@@ -45,7 +45,7 @@ export class CompareTaxEstCarPage {
   toggleLine = 0;
   toggleTable = 0;
 
-  //Table reg
+  //Table reg d
   responseRegData: any;
   grp_id: any;
 
