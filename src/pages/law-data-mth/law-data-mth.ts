@@ -40,6 +40,10 @@ ionViewDidLoad() {
   this.getProductSuraAll();
   this.getProductSicaAll();
   this.getProductCardAll();
+
+  let area = 'undefined';
+  let province = 'undefined';
+  this.getProductAll(area,province);
 }
 
 selectionAreaAll(){
@@ -51,6 +55,11 @@ selectionAreaAll(){
 selectionProvinceAll(){
   this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
     this.responseProvince = data;
+    /*this.getProductLaw_qty();
+    this.getProductTarget_qty();
+    this.getProductLaw_amt();
+    this.getProductTarget_amt();
+    this.getProductTrea_money();*/
   });
 }
 
@@ -64,22 +73,28 @@ getitemsRegion(area,province){
   this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
     this.responseArea = data;
 
-    this.getitemsProvince(area,province);
+    /*this.getitemsProvince(area,province);
     this.getTableDataSura(area,province);
     this.getTableDataSica(area,province);
-    this.getTableDataCard(area,province);
+    this.getTableDataCard(area,province);*/
   });
-
+  province = [];
+  province = 'undefined'; 
+  this.getitemsProvince(area,province);
+  
 }
 
 getitemsProvince(area,province){
-  province = [];
+  
+ 
   this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
     this.responseProvince = data;
   });
-  this.getTableDataSura(area,province);
+
+  this.getProductAll(area,province);
+  /*this.getTableDataSura(area,province);
   this.getTableDataSica(area,province);
-  this.getTableDataCard(area,province);
+  this.getTableDataCard(area,province);*/
 }
 
 getTableData() { 
@@ -94,6 +109,11 @@ getTableData() {
 }
 
 ///select all product///
+getProductAll(area,province){
+  this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+area+'&province='+province).then((data) => {
+    this.repondProductSura = data;
+  });
+}
   ///Sura
   getProductSuraAll(){
     this.webapi.getData('LawProductByMthAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
@@ -186,4 +206,50 @@ for (var i = 0; i < this.responseData.length; i++) {
   this.responseData[i].TREASURY_MONEY = val;
 }
 }
+///product
+
+getProductLaw_qty(){
+  let val;
+for (var i = 0; i < this.repondProductSura.length; i++) {
+  val = this.repondProductSura[i].LAW_QTY
+  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  this.repondProductSura[i].LAW_QTY = val;
+}
+}
+getProductTarget_qty(){
+  let val;
+for (var i = 0; i < this.repondProductSura.length; i++) {
+  val = this.repondProductSura[i].TARGET_QTY;
+  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  this.repondProductSura[i].TARGET_QTY = val;
+}
+}
+getProductLaw_amt(){
+  let val;
+  for (var i = 0; i < this.repondProductSura.length; i++) {
+    val = this.repondProductSura[i].LAW_AMT/1000000;
+    val = val.toFixed(2);
+    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.repondProductSura[i].LAW_AMT = val;
+  }
+}
+getProductTarget_amt(){
+  let val;
+for (var i = 0; i < this.repondProductSura.length; i++) {
+  val = this.repondProductSura[i].TARGET_AMT/1000000;
+  val = val.toFixed(2);
+  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  this.repondProductSura[i].TARGET_AMT = val;
+}
+}
+getProductTrea_money(){
+  let val;
+for (var i = 0; i < this.repondProductSura.length; i++) {
+  val = this.repondProductSura[i].TREASURY_MONEY/1000000;
+  val = val.toFixed(2);
+  val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  this.repondProductSura[i].TREASURY_MONEY = val;
+}
+}
+
 }

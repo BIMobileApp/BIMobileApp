@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
+declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 @IonicPage()
 @Component({
@@ -30,8 +31,10 @@ export class CompareTaxEstAlcoholPage {
 
   dateDisplay:any;
   dateAsOff:any;
-  oldArea="";
   subArea:any;
+
+  oldArea: any;
+  oldtypeCur : any; 
   
   //Table reg
   responseRegData: any;
@@ -51,28 +54,25 @@ export class CompareTaxEstAlcoholPage {
   ionViewDidLoad() {
     this.getProductType();
     this.getLineAll();
-    var area = undefined;
-    var Province = undefined;
+    let area = undefined;
+    let Province = undefined;
+    let typeCur = 'B';
     this.selectionProviceFirst();
     this.selectionArea();
-    this.getTableData(area, Province);
-    this.selectDataAll(area, Province);
+    this.getTableData(area, Province, typeCur);
+    this.selectDataAll(area, Province, typeCur);
   }
-  selectDataAll(area, Province) {
+  selectDataAll(area, Province, typeCur) {
     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
       this.responseRegData = data;
-      if (!this.responseRegData) { } else { this.getTableRegTAX(); }
+      if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
   }
-  getTableRegTAX() {
+  getTableRegTAX(typeCur) {
     let val;
     for (var i = 0; i < this.responseRegData.length; i++) {
       val = this.responseRegData[i].TAX;
-      if(val != null){
-        val = val/1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }     
+      if (val != null) { val = changeCurrency(val, typeCur); }
       this.responseRegData[i].TAX = val;
     }
   }
@@ -87,54 +87,42 @@ export class CompareTaxEstAlcoholPage {
       this.responseProvince = data;
     });
   }
-  selectionProvince(area,Province){  
+  selectionProvince(area,Province, typeCur){  
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
 
     });
-    this.getTableData(area,Province);
+    this.getTableData(area,Province, typeCur);
   }
 
-  getTableData(area, Province) {
-    console.log("area: " + area);
-    if (area != this.oldArea) {
+  getTableData(area, Province, typeCur) {
+
+    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
     this.webapi.getData('CompareTaxSura?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      this.getTableTAX();
-      this.getTableTAX_LY();
-
+      this.getTableTAX(typeCur);
     });
-    this.selectDataAll(area, Province);
+    this.selectDataAll(area, Province, typeCur);
     this.oldArea = area;
+    this.oldtypeCur = typeCur;
   }
   //-----------------------------------------------------------------------------------------------------------//
-  getTableTAX() {
-    let val;
+  getTableTAX(typeCur) {
+    let tax;
+    let last_tax;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TOTAL_TAX_AMT;
-      if (val != null) {
-        val = val / 1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
-      this.responseData[i].TOTAL_TAX_AMT = val;
+      tax = this.responseData[i].TOTAL_TAX_AMT;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.responseData[i].TOTAL_TAX_AMT = tax;
+
+      last_tax = this.responseData[i].LAST_TOTAL_TAX_AMT;
+      if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+      this.responseData[i].LAST_TOTAL_TAX_AMT = last_tax;
     }
   }
 
-  getTableTAX_LY() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].LAST_TOTAL_TAX_AMT;
-      if (val != null) {
-        val = val / 1000000;
-        val = val.toFixed(2);
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
-      this.responseData[i].LAST_TOTAL_TAX_AMT = val;
-    }
-  }
 
   getProductType() {
     this.webapi.getData('getTypeNameSuraMonth?offcode=' + this.offcode).then((data) => {
@@ -143,14 +131,15 @@ export class CompareTaxEstAlcoholPage {
   }
 
  
-  getLineTaxData(TaxCode) {
-    if (TaxCode != "") {
-      this.webapi.getData('CompareTaxSuraMonth?code=' + TaxCode + '&&offcode=' + this.offcode).then((data) => {
+  getLineTaxData(TYPE_DESC) {
+    this.TaxLineData = [];
+    if (TYPE_DESC != "") {
+      this.webapi.getData('CompareTaxSuraMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();
-          this.TaxgetTAX_LY();
-          this.TaxgetLebel();
+          /* this.TaxgetTAX_LY();
+          this.TaxgetLebel(); */
           this.TaxCreateChart();
     
         } else {
@@ -169,8 +158,8 @@ export class CompareTaxEstAlcoholPage {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
-        this.TaxgetTAX_LY();
-        this.TaxgetLebel();
+       /*  this.TaxgetTAX_LY();
+        this.TaxgetLebel(); */
         this.TaxCreateChart();
   
       } else {
@@ -182,13 +171,19 @@ export class CompareTaxEstAlcoholPage {
 
   TaxgetTAX() {
     this.tax_TAX = [];
+    this.tax_TAX_LY = [];
+    this.tax_lebel = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
       this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
+      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
+      this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
     this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
+    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
+    this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
   }
 
-  TaxgetTAX_LY() {
+  /* TaxgetTAX_LY() {
     this.tax_TAX_LY = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
       this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
@@ -203,7 +198,7 @@ export class CompareTaxEstAlcoholPage {
       this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
-  }
+  } */
 
   TaxCreateChart() {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {

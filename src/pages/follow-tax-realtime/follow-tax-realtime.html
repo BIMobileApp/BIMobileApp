@@ -8,33 +8,40 @@
   <ion-content> 
       <ion-item style="background-color:#D0DFE6;" text-center>
           <h1 class="header-style">รายงานภาษีสรรพสามิตนำเข้าแยกรายวัน</h1>
-          <h2 class="header-style">ข้อมูล ณ วันที่ {{dateDisplay}}</h2>
+          <h2 class="header-style">{{dateNow}}</h2>
        </ion-item>
-      <!--  <ion-grid no-padding>
+     
+       <ion-grid>
+            <ion-row>      
+             <ion-col>
+               <ion-item  class="size">
+                   <ion-label> ภาค : </ion-label>
+                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province, typeCur)" disabled={{isEnable}}>
+                          <ion-option value="undefined"   [selected]="select_all_value">ทั้งหมด</ion-option>
+                          <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
+                   </ion-select>
+                 </ion-item>
+             </ion-col>       
+             <ion-col>
+               <ion-item  class="size">
+                   <ion-label>จังหวัด : </ion-label>
+                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province, typeCur)" disabled={{isEnableProv}}>
+                         <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                           <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
+                   </ion-select>
+               </ion-item>
+            </ion-col>        
+            </ion-row>
+         </ion-grid>
 
-        <ion-row>
-          <ion-col>
-              <ion-item class="size">
-                <ion-label> ภาค : </ion-label>
-                  <ion-select  [(ngModel)]="area" (ionChange)="selectionProvince(area,Province)" >                     
-                      <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                      <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_CD}}">{{item.REGION_NAME}}</ion-option>                                                                         
-                  </ion-select>
-                </ion-item>
-          </ion-col>
-        
-          <ion-col>
-              <ion-item  class="size">
-                  <ion-label>จังหวัด : </ion-label>
-                      <ion-select  [(ngModel)]="Province" (ionChange)="getTableData(area,Province)">
-                          <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                          <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_CD}}">{{item1.PROVINCE_NAME}}</ion-option>            
-                    </ion-select>
-                </ion-item>
-            </ion-col>
-      </ion-row>     
-    </ion-grid> -->
-     <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3>
+  <!--    <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3> -->
+    <ion-item class="sizemini" no-lines>
+        <ion-label> หน่วย : </ion-label>
+        <ion-select [(ngModel)]="typeCur" #item (ionChange)="getData(Region,Province, typeCur)">
+          <ion-option value="B" [selected]="true">บาท</ion-option>
+          <ion-option value="M">ล้านบาท</ion-option>
+        </ion-select>
+      </ion-item>
      <ion-card>
         <ion-card-content no-padding>
           <div class="table-responsive">
@@ -51,10 +58,10 @@
                     <tbody>
                             <tr *ngFor="let data of responseData">
                                 <td width="20%" ><h3 class="center">{{data.DIM_DATA_DATE_ID}}</h3></td>
-                                <td><h3 class="right">{{data.EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{data.IN_EXCISE_AMT}}</h3></td>
                                 <td><h3 class="right">{{data.FZ_EXCISE_AMT}}</h3></td>
                                 <td><h3 class="right">{{data.STAMP_AMT}}</h3></td>
-                                <td><h3 class="right">{{data.IN_EXCISE_AMT}}</h3></td>
+                                <td><h3 class="right">{{data.EXCISE_AMT}}</h3></td>
                             </tr>
                     </tbody>
             </table>

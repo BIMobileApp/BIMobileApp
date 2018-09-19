@@ -18,25 +18,16 @@
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   
   <script src="cordova.js"></script>
-  <script src="assets/js/util.js"></script>
-  
-  <!--google-->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--   <script>
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback();
-      google.charts.load('current', {'packages':['gauge']});
-  </script>
-   <script>
-    google.charts.load('current', {'packages':['gauge']});
-</script> -->
 
-  <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.2/radial/gauge.min.js"></script>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+  
+ 
+
+ <!--  <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.2/radial/gauge.min.js"></script> -->
+<!--   <script src="https://code.highcharts.com/highcharts.js"></script>
  <script src="https://code.highcharts.com/highcharts-more.js"></script>
  <script src="https://code.highcharts.com/modules/exporting.js"></script>
  <script src="https://code.highcharts.com/modules/export-data.js"></script>
-
+ -->
 
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF2CCbqDGdMRhGzU7sT_4pWdH6aoSzezk&callback=initMap"
  type="text/javascript"></script>
@@ -60,7 +51,17 @@
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
-
+  <script src="assets/js/util.js"></script>
+   <!--google-->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script>
+       google.charts.load("current", {packages:["corechart"]});
+       google.charts.setOnLoadCallback();
+       google.charts.load('current', {'packages':['gauge']});
+   </script>
+    <script>
+     google.charts.load('current', {'packages':['gauge']});
+ </script>
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
 

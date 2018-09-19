@@ -7,10 +7,34 @@
   
   <ion-content>
       <ion-item style="background-color:#D0DFE6;" text-center>
-          <h2 class="header-style">{{dateAsOff}}</h2>
+          <h1 class="header-style">รายงานเปรียบเทียบภาษี/ปริมาณ ปีก่อน</h1>
+          <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
         </ion-item>
+
+        <ion-grid>
+            <ion-row>      
+             <ion-col>
+               <ion-item  class="size">
+                   <ion-label> ภาค : </ion-label>
+                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)" disabled={{isEnable}}>
+                          <ion-option value="undefined"   [selected]="select_all_value">ทั้งหมด</ion-option>
+                          <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
+                   </ion-select>
+                 </ion-item>
+             </ion-col>       
+             <ion-col>
+               <ion-item  class="size">
+                   <ion-label>จังหวัด : </ion-label>
+                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)" disabled={{isEnableProv}}>
+                         <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                           <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
+                   </ion-select>
+               </ion-item>
+            </ion-col>        
+            </ion-row>
+         </ion-grid>
+         
     <ion-card>
-  
       <ion-card-content>
         <h2 class="header-style">กราฟเปรียบเทียบภาษีปีก่อน (เครื่องดื่ม)</h2>
         <div *ngIf="textDataNotValid=='0' ">

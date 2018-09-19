@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-navbar color="navber">
+    <ion-title  text-wrap>สถิติผลการจัดเก็บภาษีในประเทศ และภาษีนำเข้า จำแนกตามประเภท  <br>
+      ผู้ใช้งาน : {{username}} </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item style="background-color:#D0DFE6;" text-center>
+        <h1 class="header-style">สถิติผลการจัดเก็บภาษีในประเทศ และภาษีนำเข้า จำแนกตามประเภท</h1>
+        <h2 class="header-style"></h2>
+    </ion-item>
+    <ion-grid>
+
+        <ion-row>    
+          <ion-col>
+            <ion-item class="size">
+              <ion-label> ภาค : </ion-label>
+              <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,month, typeCur)" disabled={{isEnable}}>
+                <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
+                <ion-option *ngFor="let item of responseRegion" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+    
+          <ion-col>
+            <ion-item class="size">
+              <ion-label>จังหวัด : </ion-label>
+              <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,month, typeCur)" disabled={{isEnableProv}}>
+                <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+                <ion-option *ngFor="let item1 of ResponseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item  class="size">
+                    <ion-label> เดือน: </ion-label>
+                    <ion-select [(ngModel)]="month" (ionChange)="selectMonth(Region,Province,month, typeCur)" >
+                        <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                        <ion-option value="มกราคม">มกราคม</ion-option>
+                        <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
+                        <ion-option value="มีนาคม">มีนาคม</ion-option>
+                        <ion-option value="เมษายน">เมษายน</ion-option>
+                        <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
+                        <ion-option value="มิถุนายน">มิถุนายน</ion-option>
+                        <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
+                        <ion-option value="สิงหาคม">สิงหาคม</ion-option>
+                        <ion-option value="กันยายน">กันยายน</ion-option>
+                        <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+                        <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+                        <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+                  </ion-select>
+                  </ion-item>
+              </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+      <h3 style="padding-left: 60%; padding-top: 0px; margin-top: 0px;padding-right: 2%; "> 
+          <ion-item class="unit">
+              <ion-label> หน่วย : </ion-label>
+              <ion-select [(ngModel)]="typeCur" (ionChange)="getAllData(Region,Province,month, typeCur)">
+                  <ion-option value="B" [selected]="true">บาท</ion-option>
+                  <ion-option value="M">ล้านบาท</ion-option>
+              </ion-select>
+          </ion-item>
+    </h3>
+
+      <ion-card>           
+            <ion-card-content no-padding>       
+                    <div class="table-responsive">
+                            <table class="table" style="width: 100%;">
+                              <thead>
+                                <tr style="background-color: #F78B26; ">
+                                    <th width="10%"><h3 class="center">ลำดับ</h3></th>
+                                    <th><h3 class="center">ประเภทรายได้</h3></th>
+                                    <th><h3 class="center">ภาษีในประเทศ</h3></th>
+                                    <th><h3 class="center">ภาษีนำเข้า</h3></th>
+                                    <th><h3 class="center">รวมทั้งสิ้น</h3></th>
+                                 </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let data of respondData">
+                                        <th> <h3 class="center">{{data.ROW_NUM}}</h3></th>
+                                        <th> <h3 class="left">{{data.GROUP_NAME}}</h3></th>
+                                        <th> <h3 class="right">{{data.IN_TAX_AMT}}</h3></th>
+                                        <th> <h3 class="right">{{data.IMPORT_TAX_AMT}}</h3></th>
+                                        <th> <h3 class="right">{{data.TAX}}</h3></th>
+                                      </tr>
+                                  </tbody>
+                            </table>
+                        </div>                           
+                </ion-card-content>     
+        </ion-card>     
+</ion-content>

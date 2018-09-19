@@ -12,6 +12,7 @@ page-follow-tax-realtime{
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
+  table tbody tr:last-child { background:#a7d8ff !important; }
   table>tbody>tr>td>p {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -54,17 +55,5 @@ page-follow-tax-realtime{
     text-align: left !important;
     
   }
-  ion-item.size {
-    width: 80%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bold;
-    color: black;
-    font-size: 4vw;
-  }
-  ion-select {
-  max-width: 80% !important;
-    white-space: normal!important;
-  }
+ 
 }

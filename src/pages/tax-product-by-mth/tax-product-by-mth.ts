@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var changeCurrency: any;
 @IonicPage()
 @Component({
   selector: 'page-tax-product-by-mth',
@@ -17,12 +17,14 @@ export class TaxProductByMthPage {
   year_th:any;
   selectMTFrom:any;
   selectMTTo:any;
-  oldArea:any;
   username:any;
   area:any;
   Province:any;
   responseArea:any;
   responseProvince:any;
+  oldArea: any;
+  oldtypeCur : any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
@@ -31,11 +33,12 @@ export class TaxProductByMthPage {
   }
 
   ionViewDidLoad() {
+    let typeCur = 'B';
     this.selectMTFrom ="";
    var d = new Date(); 
     var n = d.getFullYear();
     var nt = d.getFullYear()+543;
-    console.log(nt);
+    
     var range = [];
     for(var i=0;i<10;i++) {
 
@@ -45,103 +48,81 @@ export class TaxProductByMthPage {
       range.push( {"key":this.year_th,"value": this.year_en});
     }
     this.summaryDate = range;
-    console.log(this.summaryDate);
+    
     this.selectionArea();
     var area="undefined";
     var Province="undefined"; 
-    this.getDataAll();
+    this.getDataAll(typeCur);
   }
 
-  getDataAll(){
+  getDataAll(typeCur){
     this.webapi.getData('TaxProductGroupByMthAll?offcode='+this.offcode).then((data)=>{
        this.responseData = data;
-       this.getTAX();
-       this.getTAX_Ly();
-       this.getTAX_Est();
+       this.getTAX(typeCur);
      });
   }
 
-  selectMonthFrom(mthFrom){ 
-    this.selectMTTo = mthFrom;
-    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+mthFrom+'&monthTo=').then((data)=>{
-      this.selectMTFrom =mthFrom;
+  selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){ 
+   
+    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+monthFrom+'&monthTo='+monthTo).then((data)=>{
+    //  this.selectMTFrom =monthFrom;
       this.responseData = data;
-      this.getTAX();
-      this.getTAX_Ly();
-      this.getTAX_Est();
-      this.selectMonthTo(mthFrom);
+      this.getTAX(typeCur);
+     // this.selectMonthTo(area,Province,monthFrom,monthTo);
     });
   }
 
-  selectMonthTo(mthTo){ 
-    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+mthTo).then((data)=>{
-      this.selectMTTo =mthTo;
-      this.responseData = data;
-      this.getTAX();
-      this.getTAX_Ly(); 
-      this.getTAX_Est();
-    });
+  selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
+    this.getTableData(area,Province,monthFrom,monthTo,typeCur) ;
   }
   selectionArea(){
     this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
-   
-   selectionProvince(area,Province){   
-    console.log(area,Province);
+
+  selectionRegion(area,Province,monthFrom,monthTo,typeCur){
+    this.selectionProvince(area,Province,monthFrom,monthTo,typeCur);
+  }
+
+  selectionProvince(area,Province,monthFrom,monthTo,typeCur){   
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
-
     });
-    this.getTableData(area,Province);
+    this.getTableData(area,Province,monthFrom,monthTo,typeCur);
   }
-  getTableData(area,Province) {
+
+
+  getTableData(area,Province,monthFrom,monthTo,typeCur) {
     
-    if(area != this.oldArea){
-      Province = 'undefined';
-    } 
-    this.area=area;
-    this.Province=Province;
-    this.webapi.getData('TaxProductGroupByMth?area='+area+'&Province='+Province+'&offcode='+this.offcode+'&monthFrom='+ this.selectMTFrom+'&monthTo='+this.selectMTTo).then((data) => {
+    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
+      Province = undefined;
+    }
+    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+area+'&province='+Province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
       this.responseData = data;
-      this.getTAX();
-      this.getTAX_Ly(); 
-      this.getTAX_Est();
+      this.getTAX(typeCur);
       
     });
-   this.oldArea = area;
+    this.oldArea = area;
+    this.oldtypeCur = typeCur;
   }
 
-  getTAX() {
-    let val;
+  getTAX(typeCur) {
+    let tax;
+    let last_tax;
+    let est;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TAX/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TAX = val;
+      tax = this.responseData[i].TAX;
+      if (tax != null) { tax = changeCurrency(tax, typeCur); }
+      this.responseData[i].TAX = tax;
 
-    }
-  }
+      last_tax = this.responseData[i].LAST_TAX;
+      if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+      this.responseData[i].LAST_TAX = last_tax;
 
-  getTAX_Ly() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].LAST_TAX/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].LAST_TAX = val;
-
-    }
-  }
-
-  getTAX_Est() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].ESTIMATE/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].ESTIMATE = val;
+      est = this.responseData[i].ESTIMATE;
+      if (est != null) { est = changeCurrency(est, typeCur); }
+      this.responseData[i].ESTIMATE = est;
     }
   }
 

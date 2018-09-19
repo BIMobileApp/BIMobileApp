@@ -111,6 +111,7 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { Geolocation } from '@ionic-native/geolocation'; 
+import { DimensionTime_03Page } from '../pages/dimension-time-03/dimension-time-03';
 
 @NgModule({
   declarations: [
@@ -210,7 +211,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     LawDataMthPage,
     DataStatusPage,
     NewsEventPage,
-    LicDataMarketPage
+    LicDataMarketPage,
+    DimensionTime_03Page
   ],
   imports: [
     BrowserModule,
@@ -323,7 +325,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     LawDataMthPage,
     DataStatusPage,
     NewsEventPage,
-    LicDataMarketPage
+    LicDataMarketPage,
+    DimensionTime_03Page
   ],
   providers: [
     StatusBar,

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-/* declare var dateDisplayAll: any;
+declare var dateDisplayAll: any;
 declare var google;
 
-declare var dateDisplayAll:any; */
 
 @IonicPage()
 @Component({
@@ -12,24 +11,24 @@ declare var dateDisplayAll:any; */
   templateUrl: 'new-report-gauge-tax-beer.html',
 })
 export class NewReportGaugeTaxBeerPage {
-  /* dateAsOff = "";
+  dateAsOff = "";
   respondData:any;
   respondData2:any;
   offcode: any;
   username:any;
 
-  dateDisplay:any; */
+  dateDisplay:any; 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-      /* this.offcode = localStorage.offcode;
+      this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
-      this.dateAsOff = dateDisplayAll; */
+      this.dateAsOff = dateDisplayAll; 
   }
 
   ionViewDidLoad() {
-    /* this.webapi.getData('taxPercentBeer?offcode='+this.offcode).then((data) => {
+    this.webapi.getData('taxPercentBeer?offcode='+this.offcode).then((data) => {
       this.respondData = data;
       this.getTAX();
       this.get_tax_amt();
@@ -42,10 +41,10 @@ export class NewReportGaugeTaxBeerPage {
       this.getTAX2();
       this.get_tax_quan();
       this.get_taxly_quan();
-    }); */
+    }); 
   }
 
-  /* getTAX() {
+  getTAX() {
 
     let tax_val;
     let taxly_val;
@@ -77,7 +76,7 @@ export class NewReportGaugeTaxBeerPage {
     let red_taxly_from;
     let red_taxly_to;
 
-    f(taxest_val <= 100){
+    if(taxest_val <= 100){
       taxext_percent = 100;
     }else{
       taxext_percent = taxest_val;
@@ -195,5 +194,5 @@ export class NewReportGaugeTaxBeerPage {
       this.respondData2[i].LAST_TOTAL_VOLUMN_CAPA = val;
     }
   }
- */
+ 
 }

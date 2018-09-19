@@ -13,14 +13,15 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = WelcomePage;
   pages: Array<{title: string, component: any, icon: string}>;
-  offdesc = localStorage.offdesc;
-  name = localStorage.username;
+  offdesc : any;
+  name : any;
 
   constructor(
     public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen) {
-    
+    this.offdesc = localStorage.offdesc;
+    this.name = localStorage.username;
     this.initializeApp();
      // used for an example of ngFor and navigation
     this.pages = [

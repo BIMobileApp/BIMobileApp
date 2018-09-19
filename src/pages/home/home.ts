@@ -23,7 +23,9 @@ export class HomePage {
   offcode: any;
   offdesc: any;
   username: any;
+  region:any;
   lastUpdateDate: any;
+  region_shot:any;
  
 
   constructor(public navCtrl: NavController,
@@ -53,14 +55,19 @@ export class HomePage {
      if (this.userDB.length!=0) {
         this.offcode = this.userDB[0].OFFCODE;
         this.offdesc = this.userDB[0].OFFDESC;
-        this.username = this.userDB[0].NAME;       
+        this.username = this.userDB[0].NAME;  
+        this.region =  this.userDB[0].REGION_DESC;
         this.lastUpdateDate = this.userDB[0].LAST_UPDATE_DATE;
+        this.region_shot = this.userDB[0].REGION_SHOT;
+
          //บันทึกข้อมูลของ local storage
          localStorage.setItem("userData", this.userData.username);
          localStorage.setItem("offcode", this.offcode);
          localStorage.setItem("last_update_date", this.lastUpdateDate);
          localStorage.setItem("offdesc", this.offdesc);
+         localStorage.setItem("region_desc", this.region);
          localStorage.setItem("username", this.username); 
+         localStorage.setItem("region_shot", this.region_shot); 
          
          //ปิดหน้า login และกลับไปหน้าหลัง
 

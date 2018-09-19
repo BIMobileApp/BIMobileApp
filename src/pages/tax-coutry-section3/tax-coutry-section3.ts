@@ -45,8 +45,11 @@ export class TaxCoutrySection3Page {
   UserAthu() {
     this.offcode = localStorage.offcode;
      this.selectionProvince();
-     this.TableGetDataAll();
+     //this.TableGetDataAll();
      this.GetProvinceTable();
+     var Province = undefined;
+     this.TableGetData(Province);
+     this.brance = 0;
    }
 
    selectionProvince(){

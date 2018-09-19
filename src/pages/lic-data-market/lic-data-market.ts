@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+declare var changeCurrency: any;
 declare var dateDisplayAll:any;
 
 @IonicPage()
@@ -17,6 +17,9 @@ export class LicDataMarketPage {
   dateDisplay:any;
   dateAsOff:any;
   username:any;
+  oldArea: any;
+  oldtypeCur: any;
+  Province: any;
   
 
   constructor(public navCtrl: NavController,
@@ -26,129 +29,89 @@ export class LicDataMarketPage {
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
       this.username = localStorage.userData;
+      
   }
 
   ionViewDidLoad() {
+    let typeCur = 'B';
     this.webapi.getData('IncDataMarketList?offcode='+this.offcode).then((data)=>{
       this.responseData = data;
-      this.getRegCount();
-      this.getLicSura();
-      this.getLicTobbaco();
-      this.getLicCard();
-      this.getTotal();
-      this.SumData();
+      this.getDataAmt(typeCur);
+      this.SumData(typeCur);
     });
   }
 
-  SumData(){
+  SumData(typeCur){
     this.webapi.getData('IncSumDataMarketList?offcode='+this.offcode).then((data)=>{
       this.responseSumData = data;
-      this.getSumRegCount();
-      this.getSumLicSura();
-      this.getSumLicTobbaco();
-      this.getSumLicCard();
-      this.getSumTotal();
+      this.getSumDataAmt(typeCur);
+    });
+  }
+  
+  ChangeCurrency(typeCur){
+    this.webapi.getData('IncDataMarketList?offcode='+this.offcode).then((data)=>{
+      this.responseData = data;
+      this.getDataAmt(typeCur);
+      this.SumData(typeCur);
     });
   }
 
-  getRegCount() {
-    let val;
+  getDataAmt(typeCur) {
+    let sura;
+    let top;
+    let card;
+    let total;
+    let reg;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].COUNT_REG;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].COUNT_REG = val;
-    }
-  }
+      sura = this.responseData[i].NUM_OF_LIC_SURA;
+      if (sura != null) { sura = changeCurrency(sura, typeCur); }
+      this.responseData[i].NUM_OF_LIC_SURA = sura;
 
-  getLicSura() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].NUM_OF_LIC_SURA;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].NUM_OF_LIC_SURA = val;
-    }
-  }
+      top = this.responseData[i].NUM_OF_LIC_TOBBACO;
+      if (top != null) { top = changeCurrency(top, typeCur); }
+      this.responseData[i].NUM_OF_LIC_TOBBACO = top;
 
-  getLicTobbaco() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].NUM_OF_LIC_TOBBACO = val;
-    }
-  }
+      card = this.responseData[i].NUM_OF_LIC_CARD;
+      if (card != null) { card = changeCurrency(card, typeCur); }
+      this.responseData[i].NUM_OF_LIC_CARD = card;
 
-  getLicCard() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].NUM_OF_LIC_CARD;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].NUM_OF_LIC_CARD = val;
-    }
-  }
+      total = this.responseData[i].TOTAL_LIC;
+      if (total != null) { total = changeCurrency(total, typeCur); }
+      this.responseData[i].TOTAL_LIC = total;
 
-  getTotal() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].TOTAL_LIC;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].TOTAL_LIC = val;
+      reg = this.responseData[i].COUNT_REG;
+      if (reg != null) { reg = changeCurrency(reg, typeCur); }
+      this.responseData[i].COUNT_REG = reg;
     }
   }
 
   //sum
-  getSumRegCount() {
-    let val;
+  getSumDataAmt(typeCur) {
+    let sura;
+    let top;
+    let card;
+    let total;
+    let reg;
     for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].COUNT_REG;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].COUNT_REG = val;
-    }
-  }
+      sura = this.responseSumData[i].NUM_OF_LIC_SURA;
+      if (sura != null) { sura = changeCurrency(sura, typeCur); }
+      this.responseSumData[i].NUM_OF_LIC_SURA = sura;
 
-  getSumLicSura() {
-    let val;
-    for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].NUM_OF_LIC_SURA;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].NUM_OF_LIC_SURA = val;
-    }
-  }
+      top = this.responseSumData[i].NUM_OF_LIC_TOBBACO;
+      if (top != null) { top = changeCurrency(top, typeCur); }
+      this.responseSumData[i].NUM_OF_LIC_TOBBACO = top;
 
-  getSumLicTobbaco() {
-    let val;
-    for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].NUM_OF_LIC_TOBBACO;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].NUM_OF_LIC_TOBBACO = val;
-    }
-  }
+      card = this.responseSumData[i].NUM_OF_LIC_CARD;
+      if (card != null) { card = changeCurrency(card, typeCur); }
+      this.responseSumData[i].NUM_OF_LIC_CARD = card;
 
-  getSumLicCard() {
-    let val;
-    for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].NUM_OF_LIC_CARD;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].NUM_OF_LIC_CARD = val;
-    }
-  }
+      total = this.responseSumData[i].TOTAL_LIC;
+      if (total != null) { total = changeCurrency(total, typeCur); }
+      this.responseSumData[i].TOTAL_LIC = total;
 
-  getSumTotal() {
-    let val;
-    for (var i = 0; i < this.responseSumData.length; i++) {
-      val = this.responseSumData[i].TOTAL_LIC;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumData[i].TOTAL_LIC = val;
+      reg = this.responseSumData[i].COUNT_REG;
+      if (reg != null) { reg = changeCurrency(reg, typeCur); }
+      this.responseSumData[i].COUNT_REG = reg;
     }
   }
 

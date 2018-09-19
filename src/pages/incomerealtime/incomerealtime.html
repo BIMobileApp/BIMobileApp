@@ -1,7 +1,9 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>Real Time <br>
-      ผู้ใช้งาน : {{username}}</ion-title>
+    <ion-title text-wrap>Real Time <br>
+      ผู้ใช้งาน : {{username}} <br>
+
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,49 +17,40 @@
 (pinchmove)="onPinchMove($event)">
   <ion-item style="background-color:#D0DFE6;" text-center>
     <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
-    <h2 class="header-style">ข้อมูล ณ วันที่ {{dateDisplay}}</h2>
+    <h2 class="header-style">{{dateNow}} เวลา {{time}} น.</h2>
   </ion-item>
 
   <ion-grid>
-   <ion-row>
+    <ion-row>
 
-    <ion-col>
-      <ion-item  class="size">
+      <ion-col>
+        <ion-item class="size">
           <ion-label> ภาค : </ion-label>
-          <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)">
-                <!-- <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>-->
-                  <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
+          <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province, typeCur)" disabled={{isEnable}}>
+            <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
+            <ion-option *ngFor="let item of responseRegion" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
           </ion-select>
         </ion-item>
-    </ion-col>
+      </ion-col>
 
-    <ion-col>
-      <ion-item  class="size">
+      <ion-col>
+        <ion-item class="size">
           <ion-label>จังหวัด : </ion-label>
-          <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)">
-                <!--<ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option >-->
-                  <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+          <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province, typeCur)" disabled={{isEnableProv}}>
+            <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+            <ion-option *ngFor="let item1 of ResponseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
           </ion-select>
-      </ion-item>
-   </ion-col>  
-
-   </ion-row>
-</ion-grid>
-
- <ion-grid>
-  <ion-row>
-   <ion-col>
-    <ion-item  class="size">
-         <ion-label> หน่วย : </ion-label>
-         <ion-select [(ngModel)]="BathToMillion"  #item (ionChange)="changeTHBToMTHB(item.value)" >
-          <ion-option value="B"  [selected]="true">บาท</ion-option>
-          <ion-option value="M" >ล้านบาท</ion-option> 
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item class="sizemini" no-lines>
+      <ion-label> หน่วย : </ion-label>
+      <ion-select [(ngModel)]="typeCur" #item (ionChange)="ChangeCurrency(area, Province, typeCur)">
+        <ion-option value="B" [selected]="true">บาท</ion-option>
+        <ion-option value="M">ล้านบาท</ion-option>
       </ion-select>
-    </ion-item> 
-   </ion-col>   
-  </ion-row>
-</ion-grid>  
-  
+    </ion-item>
   <ion-card>
     <ion-card-content no-padding>
       <div class="table-responsive">
@@ -84,7 +77,7 @@
                 <h3 class="left">{{data.GROUP_NAME}}</h3>
               </td>
               <td width="30%">
-                <h3 class="right">{{data.TAX | number : fractionSize}}</h3>
+                <h3 class="right">{{data.TAX}}</h3>
               </td>
             </tr>
           </tbody>
