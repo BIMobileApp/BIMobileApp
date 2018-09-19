@@ -1,111 +1,183 @@
 <ion-header>
   <ion-navbar color="navber">
     <ion-title>สถิติและปราบปราม <br>
-        ผู้ใช้งาน : {{username}}</ion-title>
+      ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
   <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
-          <h2 class="header-style">สถิติคดีตามรายเดือน</h2>
+    <h2 class="header-style">สถิติคดีตามรายเดือน</h2>
+  </ion-item>
+  <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleTable1Show()" no-lines>
+      <ion-label class="toggleLabel"> >> สถิติคดีตามรายเดือน ภาพรวม</ion-label>
+    </ion-item>
+  </div>
+  <div *ngIf="toggleTable1==1">
+    <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+      <ion-card>
+        <ion-card-content no-padding>
           <h2 class="header-style">{{dateAsOff}}</h2>
-       </ion-item>
-       <h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3>
-    <ion-card>
-       <ion-card-content no-padding> 
-                <div class="table-responsive">     
-                       <table class="table" style="width: 100%;">
-                               <thead>
-                                       <tr style="background-color: #F78B26; ">
-                                               <th width="10%"><h3 class="center">เดือน</h3></th>
-                                               <th><h3 class="center">จำนวนคดี</h3></th>
-                                               <th><h3 class="center">ค่าปรับ</h3></th>
-                                               <th><h3 class="center">เป้าจำนวนคดี</h3></th>
-                                               <th><h3 class="center">เป้าค่าปรับ</h3></th>
-                                               <th><h3 class="center">เงินส่งคลัง</h3></th>
-                                       </tr>
-                               </thead>
-                               <tbody>
-                                       <tr *ngFor="let data of responseData">
-                                               <td width="10%"><h3 class="center">{{data.MONTH}}</h3></td>
-                                               <td><h3 class="right">{{data.LAW_QTY}}</h3></td>
-                                               <td><h3 class="right">{{data.TARGET_QTY}}</h3></td>
-                                               <td><h3 class="right">{{data.LAW_AMT}}</h3></td>
-                                               <td><h3 class="right">{{data.TARGET_AMT}}</h3></td>
-                                               <td><h3 class="right">{{data.TREASURY_MONEY}}</h3></td>
-                                       </tr>
-                               </tbody>
-                       </table>
-                   </div>
-       </ion-card-content>
-     </ion-card>
 
-     
-        <ion-card>
-                <ion-card-content  no-padding>
-                           <ion-item>
-                                   <ion-label text-center><strong>สถิติคดีตามสินค้า</strong></ion-label>
-                           </ion-item>
-                           <ion-item>
-                                   <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
-                           </ion-item>
-   
-                           <ion-grid>
-                                   <ion-row>
-                                           <ion-col>
-                                           <ion-item  class="size">
-                                           <ion-label> ภาค : </ion-label>
-                                                   <ion-select  [(ngModel)]="area" (ionChange)="getitemsRegion(area,province)">
-                                                           <ion-option value="undefined"   [selected]="true">ทั้งหมด</ion-option>
-                                                           <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}" >{{item.REGION_NAME}}</ion-option>              
-                                                   </ion-select>
-                                           </ion-item>
-                                           </ion-col>
-                                           <ion-col>
-                                                   <ion-item  class="size">
-                                                           <ion-label>จังหวัด : </ion-label>
-                                                           <ion-select  [(ngModel)]="province" (ionChange)="getitemsProvince(area,province)">
-                                                                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                                                                <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
-                                                           </ion-select>
-                                                   </ion-item>
-                                           </ion-col>
-                                   </ion-row>                               
-                           </ion-grid>
-   
-                <ion-card>
-                   <ion-card-content  no-padding>
-   
-                           <h3 class="header-style">สถิติคดีแยกตามเดือนประเภทสินค้า</h3>
-   
-                           <h3 style="padding-right: 2%" class="desc-right">หน่วย : คดี/บาท</h3>
-                           <div class="table-responsive">     
-                                   <table class="table" style="width: 100%;">
-                                        <thead>
-                                                <tr style="background-color: #F78B26; ">
-                                                        <th width="15%"><h3 class="center">ประเภทสินค้า</h3></th>
-                                                        <th><h3 class="center">จำนวนคดี</h3></th>
-                                                        <th><h3 class="center">ค่าปรับ</h3></th>
-                                                        <th><h3 class="center">เป้าจำนวนคดี</h3></th>
-                                                        <th><h3 class="center">เป้าค่าปรับ</h3></th>
-                                                        <th><h3 class="center">เงินส่งคลัง</h3></th>
-                                                </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr *ngFor="let data of repondProductSura">
-                                                        <td width="15%"><h3 class="left">{{data.GROUP_DESC}}</h3></td>
-                                                        <td><h3 class="right">{{data.LAW_QTY | number : fractionSize }}</h3></td>
-                                                        <td><h3 class="right">{{data.TARGET_QTY | number : fractionSize}}</h3></td>
-                                                        <td><h3 class="right">{{data.LAW_AMT | number : fractionSize}}</h3></td>
-                                                        <td><h3 class="right">{{data.TARGET_AMT | number : fractionSize}}</h3></td>
-                                                        <td><h3 class="right">{{data.TREASURY_MONEY | number : fractionSize}}</h3></td>
-                                                </tr>
-                                        </tbody>
-                                   </table>
-                           </div>
-                    </ion-card-content>
-            </ion-card>
-   
+          <ion-item class="sizemini" no-lines>
+            <ion-label> หน่วย : </ion-label>
+            <ion-select [(ngModel)]="typeCurFirst" (ionChange)="getTableData(typeCurFirst)">
+              <ion-option value="B" [selected]="true">ใบ/บาท</ion-option>
+              <ion-option value="M">ล้านใบ/ล้านบาท</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+              <thead>
+                <tr style="background-color: #F78B26; ">
+                  <th width="10%">
+                    <h3 class="th-center" [style.fontSize]="fontSize">เดือน</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">จำนวนคดี</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">ค่าปรับ</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">เป้าจำนวนคดี</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">เป้าค่าปรับ</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">เงินส่งคลัง</h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of responseData">
+                  <td width="10%">
+                    <h3 class="td-center" [style.fontSize]="fontSize">{{data.MONTH}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.LAW_QTY}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.TARGET_QTY}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.LAW_AMT}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.TARGET_AMT}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.TREASURY_MONEY}}</h3>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleTable2Show()" no-lines>
+      <ion-label class="toggleLabel"> >> สถิติคดีตามสินค้า</ion-label>
+    </ion-item>
+  </div>
+  <div *ngIf="toggleTable2==1">
+    <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+      <ion-card>
+        <ion-card-content no-padding>
+          <h2 class="header-style">สถิติคดีตามสินค้า</h2>
+          <h2 class="header-style">{{dateAsOff}}</h2>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label> ภาค : </ion-label>
+                  <ion-select [(ngModel)]="SRegion" (ionChange)="getitemsRegion(SRegion,SProvince,typeCur)" disabled={{isEnable}}>
+                    <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
+                    <ion-option *ngFor="let item of responseArea" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label>จังหวัด : </ion-label>
+                  <ion-select [(ngModel)]="SProvince" (ionChange)="getitemsProvince(SRegion,SProvince,typeCur)"
+                    disabled={{isEnableProv}}>
+                    <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+                    <ion-option *ngFor="let item1 of responseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-card>
+            <ion-card-content no-padding>
+
+              <h3 class="header-style">สถิติคดีแยกตามเดือนประเภทสินค้า</h3>
+              <ion-item class="sizemini" no-lines>
+                <ion-label> หน่วย : คดี/</ion-label>
+                <ion-select [(ngModel)]="typeCur" (ionChange)="getProductAll(SRegion,SProvince,typeCur)">
+                  <ion-option value="B" [selected]="true">บาท</ion-option>
+                  <ion-option value="M">ล้านบาท</ion-option>
+                </ion-select>
+              </ion-item>
+              <div class="table-responsive">
+                <table class="table" style="width: 100%;">
+                  <thead>
+                    <tr style="background-color: #F78B26; ">
+                      <th width="20%">
+                        <h3 class="th-center" [style.fontSize]="fontSize">ประเภทสินค้า</h3>
+                      </th>
+                      <th>
+                        <h3 class="th-center" [style.fontSize]="fontSize">จำนวนคดี</h3>
+                      </th>
+                      <th>
+                        <h3 class="th-center" [style.fontSize]="fontSize">ค่าปรับ</h3>
+                      </th>
+                      <th>
+                        <h3 class="th-center" [style.fontSize]="fontSize">เป้าจำนวนคดี</h3>
+                      </th>
+                      <th>
+                        <h3 class="th-center" [style.fontSize]="fontSize">เป้าค่าปรับ</h3>
+                      </th>
+                      <th>
+                        <h3 class="th-center" [style.fontSize]="fontSize">เงินส่งคลัง</h3>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of repondProductSura">
+                      <td width="20%">
+                        <h3 class="td-left" [style.fontSize]="fontSize">{{data.GROUP_DESC}}</h3>
+                      </td>
+                      <td>
+                        <h3 class="td-right" [style.fontSize]="fontSize">{{data.LAW_QTY }}</h3>
+                      </td>
+                      <td>
+                        <h3 class="td-right" [style.fontSize]="fontSize">{{data.TARGET_QTY}}</h3>
+                      </td>
+                      <td>
+                        <h3 class="td-right" [style.fontSize]="fontSize">{{data.LAW_AMT }}</h3>
+                      </td>
+                      <td>
+                        <h3 class="td-right" [style.fontSize]="fontSize">{{data.TARGET_AMT}}</h3>
+                      </td>
+                      <td>
+                        <h3 class="td-right" [style.fontSize]="fontSize">{{data.TREASURY_MONEY }}</h3>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ion-card-content>
+          </ion-card>
+
           <!-- <ion-card>
                    <ion-card-content  no-padding>
                            
@@ -170,9 +242,10 @@
                                    </div>
                            </ion-card-content>
                     </ion-card>-->
-   
-           </ion-card-content>
-   </ion-card>
-   
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 
 </ion-content>

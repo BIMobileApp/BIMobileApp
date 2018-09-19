@@ -20,24 +20,30 @@ page-cetegory-tax {
   table tbody tr:last-child {
     background: #a7d8ff !important;
   }
+
   @media only screen and (orientation: landscape) {
     table>tbody>tr>td>p {
       width: 90%;
     }
   }
+
+  ion-content.disable-scrolling .scroll-content {
+    overflow-y: hidden;
+  }
+
   .td-center {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
-    font-size: 3vw !important;
+    // font-size: 3vw !important;
+    text-align: center !important;
   }
 
   .td-right {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    // font-size: 3vw !important;
     text-align: right !important;
   }
-  
 
   .img-size {
     width: 85%;
@@ -50,14 +56,14 @@ page-cetegory-tax {
   .td-left {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    // font-size: 3vw !important;
     text-align: left !important;
   }
 
   .th-center {
     font-weight: bold;
     color: rgb(27, 15, 15);
-    font-size: 3vw !important;
+    // font-size: 3vw !important;
     text-align: center !important;
   }
 
@@ -74,6 +80,7 @@ page-cetegory-tax {
     font-size: 4vw !important;
     text-align: center !important;
   }
+
   p.header-style {
     font-weight: bold;
     color: black !important;
@@ -92,26 +99,21 @@ page-cetegory-tax {
   }
 
   .font-red {
-    color: rgb(226, 40, 80)  !important;
+    color: rgb(226, 40, 80) !important;
   }
 
   .font-yellow {
-    color: #FFF000  !important;
+    color: #FFF000 !important;
     //text-shadow: 0.5px 0.5px #000000;
 
   }
 
   .font-green {
-    color: rgb(52, 180, 90)  !important;
+    color: rgb(52, 180, 90) !important;
   }
 
   .font-green2 {
-    color: rgb(31, 99, 31)  !important;
+    color: rgb(31, 99, 31) !important;
   }
-  .toggleLabel{
-    text-align: left; 
-    font-weight: bold; 
-    color: #2c95eb ;
-    font-size: 5vw !important;
-  }
+
 }

@@ -113,6 +113,9 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
 import { Geolocation } from '@ionic-native/geolocation'; 
 import { DimensionTime_03Page } from '../pages/dimension-time-03/dimension-time-03';
 
+import { DirectivesModule } from '../directives/directives.module';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -217,6 +220,7 @@ import { DimensionTime_03Page } from '../pages/dimension-time-03/dimension-time-
   imports: [
     BrowserModule,
     HttpClientModule,
+    DirectivesModule,
     ChartsModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: '',

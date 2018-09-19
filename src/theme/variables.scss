@@ -33,26 +33,7 @@ $toolbar-wp-height: 55px;
     width: 90%;
   }
 }
-table,
-  th,
-  td,
-  tr {
-    border: 1px solid #ffffff;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
 
-  table tbody tr:nth-child(odd) {
-    background-color: rgb(250, 220, 137) !important;
-  }
-
-  table tbody tr:nth-child(even) {
-    background-color: rgb(255, 255, 255) !important;
-  }
-
-  table tbody tr:last-child {
-    background: #a7d8ff !important;
-  }
 
 ion-select {
   max-width: 60% !important;
@@ -62,8 +43,6 @@ ion-select {
   direction: ltr !important;
   padding-left: 0 !important;
 }
-
-
 
 ion-item.size{
   width: 100%;
@@ -83,6 +62,13 @@ ion-item.sizemini {
   color: black ;
   font-size: 3vw ;
 }
+.toggleLabel{
+  text-align: left; 
+  font-weight: bold; 
+  color: #2c95eb ;
+  font-size: 5vw !important;
+}
+
 
 // Named Color Variables
 // --------------------------------------------------

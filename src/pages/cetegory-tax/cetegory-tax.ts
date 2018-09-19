@@ -15,7 +15,12 @@ import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-secti
 
 declare var notRound: any;
 declare var changeCurrency: any;
-declare var dateDisplayAll: any;
+declare var dateDisplayAll: any; 
+/* start for pinch */
+const MAX_SCALE = 11.1;
+const MIN_SCALE = 0.9;
+const BASE_SCALE = 1.3;
+/* end  */
 
 @IonicPage()
 @Component({
@@ -29,7 +34,7 @@ export class CetegoryTaxPage {
   off: any;
   pak: any;
   username: any;
-
+  curTG = "บาท";
   //guage parm
   TaxGauge: any;
   TaxlyGauge: any;
@@ -69,6 +74,13 @@ export class CetegoryTaxPage {
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
   dateAsOff = "";
+
+    /* start for pinch */
+    public fontSize = `${BASE_SCALE}rem`;
+    private scale = BASE_SCALE;
+    private alreadyScaled = BASE_SCALE;
+    public isScaling = false;
+    /* end  */
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public app: App,
@@ -168,8 +180,13 @@ export class CetegoryTaxPage {
     });
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-    if (Province !== "undefined") {
+    if (Province !== undefined) {
       this.hideTableBrance = 1;
+    }
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
     }
   }
 
@@ -244,7 +261,7 @@ export class CetegoryTaxPage {
     }
   }
 
-  ChangeCurrency(area, Province, typeCur) {
+  ChangeCur(area, Province, typeCur) {
     if (this.hideTableBrance == 0) {
       this.TableGetData(area, Province, typeCur);
     } else if (this.hideTableBrance == 1) {
@@ -384,5 +401,29 @@ export class CetegoryTaxPage {
     this.app.getRootNav().push(TaxCoutrySection10Page);
   }
 
+/* start for pinch */
+  public onPinchStart(e) {
+    this.isScaling = true;
+  }
+  public onPinchEnd(e) {
+    this.isScaling = false;
+    this.alreadyScaled = this.scale * this.alreadyScaled;
+  }
+  public onPinchMove(e) {
+    this.scale = e.scale;
+    let totalScaled = this.alreadyScaled * e.scale;
+    if (totalScaled >= MAX_SCALE) {
+      this.scale = MAX_SCALE / this.alreadyScaled;
+      totalScaled = MAX_SCALE;
+    } else if (totalScaled <= MIN_SCALE) {
+      this.scale = MIN_SCALE / this.alreadyScaled;
+      totalScaled = MIN_SCALE;
+    }
 
+    let fontSize = Math.round(totalScaled * 10) / 10;
+    if ((fontSize * 10) % 3 === 0) {
+      this.fontSize = `${fontSize}rem`;
+    }
+  }
+  /* end  */
 }

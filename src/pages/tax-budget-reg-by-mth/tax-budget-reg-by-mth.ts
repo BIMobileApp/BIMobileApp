@@ -58,9 +58,8 @@ export class TaxBudgetRegByMthPage {
     let tax;
     for (var i = 0; i < this.responseData.length; i++) {
       tax = this.responseData[i].TAX;
-      if (tax != null) { tax = changeCurrency(tax, typeCur); console.log(tax);}
+      if (tax != null) { tax = changeCurrency(tax, typeCur);}
      this.responseData[i].TAX = tax;
     }
   }
-
 }
