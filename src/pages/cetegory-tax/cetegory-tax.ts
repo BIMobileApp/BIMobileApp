@@ -177,7 +177,6 @@ export class CetegoryTaxPage {
     }else{
       this.curTG = "บาท";
     }
-    alert(this.curTG);
   }
 
   getTAX(typeCur) {
