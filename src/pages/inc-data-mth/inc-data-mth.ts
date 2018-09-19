@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
-declare var dateDisplayAll:any;
+declare var changeCurrency: any;
+declare var dateDisplayAll: any;
 
 @IonicPage()
 @Component({
@@ -16,493 +16,262 @@ export class IncDataMthPage {
   responseArea: any;
   responseProvince: any;
   responseGroupName: any;
-  repondProductSura:any;
-  repondProductSica:any;
-  responseTypeSura:any;
-  responseTypeSica:any;
-  responseTypeCard:any;
-  repondProductCard:any;
-  repondSumProductSura:any;
-  repondSumProductSica:any;
-  repondSumProductCard:any;
-  responseSumArea:any;
-  repondProduct:any;
-  dateDisplay:any;
-  dateAsOff:any;
-  disoffcode:any;
+  repondProductSura: any;
+  repondProductSica: any;
+  responseTypeSura: any;
+  responseTypeSica: any;
+  responseTypeCard: any;
+  repondProductCard: any;
+  repondSumProductSura: any;
+  repondSumProductSica: any;
+  repondSumProductCard: any;
+  responseSumArea: any;
+  repondProduct: any;
+  dateDisplay: any;
+  dateAsOff: any;
+  disoffcode: any;
 
-  stroffcode:any;
-  province:any;
-  branch:any;
+  stroffcode: any;
+  Province: any;
+  branch: any;
 
-  defaultSelectQuestion:any;
-  defaultSelectProvinceSura:any;
-  questionArray:any;
-  username :any;
+  defaultSelectQuestion: any;
+  defaultSelectProvinceSura: any;
+  questionArray: any;
+  username: any;
 
-  constructor(public navCtrl: NavController, 
+  oldArea: any;
+  oldtypeCur: any;
+
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public webapi:RestProvider) {
-      this.offcode = localStorage.offcode;
-     
-     // this.province = this.offcode.substring(0, 2);
-     // this.branch = this.offcode.substring(4, 2);
+    public webapi: RestProvider) {
+    this.offcode = localStorage.offcode;
 
-      //this.disoffcode = this.stroffcode;
+    // this.province = this.offcode.substring(0, 2);
+    // this.branch = this.offcode.substring(4, 2);
 
-      this.dateDisplay = localStorage.last_update_date;
-      this.dateAsOff =  dateDisplayAll;
-      this.username = localStorage.userData;
+    //this.disoffcode = this.stroffcode;
+
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff = dateDisplayAll;
+    this.username = localStorage.userData;
   }
 
 
   ionViewDidLoad() {
-    this.loadData();
+    let typeCur = 'B';
+    this.loadData(typeCur);
     let Region = 'undefined';
     let Province = 'undefined';
     let Month = 'undefined';
-    this.IncProductAllSura(Region,Province,Month);
-    this.IncProductAllSica(Region,Province,Month);
-    this.IncProductAllCard(Region,Province,Month);
-
+    this.IncProductAll(Region, Province, Month, typeCur);
     this.selectionArea();
     this.selectionAllProvince();
   }
 
-  loadData(){
-    this.webapi.getData('IncDataMonth?offcode='+this.offcode).then((data)=>{
+  loadData(typeCur) {
+    this.webapi.getData('IncDataMonth?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      this.getNumSURA();
-      this.getNumTOBBACO();
-      this.getNumCARD();
-      this.getAmtSURA();
-      this.getAmtTOBBACO();
-      this.getAmtCARD();
-      this.selectionSumArea();
+      this.getAmtProduct(typeCur)
+      this.getNumProduct();
+      this.selectionSumArea(typeCur);
     });
   }
 
   ///select all///
-  selectionArea(){
-    this.webapi.getData('SelectionMthArea?offcode='+this.offcode).then((data) => {
+  selectionArea() {
+    this.webapi.getData('SelectionMthArea?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
 
-  selectionAllProvince(){   
-    this.webapi.getData('SelectionAllProvince?offcode='+this.offcode).then((data) => {
+  selectionProvinceFill(Region) {
+    
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
-  }
-
-  selectionProvinceFill(Region){
-    Region = 'undefined';
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
-      this.responseProvince = data;
-    }); 
 
   }
 
-  selectRegion(Region,Province,Month){
-
-    Region = 'undefined';
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+  selectRegion(Region, Province, Month, typeCur) {
+    Province =  'undefined';
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
-    }); 
-   // this.selectionProvinceFill(Region);
+    });
+    this.IncProductAll(Region, Province, Month, typeCur);
+  }
 
-    this.IncProductAllSura(Region,Province,Month);
-    this.IncProductAllSica(Region,Province,Month);
-    this.IncProductAllCard(Region,Province,Month);
+  selectionProvince(Region, Province, Month, typeCur) {
+    this.webapi.getData('SelectionMthProvince?offcode=' + this.offcode + '&region=' + Region).then((data) => {
+      this.responseProvince = data;
+    });
+    this.IncProductAll(Region, Province, Month, typeCur);
   }
 
   
-  selectionSumArea(){
-    this.webapi.getData('IncSumDataByMonth?offcode='+this.offcode).then((data) => {
-      this.responseSumArea = data; 
+  ChangeCurrency(Region,Province,Month,typeCur) {
+    this.IncProductAll(Region,Province,Month,typeCur);
+    this.loadData(typeCur);
+  }
 
-      this.getSumNumSURA();
-      this.getSumNumTOBBACO();
-      this.getSumNumCARD();
-      this.getSumAmtAreaSURA();
-      this.getSumAmtTOBBACO();
-      this.getSumAmtAreaCARD();
+  selectionAllProvince() {
+    this.webapi.getData('SelectionAllProvince?offcode=' + this.offcode).then((data) => {
+      this.responseProvince = data;
     });
   }
 
-    ///end select all///
+  selectionSumArea(typeCur) {
+    this.webapi.getData('IncSumDataByMonth?offcode=' + this.offcode).then((data) => {
+      this.responseSumArea = data;
+      this.getSumNumProduct(typeCur);
+      this.getSumAmtAreaProduct(typeCur);
+    });
+  }
 
-  /////สุรา//////
+  ///end select all///
 
-
- IncProductAllSura(Region,Province,Month){
-
-    //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
-      this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month='+Month+'&group_name=สุรา').then((data) => {
+  IncProductAll(Region, Province, Month, typeCur) {
+    if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
+      this.Province = undefined;
+      Province = undefined;
+    }
+    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
-
-     /* this.loadData();
-      this.getAmtProdSura();
-      this.getCountProdSura();
-      this.getitemsSumSura(Region,Province,Month);*/
+      this.getCountAmtProdSura(typeCur);
     });
-  }
-
-  getitemsTypeNameSura(SuraArea,SuraProvince,SuraTypeName){
-     this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
-  }
-
-  getitemsRegionSura(SuraArea,SuraProvince,SuraTypeName){
-  
-    //this.selectionProvince(SuraArea);
-    this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
-
-   // SuraArea =this.questionArray[this.defaultSelectQuestion];
-   // this.getitemsProvinceSura(SuraArea,SuraProvince,SuraTypeName);
-  }
-
-  questionArrayProvince:any;
-  getitemsProvinceSura(SuraArea,SuraProvince,SuraTypeName){
-      this.IncProductAllSura(SuraArea,SuraProvince,SuraTypeName);
-
-   // SuraProvince =this.questionArrayProvince[this.defaultSelectProvinceSura];
-  }
-
-  getitemsSumSura(SuraArea,SuraProvince,SuraTypeName){
-    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SuraArea+'&province='+SuraProvince+'&type_name='+SuraTypeName+'&group_name=สุรา').then((data) => {
-      this.repondSumProductSura = data;
-      //this.getSumAmtSura();    
-      //this.getSumCountSura(); 
-    });
-  }
-
-  getAmtProdSura(){
-      let val;
-      for (var i = 0; i < this.repondProductSura.length; i++) {
-        val = this.repondProductSura[i].AMT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondProductSura[i].AMT = val;
-      }
-    }
-  
-    getCountProdSura(){
-      let val;
-      for (var i = 0; i < this.repondProductSura.length; i++) {
-        val = this.repondProductSura[i].COUNT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondProductSura[i].COUNT = val;
-      }
-    }
-
-    getSumAmtSura(){
-      let val;
-      for (var i = 0; i < this.repondSumProductSura.length; i++) {
-        val = this.repondSumProductSura[i].AMT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondSumProductSura[i].AMT = val;
-      }
-    }
-  
-    getSumCountSura(){
-      let val;
-      for (var i = 0; i < this.repondSumProductSura.length; i++) {
-        val = this.repondSumProductSura[i].COUNT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondSumProductSura[i].COUNT = val;
-      }
-    }
-
-/////end สุรา//////
-
- /////ยาสูบ//////
- selectionTypeNameSica(){
-  this.webapi.getData('SelectionMthGroupName?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
-    this.responseTypeSica = data;
-  });
-}
-
-  IncProductAllSica(Region,Province,Month){
-    //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
-     this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month='+Month+'&group_name=ยาสูบ').then((data) => {
+    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=ยาสูบ').then((data) => {
       this.repondProductSica = data;
-     /* this.loadData();
-      this.getAmtSica();
-      this.getCountSica();*/
-     // this.getitemsSumSica(SicaRegion,SicaProvince,SicaType);
+      this.getCountAmtSica(typeCur);
     });
-  }
-
-  getitemsTypeNameSica(SicaRegion,SicaProvince,SicaType){
-     this.IncProductAllSica(SicaRegion,SicaProvince,SicaType);
-  }
-
-  getitemsRegionSica(SicaRegion,SicaProvince,SicaType){
-    this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
-  }
-
-  getitemsProvinceSica(SicaRegion,SicaProvince,SicaType){    
-    this. IncProductAllSica(SicaRegion,SicaProvince,SicaType);
-    //SicaProvince =this.questionArray[this.defaultSelectProvinceSura];
-  }
-
-  getitemsSumSica(SicaRegion,SicaProvince,SicaType){
-    this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+SicaRegion+'&province='+SicaProvince+'&type_name='+SicaType+'&group_name=ยาสูบ').then((data) => {
-      this.repondSumProductSica = data;
-      //this.getSumAmtSica();    
-      //this.getSumCountSica(); 
+    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=ไพ่').then((data) => {
+      this.repondProductCard = data;
+      this.getCountAmtCard(typeCur);
     });
+    this.oldArea = Region;
+    this.oldtypeCur = typeCur;
   }
 
-  getAmtSica(){
-      let val;
-      for (var i = 0; i < this.repondProductSica.length; i++) {
-        val = this.repondProductSica[i].AMT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondProductSica[i].AMT = val;
-      }
-    }
-  
-    getCountSica(){
-      let val;
-      for (var i = 0; i < this.repondProductSica.length; i++) {
-        val = this.repondProductSica[i].COUNT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondProductSica[i].COUNT = val;
-      }
-    }
-    
-    getSumAmtSica(){
-      let val;
-      for (var i = 0; i < this.repondSumProductSica.length; i++) {
-        val = this.repondSumProductSica[i].AMT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondSumProductSica[i].AMT = val;
-      }
-    }
-  
-    getSumCountSica(){
-      let val;
-      for (var i = 0; i < this.repondSumProductSica.length; i++) {
-        val = this.repondSumProductSica[i].COUNT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondSumProductSica[i].COUNT = val;
-      }
-    }
+  getCountAmtProdSura(typeCur) {
+    let amt;
+    let count;
+    for (var i = 0; i < this.repondProductSura.length; i++) {
+      amt = this.repondProductSura[i].AMT;
+      if (amt != null) { amt = changeCurrency(amt, typeCur); }
+      this.repondProductSura[i].AMT = amt;
 
-    selectionProvince(Region,Province,Month){
-     
-      this.webapi.getData('SelectionMthProvince?offcode='+this.offcode+'&region='+Region).then((data) => {
-        this.responseProvince = data;
-      });
-
-      this.IncProductAllSura(Region,Province,Month);
-      this.IncProductAllSica(Region,Province,Month);
-      this.IncProductAllCard(Region,Province,Month);
+      count = this.repondProductSura[i].COUNT;
+      if (count != null) { count = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.repondProductSura[i].COUNT = count;
     }
-
-    /////end ยาสูบ//////
-
- /* getitemMonth(area,province,group_name,month){
-    this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&group_desc='+group_name+'&mth='+month ).then((data) => {
-      this.repondProduct = data;
-      this.loadData();
-      this.getAmt();
-      this.getCount();
-    });
-  }*/
-
-   /////ไพ่//////
-
-   selectionTypeNameCard(){
-    this.webapi.getData('SelectionMthGroupName?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
-      this.responseTypeCard = data;
-    });
-   }
-
-    IncProductAllCard(Region,Province,Month){
-      //this.webapi.getData('IncProductByMthAll?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
-        this.webapi.getData('IncProductByMth?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month='+Month+'&group_name=ไพ่').then((data) => {
-        this.repondProductCard = data;
-        /*this.loadData();
-        this.getAmtCard();
-        this.getCountCard();*/
-        //this.getitemsSumCard(CardRegion,CardProvince,CardType);
-      });
-    }
-  
-    /*getitemsTypeNameCard(CardRegion,CardProvince,CardType){
-       this.IncProductAllCard(CardRegion,CardProvince,CardType); 
-    }
-  
-    getitemsRegionCard(CardRegion,CardProvince,CardType){
-      this.IncProductAllCard(CardRegion,CardProvince,CardType);
-     // this.selectionProvince(CardRegion);
-    }
-  
-    getitemsProvinceCard(CardRegion,CardProvince,CardType){      
-      this.IncProductAllCard(CardRegion,CardProvince,CardType); 
-    }
-  
-    getitemsSumCard(area,province,type_name){
-      this.webapi.getData('IncSumProductByMth?offcode='+this.offcode+'&region='+area+'&province='+province+'&type_name='+type_name+'&group_name=ไพ่').then((data) => {
-        this.repondSumProductCard = data;
-        //this.getSumAmtCard();    
-        //this.getSumCountCard(); 
-      });
-    }*/
-
-   getAmtCard(){
-        let val;
-        for (var i = 0; i < this.repondProductCard.length; i++) {
-          val = this.repondProductCard[i].AMT;
-          val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          this.repondProductCard[i].AMT = val;
-        }
-      }
-    
-      getCountCard(){
-        let val;
-        for (var i = 0; i < this.repondProductCard.length; i++) {
-          val = this.repondProductCard[i].COUNT;
-          val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          this.repondProductCard[i].COUNT = val;
-        }
-    }
-
-    getSumAmtCard(){
-      let val;
-      for (var i = 0; i < this.repondSumProductCard.length; i++) {
-        val = this.repondSumProductCard[i].AMT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondSumProductCard[i].AMT = val;
-      }
-    }
-  
-    getSumCountCard(){
-      let val;
-      for (var i = 0; i < this.repondSumProductCard.length; i++) {
-        val = this.repondSumProductCard[i].COUNT;
-        val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        this.repondSumProductCard[i].COUNT = val;
-      }
   }
 
-    /////end ไพ่//////
+  getCountAmtSica(typeCur){
+    let amt;
+    let count;
+    for (var i = 0; i < this.repondProductSica.length; i++) {
+      amt = this.repondProductSica[i].AMT;
+      if (amt != null) { amt = changeCurrency(amt, typeCur); }
+      this.repondProductSica[i].AMT = amt;
 
-  getNumSURA() {
-    let val;
+      count = this.repondProductSica[i].COUNT;
+      if (count != null) { count = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.repondProductSica[i].COUNT = count;
+    }
+  }
+
+  getCountAmtCard(typeCur) {
+    let amt;
+    let count;
+    for (var i = 0; i < this.repondProductCard.length; i++) {
+      amt = this.repondProductCard[i].AMT;
+      if (amt != null) { amt = changeCurrency(amt, typeCur); }
+      this.repondProductCard[i].AMT = amt;
+
+      count = this.repondProductCard[i].COUNT;
+      if (count != null) { count = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.repondProductCard[i].COUNT = count;
+    }
+  }
+
+  getNumProduct() {
+    let sura;
+    let top;
+    let card;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].NUM_OF_LIC_SURA;
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].NUM_OF_LIC_SURA = val;
+      sura = this.responseData[i].NUM_OF_LIC_SURA;
+      if (sura != null) { sura = sura.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.responseData[i].NUM_OF_LIC_SURA = sura;
+
+      top = this.responseData[i].NUM_OF_LIC_TOBBACO;
+      if (top != null) { top = top.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.responseData[i].NUM_OF_LIC_TOBBACO = top;
+
+      card = this.responseData[i].NUM_OF_LIC_CARD;
+      if (card != null) { card = card.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.responseData[i].NUM_OF_LIC_CARD = card;
     }
   }
 
-  getNumTOBBACO() {
-    let val;
+  getAmtProduct(typeCur) {
+    let sura;
+    let top;
+    let card;
     for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].NUM_OF_LIC_TOBBACO = val;
-    }
-  }
+      sura = this.responseData[i].AMT_OF_LIC_SURA;
+      if (sura != null) { sura = changeCurrency(sura, typeCur); }
+      this.responseData[i].AMT_OF_LIC_SURA = sura;
 
-  getNumCARD() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].NUM_OF_LIC_CARD;
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].NUM_OF_LIC_CARD = val;
-    }
-  }
+      top = this.responseData[i].AMT_OF_LIC_TOBBACO;
+      if (top != null) { top = changeCurrency(top, typeCur); }
+      this.responseData[i].AMT_OF_LIC_TOBBACO = top;
 
-  getAmtSURA() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].AMT_OF_LIC_SURA/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].AMT_OF_LIC_SURA = val;
-    }
-  }
-
-  getAmtTOBBACO() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].AMT_OF_LIC_TOBBACO/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].AMT_OF_LIC_TOBBACO = val;
-    }
-  }
-
-  getAmtCARD() {
-    let val;
-    for (var i = 0; i < this.responseData.length; i++) {
-      val = this.responseData[i].AMT_OF_LIC_CARD/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseData[i].AMT_OF_LIC_CARD = val;
+      card = this.responseData[i].AMT_OF_LIC_CARD;
+      if (card != null) { card = changeCurrency(card, typeCur); }
+      this.responseData[i].AMT_OF_LIC_CARD = card;
     }
   }
 
 
   ///get sum area///
-  getSumNumSURA() {
-    let val;
+  getSumNumProduct(typeCur) {
+    let sura;
+    let top;
+    let card;
     for (var i = 0; i < this.responseSumArea.length; i++) {
-      val = this.responseSumArea[i].NUM_OF_LIC_SURA;
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumArea[i].NUM_OF_LIC_SURA = val;
+      sura = this.responseSumArea[i].NUM_OF_LIC_SURA;
+      if (sura != null) { sura = sura.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.responseSumArea[i].NUM_OF_LIC_SURA = sura;
+
+      top = this.responseSumArea[i].NUM_OF_LIC_TOBBACO;
+      if (top != null) { top = top.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.responseSumArea[i].NUM_OF_LIC_TOBBACO = top;
+
+      card = this.responseSumArea[i].NUM_OF_LIC_CARD;
+      if (card != null) { card = card.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+      this.responseSumArea[i].NUM_OF_LIC_CARD = card;
     }
   }
 
-  getSumNumTOBBACO() {
-    let val;
+  getSumAmtAreaProduct(typeCur) {
+    let sura;
+    let top;
+    let card;
     for (var i = 0; i < this.responseSumArea.length; i++) {
-      val = this.responseSumArea[i].NUM_OF_LIC_TOBBACO;
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumArea[i].NUM_OF_LIC_TOBBACO = val;
+      sura = this.responseSumArea[i].AMT_OF_LIC_SURA;
+      if (sura != null) { sura = changeCurrency(sura, typeCur); }
+      this.responseSumArea[i].AMT_OF_LIC_SURA = sura;
+
+      top = this.responseSumArea[i].AMT_OF_LIC_TOBBACO;
+      if (top != null) { top = changeCurrency(top, typeCur); }
+      this.responseSumArea[i].AMT_OF_LIC_TOBBACO = top;
+
+      card = this.responseSumArea[i].AMT_OF_LIC_CARD;
+      if (card != null) { sura = changeCurrency(card, typeCur); }
+      this.responseSumArea[i].AMT_OF_LIC_CARD = card;
+
     }
   }
 
-  getSumNumCARD() {
-    let val;
-    for (var i = 0; i < this.responseSumArea.length; i++) {
-      val = this.responseSumArea[i].NUM_OF_LIC_CARD;
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumArea[i].NUM_OF_LIC_CARD = val;
-    }
-  }
-
-  getSumAmtAreaSURA() {
-    let val;
-    for (var i = 0; i < this.responseSumArea.length; i++) {
-      val = this.responseSumArea[i].AMT_OF_LIC_SURA/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumArea[i].AMT_OF_LIC_SURA = val;
-    }
-  }
-
-  getSumAmtTOBBACO() {
-    let val;
-    for (var i = 0; i < this.responseSumArea.length; i++) {
-      val = this.responseSumArea[i].AMT_OF_LIC_TOBBACO/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumArea[i].AMT_OF_LIC_TOBBACO = val;
-    }
-  }
-
-  getSumAmtAreaCARD() {
-    let val;
-    for (var i = 0; i < this.responseSumArea.length; i++) {
-      val = this.responseSumArea[i].AMT_OF_LIC_CARD/1000000;
-      val = val.toFixed(2);
-      val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.responseSumArea[i].AMT_OF_LIC_CARD = val;
-    }
-  }
 
 }

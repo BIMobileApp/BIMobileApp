@@ -29,7 +29,7 @@ export class CetegoryTaxPage {
   off: any;
   pak: any;
   username: any;
-
+  curTG = "บาท";
   //guage parm
   TaxGauge: any;
   TaxlyGauge: any;
@@ -63,7 +63,9 @@ export class CetegoryTaxPage {
   responseArea: any;
   responseProvince: any;
   oldArea: any;
+  oldtypeCur : any;
   hideTableBrance = 0;
+
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -131,7 +133,6 @@ export class CetegoryTaxPage {
 
   selectionProvince(area, Province, typeCur) {
     Province = undefined;
-    alert(area+" -- "+Province+" -- "+typeCur);
     this.responseProvince = [];
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
@@ -155,7 +156,7 @@ export class CetegoryTaxPage {
   }
 
   TableGetData(area, Province, typeCur) {
-    if (area !== this.oldArea) {
+    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
     this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
@@ -166,10 +167,17 @@ export class CetegoryTaxPage {
       this.DataProduct = data;
       this.getProductTAX(typeCur);
     });
-    this.oldArea = area
+    this.oldArea = area;
+    this.oldtypeCur = typeCur;
     if (Province !== "undefined") {
       this.hideTableBrance = 1;
     }
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
+    alert(this.curTG);
   }
 
   getTAX(typeCur) {

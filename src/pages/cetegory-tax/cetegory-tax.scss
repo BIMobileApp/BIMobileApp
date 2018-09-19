@@ -20,7 +20,11 @@ page-cetegory-tax {
   table tbody tr:last-child {
     background: #a7d8ff !important;
   }
-
+  @media only screen and (orientation: landscape) {
+    table>tbody>tr>td>p {
+      width: 90%;
+    }
+  }
   .td-center {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
@@ -33,16 +37,7 @@ page-cetegory-tax {
     font-size: 3vw !important;
     text-align: right !important;
   }
-  ion-item.size{
-    width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bold;
-    color: black ;
-    font-size: 4vw ;
-  }
-
+  
   .img-size {
     width: 85%;
     display: block;
@@ -112,10 +107,5 @@ page-cetegory-tax {
   .font-green2 {
     color: rgb(31, 99, 31)  !important;
   }
-  .toggleLabel{
-    text-align: left; 
-    font-weight: bold; 
-    color: #2c95eb ;
-    font-size: 5vw !important;
-  }
+ 
 }
