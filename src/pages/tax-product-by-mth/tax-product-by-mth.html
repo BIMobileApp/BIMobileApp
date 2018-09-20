@@ -112,9 +112,9 @@
     <ion-col>
         <ion-item class="size">
           <ion-label> ภาค : </ion-label>
-            <ion-select  [(ngModel)]="area" (ionChange)="selectionRegion(area,Province,monthFrom,monthTo, typeCur)" >                     
-                <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}">{{item.REGION_NAME}}</ion-option>                                                                         
+            <ion-select  [(ngModel)]="area" (ionChange)="selectionRegion(area,Province,monthFrom,monthTo, typeCur)"  disabled={{isEnable}}>                     
+                <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
+                <ion-option  *ngFor="let item of responseArea"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>                                                                         
             </ion-select>
           </ion-item>
     </ion-col>
@@ -122,9 +122,9 @@
     <ion-col>
         <ion-item  class="size">
             <ion-label>จังหวัด : </ion-label>
-                <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(area,Province,monthFrom,monthTo, typeCur)">
-                    <ion-option value="undefined"  [selected]="true">ทั้งหมด</ion-option>
-                    <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}">{{item1.PROVINCE_NAME}}</ion-option>            
+                <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(area,Province,monthFrom,monthTo, typeCur)" disabled={{isEnableProv}}>
+                    <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+                    <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
               </ion-select>
           </ion-item>
       </ion-col>
