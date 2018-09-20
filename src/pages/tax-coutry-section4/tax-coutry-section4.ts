@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
+
 @IonicPage()
 @Component({
   selector: 'page-tax-coutry-section4',
@@ -29,6 +32,8 @@ export class TaxCoutrySection4Page {
    oldArea:any;
    brance = 0;
    area = 'ภาค 04';
+   curTG = "บาท";
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -46,9 +51,11 @@ export class TaxCoutrySection4Page {
     this.offcode = localStorage.offcode;
      this.selectionProvince();
      //this.TableGetDataAll();
-     this.GetProvinceTable();
+     let typeCurFirst = 'B';
+     this.GetProvinceTable(typeCurFirst);
      var Province = undefined;
-     this.TableGetData(Province);
+     let typeCur = 'B';
+     this.TableGetData(Province,typeCur);
      this.brance = 0;
    }
 
@@ -58,48 +65,39 @@ export class TaxCoutrySection4Page {
     });
   }
 
-  TableGetDataAll(){
+  TableGetDataAll(typeCur){
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
+    
     this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode).then((data) => {
       this.DataCurYear = data;
-      this.getTAX();
-      this.getLAST_TAX();
-      this.getEST();
-      this.getPercent();
+      this.getTAX(typeCur);
     });
     this.webapi.getData('TaxProductCurYearbyYear?offcode=' + this.offcode).then((data) => {
       this.DataProduct = data;
-      this.getProductTAX();
-      this.getProductLAST_TAX();
-      this.getProductEST();
-      this.getProductPERCENT_TAX();
+      this.getProductTAX(typeCur);
     });
   }
 
-GetProvinceTable(){
+GetProvinceTable(typeCurFirst){
   this.webapi.getData('TaxProvinceCurYear?area=' + this.area).then((data) => {
     this.DataProvince = data;
-    this.getProvinceTAX();
-    this.getProvinceLAST_TAX();
-    this.getProvinceEST();
-    this.getProvincePERCENT_TAX();
+    this.getProvinceTAX(typeCurFirst);
   });
 }
 
-TableGetData(Province) {
+TableGetData(Province,typeCur) {
   this.brance = 1;
   this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataCurYear = data;
-    this.getTAX();
-    this.getLAST_TAX();
-    this.getEST();
-    this.getPercent();
+    this.getTAX(typeCur);
   });
   this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataProduct = data;
-    this.getProductTAX();
-    this.getProductLAST_TAX();
-    this.getProductEST();
-    this.getProductPERCENT_TAX();
+    this.getProductTAX(typeCur);
   });
 }
 
@@ -111,25 +109,28 @@ getPercent(){
   }
 }
 
-getTAX() {
-  let val;
+getTAX(typeCur) {
+  let tax;
+  let last_tax;
+  let est;
+
   for (var i = 0; i < this.DataCurYear.length; i++) {
-    val = this.DataCurYear[i].TAX / 1000000;
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.DataCurYear[i].TAX = val;
+
+    tax = this.DataCurYear[i].TAX;
+    last_tax = this.DataCurYear[i].LAST_TAX;
+    est = this.DataCurYear[i].ESTIMATE;
+
+    if (tax != null) { tax = changeCurrency(tax, typeCur); }
+    if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+    if (est != null) { est = changeCurrency(est, typeCur); }
+
+    this.DataCurYear[i].TAX = tax;
+    this.DataCurYear[i].LAST_TAX = last_tax;
+    this.DataCurYear[i].ESTIMATE = est;
   }
 }
 
-getLAST_TAX() {
-  let val;
-  for (var i = 0; i < this.DataCurYear.length; i++) {
-    val = this.DataCurYear[i].LAST_TAX / 1000000;
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.DataCurYear[i].LAST_TAX = val;
-  }
-}
+
 
 getEST() {
   let val;
@@ -141,28 +142,38 @@ getEST() {
   }
 }
 
-TableProductGetData(area,Province) {
-  console.log("area : "+area);
+TableProductGetData(area,Province,typeCur) {
+  
   if(area != this.oldArea){
     Province = 'undefined';
   }
-  console.log("Province : "+Province);
+
   this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
     this.DataProduct = data;
-    this.getProductTAX();
+    this.getProductTAX(typeCur);
     this.getProductLAST_TAX();
     this.getProductEST();
     this.getProductPERCENT_TAX();
   });
 }
 
-getProductTAX() {
-  let val;
+getProductTAX(typeCur) {
+  let tax;
+  let last_tax;
+  let est;
+
   for (var i = 0; i < this.DataProduct.length; i++) {
-    val = this.DataProduct[i].TAX / 1000000;
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.DataProduct[i].TAX = val;
+    tax = this.DataProduct[i].TAX;
+    last_tax = this.DataProduct[i].LAST_TAX;
+    est = this.DataProduct[i].ESTIMATE;
+
+    if (tax != null) { tax = changeCurrency(tax, typeCur); }
+    if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
+    if (est != null) { est = changeCurrency(est, typeCur); }
+
+    this.DataProduct[i].TAX = tax;
+    this.DataProduct[i].LAST_TAX = last_tax;
+    this.DataProduct[i].ESTIMATE = est;
   }
 }
 
@@ -194,13 +205,23 @@ getProductPERCENT_TAX(){
   }
 }
 
-getProvinceTAX(){
-  let val;
+getProvinceTAX(typeCurFirst){
+  let tax;
+  let last_tax;
+  let est;
+
   for (var i = 0; i < this.DataProvince.length; i++) {
-    val = this.DataProvince[i].TAX / 1000000
-    val = val.toFixed(2);
-    val = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.DataProvince[i].TAX = val;
+    tax = this.DataProvince[i].TAX;
+    last_tax = this.DataProvince[i].LAST_TAX;
+    est = this.DataProvince[i].ESTIMATE;
+
+    if (tax != null) { tax = changeCurrency(tax, typeCurFirst); }
+    if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCurFirst); }
+    if (est != null) { est = changeCurrency(est, typeCurFirst); }
+
+    this.DataProvince[i].TAX = tax;
+    this.DataProvince[i].LAST_TAX = last_tax;
+    this.DataProvince[i].ESTIMATE = est;
   }
 }
 getProvinceLAST_TAX(){
@@ -227,6 +248,14 @@ getProvincePERCENT_TAX(){
       this.DataProvince[i].PERCENT_TAX = this.DataProvince[i].PERCENT_TAX.toFixed(2);
     }
   }
+}
+
+ChangeUnitFirst(typeCurFirst){
+  this.GetProvinceTable(typeCurFirst);
+}
+
+ChangeUnit(typeCur){
+  this.TableGetDataAll(typeCur);
 }
 
 }
