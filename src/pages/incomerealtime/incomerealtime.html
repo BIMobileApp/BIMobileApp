@@ -7,27 +7,12 @@
   </ion-navbar>
 </ion-header>
 
-<<<<<<< HEAD
-<ion-content padding
-[class.disable-scrolling]='isScaling'
-[style.fontSize]="fontSize">
-
-<div pinch
-(pinchstart)="onPinchStart($event)"
-(pinchend)="onPinchEnd($event)"
-(pinchmove)="onPinchMove($event)">
-  <ion-item style="background-color:#D0DFE6;" text-center>
-    <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
-    <h2 class="header-style">{{dateNow}} เวลา {{time}} น.</h2>
-  </ion-item>
-=======
 <ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
   <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
     <ion-item style="background-color:#D0DFE6;" text-center>
       <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
       <h2 class="header-style">{{dateNow}} เวลา {{time}} น.</h2>
     </ion-item>
->>>>>>> fb87b721abe1d4b71d5a7911eff0715e3fc816ab
 
     <ion-grid>
       <ion-row>
@@ -93,12 +78,7 @@
           </table>
         </div>
 
-<<<<<<< HEAD
-    </ion-card-content>
-  </ion-card>
-=======
       </ion-card-content>
     </ion-card>
->>>>>>> fb87b721abe1d4b71d5a7911eff0715e3fc816ab
   </div>
 </ion-content>
