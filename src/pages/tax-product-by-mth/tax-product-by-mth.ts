@@ -36,11 +36,53 @@ private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
 
+  region:any;
+  province:any;
+  branch:any;
+
+  select_region:any;
+  select_all_value:any;
+  select_all_prov_value:any;
+  select_province:any;
+  isEnable:any;
+  isEnableProv:any;
+  oldRegion:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi:RestProvider) {
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
+
+      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+     this.region = localStorage.offcode.substring(0, 2);
+     this.province = localStorage.offcode.substring(2, 4);
+     this.branch =  localStorage.offcode.substring(4, 6);
+   /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+    ///ตรวจสอบภาคเพื่อ default selection
+    if(this.region != "00"){
+      this.select_region = localStorage.region_desc;
+      this.select_all_value = false;    
+      this.isEnable  = true;        
+    }else{
+      this.select_all_value = true;
+      this.isEnable  = false;
+    }
+ ///end ตรวจสอบภาคเพื่อ default selection
+
+  /// ตรวจสอบสาขาเพื่อ default selection
+  var res = "";
+  if(this.branch != "00"){          
+     res =  localStorage.offdesc.split(" ");
+     this.select_province  = res[0];
+     this.select_all_prov_value = false;
+     this.isEnableProv = true;
+   }else{
+     this.select_all_prov_value = true;
+     this.isEnableProv = false;
+   }
+  ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
   ionViewDidLoad() {
@@ -61,9 +103,13 @@ public isScaling = false;
     this.summaryDate = range;
     
     this.selectionArea();
-    var area="undefined";
-    var Province="undefined"; 
-    this.getDataAll(typeCur);
+    this.selectionProvinceAll();
+    var area;
+    var Province;
+    var monthFrom = "undefined";
+    var monthTo ="undefined";
+    this.getTableData(area,Province,monthFrom,monthTo,typeCur);
+    //this.getDataAll(typeCur);
   }
 
   getDataAll(typeCur){
@@ -74,17 +120,40 @@ public isScaling = false;
   }
 
   selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){ 
-   
-    this.webapi.getData('TaxProductGroupByMth?area='+this.area+'&Province='+this.Province+'&offcode='+this.offcode+'&monthFrom='+monthFrom+'&monthTo='+monthTo).then((data)=>{
-    //  this.selectMTFrom =monthFrom;
-      this.responseData = data;
-      this.getTAX(typeCur);
-     // this.selectMonthTo(area,Province,monthFrom,monthTo);
-    });
+    
+    let Region;
+    let province;
+
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region =area;
+    }
+    if(this.branch != "00"){    
+      province =  this.select_province;
+    }else{
+      province = Province;
+    }  
+
+    this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
-    this.getTableData(area,Province,monthFrom,monthTo,typeCur) ;
+    let Region;
+    let province;
+
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region =area;
+    }
+    if(this.branch != "00"){    
+      province =  this.select_province;
+    }else{
+      province = Province;
+    }  
+
+    this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
   }
   selectionArea(){
     this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
@@ -92,24 +161,58 @@ public isScaling = false;
     });
   }
 
+  selectionProvinceAll(){
+    let region;
+    if(this.region != "00"){
+      region = localStorage.region_desc;
+    }
+    //let  Region = 'undefined';
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+region).then((data) => {
+      this.responseProvince = data;
+    }); 
+  }
+
   selectionRegion(area,Province,monthFrom,monthTo,typeCur){
+    
+    if(this.region != "00"){
+      area = localStorage.region_desc;
+    }
     this.selectionProvince(area,Province,monthFrom,monthTo,typeCur);
   }
 
-  selectionProvince(area,Province,monthFrom,monthTo,typeCur){   
+  selectionProvince(area,Province,monthFrom,monthTo,typeCur){ 
+
+    if(this.region != "00"){
+      area = localStorage.region_desc;
+    }
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
     });
     this.getTableData(area,Province,monthFrom,monthTo,typeCur);
+
   }
 
 
   getTableData(area,Province,monthFrom,monthTo,typeCur) {
     
-    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
+    /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
+    }*/
+    let Region;
+    let province;
+
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region =area;
     }
-    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+area+'&province='+Province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
+    if(this.branch != "00"){    
+      province =  this.select_province;
+    }else{
+      province = Province;
+    }  
+
+    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+Region+'&province='+province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
       this.responseData = data;
       this.getTAX(typeCur);
       
