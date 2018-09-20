@@ -23,13 +23,13 @@ page-tax-coutry-section2 {
     .td-center {
       font-weight: bold;
       color: rgb(27, 15, 15) !important;
-      font-size: 3vw !important;
+     // font-size: 3vw !important;
     }
   
     .td-right {
       font-weight: bold;
       color: black !important;
-      font-size: 3vw !important;
+    //  font-size: 3vw !important;
       text-align: right !important;
     }
   
@@ -44,14 +44,14 @@ page-tax-coutry-section2 {
     .td-left {
       font-weight: bold;
       color: black !important;
-      font-size: 3vw !important;
+     // font-size: 3vw !important;
       text-align: left !important;
     }
   
     .th-center {
       font-weight: bold;
       color: rgb(27, 15, 15);
-      font-size: 3vw !important;
+     // font-size: 3vw !important;
       text-align: center !important;
     }
   
@@ -77,7 +77,7 @@ page-tax-coutry-section2 {
     .DataStatus-font {
       font-weight: bold;
       color: rgb(29, 97, 160) !important;
-      font-size: 3vw !important;
+      //font-size: 3vw !important;
       text-align: left !important;
     }
   
@@ -99,6 +99,10 @@ page-tax-coutry-section2 {
   
     .font-green2 {
       color: rgb(31, 99, 31)  !important;
+    }
+
+    ion-content.disable-scrolling .scroll-content {
+      overflow-y: hidden;
     }
   
 }

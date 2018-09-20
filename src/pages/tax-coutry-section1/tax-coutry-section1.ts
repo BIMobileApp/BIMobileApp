@@ -39,12 +39,14 @@ export class TaxCoutrySection1Page {
    brance = 0;
    area = 'ภาค 01';
    curTG = "บาท";
+
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
