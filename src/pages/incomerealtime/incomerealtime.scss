@@ -33,32 +33,37 @@ page-incomerealtime {
   h1.header-style {
     font-weight: bold;
     color: black !important;
-    //font-size: 6vw !important;
+    font-size: 6vw !important;
     text-align: center !important;
   }
 
   h2.header-style {
     font-weight: bold;
     color: black !important;
-    //font-size: 5vw !important;
+    font-size: 5vw !important;
     text-align: center !important;
   }
-
-  h3.center {
+  .th-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    // font-size: 3vw !important;
+    text-align: center !important;
+  }
+  .td-center {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
     // font-size: 3vw !important;
     text-align: center !important;
   }
 
-  h3.right {
+  .td-right {
     font-weight: bold;
     color: black !important;
     // font-size: 3vw !important;
     text-align: right !important;
   }
 
-  h3.left {
+  .td-left {
     font-weight: bold;
     color: black !important;
     //font-size: 3vw !important;

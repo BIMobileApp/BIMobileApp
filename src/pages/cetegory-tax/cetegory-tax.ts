@@ -19,7 +19,7 @@ declare var dateDisplayAll: any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
-const BASE_SCALE = 1.3;
+const BASE_SCALE = 1.2;
 /* end  */
 
 @IonicPage()
