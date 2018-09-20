@@ -16,46 +16,52 @@ page-tax-product-by-mth {
     background: #a7d8ff !important;
   }
 
-  table>tbody>tr>td>p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 10em;
-  }
   @media only screen and (orientation: landscape) {
     table>tbody>tr>td>p {
       width: 90%;
     }
   }
-  h3.center {
-    font-weight: bold;
-    color: rgb(27, 15, 15) !important;
-    font-size: 3vw !important;
-    text-align: center !important;
+  ion-content.disable-scrolling .scroll-content {
+    overflow-y: hidden;
   }
-  h1.header-style{
+  h1.header-style {
     font-weight: bold;
     color: black !important;
     font-size: 6vw !important;
     text-align: center !important;
   }
-  h2.header-style{
+
+  h2.header-style {
     font-weight: bold;
     color: black !important;
     font-size: 5vw !important;
     text-align: center !important;
   }
-  h3.right {
+  .th-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    // font-size: 3vw !important;
+    text-align: center !important;
+  }
+  .td-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    // font-size: 3vw !important;
+    text-align: center !important;
+  }
+
+  .td-right {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    // font-size: 3vw !important;
     text-align: right !important;
   }
-  h3.left {
+
+  .td-left {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    //font-size: 3vw !important;
     text-align: left !important;
-    
+
   }
 }
