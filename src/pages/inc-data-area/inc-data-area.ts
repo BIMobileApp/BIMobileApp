@@ -164,6 +164,7 @@ export class IncDataAreaPage {
 
     if (Area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
+      this.Province = "undefined";
     }
     this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=สุรา&month=" + Month).then((data) => {
       this.repondProductSura = data;
