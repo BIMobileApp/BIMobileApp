@@ -4,81 +4,95 @@
       ผู้ใช้งาน : {{username}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-      <ion-item text-center style="background-color:#D0DFE6;" text-center>
-          <h2 class="header-style">รายงานผู้ประกอบการ</h2>
-          <h2 class="header-style">{{dateAsOff}}</h2>
-      </ion-item>
-  
+<ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
+  <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+    <ion-item text-center style="background-color:#D0DFE6;" text-center>
+      <h2 class="header-style">รายงานผู้ประกอบการ</h2>
+      <h2 class="header-style">{{dateAsOff}}</h2>
+    </ion-item>
+
     <ion-grid>
       <ion-row>
-       <ion-col>
-         <ion-item  class="size">
-             <ion-label> ภาค : </ion-label>
-             <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)"  disabled={{isEnable}}>
-                   <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
-                     <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
-             </ion-select>
-           </ion-item>
-       </ion-col>        
-       <ion-col>
-         <ion-item  class="size">
-             <ion-label>จังหวัด : </ion-label>
-             <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)" disabled={{isEnableProv}}>
-                     <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
-                     <ion-option  *ngFor="let item1 of ResponseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
-             </ion-select>
-         </ion-item>
-      </ion-col>         
+        <ion-col>
+          <ion-item class="size">
+            <ion-label> ภาค : </ion-label>
+            <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)" disabled={{isEnable}}>
+              <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
+              <ion-option *ngFor="let item of responseRegion" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="size">
+            <ion-label>จังหวัด : </ion-label>
+            <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)" disabled={{isEnableProv}}>
+              <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+              <ion-option *ngFor="let item1 of ResponseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
       </ion-row>
-   </ion-grid>
+    </ion-grid>
 
-      <h3 style="padding-right: 2%" class="right">หน่วย : โรง</h3>
-  <ion-card>           
-      <ion-card-content no-padding>       
-              <div class="table-responsive">
-                      <table class="table" style="width: 100%;">
-                        <thead>
-                          <tr style="background-color: #F78B26; ">
-                                    <th><h3 class="center">ประเภทสินค้า</h3></th>
-                                    <th><h3 class="center">ผู้ประกอบการนำเข้า</h3></th>
-                                    <th><h3 class="center">ผู้ประกอบการในปะเทศ</h3></th>
-                                    <th><h3 class="center">รวม</h3></th>
-                            </tr>
-                              </thead>
-                              <tbody>
-                                      <tr *ngFor="let data of responseData">
-                                              <td><h3 class="left">{{data.GROUP_DESC}}</h3></td>
-                                              <td><h3 class="right">{{data.IMP_REGISTER | number : fractionSize}}</h3></td>
-                                              <td><h3 class="right">{{data.IN_REGISTER | number : fractionSize}}</h3></td>
-                                              <td><h3 class="right">{{data.TOTAL_REGISTER | number : fractionSize}}</h3></td>
-                                      </tr>
-                              </tbody>
-                      </table>
-                  </div>                     
-          </ion-card-content>
+    <h3 style="padding-right: 2%" class="desc-right">หน่วย : โรง</h3>
+    <ion-card>
+      <ion-card-content no-padding>
+        <div class="table-responsive">
+          <table class="table" style="width: 100%;">
+            <thead>
+              <tr style="background-color: #F78B26; ">
+                <th>
+                  <h3 class="th-center"  [style.fontSize]="fontSize">ประเภทสินค้า</h3>
+                </th>
+                <th>
+                  <h3 class="th-center" [style.fontSize]="fontSize">ผู้ประกอบการนำเข้า</h3>
+                </th>
+                <th>
+                  <h3 class="th-center" [style.fontSize]="fontSize">ผู้ประกอบการในปะเทศ</h3>
+                </th>
+                <th>
+                  <h3 class="th-center" [style.fontSize]="fontSize">รวม</h3>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of responseData">
+                <td>
+                  <h3 class="td-left" [style.fontSize]="fontSize">{{data.GROUP_DESC}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.IMP_REGISTER | number : fractionSize}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.IN_REGISTER | number : fractionSize}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.TOTAL_REGISTER | number : fractionSize}}</h3>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card-content>
 
     </ion-card>
 
     <ion-scroll scrollX="true">
-          <ion-card >
-          
-                  <ion-card-content no-padding>       
-                       
-                      <ion-grid >    
-                          <ion-row nowrap>
-                            <ion-col  ><img src="../../assets/imgs/mobileelscover.png"/></ion-col>
-                          </ion-row>
-                          
-                      </ion-grid>
-                      
-                  </ion-card-content>
-           
-                </ion-card>
-      </ion-scroll>
-    
-   
-     
- 
+      <ion-card>
 
+        <ion-card-content no-padding>
+
+          <ion-grid>
+            <ion-row nowrap>
+              <ion-col><img src="../../assets/imgs/mobileelscover.png" /></ion-col>
+            </ion-row>
+
+          </ion-grid>
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-scroll>
+
+</div>
 </ion-content>

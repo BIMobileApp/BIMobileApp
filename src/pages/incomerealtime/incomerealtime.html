@@ -52,26 +52,26 @@
             <thead>
               <tr style="background-color: #F78B26; ">
                 <th width="10%">
-                  <h3 class="center" [style.fontSize]="fontSize">ลำดับ</h3>
+                  <h3 class="th-center" [style.fontSize]="fontSize">ลำดับ</h3>
                 </th>
                 <th>
-                  <h3 class="center" [style.fontSize]="fontSize">กลุ่มสินค้า</h3>
+                  <h3 class="th-center" [style.fontSize]="fontSize">กลุ่มสินค้า</h3>
                 </th>
                 <th width="30%">
-                  <h3 class="center" [style.fontSize]="fontSize">ภาษี</h3>
+                  <h3 class="th-center" [style.fontSize]="fontSize">ภาษี</h3>
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let data of respondData">
                 <td width="10%">
-                  <h3 class="center" [style.fontSize]="fontSize">{{data.SORT}}</h3>
+                  <h3 class="td-center" [style.fontSize]="fontSize">{{data.SORT}}</h3>
                 </td>
                 <td>
-                  <h3 class="left" [style.fontSize]="fontSize">{{data.GROUP_NAME}}</h3>
+                  <h3 class="td-left" [style.fontSize]="fontSize">{{data.GROUP_NAME}}</h3>
                 </td>
                 <td width="30%">
-                  <h3 class="right" [style.fontSize]="fontSize">{{data.TAX}}</h3>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.TAX}}</h3>
                 </td>
               </tr>
             </tbody>

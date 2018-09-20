@@ -26,7 +26,7 @@
                    <ion-label> ภาค : </ion-label>
                    <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,typeCur)" disabled={{isEnable}}>
                         <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
-                        <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
+                        <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}"  [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
                    </ion-select>
                  </ion-item>
              </ion-col>        

@@ -1,5 +1,5 @@
 page-mbl-register {
- table,
+  table,
   th,
   td {
     border: 0px solid #ffffff !important;
@@ -12,45 +12,62 @@ page-mbl-register {
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
-
- table tbody tr:last-child {
+  table tbody tr:last-child {
     background: #a7d8ff !important;
   }
-  table>tbody>tr>td>p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 10em;
-  }
+
   @media only screen and (orientation: landscape) {
     table>tbody>tr>td>p {
       width: 90%;
     }
   }
-  h2.header-style{
+  ion-content.disable-scrolling .scroll-content {
+    overflow-y: hidden;
+  }
+  h1.header-style {
     font-weight: bold;
     color: black !important;
     font-size: 6vw !important;
     text-align: center !important;
   }
-  h3.center {
-    font-weight: bold;
-    color: rgb(27, 15, 15) !important;
-    font-size: 3vw !important;
-    text-align: center !important;
-    
-  }
-  h3.right {
+
+  h2.header-style {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    font-size: 5vw !important;
+    text-align: center !important;
+  }
+  .desc-right {
+    font-weight: bold;
+    color: black !important;
+    font-size: 4vw !important;
     text-align: right !important;
   }
-  h3.left {
+  .th-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    // font-size: 3vw !important;
+    text-align: center !important;
+  }
+  .td-center {
+    font-weight: bold;
+    color: rgb(27, 15, 15) !important;
+    // font-size: 3vw !important;
+    text-align: center !important;
+  }
+
+  .td-right {
     font-weight: bold;
     color: black !important;
-    font-size: 3vw !important;
+    // font-size: 3vw !important;
+    text-align: right !important;
+  }
+
+  .td-left {
+    font-weight: bold;
+    color: black !important;
+    //font-size: 3vw !important;
     text-align: left !important;
-    
+
   }
 }

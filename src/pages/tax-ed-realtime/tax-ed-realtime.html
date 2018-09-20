@@ -1,80 +1,104 @@
 <ion-header>
-    <ion-navbar color="navber">
-      <ion-title>Real Time <br>
-        ผู้ใช้งาน : {{username}} <br>
-       </ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content> 
-        <ion-item style="background-color:#D0DFE6;" text-center>
-          <h1 class="header-style">รายงานแสดงยอดภาษีกลุ่มสถานะในประเทศ/นำเข้า</h1>
-          <h2 class="header-style"> {{dateNow}} เวลา {{time}} น.</h2>
-        </ion-item>
-    
-        <ion-grid>
-          <ion-row>      
-           <ion-col>
-             <ion-item  class="size">
-                 <ion-label> ภาค : </ion-label>
-                 <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,typeCur)" disabled={{isEnable}}>
-                       <ion-option value="undefined"   [selected]="select_all_value">ทั้งหมด</ion-option>
-                         <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
-                 </ion-select>
-               </ion-item>
-           </ion-col>       
-           <ion-col>
-             <ion-item  class="size">
-                 <ion-label>จังหวัด : </ion-label>
-                 <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,typeCur)" disabled={{isEnableProv}}>
-                       <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
-                         <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
-                 </ion-select>
-             </ion-item>
-          </ion-col>        
-          </ion-row>
-       </ion-grid>
-        
-       <ion-item class="sizemini" no-lines>
-          <ion-label> หน่วย : </ion-label>
-          <ion-select [(ngModel)]="typeCur" #item (ionChange)="getData(Region, Province, typeCur)">
-            <ion-option value="B" [selected]="true">บาท</ion-option>
-            <ion-option value="M">ล้านบาท</ion-option>
-          </ion-select>
-        </ion-item>
-     <ion-card>
-        <ion-card-content no-padding>
-          <div class="table-responsive">
-                  <table class="table" style="width: 100%;">
-                              <thead>
-                                <tr style="background-color: #F78B26; ">
-                                    <th width="20%"><h3 class="center">วันที่</h3></th>
-                                    <th><h3 class="center">นำเข้า</h3></th>
-                                    <th><h3 class="center">FreeZone</h3></th>
-                                    <th><h3 class="center">รวม</h3></th>
-                            </tr>
-                    </thead>
-                    <tbody>
-                            <tr *ngFor="let data of responseData">
-                                <td width="20%" ><h3 class="center">{{data.DIM_DATA_DATE_ID}}</h3></td>
-                                <td><h3 class="right">{{data.IN_EXCISE_AMT}}</h3></td>
-                                <td><h3 class="right">{{data.FZ_EXCISE_AMT}}</h3></td>
-                                <td><h3 class="right">{{data.EXCISE_AMT}}</h3></td>
-                            </tr>
+  <ion-navbar color="navber">
+    <ion-title>Real Time <br>
+      ผู้ใช้งาน : {{username}} <br>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-                            <tr *ngFor="let item of responseSumData">
-                                <td width="20%" ><h3 class="center">รวม</h3></td>
-                                <td><h3 class="right">{{item.IN_EXCISE_AMT}}</h3></td>
-                                <td><h3 class="right">{{item.FZ_EXCISE_AMT}}</h3></td>
-                                <td><h3 class="right">{{item.EXCISE_AMT}}</h3></td>
-                          </tr>
+<ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
+  <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+    <ion-item style="background-color:#D0DFE6;" text-center>
+      <h1 class="header-style">รายงานแสดงยอดภาษีกลุ่มสถานะในประเทศ/นำเข้า</h1>
+      <h2 class="header-style"> {{dateNow}} เวลา {{time}} น.</h2>
+    </ion-item>
 
-                    </tbody>
-            </table>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item class="size">
+            <ion-label> ภาค : </ion-label>
+            <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,typeCur)" disabled={{isEnable}}>
+              <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
+              <ion-option *ngFor="let item of responseRegion" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="size">
+            <ion-label>จังหวัด : </ion-label>
+            <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,typeCur)" disabled={{isEnableProv}}>
+              <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+              <ion-option *ngFor="let item1 of responseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item class="sizemini" no-lines>
+      <ion-label> หน่วย : </ion-label>
+      <ion-select [(ngModel)]="typeCur" #item (ionChange)="getData(Region, Province, typeCur)">
+        <ion-option value="B" [selected]="true">บาท</ion-option>
+        <ion-option value="M">ล้านบาท</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-card>
+      <ion-card-content no-padding>
+        <div class="table-responsive">
+          <table class="table" style="width: 100%;">
+            <thead>
+              <tr style="background-color: #F78B26; ">
+                <th width="20%">
+                  <h3 class="th-center" [style.fontSize]="fontSize">วันที่</h3>
+                </th>
+                <th>
+                  <h3 class="th-center" [style.fontSize]="fontSize">นำเข้า</h3>
+                </th>
+                <th>
+                  <h3 class="th-center" [style.fontSize]="fontSize">FreeZone</h3>
+                </th>
+                <th>
+                  <h3 class="th-center" [style.fontSize]="fontSize">รวม</h3>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of responseData">
+                <td width="20%">
+                  <h3 class="td-center" [style.fontSize]="fontSize">{{data.DIM_DATA_DATE_ID}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.IN_EXCISE_AMT}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.FZ_EXCISE_AMT}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{data.EXCISE_AMT}}</h3>
+                </td>
+              </tr>
+
+              <tr *ngFor="let item of responseSumData">
+                <td width="20%">
+                  <h3 class="td-center" [style.fontSize]="fontSize">รวม</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{item.IN_EXCISE_AMT}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{item.FZ_EXCISE_AMT}}</h3>
+                </td>
+                <td>
+                  <h3 class="td-right" [style.fontSize]="fontSize">{{item.EXCISE_AMT}}</h3>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
         </div>
 
-        </ion-card-content>
-      </ion-card>
-  
-  </ion-content>
-  
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
