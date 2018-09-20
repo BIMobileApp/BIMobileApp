@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
-declare var dateDisplayAll:any;
-
+declare var dateDisplayAll: any;
+/* start for pinch */
+const MAX_SCALE = 11.1;
+const MIN_SCALE = 0.9;
+const BASE_SCALE = 1.3;
+/* end  */
 @IonicPage()
 @Component({
   selector: 'page-inc-data-area',
@@ -12,8 +16,8 @@ declare var dateDisplayAll:any;
 export class IncDataAreaPage {
 
   offcode: any;
-  dateDisplay:any;
-  dateAsOff:any;
+  dateDisplay: any;
+  dateAsOff: any;
   responseData: any;
   responseArea: any;
   Area: any;
@@ -21,56 +25,60 @@ export class IncDataAreaPage {
   CardResponseProvince: any;
   TobResponseProvince: any;
   responseGroupName: any;
-  SuraRepondProduct:any;
-  CardRepondProduct:any;
-  TOBBACORepondProduct:any;
-  repondProduct:any;
-  defaultSelectProvince:any;
+  SuraRepondProduct: any;
+  CardRepondProduct: any;
+  TOBBACORepondProduct: any;
+  repondProduct: any;
+  defaultSelectProvince: any;
 
-  Province:any;
-  defaultSelectQuestion:any;
-  questionArray:any;
-  username:any;
-  respondProduct:any;
-  defaultSelectProduct:any;
+  Province: any;
+  defaultSelectQuestion: any;
+  questionArray: any;
+  username: any;
+  respondProduct: any;
+  defaultSelectProduct: any;
 
-  str_offcode:any;
-  str_head_offcode:any;
+  str_offcode: any;
+  str_head_offcode: any;
 
-  repondProductSura:any;
-  repondProductSica:any;
-  repondProductCard:any;
-  responseProvince:any;
+  repondProductSura: any;
+  repondProductSica: any;
+  repondProductCard: any;
+  responseProvince: any;
 
   oldArea: any;
-  oldtypeCur : any; 
+  oldtypeCur: any;
   toggleTable2 = 0;
   toggleTable1 = 0;
-  curTG1 = "บาท";
   curTG2 = "บาท";
-
-  constructor(public navCtrl: NavController, 
+  unitTG2 = "ใบ";
+  /* start for pinch */
+  public fontSize = `${BASE_SCALE}rem`;
+  private scale = BASE_SCALE;
+  private alreadyScaled = BASE_SCALE;
+  public isScaling = false;
+  /* end  */
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public webapi:RestProvider) {
-      this.offcode = localStorage.offcode;
-      this.str_offcode = localStorage.offcode.toString().substring(0, 2);
+    public webapi: RestProvider) {
+    this.offcode = localStorage.offcode;
+    this.str_offcode = localStorage.offcode.toString().substring(0, 2);
 
-      if( this.str_offcode == "00")
-      {
-        this.str_head_offcode = "ภาค";
-      }else{
-        this.str_head_offcode = "พื้นที่";
-      }
+    if (this.str_offcode == "00") {
+      this.str_head_offcode = "ภาค";
+    } else {
+      this.str_head_offcode = "พื้นที่";
+    }
 
-      /*if( this.province == "00"){
-        this.defaultSelectQuestion = -1; 
-      }else{
-        this.defaultSelectQuestion = 0;
-      }*/
+    /*if( this.province == "00"){
+      this.defaultSelectQuestion = -1; 
+    }else{
+      this.defaultSelectQuestion = 0;
+    }*/
 
-      this.dateDisplay = localStorage.last_update_date;
-      this.dateAsOff =  dateDisplayAll;
-      this.username = localStorage.userData;
+    this.dateDisplay = localStorage.last_update_date;
+    this.dateAsOff = dateDisplayAll;
+    this.username = localStorage.userData;
   }
 
   ionViewDidLoad() {
@@ -84,7 +92,7 @@ export class IncDataAreaPage {
     this.ProductAll(typeCur);
   }
 
-  toggleTable2Show(){
+  toggleTable2Show() {
     if (this.toggleTable2 == 0) {
       this.toggleTable2 = 1;
     } else {
@@ -92,7 +100,7 @@ export class IncDataAreaPage {
     }
   }
 
-  toggleTable1Show(){
+  toggleTable1Show() {
     if (this.toggleTable1 == 0) {
       this.toggleTable1 = 1;
     } else {
@@ -100,107 +108,108 @@ export class IncDataAreaPage {
     }
   }
 
-  selectionArea(){
-    this.webapi.getData('SelectionArea?offcode='+this.offcode).then((data) => {
-      this.responseArea = data;     
-    });   
+  selectionArea() {
+    this.webapi.getData('SelectionArea?offcode=' + this.offcode).then((data) => {
+      this.responseArea = data;
+    });
   }
 
-  selectionProvinceAll(){
+  selectionProvinceAll() {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
       this.responseProvince = data;
     });
   }
 
- SuraSelectionProvince(){
-    this.webapi.getData('SelectionProvince?offcode='+this.offcode+'&area='+this.Area).then((data) => {
+  SuraSelectionProvince() {
+    this.webapi.getData('SelectionProvince?offcode=' + this.offcode + '&area=' + this.Area).then((data) => {
       this.responseProvince = data;
     });
   }
 
-  selectionGeoupName(){
-    this.webapi.getData('SelectionGroupName?offcode='+this.offcode).then((data) => {
+  selectionGeoupName() {
+    this.webapi.getData('SelectionGroupName?offcode=' + this.offcode).then((data) => {
       this.responseGroupName = data;
     });
   }
   //---------------------------------------------------------SURA------------------------------------------------------------//
-  Getitems(Area,Province,Month, typeCur){
-    
-    this.GetitembyProvince(Area,Province,Month,typeCur);
-   /* var sura = "สุรา";
-    var old_area = Area;
-    //this.selectionProvinceChange(area);
-    //this.selectionGeoupName();
-    if(Area != 'undefined' || Area != old_area){
-      this.Area = Area
-      this.SuraSelectionProvince();
-      Province = 'undefined';
-    }*/
+  Getitems(Area, Province, Month, typeCur) {
+
+    this.GetitembyProvince(Area, Province, Month, typeCur);
+    /* var sura = "สุรา";
+     var old_area = Area;
+     //this.selectionProvinceChange(area);
+     //this.selectionGeoupName();
+     if(Area != 'undefined' || Area != old_area){
+       this.Area = Area
+       this.SuraSelectionProvince();
+       Province = 'undefined';
+     }*/
   }
 
-  GetitembyProvince(Area,Province,Month,typeCur){
+  GetitembyProvince(Area, Province, Month, typeCur) {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Area).then((data) => {
       this.responseProvince = data;
     });
 
-    this.getProduct(Area,Province,Month,typeCur);
+    this.getProduct(Area, Province, Month, typeCur);
   }
 
-  GetitemsMonth(Area,Province,Month,typeCur){
+  GetitemsMonth(Area, Province, Month, typeCur) {
 
-    this.GetitembyProvince(Area,Province,Month,typeCur);
-    this.getProduct(Area,Province,Month,typeCur);
+    this.GetitembyProvince(Area, Province, Month, typeCur);
+    this.getProduct(Area, Province, Month, typeCur);
   }
 
-  getProduct(Area,Province,Month,typeCur){
-   
+  getProduct(Area, Province, Month, typeCur) {
+
     if (Area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
-    alert(Area +" -- "+ Province+" -- "+Month+" -- "+typeCur);
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=สุรา&month="+Month).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=สุรา&month=" + Month).then((data) => {
       this.repondProductSura = data;
       this.getSuraAmt(typeCur);
     });
 
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=ยาสูบ&month="+Month).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ยาสูบ&month=" + Month).then((data) => {
       this.repondProductSica = data;
       this.getSicaAmt(typeCur);
     });
 
-    this.webapi.getData('IncProductByArea?offcode='+this.offcode+'&region='+Area+"&province="+Province+"&group_desc=ไพ่&month="+Month).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ไพ่&month=" + Month).then((data) => {
       this.repondProductCard = data;
       this.getCardAmt(typeCur);
     });
     this.oldArea = Area;
     this.oldtypeCur = typeCur;
-    if(typeCur == "M"){
+    if (typeCur == "M") {
       this.curTG2 = "ล้านบาท";
-    }else{
+      this.unitTG2 = "ล้านใบ";
+    } else {
       this.curTG2 = "บาท";
+      this.unitTG2 = "ใบ";
     }
 
   }
 
- /*  selectionProvinceChange(area){
-    this.webapi.getData('SelectionProvinceChange?offcode='+this.offcode+'&region'+area).then((data) => {
-      this.responseProvince = data;
-    });
-  } */
+  /*  selectionProvinceChange(area){
+     this.webapi.getData('SelectionProvinceChange?offcode='+this.offcode+'&region'+area).then((data) => {
+       this.responseProvince = data;
+     });
+   } */
 
-///get all product///
-   ProductAll(typeCur){
-    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode+'&group_name=สุรา').then((data) => {
+  ///get all product///
+  ProductAll(typeCur) {
+    this.webapi.getData('IncProductByAreaAll?offcode=' + this.offcode + '&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.getSuraAmt(typeCur);
     });
 
-    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode+'&group_name=ยาสูบ').then((data) => {
+    this.webapi.getData('IncProductByAreaAll?offcode=' + this.offcode + '&group_name=ยาสูบ').then((data) => {
       this.repondProductSica = data;
       this.getSicaAmt(typeCur);
     });
 
-    this.webapi.getData('IncProductByAreaAll?offcode='+this.offcode+'&group_name=ไพ่').then((data) => {
+    this.webapi.getData('IncProductByAreaAll?offcode=' + this.offcode + '&group_name=ไพ่').then((data) => {
       this.repondProductCard = data;
       this.getCardAmt(typeCur);
     });
@@ -209,7 +218,7 @@ export class IncDataAreaPage {
 
   ///end get all product///
 
-  getSuraAmt(typeCur){
+  getSuraAmt(typeCur) {
     let AMT;
     let COUNT;
     for (var i = 0; i < this.repondProductSura.length; i++) {
@@ -224,7 +233,7 @@ export class IncDataAreaPage {
   }
 
 
-  getCardAmt(typeCur){
+  getCardAmt(typeCur) {
     let AMT;
     let COUNT;
     for (var i = 0; i < this.repondProductCard.length; i++) {
@@ -238,7 +247,7 @@ export class IncDataAreaPage {
     }
   }
 
-  getSicaAmt(typeCur){
+  getSicaAmt(typeCur) {
     let AMT;
     let COUNT;
     for (var i = 0; i < this.repondProductSica.length; i++) {
@@ -252,16 +261,16 @@ export class IncDataAreaPage {
     }
   }
 
-  loadData(typeCur2){
-    this.webapi.getData('IncArea?offcode='+this.offcode).then((data)=>{
+  loadData(typeCur2) {
+    this.webapi.getData('IncArea?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
       this.getProductAmt(typeCur2);
-      this.getProductNum();
+      this.getProductNum(typeCur2);
     });
   }
 
   getProductAmt(typeCur2) {
-   
+
     let suraAmt;
     let topAmt;
     let cardAmt;
@@ -281,34 +290,47 @@ export class IncDataAreaPage {
     }
   }
 
-  getProductNum(){
+  getProductNum(typeCur2) {
     let sura;
     let top;
     let card;
     for (var i = 0; i < this.responseData.length; i++) {
       sura = this.responseData[i].NUM_OF_LIC_SURA;
-      sura = sura.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
       this.responseData[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      top = top.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (top != null) { top = changeCurrency(top, typeCur2); }
       this.responseData[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseData[i].NUM_OF_LIC_CARD;
-      card = card.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseData[i].NUM_OF_LIC_CARD = card;
     }
   }
-
-  ChangeCurrency(Area,Province,Month,typeCur) {
-    this.getProduct(Area,Province,Month,typeCur);
+  /* start for pinch */
+  public onPinchStart(e) {
+    this.isScaling = true;
   }
-  ChangeCurrencyOverview(typeCur2) {
-    this.loadData(typeCur2);
-    if(typeCur2 == "M"){
-      this.curTG1 = "ล้านบาท";
-    }else{
-      this.curTG1 = "บาท";
+  public onPinchEnd(e) {
+    this.isScaling = false;
+    this.alreadyScaled = this.scale * this.alreadyScaled;
+  }
+  public onPinchMove(e) {
+    this.scale = e.scale;
+    let totalScaled = this.alreadyScaled * e.scale;
+    if (totalScaled >= MAX_SCALE) {
+      this.scale = MAX_SCALE / this.alreadyScaled;
+      totalScaled = MAX_SCALE;
+    } else if (totalScaled <= MIN_SCALE) {
+      this.scale = MIN_SCALE / this.alreadyScaled;
+      totalScaled = MIN_SCALE;
+    }
+
+    let fontSize = Math.round(totalScaled * 10) / 10;
+    if ((fontSize * 10) % 3 === 0) {
+      this.fontSize = `${fontSize}rem`;
     }
   }
+  /* end  */
 }

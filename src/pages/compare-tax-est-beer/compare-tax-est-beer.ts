@@ -4,6 +4,11 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+/* start for pinch */
+const MAX_SCALE = 11.1;
+const MIN_SCALE = 0.9;
+const BASE_SCALE = 1.3;
+/* end  */
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-est-beer',
@@ -17,6 +22,7 @@ export class CompareTaxEstBeerPage {
   offcode: any;
   responseArea: any;
   responseProvince: any;
+  curTG = "บาท";
 
   //Line Tax
   TaxlineChart: any;
@@ -33,13 +39,18 @@ export class CompareTaxEstBeerPage {
   dateAsOff: any;
   subArea: any;
   oldArea: any;
-  oldtypeCur : any; 
+  oldtypeCur: any;
   toggleLine = 0;
   toggleTable = 0;
   //Table reg
   responseRegData: any;
   grp_id: any;
-
+  /* start for pinch */
+  public fontSize = `${BASE_SCALE}rem`;
+  private scale = BASE_SCALE;
+  private alreadyScaled = BASE_SCALE;
+  public isScaling = false;
+  /* end  */
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
@@ -64,7 +75,7 @@ export class CompareTaxEstBeerPage {
     this.selectDataAll(area, Province, typeCur);
 
   }
-  toggleLineShow(){
+  toggleLineShow() {
     if (this.toggleLine == 0) {
       this.getLineAll();
       this.toggleLine = 1;
@@ -73,7 +84,7 @@ export class CompareTaxEstBeerPage {
     }
   }
 
-  toggleTableShow(){
+  toggleTableShow() {
     if (this.toggleTable == 0) {
       this.toggleTable = 1;
     } else {
@@ -81,7 +92,7 @@ export class CompareTaxEstBeerPage {
     }
   }
   selectDataAll(area, Province, typeCur) {
-    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&area=' + area + '&province=' + Province).then((data) => {
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
@@ -113,7 +124,7 @@ export class CompareTaxEstBeerPage {
   }
   //-----------------------------------------------------------------------------------------------------------//
   getTableData(area, Province, typeCur) {
-    
+
     if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
@@ -125,9 +136,14 @@ export class CompareTaxEstBeerPage {
     this.selectDataAll(area, Province, typeCur);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
+    if (typeCur == "M") {
+      this.curTG = "ล้านบาท";
+    } else {
+      this.curTG = "บาท";
+    }
   }
 
-  
+
   //-----------------------------------------------------------------------------------------------------------//
   getTableTAX(typeCur) {
     let tax;
@@ -267,9 +283,9 @@ export class CompareTaxEstBeerPage {
             label: function (tooltipItem, data) {
               let value;
               if (tooltipItem.yLabel > 999999) {
-                 value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+                value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
               } else {
-                 value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+                value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
               }
 
               return value;
@@ -307,5 +323,29 @@ export class CompareTaxEstBeerPage {
 
     });
   }
+  /* start for pinch */
+  public onPinchStart(e) {
+    this.isScaling = true;
+  }
+  public onPinchEnd(e) {
+    this.isScaling = false;
+    this.alreadyScaled = this.scale * this.alreadyScaled;
+  }
+  public onPinchMove(e) {
+    this.scale = e.scale;
+    let totalScaled = this.alreadyScaled * e.scale;
+    if (totalScaled >= MAX_SCALE) {
+      this.scale = MAX_SCALE / this.alreadyScaled;
+      totalScaled = MAX_SCALE;
+    } else if (totalScaled <= MIN_SCALE) {
+      this.scale = MIN_SCALE / this.alreadyScaled;
+      totalScaled = MIN_SCALE;
+    }
 
+    let fontSize = Math.round(totalScaled * 10) / 10;
+    if ((fontSize * 10) % 3 === 0) {
+      this.fontSize = `${fontSize}rem`;
+    }
+  }
+  /* end  */
 }
