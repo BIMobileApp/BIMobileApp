@@ -102,5 +102,7 @@ page-tax-coutry-section1 {
           color: rgb(31, 99, 31)  !important;
         }
       
-      
+        ion-content.disable-scrolling .scroll-content {
+          overflow-y: hidden;
+        }
 }
