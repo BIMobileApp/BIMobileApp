@@ -172,8 +172,7 @@ public isScaling = false;
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();
-          /* this.TaxgetTAX_LY();
-          this.TaxgetLebel(); */
+          this.TaxlineChart.destroy();
           this.TaxCreateChart();
 
         } else {
@@ -192,8 +191,9 @@ public isScaling = false;
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
-        /*  this.TaxgetTAX_LY();
-         this.TaxgetLebel(); */
+        if(this.TaxlineChart){
+          this.TaxlineChart.destroy();
+        }
         this.TaxCreateChart();
 
       } else {
@@ -235,6 +235,8 @@ public isScaling = false;
   } */
 
   TaxCreateChart() {
+    
+    
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {

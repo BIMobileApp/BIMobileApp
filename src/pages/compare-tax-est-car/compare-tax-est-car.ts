@@ -177,8 +177,7 @@ export class CompareTaxEstCarPage {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();
-          this.TaxgetTAX_LY();
-          this.TaxgetLebel();
+          this.TaxlineChart.destroy();
           this.TaxCreateChart();
 
         } else {
@@ -195,8 +194,9 @@ export class CompareTaxEstCarPage {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
-        this.TaxgetTAX_LY();
-        this.TaxgetLebel();
+        if(this.TaxlineChart){
+          this.TaxlineChart.destroy();
+        }
         this.TaxCreateChart();
 
       } else {
@@ -205,29 +205,17 @@ export class CompareTaxEstCarPage {
     });
   }
 
-
   TaxgetTAX() {
     this.tax_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
-    }
-    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
-  }
-
-  TaxgetTAX_LY() {
     this.tax_TAX_LY = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
-    }
-    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
-
-  }
-
-  TaxgetLebel() {
     this.tax_lebel = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
+      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
       this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
+    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
+    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
   }
 

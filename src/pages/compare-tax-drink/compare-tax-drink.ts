@@ -133,12 +133,16 @@ export class CompareTaxDrinkPage {
     this.webapi.getData('CompareTaxVolDrink?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => {
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
+
         this.TaxgetTAX();
-        this.TaxgetTAX_LY();
-        this.TaxgetLebel();
+        if(this.TaxlineChart){
+          this.TaxlineChart.destroy();
+        }
         this.TaxCreateChart();
         this.VolgetTAX();
-        this.VolgetTAX_LY();
+        if(this.VollineChart){
+          this.VollineChart.destroy();
+        }
         this.VolCreateChart();
       }else{
         this.textDataNotValid = 0;
@@ -150,27 +154,18 @@ export class CompareTaxDrinkPage {
 
   TaxgetTAX() {
     this.tax_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
-    }
-    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
-  }
-
-  TaxgetTAX_LY() {
     this.tax_TAX_LY = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
-    }
-    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
-  }
-
-  TaxgetLebel() {
     this.tax_lebel = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
+      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
       this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
+    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
+    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
   }
+
   //----------------------- End Manage Data from API-------------------------//
 
   TaxCreateChart() {
@@ -286,19 +281,15 @@ export class CompareTaxDrinkPage {
 
   VolgetTAX() {
     this.vol_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
-    }
-    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
-  }
-
-  VolgetTAX_LY() {
     this.vol_TAX_LY = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
       this.vol_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_VOLUMN_CAPA);
     }
+    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
     this.vol_TAX_LY = JSON.parse(JSON.stringify(this.vol_TAX_LY));
   }
+
 
   //----------------------- End Manage Data from API-------------------------//
 
