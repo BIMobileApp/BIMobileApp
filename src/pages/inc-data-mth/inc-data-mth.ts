@@ -92,7 +92,7 @@ export class IncDataMthPage {
 
     /// ตรวจสอบสาขาเพื่อ default selection
     var res = "";
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       res = localStorage.offdesc.split(" ");
       this.select_province = res[0];
       this.select_all_prov_value = false;
@@ -157,6 +157,7 @@ export class IncDataMthPage {
 
   selectRegion(Region, Province, Month, typeCur) {
     Province = 'undefined';
+    this.Province = "undefined";
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
@@ -213,11 +214,12 @@ export class IncDataMthPage {
     } else {
       Region = Region;
     }
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     } else {
       Province = Province;
     }
+   
     this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.getCountAmtProdSura(typeCur);

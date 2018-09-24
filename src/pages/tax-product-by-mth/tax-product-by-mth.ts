@@ -73,7 +73,7 @@ public isScaling = false;
 
   /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-  if(this.branch != "00"){          
+  if(this.branch != "00" || this.province != "00"){          
      res =  localStorage.offdesc.split(" ");
      this.select_province  = res[0];
      this.select_all_prov_value = false;
@@ -129,7 +129,7 @@ public isScaling = false;
     }else{
       Region =area;
     }
-    if(this.branch != "00"){    
+    if(this.branch != "00" || this.province != "00"){    
       province =  this.select_province;
     }else{
       province = Province;
@@ -147,7 +147,7 @@ public isScaling = false;
     }else{
       Region =area;
     }
-    if(this.branch != "00"){    
+    if(this.branch != "00" || this.province != "00"){    
       province =  this.select_province;
     }else{
       province = Province;
@@ -174,9 +174,13 @@ public isScaling = false;
 
   selectionRegion(area,Province,monthFrom,monthTo,typeCur){
     
-    if(this.region != "00"){
+    /*if(this.region != "00"){
       area = localStorage.region_desc;
-    }
+    }*/
+
+    Province =  'undefined';
+    this.Province = 'undefined';
+    
     this.selectionProvince(area,Province,monthFrom,monthTo,typeCur);
   }
 
@@ -206,12 +210,13 @@ public isScaling = false;
     }else{
       Region =area;
     }
-    if(this.branch != "00"){    
+    if(this.branch != "00" || this.province != "00"){    
       province =  this.select_province;
     }else{
       province = Province;
     }  
 
+    alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
     this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+Region+'&province='+province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
       this.responseData = data;
       this.getTAX(typeCur);

@@ -96,7 +96,7 @@ export class IncDataAreaPage {
 
     /// ตรวจสอบสาขาเพื่อ default selection
     var res = "";
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       res = localStorage.offdesc.split(" ");
       this.select_province = res[0];
       this.select_all_prov_value = false;
@@ -167,12 +167,13 @@ export class IncDataAreaPage {
   //---------------------------------------------------------SURA------------------------------------------------------------//
   Getitems(Area, Province, Month, typeCur) {
     Province = 'undefined';
+    this.Province = "undefined";
     if (this.region != "00") {
       Area = localStorage.region_desc;
     } else {
       Area = Area;
     }
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     } else {
       Province = Province;
@@ -208,7 +209,7 @@ export class IncDataAreaPage {
     } else {
       Area = Area;
     }
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     } else {
       Province = Province;
@@ -228,7 +229,7 @@ export class IncDataAreaPage {
     } else {
       Area = Area;
     }
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     } else {
       Province = Province;

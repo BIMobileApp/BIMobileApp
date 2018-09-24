@@ -83,7 +83,7 @@ public isScaling = false;
 
     /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-   if(this.branch != "00"){          
+   if(this.branch != "00" || this.province != "00"){          
       res =  localStorage.offdesc.split(" ");
       this.select_province  = res[0];
       this.select_all_prov_value = false;
@@ -99,12 +99,13 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
-    let Region = 'undefined';
-    let Province = 'undefined';
+    let Region;
+    let Province;
     let typeCur = "B";
-    this.getData(Region, Province, typeCur);
+
     this.selectionAreaAll();
     this.selectionProvinceAll();
+    this.getData(Region, Province, typeCur);
   }
   selectionAreaAll(){
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
@@ -123,6 +124,7 @@ public isScaling = false;
 
   selectRegion(Region,Province,typeCur){  
     Province =  'undefined';
+    this.Province =  'undefined';
     this.selectionProvince(Region,Province,typeCur);
     //this.getData(Region,Province,typeCur);
   }
@@ -139,13 +141,24 @@ public isScaling = false;
   }
    
   getData(Region,Province,typeCur){
-    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
+    /*if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
+    }*/
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region = Region;
     }
-      this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
+  
+    if(this.branch != "00" || this.province != "00"){
+      Province = this.select_province;
+    }else{
+      Province = Province;
+    }
+    this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
           this.respondData = data;
           this.getTableTAX(typeCur);
-      });
+    });
       this.oldRegion = Region;
       this.oldtypeCur = typeCur;
   }

@@ -22,6 +22,12 @@ import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtim
 import { TaxYearByProductPage } from '../tax-year-by-product/tax-year-by-product';
 import { TaxProductByMthPage } from '../tax-product-by-mth/tax-product-by-mth';
 import { DimensionTime_03Page } from '../dimension-time-03/dimension-time-03';
+import { CompareTaxEstOilPage } from '../compare-tax-est-oil/compare-tax-est-oil';
+import { CompareTaxOilPage } from '../compare-tax-oil/compare-tax-oil';
+import { NewReportGaugeTaxOilPage } from '../new-report-gauge-tax-oil/new-report-gauge-tax-oil';
+import { CompareTaxEstSicaPage } from '../compare-tax-est-sica/compare-tax-est-sica';
+import { CompareTaxSicaPage } from '../compare-tax-sica/compare-tax-sica';
+import { NewReportGaugeTaxSicaPage } from '../new-report-gauge-tax-sica/new-report-gauge-tax-sica';
 
 @IonicPage()
 @Component({
@@ -40,7 +46,6 @@ export class MenuGroupNewReportPage {
     this.username = localStorage.userData;
    }
 
-
   reportCar27_31(){
     this.app.getRootNav().push(CompareTaxCarPage);  
   }
@@ -53,7 +58,6 @@ export class MenuGroupNewReportPage {
   reportDrink29_33(){
     this.app.getRootNav().push(CompareTaxDrinkPage);  
   }
-
   reportCar3(){
     this.app.getRootNav().push(CompareTaxEstCarPage); 
   }
@@ -108,13 +112,29 @@ export class MenuGroupNewReportPage {
   TaxMthByProduct(){
     this.app.getRootNav().push(TaxProductByMthPage);
   }
-
   IncomeRealTimeTable(){
     this.app.getRootNav().push(IncomerealtimePage);
   }
-
   TaxEdRealtime(){
     this.app.getRootNav().push(TaxEdRealtimePage);
+  }
+  reportOil3(){
+    this.app.getRootNav().push(CompareTaxEstOilPage);
+  }
+  reportOil29_33(){
+    this.app.getRootNav().push(CompareTaxOilPage);
+  }
+  reportGaugeTaxOil(){
+    this.app.getRootNav().push(NewReportGaugeTaxOilPage);
+  }
+  reportSica3(){
+    this.app.getRootNav().push(CompareTaxEstSicaPage);
+  }
+  reportSica29_33(){
+    this.app.getRootNav().push(CompareTaxSicaPage);
+  }
+  reportGaugeTaxSica(){
+    this.app.getRootNav().push(NewReportGaugeTaxSicaPage);
   }
 
 }

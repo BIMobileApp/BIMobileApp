@@ -33,6 +33,7 @@ export class LawDataAreaPage {
   repondProductSica:any;
   repondProductCard:any;
 
+  SProvince:any;
   region:any;
   province:any;
   branch:any;
@@ -81,7 +82,7 @@ public isScaling = false;
 
   /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-  if(this.branch != "00"){          
+  if(this.branch != "00" || this.province != "00"){          
     res =  localStorage.offdesc.split(" ");
     this.select_province  = res[0];
     this.select_all_prov_value = false;
@@ -111,7 +112,7 @@ public isScaling = false;
       SRegion = 'undefined';
     }
 
-    if(this.branch != "00"){
+    if(this.branch != "00" || this.province != "00"){
       SProvince = this.select_province;
     }else{
       SProvince = 'undefined';
@@ -156,6 +157,7 @@ public isScaling = false;
   getitemsRegion(SRegion,SProvince,typeCur){
 
     SProvince =  'undefined';
+    this.SProvince =  'undefined';
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
@@ -183,11 +185,13 @@ public isScaling = false;
       SRegion = SRegion;
     }
 
-    if(this.branch != "00"){
+    if(this.branch != "00" || this.province != "00"){
       SProvince = this.select_province;
     }else{
       SProvince = SProvince;
     }
+
+    
 
     this.webapi.getData('LawProductArea?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
       this.repondProductSura = data;
@@ -203,7 +207,7 @@ public isScaling = false;
       SRegion = SRegion;
     }
 
-    if(this.branch != "00"){
+    if(this.branch != "00" || this.province != "00"){
       SProvince = this.select_province;
     }else{
       SProvince = SProvince;
