@@ -35,14 +35,22 @@ export class IncDataMthPage {
   dateAsOff: any;
   disoffcode: any;
 
-  stroffcode: any;
-  Province: any;
-  branch: any;
-
   defaultSelectQuestion: any;
   defaultSelectProvinceSura: any;
   questionArray: any;
   username: any;
+
+  region: any;
+  province: any;
+  branch: any;
+  Province:any;
+
+  select_region: any;
+  select_all_value: any;
+  select_all_prov_value: any;
+  select_province: any;
+  isEnable: any;
+  isEnableProv: any;
 
   oldArea: any;
   oldtypeCur: any;
@@ -61,15 +69,39 @@ export class IncDataMthPage {
     public navParams: NavParams,
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
-
-    // this.province = this.offcode.substring(0, 2);
-    // this.branch = this.offcode.substring(4, 2);
-
-    //this.disoffcode = this.stroffcode;
-
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
     this.username = localStorage.userData;
+
+    ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+    this.region = localStorage.offcode.substring(0, 2);
+    this.province = localStorage.offcode.substring(2, 4);
+    this.branch = localStorage.offcode.substring(4, 6);
+    /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+    ///ตรวจสอบภาคเพื่อ default selection
+    if (this.region != "00") {
+      this.select_region = localStorage.region_desc;
+      this.select_all_value = false;
+      this.isEnable = true;
+    } else {
+      this.select_all_value = true;
+      this.isEnable = false;
+    }
+    ///end ตรวจสอบภาคเพื่อ default selection
+
+    /// ตรวจสอบสาขาเพื่อ default selection
+    var res = "";
+    if (this.branch != "00" || this.province != "00") {
+      res = localStorage.offdesc.split(" ");
+      this.select_province = res[0];
+      this.select_all_prov_value = false;
+      this.isEnableProv = true;
+    } else {
+      this.select_all_prov_value = true;
+      this.isEnableProv = false;
+    }
+    ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
 
@@ -77,8 +109,8 @@ export class IncDataMthPage {
     let typeCur = 'B';
     let typeCur2 = 'B';
     this.loadData(typeCur2);
-    let Region = 'undefined';
-    let Province = 'undefined';
+    let Region;
+    let Province;
     let Month = 'undefined';
     this.IncProductAll(Region, Province, Month, typeCur);
     this.selectionArea();
@@ -116,7 +148,7 @@ export class IncDataMthPage {
   }
 
   selectionProvinceFill(Region) {
-
+    
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
@@ -125,6 +157,7 @@ export class IncDataMthPage {
 
   selectRegion(Region, Province, Month, typeCur) {
     Province = 'undefined';
+    this.Province = "undefined";
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
@@ -132,6 +165,11 @@ export class IncDataMthPage {
   }
 
   selectionProvince(Region, Province, Month, typeCur) {
+
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+
     this.webapi.getData('SelectionMthProvince?offcode=' + this.offcode + '&region=' + Region).then((data) => {
       this.responseProvince = data;
     });
@@ -145,7 +183,12 @@ export class IncDataMthPage {
   }
 
   selectionAllProvince() {
-    this.webapi.getData('SelectionAllProvince?offcode=' + this.offcode).then((data) => {
+    let region;
+    if (this.region != "00") {
+      region = localStorage.region_desc;
+    }
+    //let  Region = 'undefined';
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + region).then((data) => {
       this.responseProvince = data;
     });
   }
@@ -161,10 +204,22 @@ export class IncDataMthPage {
   ///end select all///
 
   IncProductAll(Region, Province, Month, typeCur) {
-    if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
+   /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
       this.Province = undefined;
       Province = undefined;
+    }*/
+
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    } else {
+      Region = Region;
     }
+    if (this.branch != "00" || this.province != "00") {
+      Province = this.select_province;
+    } else {
+      Province = Province;
+    }
+   
     this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.getCountAmtProdSura(typeCur);

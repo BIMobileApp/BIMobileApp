@@ -31,6 +31,7 @@ export class TaxEdRealtimePage {
   offdesc:any;
   regiondesc:any;
 
+  Province:any;
   region:any;
   province:any;
   branch:any;
@@ -79,7 +80,7 @@ public isScaling = false;
 
   /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-  if(this.branch != "00"){          
+  if(this.branch != "00" || this.province != "00"){          
      res =  localStorage.offdesc.split(" ");
      this.select_province  = res[0];
      this.select_all_prov_value = false;
@@ -127,6 +128,7 @@ public isScaling = false;
 
   selectRegion(Region,Province,typeCur){
     Province =  'undefined';
+    this.Province = 'undefined';
     this.selectionProvince(Region,Province,typeCur);
     this.getData(Region,Province,typeCur);
   }
@@ -142,9 +144,21 @@ public isScaling = false;
   }
 
   getData(Region,Province,typeCur){ 
-    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
+    /*if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
+    }*/
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region = Region;
     }
+  
+    if(this.branch != "00" || this.province != "00"){
+      Province = this.select_province;
+    }else{
+      Province = Province;
+    }
+
      this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode+'&region='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
 

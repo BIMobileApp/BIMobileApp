@@ -75,6 +75,20 @@ export class CetegoryTaxPage {
   dateDisplay = "";
   dateAsOff = "";
 
+  Province: any;
+  region:any;
+  province:any;
+  branch:any;
+
+  select_region:any;
+  select_all_value:any;
+  select_all_prov_value:any;
+  select_province:any;
+  isEnable:any;
+  isEnableProv:any;
+  oldRegion:any;
+
+
     /* start for pinch */
     public fontSize = `${BASE_SCALE}rem`;
     private scale = BASE_SCALE;
@@ -93,13 +107,44 @@ export class CetegoryTaxPage {
     this.offcode = localStorage.offcode;
     this.off = this.offcode.substring(0, 2);
     this.pak = parseInt(this.offcode, 10);
+
+    ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+    this.region = localStorage.offcode.substring(0, 2);
+    this.province = localStorage.offcode.substring(2, 4);
+    this.branch =  localStorage.offcode.substring(4, 6);
+  /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+   ///ตรวจสอบภาคเพื่อ default selection
+   if(this.region != "00"){
+     this.select_region = localStorage.region_desc;
+     this.select_all_value = false;    
+     this.isEnable  = true;        
+   }else{
+     this.select_all_value = true;
+     this.isEnable  = false;
+   }
+///end ตรวจสอบภาคเพื่อ default selection
+
+ /// ตรวจสอบสาขาเพื่อ default selection
+ var res = "";
+ if(this.branch != "00" || this.province != "00"){          
+    res =  localStorage.offdesc.split(" ");
+    this.select_province  = res[0];
+    this.select_all_prov_value = false;
+    this.isEnableProv = true;
+  }else{
+    this.select_all_prov_value = true;
+    this.isEnableProv = false;
+  }
+ ///end  ตรวจสอบสาขาเพื่อ default selection
+   
   }
 
   ionViewDidLoad() {
     this.selectionArea();
     this.selectionProviceFirst();
-    let area = undefined;
-    let Province = undefined;
+    let area;
+    let Province;
     let typeCur = 'B';
     this.TableGetData(area, Province, typeCur);
     this.hideTableBrance = 0;
@@ -129,22 +174,32 @@ export class CetegoryTaxPage {
       this.toggleTable = 0;
     }
   }
-
-
   selectionArea() {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
   selectionProviceFirst() {
-    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
+    let region;
+    if(this.region != "00"){
+      region = localStorage.region_desc;
+    }
+
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+region).then((data) => {
       this.responseProvince = data;
     });
   }
 
   selectionProvince(area, Province, typeCur) {
-    Province = undefined;
-    this.responseProvince = [];
+
+    Province = 'undefined';
+    this.Province = 'undefined';
+    //this.responseProvince = [];
+
+    if(this.region != "00"){
+      area = localStorage.region_desc;
+    }
+
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
@@ -167,18 +222,33 @@ export class CetegoryTaxPage {
   }
 
   TableGetData(area, Province, typeCur) {
-    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
-      Province = undefined;
+
+   let Region;
+   let province;
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region =area;
     }
-    this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
+    if(this.branch != "00" || this.province != "00"){    
+      province =  this.select_province;
+    }else{
+      province = Province;
+    }  
+
+ 
+   /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
+      province = undefined;
+    }*/
+    this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&area=' + Region + '&province=' + province).then((data) => {
       this.DataCurYear = data;
       this.getTAX(typeCur);
     });
-    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + area + '&province=' + Province).then((data) => {
+    this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + Region + '&province=' + province).then((data) => {
       this.DataProduct = data;
       this.getProductTAX(typeCur);
     });
-    this.oldArea = area;
+    this.oldArea = Region;
     this.oldtypeCur = typeCur;
     if (Province !== undefined) {
       this.hideTableBrance = 1;

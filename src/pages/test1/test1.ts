@@ -1,17 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the Test1Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-test1',
-  templateUrl: 'test1.html',
+  templateUrl: 'test1.html'
 })
 export class Test1Page {
 
@@ -19,6 +12,14 @@ export class Test1Page {
   }
 
   ionViewDidLoad() {
+    
+    /*  template:`
+  <ion-header>
+  <ion-navbar>
+    <ion-title>Other Page</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>I'm the other page!</ion-content>`*/
     console.log('ionViewDidLoad Test1Page');
   }
 

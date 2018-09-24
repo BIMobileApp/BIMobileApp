@@ -42,6 +42,17 @@ export class CompareTaxEstDrinkPage {
   toggleTable = 0;
   oldArea: any;
   oldtypeCur : any; 
+
+  region: any;
+  province: any;
+  branch: any;
+
+  select_region: any;
+  select_all_value: any;
+  select_all_prov_value: any;
+  select_province: any;
+  isEnable: any;
+  isEnableProv: any;
     //Table reg
     responseRegData: any;
     grp_id: any;
@@ -61,16 +72,46 @@ export class CompareTaxEstDrinkPage {
     this.dateAsOff = dateDisplayAll;
     this.grp_id = 'ภาษีเครื่องดื่ม';
     this.offcode = localStorage.offcode;
+
+      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+      this.region = localStorage.offcode.substring(0, 2);
+      this.province = localStorage.offcode.substring(2, 4);
+      this.branch = localStorage.offcode.substring(4, 6);
+      /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+      ///ตรวจสอบภาคเพื่อ default selection
+      if (this.region != "00") {
+        this.select_region = localStorage.region_desc;
+        this.select_all_value = false;
+        this.isEnable = true;
+      } else {
+        this.select_all_value = true;
+        this.isEnable = false;
+      }
+      ///end ตรวจสอบภาคเพื่อ default selection
+
+      /// ตรวจสอบสาขาเพื่อ default selection
+      var res = "";
+      if (this.branch != "00") {
+        res = localStorage.offdesc.split(" ");
+        this.select_province = res[0];
+        this.select_all_prov_value = false;
+        this.isEnableProv = true;
+      } else {
+        this.select_all_prov_value = true;
+        this.isEnableProv = false;
+      }
+      ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
   ionViewDidLoad() {
     this.getProductType();
     
-    let area = undefined;
-    let Province = undefined;
+    let area;
+    let Province;
     let typeCur = 'B';
-    this.selectionProviceFirst();
     this.selectionArea();
+    this.selectionProviceFirst();
     this.getTableData(area, Province,typeCur);
     this.selectDataAll(area, Province,typeCur);
   }
@@ -98,6 +139,7 @@ export class CompareTaxEstDrinkPage {
       if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
   }
+
   getTableRegTAX(typeCur) {
     let val;
     for (var i = 0; i < this.responseRegData.length; i++) {
@@ -113,24 +155,42 @@ export class CompareTaxEstDrinkPage {
     });
   }
   selectionProviceFirst(){
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area=undefined').then((data) => {
+    let region;
+    if (this.region != "00") {
+      region = localStorage.region_desc;
+    }
+
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+region).then((data) => {
       this.responseProvince = data;
 
     });
   }
-  selectionProvince(area,Province,typeCur){  
+  selectionProvince(area,Province,typeCur){
+
+    Province = 'undefined'; 
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
-
     });
     this.getTableData(area,Province,typeCur);
   }
   //-----------------------------------------------------------------------------------------------------------//
   getTableData(area, Province,typeCur) {
    
-    if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
+    /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
+    }*/
+
+    if (this.region != "00") {
+      area = localStorage.region_desc;
+    } else {
+      area = area;
     }
+    if (this.branch != "00") {
+      Province = this.select_province;
+    } else {
+      Province = Province;
+    }
+
     this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
       this.getTableTAX(typeCur);

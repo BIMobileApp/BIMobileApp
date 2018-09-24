@@ -26,6 +26,7 @@ responseProvince:any;
 
 repondProductSura:any;
 
+  SProvince:any;
   region:any;
   province:any;
   branch:any;
@@ -75,7 +76,7 @@ constructor(
 
   /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-  if(this.branch != "00"){          
+  if(this.branch != "00" || this.province != "00"){          
     res =  localStorage.offdesc.split(" ");
     this.select_province  = res[0];
     this.select_all_prov_value = false;
@@ -83,7 +84,7 @@ constructor(
   }else{
     this.select_all_prov_value = true;
     this.isEnableProv = false;
-  } console.log(this.select_all_prov_value);
+  }
   ///end  ตรวจสอบสาขาเพื่อ default selection
 }
 
@@ -135,6 +136,7 @@ selectionProvinceAll(){
 
 getitemsRegion(SRegion,SProvince,typeCur){
   SProvince = 'undefined';
+  this.SProvince =  'undefined';
 
   this.getitemsProvince(SRegion,SProvince,typeCur);
   //this.getProductAll(area,province,typeCur);
@@ -169,12 +171,12 @@ getProductAll(SRegion,SProvince,typeCur){
     SRegion = SRegion;
   }
 
-  if(this.branch != "00"){
+  if(this.branch != "00" || this.province != "00"){
     SProvince = this.select_province;
   }else{
     SProvince = SProvince;
   }
-
+  alert("ภาค="+SRegion+" จังหวัด="+ SProvince+" หน่วย="+ typeCur);
   this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
     this.repondProductSura = data; 
     this.getTableTAX(typeCur);

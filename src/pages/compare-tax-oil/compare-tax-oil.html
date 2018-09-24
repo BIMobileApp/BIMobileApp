@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar color="navber">
+    <ion-title>กราฟเปรียบเทียบกับปีก่อน<br>
+      ผู้ใช้งาน : {{username}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item style="background-color:#D0DFE6;" text-center>
+        <h1 class="header-style">รายงานรับเงินรายได้ Real Time</h1>
+        <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
+      </ion-item>
+      <ion-grid>
+        <ion-row>      
+         <ion-col>
+           <ion-item  class="size">
+               <ion-label> ภาค : </ion-label>
+               <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)" disabled={{isEnable}}>
+                      <ion-option value="undefined"   [selected]="select_all_value">ทั้งหมด</ion-option>
+                      <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
+               </ion-select>
+             </ion-item>
+         </ion-col>       
+         <ion-col>
+           <ion-item  class="size">
+               <ion-label>จังหวัด : </ion-label>
+               <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)" disabled={{isEnableProv}}>
+                     <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                       <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
+               </ion-select>
+           </ion-item>
+        </ion-col>        
+        </ion-row>
+     </ion-grid>
+  <ion-card>
+    <ion-card-content>
+      <h2 class="header-style">กราฟเปรียบเทียบภาษีปีก่อน (น้ำมัน)</h2>
+      <div *ngIf="textDataNotValid=='0' ">
+        <br><br><br><br>
+        <h2 style="text-align: center; color: rgb(107, 105, 105)">ไม่มีข้อมูลในฐานข้อมูล</h2>
+        <br><br><br><br>
+      </div>
+      <div *ngIf="textDataNotValid!='0' ">
+        <canvas #LineCanvasTax></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <h2 class="header-style">กราฟเปรียบเทียบปริมาณปีก่อน (น้ำมัน)</h2>
+      <div *ngIf="textDataNotValid=='0' ">
+        <br><br><br><br>
+        <h2 style="text-align: center; color: rgb(107, 105, 105)">ไม่มีข้อมูลในฐานข้อมูล</h2>
+        <br><br><br><br>
+      </div>
+      <div *ngIf="textDataNotValid!='0' ">
+        <canvas #LineCanvasVol></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  </ion-content>
+  
