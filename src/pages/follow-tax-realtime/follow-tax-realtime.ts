@@ -141,8 +141,7 @@ export class FollowTaxRealtimePage {
     if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
-
-    alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
+    //alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
     
      this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;

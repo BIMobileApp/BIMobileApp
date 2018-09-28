@@ -19,4 +19,5 @@ export class WelcomePage {
   gotoHomePage(){
     this.app.getRootNav().push(HomePage);  
   }
+  
 }

@@ -39,6 +39,7 @@ export class TaxCoutrySection1Page {
    brance = 0;
    area = 'ภาค 01';
    curTG = "บาท";
+   display_province_fillter = "";
 
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
@@ -109,6 +110,12 @@ TableGetData(Province,typeCur) {
     this.curTG = "ล้านบาท";
   }else{
     this.curTG = "บาท";
+  }
+
+  if(Province != "undefined"){
+   this.display_province_fillter = Province;
+  }else{
+    this.display_province_fillter = "";
   }
 
   this.brance = 1;

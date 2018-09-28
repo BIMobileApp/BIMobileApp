@@ -41,14 +41,14 @@
           <table class="table" style="width: 100%;">
             <thead>
               <tr style="background-color: #F78B26; ">
-                <th>
+                <th style="width: 25%">
                   <h3 class="th-center"  [style.fontSize]="fontSize">ประเภทสินค้า</h3>
                 </th>
-                <th>
+                <th style="width: 23%">
                   <h3 class="th-center" [style.fontSize]="fontSize">ผู้ประกอบการนำเข้า</h3>
                 </th>
-                <th>
-                  <h3 class="th-center" [style.fontSize]="fontSize">ผู้ประกอบการในปะเทศ</h3>
+                <th style="width: 27%">
+                  <h3 class="th-center" [style.fontSize]="fontSize">ผู้ประกอบการในประเทศ</h3>
                 </th>
                 <th>
                   <h3 class="th-center" [style.fontSize]="fontSize">รวม</h3>
@@ -57,13 +57,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of responseData">
-                <td>
+                <td style="width: 25%">
                   <h3 class="td-left" [style.fontSize]="fontSize">{{data.GROUP_DESC}}</h3>
                 </td>
-                <td>
+                <td style="width: 23%">
                   <h3 class="td-right" [style.fontSize]="fontSize">{{data.IMP_REGISTER | number : fractionSize}}</h3>
                 </td>
-                <td>
+                <td style="width: 27%">
                   <h3 class="td-right" [style.fontSize]="fontSize">{{data.IN_REGISTER | number : fractionSize}}</h3>
                 </td>
                 <td>

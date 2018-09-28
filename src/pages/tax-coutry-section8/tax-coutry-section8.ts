@@ -38,6 +38,7 @@ export class TaxCoutrySection8Page {
    brance = 0;
    area = 'ภาค 08';
    curTG = "บาท";
+   display_province_fillter  = "";
 
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
@@ -102,6 +103,13 @@ GetProvinceTable(typeCurFirst){
 }
 
 TableGetData(Province,typeCur) {
+  
+  if(Province != "undefined"){
+    this.display_province_fillter = Province;
+   }else{
+    this.display_province_fillter = "";
+   }
+
   this.brance = 1;
   this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataCurYear = data;

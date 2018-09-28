@@ -18,6 +18,7 @@
     
 <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามจังหวัด</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
+<h2 class="header-style"> ภาค 08</h2> 
   
 <ion-item class="sizemini" no-lines>
   <ion-label> หน่วย : </ion-label>
@@ -76,6 +77,7 @@
 
 <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
+<h2 class="header-style"> ภาค 08    {{display_province_fillter}}</h2> 
 
 <ion-item class="sizemini" no-lines>
   <ion-label> หน่วย : </ion-label>
@@ -120,7 +122,8 @@
 
 <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามประเภทสินค้า</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
-<h3 style="padding-right: 2%" class="td-right">หน่วย : {{curTG}}</h3>
+<h2 class="header-style"> ภาค 08    {{display_province_fillter}}</h2> 
+<h3 style="padding-right: 2%" class="desc-right" [style.fontSize]="fontSize">หน่วย : {{curTG}}</h3>
 <ion-card>
   <ion-card-content no-padding>
     <div class="table-responsive">
@@ -157,7 +160,8 @@
 <br>
 <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามสาขา</h1>
 <h2 class="header-style">{{dateAsOff}}</h2>
-<h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
+<h2 class="header-style"> ภาค 08    {{display_province_fillter}}</h2> 
+<h3 style="padding-right: 2%" class="desc-right" [style.fontSize]="fontSize">หน่วย : {{curTG}}</h3>
 <ion-card>
   <ion-card-content no-padding>
     <div class="table-responsive">

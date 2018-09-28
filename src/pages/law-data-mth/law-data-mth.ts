@@ -176,7 +176,7 @@ getProductAll(SRegion,SProvince,typeCur){
   }else{
     SProvince = SProvince;
   }
-  alert("ภาค="+SRegion+" จังหวัด="+ SProvince+" หน่วย="+ typeCur);
+  //alert("ภาค="+SRegion+" จังหวัด="+ SProvince+" หน่วย="+ typeCur);
   this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
     this.repondProductSura = data; 
     this.getTableTAX(typeCur);

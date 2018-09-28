@@ -3,7 +3,7 @@ page-tax-coutry-section10 {
     th,
     td,
     tr {
-      border: 1px solid #ffffff;
+      border: 0px solid #ffffff;
       border-collapse: collapse;
       table-layout: fixed;
     }
@@ -98,6 +98,12 @@ page-tax-coutry-section10 {
   
     .font-green2 {
       color: rgb(31, 99, 31)  !important;
+    }
+    .desc-right {
+      font-weight: bold;
+      color: black !important;
+      font-size: 4vw !important;
+      text-align: right !important;
     }
     ion-content.disable-scrolling .scroll-content {
       overflow-y: hidden;

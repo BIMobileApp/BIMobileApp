@@ -1,6 +1,8 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title>ผู้ประกอบการรายเดือน</ion-title>
+    <ion-title>ผู้ประกอบการรายเดือน <br>
+      ผู้ใช้งาน : {{username}}
+    </ion-title>    
   </ion-navbar>
 </ion-header>
 
@@ -14,7 +16,7 @@
     <ion-item class="size">
       <ion-label>เดือน : </ion-label>
       <ion-select [(ngModel)]="summaryDate" (ionChange)="selectDate(summaryDate,typeCur)">
-        <ion-option value="undefined" [selected]="true">..กรุณาเลือก..</ion-option>
+        <ion-option value="undefined" [selected]="true">..ทั้งหมด..</ion-option>
         <ion-option value="1">มกราคม</ion-option>
         <ion-option value="2">กุมภาพันธ์</ion-option>
         <ion-option value="3">มีนาคม</ion-option>

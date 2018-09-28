@@ -16,6 +16,7 @@ const BASE_SCALE = 1.3;
 })
 export class TaxBudgetRegByMthPage {
 
+  username:any;
   responseData: any;
   summaryDate: any;
   offcode: any;
@@ -32,7 +33,7 @@ export class TaxBudgetRegByMthPage {
     public navParams: NavParams,
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
-
+    this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
   }

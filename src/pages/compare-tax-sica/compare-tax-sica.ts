@@ -2,6 +2,7 @@ import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
+import { AnyMxRecord } from 'dns';
 declare var dateDisplayAll: any;
 
 @IonicPage()
@@ -29,6 +30,7 @@ export class CompareTaxSicaPage {
   textDataNotValid : any;
   username: any;
 
+  Province:any;
   responseRegion:any;
   region:any;
   responseProvince:any;
@@ -61,7 +63,7 @@ export class CompareTaxSicaPage {
 
  /// ตรวจสอบสาขาเพื่อ default selection
  var res = "";
- if(this.branch != "00"){          
+ if(this.branch != "00"  || this.province != "00"){          
     res =  localStorage.offdesc.split(" ");
     this.select_province  = res[0];
     this.select_all_prov_value = false;
@@ -79,8 +81,8 @@ export class CompareTaxSicaPage {
     this.offcode = localStorage.offcode;
     this.selectionAreaAll();
     this.selectionProvinceAll();
-    let Region =  'undefined';
-    let Province = 'undefined';
+    let Region;
+    let Province;
     this.getLineTaxData(Region,Province);
   }
 
@@ -102,6 +104,8 @@ export class CompareTaxSicaPage {
 
   selectRegion(Region,Province){
     Province =  'undefined';
+    this.Province = 'undefined';
+
     this.selectionProvince(Region,Province);
   }
 
@@ -112,7 +116,6 @@ export class CompareTaxSicaPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
       this.responseProvince = data;
     }); 
-
     this.getLineTaxData(Region,Province);
   }
 
@@ -121,9 +124,10 @@ export class CompareTaxSicaPage {
     Region = localStorage.region_desc;
   }
 
-  if(this.branch != "00"){     
+  if(this.branch != "00"  || this.province != "00"){     
     Province =  this.select_province;
   }
+  
     this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => {
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
@@ -365,9 +369,9 @@ export class CompareTaxSicaPage {
         callbacks: {
           label: function (tooltipItem, data) {
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
             }
 
             return value;
@@ -387,7 +391,7 @@ export class CompareTaxSicaPage {
             },
             scaleLabel: {
               display: true,
-              labelString: 'มวน'
+              labelString: ''
             }
           }
           ],

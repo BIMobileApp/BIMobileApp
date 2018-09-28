@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="navber">
-    <ion-title text-wrap>สถิติผลการจัดเก็บภาษีในประเทศ และภาษีนำเข้า จำแนกตามประเภท <br>
+    <ion-title text-wrap>มิติมุมมองตาม Time <br>
       ผู้ใช้งาน : {{username}} </ion-title>
   </ion-navbar>
 </ion-header>
@@ -8,8 +8,8 @@
 <ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
   <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
     <ion-item style="background-color:#D0DFE6;" text-center text-wrap>
-      <h1 class="header-style">สถิติผลการจัดเก็บภาษีในประเทศ และภาษีนำเข้า จำแนกตามประเภท</h1>
-      <h2 class="header-style"></h2>
+      <h1 class="header-style">สถิติผลการจัดเก็บภาษีในประเทศ และภาษีนำเข้า</h1>
+      <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
     </ion-item>
     <ion-grid>
 

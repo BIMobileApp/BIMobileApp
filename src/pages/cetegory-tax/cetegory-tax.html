@@ -154,7 +154,8 @@
         </ion-card-content>
       </ion-card>
 
-      <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามประเภทสินค้า</h1>
+      <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน <br/>ตามประเภทสินค้า</h1>
+      <h2 class="header-style"> {{display_region_product}}     {{display_province_product}}</h2>    
       <h2 class="header-style">{{dateAsOff}}</h2>
       <h3 style="padding-right: 2%" class="desc-right" >หน่วย : {{curTG}}</h3>
       <ion-card>
@@ -211,6 +212,7 @@
       <div *ngIf="hideTableBrance=='2' ">
         <br>
         <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามจังหวัด</h1>
+        <h2 class="header-style"> {{display_region_province}}     {{display_province_province}}</h2>    
         <h2 class="header-style">{{dateAsOff}}</h2>
         <h3 style="padding-right: 2%" class="desc-right" >หน่วย : {{curTG}}</h3>
         <ion-card>
@@ -267,6 +269,7 @@
       <div *ngIf="hideTableBrance=='1' ">
         <br>
         <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามสาขา</h1>
+        <h2 class="header-style"> {{display_region_branch}}     {{display_province_branch}}</h2> 
         <h2 class="header-style">{{dateAsOff}}</h2>
         <h3 style="padding-right: 2%" class="desc-right" >หน่วย : {{curTG}}</h3>
         <ion-card>

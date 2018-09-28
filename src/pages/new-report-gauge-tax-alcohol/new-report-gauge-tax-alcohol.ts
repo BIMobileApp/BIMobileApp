@@ -40,7 +40,7 @@ export class NewReportGaugeTaxAlcoholPage {
     this.webapi.getData('QuantitySura?offcode='+this.offcode).then((data) => {
       this.respondData2 = data;
       this.getTAX2();
-      this.get_last_tax();
+      //this.get_last_tax();
       this.get_tax_quan();
       this.get_taxly_quan();
     }); 
@@ -56,13 +56,13 @@ export class NewReportGaugeTaxAlcoholPage {
       taxly_val =  this.respondData[i].LAST_TAX_PERCENT;
       taxest_val = this.respondData[i].EST_PERCENT;
 
-      tax_val = tax_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     /* tax_val = tax_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       taxly_val = taxly_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       taxest_val = taxest_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
       this.respondData[i].TAX_PERCENT = tax_val;
       this.respondData[i].LAST_TAX_PERCENT = taxly_val;
-      this.respondData[i].EST_PERCENT = taxest_val;
+      this.respondData[i].EST_PERCENT = taxest_val;*/
     }
     this.showgaugechartTax(tax_val,taxly_val,taxest_val);
   }
@@ -71,8 +71,8 @@ export class NewReportGaugeTaxAlcoholPage {
     let tax_val;
     for (var i = 0; i < this.respondData2.length; i++) {
       tax_val = this.respondData2[i].QUAN_PERCENT;
-      tax_val = tax_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.respondData2[i].QUAN_PERCENT = tax_val;
+      /*tax_val = tax_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.respondData2[i].QUAN_PERCENT = tax_val;*/
     }
     this.showgaugechartTax2(tax_val);
   }

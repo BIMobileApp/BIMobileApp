@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RestProvider } from '../../providers/rest/rest'; 
+import { RestProvider } from '../../providers/rest/rest';
 
 declare var changeCurrency: any;
 declare var dateDisplayNow: any;
