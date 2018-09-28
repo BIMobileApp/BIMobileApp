@@ -29,6 +29,7 @@ export class CompareTaxOilPage {
   textDataNotValid : any;
   username: any;
 
+  Province:any;
   responseRegion:any;
   region:any;
   responseProvince:any;
@@ -61,7 +62,7 @@ export class CompareTaxOilPage {
 
  /// ตรวจสอบสาขาเพื่อ default selection
  var res = "";
- if(this.branch != "00"){          
+ if(this.branch != "00" || this.province != "00"){          
     res =  localStorage.offdesc.split(" ");
     this.select_province  = res[0];
     this.select_all_prov_value = false;
@@ -79,8 +80,8 @@ export class CompareTaxOilPage {
     this.offcode = localStorage.offcode;
     this.selectionAreaAll();
     this.selectionProvinceAll();
-    let Region =  'undefined';
-    let Province = 'undefined';
+    let Region;
+    let Province;
     this.getLineTaxData(Region,Province);
   }
 
@@ -102,6 +103,7 @@ export class CompareTaxOilPage {
 
   selectRegion(Region,Province){
     Province =  'undefined';
+    this.Province = 'undefined';
     this.selectionProvince(Region,Province);
   }
 
@@ -121,9 +123,10 @@ export class CompareTaxOilPage {
     Region = localStorage.region_desc;
   }
 
-  if(this.branch != "00"){     
+  if(this.branch != "00" || this.province != "00"){     
     Province =  this.select_province;
   }
+
     this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => {
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
@@ -365,9 +368,9 @@ export class CompareTaxOilPage {
         callbacks: {
           label: function (tooltipItem, data) {
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านลิตร";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ลิตร";
             }
 
             return value;

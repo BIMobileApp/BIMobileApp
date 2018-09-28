@@ -5,6 +5,12 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 
+/* start for pinch */
+const MAX_SCALE = 11.1;
+const MIN_SCALE = 0.9;
+const BASE_SCALE = 1.3;
+/* end  */
+
 @IonicPage()
 @Component({
   selector: 'page-tax-coutry-section1',
@@ -32,7 +38,15 @@ export class TaxCoutrySection1Page {
    oldArea:any;
    brance = 0;
    area = 'ภาค 01';
-   curTG = "บาท";
+   curTG = "ล้านบาท";
+   display_province_fillter = "";
+
+/* start for pinch */
+public fontSize = `${BASE_SCALE}rem`;
+private scale = BASE_SCALE;
+private alreadyScaled = BASE_SCALE;
+public isScaling = false;
+/* end  */
 
   constructor(
     public navCtrl: NavController, 
@@ -51,11 +65,11 @@ export class TaxCoutrySection1Page {
     this.offcode = localStorage.offcode;
      this.selectionProvince();
      //this.TableGetDataAll();
-     let typeCurFirst = 'B';
+     let typeCurFirst = 'M';
      this.GetProvinceTable(typeCurFirst);
      var Province = undefined;
 
-     let typeCur = 'B';
+     let typeCur = 'M';
      this.TableGetData(Province,typeCur);
      this.brance = 0;
    }
@@ -96,6 +110,12 @@ TableGetData(Province,typeCur) {
     this.curTG = "ล้านบาท";
   }else{
     this.curTG = "บาท";
+  }
+
+  if(Province != "undefined"){
+   this.display_province_fillter = Province;
+  }else{
+    this.display_province_fillter = "";
   }
 
   this.brance = 1;
@@ -290,5 +310,32 @@ ChangeUnit(Province, typeCur){
 ChangeUnitFirst(typeCurFirst){
   this.GetProvinceTable(typeCurFirst);
 }
+
+
+/* start for pinch */
+public onPinchStart(e) {
+  this.isScaling = true;
+}
+public onPinchEnd(e) {
+  this.isScaling = false;
+  this.alreadyScaled = this.scale * this.alreadyScaled;
+}
+public onPinchMove(e) {
+  this.scale = e.scale;
+  let totalScaled = this.alreadyScaled * e.scale;
+  if (totalScaled >= MAX_SCALE) {
+    this.scale = MAX_SCALE / this.alreadyScaled;
+    totalScaled = MAX_SCALE;
+  } else if (totalScaled <= MIN_SCALE) {
+    this.scale = MIN_SCALE / this.alreadyScaled;
+    totalScaled = MIN_SCALE;
+  }
+
+  let fontSize = Math.round(totalScaled * 10) / 10;
+  if ((fontSize * 10) % 3 === 0) {
+    this.fontSize = `${fontSize}rem`;
+  }
+}
+/* end  */
 
 }

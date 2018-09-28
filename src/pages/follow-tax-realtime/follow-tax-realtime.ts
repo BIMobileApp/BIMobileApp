@@ -91,7 +91,7 @@ export class FollowTaxRealtimePage {
   ionViewDidLoad() {
     this.selectionAreaAll();
     this.selectionProvinceAll();
-    let typeCur = 'B';
+    let typeCur = 'M';
     let Region = undefined;
     let Province = undefined;
     this.getData(Region,Province,typeCur);    
@@ -141,8 +141,7 @@ export class FollowTaxRealtimePage {
     if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
-
-    alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
+    //alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
     
      this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;

@@ -9,7 +9,6 @@
 <ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
   <ion-item style="background-color:#D0DFE6;" text-center>
     <h1 class="header-style">รายงานการเปรียบเทียบปีก่อน (เบียร์)</h1>
-    <h2 class="header-style">{{dateAsOff}}</h2>
   </ion-item>
   <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241); ">
     <ion-item (click)="toggleLineShow()" no-lines>
@@ -22,6 +21,7 @@
       <ion-card-content>
 
         <h2 class="header-style">กราฟเปรียบเทียบภาษีปีก่อน (เบียร์)</h2>
+        <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
         <ion-item class="size">
           <ion-label>กลุ่มสินค้า : </ion-label>
 
@@ -80,7 +80,8 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <h2 class="header-style">รายงานเปรียบเทียบภาษีปีก่อน แยกตามประเภทสินค้า</h2>
+      <h2 class="header-style">รายงานเปรียบเทียบภาษีปีก่อน แยกตามประเภทสินค้า (เบียร์)</h2>
+      <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
       <!-- <h3 style="padding-right: 2%" class="desc-right">หน่วย : ล้านบาท</h3> -->
       <ion-item class="sizemini" no-lines>
         <ion-label> หน่วย : </ion-label>
@@ -123,7 +124,9 @@
           </div>
         </ion-card-content>
       </ion-card>
-      <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</h2>
+      <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ (เบียร์)</h2>
+      <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
+      <h2 class="header-style"> {{display_region_top10}}     {{display_province_top10}}</h2> 
       <h3 style="padding-right: 2%" class="desc-right">หน่วย : {{curTG}}</h3>
       <ion-card>
         <ion-card-content no-padding>
