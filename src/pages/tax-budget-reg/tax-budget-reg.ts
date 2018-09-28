@@ -109,7 +109,7 @@ export class TaxBudgetRegPage {
     let Region;
     let Province;
     let Year = 'undefined';
-    let typeCur = 'B';
+    let typeCur = 'M';
 
     this.selectDataAll(Region, Province, typeCur);
 

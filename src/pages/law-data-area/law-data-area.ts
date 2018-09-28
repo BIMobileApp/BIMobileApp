@@ -261,22 +261,28 @@ public isScaling = false;
     let tar_qty;
     let tar_amt;
     let money;
+    let  law_amt;
+
 
     for (var i = 0; i < this.responseData.length; i++) {
       law_qty = this.responseData[i].LAW_QTY;
-      tar_qty = this.responseData[i].LAW_AMT;
+      tar_qty = this.responseData[i].TARGET_QTY;
       tar_amt = this.responseData[i].TARGET_AMT;
       money = this.responseData[i].TREASURY_MONEY;
+      law_amt = this.responseData[i].LAW_AMT;
+      
 
       if (law_qty != null) { law_qty = changeCurrency(law_qty, typeCurFirst); }
       if (tar_qty != null) { tar_qty = changeCurrency(tar_qty, typeCurFirst); }
       if (tar_amt != null) { tar_amt = changeCurrency(tar_amt, typeCurFirst); }
       if (money != null) { money = changeCurrency(money, typeCurFirst); }
+      if (law_amt != null) { law_amt = changeCurrency(law_amt, typeCurFirst); }
 
       this.responseData[i].LAW_QTY = law_qty;
-      this.responseData[i].LAW_AMT = tar_qty;
+      this.responseData[i].TARGET_QTY = tar_qty;
       this.responseData[i].TARGET_AMT = tar_amt;
       this.responseData[i].TREASURY_MONEY = money;
+      this.responseData[i].LAW_AMT = law_amt;
 
     }
   }

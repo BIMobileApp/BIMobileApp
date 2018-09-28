@@ -97,7 +97,7 @@ public isScaling = false;
 
   ionViewDidLoad() {
       let Province = 'undefined';
-      let typeCur = 'B';
+      let typeCur = 'M';
       let region;
       if(this.region != "00"){
         region = localStorage.region_desc;

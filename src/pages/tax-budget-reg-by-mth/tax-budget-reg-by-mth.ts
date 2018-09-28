@@ -45,8 +45,8 @@ export class TaxBudgetRegByMthPage {
     // let datenow = datetime.getMonth();
 
     let date;
-    let summaryDate = 2;
-    let typeCur = "B";
+    let summaryDate;
+    let typeCur = "M";
     this.selectDate(summaryDate, typeCur);
   }
 

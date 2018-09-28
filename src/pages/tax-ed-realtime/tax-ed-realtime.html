@@ -39,8 +39,8 @@
     <ion-item class="sizemini" no-lines>
       <ion-label> หน่วย : </ion-label>
       <ion-select [(ngModel)]="typeCur" #item (ionChange)="getData(Region, Province, typeCur)">
-        <ion-option value="B" [selected]="true">บาท</ion-option>
-        <ion-option value="M">ล้านบาท</ion-option>
+        <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+        <ion-option value="B">บาท</ion-option>
       </ion-select>
     </ion-item>
     <ion-card>

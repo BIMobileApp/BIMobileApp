@@ -38,7 +38,7 @@ export class TaxCoutrySection1Page {
    oldArea:any;
    brance = 0;
    area = 'ภาค 01';
-   curTG = "บาท";
+   curTG = "ล้านบาท";
    display_province_fillter = "";
 
 /* start for pinch */
@@ -65,11 +65,11 @@ public isScaling = false;
     this.offcode = localStorage.offcode;
      this.selectionProvince();
      //this.TableGetDataAll();
-     let typeCurFirst = 'B';
+     let typeCurFirst = 'M';
      this.GetProvinceTable(typeCurFirst);
      var Province = undefined;
 
-     let typeCur = 'B';
+     let typeCur = 'M';
      this.TableGetData(Province,typeCur);
      this.brance = 0;
    }

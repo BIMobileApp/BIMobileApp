@@ -153,7 +153,7 @@ export class CetegoryTaxPage {
     this.selectionProviceFirst();
     let area;
     let Province;
-    let typeCur = 'B';
+    let typeCur = 'M';
     this.TableGetData(area, Province, typeCur);
     this.hideTableBrance = 0;
   }

@@ -97,7 +97,7 @@ export class DimensionTime_03Page {
 
     let Region = 'undefined';
     let Province = 'undefined';
-    let typeCur = "B";
+    let typeCur = "M";
     let month = 'undefined';
 
     this.getAllData(Region, Province, month, typeCur);

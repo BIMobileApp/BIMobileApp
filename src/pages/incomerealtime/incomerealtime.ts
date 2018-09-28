@@ -101,7 +101,7 @@ public isScaling = false;
   ionViewDidLoad() {
     let Region;
     let Province;
-    let typeCur = "B";
+    let typeCur = "M";
 
     this.selectionAreaAll();
     this.selectionProvinceAll();

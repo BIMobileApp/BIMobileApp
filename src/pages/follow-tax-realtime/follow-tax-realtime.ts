@@ -91,7 +91,7 @@ export class FollowTaxRealtimePage {
   ionViewDidLoad() {
     this.selectionAreaAll();
     this.selectionProvinceAll();
-    let typeCur = 'B';
+    let typeCur = 'M';
     let Region = undefined;
     let Province = undefined;
     this.getData(Region,Province,typeCur);    
