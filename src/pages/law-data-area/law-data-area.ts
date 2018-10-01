@@ -91,13 +91,13 @@ public isScaling = false;
     this.select_all_prov_value = true;
     this.isEnableProv = false;
   }
-  console.log(this.select_all_prov_value);
+
   ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
   ionViewDidLoad() {
-    let typeCur = "B";
-    let typeCurFirst ='B';
+    let typeCur = "M";
+    let typeCurFirst ='M';
 
     this.getTableData(typeCurFirst);
     this.selectionAreaAll();
@@ -177,6 +177,7 @@ public isScaling = false;
     this.getProductAll(SRegion,SProvince,typeCur);
   }
 
+  regionSelectType = "";
   getProductAll(SRegion,SProvince,typeCur){
    
     if(this.region != "00"){
@@ -191,11 +192,15 @@ public isScaling = false;
       SProvince = SProvince;
     }
 
-    
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
 
     this.webapi.getData('LawProductArea?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
       this.repondProductSura = data;
-      this.getTableTAX(typeCur);
+      this.getTableTAX(this.regionSelectType);
     });
   }
 

@@ -150,6 +150,7 @@ export class DimensionTime_03Page {
     this.getAllData(Region, Province, month, typeCur);
   }
 
+  regionSelectType = "";
   getAllData(Region, Province, month, typeCur) {
     if (this.region != "00") {
       Region = localStorage.region_desc;
@@ -158,10 +159,16 @@ export class DimensionTime_03Page {
     if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
     
     this.webapi.getData('DimansionTime03?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + month).then((data) => {
       this.respondData = data;
-      this.getTableTAX(typeCur);
+      this.getTableTAX(this.regionSelectType);
     });
   }
 

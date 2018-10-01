@@ -156,6 +156,7 @@ export class TaxBudgetRegPage {
     this.selectDataAll(Region, Province, typeCur);
   }
 
+  regionSelectType = "";
   selectDataAll(Region, Province, typeCur) {
     if (this.region != "00") {
       Region = localStorage.region_desc;
@@ -168,9 +169,15 @@ export class TaxBudgetRegPage {
       Province = Province;
     }
 
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
     this.webapi.getData('TaxBudgetRegAll?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + Region + '&province=' + Province).then((data) => {
       this.responseData = data;
-      this.getTableTAX(typeCur);
+      this.getTableTAX(this.regionSelectType);
     });
   }
 

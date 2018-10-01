@@ -17,7 +17,7 @@
   <div *ngIf="toggleMap==1">
     <br>
     <h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี ทั่วประเทศ</h1>
-    <h2 class="header-style">{{dateAsOff}}</h2>
+    <h2 class="header-style">{{dateAsOff_Map}}</h2>
     <!--  <div *ngIf="off=='00' "> -->
     <img class="img-size" src="../../assets/imgs/thailandhello1.png" />
 <!--     <div *ngIf="off=='00' "> -->
@@ -266,7 +266,7 @@
         </ion-card>
       </div>
 
-      <div *ngIf="hideTableBrance=='1' ">
+      <div>
         <br>
         <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามสาขา</h1>
         <h2 class="header-style"> {{display_region_branch}}     {{display_province_branch}}</h2> 
@@ -287,32 +287,28 @@
                     <th>
                       <h3 class='td-center'  [style.fontSize]="fontSize">ปีก่อน</h3>
                     </th>
-                    <th>
-                      <h3 class='td-center' [style.fontSize]="fontSize">ประมาณการ</h3>
-                    </th>
                     <th width="15%">
                       <h3 class='td-center' [style.fontSize]="fontSize">+/-</h3>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <td colspan="5">
+                  <!--<td colspan="5">
                     <br><br><br>
                     <h2 style="text-align: center; color: rgb(107, 105, 105)" [style.fontSize]="fontSize">ไม่มีข้อมูลในฐานข้อมูล</h2>
                     <br><br><br>
-                  </td>
-                  <!--  <tr *ngFor="let data of DataProduct">
-                <td><h3 class='td-left'>{{data.GROUP_NAME}}</h3></td>
+                  </td>-->
+               <tr *ngFor="let data of DataOverallBranch">
+                <td><h3 class='td-left'>{{data.OFFDESC}}</h3></td>
                 <td><h3 class='td-right'>{{data.TAX}}</h3></td>
                 <td><h3 class='td-right'>{{data.LAST_TAX}}</h3></td>
-                <td><h3 class='td-right'>{{data.ESTIMATE}}</h3></td>
                   <td width="15%">
                     <h3 *ngIf="data.PERCENT_TAX > 5 " class='td-right font-green2'>{{data.PERCENT_TAX}}</h3>
                     <h3 *ngIf="data.PERCENT_TAX <= 5 && data.PERCENT_TAX > 0 " class='td-right font-green'>{{data.PERCENT_TAX}}</h3>
                     <h3 *ngIf="data.PERCENT_TAX < 0 && data.PERCENT_TAX >= -5 " class='td-right font-yellow'>{{data.PERCENT_TAX}}</h3>
                     <h3 *ngIf="data.PERCENT_TAX < -5 " class='td-right font-red'>{{data.PERCENT_TAX}}</h3>
                   </td>
-              </tr> -->
+              </tr> 
                 </tbody>
               </table>
             </div>

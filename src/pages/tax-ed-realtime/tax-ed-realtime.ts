@@ -95,6 +95,8 @@ public isScaling = false;
     this.time = d.getHours() + " : " +  d.getMinutes();
   }
 
+  newType = "";
+
   ionViewDidLoad() {
       let Province = 'undefined';
       let typeCur = 'M';
@@ -126,11 +128,13 @@ public isScaling = false;
     }); 
   }
 
-  selectRegion(Region,Province,typeCur){
+
+  selectRegion(Region,Province,typeCur){ 
+
     Province =  'undefined';
     this.Province = 'undefined';
-    this.selectionProvince(Region,Province,typeCur);
-    this.getData(Region,Province,typeCur);
+    this.selectionProvince(Region,Province,this.newType);
+    this.getData(Region,Province,this.newType);
   }
 
   selectionProvince(Region,Province,typeCur){
@@ -147,6 +151,13 @@ public isScaling = false;
     /*if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }*/
+
+    if(typeCur == undefined){
+      this.newType = "M";
+    }else{
+      this.newType =  typeCur;
+    }
+
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{
@@ -162,9 +173,9 @@ public isScaling = false;
      this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode+'&region='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
 
-       this.getTableFZ_EXCISE(typeCur);
-       this.getDateFormat();
-       this.sumtax(Region,Province,typeCur);
+       this.getTableFZ_EXCISE(this.newType);
+       //this.getDateFormat();
+       this.sumtax(Region,Province,this.newType);
      });
      this.oldRegion = Region;
      this.oldtypeCur = typeCur;
@@ -182,13 +193,13 @@ public isScaling = false;
      let IN;
      let AMT;
      for (var i = 0; i < this.responseData.length; i++) {
-      FZ = this.responseData[i].FZ_EXCISE_AMT;
+      /*FZ = this.responseData[i].FZ_EXCISE_AMT;
        if (FZ != null) { FZ = changeCurrency(FZ, typeCur); }
        this.responseData[i].FZ_EXCISE_AMT = FZ;
 
        IN = this.responseData[i].IN_EXCISE_AMT;
        if (IN != null) { IN = changeCurrency(IN, typeCur); }
-       this.responseData[i].IN_EXCISE_AMT = IN;
+       this.responseData[i].IN_EXCISE_AMT = IN;*/
 
        AMT = this.responseData[i].EXCISE_AMT;
        if (AMT != null) { AMT = changeCurrency(AMT, typeCur); }
@@ -197,7 +208,7 @@ public isScaling = false;
    }
 
 
-   getDateFormat(){
+   /*getDateFormat(){
      let val;
      let date;
      let month;
@@ -212,7 +223,7 @@ public isScaling = false;
  
        this.responseData[i].DIM_DATA_DATE_ID = val;
      }
-   }
+   }*/
 
    ///get sum
 
@@ -221,13 +232,13 @@ public isScaling = false;
      let IN;
      let AMT;
     for (var i = 0; i < this.responseSumData.length; i++) {
-      FZ = this.responseSumData[i].FZ_EXCISE_AMT;
+      /*FZ = this.responseSumData[i].FZ_EXCISE_AMT;
       if (FZ != null) { FZ = changeCurrency(FZ, typeCur); }
       this.responseSumData[i].FZ_EXCISE_AMT = FZ;
 
       IN = this.responseSumData[i].IN_EXCISE_AMT;
       if (IN != null) { IN = changeCurrency(IN, typeCur); }
-      this.responseSumData[i].IN_EXCISE_AMT = IN;
+      this.responseSumData[i].IN_EXCISE_AMT = IN;*/
 
       AMT = this.responseSumData[i].EXCISE_AMT;
       if (AMT != null) { AMT = changeCurrency(AMT, typeCur); }

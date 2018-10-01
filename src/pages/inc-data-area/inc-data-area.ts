@@ -61,8 +61,8 @@ export class IncDataAreaPage {
   oldtypeCur: any;
   toggleTable2 = 0;
   toggleTable1 = 0;
-  curTG2 = "บาท";
-  unitTG2 = "ใบ";
+  curTG2 = "ล้านบาท";
+  unitTG2 = "ล้านใบ";
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -110,8 +110,8 @@ export class IncDataAreaPage {
   }
 
   ionViewDidLoad() {
-    let typeCur = 'B';
-    let typeCur2 = 'B';
+    let typeCur = 'M';
+    let typeCur2 = 'M';
     this.loadData(typeCur2);
     this.selectionArea();
     this.selectionGeoupName();
@@ -218,6 +218,7 @@ export class IncDataAreaPage {
     this.getProduct(Area, Province, Month, typeCur);
   }
 
+  regionSelectType = "";
   getProduct(Area, Province, Month, typeCur) {
 
     /*if (Area !== this.oldArea || typeCur !== this.oldtypeCur) {
@@ -235,29 +236,40 @@ export class IncDataAreaPage {
       Province = Province;
     }
 
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
     this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=สุรา&month=" + Month).then((data) => {
       this.repondProductSura = data;
-      this.getSuraAmt(typeCur);
+      this.getSuraAmt(this.regionSelectType);
     });
 
     this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ยาสูบ&month=" + Month).then((data) => {
       this.repondProductSica = data;
-      this.getSicaAmt(typeCur);
+      this.getSicaAmt(this.regionSelectType);
     });
 
     this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ไพ่&month=" + Month).then((data) => {
       this.repondProductCard = data;
-      this.getCardAmt(typeCur);
+      this.getCardAmt(this.regionSelectType);
     });
-    this.oldArea = Area;
-    this.oldtypeCur = typeCur;
+  
     if (typeCur == "M") {
+      this.curTG2 = "ล้านบาท";
+      this.unitTG2 = "ล้านใบ";
+    }else if(typeCur == undefined ){
       this.curTG2 = "ล้านบาท";
       this.unitTG2 = "ล้านใบ";
     } else {
       this.curTG2 = "บาท";
       this.unitTG2 = "ใบ";
     }
+
+    this.oldArea = Area;
+    this.oldtypeCur = typeCur;
 
   }
 

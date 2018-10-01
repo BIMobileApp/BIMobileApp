@@ -25,8 +25,8 @@
           <ion-item class="sizemini" no-lines>
             <ion-label> หน่วย : </ion-label>
             <ion-select [(ngModel)]="typeCur2" #item (ionChange)="loadData(typeCur2)">
-              <ion-option value="B" [selected]="true">ใบ/บาท</ion-option>
-              <ion-option value="M">ล้านใบ/ล้านบาท</ion-option>
+              <ion-option value="M" [selected]="true">ล้านใบ/ล้านบาท</ion-option>
+              <ion-option value="B">ใบ/บาท</ion-option>
             </ion-select>
           </ion-item>
           <!--  <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3> -->
@@ -163,6 +163,9 @@
                   <ion-label>เดือน : </ion-label>
                   <ion-select [(ngModel)]="Month" (ionChange)="IncProductAll(Region,Province,Month,typeCur)">
                     <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                    <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+                    <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+                    <ion-option value="ธันวาคม">ธันวาคม</ion-option>
                     <ion-option value="มกราคม">มกราคม</ion-option>
                     <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
                     <ion-option value="มีนาคม">มีนาคม</ion-option>
@@ -171,10 +174,7 @@
                     <ion-option value="มิถุนายน">มิถุนายน</ion-option>
                     <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
                     <ion-option value="สิงหาคม">สิงหาคม</ion-option>
-                    <ion-option value="กันยายน">กันยายน</ion-option>
-                    <ion-option value="ตุลาคม">ตุลาคม</ion-option>
-                    <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
-                    <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+                    <ion-option value="กันยายน">กันยายน</ion-option>                  
                   </ion-select>
                 </ion-item>
               </ion-col>
@@ -189,8 +189,8 @@
           <ion-item class="sizemini" no-lines>
             <ion-label> หน่วย : </ion-label>
             <ion-select [(ngModel)]="typeCur" #item (ionChange)="IncProductAll(Region,Province,Month,typeCur)">
-              <ion-option value="B" [selected]="true">ใบ/บาท</ion-option>
-              <ion-option value="M">ล้านใบ/ล้านบาท</ion-option>
+              <ion-option value="M" [selected]="true">ล้านใบ/ล้านบาท</ion-option>
+              <ion-option value="B">ใบ/บาท</ion-option>
             </ion-select>
           </ion-item>
           <div class="table-responsive">

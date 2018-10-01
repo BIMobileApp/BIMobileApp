@@ -23,7 +23,7 @@ export class CompareTaxEstAlcoholPage {
   offcode: any;
   responseArea: any;
   responseProvince: any;
-  curTG = "บาท";
+  curTG = "ล้านบาท";
   display_region_top10 = "";
   display_province_top10 = "";
 
@@ -113,7 +113,7 @@ public isScaling = false;
 
     let area;
     let Province;
-    let typeCur = 'B';
+    let typeCur = 'M';
     this.selectionArea();
     this.selectionProviceFirst();
     
@@ -175,6 +175,7 @@ public isScaling = false;
     this.getTableData(area, Province, typeCur);
   }
 
+  regionSelectType = "";
   getTableData(area, Province, typeCur) {
 
     /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
@@ -215,14 +216,22 @@ public isScaling = false;
       Province = Province;
     }
 
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
     this.webapi.getData('CompareTaxSura?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
       this.responseData = data;
-      this.getTableTAX(typeCur);
+      this.getTableTAX(this.regionSelectType);
     });
-    this.selectDataAll(area, Province, typeCur);
+    this.selectDataAll(area, Province, this.regionSelectType);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
     if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else if(typeCur == undefined){
       this.curTG = "ล้านบาท";
     }else{
       this.curTG = "บาท";
