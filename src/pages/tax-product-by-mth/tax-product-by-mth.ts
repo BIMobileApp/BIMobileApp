@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
+declare var dateDisplayAll: any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -29,6 +30,7 @@ export class TaxProductByMthPage {
   responseProvince:any;
   oldArea: any;
   oldtypeCur : any;
+  dateAsOff = "";
   /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -39,6 +41,7 @@ public isScaling = false;
   region:any;
   province:any;
   branch:any;
+  monthTo:any;
 
   select_region:any;
   select_all_value:any;
@@ -48,11 +51,15 @@ public isScaling = false;
   isEnableProv:any;
   oldRegion:any;
 
+  select_month_to:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public webapi:RestProvider) {
+    public webapi:RestProvider,
+    public alertCtrl: AlertController,) {
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
+      this.dateAsOff = dateDisplayAll;
 
       ///หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);
@@ -73,7 +80,7 @@ public isScaling = false;
 
   /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-  if(this.branch != "00"){          
+  if(this.branch != "00" || this.province != "00"){          
      res =  localStorage.offdesc.split(" ");
      this.select_province  = res[0];
      this.select_all_prov_value = false;
@@ -86,7 +93,7 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
-    let typeCur = 'B';
+ 
     this.selectMTFrom ="";
    var d = new Date(); 
     var n = d.getFullYear();
@@ -108,6 +115,7 @@ public isScaling = false;
     var Province;
     var monthFrom = "undefined";
     var monthTo ="undefined";
+    let typeCur = 'B';
     this.getTableData(area,Province,monthFrom,monthTo,typeCur);
     //this.getDataAll(typeCur);
   }
@@ -119,41 +127,70 @@ public isScaling = false;
      });
   }
 
-  selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){ 
+  selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){
     
-    let Region;
-    let province;
+    if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
-    if(this.region != "00"){
-      Region = localStorage.region_desc;
+      const alert = this.alertCtrl.create({
+        title: 'การเลือกข้อมูลไม่ถูกต้อง!',
+        subTitle: 'เดือนที่สิ้นสุดต้องไม่มากกว่าเดือนที่เริ่มต้น',
+        buttons: ['ตกลง']
+      });
+      alert.present();
+
+      monthTo = 'undefined';
+     this.monthTo = 'undefined';
     }else{
-      Region =area;
+      let Region;
+      let province;
+      monthTo = 'undefined';
+      this.monthTo = 'undefined';
+
+      if(this.region != "00"){
+        Region = localStorage.region_desc;
+      }else{
+        Region =area;
+      }
+      if(this.branch != "00" || this.province != "00"){    
+        province =  this.select_province;
+      }else{
+        province = Province;
+      }  
+
+      this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
     }
-    if(this.branch != "00"){    
-      province =  this.select_province;
-    }else{
-      province = Province;
-    }  
-
-    this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
-    let Region;
-    let province;
 
-    if(this.region != "00"){
-      Region = localStorage.region_desc;
+    if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
+
+      const alert = this.alertCtrl.create({
+        title: 'การเลือกข้อมูลไม่ถูกต้อง!',
+        subTitle: 'เดือนที่สิ้นสุดต้องไม่มากกว่าเดือนที่เริ่มต้น',
+        buttons: ['ตกลง']
+      });
+      alert.present();
+
+      monthTo = 'undefined';
+     this.monthTo = 'undefined';
     }else{
-      Region =area;
+      let Region;
+      let province;
+
+      if(this.region != "00"){
+        Region = localStorage.region_desc;
+      }else{
+        Region =area;
+      }
+      if(this.branch != "00" || this.province != "00"){    
+        province =  this.select_province;
+      }else{
+        province = Province;
+      }  
+
+      this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
     }
-    if(this.branch != "00"){    
-      province =  this.select_province;
-    }else{
-      province = Province;
-    }  
-
-    this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
   }
   selectionArea(){
     this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
@@ -174,14 +211,17 @@ public isScaling = false;
 
   selectionRegion(area,Province,monthFrom,monthTo,typeCur){
     
-    if(this.region != "00"){
+    /*if(this.region != "00"){
       area = localStorage.region_desc;
-    }
+    }*/
+    Province =  'undefined';
+    this.Province = 'undefined';
+    
     this.selectionProvince(area,Province,monthFrom,monthTo,typeCur);
   }
 
   selectionProvince(area,Province,monthFrom,monthTo,typeCur){ 
-
+ 
     if(this.region != "00"){
       area = localStorage.region_desc;
     }
@@ -206,7 +246,7 @@ public isScaling = false;
     }else{
       Region =area;
     }
-    if(this.branch != "00"){    
+    if(this.branch != "00" || this.province != "00"){    
       province =  this.select_province;
     }else{
       province = Province;

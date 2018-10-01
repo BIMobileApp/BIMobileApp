@@ -140,7 +140,7 @@ public isScaling = false;
     }else{
       Province = Province;
     }
-
+   
     this.webapi.getData('MBLRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
       this.responseData = data;     
     });

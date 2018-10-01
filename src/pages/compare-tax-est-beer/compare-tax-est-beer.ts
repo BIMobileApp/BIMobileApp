@@ -23,6 +23,8 @@ export class CompareTaxEstBeerPage {
   responseArea: any;
   responseProvince: any;
   curTG = "บาท";
+  display_region_top10 = "";
+  display_province_top10 = "";
 
   //Line Tax
   TaxlineChart: any;
@@ -43,6 +45,7 @@ export class CompareTaxEstBeerPage {
   toggleLine = 0;
   toggleTable = 0;
 
+  Province:any;
   region: any;
   province: any;
   branch: any;
@@ -93,7 +96,7 @@ export class CompareTaxEstBeerPage {
 
     /// ตรวจสอบสาขาเพื่อ default selection
     var res = "";
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       res = localStorage.offdesc.split(" ");
       this.select_province = res[0];
       this.select_all_prov_value = false;
@@ -163,6 +166,8 @@ export class CompareTaxEstBeerPage {
   }
   selectionProvince(area, Province, typeCur) {
     Province = 'undefined';
+    this.Province = 'undefined';
+
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
 
@@ -177,13 +182,35 @@ export class CompareTaxEstBeerPage {
     }*/
 
     if (this.region != "00") {
+      if(area != 'undefined'){
+        this.display_region_top10 =  localStorage.region_desc;
+      }else{
+        this.display_region_top10 = "";
+      }
       area = localStorage.region_desc;
     } else {
+      if(area != 'undefined'){
+        this.display_region_top10 = area;
+      }else{
+        this.display_region_top10 = "";
+      }
       area = area;
     }
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
+      if(Province != 'undefined'){
+        this.display_province_top10 = this.select_province;
+      }
+      else{
+        this.display_province_top10 = "";
+      }
       Province = this.select_province;
     } else {
+      if(Province != 'undefined'){
+        this.display_province_top10 = Province;
+      }
+      else{
+        this.display_province_top10 = "";
+      }
       Province = Province;
     }
 

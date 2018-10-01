@@ -26,6 +26,7 @@ export class TaxBudgetRegPage {
   dateAsOff = "";
   dateDisplay = "";
 
+  Province: any;
   region: any;
   province: any;
   branch: any;
@@ -88,7 +89,7 @@ export class TaxBudgetRegPage {
 
       /// ตรวจสอบสาขาเพื่อ default selection
       var res = "";
-      if (this.branch != "00") {
+      if (this.branch != "00" || this.province != "00") {
         res = localStorage.offdesc.split(" ");
         this.select_province = res[0];
         this.select_all_prov_value = false;
@@ -108,7 +109,7 @@ export class TaxBudgetRegPage {
     let Region;
     let Province;
     let Year = 'undefined';
-    let typeCur = 'B';
+    let typeCur = 'M';
 
     this.selectDataAll(Region, Province, typeCur);
 
@@ -134,8 +135,7 @@ export class TaxBudgetRegPage {
 
   selectRegion(Region, Province, typeCur) {
     Province = 'undefined';
-    this.select_all_value = true;
-    this.select_all_prov_value = false;
+    this.Province = "undefined";
 
     if (this.region != "00") {
       Region = localStorage.region_desc;
@@ -162,7 +162,7 @@ export class TaxBudgetRegPage {
     } else {
       Region = Region;
     }
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     } else {
       Province = Province;

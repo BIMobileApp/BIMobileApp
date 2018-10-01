@@ -31,6 +31,7 @@ export class TaxEdRealtimePage {
   offdesc:any;
   regiondesc:any;
 
+  Province:any;
   region:any;
   province:any;
   branch:any;
@@ -79,7 +80,7 @@ public isScaling = false;
 
   /// ตรวจสอบสาขาเพื่อ default selection
   var res = "";
-  if(this.branch != "00"){          
+  if(this.branch != "00" || this.province != "00"){          
      res =  localStorage.offdesc.split(" ");
      this.select_province  = res[0];
      this.select_all_prov_value = false;
@@ -96,7 +97,7 @@ public isScaling = false;
 
   ionViewDidLoad() {
       let Province = 'undefined';
-      let typeCur = 'B';
+      let typeCur = 'M';
       let region;
       if(this.region != "00"){
         region = localStorage.region_desc;
@@ -127,6 +128,7 @@ public isScaling = false;
 
   selectRegion(Region,Province,typeCur){
     Province =  'undefined';
+    this.Province = 'undefined';
     this.selectionProvince(Region,Province,typeCur);
     this.getData(Region,Province,typeCur);
   }
@@ -142,9 +144,21 @@ public isScaling = false;
   }
 
   getData(Region,Province,typeCur){ 
-    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
+    /*if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
+    }*/
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region = Region;
     }
+  
+    if(this.branch != "00" || this.province != "00"){
+      Province = this.select_province;
+    }else{
+      Province = Province;
+    }
+
      this.webapi.getData('FollowPayTaxRealtimeAll?offcode='+this. offcode+'&region='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
 
@@ -189,14 +203,17 @@ public isScaling = false;
      let month;
      let year;
      for (var i = 0; i < this.responseData.length; i++) {
-       val = this.responseData[i].DIM_DATA_DATE_ID.toString();
-       
-       year = val.substring(0,4);
-       month = val.substring(6,4);
-       date = val.substring(6,8);
-       val = date+'/'+month+'/'+year;
- 
-       this.responseData[i].DIM_DATA_DATE_ID = val;
+      
+       val = this.responseData[i].DIM_DATA_DATE_ID
+       if (val != null){
+        val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+        year = val.substring(0,4);
+        month = val.substring(6,4);
+        date = val.substring(6,8);
+        val = date+'/'+month+'/'+year;
+        this.responseData[i].DIM_DATA_DATE_ID = val;
+      }
+      
      }
    }
 

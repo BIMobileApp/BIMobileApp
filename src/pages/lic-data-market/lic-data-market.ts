@@ -42,7 +42,7 @@ export class LicDataMarketPage {
   }
 
   ionViewDidLoad() {
-    let typeCur = 'B';
+    let typeCur = 'M';
     this.webapi.getData('IncDataMarketList?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
       this.getDataAmt(typeCur);

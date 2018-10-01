@@ -79,7 +79,7 @@ export class DimensionTime_03Page {
 
     /// ตรวจสอบสาขาเพื่อ default selection
     var res = "";
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       res = localStorage.offdesc.split(" ");
       this.select_province = res[0];
       this.select_all_prov_value = false;
@@ -97,7 +97,7 @@ export class DimensionTime_03Page {
 
     let Region = 'undefined';
     let Province = 'undefined';
-    let typeCur = "B";
+    let typeCur = "M";
     let month = 'undefined';
 
     this.getAllData(Region, Province, month, typeCur);
@@ -124,8 +124,9 @@ export class DimensionTime_03Page {
 
   selectRegion(Region, Province, month, typeCur) {
     Province = 'undefined';
-    this.select_all_value = true;
-    this.select_all_prov_value = false;
+    this.Province = 'undefined';
+    //this.select_all_value = true;
+    //this.select_all_prov_value = false;
 
     if (this.region != "00") {
       Region = localStorage.region_desc;
@@ -154,10 +155,10 @@ export class DimensionTime_03Page {
       Region = localStorage.region_desc;
     }
 
-    if (this.branch != "00") {
+    if (this.branch != "00" || this.province != "00") {
       Province = this.select_province;
     }
-
+    
     this.webapi.getData('DimansionTime03?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + month).then((data) => {
       this.respondData = data;
       this.getTableTAX(typeCur);

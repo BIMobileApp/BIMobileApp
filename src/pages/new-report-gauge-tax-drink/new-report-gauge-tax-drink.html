@@ -27,7 +27,7 @@
       <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
       <ion-item>
         <ion-label color="primary"><h3>ปีนี้ :</h3></ion-label>
-        <ion-label><h3>{{data.TAX_PERCENT}}</h3></ion-label>
+        <ion-label><h3>{{data.TAX_PERCENT | number : fractionSize}}</h3></ion-label>
         <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
         <ion-label text-left><h3>{{data.TAX}}</h3></ion-label>
       </ion-item>
@@ -58,7 +58,7 @@
        <h3 style="padding-right: 2%" class="td-right">หน่วย : ล้านบาท</h3>
        <ion-item>
          <ion-label color="primary"><h3>ปีนี้ :</h3></ion-label>
-         <ion-label><h3>{{data.QUAN_PERCENT}}</h3></ion-label>
+         <ion-label><h3>{{data.QUAN_PERCENT | number : fractionSize}}</h3></ion-label>
          <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
          <ion-label text-left><h3>{{data.TOTAL_VOLUMN_CAPA}}</h3></ion-label>
        </ion-item>

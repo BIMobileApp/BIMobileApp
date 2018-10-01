@@ -20,25 +20,30 @@
 var dateDisplayAll = '';
 var dateDisplayNow = '';
       
-var now=new Date();  
+var now = new Date();  
 var buddhayear = now.getFullYear()+543;    
 var last  =  new Date(now.getFullYear(),now.getMonth(),0); //th 
 var budgetyear =  0;
-if (now.getMonth() >= 10) {budgetyear= buddhayear;}
-else {budgetyear=buddhayear-1;}
+
+// ปล. เดือน ในระบบ เริ่มตั้งแต่ 0 จึง +1 ให้ลำดับเท่ากับปฏิทิน
+if (now.getMonth()+1 >= 10) {budgetyear= buddhayear+1;}
+else {budgetyear=buddhayear;}
 
 var thmonth = new Array ("มกราคม","กุมภาพันธ์","มีนาคม",
 "เมษายน","พฤษภาคม","มิถุนายน", "กรกฎาคม","สิงหาคม","กันยายน",
 "ตุลาคม","พฤศจิกายน","ธันวาคม");
-
-if((now.getDate()-1) < 1){
-    dateDisplayAll="ตั้งแต่ 1 ตุลาคม ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-2] ) +" ปีงบฯ " +  (now.getMonth()-2  < 0 ? buddhayear- 1 : buddhayear ); 
+/* if((now.getDate()-1) < 1){
+    dateDisplayAll="ตั้งแต่ 1 ตุลาคม ถึง "+ last.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()-1] ) +" ปีงบฯ " +  (now.getMonth()-1  ? buddhayear- 1 : buddhayear ); 
   }else{
     dateDisplayAll="ตั้งแต่ 1 ตุลาคม ถึง "+ (now.getDate()-1) +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()] ) +" ปีงบฯ " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
+  } */
+
+  if((now.getDate()-1) < 1){
+    dateDisplayAll="ตั้งแต่ 1 ตุลาคม ถึง "+ last.getDate() +" "+   (last.getMonth()-2 < 0 ?thmonth[11] : thmonth[last.getMonth()]) +" ปีงบฯ " +  (last.getMonth()+1 >= 10  ? budgetyear: budgetyear-1 ); 
+  }else{
+    dateDisplayAll="ตั้งแต่ 1 ตุลาคม ถึง "+ (now.getDate() -1) +" "+  (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[last.getMonth()] ) +" ปีงบฯ " +  (now.getMonth()+1 >= 10  ? budgetyear: budgetyear-1);
   }
-
-  dateDisplayNow =  " ข้อมูล ณ วันที่ "+now.getDate() +" "+   (now.getMonth() < 0 ?thmonth[11] : thmonth[now.getMonth()] ) +" ปีงบฯ " +  (now.getMonth()  < 0 ? buddhayear- 1 : buddhayear );
-
+  dateDisplayNow =  " ข้อมูล ณ วันที่ "+ now.getDate() +" "+   (now.getMonth()-2 < 0 ?thmonth[11] : thmonth[now.getMonth()] ) +" ปีงบฯ " +  (now.getMonth()+1  >= 10  ? budgetyear: budgetyear-1);
     //ฟังก์ชั่น เปลี่ยนบาทเป็นล้านบาท
   function changeCurrency(val,typeNow) {
     try {

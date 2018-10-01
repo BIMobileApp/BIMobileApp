@@ -114,6 +114,12 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DimensionTime_03Page } from '../pages/dimension-time-03/dimension-time-03';
 
 import { DirectivesModule } from '../directives/directives.module';
+import { CompareTaxEstOilPage } from '../pages/compare-tax-est-oil/compare-tax-est-oil';
+import { CompareTaxOilPage } from '../pages/compare-tax-oil/compare-tax-oil';
+import { NewReportGaugeTaxOilPage } from '../pages/new-report-gauge-tax-oil/new-report-gauge-tax-oil';
+import { CompareTaxEstSicaPage } from '../pages/compare-tax-est-sica/compare-tax-est-sica';
+import { CompareTaxSicaPage } from '../pages/compare-tax-sica/compare-tax-sica';
+import { NewReportGaugeTaxSicaPage } from '../pages/new-report-gauge-tax-sica/new-report-gauge-tax-sica';
 
 
 @NgModule({
@@ -215,7 +221,13 @@ import { DirectivesModule } from '../directives/directives.module';
     DataStatusPage,
     NewsEventPage,
     LicDataMarketPage,
-    DimensionTime_03Page
+    DimensionTime_03Page,
+    CompareTaxEstOilPage,
+    CompareTaxOilPage,
+    NewReportGaugeTaxOilPage,
+    CompareTaxEstSicaPage,
+    CompareTaxSicaPage,
+    NewReportGaugeTaxSicaPage
   ],
   imports: [
     BrowserModule,
@@ -330,7 +342,13 @@ import { DirectivesModule } from '../directives/directives.module';
     DataStatusPage,
     NewsEventPage,
     LicDataMarketPage,
-    DimensionTime_03Page
+    DimensionTime_03Page,
+    CompareTaxEstOilPage,
+    CompareTaxOilPage,
+    NewReportGaugeTaxOilPage,
+    CompareTaxEstSicaPage,
+    CompareTaxSicaPage,
+    NewReportGaugeTaxSicaPage
   ],
   providers: [
     StatusBar,

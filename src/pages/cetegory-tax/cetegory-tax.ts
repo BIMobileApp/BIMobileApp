@@ -35,6 +35,14 @@ export class CetegoryTaxPage {
   pak: any;
   username: any;
   curTG = "บาท";
+  display_region_product = "";
+  display_province_product = "";
+  display_region_province = "";
+  display_province_province = "";
+  display_region_branch = "";
+  display_province_branch = "";
+
+
   //guage parm
   TaxGauge: any;
   TaxlyGauge: any;
@@ -75,6 +83,7 @@ export class CetegoryTaxPage {
   dateDisplay = "";
   dateAsOff = "";
 
+  Province: any;
   region:any;
   province:any;
   branch:any;
@@ -126,7 +135,7 @@ export class CetegoryTaxPage {
 
  /// ตรวจสอบสาขาเพื่อ default selection
  var res = "";
- if(this.branch != "00"){          
+ if(this.branch != "00" || this.province != "00"){          
     res =  localStorage.offdesc.split(" ");
     this.select_province  = res[0];
     this.select_all_prov_value = false;
@@ -136,7 +145,7 @@ export class CetegoryTaxPage {
     this.isEnableProv = false;
   }
  ///end  ตรวจสอบสาขาเพื่อ default selection
-    
+   
   }
 
   ionViewDidLoad() {
@@ -144,7 +153,7 @@ export class CetegoryTaxPage {
     this.selectionProviceFirst();
     let area;
     let Province;
-    let typeCur = 'B';
+    let typeCur = 'M';
     this.TableGetData(area, Province, typeCur);
     this.hideTableBrance = 0;
   }
@@ -173,8 +182,6 @@ export class CetegoryTaxPage {
       this.toggleTable = 0;
     }
   }
-
-
   selectionArea() {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -192,8 +199,10 @@ export class CetegoryTaxPage {
   }
 
   selectionProvince(area, Province, typeCur) {
-    Province = undefined;
-    this.responseProvince = [];
+
+    Province = 'undefined';
+    this.Province = 'undefined';
+    //this.responseProvince = [];
 
     if(this.region != "00"){
       area = localStorage.region_desc;
@@ -225,16 +234,60 @@ export class CetegoryTaxPage {
    let Region;
    let province;
     if(this.region != "00"){
+
+      if(area != 'undefined'){
+        this.display_region_product =  localStorage.region_desc;
+        this.display_region_province =  localStorage.region_desc;
+        this.display_region_branch =  localStorage.region_desc;
+      }else{ 
+        this.display_region_product = "";
+        this.display_region_province = "";
+        this.display_region_branch = "";
+      }
+
       Region = localStorage.region_desc;
     }else{
+      if(area != 'undefined'){
+        this.display_region_product = area;
+        this.display_region_province = area;
+        this.display_region_branch  = area;
+      }else{ 
+        this.display_region_product = "";
+        this.display_region_province = "";
+        this.display_region_branch = "";
+      }
+
       Region =area;
     }
-    if(this.branch != "00"){    
+
+    /////////////////////////////////////////////
+    if(this.branch != "00" || this.province != "00"){
+     
+      if(Province != 'undefined'){
+        this.display_province_product = this.select_province;
+        this.display_province_province = this.select_province;
+        this.display_province_branch = this.select_province;
+      } else{
+        this.display_province_product  = "";
+        this.display_province_province  = "";
+        this.display_province_branch = "";
+      }   
       province =  this.select_province;
     }else{
+      if(Province != 'undefined'){
+        this.display_province_product = Province;
+        this.display_province_province = Province;
+        this.display_province_branch = Province;
+      }else{
+        this.display_province_product = "";
+        this.display_province_province = "";
+        this.display_province_branch = "";
+      }   
+  
       province = Province;
     }  
 
+ 
    /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
       province = undefined;
     }*/
