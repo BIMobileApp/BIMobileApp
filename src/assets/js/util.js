@@ -19,6 +19,7 @@
 
 var dateDisplayAll = '';
 var dateDisplayNow = '';
+var slayNow = 'ตั้งแต่ 1 ตุลาคม ถึง 30 กันยายน ปีงบฯ 2561';
 
 var now = new Date();
 var buddhayear = now.getFullYear() + 543;

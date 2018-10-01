@@ -114,7 +114,7 @@ export class CetegoryTaxPage {
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
      
-  this.dateAsOff_Map=slayNow;
+  this.dateAsOff_Map = slayNow;
     this.username = localStorage.userData;
     this.offdesc = localStorage.offdesc;
     this.name = localStorage.username;
