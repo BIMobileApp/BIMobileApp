@@ -214,14 +214,17 @@ public isScaling = false;
      let month;
      let year;
      for (var i = 0; i < this.responseData.length; i++) {
-       val = this.responseData[i].DIM_DATA_DATE_ID.toString();
-       
-       year = val.substring(0,4);
-       month = val.substring(6,4);
-       date = val.substring(6,8);
-       val = date+'/'+month+'/'+year;
- 
-       this.responseData[i].DIM_DATA_DATE_ID = val;
+      
+       val = this.responseData[i].DIM_DATA_DATE_ID
+       if (val != null){
+        val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+        year = val.substring(0,4);
+        month = val.substring(6,4);
+        date = val.substring(6,8);
+        val = date+'/'+month+'/'+year;
+        this.responseData[i].DIM_DATA_DATE_ID = val;
+      }
+      
      }
    }*/
 

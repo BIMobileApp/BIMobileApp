@@ -269,6 +269,7 @@ export class CompareTaxEstBeerPage {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
           this.TaxgetTAX();
+          this.TaxlineChart.destroy();
           this.TaxCreateChart();
 
         } else {
@@ -287,6 +288,9 @@ export class CompareTaxEstBeerPage {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
+        if(this.TaxlineChart){
+          this.TaxlineChart.destroy();
+        }
         this.TaxCreateChart();
 
       } else {
