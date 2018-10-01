@@ -268,7 +268,7 @@
 
       <div>
         <br>
-        <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามสาขา</h1>
+        <h1 class="header-style">ตารางแสดงภาษีประจำปีงบประมาณปัจจุบัน ตามรายภาค</h1>
         <h2 class="header-style"> {{display_region_branch}}     {{display_province_branch}}</h2> 
         <h2 class="header-style">{{dateAsOff}}</h2>
         <h3 style="padding-right: 2%" class="desc-right" >หน่วย : {{curTG}}</h3>
@@ -298,8 +298,8 @@
                     <h2 style="text-align: center; color: rgb(107, 105, 105)" [style.fontSize]="fontSize">ไม่มีข้อมูลในฐานข้อมูล</h2>
                     <br><br><br>
                   </td>-->
-               <tr *ngFor="let data of DataOverallBranch">
-                <td><h3 class='td-left'>{{data.OFFDESC}}</h3></td>
+               <tr *ngFor="let data of DataOverallRegion">
+                <td><h3 class='td-left'>{{data.REGION_NAME}}</h3></td>
                 <td><h3 class='td-right'>{{data.TAX}}</h3></td>
                 <td><h3 class='td-right'>{{data.LAST_TAX}}</h3></td>
                   <td width="15%">
