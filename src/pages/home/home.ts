@@ -9,7 +9,12 @@ import { Http, ResponseContentType } from '@angular/http';
 import { File } from '@ionic-native/file';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';
+ 
 
+
+import { DisableSideMenu } from '../../customDecorators/disable-side-menu.decorator'; 
+
+@DisableSideMenu()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

@@ -15,9 +15,9 @@ export class RestProvider {
     //this.baseUrl = "https://bimobile.excise.go.th/ExciseMobile/api/";
   } 
 
-
    // GET Method
  getData(segment){
+  
   return new Promise((resolve, reject) => {
     // Header
     let headers = new HttpHeaders();

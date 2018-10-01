@@ -89,8 +89,8 @@ constructor(
 }
 
 ionViewDidLoad() {
-  let typeCur = 'B';
-  let typeCurFirst = 'B';
+  let typeCur = 'M';
+  let typeCurFirst = 'M';
 
   this.selectionAreaAll();
   this.selectionProvinceAll();
@@ -163,6 +163,7 @@ getTableData(typeCurFirst) {
 }
 
 ///select all product///
+regionSelectType = "";
 getProductAll(SRegion,SProvince,typeCur){
   
   if(this.region != "00"){
@@ -176,10 +177,16 @@ getProductAll(SRegion,SProvince,typeCur){
   }else{
     SProvince = SProvince;
   }
+
+  if(typeCur == undefined){
+    this.regionSelectType = "M";
+  }else{
+    this.regionSelectType =  typeCur;
+  }
   //alert("ภาค="+SRegion+" จังหวัด="+ SProvince+" หน่วย="+ typeCur);
   this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
     this.repondProductSura = data; 
-    this.getTableTAX(typeCur);
+    this.getTableTAX(this.regionSelectType);
   });
 }
 

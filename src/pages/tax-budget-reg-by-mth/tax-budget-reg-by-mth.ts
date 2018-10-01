@@ -57,10 +57,17 @@ export class TaxBudgetRegByMthPage {
     });
   }*/
 
+  regionSelectType = "";
   selectDate(summaryDate, typeCur) {
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
     this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month=' + summaryDate).then((data) => {
       this.responseData = data;
-      this.getTableTAX(typeCur);
+      this.getTableTAX(this.regionSelectType);
     });
   }
 

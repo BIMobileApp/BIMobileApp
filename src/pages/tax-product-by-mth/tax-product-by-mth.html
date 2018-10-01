@@ -70,8 +70,11 @@
           </ion-item> -->
           <ion-item class="size">
             <ion-label> เดือน : </ion-label>
-            <ion-select [(ngModel)]="monthFrom"  (ionChange)="selectMonthFrom(area,Province,monthFrom,monthTo, typeCur)">
+            <ion-select [(ngModel)]="monthFrom"  (ionChange)="selectMonthFrom(area,Province,monthFrom,monthTo,typeCur)">
               <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+              <ion-option value="10">ตุลาคม</ion-option>
+              <ion-option value="11">พฤศจิกายน</ion-option>
+              <ion-option value="12">ธันวาคม</ion-option>
               <ion-option value="1">มกราคม</ion-option>
               <ion-option value="2">กุมภาพันธ์</ion-option>
               <ion-option value="3">มีนาคม</ion-option>
@@ -80,10 +83,7 @@
               <ion-option value="6">มิถุนายน</ion-option>
               <ion-option value="7">กรกฎาคม</ion-option>
               <ion-option value="8">สิงหาคม</ion-option>
-              <ion-option value="9">กันยายน</ion-option>
-              <ion-option value="10">ตุลาคม</ion-option>
-              <ion-option value="11">พฤศจิกายน</ion-option>
-              <ion-option value="12">ธันวาคม</ion-option>
+              <ion-option value="9">กันยายน</ion-option>            
             </ion-select>
           </ion-item>
         </ion-col>
@@ -92,6 +92,9 @@
             <ion-label> ถึง: </ion-label>
             <ion-select [(ngModel)]="monthTo" (ionChange)="selectMonthTo(area,Province,monthFrom,monthTo, typeCur)">
               <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+              <ion-option value="10">ตุลาคม</ion-option>
+              <ion-option value="11">พฤศจิกายน</ion-option>
+              <ion-option value="12">ธันวาคม</ion-option>
               <ion-option value="1">มกราคม</ion-option>
               <ion-option value="2">กุมภาพันธ์</ion-option>
               <ion-option value="3">มีนาคม</ion-option>
@@ -100,10 +103,7 @@
               <ion-option value="6">มิถุนายน</ion-option>
               <ion-option value="7">กรกฎาคม</ion-option>
               <ion-option value="8">สิงหาคม</ion-option>
-              <ion-option value="9">กันยายน</ion-option>
-              <ion-option value="10">ตุลาคม</ion-option>
-              <ion-option value="11">พฤศจิกายน</ion-option>
-              <ion-option value="12">ธันวาคม</ion-option>
+              <ion-option value="9">กันยายน</ion-option>            
             </ion-select>
           </ion-item>
       </ion-col>
@@ -135,9 +135,9 @@
     <!-- <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3> -->
     <ion-item class="sizemini" no-lines>
       <ion-label> หน่วย : </ion-label>
-      <ion-select [(ngModel)]="typeCur" (ionChange)="getTableData(area, Province,monthFrom,monthTo, typeCur)">
-        <ion-option value="B" [selected]="true">บาท</ion-option>
-        <ion-option value="M">ล้านบาท</ion-option>
+      <ion-select [(ngModel)]="typeCur"  #item (ionChange)="getTableData(area, Province,monthFrom,monthTo, typeCur)">
+        <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+        <ion-option value="B">บาท</ion-option>
       </ion-select>
     </ion-item>
     <ion-card>

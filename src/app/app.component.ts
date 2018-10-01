@@ -6,8 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { WelcomePage } from '../pages/welcome/welcome';
-
-
+import {Injectable, Inject} from  '@angular/core';
 
 @Component({
   templateUrl: 'app.html'

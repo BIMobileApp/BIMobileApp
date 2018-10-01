@@ -115,7 +115,7 @@ public isScaling = false;
     var Province;
     var monthFrom = "undefined";
     var monthTo ="undefined";
-    let typeCur = 'B';
+    let typeCur = 'M';
     this.getTableData(area,Province,monthFrom,monthTo,typeCur);
     //this.getDataAll(typeCur);
   }
@@ -128,8 +128,8 @@ public isScaling = false;
   }
 
   selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){
-    
-    if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
+  
+   /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
         title: 'การเลือกข้อมูลไม่ถูกต้อง!',
@@ -140,7 +140,7 @@ public isScaling = false;
 
       monthTo = 'undefined';
      this.monthTo = 'undefined';
-    }else{
+    }else{*/
       let Region;
       let province;
       monthTo = 'undefined';
@@ -158,12 +158,12 @@ public isScaling = false;
       }  
 
       this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
-    }
+    //}
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
 
-    if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
+   /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
         title: 'การเลือกข้อมูลไม่ถูกต้อง!',
@@ -174,7 +174,7 @@ public isScaling = false;
 
       monthTo = 'undefined';
      this.monthTo = 'undefined';
-    }else{
+    }else{*/
       let Region;
       let province;
 
@@ -190,7 +190,7 @@ public isScaling = false;
       }  
 
       this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
-    }
+   // }
   }
   selectionArea(){
     this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
@@ -232,7 +232,7 @@ public isScaling = false;
 
   }
 
-
+  regionSelectType = "";
   getTableData(area,Province,monthFrom,monthTo,typeCur) {
     
     /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
@@ -252,9 +252,16 @@ public isScaling = false;
       province = Province;
     }  
 
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
+
     this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+Region+'&province='+province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
       this.responseData = data;
-      this.getTAX(typeCur);
+      this.getTAX(this.regionSelectType );
       
     });
     this.oldArea = area;

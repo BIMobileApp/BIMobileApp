@@ -40,6 +40,9 @@
             <ion-label> เดือน: </ion-label>
             <ion-select [(ngModel)]="month" (ionChange)="selectMonth(Region,Province,month, typeCur)">
               <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+              <ion-option value="ตุลาคม">ตุลาคม</ion-option>
+              <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
+              <ion-option value="ธันวาคม">ธันวาคม</ion-option>
               <ion-option value="มกราคม">มกราคม</ion-option>
               <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
               <ion-option value="มีนาคม">มีนาคม</ion-option>
@@ -49,9 +52,7 @@
               <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
               <ion-option value="สิงหาคม">สิงหาคม</ion-option>
               <ion-option value="กันยายน">กันยายน</ion-option>
-              <ion-option value="ตุลาคม">ตุลาคม</ion-option>
-              <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
-              <ion-option value="ธันวาคม">ธันวาคม</ion-option>
+             
             </ion-select>
           </ion-item>
         </ion-col>
@@ -63,7 +64,7 @@
       <ion-label> หน่วย : </ion-label>
       <ion-select [(ngModel)]="typeCur" (ionChange)="getAllData(Region,Province,month, typeCur)">
         <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
-        <ion-option value="B">ล้านบาท</ion-option>
+        <ion-option value="B">บาท</ion-option>
       </ion-select>
     </ion-item>
 

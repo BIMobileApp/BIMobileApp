@@ -130,6 +130,7 @@ export class FollowTaxRealtimePage {
     this.getData(Region,Province,typeCur);
   }
 
+  regionSelectType = "";
   getData(Region,Province,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
@@ -141,11 +142,18 @@ export class FollowTaxRealtimePage {
     if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+  
     //alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
     
      this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province).then((data)=>{
        this.responseData = data;
-       this.getTableAmt(typeCur);
+       this.getTableAmt(this.regionSelectType);
        this.getDateFormat();
      });
      this.oldRegion = Region;

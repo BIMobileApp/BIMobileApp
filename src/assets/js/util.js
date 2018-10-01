@@ -1,4 +1,4 @@
-  /*var dateDisplayAll = '';
+/*var dateDisplayAll = '';
 
     var now=new Date();  
     var buddhayear = now.getFullYear()+543;    
@@ -17,8 +17,13 @@
         dateDisplayAll="ตั้งแต่ 1 ตุลาคม ถึง "+ (now.getDate()) +" "+  (now.getMonth()-1 < 0 ?thmonth[11] : thmonth[now.getMonth()] ) +" ปีงบฯ " +  (now.getMonth()-1  < 0 ? buddhayear- 1 : buddhayear );
       }*/
 
-var dateDisplayAll = '';
-var dateDisplayNow = '';
+      var dateDisplayAll = '';
+      var dateDisplayNow = '';
+            
+      var now = new Date();  
+      var buddhayear = now.getFullYear()+543;    
+      var last  =  new Date(now.getFullYear(),now.getMonth(),0); //th 
+      var budgetyear =  0;
       
 var now = new Date();  
 var buddhayear = now.getFullYear()+543;    

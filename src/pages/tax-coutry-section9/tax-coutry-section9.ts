@@ -34,11 +34,15 @@ export class TaxCoutrySection9Page {
    ProdTAX_LY = [];
    ProdEST = [];
    responseProvince:any;
+   DataOverallBranch:any;
    oldArea:any;
    brance = 0;
    area = 'ภาค 09';
-   curTG = "บาท";
+   curTG = "ล้านบาท";
    display_province_fillter = "";
+   region:any;
+   province:any;
+   branch:any;
 
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
@@ -54,6 +58,12 @@ public isScaling = false;
     public webapi: RestProvider) {
     this.username = localStorage.userData;
     this.dateAsOff = dateDisplayAll;
+    this.offcode = localStorage.offcode;
+
+       //หา offcode เพื่อหา ภาค จังหวัด สาขา
+       this.region = localStorage.offcode.substring(0, 2);
+       this.province = localStorage.offcode.substring(2, 4);
+       this.branch =  localStorage.offcode.substring(4, 6);
   }
 
   ionViewDidLoad() {
@@ -61,15 +71,16 @@ public isScaling = false;
     this.dateAsOff = dateDisplayAll;
   }
   UserAthu() {
-    this.offcode = localStorage.offcode;
+    
      this.selectionProvince();
      //this.TableGetDataAll();
-     let typeCurFirst = 'B';
+     let typeCurFirst = 'M';
      this.GetProvinceTable(typeCurFirst);
      var Province = undefined;
-     let typeCur = 'B';
+     let typeCur = 'M';
      this.TableGetData(Province,typeCur);
      this.brance = 0;
+     this.OverallBranch(this.area, Province, typeCur);
    }
 
    selectionProvince(){
@@ -96,12 +107,13 @@ public isScaling = false;
   }
 
 GetProvinceTable(typeCurFirst){
-  this.webapi.getData('TaxProvinceCurYear?area=' + this.area).then((data) => {
+  this.webapi.getData('TaxProvinceCurYear?area=' + this.area+'&offcode='+this.offcode).then((data) => {
     this.DataProvince = data;
     this.getProvinceTAX(typeCurFirst);
   });
 }
 
+regionSelectType = "";
 TableGetData(Province,typeCur) {
 
   if(Province != "undefined"){
@@ -110,16 +122,59 @@ TableGetData(Province,typeCur) {
     this.display_province_fillter = "";
    }
 
+   if(typeCur == undefined){
+    this.regionSelectType = "M";
+  }else{
+    this.regionSelectType =  typeCur;
+  }
+
+  if(typeCur == "M"){
+    this.curTG = "ล้านบาท";
+  }else if(typeCur == undefined){
+    this.curTG = "ล้านบาท";
+  }else{
+    this.curTG = "บาท";
+  }
+
   this.brance = 1;
   this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataCurYear = data;
-    this.getTAX(typeCur);
+    this.getTAX(this.regionSelectType);
   });
   this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataProduct = data;
-    this.getProductTAX(typeCur);
+    this.getProductTAX(this.regionSelectType);
   });
+  this.OverallBranch(this.area, Province, this.regionSelectType);
 }
+
+OverallBranch(area, Province, typeCur){
+
+  if (this.branch != "00" || this.province != "00") {
+    Province = localStorage.offcode.substring(2, 4);
+  } else {
+    Province = Province;
+  }
+
+  this.webapi.getData('TaxOverallBranch?&region='+this.area+'&province='+Province).then((data) => {
+    this.DataOverallBranch = data;
+    this.getTaxBranch(typeCur);
+  });
+ }
+
+ getTaxBranch(typeCur){
+  let tax_branch;
+  let last_tax_branch;
+  for (var i = 0; i < this.DataOverallBranch.length; i++) {
+    tax_branch = this.DataOverallBranch[i].TAX;
+    if (tax_branch != null) { tax_branch = changeCurrency(tax_branch, typeCur); }
+    this.DataOverallBranch[i].TAX = tax_branch;
+
+    last_tax_branch = this.DataOverallBranch[i].LAST_TAX;
+    if (last_tax_branch != null) { last_tax_branch = changeCurrency(last_tax_branch, typeCur); }
+    this.DataOverallBranch[i].LAST_TAX = last_tax_branch;
+  }
+ }
 
 getTAX(typeCur) {
   let tax;
@@ -198,8 +253,8 @@ ChangeUnitFirst(typeCurFirst){
   this.GetProvinceTable(typeCurFirst);
 }
 
-ChangeUnit(typeCur){
-  this.TableGetDataAll(typeCur);
+ChangeUnit(Province,typeCur){
+  this.TableGetData(Province,typeCur);
 }
 
 /* start for pinch */

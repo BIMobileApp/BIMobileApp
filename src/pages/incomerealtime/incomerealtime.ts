@@ -98,6 +98,7 @@ public isScaling = false;
       this.time = d.getHours() + " : " +  d.getMinutes();
   }
 
+  regionSelectType = "";
   ionViewDidLoad() {
     let Region;
     let Province;
@@ -129,7 +130,9 @@ public isScaling = false;
     //this.getData(Region,Province,typeCur);
   }
 
+
   selectionProvince(Region,Province,typeCur){
+
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -137,13 +140,20 @@ public isScaling = false;
       this.ResponseProvince = data;
     });
     //console.log(Region);
-    this.getData(Region,Province,typeCur);
+    this.getData(Region,Province,this.regionSelectType);
   }
    
   getData(Region,Province,typeCur){
     /*if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }*/
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{
@@ -157,7 +167,7 @@ public isScaling = false;
     }
     this.webapi.getData('SourceImcome?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
           this.respondData = data;
-          this.getTableTAX(typeCur);
+          this.getTableTAX(this.regionSelectType);
     });
       this.oldRegion = Region;
       this.oldtypeCur = typeCur;
