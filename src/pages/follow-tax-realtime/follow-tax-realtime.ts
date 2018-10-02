@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll:any;
-declare var dateDisplayNow:any;
+declare var dateDisplayDataReailTime:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -53,7 +53,7 @@ export class FollowTaxRealtimePage {
   this.offcode = localStorage.offcode;
   this.dateDisplay = localStorage.last_update_date;
   this.dateAsOff =  dateDisplayAll;
-  this.dateNow = dateDisplayNow;
+  this.dateNow = dateDisplayDataReailTime;
   this.username = localStorage.userData;
 
   ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -88,6 +88,7 @@ export class FollowTaxRealtimePage {
 
   }
 
+  dateDisplayDataReailTime = "";
   ionViewDidLoad() {
     this.selectionAreaAll();
     this.selectionProvinceAll();

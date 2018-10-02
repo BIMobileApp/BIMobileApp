@@ -17,6 +17,7 @@ declare var notRound: any;
 declare var changeCurrency: any;
 declare var dateDisplayAll: any; 
 
+
 declare var slayNow: any; 
 
 /* start for pinch */
@@ -68,7 +69,7 @@ export class CetegoryTaxPage {
   DataProduct: any;
   DataGauge: any;
   DataProvince: any;
-  DataOverallBranch:any;
+  DataOverallRegion:any;
   Data = [];
   TAX = [];
   TAX_LY = [];
@@ -316,18 +317,24 @@ export class CetegoryTaxPage {
       this.getProductTAX( this.regionSelectType);
     });
 
+    //this.GetProvinceTable(area, typeCur);
     this.OverallBranch(area, Province,  this.regionSelectType);
-        
-    this.oldArea = Region;
-    this.oldtypeCur = typeCur;
+            
+  
     if (Province !== undefined) {
       this.hideTableBrance = 1;
     }
     if(typeCur == "M"){
       this.curTG = "ล้านบาท";
-    }else{
+    }else if(typeCur == undefined){
+      this.curTG = "ล้านบาท";
+    }
+    else{
       this.curTG = "บาท";
     }
+
+    this.oldArea = Region;
+    this.oldtypeCur = typeCur;
   }
 
   getTAX(typeCur) {
@@ -391,7 +398,7 @@ export class CetegoryTaxPage {
       if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
       this.DataProvince[i].LAST_TAX = last_tax;
 
-      est = 7000000; //this.DataProvince[i].ESTIMATE;
+      est = this.DataProvince[i].ESTIMATE;
       if (est != null) { est = changeCurrency(est, typeCur); }
       this.DataProvince[i].ESTIMATE = est;
 
@@ -415,7 +422,7 @@ export class CetegoryTaxPage {
 
   BarGetData() {
     this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
-      this.responseData = data; console.log(this.responseData);
+      this.responseData = data;
       if (this.responseData[0].TAX != null) {
         this.createBarChart();
       } else {
@@ -521,8 +528,8 @@ export class CetegoryTaxPage {
       Province = Province;
     }
     
-    this.webapi.getData('TaxOverallBranch?region='+area+'&province='+Province).then((data) => {
-      this.DataOverallBranch = data;
+    this.webapi.getData('TaxOverallRegion?region='+area+'&province='+Province).then((data) => {
+      this.DataOverallRegion = data;
       this.getTaxBranch(typeCur);
     });
    }
@@ -530,14 +537,14 @@ export class CetegoryTaxPage {
    getTaxBranch(typeCur){
     let tax_branch;
     let last_tax_branch;
-    for (var i = 0; i < this.DataOverallBranch.length; i++) {
-      tax_branch = this.DataOverallBranch[i].TAX;
+    for (var i = 0; i < this.DataOverallRegion.length; i++) {
+      tax_branch = this.DataOverallRegion[i].TAX;
       if (tax_branch != null) { tax_branch = changeCurrency(tax_branch, typeCur); }
-      this.DataOverallBranch[i].TAX = tax_branch;
+      this.DataOverallRegion[i].TAX = tax_branch;
 
-      last_tax_branch = this.DataOverallBranch[i].LAST_TAX;
+      last_tax_branch = this.DataOverallRegion[i].LAST_TAX;
       if (last_tax_branch != null) { last_tax_branch = changeCurrency(last_tax_branch, typeCur); }
-      this.DataOverallBranch[i].LAST_TAX = last_tax_branch;
+      this.DataOverallRegion[i].LAST_TAX = last_tax_branch;
     }
    }
 

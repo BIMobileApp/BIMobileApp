@@ -55,16 +55,16 @@ export class HomePage {
   Authenticate_User:any;
   login() {
 
- /*    this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
+    /*this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
       
       this.Authenticate_User = data;
 
-      if(this.Authenticate_User == 12){ */
+      if(this.Authenticate_User == 12){*/
 
-        this.webapi.getData('TMP_USER?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {
+        this.webapi.getData('TMP_USER?username=' + this.userData.username).then((data) => {
           this.userDB = data;
           
-            if (this.userDB.length!=0) {
+            //if (this.userDB.length!=0) {
                 this.offcode = this.userDB[0].OFFCODE;
                 this.offdesc = this.userDB[0].OFFDESC;
                 this.username = this.userDB[0].NAME;  
@@ -84,17 +84,17 @@ export class HomePage {
                 //ปิดหน้า login และกลับไปหน้าหลัง
 
                 this.navCtrl.setRoot(MenuGroupPage);
-              }else {
+             /* }else {
                 const alert = this.alertCtrl.create({
                   title: 'เข้าสู่ระบบไม่สำเร็จ!',
                   subTitle: 'กรุณากรอกข้อมูลอีกครั้ง',
                   buttons: ['ตกลง']
                 });
                 alert.present();
-              }
+              }*/
             });
 
-      /* }else{
+      /*}else{
 
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
@@ -104,7 +104,8 @@ export class HomePage {
         alert.present();
      }
      
-    }); */
+    });*/
+
   }
 
   NewsEvent(){
