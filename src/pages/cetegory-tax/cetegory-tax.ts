@@ -83,6 +83,8 @@ export class CetegoryTaxPage {
   oldArea: any;
   oldtypeCur : any;
   hideTableBrance = 0;
+  responseDate: any;
+  showDate: any;
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -190,6 +192,12 @@ export class CetegoryTaxPage {
       this.toggleTable = 0;
     }
   }
+  getDate() {
+    this.webapi.getData('getDatadate?menu_cd=M1').then((data) => {
+      this.responseDate = data;
+      this.showDate = 'ตั้งแต่วันที่ 1 ตุลาคม ถึง วันที่ ' 
+    });
+  }
   selectionArea() {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -240,7 +248,6 @@ export class CetegoryTaxPage {
   }
 
   TableGetData(area, Province, typeCur) {
-
    let Region;
    let province;
     if(this.region != "00"){
@@ -392,7 +399,7 @@ export class CetegoryTaxPage {
       if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
       this.DataProvince[i].LAST_TAX = last_tax;
 
-      est = 7000000; //this.DataProvince[i].ESTIMATE;
+      est = this.DataProvince[i].ESTIMATE;
       if (est != null) { est = changeCurrency(est, typeCur); }
       this.DataProvince[i].ESTIMATE = est;
 

@@ -32,6 +32,7 @@ export class HomePage {
   region:any;
   lastUpdateDate: any;
   region_shot:any;
+  date:any;
  
 
   constructor(public navCtrl: NavController,
@@ -104,6 +105,14 @@ export class HomePage {
         alert.present();
      }
      
+    }); */
+
+    /* this.webapi.getData('getDatadate').then((data) => {
+      this.date = data;
+      let dateSince = this.date.DATE_SINCE;
+      let updatedate = this.date.UPDATE_DATE;
+      let budgetyear = this.date.BUDGETYEAR;
+      dateSince
     }); */
   }
 
