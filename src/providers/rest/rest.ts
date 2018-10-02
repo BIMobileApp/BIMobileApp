@@ -10,9 +10,9 @@ export class RestProvider {
   constructor(public http: HttpClient,
     public toast:ToastController) {
     
-    this.baseUrl = "http://localhost:62657/api/";
+    //this.baseUrl = "http://localhost:62657/api/";
     //this.baseUrl = "http://192.168.41.101/BIWebService/api/";
-    //this.baseUrl = "https://bimobile.excise.go.th/ExciseMobile/api/";
+    this.baseUrl = "https://bimobile.excise.go.th/ExciseMobile/api/";
   } 
 
    // GET Method
