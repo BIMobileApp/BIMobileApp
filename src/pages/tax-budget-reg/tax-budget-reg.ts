@@ -108,10 +108,12 @@ export class TaxBudgetRegPage {
 
     let Region;
     let Province;
+    let month_from;
+    let month_to;
     let Year = 'undefined';
     let typeCur = 'M';
 
-    this.selectDataAll(Region, Province, typeCur);
+    this.selectDataAll(Region, Province, typeCur,month_from,month_to);
 
   }
 
@@ -133,7 +135,7 @@ export class TaxBudgetRegPage {
     });
   }
 
-  selectRegion(Region, Province, typeCur) {
+  selectRegion(Region, Province, typeCur,month_from,month_to) {
     Province = 'undefined';
     this.Province = "undefined";
 
@@ -142,7 +144,7 @@ export class TaxBudgetRegPage {
     }
 
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region, Province, typeCur);
+    this.selectDataAll(Region, Province, typeCur,month_from,month_to);
   }
 
   selectionProvinceFill(Region) {
@@ -151,13 +153,13 @@ export class TaxBudgetRegPage {
     });
   }
 
-  selectionProvince(Region, Province, typeCur) {
+  selectionProvince(Region, Province, typeCur,month_from,month_to) {
     //this.selectionProvinceFill(Region);
-    this.selectDataAll(Region, Province, typeCur);
+    this.selectDataAll(Region, Province, typeCur,month_from,month_to);
   }
 
   regionSelectType = "";
-  selectDataAll(Region, Province, typeCur) {
+  selectDataAll(Region, Province, typeCur,month_from,month_to) {
     if (this.region != "00") {
       Region = localStorage.region_desc;
     } else {
@@ -168,14 +170,15 @@ export class TaxBudgetRegPage {
     } else {
       Province = Province;
     }
-
+    
     if(typeCur == undefined){
       this.regionSelectType = "M";
     }else{
       this.regionSelectType =  typeCur;
     }
 
-    this.webapi.getData('TaxBudgetRegAll?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + Region + '&province=' + Province).then((data) => {
+  
+    this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + Region + '&province=' + Province + '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
       this.responseData = data;
       this.getTableTAX(this.regionSelectType);
     });

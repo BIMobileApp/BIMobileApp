@@ -83,8 +83,6 @@ export class CetegoryTaxPage {
   oldArea: any;
   oldtypeCur : any;
   hideTableBrance = 0;
-  responseDate: any;
-  showDate: any;
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -192,12 +190,6 @@ export class CetegoryTaxPage {
       this.toggleTable = 0;
     }
   }
-  getDate() {
-    this.webapi.getData('getDatadate?menu_cd=M1').then((data) => {
-      this.responseDate = data;
-      this.showDate = 'ตั้งแต่วันที่ 1 ตุลาคม ถึง วันที่ ' 
-    });
-  }
   selectionArea() {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -248,6 +240,7 @@ export class CetegoryTaxPage {
   }
 
   TableGetData(area, Province, typeCur) {
+
    let Region;
    let province;
     if(this.region != "00"){
@@ -324,18 +317,24 @@ export class CetegoryTaxPage {
       this.getProductTAX( this.regionSelectType);
     });
 
+    //this.GetProvinceTable(area, typeCur);
     this.OverallBranch(area, Province,  this.regionSelectType);
-        
-    this.oldArea = Region;
-    this.oldtypeCur = typeCur;
+            
+  
     if (Province !== undefined) {
       this.hideTableBrance = 1;
     }
     if(typeCur == "M"){
       this.curTG = "ล้านบาท";
-    }else{
+    }else if(typeCur == undefined){
+      this.curTG = "ล้านบาท";
+    }
+    else{
       this.curTG = "บาท";
     }
+
+    this.oldArea = Region;
+    this.oldtypeCur = typeCur;
   }
 
   getTAX(typeCur) {
@@ -423,7 +422,7 @@ export class CetegoryTaxPage {
 
   BarGetData() {
     this.webapi.getData('GaugeOverviewRegion?offcode=' + this.offcode).then((data) => {
-      this.responseData = data; console.log(this.responseData);
+      this.responseData = data;
       if (this.responseData[0].TAX != null) {
         this.createBarChart();
       } else {

@@ -10,7 +10,7 @@ import { RestProvider } from '../../providers/rest/rest';
 export class DataStatusPage {
   responseData: any;
   constructor(
-    public navCtrl: NavController,
+    public navCtrl: NavController, 
     public navParams: NavParams,
     public webapi: RestProvider) {
   }
@@ -18,10 +18,9 @@ export class DataStatusPage {
   ionViewDidLoad() {
     this.getTableData();
   }
-  getTableData() {
-    this.webapi.getData('DataStatus').then((data) => {
+    getTableData() {
+      this.webapi.getData('DataStatus').then((data) => {
       this.responseData = data;
     });
-
-  }
+}
 }

@@ -19,6 +19,7 @@
 
 var dateDisplayAll = '';
 var dateDisplayNow = '';
+var dateDisplayDataReailTime = "";
 var slayNow = 'ตั้งแต่ 1 ตุลาคม ถึง 30 กันยายน ปีงบฯ 2561';
 
 var now = new Date();
@@ -44,16 +45,15 @@ var thmonth = new Array("มกราคม", "กุมภาพันธ์", 
 
 if ((now.getDate() - 1) < 1) {
   dateDisplayAll = "ตั้งแต่ 1 ตุลาคม ถึง " + last.getDate() + " " + (last.getMonth() - 2 < 0 ? thmonth[11] : thmonth[last.getMonth()]) + " ปีงบฯ " + (last.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
+  //dateDisplayDataReailTime = "ข้อมูลเดือน" + last.getDate() + " " + (last.getMonth() - 2 < 0 ? thmonth[11] : thmonth[last.getMonth()]) + " ปีงบฯ " + (last.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
 } else {
   dateDisplayAll = "ตั้งแต่ 1 ตุลาคม ถึง " + (now.getDate() - 1) + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
+  //dateDisplayDataReailTime = "ข้อมูลเดือน " + (now.getDate() - 1) + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
 }
+
 dateDisplayNow = " ข้อมูล ณ วันที่ " + now.getDate() + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
 
-//ฟังก์ชั่น แปลงวันที่
-function formatDate(val){
-  val = val.split(' ');
-  strVal = 'ตั้งแต่ 1 ตุลาคม ถึง '+ val[0] + " " + val[1] + "ปีงบ"
-}
+dateDisplayDataReailTime = "ข้อมูลเดือน "+ (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()] + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1));
 
 //ฟังก์ชั่น เปลี่ยนบาทเป็นล้านบาท
 function changeCurrency(val, typeNow) {
