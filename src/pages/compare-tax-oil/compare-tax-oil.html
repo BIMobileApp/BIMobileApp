@@ -12,11 +12,53 @@
         <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
       </ion-item>
       <ion-grid>
+          <ion-row>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label> เดือน : </ion-label>
+                  <ion-select [(ngModel)]="month_from"  (ionChange)="selectionProvince(Region,Province,month_from,month_to)">
+                    <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                    <ion-option value="10">ตุลาคม</ion-option>
+                    <ion-option value="11">พฤศจิกายน</ion-option>
+                    <ion-option value="12">ธันวาคม</ion-option>
+                    <ion-option value="1">มกราคม</ion-option>
+                    <ion-option value="2">กุมภาพันธ์</ion-option>
+                    <ion-option value="3">มีนาคม</ion-option>
+                    <ion-option value="4">เมษายน</ion-option>
+                    <ion-option value="5">พฤษภาคม</ion-option>
+                    <ion-option value="6">มิถุนายน</ion-option>
+                    <ion-option value="7">กรกฎาคม</ion-option>
+                    <ion-option value="8">สิงหาคม</ion-option>
+                    <ion-option value="9">กันยายน</ion-option>            
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label> ถึง: </ion-label>
+                  <ion-select [(ngModel)]="month_to" (ionChange)="selectionProvince(Region,Province,month_from,month_to)">
+                    <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                    <ion-option value="10">ตุลาคม</ion-option>
+                    <ion-option value="11">พฤศจิกายน</ion-option>
+                    <ion-option value="12">ธันวาคม</ion-option>
+                    <ion-option value="1">มกราคม</ion-option>
+                    <ion-option value="2">กุมภาพันธ์</ion-option>
+                    <ion-option value="3">มีนาคม</ion-option>
+                    <ion-option value="4">เมษายน</ion-option>
+                    <ion-option value="5">พฤษภาคม</ion-option>
+                    <ion-option value="6">มิถุนายน</ion-option>
+                    <ion-option value="7">กรกฎาคม</ion-option>
+                    <ion-option value="8">สิงหาคม</ion-option>
+                    <ion-option value="9">กันยายน</ion-option>           
+                  </ion-select>
+                </ion-item>
+            </ion-col>
+            </ion-row>
         <ion-row>      
          <ion-col>
            <ion-item  class="size">
                <ion-label> ภาค : </ion-label>
-               <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province)" disabled={{isEnable}}>
+               <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,month_from,month_to)" disabled={{isEnable}}>
                       <ion-option value="undefined"   [selected]="select_all_value">ทั้งหมด</ion-option>
                       <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
                </ion-select>
@@ -25,7 +67,7 @@
          <ion-col>
            <ion-item  class="size">
                <ion-label>จังหวัด : </ion-label>
-               <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province)" disabled={{isEnableProv}}>
+               <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,month_from,month_to)" disabled={{isEnableProv}}>
                      <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
                        <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
                </ion-select>

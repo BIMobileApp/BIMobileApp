@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+declare var changeCurrencyNoUnit:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -264,7 +265,7 @@ export class IncDataMthPage {
       this.repondProductSura[i].AMT = amt;
 
       count = this.repondProductSura[i].COUNT;
-      if (count != null) { count = changeCurrency(count, typeCur); }
+      if (count != null) { count = changeCurrencyNoUnit(count, typeCur); }
       this.repondProductSura[i].COUNT = count;
     }
   }
@@ -278,7 +279,7 @@ export class IncDataMthPage {
       this.repondProductSica[i].AMT = amt;
 
       count = this.repondProductSica[i].COUNT;
-      if (count != null) { count = changeCurrency(count, typeCur); }
+      if (count != null) { count = changeCurrencyNoUnit(count, typeCur); }
       this.repondProductSica[i].COUNT = count;
     }
   }
@@ -292,7 +293,7 @@ export class IncDataMthPage {
       this.repondProductCard[i].AMT = amt;
 
       count = this.repondProductCard[i].COUNT;
-      if (count != null) { count = changeCurrency(count, typeCur); }
+      if (count != null) { count = changeCurrencyNoUnit(count, typeCur); }
       this.repondProductCard[i].COUNT = count;
     }
   }
@@ -303,15 +304,15 @@ export class IncDataMthPage {
     let card;
     for (var i = 0; i < this.responseData.length; i++) {
       sura = this.responseData[i].NUM_OF_LIC_SURA;
-      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
+      if (sura != null) { sura = changeCurrencyNoUnit(sura, typeCur2); }
       this.responseData[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      if (top != null) { top = changeCurrency(top, typeCur2); }
+      if (top != null) { top = changeCurrencyNoUnit(top, typeCur2); }
       this.responseData[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseData[i].NUM_OF_LIC_CARD;
-      if (card != null) { card = changeCurrency(card, typeCur2); }
+      if (card != null) { card = changeCurrencyNoUnit(card, typeCur2); }
       this.responseData[i].NUM_OF_LIC_CARD = card;
     }
   }
@@ -343,15 +344,15 @@ export class IncDataMthPage {
     let card;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       sura = this.responseSumArea[i].NUM_OF_LIC_SURA;
-      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
+      if (sura != null) { sura = changeCurrencyNoUnit(sura, typeCur2); }
       this.responseSumArea[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseSumArea[i].NUM_OF_LIC_TOBBACO;
-      if (top != null) { top = changeCurrency(top, typeCur2); }
+      if (top != null) { top = changeCurrencyNoUnit(top, typeCur2); }
       this.responseSumArea[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseSumArea[i].NUM_OF_LIC_CARD;
-      if (card != null) { card = changeCurrency(card, typeCur2); }
+      if (card != null) { card = changeCurrencyNoUnit(card, typeCur2); }
       this.responseSumArea[i].NUM_OF_LIC_CARD = card;
     }
   }

@@ -71,6 +71,23 @@ function changeCurrency(val, typeNow) {
     alert('error: ' + e);
   }
 }
+
+function changeCurrencyNoUnit(val, typeNow) {
+  try {
+    var result = 0;
+    if (typeNow == 'M') {
+      val = val / 1000000;
+      result = notRound(val);
+    } else {
+      result = val;
+    }
+    result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return result;
+  } catch (e) {
+    alert('error: ' + e);
+  }
+}
+
 //ฟังก์ชั่น ไม่ปัดเศษ
 /* function notRound(number, precision){
     var factor = Math.pow(10, precision);

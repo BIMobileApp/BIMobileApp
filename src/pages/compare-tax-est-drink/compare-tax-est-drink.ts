@@ -112,11 +112,13 @@ export class CompareTaxEstDrinkPage {
     
     let area;
     let Province;
+    let month_from;
+    let month_to;
     let typeCur = 'M';
     this.selectionArea();
     this.selectionProviceFirst();
-    this.getTableData(area, Province,typeCur);
-    this.selectDataAll(area, Province,typeCur);
+    this.getTableData(area, Province,typeCur,month_from,month_to);
+    this.selectDataAll(area, Province,typeCur,month_from,month_to);
   }
   
   toggleLineShow(){
@@ -136,8 +138,9 @@ export class CompareTaxEstDrinkPage {
     }
   }
 
-  selectDataAll(area, Province,typeCur) {
-    this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => {
+  selectDataAll(area, Province,typeCur,month_from,month_to) {
+    this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + area + '&province=' + Province+ '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
+/*     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => { */
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
@@ -168,23 +171,23 @@ export class CompareTaxEstDrinkPage {
 
     });
   }
-  selectionProvince(area,Province,typeCur){
+  selectionProvince(area,Province,typeCur,month_from,month_to){
 
     Province = 'undefined'; 
     this.Province =  'undefined';
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
       this.responseProvince = data;
     });
-    this.getTableData(area,Province,typeCur);
+    this.getTableData(area,Province,typeCur,month_from,month_to);
   }
   //-----------------------------------------------------------------------------------------------------------//
   regionSelectType = "";
-  getTableData(area, Province,typeCur) {
+  getTableData(area, Province,typeCur,month_from,month_to) {
    
     /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }*/
-
+   let table = "MBL_PRODUCT_DRINK";
     if (this.region != "00") {
       if(area != 'undefined'){
         this.display_region_top10 =  localStorage.region_desc;
@@ -223,11 +226,12 @@ export class CompareTaxEstDrinkPage {
     }else{
       this.regionSelectType =  typeCur;
     }
-    this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => {
+    this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode+ '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
+    /* this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => { */
       this.responseData = data;
       this.getTableTAX(this.regionSelectType);
     });
-    this.selectDataAll(area, Province,this.regionSelectType);
+    this.selectDataAll(area, Province,this.regionSelectType,month_from,month_to);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
     if(typeCur == "M"){

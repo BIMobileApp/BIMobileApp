@@ -94,7 +94,7 @@ export class HomePage {
               }*/
             });
 
-      /* }else{
+     /*  }else{
 
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
@@ -102,9 +102,9 @@ export class HomePage {
           buttons: ['ตกลง']
         });
         alert.present();
-     }
+     } */
      
-    }); */
+    /* }); */
 
   }
 

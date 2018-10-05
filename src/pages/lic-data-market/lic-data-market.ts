@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+declare var changeCurrencyNoUnit:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -89,7 +90,7 @@ export class LicDataMarketPage {
       this.responseData[i].TOTAL_LIC = total;
 
       reg = this.responseData[i].COUNT_REG;
-      if (reg != null) { reg = changeCurrency(reg, typeCur); }
+      if (reg != null) { reg = changeCurrencyNoUnit(reg, typeCur); }
       this.responseData[i].COUNT_REG = reg;
     }
   }
@@ -119,7 +120,7 @@ export class LicDataMarketPage {
       this.responseSumData[i].TOTAL_LIC = total;
 
       reg = this.responseSumData[i].COUNT_REG;
-      if (reg != null) { reg = changeCurrency(reg, typeCur); }
+      if (reg != null) { reg = changeCurrencyNoUnit(reg, typeCur); }
       this.responseSumData[i].COUNT_REG = reg;
     }
   }

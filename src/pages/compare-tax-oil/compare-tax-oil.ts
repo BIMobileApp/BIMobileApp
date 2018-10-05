@@ -41,6 +41,7 @@ export class CompareTaxOilPage {
   select_province:any;
   select_all_prov_value:any;
   isEnableProv:any;
+  dbtable = "MBL_PRODUCT_OIL_MONTH";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public webapi: RestProvider) {
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -82,7 +83,9 @@ export class CompareTaxOilPage {
     this.selectionProvinceAll();
     let Region;
     let Province;
-    this.getLineTaxData(Region,Province);
+    let month_from;
+    let month_to;
+    this.getLineTaxData(Region,Province,month_from,month_to);
   }
 
   selectionAreaAll(){
@@ -101,13 +104,13 @@ export class CompareTaxOilPage {
     }); 
   }
 
-  selectRegion(Region,Province){
+  selectRegion(Region,Province,month_from,month_to){
     Province =  'undefined';
     this.Province = 'undefined';
-    this.selectionProvince(Region,Province);
+    this.selectionProvince(Region,Province,month_from,month_to);
   }
 
-  selectionProvince(Region,Province){
+  selectionProvince(Region,Province,month_from,month_to){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -115,10 +118,10 @@ export class CompareTaxOilPage {
       this.responseProvince = data;
     }); 
 
-    this.getLineTaxData(Region,Province);
+    this.getLineTaxData(Region,Province,month_from,month_to);
   }
 
- getLineTaxData(Region,Province) {
+ getLineTaxData(Region,Province,month_from,month_to) {
   if(this.region != "00"){
     Region = localStorage.region_desc;
   }
@@ -126,8 +129,8 @@ export class CompareTaxOilPage {
   if(this.branch != "00" || this.province != "00"){     
     Province =  this.select_province;
   }
-
-    this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => {
+  this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
+    /* this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
         this.TaxgetTAX();

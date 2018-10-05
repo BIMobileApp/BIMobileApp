@@ -8,7 +8,8 @@
       
         <ion-content   text-center [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
         <ion-item style="background-color:#D0DFE6;" text-center>
-            <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ </h2>
+            <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ</h2>
+            <h2 class="header-style">{{str_product}}</h2>
             <h2 class="header-style">{{dateAsOff}}</h2>
         </ion-item>
                 <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">

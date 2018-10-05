@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+declare var changeCurrencyNoUnit:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -39,7 +40,7 @@ export class IncDataAreaPage {
   defaultSelectProduct: any;
 
   str_offcode: any;
-  str_head_offcode: any;
+  str_head_offcode = "หน่วยงาน";
 
   repondProductSura: any;
   repondProductSica: any;
@@ -309,7 +310,7 @@ export class IncDataAreaPage {
       this.repondProductSura[i].AMT = AMT;
 
       COUNT = this.repondProductSura[i].COUNT;
-      if (COUNT != null) { COUNT = changeCurrency(COUNT, typeCur); }
+      if (COUNT != null) { COUNT = changeCurrencyNoUnit(COUNT, typeCur); }
       this.repondProductSura[i].COUNT = COUNT;
     }
   }
@@ -324,7 +325,7 @@ export class IncDataAreaPage {
       this.repondProductCard[i].AMT = AMT;
 
       COUNT = this.repondProductCard[i].COUNT;
-      if (COUNT != null) { COUNT = changeCurrency(COUNT, typeCur); }
+      if (COUNT != null) { COUNT = changeCurrencyNoUnit(COUNT, typeCur); }
       this.repondProductCard[i].COUNT = COUNT;
     }
   }
@@ -338,7 +339,7 @@ export class IncDataAreaPage {
       this.repondProductSica[i].AMT = AMT;
 
       COUNT = this.repondProductSica[i].COUNT;
-      if (COUNT != null) { COUNT = changeCurrency(COUNT, typeCur); }
+      if (COUNT != null) { COUNT = changeCurrencyNoUnit(COUNT, typeCur); }
       this.repondProductSica[i].COUNT = COUNT;
     }
   }
@@ -378,15 +379,15 @@ export class IncDataAreaPage {
     let card;
     for (var i = 0; i < this.responseData.length; i++) {
       sura = this.responseData[i].NUM_OF_LIC_SURA;
-      if (sura != null) { sura = changeCurrency(sura, typeCur2); }
+      if (sura != null) { sura = changeCurrencyNoUnit(sura, typeCur2); }
       this.responseData[i].NUM_OF_LIC_SURA = sura;
 
       top = this.responseData[i].NUM_OF_LIC_TOBBACO;
-      if (top != null) { top = changeCurrency(top, typeCur2); }
+      if (top != null) { top = changeCurrencyNoUnit(top, typeCur2); }
       this.responseData[i].NUM_OF_LIC_TOBBACO = top;
 
       card = this.responseData[i].NUM_OF_LIC_CARD;
-      if (card != null) { card = changeCurrency(card, typeCur2); }
+      if (card != null) { card = changeCurrencyNoUnit(card, typeCur2); }
       this.responseData[i].NUM_OF_LIC_CARD = card;
     }
   }

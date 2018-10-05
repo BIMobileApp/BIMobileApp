@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
 declare var changeCurrency: any;
+declare var changeCurrencyNoUnit:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -226,7 +227,7 @@ public isScaling = false;
 
   getTableTAX(typeCur){
 
-    let law_tax;
+    let law_qty;
     let tar_qty;
     let law_amt;
     let tar_amt;
@@ -234,21 +235,21 @@ public isScaling = false;
 
     for (var i = 0; i < this.repondProductSura.length; i++) {
 
-        law_tax = this.repondProductSura[i].LAW_QTY;
-        tar_qty = this.repondProductSura[i].LAW_AMT;
-        law_amt = this.repondProductSura[i].TARGET_QTY;
+        law_qty = this.repondProductSura[i].LAW_QTY;
+        law_amt = this.repondProductSura[i].LAW_AMT;
+        tar_qty = this.repondProductSura[i].TARGET_QTY;
         tar_amt = this.repondProductSura[i].TARGET_AMT;
         money = this.repondProductSura[i].TREASURY_MONEY;
     
-       if (law_tax != null) { law_tax = changeCurrency(law_tax, typeCur); }
-       if (tar_qty != null) { tar_qty = changeCurrency(tar_qty, typeCur); }
+       if (law_qty != null) { law_qty = changeCurrencyNoUnit(law_qty, typeCur); }
        if (law_amt != null) { law_amt = changeCurrency(law_amt, typeCur); }
+       if (tar_qty != null) { tar_qty = changeCurrencyNoUnit(tar_qty, typeCur); }
        if (tar_amt != null) { tar_amt = changeCurrency(tar_amt, typeCur); }
        if (money != null) { money = changeCurrency(money, typeCur); }
 
-      this.repondProductSura[i].LAW_QTY = law_tax;
-      this.repondProductSura[i].LAW_AMT = tar_qty;
-      this.repondProductSura[i].TARGET_QTY = law_amt;
+      this.repondProductSura[i].LAW_QTY = law_qty;
+      this.repondProductSura[i].LAW_AMT = law_amt;
+      this.repondProductSura[i].TARGET_QTY = tar_qty;
       this.repondProductSura[i].TARGET_AMT = tar_amt;
       this.repondProductSura[i].TREASURY_MONEY = money;
     }
@@ -273,12 +274,12 @@ public isScaling = false;
       law_qty = this.responseData[i].LAW_QTY;
       tar_qty = this.responseData[i].TARGET_QTY;
       tar_amt = this.responseData[i].TARGET_AMT;
-      money = this.responseData[i].TREASURY_MONEY;
       law_amt = this.responseData[i].LAW_AMT;
+      money = this.responseData[i].TREASURY_MONEY;
       
 
-      if (law_qty != null) { law_qty = changeCurrency(law_qty, typeCurFirst); }
-      if (tar_qty != null) { tar_qty = changeCurrency(tar_qty, typeCurFirst); }
+      if (law_qty != null) { law_qty = changeCurrencyNoUnit(law_qty, typeCurFirst); }
+      if (tar_qty != null) { tar_qty = changeCurrencyNoUnit(tar_qty, typeCurFirst); }
       if (tar_amt != null) { tar_amt = changeCurrency(tar_amt, typeCurFirst); }
       if (money != null) { money = changeCurrency(money, typeCurFirst); }
       if (law_amt != null) { law_amt = changeCurrency(law_amt, typeCurFirst); }
