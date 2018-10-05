@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
+declare var changeCurrencyNoUnit:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -86,8 +87,11 @@ public isScaling = false;
   ionViewDidLoad() {
     let Region;
     let Province;
+    let typeCur  = 'M';
+    let Mth_From = 'undefined';
+    let Mth_To  = 'undefined';
 
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
     this.selectRegionAll();
     this.selectionProvinceAll();
   }
@@ -107,11 +111,11 @@ public isScaling = false;
       this.ResponseProvince = data;
     }); 
   }
-  selectRegion(Region,Province){
+  selectRegion(Mth_From,Mth_To,Region,Province,typeCur){
     Province =  'undefined';
 
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
   }
 
   selectionProvinceFill(Region){
@@ -120,15 +124,24 @@ public isScaling = false;
     }); 
   }
 
-  selectionProvince(Region,Province){ 
+  selectionProvince(Mth_From,Mth_To,Region,Province,typeCur){ 
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region,Province);
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
   }
 
-  selectDataAll(Region,Province){
+  selectMonthFrom(Mth_From,Mth_To,Region,Province,typeCur){
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
+  }
+
+  selectMonthTo(Mth_From,Mth_To,Region,Province,typeCur){
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
+  }
+
+  regionSelectType = "";
+  selectDataAll(Mth_From,Mth_To,Region,Province,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{
@@ -140,14 +153,42 @@ public isScaling = false;
     }else{
       Province = Province;
     }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
    
-    this.webapi.getData('MBLRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data)=>{
-      this.responseData = data;     
+    this.webapi.getData('MBLRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month_from=' + Mth_From+'&month_to'+Mth_To).then((data)=>{
+      this.responseData = data; 
+      this.getChangNumber(this.regionSelectType);    
     });
+  }
+
+  getChangNumber(typeCur){
+    let imp_register;
+    let in_register;
+    let total_register;
+
+    for (var i = 0; i < this.responseData.length; i++) {
+      imp_register = this.responseData[i].IMP_REGISTER;
+      in_register = this.responseData[i].IN_REGISTER;
+      total_register = this.responseData[i].TOTAL_REGISTER;
+
+      if (imp_register != null) { imp_register = changeCurrencyNoUnit(imp_register, typeCur); }
+      if (in_register != null) { in_register = changeCurrencyNoUnit(in_register, typeCur); }
+      if (total_register != null) { total_register = changeCurrencyNoUnit(total_register, typeCur); }
+
+      this.responseData[i].IMP_REGISTER = imp_register;
+      this.responseData[i].IN_REGISTER = in_register;
+      this.responseData[i].TOTAL_REGISTER = total_register;
+    }
   }
  /* start for pinch */
  public onPinchStart(e) {
-  this.isScaling = true;
+  this.isScaling = true; 
+
 }
 public onPinchEnd(e) {
   this.isScaling = false;

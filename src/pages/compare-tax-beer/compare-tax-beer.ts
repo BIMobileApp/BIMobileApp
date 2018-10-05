@@ -43,6 +43,7 @@ export class CompareTaxBeerPage {
   responseRegion:any;
   responseProvince:any;
   dbtable = "MBL_PRODUCT_BEER_MONTH";
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -138,9 +139,6 @@ export class CompareTaxBeerPage {
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
   /*   this.webapi.getData('CompareTaxVolBeer?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
-      console.log(this.TaxlineChart);
-       console.log(this.TaxLineData.length);
-      
       
       if(this.TaxLineData.length > 0){
         this.textDataNotValid = 1;
@@ -148,13 +146,18 @@ export class CompareTaxBeerPage {
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
         }
-        
+        setTimeout(() => {
           this.TaxCreateChart();
+        },1000);
+        
         this.VolgetTAX();
         if(this.VollineChart){
           this.VollineChart.destroy();
         }
+        setTimeout(() => {
           this.VolCreateChart();
+        },1000);
+        
         
       }else{
         this.textDataNotValid = 0;
@@ -186,7 +189,7 @@ export class CompareTaxBeerPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -312,7 +315,7 @@ export class CompareTaxBeerPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",

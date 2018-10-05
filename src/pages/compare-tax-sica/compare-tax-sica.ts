@@ -43,6 +43,7 @@ export class CompareTaxSicaPage {
   select_all_prov_value:any;
   isEnableProv:any;
   dbtable = "MBL_PRODUCT_TOBACCO_MONTH";
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public webapi: RestProvider) {
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -133,14 +134,25 @@ export class CompareTaxSicaPage {
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
   /*   this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
+      
       if(this.TaxLineData.length > 0){
+
         this.TaxgetTAX();
-        this.TaxgetTAX_LY();
-        this.TaxgetLebel();
-        this.TaxCreateChart();
+        if(this.TaxlineChart){
+          this.TaxlineChart.destroy();
+        }
+        setTimeout(() => {
+          this.TaxCreateChart();
+        },1000);
+        
         this.VolgetTAX();
-        this.VolgetTAX_LY();
-        this.VolCreateChart();
+        if(this.VollineChart){
+          this.VollineChart.destroy();
+        }
+        setTimeout(() => {
+          this.VolCreateChart();
+        },1000);
+        
       }else{
         this.textDataNotValid = 0;
       }
@@ -152,34 +164,25 @@ export class CompareTaxSicaPage {
 
   TaxgetTAX() {
     this.tax_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
-    }
-    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
-  }
-
-  TaxgetTAX_LY() {
     this.tax_TAX_LY = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
-    }
-    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
-  }
-
-  TaxgetLebel() {
     this.tax_lebel = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
+      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
       this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
+    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
+    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
   }
+
   //----------------------- End Manage Data from API-------------------------//
 
   TaxCreateChart() {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -289,17 +292,12 @@ export class CompareTaxSicaPage {
 
   VolgetTAX() {
     this.vol_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
-    }
-    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
-  }
-
-  VolgetTAX_LY() {
     this.vol_TAX_LY = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
       this.vol_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_VOLUMN_CAPA);
     }
+    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
     this.vol_TAX_LY = JSON.parse(JSON.stringify(this.vol_TAX_LY));
   }
 
@@ -309,7 +307,7 @@ export class CompareTaxSicaPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",

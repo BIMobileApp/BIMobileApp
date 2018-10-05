@@ -45,9 +45,10 @@ export class TaxBudgetRegByMthPage {
     // let datenow = datetime.getMonth();
 
     let date;
-    let summaryDate;
+    let Mth_From = 'undefined';
+    let Mth_To  = 'undefined';
     let typeCur = "M";
-    this.selectDate(summaryDate, typeCur);
+    this.selectDate(Mth_From,Mth_To,typeCur);   
   }
 
   /*selectDataAll(){  
@@ -57,18 +58,27 @@ export class TaxBudgetRegByMthPage {
     });
   }*/
 
+  selectMonthFrom(Mth_From,Mth_To,typeCur){
+    this.selectDate(Mth_From,Mth_To,typeCur);
+  }
+
+  selectMonthTo(Mth_From,Mth_To,typeCur){
+    this.selectDate(Mth_From,Mth_To,typeCur); 
+  }
+
   regionSelectType = "";
-  selectDate(summaryDate, typeCur) {
+  selectDate(Mth_From,Mth_To,typeCur) {
     if(typeCur == undefined){
       this.regionSelectType = "M";
     }else{
       this.regionSelectType =  typeCur;
-    }
+  }
 
-    this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month=' + summaryDate).then((data) => {
+    this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + Mth_From+'&month_to='+Mth_To).then((data) => {
       this.responseData = data;
       this.getTableTAX(this.regionSelectType);
     });
+
   }
 
   getTableTAX(typeCur) {

@@ -45,6 +45,7 @@ export class CompareTaxAlcoholPage {
 
   responseRegion:any;
   responseProvince:any;
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   dbtable = "MBL_PRODUCT_SURA_MONTH";
 
@@ -151,12 +152,18 @@ export class CompareTaxAlcoholPage {
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
         }
-        this.TaxCreateChart();
+        setTimeout(() => {
+          this.TaxCreateChart();
+        },1000);
+       
         this.VolgetTAX();
         if(this.VollineChart){
           this.VollineChart.destroy();
         }
-        this.VolCreateChart();
+        setTimeout(() => {
+          this.VolCreateChart();
+        },1000);
+       
       }else{
         this.textDataNotValid = 0;
       }
@@ -185,7 +192,8 @@ export class CompareTaxAlcoholPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+       /*  labels: this.tax_lebel, */
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",

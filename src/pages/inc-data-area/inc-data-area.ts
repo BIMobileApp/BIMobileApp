@@ -166,7 +166,7 @@ export class IncDataAreaPage {
     });
   }
   //---------------------------------------------------------SURA------------------------------------------------------------//
-  Getitems(Area, Province, Month, typeCur) {
+  Getitems(Area,Province,Mth_From,Mth_To,typeCur) {
     Province = 'undefined';
     this.Province = "undefined";
     if (this.region != "00") {
@@ -179,7 +179,7 @@ export class IncDataAreaPage {
     } else {
       Province = Province;
     }
-    this.GetitembyProvince(Area, Province, Month, typeCur);
+    this.GetitembyProvince(Area,Province,Mth_From,Mth_To,typeCur);
     /* var sura = "สุรา";
      var old_area = Area;
      //this.selectionProvinceChange(area);
@@ -191,7 +191,7 @@ export class IncDataAreaPage {
      }*/
   }
 
-  GetitembyProvince(Area, Province, Month, typeCur) {
+  GetitembyProvince(Area,Province,Mth_From,Mth_To,typeCur) {
 
     if (this.region != "00") {
       Area = localStorage.region_desc;
@@ -200,10 +200,10 @@ export class IncDataAreaPage {
       this.responseProvince = data;
     });
 
-    this.getProduct(Area, Province, Month, typeCur);
+    this.getProduct(Area,Province,Mth_From,Mth_To,typeCur);
   }
 
-  GetitemsMonth(Area, Province, Month, typeCur) {
+  GetitemsMonth(Area,Province,Mth_From,Mth_To,typeCur) {
 
     if (this.region != "00") {
       Area = localStorage.region_desc;
@@ -215,12 +215,20 @@ export class IncDataAreaPage {
     } else {
       Province = Province;
     }
-    this.GetitembyProvince(Area, Province, Month, typeCur);
-    this.getProduct(Area, Province, Month, typeCur);
+    this.GetitembyProvince(Area,Province,Mth_From,Mth_To,typeCur);
+    this.getProduct(Area,Province,Mth_From,Mth_To,typeCur);
+  }
+
+  selectMonthFrom(Area,Province,Mth_From,Mth_To,typeCur){
+    this.getProduct(Area,Province,Mth_From,Mth_To,typeCur);
+  }
+
+  selectMonthTo(Area,Province,Mth_From,Mth_To,typeCur){
+    this.getProduct(Area,Province,Mth_From,Mth_To,typeCur);
   }
 
   regionSelectType = "";
-  getProduct(Area, Province, Month, typeCur) {
+  getProduct(Area,Province,Mth_From,Mth_To,typeCur) {
 
     /*if (Area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
@@ -243,17 +251,17 @@ export class IncDataAreaPage {
       this.regionSelectType =  typeCur;
     }
 
-    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=สุรา&month=" + Month).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=สุรา&month_from=" + Mth_From +"&month_to="+Mth_To).then((data) => {
       this.repondProductSura = data;
       this.getSuraAmt(this.regionSelectType);
     });
 
-    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ยาสูบ&month=" + Month).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ยาสูบ&month_from=" + Mth_From +"&month_to="+Mth_To).then((data) => {
       this.repondProductSica = data;
       this.getSicaAmt(this.regionSelectType);
     });
 
-    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ไพ่&month=" + Month).then((data) => {
+    this.webapi.getData('IncProductByArea?offcode=' + this.offcode + '&region=' + Area + "&province=" + Province + "&group_desc=ไพ่&month_from=" + Mth_From +"&month_to="+Mth_To).then((data) => {
       this.repondProductCard = data;
       this.getCardAmt(this.regionSelectType);
     });

@@ -135,11 +135,55 @@
           <h2 class="header-style">สถิติใบอนุญาตแยกตามเดือน ตามประเภทสินค้า</h2>
 
           <ion-grid no-padding>
+
+          <ion-row>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label>ตั้งแต่เดือน : </ion-label>
+                  <ion-select [(ngModel)]="Mth_From" (ionChange)="selectMonthFrom(Region,Province,Mth_From,Mth_To,typeCur)">
+                    <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                    <ion-option value="1">ตุลาคม</ion-option>
+                    <ion-option value="2">พฤศจิกายน</ion-option>
+                    <ion-option value="3">ธันวาคม</ion-option>
+                    <ion-option value="4">มกราคม</ion-option>
+                    <ion-option value="5">กุมภาพันธ์</ion-option>
+                    <ion-option value="6">มีนาคม</ion-option>
+                    <ion-option value="7">เมษายน</ion-option>
+                    <ion-option value="8">พฤษภาคม</ion-option>
+                    <ion-option value="9">มิถุนายน</ion-option>
+                    <ion-option value="10">กรกฎาคม</ion-option>
+                    <ion-option value="11">สิงหาคม</ion-option>
+                    <ion-option value="12">กันยายน</ion-option>            
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                  <ion-item class="size">
+                      <ion-label>ถึงเดือน : </ion-label>
+                      <ion-select [(ngModel)]="Mth_To" (ionChange)="selectMonthTo(Region,Province,Mth_From,Mth_To,typeCur)">
+                        <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                        <ion-option value="1">ตุลาคม</ion-option>
+                        <ion-option value="2">พฤศจิกายน</ion-option>
+                        <ion-option value="3">ธันวาคม</ion-option>
+                        <ion-option value="4">มกราคม</ion-option>
+                        <ion-option value="5">กุมภาพันธ์</ion-option>
+                        <ion-option value="6">มีนาคม</ion-option>
+                        <ion-option value="7">เมษายน</ion-option>
+                        <ion-option value="8">พฤษภาคม</ion-option>
+                        <ion-option value="9">มิถุนายน</ion-option>
+                        <ion-option value="10">กรกฎาคม</ion-option>
+                        <ion-option value="11">สิงหาคม</ion-option>
+                        <ion-option value="12">กันยายน</ion-option>            
+                      </ion-select>
+                    </ion-item>
+              </ion-col>
+            </ion-row>
+
             <ion-row>
               <ion-col>
                 <ion-item class="size">
                   <ion-label> ภาค : </ion-label>
-                  <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,Month,typeCur)" disabled={{isEnable}}>
+                  <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,Mth_From,Mth_To,typeCur)" disabled={{isEnable}}>
                     <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
                     <ion-option *ngFor="let item of responseArea" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
                   </ion-select>
@@ -149,36 +193,12 @@
               <ion-col>
                 <ion-item class="size">
                   <ion-label>จังหวัด : </ion-label>
-                  <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,Month,typeCur)" disabled={{isEnableProv}}>
+                  <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,Mth_From,Mth_To,typeCur)" disabled={{isEnableProv}}>
                     <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
                     <ion-option *ngFor="let item1 of responseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
                   </ion-select>
                 </ion-item>
               </ion-col>
-            </ion-row>
-
-            <ion-row>
-              <ion-col>
-                <ion-item class="size">
-                  <ion-label>เดือน : </ion-label>
-                  <ion-select [(ngModel)]="Month" (ionChange)="IncProductAll(Region,Province,Month,typeCur)">
-                    <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
-                    <ion-option value="ตุลาคม">ตุลาคม</ion-option>
-                    <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
-                    <ion-option value="ธันวาคม">ธันวาคม</ion-option>
-                    <ion-option value="มกราคม">มกราคม</ion-option>
-                    <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
-                    <ion-option value="มีนาคม">มีนาคม</ion-option>
-                    <ion-option value="เมษายน">เมษายน</ion-option>
-                    <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
-                    <ion-option value="มิถุนายน">มิถุนายน</ion-option>
-                    <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
-                    <ion-option value="สิงหาคม">สิงหาคม</ion-option>
-                    <ion-option value="กันยายน">กันยายน</ion-option>                  
-                  </ion-select>
-                </ion-item>
-              </ion-col>
-              <ion-col></ion-col>
             </ion-row>
 
           </ion-grid>
@@ -188,7 +208,7 @@
 
           <ion-item class="sizemini" no-lines>
             <ion-label> หน่วย : </ion-label>
-            <ion-select [(ngModel)]="typeCur" #item (ionChange)="IncProductAll(Region,Province,Month,typeCur)">
+            <ion-select [(ngModel)]="typeCur" #item (ionChange)="IncProductAll(Region,Province,Mth_From,Mth_To,typeCur)">
               <ion-option value="M" [selected]="true">ล้านใบ/ล้านบาท</ion-option>
               <ion-option value="B">ใบ/บาท</ion-option>
             </ion-select>

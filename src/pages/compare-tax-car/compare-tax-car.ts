@@ -43,6 +43,7 @@ export class CompareTaxCarPage {
   isEnableProv:any;
 
   dbtable = "MBL_PRODUCT_CAR_MONTH";
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -144,12 +145,18 @@ export class CompareTaxCarPage {
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
         }
-        this.TaxCreateChart();
+        setTimeout(() => {
+          this.TaxCreateChart();
+        },1000);
+        
         this.VolgetTAX();
         if(this.VollineChart){
           this.VollineChart.destroy();
         }
-        this.VolCreateChart();
+        setTimeout(() => {
+          this.VolCreateChart();
+        },1000);
+        
       }else{
         this.textDataNotValid = 0;
       }
@@ -180,7 +187,7 @@ export class CompareTaxCarPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -305,7 +312,7 @@ export class CompareTaxCarPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
