@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -42,9 +43,11 @@ export class CompareTaxAlcoholPage {
   select_province:any;
   select_all_prov_value:any;
   isEnableProv:any;
+  
 
   responseRegion:any;
   responseProvince:any;
+  responseMonth: any;
   label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   dbtable = "MBL_PRODUCT_SURA_MONTH";
@@ -92,6 +95,7 @@ export class CompareTaxAlcoholPage {
 
     this.selectionAreaAll();
     this.selectionProvinceAll();
+    /* this.selectionBudgetMonth(); */
 
     let Region;
     let Province;
@@ -130,8 +134,15 @@ export class CompareTaxAlcoholPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
       this.responseProvince = data;
     }); 
+   
 
     this.getLineTaxData(Region,Province,month_from,month_to);
+  }
+
+  selectionBudgetMonth(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.responseMonth = data;
+    }); 
   }
 
  getLineTaxData(Region,Province,month_from,month_to) {
@@ -148,6 +159,7 @@ export class CompareTaxAlcoholPage {
     /* this.webapi.getData('CompareTaxVolSura?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
+        this.textDataNotValid = 1;
         this.TaxgetTAX();
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
@@ -255,10 +267,14 @@ export class CompareTaxAlcoholPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " ล้านบาท"; 
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+             valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+             value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " บาท"; 
             }
 
             return value;
@@ -317,7 +333,7 @@ export class CompareTaxAlcoholPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -379,10 +395,14 @@ export class CompareTaxAlcoholPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านลิตร";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านลิตร";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ลิตร";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ลิตร";
             }
 
             return value;

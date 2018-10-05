@@ -4,6 +4,9 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 declare var changeCurrencyNoUnit:any;
+declare var monthNowNumber:any;
+declare var monthNowText:any;
+declare var datePreviousOneDay:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -19,6 +22,9 @@ export class IncDataAreaPage {
   offcode: any;
   dateDisplay: any;
   dateAsOff: any;
+  mthText:any;
+  mthNumber:any;
+  datePrevois:any;
   responseData: any;
   responseArea: any;
   Area: any;
@@ -77,6 +83,14 @@ export class IncDataAreaPage {
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
     this.username = localStorage.userData;
+    this.mthNumber = monthNowNumber;
+    this.mthText = monthNowText;
+    this.datePrevois = datePreviousOneDay;
+
+    console.log(this.dateAsOff );
+    console.log(this.mthNumber );
+    console.log(this.mthText );
+    console.log(this.datePrevois);
 
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
     this.region = localStorage.offcode.substring(0, 2);

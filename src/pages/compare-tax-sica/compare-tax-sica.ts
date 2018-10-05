@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 import { AnyMxRecord } from 'dns';
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -136,7 +137,7 @@ export class CompareTaxSicaPage {
       this.TaxLineData = data;
       
       if(this.TaxLineData.length > 0){
-
+        this.textDataNotValid = 1;
         this.TaxgetTAX();
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
@@ -244,10 +245,14 @@ export class CompareTaxSicaPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านบาท";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " บาท";
             }
 
             return value;
@@ -369,12 +374,15 @@ export class CompareTaxSicaPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ";
             }
-
             return value;
           }
         } // end callbacks:
