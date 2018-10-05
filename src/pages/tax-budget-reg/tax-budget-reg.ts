@@ -25,7 +25,7 @@ export class TaxBudgetRegPage {
   grp_id: any;
   dateAsOff = "";
   dateDisplay = "";
-
+  str_product:any;
   Province: any;
   region: any;
   province: any;
@@ -49,6 +49,7 @@ export class TaxBudgetRegPage {
     public navParams: NavParams,
     public webapi: RestProvider) {
     this.grp_id = this.navParams.get('group_id');
+    this.str_product = this.grp_id;
     this.offcode = localStorage.offcode;
     this.dateAsOff = dateDisplayAll;
     this.dateDisplay = localStorage.last_update_date;

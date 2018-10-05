@@ -40,7 +40,7 @@ export class IncDataAreaPage {
   defaultSelectProduct: any;
 
   str_offcode: any;
-  str_head_offcode: any;
+  str_head_offcode = "หน่วยงาน";
 
   repondProductSura: any;
   repondProductSica: any;
