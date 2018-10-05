@@ -332,7 +332,6 @@ export class CetegoryTaxPage {
     else{
       this.curTG = "บาท";
     }
-
     this.oldArea = Region;
     this.oldtypeCur = typeCur;
   }
@@ -468,11 +467,16 @@ export class CetegoryTaxPage {
           label: 'myLabel',
           callbacks: {
             label: function (tooltipItem, data) {
-              var value;
+              let value;
+              let valFormat;
               if (tooltipItem.xLabel > 999999) {
-                value = tooltipItem.yLabel + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+               /*  value = tooltipItem.yLabel + ': ' + (tooltipItem.xLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท"; */
+                valFormat = changeCurrency(tooltipItem.xLabel, 'M');
+                value = tooltipItem.yLabel + ': ' + valFormat + " ล้านบาท";
               } else {
-                value = tooltipItem.yLabel + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              /*   value = tooltipItem.yLabel + ': ' + tooltipItem.xLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท"; */
+                valFormat = changeCurrency(tooltipItem.xLabel, 'B');
+                value = tooltipItem.yLabel + ': ' + valFormat + " บาท";
               }
               return value;
             }

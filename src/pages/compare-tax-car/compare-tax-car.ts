@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-car',
@@ -43,6 +44,7 @@ export class CompareTaxCarPage {
   isEnableProv:any;
 
   dbtable = "MBL_PRODUCT_CAR_MONTH";
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -139,17 +141,23 @@ export class CompareTaxCarPage {
    /*  this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
       if(this.TaxLineData.length > 0){
-     
+        this.textDataNotValid = 1;
         this.TaxgetTAX();
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
         }
-        this.TaxCreateChart();
+        setTimeout(() => {
+          this.TaxCreateChart();
+        },1000);
+        
         this.VolgetTAX();
         if(this.VollineChart){
           this.VollineChart.destroy();
         }
-        this.VolCreateChart();
+        setTimeout(() => {
+          this.VolCreateChart();
+        },1000);
+        
       }else{
         this.textDataNotValid = 0;
       }
@@ -180,7 +188,7 @@ export class CompareTaxCarPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -242,10 +250,14 @@ export class CompareTaxCarPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านบาท";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " บาท";
             }
 
             return value;
@@ -305,7 +317,7 @@ export class CompareTaxCarPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -367,10 +379,14 @@ export class CompareTaxCarPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านคัน";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านคัน";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " คัน";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " คัน";
             }
 
             return value;

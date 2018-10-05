@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -43,6 +44,7 @@ export class CompareTaxBeerPage {
   responseRegion:any;
   responseProvince:any;
   dbtable = "MBL_PRODUCT_BEER_MONTH";
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -138,9 +140,6 @@ export class CompareTaxBeerPage {
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
   /*   this.webapi.getData('CompareTaxVolBeer?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
-      console.log(this.TaxlineChart);
-       console.log(this.TaxLineData.length);
-      
       
       if(this.TaxLineData.length > 0){
         this.textDataNotValid = 1;
@@ -148,13 +147,18 @@ export class CompareTaxBeerPage {
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
         }
-        
+        setTimeout(() => {
           this.TaxCreateChart();
+        },1000);
+        
         this.VolgetTAX();
         if(this.VollineChart){
           this.VollineChart.destroy();
         }
+        setTimeout(() => {
           this.VolCreateChart();
+        },1000);
+        
         
       }else{
         this.textDataNotValid = 0;
@@ -186,7 +190,7 @@ export class CompareTaxBeerPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -248,10 +252,14 @@ export class CompareTaxBeerPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านบาท";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " บาท";
             }
 
             return value;
@@ -312,7 +320,7 @@ export class CompareTaxBeerPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -374,12 +382,15 @@ export class CompareTaxBeerPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านลิตร";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านลิตร";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ลิตร";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ลิตร";
             }
-
             return value;
           }
         } // end callbacks:

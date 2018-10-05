@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 import { AnyMxRecord } from 'dns';
 declare var dateDisplayAll: any;
+declare var changeCurrency: any;
 
 @IonicPage()
 @Component({
@@ -43,6 +44,7 @@ export class CompareTaxSicaPage {
   select_all_prov_value:any;
   isEnableProv:any;
   dbtable = "MBL_PRODUCT_TOBACCO_MONTH";
+  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public webapi: RestProvider) {
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -133,14 +135,25 @@ export class CompareTaxSicaPage {
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
   /*   this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
+      
       if(this.TaxLineData.length > 0){
+        this.textDataNotValid = 1;
         this.TaxgetTAX();
-        this.TaxgetTAX_LY();
-        this.TaxgetLebel();
-        this.TaxCreateChart();
+        if(this.TaxlineChart){
+          this.TaxlineChart.destroy();
+        }
+        setTimeout(() => {
+          this.TaxCreateChart();
+        },1000);
+        
         this.VolgetTAX();
-        this.VolgetTAX_LY();
-        this.VolCreateChart();
+        if(this.VollineChart){
+          this.VollineChart.destroy();
+        }
+        setTimeout(() => {
+          this.VolCreateChart();
+        },1000);
+        
       }else{
         this.textDataNotValid = 0;
       }
@@ -152,34 +165,25 @@ export class CompareTaxSicaPage {
 
   TaxgetTAX() {
     this.tax_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
-    }
-    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
-  }
-
-  TaxgetTAX_LY() {
     this.tax_TAX_LY = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
-    }
-    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
-  }
-
-  TaxgetLebel() {
     this.tax_lebel = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.tax_TAX.push(this.TaxLineData[i].TOTAL_TAX_AMT);
+      this.tax_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_TAX_AMT);
       this.tax_lebel.push(this.TaxLineData[i].MONTH);
     }
+    this.tax_TAX = JSON.parse(JSON.stringify(this.tax_TAX));
+    this.tax_TAX_LY = JSON.parse(JSON.stringify(this.tax_TAX_LY));
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
   }
+
   //----------------------- End Manage Data from API-------------------------//
 
   TaxCreateChart() {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -241,10 +245,14 @@ export class CompareTaxSicaPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านบาท";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " บาท";
             }
 
             return value;
@@ -289,17 +297,12 @@ export class CompareTaxSicaPage {
 
   VolgetTAX() {
     this.vol_TAX = [];
-    for (var i = 0; i < this.TaxLineData.length; i++) {
-      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
-    }
-    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
-  }
-
-  VolgetTAX_LY() {
     this.vol_TAX_LY = [];
     for (var i = 0; i < this.TaxLineData.length; i++) {
+      this.vol_TAX.push(this.TaxLineData[i].TOTAL_VOLUMN_CAPA);
       this.vol_TAX_LY.push(this.TaxLineData[i].LAST_TOTAL_VOLUMN_CAPA);
     }
+    this.vol_TAX = JSON.parse(JSON.stringify(this.vol_TAX));
     this.vol_TAX_LY = JSON.parse(JSON.stringify(this.vol_TAX_LY));
   }
 
@@ -309,7 +312,7 @@ export class CompareTaxSicaPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.tax_lebel,
+        labels: this.label,
         datasets: [
           {
             label: "ปีนี้",
@@ -371,12 +374,15 @@ export class CompareTaxSicaPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
+            let value;
+            let valFormat;
             if (tooltipItem.yLabel > 999999) {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
+              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ";
             } else {
-              var value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
+              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ";
             }
-
             return value;
           }
         } // end callbacks:
