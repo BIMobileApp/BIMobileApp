@@ -99,13 +99,15 @@ public isScaling = false;
   ionViewDidLoad() {
     let typeCur = "M";
     let typeCurFirst ='M';
-
+    
     this.getTableData(typeCurFirst);
     this.selectionAreaAll();
     this.selectionProvinceAll();
 
     let SRegion;
     let SProvince; 
+    let month_from;
+    let month_to;
     
     if(this.region != "00"){
       SRegion = localStorage.region_desc;
@@ -119,7 +121,7 @@ public isScaling = false;
       SProvince = 'undefined';
     }
 
-    this.getProductAll(SRegion,SProvince,typeCur);
+    this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
   }
 
   toggleTable2Show() {
@@ -155,7 +157,7 @@ public isScaling = false;
     });
   }
 
-  getitemsRegion(SRegion,SProvince,typeCur){
+  getitemsRegion(SRegion,SProvince,typeCur,month_from,month_to){
 
     SProvince =  'undefined';
     this.SProvince =  'undefined';
@@ -163,10 +165,10 @@ public isScaling = false;
       this.responseArea = data;
     });
 
-    this.getitemsProvince(SRegion,SProvince,typeCur);
+    this.getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to);
   }
 
-  getitemsProvince(SRegion,SProvince,typeCur){
+  getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to){
     if(this.region != "00"){
       SRegion = localStorage.region_desc;
     }
@@ -175,11 +177,11 @@ public isScaling = false;
       this.responseProvince = data; 
     });
     
-    this.getProductAll(SRegion,SProvince,typeCur);
+    this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
   }
 
   regionSelectType = "";
-  getProductAll(SRegion,SProvince,typeCur){
+  getProductAll(SRegion,SProvince,typeCur,month_from,month_to){
    
     if(this.region != "00"){
       SRegion = localStorage.region_desc;
@@ -199,13 +201,13 @@ public isScaling = false;
       this.regionSelectType =  typeCur;
     }
 
-    this.webapi.getData('LawProductArea?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
+    this.webapi.getData('LawProductAreaMonth?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
       this.repondProductSura = data;
       this.getTableTAX(this.regionSelectType);
     });
   }
 
-  getProductUnit(SRegion,SProvince,typeCur){
+  getProductUnit(SRegion,SProvince,typeCur,month_from,month_to){
 
     if(this.region != "00"){
       SRegion = localStorage.region_desc;
@@ -219,7 +221,7 @@ public isScaling = false;
       SProvince = SProvince;
     }
 
-    this.webapi.getData('LawProductArea?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
+    this.webapi.getData('LawProductAreaMonth?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
       this.repondProductSura = data; 
       this.getTableTAX(typeCur);
     });

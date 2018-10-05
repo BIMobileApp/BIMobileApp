@@ -42,6 +42,7 @@ export class CompareTaxCarPage {
   select_province:any;
   select_all_prov_value:any;
   isEnableProv:any;
+  responseMonth: any;
 
   dbtable = "MBL_PRODUCT_CAR_MONTH";
   label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
@@ -89,6 +90,7 @@ export class CompareTaxCarPage {
     this.offcode = localStorage.offcode;
     this.selectionAreaAll();
     this.selectionProvinceAll();
+    this.selectionBudgetMonth();
     let Region;
     let Province;
     let month_from;
@@ -127,6 +129,11 @@ export class CompareTaxCarPage {
     }); 
 
     this.getLineTaxData(Region,Province,month_from,month_to);
+  }
+  selectionBudgetMonth(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.responseMonth = data;
+    }); 
   }
 
  getLineTaxData(Region,Province,month_from,month_to) {
@@ -188,7 +195,7 @@ export class CompareTaxCarPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.label,
+        labels: this.tax_lebel,
         datasets: [
           {
             label: "ปีนี้",
@@ -317,7 +324,7 @@ export class CompareTaxCarPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.label,
+        labels: this.tax_lebel,
         datasets: [
           {
             label: "ปีนี้",

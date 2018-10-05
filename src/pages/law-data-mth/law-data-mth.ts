@@ -99,8 +99,10 @@ ionViewDidLoad() {
 
   let SRegion;
   let SProvince; 
+  let month_from;
+  let month_to; 
  
-  this.getProductAll(SRegion,SProvince,typeCur);
+  this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
 }
 toggleTable2Show() {
   if (this.toggleTable2 == 0) {
@@ -135,15 +137,15 @@ selectionProvinceAll(){
 }
 
 
-getitemsRegion(SRegion,SProvince,typeCur){
+getitemsRegion(SRegion,SProvince,typeCur,month_from,month_to){
   SProvince = 'undefined';
   this.SProvince =  'undefined';
 
-  this.getitemsProvince(SRegion,SProvince,typeCur);
+  this.getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to);
   //this.getProductAll(area,province,typeCur);
 }
 
-getitemsProvince(SRegion,SProvince,typeCur){ 
+getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to){ 
 
   if(this.region != "00"){
     SRegion = localStorage.region_desc;
@@ -153,7 +155,7 @@ getitemsProvince(SRegion,SProvince,typeCur){
     this.responseProvince = data;
   });
 
-  this.getProductAll(SRegion,SProvince,typeCur);
+  this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
 }
 
 getTableData(typeCurFirst) { 
@@ -165,7 +167,7 @@ getTableData(typeCurFirst) {
 
 ///select all product///
 regionSelectType = "";
-getProductAll(SRegion,SProvince,typeCur){
+getProductAll(SRegion,SProvince,typeCur,month_from,month_to){
   
   if(this.region != "00"){
     SRegion = localStorage.region_desc;
@@ -185,7 +187,7 @@ getProductAll(SRegion,SProvince,typeCur){
     this.regionSelectType =  typeCur;
   }
   //alert("ภาค="+SRegion+" จังหวัด="+ SProvince+" หน่วย="+ typeCur);
-  this.webapi.getData('LawProduct?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince).then((data) => {
+  this.webapi.getData('LawProductAllMonth?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
     this.repondProductSura = data; 
     this.getTableTAX(this.regionSelectType);
   });

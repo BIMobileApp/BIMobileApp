@@ -42,6 +42,7 @@ export class CompareTaxDrinkPage {
 
   responseRegion:any;
   responseProvince:any;
+  responseMonth: any;
   dbtable = "MBL_PRODUCT_DRINK_MONTH";
   label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
@@ -87,6 +88,7 @@ export class CompareTaxDrinkPage {
 
     this.selectionAreaAll();
     this.selectionProvinceAll();
+    this.selectionBudgetMonth();
 
     let Region;
     let Province;
@@ -127,7 +129,11 @@ export class CompareTaxDrinkPage {
 
     this.getLineTaxData(Region,Province,month_from,month_to);
   }
-
+  selectionBudgetMonth(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.responseMonth = data;
+    }); 
+  }
  getLineTaxData(Region,Province,month_from,month_to) {
   if(this.region != "00"){
     Region = localStorage.region_desc;
@@ -185,7 +191,7 @@ export class CompareTaxDrinkPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-        labels: this.label,
+        labels: this.tax_lebel,
         datasets: [
           {
             label: "ปีนี้",
@@ -314,7 +320,7 @@ export class CompareTaxDrinkPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.label,
+        labels: this.tax_lebel,
         datasets: [
           {
             label: "ปีนี้",

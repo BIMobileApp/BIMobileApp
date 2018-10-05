@@ -289,12 +289,15 @@ public isScaling = false;
     this.webapi.getData('CompareTaxSuraMonthAll?offcode=' + this.offcode).then((data) => {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
+        this.textDataInValid = 1;
         this.TaxgetTAX();
         if(this.TaxlineChart){
           this.TaxlineChart.destroy();
         }
-        this.TaxCreateChart();
-
+        setTimeout(() => {
+          this.TaxCreateChart();
+        },1000);
+       
       } else {
         this.textDataInValid = 0;
       }
