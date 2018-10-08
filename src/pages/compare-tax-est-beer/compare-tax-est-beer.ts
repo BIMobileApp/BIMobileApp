@@ -271,10 +271,16 @@ export class CompareTaxEstBeerPage {
       this.webapi.getData('CompareTaxBeerMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
+          this.textDataInValid = 1;
           this.TaxgetTAX();
-          this.TaxlineChart.destroy();
-          this.TaxCreateChart();
-
+          if(this.TaxlineChart){
+            this.TaxlineChart.destroy();
+          }
+          setTimeout(() => {
+            this.TaxCreateChart();
+          },1000);
+         
+        
         } else {
           this.textDataInValid = 0;
         }
@@ -282,8 +288,6 @@ export class CompareTaxEstBeerPage {
     } else {
       this.getLineAll();
     }
-
-
   }
 
   getLineAll() {

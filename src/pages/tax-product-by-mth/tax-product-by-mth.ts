@@ -70,7 +70,7 @@ public isScaling = false;
     public alertCtrl: AlertController,) {
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
-    this.dateAsOff = dateDisplayAll;
+    //this.dateAsOff = dateDisplayAll;
     this.mthNumber = monthNowNumber;
     this.datePrevois = datePreviousOneDay;
 
@@ -127,12 +127,12 @@ public isScaling = false;
     this.selectionProvinceAll();
     var area;
     var Province;
-    var monthFrom = 'undefined';// convertMthBudYear(this.mthNumber);
-    var monthTo = 'undefined';//convertMthBudYear(this.mthNumber);
-    //console.log(monthFrom);
+    var monthFrom = convertMthBudYear(this.mthNumber);
+    var monthTo =  convertMthBudYear(this.mthNumber);
+
     let typeCur = 'M';
 
-    this.getTableData(area,Province,monthFrom,monthTo,typeCur) ;
+    this.getTableDataAll(area,Province,monthFrom,monthTo,typeCur) ;
 
     //this.getTableData(area,Province,monthFrom,monthTo,typeCur);
     //this.getDataAll(typeCur);
@@ -147,6 +147,13 @@ public isScaling = false;
 
   selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){
   
+    if(monthFrom ==  undefined){
+      monthTo = undefined;
+      this.monthTo = undefined;
+
+      console.log(this.monthTo);
+    }
+
    /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
@@ -161,8 +168,8 @@ public isScaling = false;
     }else{*/
       let Region;
       let province;
-      monthTo = 'undefined';
-      this.monthTo = 'undefined';
+     // monthTo = 'undefined';
+     // this.monthTo = 'undefined';
 
       if(this.region != "00"){
         Region = localStorage.region_desc;
@@ -180,7 +187,6 @@ public isScaling = false;
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
-
 
    /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
@@ -229,11 +235,10 @@ public isScaling = false;
   }
 
   selectionRegion(area,Province,monthFrom,monthTo,typeCur){
-    
+
     /*if(this.region != "00"){
       area = localStorage.region_desc;
-    }*/
-   
+    }*/ 
         Province =  'undefined';
         this.Province = 'undefined';
         
@@ -243,13 +248,13 @@ public isScaling = false;
     
     selectionProvince(area,Province,monthFrom,monthTo,typeCur){
       
-      if(monthFrom != undefined && monthTo !=  undefined){
+      /*if(monthFrom != undefined && monthTo !=  undefined){
         this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
       }else{
         this.dateAsOff = dateDisplayAll;
-      }
+      }*/
 
-      if(monthFrom != 'undefined' &&  monthTo == 'undefined'){
+     /* if(monthFrom != 'undefined' &&  monthTo == 'undefined'){
         const alert = this.alertCtrl.create({
           title: 'การเลือกช่วงข้อมูลไม่ถูกต้อง!',
           subTitle: 'กรุณาเลือกเดือนเริ่มต้น และ เดือนที่สิ้นสุด',
@@ -264,7 +269,7 @@ public isScaling = false;
           buttons: ['ตกลง']
         });
         alert.present();
-      }else{
+      }else{*/
 
           if(this.region != "00"){
             area = localStorage.region_desc;
@@ -273,7 +278,7 @@ public isScaling = false;
             this.responseProvince = data;
           });
           this.getTableData(area,Province,monthFrom,monthTo,typeCur);
-      }
+     // }
     }
 
   regionSelectType = "";
@@ -316,16 +321,13 @@ public isScaling = false;
 
     /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
-    }*/
+    }*/ 
 
-    
-
-    /*if(monthFrom != 'undefined' && monthTo !=  'undefined'){
+    if((monthFrom != undefined) && (monthTo !=  undefined)){
       this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
     }else{
       this.dateAsOff = dateDisplayAll;
-    }*/
-
+    }
     
     let Region;
     let province;

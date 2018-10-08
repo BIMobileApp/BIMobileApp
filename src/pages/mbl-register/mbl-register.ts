@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
+
 declare var dateDisplayAll:any;
 declare var changeCurrencyNoUnit:any;
 /* start for pinch */
@@ -26,6 +27,7 @@ export class MblRegisterPage {
   responseRegion:any;
   ResponseProvince:any;
 
+  Province:any;
   region:any;
   province:any;
   branch:any;
@@ -91,7 +93,7 @@ public isScaling = false;
     let Mth_From = 'undefined';
     let Mth_To  = 'undefined';
 
-    this.selectDataAll(Mth_From,Mth_To,Region,Province);
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
     this.selectRegionAll();
     this.selectionProvinceAll();
   }
@@ -111,37 +113,43 @@ public isScaling = false;
       this.ResponseProvince = data;
     }); 
   }
-  selectRegion(Mth_From,Mth_To,Region,Province){
+  selectRegion(Mth_From,Mth_To,Region,Province,typeCur){
     Province =  'undefined';
+    this.Province = 'undefined';
 
-    this.selectionProvinceFill(Region);
-    this.selectDataAll(Mth_From,Mth_To,Region,Province);
+    this.selectionProvince(Mth_From,Mth_To,Region,Province,typeCur);
+    
   }
 
-  selectionProvinceFill(Region){
+  /*selectionProvinceFill(Region){
     this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
       this.ResponseProvince = data;
     }); 
-  }
+  }*/
 
-  selectionProvince(Mth_From,Mth_To,Region,Province){ 
+  selectionProvince(Mth_From,Mth_To,Region,Province,typeCur){ 
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
-    this.selectionProvinceFill(Region);
-    this.selectDataAll(Mth_From,Mth_To,Region,Province);
+    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
+      this.ResponseProvince = data;
+    }); 
+
+   // this.selectionProvinceFill(Region);
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
   }
 
-  selectMonthFrom(Mth_From,Mth_To,Region,Province){
-    this.selectDataAll(Mth_From,Mth_To,Region,Province);
+  selectMonthFrom(Mth_From,Mth_To,Region,Province,typeCur){
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
   }
 
-  selectMonthTo(Mth_From,Mth_To,Region,Province){
-    this.selectDataAll(Mth_From,Mth_To,Region,Province);
+  selectMonthTo(Mth_From,Mth_To,Region,Province,typeCur){
+    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
   }
 
   regionSelectType = "";
-  selectDataAll(Mth_From,Mth_To,Region,Province){
+  selectDataAll(Mth_From,Mth_To,Region,Province,typeCur){
+  
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{
@@ -154,15 +162,15 @@ public isScaling = false;
       Province = Province;
     }
 
-    /*if(typeCur == undefined){
+    if(typeCur == undefined){
       this.regionSelectType = "M";
     }else{
       this.regionSelectType =  typeCur;
-    }*/
+    }
    
     this.webapi.getData('MBLRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month_from=' + Mth_From+'&month_to='+Mth_To).then((data)=>{
-      this.responseData = data;  console.log(this.responseData);
-      //this.getChangNumber(this.regionSelectType);    
+      this.responseData = data;  
+      this.getChangNumber(this.regionSelectType);    
     });
   }
 
@@ -177,9 +185,9 @@ public isScaling = false;
       in_register = this.responseData[i].IN_REGISTER;
       total_register = this.responseData[i].TOTAL_REGISTER;
 
-      //if (imp_register != null) { imp_register = changeCurrencyNoUnit(imp_register, typeCur); }
-      //if (in_register != null) { in_register = changeCurrencyNoUnit(in_register, typeCur); }
-      //if (total_register != null) { total_register = changeCurrencyNoUnit(total_register, typeCur); }
+      if (imp_register != null) { imp_register = changeCurrencyNoUnit(imp_register, typeCur); }
+      if (in_register != null) { in_register = changeCurrencyNoUnit(in_register, typeCur); }
+      if (total_register != null) { total_register = changeCurrencyNoUnit(total_register, typeCur); }
 
       this.responseData[i].IMP_REGISTER = imp_register;
       this.responseData[i].IN_REGISTER = in_register;

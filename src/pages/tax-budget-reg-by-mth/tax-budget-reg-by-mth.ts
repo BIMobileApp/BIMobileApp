@@ -82,6 +82,7 @@ export class TaxBudgetRegByMthPage {
   }
 
   getTableTAX(typeCur) {
+    console.log(typeCur);
     let tax;
     for (var i = 0; i < this.responseData.length; i++) {
       tax = this.responseData[i].TAX;

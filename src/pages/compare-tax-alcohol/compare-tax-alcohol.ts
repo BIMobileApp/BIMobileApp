@@ -95,7 +95,7 @@ export class CompareTaxAlcoholPage {
 
     this.selectionAreaAll();
     this.selectionProvinceAll();
-    /* this.selectionBudgetMonth(); */
+    this.selectionBudgetMonth();
 
     let Region;
     let Province;
@@ -204,8 +204,8 @@ export class CompareTaxAlcoholPage {
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
-       /*  labels: this.tax_lebel, */
-        labels: this.label,
+        labels: this.tax_lebel,
+      /*   labels: this.label, */
         datasets: [
           {
             label: "ปีนี้",
@@ -333,7 +333,8 @@ export class CompareTaxAlcoholPage {
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
-        labels: this.label,
+        labels: this.tax_lebel,
+       /*  labels: this.label, */
         datasets: [
           {
             label: "ปีนี้",

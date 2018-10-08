@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var fillterMonthCd:any;
+declare var convertMthBudYear:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -20,8 +22,10 @@ export class TaxBudgetRegPage {
   summaryDate: any;
   responseRegion: any;
   ResponseProvince: any;
+  mthNumber:any;
   offcode: any;
   year: any;
+  month_to:any;
   grp_id: any;
   dateAsOff = "";
   dateDisplay = "";
@@ -44,6 +48,7 @@ export class TaxBudgetRegPage {
   private scale = BASE_SCALE;
   private alreadyScaled = BASE_SCALE;
   public isScaling = false;
+
   /* end  */
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,9 +58,10 @@ export class TaxBudgetRegPage {
     this.offcode = localStorage.offcode;
     this.dateAsOff = dateDisplayAll;
     this.dateDisplay = localStorage.last_update_date;
+    
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() {    
 
     var d = new Date();
     var n = d.getFullYear();
@@ -109,13 +115,12 @@ export class TaxBudgetRegPage {
 
     let Region;
     let Province;
-    let month_from;
-    let month_to;
+    let month_from =  'undefined';//convertMthBudYear(this.mthNumber);
+    let month_to = 'undefined'; //convertMthBudYear(this.mthNumber);
     let Year = 'undefined';
     let typeCur = 'M';
 
     this.selectDataAll(Region, Province, typeCur,month_from,month_to);
-
   }
 
   selectRegionAll() {
@@ -145,7 +150,7 @@ export class TaxBudgetRegPage {
     }
 
     this.selectionProvinceFill(Region);
-    this.selectDataAll(Region, Province, typeCur,month_from,month_to);
+    this.selectData(Region, Province, typeCur,month_from,month_to);
   }
 
   selectionProvinceFill(Region) {
@@ -156,11 +161,58 @@ export class TaxBudgetRegPage {
 
   selectionProvince(Region, Province, typeCur,month_from,month_to) {
     //this.selectionProvinceFill(Region);
-    this.selectDataAll(Region, Province, typeCur,month_from,month_to);
+    this.selectData(Region, Province, typeCur,month_from,month_to);
+  }
+
+  selectMonthFrom(Region, Province, typeCur,month_from,month_to){
+   
+    if(month_from ==  undefined){
+      month_to = 'undefined';
+      this.month_to = 'undefined';
+    }  
+
+    this.selectData(Region, Province, typeCur,month_from,month_to);
+  }
+
+  selectMonthTo(Region, Province, typeCur,month_from,month_to){
+    this.selectData(Region, Province, typeCur,month_from,month_to);
   }
 
   regionSelectType = "";
   selectDataAll(Region, Province, typeCur,month_from,month_to) {
+    //this.dateAsOff = dateDisplayAll;
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    } else {
+      Region = Region;
+    }
+    if (this.branch != "00" || this.province != "00") {
+      Province = this.select_province;
+    } else {
+      Province = Province;
+    }
+    
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
+  
+    this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + Region + '&province=' + Province + '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
+      this.responseData = data; console.log(this.responseData);
+      this.getTableTAX(this.regionSelectType);
+    });
+  }
+
+  selectData(Region, Province, typeCur,month_from,month_to){
+
+   /* if((month_from != undefined) && (month_to !=  undefined)){
+      this.dateAsOff = fillterMonthCd(month_from,month_to);     
+    }else{
+      this.dateAsOff = dateDisplayAll;
+    }*/
+
     if (this.region != "00") {
       Region = localStorage.region_desc;
     } else {

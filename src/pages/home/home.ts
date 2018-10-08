@@ -22,8 +22,8 @@ import { DisableSideMenu } from '../../customDecorators/disable-side-menu.decora
 
 export class HomePage {
   userData = {
-    "username": "train02",
-    "password": "train02"
+    "username": "",
+    "password": ""
   };
   userDB: any;
   offcode: any;

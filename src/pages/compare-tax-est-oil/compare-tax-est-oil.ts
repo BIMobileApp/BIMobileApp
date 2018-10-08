@@ -270,11 +270,17 @@ export class CompareTaxEstOilPage {
       this.webapi.getData('CompareTaxOilMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
         if (this.TaxLineData.length > 0) {
+           this.textDataInValid = 1;
           this.TaxgetTAX();
           this.TaxgetTAX_LY();
           this.TaxgetLebel();
-          this.TaxCreateChart();
-
+          if(this.TaxlineChart){
+            this.TaxlineChart.destroy();
+          }
+          setTimeout(() => {
+            this.TaxCreateChart();
+          },1000);
+          
         } else {
           this.textDataInValid = 0;
         }
