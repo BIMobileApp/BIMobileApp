@@ -34,6 +34,7 @@ export class TaxProductByMthPage {
   area:any;
   Province:any;
   responseArea:any;
+  responseDateTitle:any;
   responseProvince:any;
   oldArea: any;
   oldtypeCur : any;
@@ -146,12 +147,12 @@ public isScaling = false;
  }
 
   selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){
-  
+   
     if(monthFrom ==  undefined){
       monthTo = undefined;
       this.monthTo = undefined;
 
-      console.log(this.monthTo);
+      //console.log(this.monthTo);
     }
 
    /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
@@ -181,13 +182,13 @@ public isScaling = false;
       }else{
         province = Province;
       }  
-
+       
       this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
     //}
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
-
+ 
    /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
@@ -284,7 +285,7 @@ public isScaling = false;
   regionSelectType = "";
   getTableDataAll(area,Province,monthFrom,monthTo,typeCur){
 
-    this.dateAsOff = dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
    
     let Region;
     let province;
@@ -316,19 +317,42 @@ public isScaling = false;
     this.oldtypeCur = typeCur;
   }
 
+  getDateTiTle(monthFrom,monthTo){  
  
-  getTableData(area,Province,monthFrom,monthTo,typeCur) {
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
 
+  getTableData(area,Province,monthFrom,monthTo,typeCur) {
     /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }*/ 
 
-    if((monthFrom != undefined) && (monthTo !=  undefined)){
+   /*  if((monthFrom != undefined) && (monthTo !=  undefined)){
       this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
     }else{
       this.dateAsOff = dateDisplayAll;
     }
-    
+     */
     let Region;
     let province;
 
@@ -357,6 +381,10 @@ public isScaling = false;
     });
     this.oldArea = area;
     this.oldtypeCur = typeCur;
+
+    
+    //console.log(monthFrom +'---'+monthTo);
+     this.getDateTiTle(monthFrom,monthTo);
   }
 
   getTAX(typeCur) {

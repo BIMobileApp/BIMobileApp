@@ -29,6 +29,7 @@ export class LawDataAreaPage {
   dateAsOff:any;
   str_offcode:any;
   str_head_offcode:any;
+  responseDateTitle:any;
 
   repondProductSura:any;
   repondProductSica:any;
@@ -205,7 +206,35 @@ public isScaling = false;
       this.repondProductSura = data;
       this.getTableTAX(this.regionSelectType);
     });
+    this.getDateTiTle(month_from,month_to);
   }
+
+
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
+
 
   getProductUnit(SRegion,SProvince,typeCur,month_from,month_to){
 

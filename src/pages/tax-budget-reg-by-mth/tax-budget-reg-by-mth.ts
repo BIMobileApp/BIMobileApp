@@ -20,7 +20,7 @@ export class TaxBudgetRegByMthPage {
   responseData: any;
   summaryDate: any;
   offcode: any;
-
+  responseDateTitle:any;
   dateDisplay: any;
   dateAsOff: any;
   /* start for pinch */
@@ -35,7 +35,9 @@ export class TaxBudgetRegByMthPage {
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff = dateDisplayAll;
+    //this.dateAsOff = dateDisplayAll;
+    
+    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
   }
 
   ionViewDidLoad() {
@@ -75,14 +77,39 @@ export class TaxBudgetRegByMthPage {
   }
 
     this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + Mth_From+'&month_to='+Mth_To).then((data) => {
-      this.responseData = data;
+      this.responseData = data; console.log(this.responseData);
       this.getTableTAX(this.regionSelectType);
     });
 
+    this.getDateTiTle(Mth_From,Mth_To);
   }
 
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
   getTableTAX(typeCur) {
-    console.log(typeCur);
+    //console.log(typeCur);
     let tax;
     for (var i = 0; i < this.responseData.length; i++) {
       tax = this.responseData[i].TAX;

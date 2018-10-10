@@ -121,6 +121,16 @@ import { NewReportGaugeTaxOilPage } from '../pages/new-report-gauge-tax-oil/new-
 import { CompareTaxEstSicaPage } from '../pages/compare-tax-est-sica/compare-tax-est-sica';
 import { CompareTaxSicaPage } from '../pages/compare-tax-sica/compare-tax-sica';
 import { NewReportGaugeTaxSicaPage } from '../pages/new-report-gauge-tax-sica/new-report-gauge-tax-sica';
+import { TaxBranchSection1Page } from '../pages/tax-branch-section1/tax-branch-section1';
+import { TaxBranchSection2Page } from '../pages/tax-branch-section2/tax-branch-section2';
+import { TaxBranchSection3Page } from '../pages/tax-branch-section3/tax-branch-section3';
+import { TaxBranchSection4Page } from '../pages/tax-branch-section4/tax-branch-section4';
+import { TaxBranchSection5Page } from '../pages/tax-branch-section5/tax-branch-section5';
+import { TaxBranchSection6Page } from '../pages/tax-branch-section6/tax-branch-section6';
+import { TaxBranchSection7Page } from '../pages/tax-branch-section7/tax-branch-section7';
+import { TaxBranchSection8Page } from '../pages/tax-branch-section8/tax-branch-section8';
+import { TaxBranchSection9Page } from '../pages/tax-branch-section9/tax-branch-section9';
+import { TaxBranchSection10Page } from '../pages/tax-branch-section10/tax-branch-section10';
 
 
 @NgModule({
@@ -228,7 +238,17 @@ import { NewReportGaugeTaxSicaPage } from '../pages/new-report-gauge-tax-sica/ne
     NewReportGaugeTaxOilPage,
     CompareTaxEstSicaPage,
     CompareTaxSicaPage,
-    NewReportGaugeTaxSicaPage
+    NewReportGaugeTaxSicaPage,
+    TaxBranchSection1Page,
+    TaxBranchSection2Page,
+    TaxBranchSection3Page,
+    TaxBranchSection4Page,
+    TaxBranchSection5Page,
+    TaxBranchSection6Page,
+    TaxBranchSection7Page,
+    TaxBranchSection8Page,
+    TaxBranchSection9Page,
+    TaxBranchSection10Page
   ],
   imports: [
     BrowserModule,
@@ -349,7 +369,17 @@ import { NewReportGaugeTaxSicaPage } from '../pages/new-report-gauge-tax-sica/ne
     NewReportGaugeTaxOilPage,
     CompareTaxEstSicaPage,
     CompareTaxSicaPage,
-    NewReportGaugeTaxSicaPage
+    NewReportGaugeTaxSicaPage,
+    TaxBranchSection1Page,
+    TaxBranchSection2Page,
+    TaxBranchSection3Page,
+    TaxBranchSection4Page,
+    TaxBranchSection5Page,
+    TaxBranchSection6Page,
+    TaxBranchSection7Page,
+    TaxBranchSection8Page,
+    TaxBranchSection9Page,
+    TaxBranchSection10Page
   ],
   providers: [
     StatusBar,

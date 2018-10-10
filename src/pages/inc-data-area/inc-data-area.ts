@@ -37,7 +37,7 @@ export class IncDataAreaPage {
   TOBBACORepondProduct: any;
   repondProduct: any;
   defaultSelectProvince: any;
-
+  responseDateTitle:any;
   Province: any;
   defaultSelectQuestion: any;
   questionArray: any;
@@ -81,7 +81,8 @@ export class IncDataAreaPage {
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
     this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff = dateDisplayAll;
+    //this.dateAsOff = dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.username = localStorage.userData;
     this.mthNumber = monthNowNumber;
     this.mthText = monthNowText;
@@ -293,8 +294,34 @@ export class IncDataAreaPage {
 
     this.oldArea = Area;
     this.oldtypeCur = typeCur;
-
+    this.getDateTiTle(Mth_From,Mth_To);
   }
+
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
+
 
   /*  selectionProvinceChange(area){
      this.webapi.getData('SelectionProvinceChange?offcode='+this.offcode+'&region'+area).then((data) => {

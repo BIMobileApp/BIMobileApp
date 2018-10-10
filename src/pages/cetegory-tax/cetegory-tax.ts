@@ -16,6 +16,8 @@ import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-secti
 declare var notRound: any;
 declare var changeCurrency: any;
 declare var dateDisplayAll: any; 
+declare var getColorMap: any;
+declare var budgetyear : any;
 
 
 declare var slayNow: any; 
@@ -100,6 +102,17 @@ export class CetegoryTaxPage {
   isEnable:any;
   isEnableProv:any;
   oldRegion:any;
+  responseDataMap : any; 
+    public Mzone1 = `#DCDCDD`;
+    public Mzone2 = `#DCDCDD`;
+    public Mzone3 = `#DCDCDD`;
+    public Mzone4 = `#DCDCDD`;
+    public Mzone5 = `#DCDCDD`;
+    public Mzone6 = `#DCDCDD`;
+    public Mzone7 = `#DCDCDD`;
+    public Mzone8 = `#DCDCDD`;
+    public Mzone9 = `#DCDCDD`; 
+    public Mzone10 = `#DCDCDD`; 
 
 
     /* start for pinch */
@@ -157,6 +170,7 @@ export class CetegoryTaxPage {
 
   regionSelectType = "";
   ionViewDidLoad() {
+    this.setData();
     this.selectionArea();
     this.selectionProviceFirst();
     let area;
@@ -552,7 +566,7 @@ export class CetegoryTaxPage {
     }
    }
 
-  section1() {
+  /*section1() {
     this.app.getRootNav().push(TaxCoutrySection1Page);
   }
   section2() {
@@ -581,7 +595,7 @@ export class CetegoryTaxPage {
   }
   section10() {
     this.app.getRootNav().push(TaxCoutrySection10Page);
-  }
+  }*/
 
 /* start for pinch */
   public onPinchStart(e) {
@@ -608,4 +622,89 @@ export class CetegoryTaxPage {
     }
   }
   /* end  */
+
+  setData() {
+    console.log(budgetyear);
+    this.webapi.getData('MapColorThailand?budget_year='+budgetyear).then((data) => {
+      this.responseDataMap = data;
+      for (var i = 0; i < this.responseDataMap.length; i++) {       
+    let mapColor;
+    let provinceName; 
+        mapColor = this.responseDataMap[i].MAP_COLOR;
+        provinceName= this.responseDataMap[i].REGION_NAME_EN;
+
+        if(provinceName=="zone1"){
+          this.Mzone1 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone2"){
+          this.Mzone2 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone3"){
+          this.Mzone3 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone4"){
+          this.Mzone4 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone5"){
+          this.Mzone5 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone6"){
+          this.Mzone6 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone7"){
+          this.Mzone7 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone8"){
+          this.Mzone8 =getColorMap(mapColor);
+        }
+        if(provinceName=="zone9"){
+          this.Mzone9 =getColorMap(mapColor);
+        } 
+        if(provinceName=="zone10"){
+          this.Mzone10 =getColorMap(mapColor);
+        }
+      }
+       });      
+  }
+
+  gotoZone1(){
+    this.app.getRootNav().push(TaxCoutrySection1Page);
+  }
+
+  gotoZone2(){
+    this.app.getRootNav().push(TaxCoutrySection2Page); 
+  }
+
+  gotoZone3(){
+    this.app.getRootNav().push(TaxCoutrySection3Page); 
+  }
+
+  gotoZone4(){
+    this.app.getRootNav().push(TaxCoutrySection4Page); 
+  }
+
+  gotoZone5(){
+    this.app.getRootNav().push(TaxCoutrySection5Page); 
+  }
+
+  gotoZone6(){
+    this.app.getRootNav().push(TaxCoutrySection6Page); 
+  }
+
+  gotoZone7(){
+    this.app.getRootNav().push(TaxCoutrySection7Page); 
+  }
+
+  gotoZone8(){
+    this.app.getRootNav().push(TaxCoutrySection8Page); 
+  }
+
+  gotoZone9(){
+    this.app.getRootNav().push(TaxCoutrySection9Page); 
+  }
+
+  gotoZone10(){
+    this.app.getRootNav().push(TaxCoutrySection10Page); 
+  }
+
 }

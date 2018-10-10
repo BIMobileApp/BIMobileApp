@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection2Page } from '../tax-branch-section2/tax-branch-section2';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
-
+declare var getColorMap: any;
+declare var budgetyear : any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -51,6 +53,19 @@ private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
+responseData : any; 
+public Pnakhon_nayok = `#DCDCDD`;
+public Pprajeen = `#DCDCDD`;
+public Psakeaw = `#DCDCDD`;
+public Pchachoengsao = `#DCDCDD`;
+public Psamut_prakan1 = `#DCDCDD`;
+public Psamut_prakan2 = `#DCDCDD`;
+public Pchonburi1 = `#DCDCDD`;
+public Pchonburi2 = `#DCDCDD`;
+public Prayong2 = `#DCDCDD`;
+public Prayong1 = `#DCDCDD`;
+public Pjantraburi = `#DCDCDD`;
+public Ptrat = `#DCDCDD`;
 
   constructor( public navCtrl: NavController, 
     public navParams: NavParams,
@@ -67,6 +82,7 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
+    this.setData();
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
    
@@ -297,5 +313,60 @@ public onPinchMove(e) {
   }
 }
 /* end  */
+
+
+setData() {
+  console.log(budgetyear);
+  this.webapi.getData('MapColorRegion?budget_year='+budgetyear+'&region=02').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {       
+  let mapColor;
+  let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
+
+      if(provinceName=="P-nakhon_nayok"){
+        this.Pnakhon_nayok =getColorMap(mapColor);
+      }
+      if(provinceName=="P-prajeen"){
+        this.Pprajeen =getColorMap(mapColor);
+      }
+      if(provinceName=="P-sakeaw"){
+        this.Psakeaw =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chachoengsao"){
+        this.Pchachoengsao =getColorMap(mapColor);
+      }
+      if(provinceName=="P-samut_prakan1"){
+        this.Psamut_prakan1 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-samut_prakan2"){
+        this.Psamut_prakan2 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chonburi1"){
+        this.Pchonburi1 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chonburi2"){
+        this.Pchonburi2 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-rayong2"){
+        this.Prayong2 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-rayong1"){
+        this.Prayong1 =getColorMap(mapColor);
+      } 
+      if(provinceName=="P-jantraburi"){
+        this.Pjantraburi =getColorMap(mapColor);
+      } 
+      if(provinceName=="P-trat"){
+        this.Ptrat =getColorMap(mapColor);
+      } 
+    }
+     });    
+  }
+
+  GotoBranch(province){
+    this.app.getRootNav().push(TaxBranchSection2Page,{province:province}); 
+  }
 
 }

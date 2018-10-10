@@ -34,7 +34,7 @@ export class TaxBudgetRegPage {
   region: any;
   province: any;
   branch: any;
-
+  responseDateTitle:any;
   select_region: any;
   select_all_value: any;
   select_all_prov_value: any;
@@ -56,7 +56,8 @@ export class TaxBudgetRegPage {
     this.grp_id = this.navParams.get('group_id');
     this.str_product = this.grp_id;
     this.offcode = localStorage.offcode;
-    this.dateAsOff = dateDisplayAll;
+   // this.dateAsOff = dateDisplayAll;
+   this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.dateDisplay = localStorage.last_update_date;
     
   }
@@ -115,8 +116,8 @@ export class TaxBudgetRegPage {
 
     let Region;
     let Province;
-    let month_from =  'undefined';//convertMthBudYear(this.mthNumber);
-    let month_to = 'undefined'; //convertMthBudYear(this.mthNumber);
+    let month_from = 'undefined';//convertMthBudYear(this.mthNumber);
+    let month_to = 'undefined';//convertMthBudYear(this.mthNumber);
     let Year = 'undefined';
     let typeCur = 'M';
 
@@ -203,6 +204,7 @@ export class TaxBudgetRegPage {
       this.responseData = data; console.log(this.responseData);
       this.getTableTAX(this.regionSelectType);
     });
+
   }
 
   selectData(Region, Province, typeCur,month_from,month_to){
@@ -229,14 +231,38 @@ export class TaxBudgetRegPage {
     }else{
       this.regionSelectType =  typeCur;
     }
-
   
     this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + Region + '&province=' + Province + '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
-      this.responseData = data;
+      this.responseData = data; console.log(this.responseData);
       this.getTableTAX(this.regionSelectType);
     });
-  }
+    this.getDateTiTle(month_from,month_to);
 
+  }
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
   getTableTAX(typeCur) {
     let tax;
     for (var i = 0; i < this.responseData.length; i++) {

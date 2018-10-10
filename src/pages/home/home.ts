@@ -9,9 +9,6 @@ import { Http, ResponseContentType } from '@angular/http';
 import { File } from '@ionic-native/file';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';
- 
-
-
 import { DisableSideMenu } from '../../customDecorators/disable-side-menu.decorator'; 
 
 @DisableSideMenu()
@@ -59,11 +56,11 @@ export class HomePage {
       
       this.Authenticate_User = data;
 
-      if(this.Authenticate_User == 12){ 
+      if(this.Authenticate_User == 12){
 
         this.webapi.getData('TMP_USER?username=' + this.userData.username).then((data) => {
           this.userDB = data;
-          
+            console.log(this.userDB );
             //if (this.userDB.length!=0) {
                 this.offcode = this.userDB[0].OFFCODE;
                 this.offdesc = this.userDB[0].OFFDESC;

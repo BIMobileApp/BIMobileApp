@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection3Page } from '../tax-branch-section3/tax-branch-section3';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
-
+declare var getColorMap: any;
+declare var budgetyear : any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -51,7 +53,17 @@ private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
-
+responseData : any; 
+public Proiead = `#DCDCDD`;
+public Pyasothorn = `#DCDCDD`;
+public Pamnatcharoen = `#DCDCDD`;
+public Pubon = `#DCDCDD`;
+public Psisaket = `#DCDCDD`;
+public Psurin = `#DCDCDD`;
+public Pbhurirum = `#DCDCDD`;
+public Pnakronratchasima = `#DCDCDD`;
+public Pchaiyabhum = `#DCDCDD`; 
+ 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -68,7 +80,8 @@ public isScaling = false;
     this.branch =  localStorage.offcode.substring(4, 6);
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() {  
+    this.setData();
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
   }
@@ -302,5 +315,48 @@ public onPinchMove(e) {
   }
 }
 /* end  */
+setData() {
+  this.webapi.getData('MapColorRegion?budget_year='+budgetyear+'&region=03').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {       
+  let mapColor;
+  let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
+
+      if(provinceName=="P-roiead"){
+        this.Proiead =getColorMap(mapColor);
+      }
+      if(provinceName=="P-yasothorn"){
+        this.Pyasothorn =getColorMap(mapColor);
+      }
+      if(provinceName=="P-amnatcharoen"){
+        this.Pamnatcharoen =getColorMap(mapColor);
+      }
+      if(provinceName=="P-ubon"){
+        this.Pubon =getColorMap(mapColor);
+      }
+      if(provinceName=="P-sisaket"){
+        this.Psisaket =getColorMap(mapColor);
+      }
+      if(provinceName=="P-surin"){
+        this.Psurin =getColorMap(mapColor);
+      }
+      if(provinceName=="P-bhurirum"){
+        this.Pbhurirum =getColorMap(mapColor);
+      }
+      if(provinceName=="P-nakronratchasima"){
+        this.Pnakronratchasima =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chaiyabhum"){
+        this.Pchaiyabhum =getColorMap(mapColor);
+      } 
+    }
+     });    
+  }
+
+  GotoBranch(province){
+    this.app.getRootNav().push(TaxBranchSection3Page,{province:province}); 
+  }
 
 }

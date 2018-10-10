@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection8Page } from '../tax-branch-section8/tax-branch-section8';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var getColorMap: any; 
+declare var budgetyear : any;
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -51,7 +54,14 @@ private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
-
+responseData : any; 
+public Pranong = `#DCDCDD`;
+public Pphangnga = `#DCDCDD`;
+public Pphuket = `#DCDCDD`;
+public Pkrabi = `#DCDCDD`;
+public Pchumphon = `#DCDCDD`;
+public Psuratthani = `#DCDCDD`;
+public Pnakhon_si_thammarat = `#DCDCDD`; 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -68,6 +78,7 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
+    this.setData();
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
   }
@@ -287,5 +298,42 @@ public onPinchMove(e) {
   }
 }
 /* end  */
+setData() {
+  this.webapi.getData('MapColorRegion?budget_year='+budgetyear+'&region=08').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {       
+  let mapColor;
+  let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
+
+      if(provinceName=="P-ranong"){
+        this.Pranong =getColorMap(mapColor);
+      }
+      if(provinceName=="P-phangnga"){
+        this.Pphangnga =getColorMap(mapColor);
+      }
+      if(provinceName=="P-phuket"){
+        this.Pphuket =getColorMap(mapColor);
+      }
+      if(provinceName=="P-krabi"){
+        this.Pkrabi =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chumphon"){
+        this.Pchumphon =getColorMap(mapColor);
+      }
+      if(provinceName=="P-suratthani"){
+        this.Psuratthani =getColorMap(mapColor);
+      }
+      if(provinceName=="P-nakhon_si_thammarat"){
+        this.Pnakhon_si_thammarat =getColorMap(mapColor);
+      } 
+    }
+     });    
+}
+
+GotoBranch(province){
+  this.app.getRootNav().push(TaxBranchSection8Page,{province:province}); 
+}
 
 }

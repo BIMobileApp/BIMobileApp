@@ -35,7 +35,7 @@ export class IncDataMthPage {
   dateDisplay: any;
   dateAsOff: any;
   disoffcode: any;
-
+  responseDateTitle:any;
   defaultSelectQuestion: any;
   defaultSelectProvinceSura: any;
   questionArray: any;
@@ -71,7 +71,8 @@ export class IncDataMthPage {
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
     this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff = dateDisplayAll;
+    //this.dateAsOff = dateDisplayAll;
+
     this.username = localStorage.userData;
 
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -264,6 +265,33 @@ export class IncDataMthPage {
 
     this.oldArea = Region;
     this.oldtypeCur = typeCur;
+    
+    this.getDateTiTle(Mth_From,Mth_To);
+  }
+
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
   }
 
   getCountAmtProdSura(typeCur) {

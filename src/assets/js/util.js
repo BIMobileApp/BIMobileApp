@@ -179,3 +179,20 @@ function convertMthBudYear(month){
   return monthCnvBudYear;
 }
 
+function getColorMap(val) {
+  var returnVal; 
+  if (val == 1) {
+    returnVal = `#F72100`;
+  } else if (val == 2) {
+    returnVal =`#FFFC31`;
+   } else  if (val == 3) {
+    returnVal =`#CEFFCE`;
+   } else if (val == 4) {
+    returnVal  =`#63b931`;
+  }else{
+    returnVal   = `#DCDCDD`;
+  }
+
+  return returnVal;
+}
+
