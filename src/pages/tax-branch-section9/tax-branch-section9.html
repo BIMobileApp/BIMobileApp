@@ -7,13 +7,17 @@
 </ion-header>
 <ion-content padding text-center [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
 <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
-      <h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี จังหวัด {{titleProvince}}</h1>
-      <h2 class="header-style">{{dateAsOff}}</h2>
+
+      <!--<h1 class="header-style">แผนที่แสดงผลการจัดเก็บภาษี จังหวัด {{titleProvince}}</h1>
+      <h2 class="header-style">{{dateAsOff}}</h2>-->
+
   <!--////////////////////////////////////////////////  Start Map ////////////////////////////////////////////////////-->
   
   <!-- <img src="https://bimobile.excise.go.th/ExciseMobile/Map/pak9.png"/> -->
 
-      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+      <!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
       width="1000px" height="774.406px" viewBox="435.039 2603.245 1000 774.406"
       enable-background="new 435.039 2603.245 1000 774.406" xml:space="preserve">
    <g id="MAP">
@@ -1961,7 +1965,11 @@
        </g>
      </g>
    </g>
+<<<<<<< HEAD
    </svg>
+=======
+   </svg>-->
+
 
    <!--/////////////////////////////////////////////////  End Map ////////////////////////////////////////////////////-->
 
@@ -2045,7 +2053,9 @@
        <table style="width: 100%;" >
          <thead>
            <tr style="background-color: #F78B26; ">
-             <th width="10%"><h3 class='th-center' [style.fontSize]="fontSize" >เดือน</h3></th>
+
+             <th width="15%"><h3 class='th-center' [style.fontSize]="fontSize" >เดือน</h3></th>
+
              <th><h3 class='th-center' [style.fontSize]="fontSize" >ปีนี้</h3></th>
              <th><h3 class='th-center' [style.fontSize]="fontSize" >ปีก่อน</h3></th>
              <!--<th><h3 class='th-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>-->
@@ -2054,7 +2064,9 @@
          </thead>
          <tbody>
            <tr *ngFor="let data of DataCurYear">
-             <td width="10%"><h3 class='td-center' [style.fontSize]="fontSize" >{{data.BUDGET_MONTH_DESC}}</h3></td>
+
+             <td width="15%"><h3 class='td-center' [style.fontSize]="fontSize" >{{data.BUDGET_MONTH_DESC}}</h3></td>
+
              <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.TAX}}</h3></td>
              <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.LAST_TAX}}</h3></td>
              <!--<td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>-->

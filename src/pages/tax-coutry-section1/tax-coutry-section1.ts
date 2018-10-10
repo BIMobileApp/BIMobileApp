@@ -6,6 +6,7 @@ import { TaxBranchSection1Page } from '../tax-branch-section1/tax-branch-section
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 declare var getColorMap: any; 
+declare var budgetyear : any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -410,7 +411,7 @@ public onPinchMove(e) {
 
 
 setData() {
-  this.webapi.getData('MapColorRegion?budget_year=2562&region=01').then((data) => {
+  this.webapi.getData('MapColorRegion?budget_year='+budgetyear+'&region=01').then((data) => {
     this.responseData = data;
     for (var i = 0; i < this.responseData.length; i++) {
              

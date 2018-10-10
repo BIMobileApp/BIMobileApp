@@ -5,6 +5,7 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 declare var getColorMap: any; 
+declare var budgetyear : any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -106,7 +107,7 @@ export class TaxBranchSection1Page {
     this.TableGetData(Province,typeCur);
     this.brance = 0;
 
-    this.OverallBranch(this.area, Province, typeCur);
+    //this.OverallBranch(this.area, Province, typeCur);
   }
 
   /*selectionProvince(){
@@ -410,7 +411,7 @@ public onPinchMove(e) {
 
 
 setData(province_select) {
- this.webapi.getData('MapColorRegion?budget_year=2562&region=01').then((data) => {
+ this.webapi.getData('MapColorRegion?budget_year='+budgetyear+'&region=01').then((data) => {
    this.responseData = data;
    for (var i = 0; i < this.responseData.length; i++) {
     //console.log( this.responseData);

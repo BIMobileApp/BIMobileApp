@@ -103,7 +103,8 @@ public Pprachuap_khiri_khan = `#DCDCDD`;
     let typeCur = 'M';
     this.TableGetData(Province,typeCur);
     this.brance = 0;
-    this.OverallBranch(this.area, Province, typeCur);
+
+    //this.OverallBranch(this.area, Province, typeCur);
   }
 
 /*selectionProvince(){

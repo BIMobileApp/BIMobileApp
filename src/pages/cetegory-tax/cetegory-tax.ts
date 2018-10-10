@@ -17,6 +17,7 @@ declare var notRound: any;
 declare var changeCurrency: any;
 declare var dateDisplayAll: any; 
 declare var getColorMap: any;
+declare var budgetyear : any;
 
 
 declare var slayNow: any; 
@@ -623,7 +624,8 @@ export class CetegoryTaxPage {
   /* end  */
 
   setData() {
-    this.webapi.getData('MapColorThailand?budget_year=2561').then((data) => {
+    console.log(budgetyear);
+    this.webapi.getData('MapColorThailand?budget_year='+budgetyear).then((data) => {
       this.responseDataMap = data;
       for (var i = 0; i < this.responseDataMap.length; i++) {       
     let mapColor;
