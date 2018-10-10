@@ -103,16 +103,18 @@ export class CetegoryTaxPage {
   isEnableProv:any;
   oldRegion:any;
   responseDataMap : any; 
-    public Mzone1 = `#DCDCDD`;
-    public Mzone2 = `#DCDCDD`;
-    public Mzone3 = `#DCDCDD`;
-    public Mzone4 = `#DCDCDD`;
-    public Mzone5 = `#DCDCDD`;
-    public Mzone6 = `#DCDCDD`;
-    public Mzone7 = `#DCDCDD`;
-    public Mzone8 = `#DCDCDD`;
-    public Mzone9 = `#DCDCDD`; 
-    public Mzone10 = `#DCDCDD`; 
+  show_map_thiland:any;
+
+    public Mzone1 = '';// `#DCDCDD`;
+    public Mzone2 = '';//`#DCDCDD`;
+    public Mzone3 = '';//`#DCDCDD`;
+    public Mzone4 = '';//`#DCDCDD`;
+    public Mzone5 = '';//`#DCDCDD`;
+    public Mzone6 = '';//`#DCDCDD`;
+    public Mzone7 = '';//`#DCDCDD`;
+    public Mzone8 = '';//`#DCDCDD`;
+    public Mzone9 = '';//`#DCDCDD`; 
+    public Mzone10 = '';//`#DCDCDD`; 
 
 
     /* start for pinch */
@@ -170,14 +172,21 @@ export class CetegoryTaxPage {
 
   regionSelectType = "";
   ionViewDidLoad() {
+
+    this.show_map_thiland  = 0;
+
     this.setData();
     this.selectionArea();
     this.selectionProviceFirst();
     let area;
     let Province;
     let typeCur = 'M';
+
+    
     this.TableGetData(area, Province, typeCur);
     this.hideTableBrance = 0;
+
+   
   }
 
   toggleBarShow() {
@@ -664,7 +673,9 @@ export class CetegoryTaxPage {
           this.Mzone10 =getColorMap(mapColor);
         }
       }
-       });      
+       });   
+       
+       this.show_map_thiland  = 1;
   }
 
   gotoZone1(){
