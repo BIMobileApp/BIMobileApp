@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection10Page } from '../tax-branch-section10/tax-branch-section10';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var getColorMap: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -51,7 +53,12 @@ private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
-
+responseData : any; 
+  public Pbangkok1 = `#DCDCDD`;
+  public Pbangkok2 = `#DCDCDD`;
+  public Pbangkok3 = `#DCDCDD`;
+  public Pbangkok4 = `#DCDCDD`;
+  public Pbangkok5 = `#DCDCDD`; 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -68,6 +75,7 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
+    this.setData();
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
   }
@@ -322,5 +330,35 @@ public onPinchMove(e) {
   }
 }
 /* end  */
+setData() {
+  this.webapi.getData('MapColorRegion?budget_year=2562&region=10').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {       
+  let mapColor;
+  let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
 
+      if(provinceName=="P-bangkok1"){
+        this.Pbangkok1 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-bangkok2"){
+        this.Pbangkok2 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-bangkok3"){
+        this.Pbangkok3 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-bangkok4"){
+        this.Pbangkok4 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-bangkok5"){
+        this.Pbangkok5 =getColorMap(mapColor);
+      } 
+    }
+     });    
+  }
+
+  GotoBranch(province){
+    this.app.getRootNav().push(TaxBranchSection10Page,{province:province}); 
+  }
 }

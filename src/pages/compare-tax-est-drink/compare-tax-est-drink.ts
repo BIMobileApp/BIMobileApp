@@ -25,7 +25,7 @@ export class CompareTaxEstDrinkPage {
   curTG = "ล้านบาท";
   display_region_top10 = "";
   display_province_top10 = "";
-
+  responseDateTitle:any;
   //Line Tax
   TaxlineChart: any;
   TaxLineData: any;
@@ -72,7 +72,8 @@ export class CompareTaxEstDrinkPage {
       this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff = dateDisplayAll;
+   // this.dateAsOff = dateDisplayAll;
+   this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.grp_id = 'ภาษีเครื่องดื่ม';
     this.offcode = localStorage.offcode;
 
@@ -241,6 +242,33 @@ export class CompareTaxEstDrinkPage {
     }else{
       this.curTG = "บาท";
     }
+    this.getDateTiTle(month_from,month_to);
+
+  }
+
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
   }
 
   //-----------------------------------------------------------------------------------------------------------//

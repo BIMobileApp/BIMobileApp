@@ -35,7 +35,7 @@ export class IncDataMthPage {
   dateDisplay: any;
   dateAsOff: any;
   disoffcode: any;
-
+  responseDateTitle:any;
   defaultSelectQuestion: any;
   defaultSelectProvinceSura: any;
   questionArray: any;
@@ -71,7 +71,8 @@ export class IncDataMthPage {
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
     this.dateDisplay = localStorage.last_update_date;
-    this.dateAsOff = dateDisplayAll;
+    //this.dateAsOff = dateDisplayAll;
+
     this.username = localStorage.userData;
 
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -113,7 +114,9 @@ export class IncDataMthPage {
     let Region;
     let Province;
     let Month = 'undefined';
-    this.IncProductAll(Region, Province, Month, typeCur);
+    let Mth_From = 'undefined';
+    let Mth_To = 'undefined';
+    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
     this.selectionArea();
     this.selectionAllProvince();
   }
@@ -156,16 +159,16 @@ export class IncDataMthPage {
 
   }
 
-  selectRegion(Region, Province, Month, typeCur) {
+  selectRegion(Region,Province,Mth_From,Mth_To,typeCur) {
     Province = 'undefined';
     this.Province = "undefined";
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
-    this.IncProductAll(Region, Province, Month, typeCur);
+    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
   }
 
-  selectionProvince(Region, Province, Month, typeCur) {
+  selectionProvince(Region,Province,Mth_From,Mth_To,typeCur) {
 
     if (this.region != "00") {
       Region = localStorage.region_desc;
@@ -174,12 +177,12 @@ export class IncDataMthPage {
     this.webapi.getData('SelectionMthProvince?offcode=' + this.offcode + '&region=' + Region).then((data) => {
       this.responseProvince = data;
     });
-    this.IncProductAll(Region, Province, Month, typeCur);
+    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
   }
 
 
-  ChangeCur(Region, Province, Month, typeCur) {
-    this.IncProductAll(Region, Province, Month, typeCur);
+  ChangeCur(Region,Province,Mth_From,Mth_To,typeCur) {
+    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
     this.loadData(typeCur);
   }
 
@@ -204,8 +207,16 @@ export class IncDataMthPage {
 
   ///end select all///
 
+  selectMonthFrom(Region,Province,Mth_From,Mth_To,typeCur){
+    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
+  }
+
+  selectMonthTo(Region,Province,Mth_From,Mth_To,typeCur){
+    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
+  }
+
   regionSelectType = "";
-  IncProductAll(Region, Province, Month, typeCur) {
+  IncProductAll(Region,Province,Mth_From,Mth_To,typeCur) {
    /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
       this.Province = undefined;
       Province = undefined;
@@ -228,15 +239,15 @@ export class IncDataMthPage {
       this.regionSelectType =  typeCur;
     }
    
-    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=สุรา').then((data) => {
+    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + Mth_From +'&month_to='+Mth_To+ '&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.getCountAmtProdSura(this.regionSelectType );
     });
-    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=ยาสูบ').then((data) => {
+    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + Mth_From +'&month_to='+Mth_To+ '&group_name=ยาสูบ').then((data) => {
       this.repondProductSica = data;
       this.getCountAmtSica(this.regionSelectType );
     });
-    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + Month + '&group_name=ไพ่').then((data) => {
+    this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + Mth_From +'&month_to='+Mth_To+ '&group_name=ไพ่').then((data) => {
       this.repondProductCard = data;
       this.getCountAmtCard(this.regionSelectType );
     });
@@ -254,6 +265,33 @@ export class IncDataMthPage {
 
     this.oldArea = Region;
     this.oldtypeCur = typeCur;
+    
+    this.getDateTiTle(Mth_From,Mth_To);
+  }
+
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
   }
 
   getCountAmtProdSura(typeCur) {

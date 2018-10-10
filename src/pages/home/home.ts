@@ -9,9 +9,6 @@ import { Http, ResponseContentType } from '@angular/http';
 import { File } from '@ionic-native/file';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';
- 
-
-
 import { DisableSideMenu } from '../../customDecorators/disable-side-menu.decorator'; 
 
 @DisableSideMenu()
@@ -55,7 +52,7 @@ export class HomePage {
   Authenticate_User:any;
   login() {
 
-    /* this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
+    /*this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
       
       this.Authenticate_User = data;
 
@@ -63,7 +60,7 @@ export class HomePage {
 
         this.webapi.getData('TMP_USER?username=' + this.userData.username).then((data) => {
           this.userDB = data;
-          
+            console.log(this.userDB );
             //if (this.userDB.length!=0) {
                 this.offcode = this.userDB[0].OFFCODE;
                 this.offdesc = this.userDB[0].OFFDESC;
@@ -94,7 +91,7 @@ export class HomePage {
               }*/
             });
 
-     /*  }else{
+     /* }else{
 
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
@@ -102,9 +99,9 @@ export class HomePage {
           buttons: ['ตกลง']
         });
         alert.present();
-     } */
+     } 
      
-    /* }); */
+     });*/
 
   }
 

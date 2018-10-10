@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection1Page } from '../tax-branch-section1/tax-branch-section1';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
-
+declare var getColorMap: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -46,21 +47,33 @@ export class TaxCoutrySection1Page {
   province:any;
   branch:any;
 
-/* start for pinch */
-public fontSize = `${BASE_SCALE}rem`;
-private scale = BASE_SCALE;
-private alreadyScaled = BASE_SCALE;
-public isScaling = false;
-/* end  */
+  /* start for pinch */
+  public fontSize = `${BASE_SCALE}rem`;
+  private scale = BASE_SCALE;
+  private alreadyScaled = BASE_SCALE;
+  public isScaling = false;
+  /* end  */
+
+  responseData : any;   
+  public Pchainat = `#DCDCDD`;
+  public Psingburi = `#DCDCDD`;
+  public Plopburi = `#DCDCDD`;
+  public Psaraburi = `#DCDCDD`;
+  public Payutthaya1 = `#DCDCDD`;
+  public Pangthong = `#DCDCDD`;
+  public Payutthaya2 = `#DCDCDD`;
+  public Ppathum_thani1 = `#DCDCDD`;
+  public Ppathum_thani2 = `#DCDCDD`;
+  public Pnonthaburi = `#DCDCDD`;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public app: App,
     public webapi: RestProvider) {
-    this.username = localStorage.userData;
-    this.dateAsOff = dateDisplayAll;
-    this.offcode = localStorage.offcode;
+      this.username = localStorage.userData;
+      this.dateAsOff = dateDisplayAll;
+      this.offcode = localStorage.offcode;
 
       //หา offcode เพื่อหา ภาค จังหวัด สาขา
       this.region = localStorage.offcode.substring(0, 2);
@@ -70,9 +83,11 @@ public isScaling = false;
 
   regionSelectType = "";
   ionViewDidLoad() {
+    this.setData();
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
   }
+  
   UserAthu() {
    
      this.selectionProvince();
@@ -120,6 +135,8 @@ GetProvinceTable(typeCurFirst){
 }
 
 TableGetData(Province,typeCur) {
+
+  console.log(Province);
 
   if(typeCur == undefined){
     this.regionSelectType = "M";
@@ -391,4 +408,52 @@ public onPinchMove(e) {
 }
 /* end  */
 
+
+setData() {
+  this.webapi.getData('MapColorRegion?budget_year=2562&region=01').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {
+             
+      let mapColor;
+      let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
+
+      if(provinceName=="P-chai_nat"){
+        this.Pchainat =getColorMap(mapColor);
+      }
+      if(provinceName=="P-nonthaburi"){
+        this.Pnonthaburi =getColorMap(mapColor);
+      }
+      if(provinceName=="P-pathum_thani1"){
+        this.Ppathum_thani1 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-pathum_thani2"){
+        this.Ppathum_thani2 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-lopburi"){
+        this.Plopburi =getColorMap(mapColor);
+      }
+      if(provinceName=="P-saraburi"){
+        this.Psaraburi =getColorMap(mapColor);
+      }
+      if(provinceName=="P-singburi"){
+        this.Psingburi =getColorMap(mapColor);
+      }
+      if(provinceName=="P-ayutthaya1"){
+        this.Payutthaya1 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-ayutthaya2"){
+        this.Payutthaya2 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-ang_thong"){
+        this.Pangthong =getColorMap(mapColor);
+      } 
+    }
+     });    
+  }
+
+  GotoBranch(province){
+    this.app.getRootNav().push(TaxBranchSection1Page,{province:province}); 
+  }
 }

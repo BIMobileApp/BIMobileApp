@@ -64,7 +64,9 @@ dateDisplayNow = " ข้อมูล ณ วันที่ " + now.getDate() +
 
 dateDisplayDataReailTime = "ข้อมูลเดือน "+ (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()] + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1));
 
-monthNowNumber = now.getMonth();
+monthNowNumber = now.getMonth()+1;
+
+
 
 monthNowText = thmonth[now.getMonth()];
 
@@ -103,12 +105,12 @@ function changeCurrencyNoUnit(val, typeNow) {
   }
 }
 
-
+var dateDisplaySelectMth = "";
 function fillterMonthCd(monthForm,monthTo){
 
   var lastDay = new Date(now.getFullYear(), monthTo + 1, 0).getDate(); //;วันที่สุดท้ายของเดือน
-  dateDisplayAll = "ตั้งแต่ 1 "+ thmonthBudYear[monthForm-1]+  "ถึง " + lastDay + " " + thmonthBudYear[monthTo-1]+ " ปีงบฯ " + (monthTo + 1 >= 10 ? budgetyear : budgetyear - 1);
-  return dateDisplayAll;
+  dateDisplaySelectMth = "ตั้งแต่ 1 "+ thmonthBudYear[monthForm-1]+  "ถึง " + lastDay + " " + thmonthBudYear[monthTo-1]+ " ปีงบฯ " + (monthTo + 1 >= 10 ? budgetyear : budgetyear - 1);
+  return dateDisplaySelectMth;
 }
 
 //ฟังก์ชั่น ไม่ปัดเศษ
@@ -175,5 +177,22 @@ function convertMthBudYear(month){
     break;
   }
   return monthCnvBudYear;
+}
+
+function getColorMap(val) {
+  var returnVal; 
+  if (val == 1) {
+    returnVal = `#F72100`;
+  } else if (val == 2) {
+    returnVal =`#FFFC31`;
+   } else  if (val == 3) {
+    returnVal =`#CEFFCE`;
+   } else if (val == 4) {
+    returnVal  =`#63b931`;
+  }else{
+    returnVal   = `#DCDCDD`;
+  }
+
+  return returnVal;
 }
 

@@ -8,6 +8,7 @@ declare var datePreviousOneDay:any;
 declare var fillterMonthCd:any;
 declare var lastDay:any; 
 declare var convertMthBudYear:any;
+declare var dateDisplaySelectMth:any;
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -33,6 +34,7 @@ export class TaxProductByMthPage {
   area:any;
   Province:any;
   responseArea:any;
+  responseDateTitle:any;
   responseProvince:any;
   oldArea: any;
   oldtypeCur : any;
@@ -69,7 +71,7 @@ public isScaling = false;
     public alertCtrl: AlertController,) {
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
-
+    //this.dateAsOff = dateDisplayAll;
     this.mthNumber = monthNowNumber;
     this.datePrevois = datePreviousOneDay;
 
@@ -121,17 +123,17 @@ public isScaling = false;
     }
     this.summaryDate = range;*/
     
-    this.dateAsOff = dateDisplayAll;
+    //this.dateAsOff = dateDisplayAll;
     this.selectionArea();
     this.selectionProvinceAll();
     var area;
     var Province;
     var monthFrom = convertMthBudYear(this.mthNumber);
-    var monthTo = convertMthBudYear(this.mthNumber);
-    //console.log(monthFrom);
+    var monthTo =  convertMthBudYear(this.mthNumber);
+
     let typeCur = 'M';
 
-    this.getTableData(area,Province,monthFrom,monthTo,typeCur) ;
+    this.getTableDataAll(area,Province,monthFrom,monthTo,typeCur) ;
 
     //this.getTableData(area,Province,monthFrom,monthTo,typeCur);
     //this.getDataAll(typeCur);
@@ -145,10 +147,14 @@ public isScaling = false;
  }
 
   selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){
-  
-      if(monthFrom == 'undefined' && monthTo ==  'undefined'){
-      this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
-     }
+   
+    if(monthFrom ==  undefined){
+      monthTo = undefined;
+      this.monthTo = undefined;
+
+      //console.log(this.monthTo);
+    }
+
    /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
@@ -163,8 +169,8 @@ public isScaling = false;
     }else{*/
       let Region;
       let province;
-      monthTo = 'undefined';
-      this.monthTo = 'undefined';
+     // monthTo = 'undefined';
+     // this.monthTo = 'undefined';
 
       if(this.region != "00"){
         Region = localStorage.region_desc;
@@ -176,16 +182,13 @@ public isScaling = false;
       }else{
         province = Province;
       }  
-
+       
       this.getTableData(Region,province,monthFrom,monthTo,typeCur) ;
     //}
   }
 
   selectMonthTo(area,Province,monthFrom,monthTo,typeCur){ 
-
-    if(monthFrom == 'undefined' && monthTo ==  'undefined'){
-      this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
-    }
+ 
    /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
@@ -233,37 +236,26 @@ public isScaling = false;
   }
 
   selectionRegion(area,Province,monthFrom,monthTo,typeCur){
-    
+
     /*if(this.region != "00"){
       area = localStorage.region_desc;
-    }*/
-
-    if(monthFrom != 'undefined' &&  monthTo == 'undefined'){
-      const alert = this.alertCtrl.create({
-        title: 'การเลือกช่วงข้อมูลไม่ถูกต้อง!',
-        subTitle: 'กรุณาเลือกเดือนเริ่มต้น และ เดือนที่สิ้นสุด',
-        buttons: ['ตกลง']
-      });
-      alert.present();
-
-    }else if(monthFrom == 'undefined' &&  monthTo != 'undefined'){
-      const alert = this.alertCtrl.create({
-        title: 'การเลือกช่วงข้อมูลไม่ถูกต้อง!',
-        subTitle: 'กรุณาเลือกเดือนเริ่มต้น และ เดือนที่สิ้นสุด',
-        buttons: ['ตกลง']
-      });
-      alert.present();
-    }else{
+    }*/ 
         Province =  'undefined';
         this.Province = 'undefined';
         
         this.selectionProvince(area,Province,monthFrom,monthTo,typeCur);
-      }
+      
     }
     
     selectionProvince(area,Province,monthFrom,monthTo,typeCur){
       
-      if(monthFrom != 'undefined' &&  monthTo == 'undefined'){
+      /*if(monthFrom != undefined && monthTo !=  undefined){
+        this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
+      }else{
+        this.dateAsOff = dateDisplayAll;
+      }*/
+
+     /* if(monthFrom != 'undefined' &&  monthTo == 'undefined'){
         const alert = this.alertCtrl.create({
           title: 'การเลือกช่วงข้อมูลไม่ถูกต้อง!',
           subTitle: 'กรุณาเลือกเดือนเริ่มต้น และ เดือนที่สิ้นสุด',
@@ -278,7 +270,7 @@ public isScaling = false;
           buttons: ['ตกลง']
         });
         alert.present();
-      }else{
+      }else{*/
 
           if(this.region != "00"){
             area = localStorage.region_desc;
@@ -287,24 +279,14 @@ public isScaling = false;
             this.responseProvince = data;
           });
           this.getTableData(area,Province,monthFrom,monthTo,typeCur);
-      }
+     // }
     }
 
   regionSelectType = "";
-  getTableData(area,Province,monthFrom,monthTo,typeCur) {
+  getTableDataAll(area,Province,monthFrom,monthTo,typeCur){
 
-    /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
-      Province = undefined;
-    }*/
-
-    console.log(monthFrom);
-    console.log(monthTo);
-
-    if(monthFrom != 'undefined' && monthTo !=  'undefined'){
-      this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
-    }
-
-    console.log(this.dateAsOff );
+    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+   
     let Region;
     let province;
 
@@ -333,6 +315,76 @@ public isScaling = false;
     });
     this.oldArea = area;
     this.oldtypeCur = typeCur;
+  }
+
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
+
+  getTableData(area,Province,monthFrom,monthTo,typeCur) {
+    /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
+      Province = undefined;
+    }*/ 
+
+   /*  if((monthFrom != undefined) && (monthTo !=  undefined)){
+      this.dateAsOff = fillterMonthCd(monthFrom,monthTo);     
+    }else{
+      this.dateAsOff = dateDisplayAll;
+    }
+     */
+    let Region;
+    let province;
+
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }else{
+      Region =area;
+    }
+    if(this.branch != "00" || this.province != "00"){    
+      province =  this.select_province;
+    }else{
+      province = Province;
+    }  
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
+
+    this.webapi.getData('TaxProductGroupByMth?offcode='+this.offcode+'&area='+Region+'&province='+province+'&monthFrom='+ monthFrom +'&monthTo='+monthTo).then((data) => {
+      this.responseData = data;
+      this.getTAX(this.regionSelectType );
+      
+    });
+    this.oldArea = area;
+    this.oldtypeCur = typeCur;
+
+    
+    //console.log(monthFrom +'---'+monthTo);
+     this.getDateTiTle(monthFrom,monthTo);
   }
 
   getTAX(typeCur) {

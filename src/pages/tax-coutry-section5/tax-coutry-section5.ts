@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection5Page } from '../tax-branch-section5/tax-branch-section5';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var getColorMap: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
 const BASE_SCALE = 1.3;
 /* end  */
+
+
 @IonicPage()
 @Component({
   selector: 'page-tax-coutry-section5',
@@ -51,7 +55,16 @@ private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
-
+responseData : any; 
+  public Puttraradit = `#DCDCDD`;
+  public Pnan = `#DCDCDD`;
+  public Pphrae = `#DCDCDD`;
+  public Pphayao = `#DCDCDD`;
+  public Plampang = `#DCDCDD`;
+  public Plamphun	 = `#DCDCDD`;
+  public Pchaingrai = `#DCDCDD`;
+  public Pchiangmai = `#DCDCDD`;
+  public Pmaehongson = `#DCDCDD`; 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -68,6 +81,7 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
+    this.setData();
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
 
@@ -118,6 +132,8 @@ GetProvinceTable(typeCurFirst){
 
 regionSelectType = "";
 TableGetData(Province,typeCur) {
+
+  console.log(Province +" หน่วย "+typeCur );
   if(Province != "undefined"){
     this.display_province_fillter = Province;
    }else{
@@ -284,6 +300,50 @@ public onPinchMove(e) {
   }
 }
 /* end  */
+setData() {
+  this.webapi.getData('MapColorRegion?budget_year=2562&region=05').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {       
+  let mapColor;
+  let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
+
+      if(provinceName=="P-uttraradit"){
+        this.Puttraradit =getColorMap(mapColor);
+      }
+      if(provinceName=="P-nan"){
+        this.Pnan =getColorMap(mapColor);
+      }
+      if(provinceName=="P-phrae"){
+        this.Pphrae =getColorMap(mapColor);
+      }
+      if(provinceName=="P-phayao"){
+        this.Pphayao =getColorMap(mapColor);
+      }
+      if(provinceName=="P-lampang"){
+        this.Plampang =getColorMap(mapColor);
+      }
+      if(provinceName=="P-lamphun"){
+        this.Plamphun	 =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chaingrai"){
+        this.Pchaingrai =getColorMap(mapColor);
+      }
+      if(provinceName=="P-chiangmai"){
+        this.Pchiangmai =getColorMap(mapColor);
+      }
+      if(provinceName=="P-maehongson"){
+        this.Pmaehongson =getColorMap(mapColor);
+      }
+      
+    }
+     });    
+  }
+
+  GotoBranch(province){
+    this.app.getRootNav().push(TaxBranchSection5Page,{province:province}); 
+  }
 
 }
 

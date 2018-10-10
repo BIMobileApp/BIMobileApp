@@ -112,4 +112,13 @@ page-tax-coutry-section1 {
         ion-content.disable-scrolling .scroll-content {
           overflow-y: hidden;
         }
+
+      svg{
+        padding-top: 10px;
+        padding-bottom: 5px;
+        width: 85%;
+        height: 65%;
+        margin: 0 auto;
+        display: block;
+      } 
 }

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { TaxBranchSection9Page } from '../tax-branch-section9/tax-branch-section9';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var getColorMap: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -50,7 +52,14 @@ private scale = BASE_SCALE;
 private alreadyScaled = BASE_SCALE;
 public isScaling = false;
 /* end  */
-
+responseData : any; 
+public Pnarathiwat = `#DCDCDD`;
+public Pyala = `#DCDCDD`;
+public Ppattani = `#DCDCDD`;
+public Psongkhla = `#DCDCDD`;
+public Psatun = `#DCDCDD`;
+public Pphatthalung = `#DCDCDD`;
+public Ptrang = `#DCDCDD`; 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -67,6 +76,7 @@ public isScaling = false;
   }
 
   ionViewDidLoad() {
+    this.setData(); 
     this.UserAthu();
     this.dateAsOff = dateDisplayAll;
   }
@@ -282,5 +292,42 @@ public onPinchMove(e) {
   }
 }
 /* end  */
+setData() {
+  this.webapi.getData('MapColorRegion?budget_year=2562&region=09').then((data) => {
+    this.responseData = data;
+    for (var i = 0; i < this.responseData.length; i++) {       
+  let mapColor;
+  let provinceName; 
+      mapColor = this.responseData[i].MAP_COLOR;
+      provinceName= this.responseData[i].PROVINCE_NAME_EN;
+
+      if(provinceName=="P-narathiwat"){
+        this.Pnarathiwat =getColorMap(mapColor);
+      }
+      if(provinceName=="P-yala"){
+        this.Pyala =getColorMap(mapColor);
+      }
+      if(provinceName=="P-pattani"){
+        this.Ppattani =getColorMap(mapColor);
+      }
+      if(provinceName=="P-songkhla"){
+        this.Psongkhla =getColorMap(mapColor);
+      }
+      if(provinceName=="P-satun"){
+        this.Psatun =getColorMap(mapColor);
+      }
+      if(provinceName=="P-phatthalung"){
+        this.Pphatthalung =getColorMap(mapColor);
+      }
+      if(provinceName=="P-trang"){
+        this.Ptrang =getColorMap(mapColor);
+      } 
+    }
+     });    
+  }
+
+  GotoBranch(province){
+    this.app.getRootNav().push(TaxBranchSection9Page,{province:province}); 
+  }
 
 }

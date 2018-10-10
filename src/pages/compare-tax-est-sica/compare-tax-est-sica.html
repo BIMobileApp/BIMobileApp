@@ -22,7 +22,7 @@
       <ion-card>
         <ion-card-content>
           <h2 class="header-style" >กราฟเปรียบเทียบภาษีปีก่อน (ยาสูบ)</h2>
-          <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
+          <h2 class="header-style">{{dateAsOff}}</h2>
           <ion-item class="size">
             <ion-label>กลุ่มสินค้า : </ion-label>
             <ion-select [(ngModel)]="TYPE_DESC" (ionChange)="getLineTaxData(TYPE_DESC)" class="itemStyle">
@@ -127,7 +127,7 @@
       </ion-grid>
 
       <h2 class="header-style" >รายงานเปรียบเทียบภาษีปีก่อน แยกตามประเภทสินค้า  (ยาสูบ)</h2>
-      <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
+      <h2 class="header-style">{{dateAsOff}}</h2>
       
       <ion-item class="sizemini" no-lines>
         <ion-label> หน่วย : </ion-label>
@@ -172,7 +172,7 @@
       </ion-card>
 
       <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการปีงบประมาณ  (ยาสูบ)</h2>
-      <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2>
+      <h2 class="header-style">{{dateAsOff}}</h2>
       <h2 class="header-style"> {{display_region_top10}}     {{display_province_top10}}</h2> 
       
       <h3 style="padding-right: 2%" class="desc-right">หน่วย : {{curTG}}</h3>
