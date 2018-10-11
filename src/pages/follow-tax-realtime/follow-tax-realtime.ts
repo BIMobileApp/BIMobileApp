@@ -211,6 +211,7 @@ export class FollowTaxRealtimePage {
         val = this.responseData[i].DIM_DATA_DATE_ID.toString();
         if(val != 'รวม'){
           year = val.substring(0,4);
+          year = parseInt(year) + 543;
           month = val.substring(6,4);
           date = val.substring(6,8);
           val = date+'/'+month+'/'+year;

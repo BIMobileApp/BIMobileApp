@@ -409,7 +409,7 @@ export class IncDataMthPage {
       this.responseSumArea[i].AMT_OF_LIC_TOBBACO = top;
 
       card = this.responseSumArea[i].AMT_OF_LIC_CARD;
-      if (card != null) { sura = changeCurrency(card, typeCur2); }
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseSumArea[i].AMT_OF_LIC_CARD = card;
 
     }

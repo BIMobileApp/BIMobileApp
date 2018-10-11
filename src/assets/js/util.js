@@ -131,6 +131,9 @@ function notRound(val) {
   } else {
     returnVal = res[0] + "." + res[1].substring(0, 2);
   }
+  if(returnVal == "-100.00" || returnVal == "-100"){
+    returnVal = "-";
+  }
   return returnVal;
 }
 

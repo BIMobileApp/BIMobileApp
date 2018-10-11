@@ -43,6 +43,7 @@ export class TaxBudgetRegPage {
   isEnableProv: any;
   oldRegion: any;
   oldtypeCur: any;
+  username:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -59,6 +60,7 @@ export class TaxBudgetRegPage {
    // this.dateAsOff = dateDisplayAll;
    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.dateDisplay = localStorage.last_update_date;
+    this.username = localStorage.localStorage.userData;
     
   }
 
