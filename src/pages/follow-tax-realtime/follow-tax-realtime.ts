@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll:any;
 declare var dateDisplayDataReailTime:any;
+declare var coventACtoBE:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -206,18 +207,20 @@ export class FollowTaxRealtimePage {
     let date;
     let month;
     let year;
+    let con_year;
     for (var i = 0; i < this.responseData.length; i++) {
     
         val = this.responseData[i].DIM_DATA_DATE_ID.toString();
+       
+
         if(val != 'รวม'){
-          year = val.substring(0,4);
+          year = coventACtoBE(this.responseData[i].DIM_DATA_DATE_ID.toString()); 
           month = val.substring(6,4);
           date = val.substring(6,8);
           val = date+'/'+month+'/'+year;
         }
        
-       
-      this.responseData[i].DIM_DATA_DATE_ID = val;
+        this.responseData[i].DIM_DATA_DATE_ID = val;      
     }
   }
   /* start for pinch */

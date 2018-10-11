@@ -13,6 +13,7 @@ import { LawDataMthPage } from '../law-data-mth/law-data-mth';
 import { IncDataAreaPage } from '../inc-data-area/inc-data-area';
 import { IncDataMthPage } from '../inc-data-mth/inc-data-mth';
 import { LicDataMarketPage } from '../lic-data-market/lic-data-market';
+import { MblRegisterPage } from '../mbl-register/mbl-register';
 
 @IonicPage()
 @Component({
@@ -99,6 +100,10 @@ username:any;
 
   IncDataMarket(){
     this.app.getRootNav().push(LicDataMarketPage); 
+  }
+
+  MBLRegisterLink(){
+    this.app.getRootNav().push(MblRegisterPage); 
   }
   
 }

@@ -47,6 +47,7 @@ export class TaxCoutrySection1Page {
   region:any;
   province:any;
   branch:any;
+  show_branch:any;
 
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
@@ -99,7 +100,7 @@ export class TaxCoutrySection1Page {
 
      let typeCur = 'M';
      this.TableGetData(Province,typeCur);
-     this.brance = 0;
+     this.show_branch = 0;
 
      this.OverallBranch(this.area, Province, typeCur);
    }
@@ -136,8 +137,7 @@ GetProvinceTable(typeCurFirst){
 }
 
 TableGetData(Province,typeCur) {
-
-  console.log(Province);
+  this.show_branch = 1;
 
   if(typeCur == undefined){
     this.regionSelectType = "M";
@@ -159,7 +159,7 @@ TableGetData(Province,typeCur) {
     this.display_province_fillter = "";
   }
 
-  this.brance = 1;
+ // this.brance = 1;
   this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataCurYear = data;
     this.getDataTAX(this.regionSelectType);

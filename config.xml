@@ -13,8 +13,8 @@
     <allow-intent href="geo:*" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
-    <preference name="loadUrlTimeoutValue" value="120000" />
+    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="loadUrlTimeoutValue" value="190000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />

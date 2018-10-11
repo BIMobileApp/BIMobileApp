@@ -399,6 +399,7 @@ export class IncDataMthPage {
     let sura;
     let top;
     let card;
+    let summary;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       sura = this.responseSumArea[i].AMT_OF_LIC_SURA;
       if (sura != null) { sura = changeCurrency(sura, typeCur2); }
@@ -409,7 +410,7 @@ export class IncDataMthPage {
       this.responseSumArea[i].AMT_OF_LIC_TOBBACO = top;
 
       card = this.responseSumArea[i].AMT_OF_LIC_CARD;
-      if (card != null) { sura = changeCurrency(card, typeCur2); }
+      if (card != null) { card = changeCurrency(card, typeCur2); }
       this.responseSumArea[i].AMT_OF_LIC_CARD = card;
 
     }

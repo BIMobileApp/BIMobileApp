@@ -91,7 +91,7 @@ public isScaling = false;
   ionViewDidLoad() {
     let Region;
     let Province;
-    let typeCur  = 'M';
+    let typeCur  = 'B';
     let Mth_From = 'undefined';
     let Mth_To  = 'undefined';
 
@@ -165,7 +165,7 @@ public isScaling = false;
     }
 
     if(typeCur == undefined){
-      this.regionSelectType = "M";
+      this.regionSelectType = "B";
     }else{
       this.regionSelectType =  typeCur;
     }

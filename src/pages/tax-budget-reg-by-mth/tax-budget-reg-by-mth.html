@@ -9,7 +9,7 @@
 <ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
   <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
     <ion-item text-center style="background-color:#D0DFE6;" text-center>
-      <h2 class="header-style">รายงานผู้ประกอบการรายเดือน</h2>
+      <h2 class="header-style">รายงาน Top 10 ผู้ประกอบการรายเดือน</h2>
       <h2 class="header-style">{{dateAsOff}}</h2>
     </ion-item>
 
@@ -50,7 +50,7 @@
 
                 <ion-col>
                 <ion-item class="size">
-                  <ion-label>ถึง เดือน : </ion-label>
+                  <ion-label>ถึง : </ion-label>
                   <ion-select [(ngModel)]="Mth_To" (ionChange)="selectMonthTo(Mth_From,Mth_To,typeCur)">
                     <ion-option value="undefined" [selected]="true">..ทั้งหมด..</ion-option>
                     <ion-option value="1">ตุลาคม</ion-option>
