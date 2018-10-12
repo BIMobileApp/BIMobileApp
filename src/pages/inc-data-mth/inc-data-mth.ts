@@ -399,6 +399,7 @@ export class IncDataMthPage {
     let sura;
     let top;
     let card;
+    let summary;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       sura = this.responseSumArea[i].AMT_OF_LIC_SURA;
       if (sura != null) { sura = changeCurrency(sura, typeCur2); }

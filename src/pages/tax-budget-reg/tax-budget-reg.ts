@@ -43,7 +43,8 @@ export class TaxBudgetRegPage {
   isEnableProv: any;
   oldRegion: any;
   oldtypeCur: any;
-  username:any;
+  username: any;
+  name: any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -54,13 +55,15 @@ export class TaxBudgetRegPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
+
+    this.username = localStorage.userData;
+    this.name = localStorage.username;
     this.grp_id = this.navParams.get('group_id');
     this.str_product = this.grp_id;
     this.offcode = localStorage.offcode;
    // this.dateAsOff = dateDisplayAll;
    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.dateDisplay = localStorage.last_update_date;
-    this.username = localStorage.localStorage.userData;
     
   }
 

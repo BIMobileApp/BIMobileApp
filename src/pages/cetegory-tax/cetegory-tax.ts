@@ -12,6 +12,7 @@ import { TaxCoutrySection7Page } from '../tax-coutry-section7/tax-coutry-section
 import { TaxCoutrySection8Page } from '../tax-coutry-section8/tax-coutry-section8';
 import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
+import { MblRegisterPage } from '../mbl-register/mbl-register';
 
 declare var notRound: any;
 declare var changeCurrency: any;

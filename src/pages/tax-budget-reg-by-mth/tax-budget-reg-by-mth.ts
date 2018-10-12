@@ -77,7 +77,7 @@ export class TaxBudgetRegByMthPage {
   }
 
     this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + Mth_From+'&month_to='+Mth_To).then((data) => {
-      this.responseData = data; console.log(this.responseData);
+      this.responseData = data; 
       this.getTableTAX(this.regionSelectType);
     });
 

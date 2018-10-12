@@ -199,3 +199,13 @@ function getColorMap(val) {
   return returnVal;
 }
 
+function coventACtoBE(data){
+  var year = data.substring(0, 4); 
+  var month = data.substring(4, 6); 
+  var day = data.substring(6, 8); 
+
+  var d = new Date(year + '-' + month + '-' + day);  
+  return d.getFullYear() + 543; 
+}
+
+
