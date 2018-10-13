@@ -4,7 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any; 
-
+declare var notRound: any;
 declare var getColorMap: any; 
 
 /* start for pinch */
@@ -103,6 +103,7 @@ public Pprachuap_khiri_khan = `#DCDCDD`;
     let typeCur = 'M';
     this.TableGetData(Province,typeCur);
     this.brance = 0;
+
     //this.OverallBranch(this.area, Province, typeCur);
   }
 
@@ -192,16 +193,13 @@ getTaxBranch(typeCur){
    last_tax_branch = this.DataOverallBranch[i].LAST_TAX;
    if (last_tax_branch != null) { last_tax_branch = changeCurrency(last_tax_branch, typeCur); }
    this.DataOverallBranch[i].LAST_TAX = last_tax_branch;
+
+   if(this.DataOverallBranch[i].PERCENT_TAX != null){
+    this.DataOverallBranch[i].PERCENT_TAX = notRound(this.DataOverallBranch[i].PERCENT_TAX);
+  }
  }
 }
 
-getPercent(){
- for (var i = 0; i < this.DataCurYear.length; i++) {
-   if(this.DataCurYear[i].PERCENT_TAX != null){
-     this.DataCurYear[i].PERCENT_TAX = this.DataCurYear[i].PERCENT_TAX.toFixed(2);
-   }
- }
-}
 
 getTAX(typeCur) {
  let tax;
@@ -217,6 +215,10 @@ getTAX(typeCur) {
    if (tax != null) { tax = changeCurrency(tax, typeCur); }
    if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
    if (est != null) { est = changeCurrency(est, typeCur); }
+
+   if(this.DataCurYear[i].PERCENT_TAX != null){
+    this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
+  }
 
    this.DataCurYear[i].TAX = tax;
    this.DataCurYear[i].LAST_TAX = last_tax;
@@ -250,6 +252,10 @@ getProductTAX(typeCur) {
    if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
    if (est != null) { est = changeCurrency(est, typeCur); }
 
+   if(this.DataProduct[i].PERCENT_TAX != null){
+    this.DataProduct[i].PERCENT_TAX = notRound(this.DataProduct[i].PERCENT_TAX);
+  }
+
    this.DataProduct[i].TAX = tax;
    this.DataProduct[i].LAST_TAX = last_tax;
    this.DataProduct[i].ESTIMATE = est;
@@ -269,6 +275,10 @@ getProvinceTAX(typeCurFirst){
    if (tax != null) { tax = changeCurrency(tax, typeCurFirst); }
    if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCurFirst); }
    if (est != null) { est = changeCurrency(est, typeCurFirst); }
+
+   if(this.DataProvince[i].PERCENT_TAX != null){
+    this.DataProvince[i].PERCENT_TAX = notRound(this.DataProvince[i].PERCENT_TAX);
+  }
 
    this.DataProvince[i].TAX = tax;
    this.DataProvince[i].LAST_TAX = last_tax;

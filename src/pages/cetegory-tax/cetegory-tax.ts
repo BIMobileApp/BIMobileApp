@@ -106,16 +106,16 @@ export class CetegoryTaxPage {
   responseDataMap : any; 
   show_map_thiland:any;
 
-    public Mzone1 = '';// `#DCDCDD`;
-    public Mzone2 = '';//`#DCDCDD`;
-    public Mzone3 = '';//`#DCDCDD`;
-    public Mzone4 = '';//`#DCDCDD`;
-    public Mzone5 = '';//`#DCDCDD`;
-    public Mzone6 = '';//`#DCDCDD`;
-    public Mzone7 = '';//`#DCDCDD`;
-    public Mzone8 = '';//`#DCDCDD`;
-    public Mzone9 = '';//`#DCDCDD`; 
-    public Mzone10 = '';//`#DCDCDD`; 
+    public Mzone1 = `#DCDCDD`;
+    public Mzone2 = `#DCDCDD`;
+    public Mzone3 = '#DCDCDD';
+    public Mzone4 = `#DCDCDD`;
+    public Mzone5 = `#DCDCDD`;
+    public Mzone6 = `#DCDCDD`;
+    public Mzone7 = `#DCDCDD`;
+    public Mzone8 = `#DCDCDD`;
+    public Mzone9 = `#DCDCDD`; 
+    public Mzone10 = `#DCDCDD`; 
 
 
     /* start for pinch */

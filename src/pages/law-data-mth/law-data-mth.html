@@ -20,9 +20,32 @@
         <ion-card-content no-padding>
           <h2 class="header-style">{{dateAsOff}}</h2>
 
+          <ion-grid>
+            <ion-row>
+                <ion-col>
+                  <ion-item  class="size">
+                      <ion-label> ภาค : </ion-label>
+                      <ion-select  [(ngModel)]="OverallRegion" (ionChange)="overAllSelectRegion(OverallRegion, OverallProvince, typeCurFirst)" disabled={{isEnable}}>
+                           <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
+                           <ion-option  *ngFor="let item3 of responseOverallRegion"  value="{{item3.REGION_NAME}}"  [selected]="select_region == item3.REGION_NAME">{{item3.REGION_NAME}}</ion-option>              
+                      </ion-select>
+                    </ion-item>
+                </ion-col>        
+                <ion-col>
+                  <ion-item  class="size">
+                      <ion-label>จังหวัด : </ion-label>
+                      <ion-select  [(ngModel)]="OverallProvince" (ionChange)="overallSelectionProvince(OverallRegion, OverallProvince, typeCurFirst)" disabled={{isEnableProv}}>
+                           <ion-option value="undefined"   [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                           <ion-option  *ngFor="let item4 of ResponseOverAllProvince"  value="{{item4.PROVINCE_NAME}}"  [selected]="select_province == item4.PROVINCE_NAME">{{item4.PROVINCE_NAME}}</ion-option>            
+                      </ion-select>
+                  </ion-item>
+               </ion-col>         
+             </ion-row>
+          </ion-grid>
+
           <ion-item class="sizemini" no-lines>
             <ion-label> หน่วย : </ion-label>
-            <ion-select [(ngModel)]="typeCurFirst" (ionChange)="getTableData(typeCurFirst)">
+            <ion-select [(ngModel)]="typeCurFirst" (ionChange)="getTableData(OverallRegion, OverallProvince, typeCurFirst)">
               <ion-option value="M" [selected]="true">ล้านคดี/ล้านบาท</ion-option>
               <ion-option value="B">คดี/บาท</ion-option>
             </ion-select>

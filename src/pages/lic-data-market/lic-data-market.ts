@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 declare var changeCurrencyNoUnit:any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -25,6 +27,7 @@ export class LicDataMarketPage {
   oldArea: any;
   oldtypeCur: any;
   Province: any;
+  mthNumber:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -39,32 +42,107 @@ export class LicDataMarketPage {
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
     this.username = localStorage.userData;
-
+    this.mthNumber = monthNowNumber;
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
+
   ionViewDidLoad() {
+   
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let typeCur = 'M';
-    this.webapi.getData('IncDataMarketList?offcode=' + this.offcode).then((data) => {
-      this.responseData = data;
-      this.getDataAmt(typeCur);
-      this.SumData(typeCur);
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
+   this.loadAllData(typeCur,month_from,month_to);
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
     });
   }
 
-  SumData(typeCur) {
-    this.webapi.getData('IncSumDataMarketList?offcode=' + this.offcode).then((data) => {
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+
+  loadAllData(typeCur,month_from,month_to){
+    this.webapi.getData('IncDataMarketList?offcode=' + this.offcode+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
+      this.responseData = data;
+      this.getDataAmt(typeCur);
+      this.SumData(typeCur,month_from,month_to);
+    });
+  }
+
+  SumData(typeCur,month_from,month_to) {
+    this.webapi.getData('IncSumDataMarketList?offcode=' + this.offcode+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
       this.responseSumData = data;
       this.getSumDataAmt(typeCur);
     });
   }
 
-  ChangeCurrency(typeCur) {
+  SelectMonthFrom(typeCur,month_from,month_to){
+    //this. loadData(typeCur,month_from,month_to);
+  }
+
+  SelectMonthTo(typeCur,month_from,month_to){
+    this. loadData(typeCur,month_from,month_to);
+  }
+
+  loadData(typeCur,month_from,month_to){
+    this.webapi.getData('IncDataMarketList?offcode=' + this.offcode+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
+      this.responseData = data;
+      this.getDataAmt(typeCur);
+      this.SumData(typeCur,month_from,month_to);
+    });
+
+    this.getDateTiTle(month_from,month_to);
+  }
+
+  responseDateTitle:any;
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
+
+  /*ChangeCurrency(typeCur) {
     this.webapi.getData('IncDataMarketList?offcode=' + this.offcode).then((data) => {
       this.responseData = data;
       this.getDataAmt(typeCur);
       this.SumData(typeCur);
     });
-  }
+  }*/
 
   getDataAmt(typeCur) {
     let sura;

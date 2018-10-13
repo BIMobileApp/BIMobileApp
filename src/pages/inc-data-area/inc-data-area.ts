@@ -7,6 +7,7 @@ declare var changeCurrencyNoUnit:any;
 declare var monthNowNumber:any;
 declare var monthNowText:any;
 declare var datePreviousOneDay:any;
+declare var convertMthBudYear:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -22,6 +23,7 @@ export class IncDataAreaPage {
   offcode: any;
   dateDisplay: any;
   dateAsOff: any;
+  dateAsOffOverall:any;
   mthText:any;
   mthNumber:any;
   datePrevois:any;
@@ -83,15 +85,11 @@ export class IncDataAreaPage {
     this.dateDisplay = localStorage.last_update_date;
     //this.dateAsOff = dateDisplayAll;
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    this.dateAsOffOverall = 'ข้อมูล '+dateDisplayAll; 
     this.username = localStorage.userData;
     this.mthNumber = monthNowNumber;
     this.mthText = monthNowText;
     this.datePrevois = datePreviousOneDay;
-
-    console.log(this.dateAsOff );
-    console.log(this.mthNumber );
-    console.log(this.mthText );
-    console.log(this.datePrevois);
 
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
     this.region = localStorage.offcode.substring(0, 2);
@@ -125,13 +123,25 @@ export class IncDataAreaPage {
 
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
+  
   ionViewDidLoad() {
+
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let typeCur = 'M';
     let typeCur2 = 'M';
-    this.loadData(typeCur2);
+    let monthFrom = convertMthBudYear(this.mthNumber);
+    let monthTo = convertMthBudYear(this.mthNumber);
+    this.loadDataAll(monthFrom,monthTo,typeCur2);
     this.selectionArea();
     this.selectionGeoupName();
     this.selectionProvinceAll();
+
+    this.select_mth_from = monthFrom;
+    this.select_mth_to = monthTo;
 
     this.ProductAll(typeCur);
   }
@@ -347,8 +357,35 @@ export class IncDataAreaPage {
     });
   }
 
+   ///end get all product///
 
-  ///end get all product///
+
+   //--------------------------------------------------------- selection เดือน  ---------------------------------------------------------//
+
+   ResponseOverallMthFrom:any;
+   ddlMonthFrom(){
+     this.webapi.getData('dllMMonth').then((data) => {
+       this.ResponseOverallMthFrom = data;
+     });
+   }
+ 
+   ResponseOverallMthTo:any;
+   ddlMonthTo(){
+     this.webapi.getData('dllMMonth').then((data) => {
+       this.ResponseOverallMthTo = data;
+     });
+   }
+ 
+ 
+   overallSelectMonthFrom(month_from,month_to,typeCur2){
+    // this.loadData(month_from,month_to,typeCur2);
+   }
+ 
+   overallSelectMonthTo(month_from,month_to,typeCur2){
+     this.loadData(month_from,month_to,typeCur2);
+   }
+
+   //--------------------------------------------------------- end selection เดือน  ---------------------------------------------------------//
 
   getSuraAmt(typeCur) {
     let AMT;
@@ -393,13 +430,52 @@ export class IncDataAreaPage {
     }
   }
 
-  loadData(typeCur2) {
-    this.webapi.getData('IncArea?offcode=' + this.offcode).then((data) => {
+  loadDataAll(month_from,month_to,typeCur2) {
+    this.webapi.getData('IncArea?offcode=' + this.offcode+'&month_from='+ month_from +'&month_to='+month_to).then((data) => {
       this.responseData = data;
       this.getProductAmt(typeCur2);
       this.getProductNum(typeCur2);
     });
   }
+
+  loadData(month_from,month_to,typeCur2) {
+
+    this.webapi.getData('IncArea?offcode=' + this.offcode+'&month_from='+ month_from +'&month_to='+month_to).then((data) => {
+      this.responseData = data;
+      this.getProductAmt(typeCur2);
+      this.getProductNum(typeCur2);
+    });
+
+    this.getDateTiTleOverall(month_from,month_to);
+  }
+
+  getDateTiTleOverall(monthFrom,monthTo){
+    alert(monthFrom);
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOffOverall="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOffOverall =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOffOverall = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOffOverall = 'ข้อมูล '+dateDisplayAll;
+    }    
+
+  }
+
+
 
   getProductAmt(typeCur2) {
 

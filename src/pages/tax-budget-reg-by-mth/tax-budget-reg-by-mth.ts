@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -23,6 +25,8 @@ export class TaxBudgetRegByMthPage {
   responseDateTitle:any;
   dateDisplay: any;
   dateAsOff: any;
+  monthNowNumber:any;
+  mthNumber:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -35,53 +39,149 @@ export class TaxBudgetRegByMthPage {
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
+    this.mthNumber = monthNowNumber;
     //this.dateAsOff = dateDisplayAll;
     
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
   }
 
+
+  region: any;
+  province: any;
+  branch: any;
+
+  select_region: any;
+  select_all_value: any;
+  select_all_prov_value: any;
+  select_province: any;
+  isEnable: any;
+  isEnableProv: any;
+  
+  select_mth_from = '';
+  select_mth_to = '';
   ionViewDidLoad() {
     let datetime = new Date();
-
     let datenow = datetime.getMonth();
     // let datenow = datetime.getMonth();
 
-    let date;
-    let Mth_From = 'undefined';
-    let Mth_To  = 'undefined';
+     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+     this.region = localStorage.offcode.substring(0, 2);
+     this.province = localStorage.offcode.substring(2, 4);
+     this.branch = localStorage.offcode.substring(4, 6);
+     /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+
+     ///ตรวจสอบภาคเพื่อ default selection
+     if (this.region != "00") {
+       this.select_region = localStorage.region_desc;
+       this.select_all_value = false;
+       this.isEnable = true;
+     } else {
+       this.select_all_value = true;
+       this.isEnable = false;
+     }
+     ///end ตรวจสอบภาคเพื่อ default selection
+
+     /// ตรวจสอบสาขาเพื่อ default selection
+     var res = "";
+     if (this.branch != "00" || this.province != "00") {
+       res = localStorage.offdesc.split(" ");
+       this.select_province = res[0];
+       this.select_all_prov_value = false;
+       this.isEnableProv = true;
+     } else {
+       this.select_all_prov_value = true;
+       this.isEnableProv = false;
+     }
+     ///end  ตรวจสอบสาขาเพื่อ default selection
+
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_tor  = convertMthBudYear(this.mthNumber);
     let typeCur = "M";
-    this.selectDate(Mth_From,Mth_To,typeCur);   
+    let Region = 'undefined';
+    let Province =  'undefined';
+
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_tor;
+
+    this.selectDataAll(Region, Province, typeCur,month_from,month_tor);   
   }
 
-  /*selectDataAll(){  
-    this.webapi.getData('TaxBudgetRegByMth?offcode='+this.offcode+'&grpup_id='+this.grp_id).then((data)=>{
-      this.responseData = data;
-      this.getTableTAX();
+  selectDataAll(Region, Province, typeCur,month_from,month_to){ 
+    
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    } else {
+      Region = Region;
+    }
+    if (this.branch != "00" || this.province != "00") {
+      Province = this.select_province;
+    } else {
+      Province = Province;
+    }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+      }
+    this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + month_from+'&month_to='+month_to+
+                                    '&region='+Region+'&province='+Province).then((data) => {
+      this.responseData = data; 
+      this.getTableTAX(this.regionSelectType);
     });
-  }*/
-
-  selectMonthFrom(Mth_From,Mth_To,typeCur){
-    this.selectDate(Mth_From,Mth_To,typeCur);
   }
 
-  selectMonthTo(Mth_From,Mth_To,typeCur){
-    this.selectDate(Mth_From,Mth_To,typeCur); 
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+
+  selectMonthFrom(Region, Province, typeCur,month_from,month_to){
+    this.selectDate(Region, Province, typeCur,month_from,month_to);
+  }
+
+  selectMonthTo(Region, Province, typeCur,month_from,month_to){
+    this.selectDate(Region, Province, typeCur,month_from,month_to); 
   }
 
   regionSelectType = "";
-  selectDate(Mth_From,Mth_To,typeCur) {
+  selectDate(Region, Province, typeCur,month_from,month_to) {
     if(typeCur == undefined){
       this.regionSelectType = "M";
     }else{
       this.regionSelectType =  typeCur;
   }
 
-    this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + Mth_From+'&month_to='+Mth_To).then((data) => {
+      if (this.region != "00") {
+        Region = localStorage.region_desc;
+      } else {
+        Region = Region;
+      }
+      if (this.branch != "00" || this.province != "00") {
+        Province = this.select_province;
+      } else {
+        Province = Province;
+      }
+
+  this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + month_from+'&month_to='+month_to+
+                                  '&region='+Region+'&province='+Province).then((data) => {
       this.responseData = data; 
       this.getTableTAX(this.regionSelectType);
     });
 
-    this.getDateTiTle(Mth_From,Mth_To);
+    this.getDateTiTle(month_from,month_to);
   }
 
   getDateTiTle(monthFrom,monthTo){  
@@ -108,6 +208,7 @@ export class TaxBudgetRegByMthPage {
       this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     }    
   }
+
   getTableTAX(typeCur) {
     //console.log(typeCur);
     let tax;

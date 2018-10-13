@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -61,6 +63,8 @@ export class CompareTaxEstAlcoholPage {
   //Table reg
   responseRegData: any;
   grp_id: any;
+
+  mthNumber:any;
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -73,6 +77,7 @@ public isScaling = false;
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
+    this.mthNumber = monthNowNumber;
    // this.dateAsOff = dateDisplayAll;   
    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.grp_id = 'ภาษีสุรา';
@@ -109,17 +114,23 @@ public isScaling = false;
     ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
+
   ionViewDidLoad() {
     this.getProductType();
 
     let area;
     let Province;
-    let month_from;
-    let month_to;
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.selectionArea();
     this.selectionProviceFirst();
     
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
     this.getTableData(area, Province, typeCur,month_from,month_to);
     this.selectDataAll(area, Province, typeCur,month_from,month_to);
   }

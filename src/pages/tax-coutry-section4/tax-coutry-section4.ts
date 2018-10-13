@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { TaxBranchSection4Page } from '../tax-branch-section4/tax-branch-section4';
-
+declare var notRound: any;
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 declare var getColorMap: any; 
@@ -187,6 +187,10 @@ OverallBranch(area, Province, typeCur){
     last_tax_branch = this.DataOverallBranch[i].LAST_TAX;
     if (last_tax_branch != null) { last_tax_branch = changeCurrency(last_tax_branch, typeCur); }
     this.DataOverallBranch[i].LAST_TAX = last_tax_branch;
+
+    if(this.DataOverallBranch[i].PERCENT_TAX != null){
+      this.DataOverallBranch[i].PERCENT_TAX = notRound(this.DataOverallBranch[i].PERCENT_TAX);
+    }
   }
  }
 
@@ -212,6 +216,9 @@ getTAX(typeCur) {
     if (tax != null) { tax = changeCurrency(tax, typeCur); }
     if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
     if (est != null) { est = changeCurrency(est, typeCur); }
+    if(this.DataCurYear[i].PERCENT_TAX != null){
+      this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
+    }
 
     this.DataCurYear[i].TAX = tax;
     this.DataCurYear[i].LAST_TAX = last_tax;
@@ -240,9 +247,9 @@ TableProductGetData(area,Province,typeCur) {
   this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+area+'&province='+Province).then((data) => {
     this.DataProduct = data;
     this.getProductTAX(typeCur);
-    this.getProductLAST_TAX();
+  /*   this.getProductLAST_TAX();
     this.getProductEST();
-    this.getProductPERCENT_TAX();
+    this.getProductPERCENT_TAX(); */
   });
 }
 
@@ -259,6 +266,9 @@ getProductTAX(typeCur) {
     if (tax != null) { tax = changeCurrency(tax, typeCur); }
     if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
     if (est != null) { est = changeCurrency(est, typeCur); }
+    if(this.DataProduct[i].PERCENT_TAX != null){
+      this.DataProduct[i].PERCENT_TAX = notRound(this.DataProduct[i].PERCENT_TAX);
+    }
 
     this.DataProduct[i].TAX = tax;
     this.DataProduct[i].LAST_TAX = last_tax;
@@ -266,7 +276,7 @@ getProductTAX(typeCur) {
   }
 }
 
-getProductLAST_TAX() {
+/* getProductLAST_TAX() {
   let val;
   for (var i = 0; i < this.DataProduct.length; i++) {
     val = this.DataProduct[i].LAST_TAX / 1000000;
@@ -292,7 +302,7 @@ getProductPERCENT_TAX(){
       this.DataProduct[i].PERCENT_TAX = this.DataProduct[i].PERCENT_TAX.toFixed(2);
     }
   }
-}
+} */
 
 getProvinceTAX(typeCurFirst){
   let tax;
@@ -307,13 +317,16 @@ getProvinceTAX(typeCurFirst){
     if (tax != null) { tax = changeCurrency(tax, typeCurFirst); }
     if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCurFirst); }
     if (est != null) { est = changeCurrency(est, typeCurFirst); }
+    if(this.DataProvince[i].PERCENT_TAX != null){
+      this.DataProvince[i].PERCENT_TAX = notRound(this.DataProvince[i].PERCENT_TAX);
+    }
 
     this.DataProvince[i].TAX = tax;
     this.DataProvince[i].LAST_TAX = last_tax;
     this.DataProvince[i].ESTIMATE = est;
   }
 }
-getProvinceLAST_TAX(){
+/* getProvinceLAST_TAX(){
   let val;
   for (var i = 0; i < this.DataProvince.length; i++) {
     val = this.DataProvince[i].LAST_TAX / 1000000
@@ -337,7 +350,7 @@ getProvincePERCENT_TAX(){
       this.DataProvince[i].PERCENT_TAX = this.DataProvince[i].PERCENT_TAX.toFixed(2);
     }
   }
-}
+} */
 
 ChangeUnitFirst(typeCurFirst){
   this.GetProvinceTable(typeCurFirst);

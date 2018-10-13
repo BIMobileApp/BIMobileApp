@@ -110,7 +110,9 @@ export class CompareTaxEstDrinkPage {
 
   ionViewDidLoad() {
     this.getProductType();
-    
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let area;
     let Province;
     let month_from;
@@ -139,6 +141,20 @@ export class CompareTaxEstDrinkPage {
     }
   }
 
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+  
   selectDataAll(area, Province,typeCur,month_from,month_to) {
     this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + area + '&province=' + Province+ '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
 /*     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => { */

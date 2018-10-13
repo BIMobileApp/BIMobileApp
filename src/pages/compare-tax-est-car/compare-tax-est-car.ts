@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -64,6 +66,8 @@ export class CompareTaxEstCarPage {
   isEnable: any;
   isEnableProv: any;
 
+  mthNumber:any;
+
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -78,6 +82,7 @@ export class CompareTaxEstCarPage {
     this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
+    this.mthNumber = monthNowNumber;
     //this.dateAsOff = dateDisplayAll;
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.grp_id = 'ภาษีรถยนต์';
@@ -114,17 +119,24 @@ export class CompareTaxEstCarPage {
     ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
   ionViewDidLoad() {
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
     this.getProductType();
     let area;
     let Province;
-    let month_from;
-    let month_to;
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.selectionArea();
     this.selectionProviceFirst();
    
-    this.getTableData(area, Province, typeCur,month_from,month_to);
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
+    this.getTableDataAll(area, Province, typeCur,month_from,month_to);
     this.selectDataAll(area, Province, typeCur,month_from,month_to);
   }
   toggleLineShow() {
@@ -142,6 +154,20 @@ export class CompareTaxEstCarPage {
     } else {
       this.toggleTable = 0;
     }
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
   }
 
   selectDataAll(area, Province, typeCur,month_from,month_to) {
@@ -188,6 +214,76 @@ export class CompareTaxEstCarPage {
   //-----------------------------------------------------------------------------------------------------------//
   
   regionSelectType = "";
+
+  getTableDataAll(area, Province, typeCur,month_from,month_to) {
+
+    /* if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
+       this.Province = undefined;
+       Province = undefined;
+     }*/
+     let table = "MBL_PRODUCT_CAR";
+     if (this.region != "00") {
+       area = localStorage.region_desc;
+       if(area != 'undefined'){
+         this.display_region_top10 =  localStorage.region_desc;
+       }else{
+         this.display_region_top10 = "";
+       }
+ 
+     } else {
+       if(area != 'undefined'){
+         this.display_region_top10 = area;
+       }else{
+         this.display_region_top10 = "";
+       }
+       area = area;
+     }
+ 
+ 
+     if (this.branch != "00" || this.province != "00") {
+       if(Province != 'undefined'){
+         this.display_province_top10 = this.select_province;
+       }
+       else{
+         this.display_province_top10 = "";
+       }
+       Province = this.select_province;
+     } else {
+       if(Province != 'undefined'){
+         this.display_province_top10 = Province;
+       }
+       else{
+         this.display_province_top10 = "";
+       }
+       Province = Province;
+     }
+ 
+     if(typeCur == undefined){
+       this.regionSelectType = "M";
+     }else{
+       this.regionSelectType =  typeCur;
+     }
+     this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode+ '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
+     /* this.webapi.getData('CompareTaxCar?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => { */
+       this.responseData = data;
+       this.getTableTAX(this.regionSelectType);
+ 
+     });
+     this.selectDataAll(area, Province, this.regionSelectType,month_from,month_to);
+     this.oldArea = area;
+     this.oldtypeCur = typeCur;
+     if(typeCur == "M"){
+       this.curTG = "ล้านบาท";
+     }else if(typeCur == undefined){
+       this.curTG = "ล้านบาท";
+     }else{
+       this.curTG = "บาท";
+     }
+     
+    // this.getDateTiTle(month_from,month_to);
+ 
+   }
+
   getTableData(area, Province, typeCur,month_from,month_to) {
 
    /* if (area !== this.oldArea || typeCur !== this.oldtypeCur) {

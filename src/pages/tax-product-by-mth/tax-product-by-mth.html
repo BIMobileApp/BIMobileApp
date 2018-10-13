@@ -13,77 +13,16 @@
       <h2 class="header-style"> {{dateAsOff}}</h2>
     </ion-item>
 
-    <!--<ion-grid>
-    <ion-col>
-      <ion-row>ปี : </ion-row>
-      <ion-row> 
-          <ion-select  [(ngModel)]="year"   (ionChange)="getitemsByDate(year)" >
-            <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
-            <ion-option  *ngFor="let item of summaryDate"  value="{{item.key}}">{{item.key}}</ion-option>
-          </ion-select>
-      </ion-row>
-    </ion-col>
-    <ion-col>
-      <ion-row>เดือน :</ion-row>
-      <ion-row>
-          <ion-select [(ngModel)]="month"  #item (ionChange)="selectDate(item.value)" >
-              <ion-option value=" "  [selected]="true">...ทั้งหมด...</ion-option>
-              <ion-option value="มกราคม" >มกราคม</ion-option>
-              <ion-option value="กุมภาพันธ์">กุมภาพันธ์</ion-option>
-              <ion-option value="มีนาคม">มีนาคม</ion-option>
-              <ion-option value="เมษายน">เมษายน</ion-option>
-              <ion-option value="พฤษภาคม">พฤษภาคม</ion-option>
-              <ion-option value="มิถุนายน">มิถุนายน</ion-option>
-              <ion-option value="กรกฎาคม">กรกฎาคม</ion-option>
-              <ion-option value="สิงหาคม">สิงหาคม</ion-option>
-              <ion-option value="กันยายน">กันยายน</ion-option>
-              <ion-option value="ตุลาคม">ตุลาคม</ion-option>
-              <ion-option value="พฤศจิกายน">พฤศจิกายน</ion-option>
-              <ion-option value="ธันวาคม">ธันวาคม</ion-option>
-          </ion-select>
-      </ion-row>
-    </ion-col>
-  </ion-grid>-->
-    <!--
-  <ion-grid>
-      <ion-col>
-          <ion-item>
-              <ion-label>ปี : </ion-label>
-              <ion-select  [(ngModel)]="year"   (ionChange)="getitemsByDate(year)" >
-                <ion-option value=""  [selected]="true">ทั้งหมด</ion-option>
-                <ion-option  *ngFor="let item of summaryDate"  value="{{item.key}}">{{item.key}}</ion-option>
-              </ion-select>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-  </ion-col> 
-</ion-grid> -->
+   
     <ion-grid>
       <ion-row>
         <ion-col>
-          <!--    <ion-item  class="size">
-            <ion-label>กลุ่มสินค้า : </ion-label>
-            <ion-select  [(ngModel)]="group_name"   (ionChange)="getitemsGroupName(area,province,group_name)" >
-                    <ion-option value="undefined"  [selected]="true">สุรา</ion-option>
-                    <ion-option  *ngFor="let item2 of responseGroupName"  value="{{item2.GROUP_DESC}}">{{item2.GROUP_DESC}}</ion-option>          
-            </ion-select>
-          </ion-item> -->
+
           <ion-item class="size">
             <ion-label> เดือน : </ion-label>
             <ion-select [(ngModel)]="monthFrom"  (ionChange)="selectMonthFrom(area,Province,monthFrom,monthTo,typeCur)">
-              <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
-              <ion-option value="1">ตุลาคม</ion-option>
-              <ion-option value="2">พฤศจิกายน</ion-option>
-              <ion-option value="3">ธันวาคม</ion-option>
-              <ion-option value="4">มกราคม</ion-option>
-              <ion-option value="5">กุมภาพันธ์</ion-option>
-              <ion-option value="6">มีนาคม</ion-option>
-              <ion-option value="7">เมษายน</ion-option>
-              <ion-option value="8">พฤษภาคม</ion-option>
-              <ion-option value="9">มิถุนายน</ion-option>
-              <ion-option value="10">กรกฎาคม</ion-option>
-              <ion-option value="11">สิงหาคม</ion-option>
-              <ion-option value="12">กันยายน</ion-option>            
+                <ion-option value="undefined">ทั้งหมด</ion-option>
+                <ion-option *ngFor="let item3 of ResponseMthFrom"  value="{{item3.BUDGET_MONTH_CD}}"  [selected]="select_mth_from == item3.BUDGET_MONTH_CD">{{item3.MONTH_DESC}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -91,19 +30,8 @@
           <ion-item class="size">
             <ion-label> ถึง: </ion-label>
             <ion-select [(ngModel)]="monthTo" (ionChange)="selectMonthTo(area,Province,monthFrom,monthTo, typeCur)">
-              <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
-              <ion-option value="1">ตุลาคม</ion-option>
-              <ion-option value="2">พฤศจิกายน</ion-option>
-              <ion-option value="3">ธันวาคม</ion-option>
-              <ion-option value="4">มกราคม</ion-option>
-              <ion-option value="5">กุมภาพันธ์</ion-option>
-              <ion-option value="6">มีนาคม</ion-option>
-              <ion-option value="7">เมษายน</ion-option>
-              <ion-option value="8">พฤษภาคม</ion-option>
-              <ion-option value="9">มิถุนายน</ion-option>
-              <ion-option value="10">กรกฎาคม</ion-option>
-              <ion-option value="11">สิงหาคม</ion-option>
-              <ion-option value="12">กันยายน</ion-option>       
+                  <ion-option value="undefined">ทั้งหมด</ion-option>
+                  <ion-option  *ngFor="let item4 of ResponseMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>    
             </ion-select>
           </ion-item>
       </ion-col>
