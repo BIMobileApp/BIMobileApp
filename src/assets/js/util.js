@@ -74,11 +74,12 @@ datePreviousOneDay = now.getDate() - 1;
 
 //ฟังก์ชั่น เปลี่ยนบาทเป็นล้านบาท
 function changeCurrency(val, typeNow) {
+
   try {
     var result = 0;
     if (typeNow == 'M') {
-      val = val / 1000000;
-      result = notRound(val);
+      val = val/1000000;
+      result = Math.round(val * 1000) / 1000;
     } else {
       result = notRound(val);
     }
@@ -90,11 +91,13 @@ function changeCurrency(val, typeNow) {
 }
 
 function changeCurrencyNoUnit(val, typeNow) {
+  
   try {
     var result = 0;
     if (typeNow == 'M') {
-      val = val / 1000000;
-      result = notRound(val);
+        val = val/1000000;
+        result = Math.round(val * 1000) / 1000;
+       //result = Math.ceil(val * 1000) / 1000;
     } else {
       result = val;
     }
@@ -131,9 +134,9 @@ function notRound(val) {
   } else {
     returnVal = res[0] + "." + res[1].substring(0, 2);
   }
-  if(returnVal == "-100.00" || returnVal == "-100"){
+ /* if(returnVal == "-100.00" || returnVal == "-100"){
     returnVal = "-";
-  }
+  }*/
   return returnVal;
 }
 

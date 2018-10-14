@@ -5,6 +5,8 @@ declare var changeCurrency: any;
 declare var dateDisplayAll:any;
 declare var dateDisplayDataReailTime:any;
 declare var coventACtoBE:any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -40,6 +42,8 @@ export class FollowTaxRealtimePage {
   responseProvince:any;
   oldRegion: any;
   oldtypeCur : any;
+
+  mthNumber:any;
    /* start for pinch */
    public fontSize = `${BASE_SCALE}rem`;
    private scale = BASE_SCALE;
@@ -56,6 +60,7 @@ export class FollowTaxRealtimePage {
   this.dateAsOff =  dateDisplayAll;
   this.dateNow = dateDisplayDataReailTime;
   this.username = localStorage.userData;
+  this.mthNumber = monthNowNumber; 
 
   ///หา offcode เพื่อหา ภาค จังหวัด สาขา
   this.region = localStorage.offcode.substring(0, 2);
@@ -90,13 +95,65 @@ export class FollowTaxRealtimePage {
   }
 
   dateDisplayDataReailTime = "";
+  select_mth_from = '';
+  select_mth_to = '';
+
   ionViewDidLoad() {
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
     this.selectionAreaAll();
     this.selectionProvinceAll();
     let typeCur = 'M';
     let Region = undefined;
     let Province = undefined;
-    this.getData(Region,Province,typeCur);    
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
+    this.getDataAll(Region,Province, month_from,month_to,typeCur);    
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+
+  getDataAll(Region,Province, month_from,month_to,typeCur){
+
+    if(this.region != "00"){
+      Region = localStorage.region_desc;
+    }
+  
+    if(this.branch != "00" || this.province != "00"){     
+      Province =  this.select_province;
+    }
+    if (Region !== this.oldRegion || typeCur !== this.oldtypeCur) {
+      Province = undefined;
+    }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+      
+     this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province+'&month_from='+month_from+'&month_to='+month_to).then((data)=>{
+       this.responseData = data;
+       this.getTableAmt(this.regionSelectType);
+       this.getDateFormat();
+     });
+
   }
 
   selectionAreaAll(){
@@ -115,13 +172,21 @@ export class FollowTaxRealtimePage {
     }); 
   }
 
-  selectRegion(Region,Province,typeCur){
-    Province =  'undefined';
-    this.Province =  'undefined';
-    this.selectionProvince(Region,Province,typeCur);
+  selectMonthFrom(Region,Province, month_from,month_to,typeCur){
+     this.getData(Region,Province, month_from,month_to,typeCur);
   }
 
-  selectionProvince(Region,Province,typeCur){
+  selectMonthTo(Region,Province, month_from,month_to,typeCur){
+    this.getData(Region,Province, month_from,month_to,typeCur);
+  }
+
+  selectRegion(Region,Province, month_from,month_to,typeCur){
+    Province =  'undefined';
+    this.Province =  'undefined';
+    this.selectionProvince(Region,Province, month_from,month_to,typeCur);
+  }
+
+  selectionProvince(Region,Province, month_from,month_to,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -129,11 +194,11 @@ export class FollowTaxRealtimePage {
       this.responseProvince = data;
     }); 
 
-    this.getData(Region,Province,typeCur);
+    this.getData(Region,Province, month_from,month_to,typeCur);
   }
 
   regionSelectType = "";
-  getData(Region,Province,typeCur){
+  getData(Region,Province, month_from,month_to,typeCur){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -150,17 +215,43 @@ export class FollowTaxRealtimePage {
     }else{
       this.regionSelectType =  typeCur;
     }
-  
-    //alert("ภาค="+Region+" จังหวัด="+ Province+" หน่วย="+ typeCur);
-    
-     this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province).then((data)=>{
+      
+    this.webapi.getData('TaxRealtimeDaily?offcode='+this. offcode+'&area='+Region+'&province='+Province+'&month_from='+month_from+'&month_to='+month_to).then((data)=>{
        this.responseData = data;
        this.getTableAmt(this.regionSelectType);
        this.getDateFormat();
      });
      this.oldRegion = Region;
      this.oldtypeCur = typeCur;
+
+     this.getDateTiTle(month_from,month_to);
    }  
+
+   responseDateTitle:any;
+   getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
+  }
   /* getDashboardItemsByDate(month){
 
     var d = new Date(); 

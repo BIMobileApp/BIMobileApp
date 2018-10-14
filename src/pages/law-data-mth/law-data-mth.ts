@@ -5,6 +5,9 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll:any;
 declare var changeCurrency: any;
 declare var changeCurrencyNoUnit:any; 
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
+
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -58,6 +61,9 @@ constructor(
     this.offcode = localStorage.offcode;
     //this.dateAsOff =  dateDisplayAll;
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    this.mthNumber = monthNowNumber;
+
+
      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);
      this.province = localStorage.offcode.substring(2, 4);
@@ -89,21 +95,39 @@ constructor(
   ///end  ตรวจสอบสาขาเพื่อ default selection
 }
 
+select_mth_from = '';
+select_mth_to = '';
+select_mth_from1 = '';
+select_mth_to1 = '';
+mthNumber:any;
 ionViewDidLoad() {
+  this.ddlMonthFrom();
+  this.ddlMonthTo();
+
   let typeCur = 'M';
   let typeCurFirst = 'M';
+  let OverallRegion = 'undefined';
+  let OverallProvince =  'undefined';
 
   this.selectionAreaAll();
   this.selectionProvinceAll();
-  this.getTableData(typeCurFirst);
+  this.overallRegion();
+  this.overallProvince();
+  this.getTableDataAll(OverallRegion, OverallProvince, typeCurFirst);
 
   let SRegion;
   let SProvince; 
-  let month_from;
-  let month_to; 
+  let month_from = convertMthBudYear(this.mthNumber);
+  let month_to = convertMthBudYear(this.mthNumber);
+
+  this.select_mth_from = month_from;
+  this.select_mth_to = month_to;
+  this.select_mth_from1 = month_from;
+  this.select_mth_to1 = month_to;
  
   this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
 }
+
 toggleTable2Show() {
   if (this.toggleTable2 == 0) {
     this.toggleTable2 = 1;
@@ -119,6 +143,38 @@ toggleTable1Show() {
     this.toggleTable1 = 0;
   }
 }
+
+   ResponseMthFrom:any;
+   ddlMonthFrom(){
+     this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+     });
+   }
+ 
+   ResponseMthTo:any;
+   ddlMonthTo(){
+     this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+
+   }
+
+   OverallProvince:any;
+   overAllSelectRegion(OverallRegion, OverallProvince, typeCurFirst){
+    OverallProvince = 'undefined';
+    this.OverallProvince = "undefined";
+
+    if (this.region != "00") {
+      OverallRegion = localStorage.region_desc;
+    }
+
+    this.getTableData(OverallRegion, OverallProvince, typeCurFirst);
+   }
+
+   overallSelectionProvince(OverallRegion, OverallProvince, typeCurFirst){
+    this.getTableData(OverallRegion, OverallProvince, typeCurFirst);
+   }
+
 selectionAreaAll(){
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -130,12 +186,30 @@ selectionProvinceAll(){
   if(this.region != "00"){
     area = localStorage.region_desc;
   }
-
   this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+area).then((data) => {
     this.responseProvince = data;
   });
 }
 
+responseOverallRegion:any;
+overallRegion(){
+  this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
+    this.responseOverallRegion = data;
+  });
+}
+
+ResponseOverAllProvince:any;
+overallProvince(){
+
+  let area;
+  if(this.region != "00"){
+    area = localStorage.region_desc;
+  }
+
+  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+area).then((data) => {
+    this.ResponseOverAllProvince = data;
+  });
+}
 
 getitemsRegion(SRegion,SProvince,typeCur,month_from,month_to){
   SProvince = 'undefined';
@@ -158,12 +232,40 @@ getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to){
   this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
 }
 
-getTableData(typeCurFirst) { 
-  this.webapi.getData('LawReportMth?offcode='+this.offcode).then((data) => {
+getTableDataAll(OverallRegion, OverallProvince, typeCurFirst) { 
+  if (this.region != "00") {
+    OverallRegion = localStorage.region_desc;
+  } else {
+    OverallRegion = OverallRegion;
+  }
+  if (this.branch != "00" || this.province != "00") {
+    OverallProvince = this.select_province;
+  } else {
+    OverallProvince = OverallProvince;
+  }
+  this.webapi.getData('LawReportMth?offcode='+this.offcode+'&region='+OverallRegion+'&province='+OverallProvince).then((data) => {
     this.responseData = data;
     this.getTableLaw(typeCurFirst);
   });
 }
+
+getTableData(OverallRegion, OverallProvince, typeCurFirst) { 
+  if (this.region != "00") {
+    OverallRegion = localStorage.region_desc;
+  } else {
+    OverallRegion = OverallRegion;
+  }
+  if (this.branch != "00" || this.province != "00") {
+    OverallProvince = this.select_province;
+  } else {
+    OverallProvince = OverallProvince;
+  }
+  this.webapi.getData('LawReportMth?offcode='+this.offcode+'&region='+OverallRegion+'&province='+OverallProvince).then((data) => {
+    this.responseData = data;
+    this.getTableLaw(typeCurFirst);
+  });
+}
+
 
 ///select all product///
 regionSelectType = "";

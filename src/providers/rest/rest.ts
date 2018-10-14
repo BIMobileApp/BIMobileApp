@@ -16,7 +16,6 @@ export class RestProvider {
     this.baseUrl = "https://bimobile.excise.go.th/ExciseMobileForTest/api/";
 
   } 
-
    // GET Method
  getData(segment){
   

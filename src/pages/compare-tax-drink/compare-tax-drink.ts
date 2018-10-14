@@ -2,8 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
+
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
+
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-drink',
@@ -44,12 +48,14 @@ export class CompareTaxDrinkPage {
   responseRegion:any;
   responseProvince:any;
   responseMonth: any;
+  mthNumber:any;
   dbtable = "MBL_PRODUCT_DRINK_MONTH";
   label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
+      this.mthNumber = monthNowNumber;
 
       ///หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);
@@ -82,6 +88,8 @@ export class CompareTaxDrinkPage {
   ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
   ionViewDidLoad() {
     this.username = localStorage.userData;
     //this.dateAsOff = dateDisplayAll;
@@ -91,17 +99,37 @@ export class CompareTaxDrinkPage {
     this.selectionAreaAll();
     this.selectionProvinceAll();
     this.selectionBudgetMonth();
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
 
     let Region;
     let Province;
-    let month_from;
-    let month_to;
+    let month_from = convertMthBudYear(this.mthNumber);;
+    let month_to = convertMthBudYear(this.mthNumber);;
+
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
     this.getLineTaxData(Region,Province,month_from,month_to);
   }
 
   selectionAreaAll(){
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseRegion = data;
+    });
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
     });
   }
 

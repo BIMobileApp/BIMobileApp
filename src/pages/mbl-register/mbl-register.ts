@@ -5,6 +5,8 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
 declare var changeCurrencyNoUnit:any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -41,6 +43,8 @@ export class MblRegisterPage {
   isEnableProv:any;
   oldRegion:any;
   oldtypeCur:any;
+  mthNumber:any;
+
   /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -54,50 +58,73 @@ public isScaling = false;
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
       this.dateDisplay = localStorage.last_update_date;
+      this.mthNumber = monthNowNumber;
     //  this.dateAsOff =  dateDisplayAll;
 
-    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-    ///หา offcode เพื่อหา ภาค จังหวัด สาขา
-     this.region = localStorage.offcode.substring(0, 2);
-     this.province = localStorage.offcode.substring(2, 4);
-     this.branch =  localStorage.offcode.substring(4, 6);
-   /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+      this.region = localStorage.offcode.substring(0, 2);
+      this.province = localStorage.offcode.substring(2, 4);
+      this.branch =  localStorage.offcode.substring(4, 6);
+      /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
 
-    ///ตรวจสอบภาคเพื่อ default selection
-    if(this.region != "00"){
+      ///ตรวจสอบภาคเพื่อ default selection
+      if(this.region != "00"){
       this.select_region = localStorage.region_desc;
       this.select_all_value = false;    
       this.isEnable  = true;        
-    }else{
+      }else{
       this.select_all_value = true;
       this.isEnable  = false;
-    }
-  ///end ตรวจสอบภาคเพื่อ default selection
+      }
+      ///end ตรวจสอบภาคเพื่อ default selection
 
-  /// ตรวจสอบสาขาเพื่อ default selection
-  var res = "";
-  if(this.branch != "00"){          
-    res =  localStorage.offdesc.split(" ");
-    this.select_province  = res[0];
-    this.select_all_prov_value = false;
-    this.isEnableProv = true;
-  }else{
-    this.select_all_prov_value = true;
-    this.isEnableProv = false;
-  }
-  ///end  ตรวจสอบสาขาเพื่อ default selection
+      /// ตรวจสอบสาขาเพื่อ default selection
+      var res = "";
+      if(this.branch != "00" || this.province != "00"){          
+      res =  localStorage.offdesc.split(" ");
+      this.select_province  = res[0];
+      this.select_all_prov_value = false;
+      this.isEnableProv = true;
+      }else{
+      this.select_all_prov_value = true;
+      this.isEnableProv = false;
+      }
+      ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
   ionViewDidLoad() {
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let Region;
     let Province;
     let typeCur  = 'B';
-    let Mth_From = 'undefined';
-    let Mth_To  = 'undefined';
+    let Mth_From = convertMthBudYear(this.mthNumber);
+    let Mth_To  = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from = Mth_From;
+    this.select_mth_to = Mth_To;
 
     this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
     this.selectRegionAll();
     this.selectionProvinceAll();
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
   }
 
   selectRegionAll(){

@@ -95,7 +95,7 @@ public Ptrang = `#DCDCDD`;
    }
 
    selectionProvince(){
-    this.webapi.getData('getAreaProvinceTaxCurYear?offcode='+this.offcode+'&area='+this.area).then((data) => {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + this.area).then((data) => {
       this.responseProvince = data;
     });
   }

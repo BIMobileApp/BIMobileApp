@@ -106,37 +106,28 @@ public isScaling = false;
   ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from:any;
+  select_mth_to:any;
+
   ionViewDidLoad() {
  
-   /* this.selectMTFrom ="";
-   var d = new Date(); 
-    var n = d.getFullYear();
-    var nt = d.getFullYear()+543;
-    
-    var range = [];
-    for(var i=0;i<10;i++) {
-
-     this.year_en = n-i;
-     this.year_th = nt-i;
-
-      range.push( {"key":this.year_th,"value": this.year_en});
-    }
-    this.summaryDate = range;*/
-    
-    //this.dateAsOff = dateDisplayAll;
     this.selectionArea();
     this.selectionProvinceAll();
+
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     var area;
     var Province;
     var monthFrom = convertMthBudYear(this.mthNumber);
     var monthTo =  convertMthBudYear(this.mthNumber);
-
     let typeCur = 'M';
 
-    this.getTableDataAll(area,Province,monthFrom,monthTo,typeCur) ;
+    this.select_mth_from = monthFrom;
+    this.select_mth_to = monthTo;
 
-    //this.getTableData(area,Province,monthFrom,monthTo,typeCur);
-    //this.getDataAll(typeCur);
+    this.getTableDataAll(area,Province,monthFrom,monthTo,typeCur) ;
+    
   }
 
   getDataAll(typeCur){
@@ -146,16 +137,23 @@ public isScaling = false;
      });
  }
 
+ ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+
   selectMonthFrom(area,Province,monthFrom,monthTo,typeCur){
    
-    if(monthFrom ==  undefined){
-      monthTo = undefined;
-      this.monthTo = undefined;
-
-      //console.log(this.monthTo);
-    }
-
-   /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
+      /* if(parseInt(monthTo)<parseInt(monthFrom) && monthTo != 'undefined'){
 
       const alert = this.alertCtrl.create({
         title: 'การเลือกข้อมูลไม่ถูกต้อง!',
@@ -328,8 +326,7 @@ public isScaling = false;
       //  console.log("dateTitle"+dateTitle);
         if (dateTitle == "0"){
           this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
-         }else{
-    
+         }else{   
           this.dateAsOff =dateTitle;
          }
        //  console.log("this.dateAsOff"+this.dateAsOff);
@@ -381,8 +378,7 @@ public isScaling = false;
     });
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-
-    
+      
     //console.log(monthFrom +'---'+monthTo);
      this.getDateTiTle(monthFrom,monthTo);
   }

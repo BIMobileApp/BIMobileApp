@@ -5,6 +5,9 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll:any;
 declare var changeCurrency: any;
 declare var changeCurrencyNoUnit:any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
+
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -27,6 +30,7 @@ export class LawDataAreaPage {
 
   dateDisplay:any;
   dateAsOff:any;
+  dateAsOffOverall:any;
   str_offcode:any;
   str_head_offcode:any;
   responseDateTitle:any;
@@ -39,6 +43,7 @@ export class LawDataAreaPage {
   region:any;
   province:any;
   branch:any;
+  mthNumber:any;
 
   select_region:any;
   select_all_value:any;
@@ -63,7 +68,9 @@ public isScaling = false;
       this.offcode = localStorage.offcode;            
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.dateAsOffOverall = dateDisplayAll;
       this.username = localStorage.userData;
+      this.mthNumber = monthNowNumber;
 
       ///หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);
@@ -97,18 +104,35 @@ public isScaling = false;
   ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
+  select_mth_from1 = '';
+  select_mth_to1 = '';
+
   ionViewDidLoad() {
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let typeCur = "M";
     let typeCurFirst ='M';
     
-    this.getTableData(typeCurFirst);
+    let overall_month_from = convertMthBudYear(this.mthNumber);
+    let overall_month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from = overall_month_from;
+    this.select_mth_to = overall_month_to;
+
+    this.getTableDataAll(overall_month_from,overall_month_to,typeCurFirst);
     this.selectionAreaAll();
     this.selectionProvinceAll();
 
     let SRegion;
     let SProvince; 
-    let month_from;
-    let month_to;
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from1 = month_from;
+    this.select_mth_to1 = month_to;
     
     if(this.region != "00"){
       SRegion = localStorage.region_desc;
@@ -120,10 +144,45 @@ public isScaling = false;
       SProvince = this.select_province;
     }else{
       SProvince = 'undefined';
-    }
-
+    }   
     this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
   }
+
+  //--------------------------------------------------------- selection เดือน  ---------------------------------------------------------//
+
+  ResponseOverallMthFrom:any;
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseOverallMthFrom = data;
+    });
+
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+     });
+  }
+
+  ResponseOverallMthTo:any;
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseOverallMthTo = data;
+    });
+
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+
+  overallSelectMonthFrom(overall_month_from,overall_month_to,typeCurFirst){
+    this.getTableData(overall_month_from,overall_month_to,typeCurFirst);
+  }
+
+  overallSelectMonthTo(overall_month_from,overall_month_to,typeCurFirst){
+    this.getTableData(overall_month_from,overall_month_to,typeCurFirst);
+  }
+
+  //--------------------------------------------------------- end selection เดือน  ---------------------------------------------------------//
 
   toggleTable2Show() {
     if (this.toggleTable2 == 0) {
@@ -286,11 +345,60 @@ public isScaling = false;
     }
   }
 
-  getTableData(typeCurFirst){
-    this.webapi.getData('LawReportArea?offcode='+this.offcode).then((data) => {
+  getTableDataAll(overall_month_from,overall_month_to,typeCurFirst){
+    if(typeCurFirst == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCurFirst;
+    }
+    /* console.log(1+' | '+overall_month_from+' | '+overall_month_to); */
+
+    this.webapi.getData('LawReportArea?offcode='+this.offcode+'&month_from='+overall_month_from+'&month_to='+overall_month_to).then((data) => {
       this.responseData = data; 
-      this.getTaxData(typeCurFirst);
+      this.getTaxData(this.regionSelectType);
      });
+  }
+
+  getTableData(overall_month_from,overall_month_to,typeCurFirst){
+    console.log(typeCurFirst);
+    if(typeCurFirst == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCurFirst;
+    }
+
+    //console.log(2+' | '+overall_month_from+' | '+overall_month_to);
+
+    this.webapi.getData('LawReportArea?offcode='+this.offcode+'&month_from='+overall_month_from+'&month_to='+overall_month_to).then((data) => {
+      this.responseData = data; 
+      this.getTaxData(this.regionSelectType);
+     });
+
+     this.getDateTiTleOverAll(overall_month_from,overall_month_to);
+  }
+
+  getDateTiTleOverAll(overall_month_from,overall_month_to){
+    let dateTitle;
+    if(overall_month_from != undefined  && overall_month_to != undefined){
+      if( overall_month_from != 'undefined'  && overall_month_to != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(overall_month_from == undefined  ? overall_month_to : overall_month_from) +'&endMonth='+(overall_month_to == undefined ? overall_month_from :overall_month_to)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOffOverall="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOffOverall =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOffOverall = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
   }
 
   getTaxData(typeCurFirst){

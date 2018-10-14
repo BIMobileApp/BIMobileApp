@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 declare var changeCurrencyNoUnit:any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -34,6 +36,7 @@ export class IncDataMthPage {
   repondProduct: any;
   dateDisplay: any;
   dateAsOff: any;
+  dateAsOffOverall:any;
   disoffcode: any;
   responseDateTitle:any;
   defaultSelectQuestion: any;
@@ -72,7 +75,7 @@ export class IncDataMthPage {
     this.offcode = localStorage.offcode;
     this.dateDisplay = localStorage.last_update_date;
     //this.dateAsOff = dateDisplayAll;
-
+    this.mthNumber = monthNowNumber;
     this.username = localStorage.userData;
 
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
@@ -106,20 +109,33 @@ export class IncDataMthPage {
     ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  mthNumber:any;
+  select_mth_from1 = '';
+  select_mth_to1 = '';
 
   ionViewDidLoad() {
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let typeCur = 'M';
     let typeCur2 = 'M';
-    this.loadData(typeCur2);
     let Region;
     let Province;
-    let Month = 'undefined';
-    let Mth_From = 'undefined';
-    let Mth_To = 'undefined';
+    let Mth_From = convertMthBudYear(this.mthNumber);
+    let Mth_To = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from1 = Mth_From;
+    this.select_mth_to1 = Mth_To;
+
+    this.loadDataAll(Region, Province,typeCur2)
+    //this.loadData(Mth_From,Mth_To,typeCur2);
     this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
     this.selectionArea();
     this.selectionAllProvince();
+    this.overallRegion();
+    this.overallProvince();
   }
+
   toggleTable2Show() {
     if (this.toggleTable2 == 0) {
       this.toggleTable2 = 1;
@@ -135,16 +151,82 @@ export class IncDataMthPage {
       this.toggleTable1 = 0;
     }
   }
-  loadData(typeCur2) {
-    this.webapi.getData('IncDataMonth?offcode=' + this.offcode).then((data) => {
+
+  loadDataAll(OverallRegion, OverallProvince,typeCur2) {
+    if (this.region != "00") {
+      OverallRegion = localStorage.region_desc;
+    } else {
+      OverallRegion = OverallRegion;
+    }
+    if (this.branch != "00" || this.province != "00") {
+      OverallProvince = this.select_province;
+    } else {
+      OverallProvince = OverallProvince;
+    }
+
+    this.webapi.getData('IncDataMonth?offcode=' + this.offcode+'&province='+OverallProvince+'&region='+OverallRegion).then((data) => {
       this.responseData = data;
       this.getAmtProduct(typeCur2)
       this.getNumProduct(typeCur2);
-      this.selectionSumArea(typeCur2);
+      //this.selectionSumArea(OverallRegion, OverallProvince,typeCur2);
     });
   }
 
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+     this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+     this.ResponseMthTo = data;
+   });
+  }
+
+  loadData(OverallRegion, OverallProvince,typeCur2) {
+    if (this.region != "00") {
+      OverallRegion = localStorage.region_desc;
+    } else {
+      OverallRegion = OverallRegion;
+    }
+    if (this.branch != "00" || this.province != "00") {
+      OverallProvince = this.select_province;
+    } else {
+      OverallProvince = OverallProvince;
+    }
+
+    this.webapi.getData('IncDataMonth?offcode=' + this.offcode+'&province='+OverallProvince+'&region='+OverallRegion).then((data) => {
+      this.responseData = data;
+      this.getAmtProduct(typeCur2)
+      this.getNumProduct(typeCur2);
+     // this.selectionSumArea(typeCur2,OverallProvince,typeCur2);
+    });
+  }
+
+
   ///select all///
+  responseOverallRegion:any;
+  overallRegion(){
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
+      this.responseOverallRegion = data;
+    });
+  }
+
+  ResponseOverAllProvince:any;
+  overallProvince(){
+    let Region
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+ 
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
+      this.ResponseOverAllProvince = data;
+    });
+  }
+
   selectionArea() {
     this.webapi.getData('SelectionMthArea?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -156,7 +238,6 @@ export class IncDataMthPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
-
   }
 
   selectRegion(Region,Province,Mth_From,Mth_To,typeCur) {
@@ -183,7 +264,7 @@ export class IncDataMthPage {
 
   ChangeCur(Region,Province,Mth_From,Mth_To,typeCur) {
     this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
-    this.loadData(typeCur);
+    this.loadData(Region, Province,typeCur);
   }
 
   selectionAllProvince() {
@@ -197,7 +278,7 @@ export class IncDataMthPage {
     });
   }
 
-  selectionSumArea(typeCur2) {
+  selectionSumArea(OverallRegion, OverallProvince,typeCur2) {
     this.webapi.getData('IncSumDataByMonth?offcode=' + this.offcode).then((data) => {
       this.responseSumArea = data;
       this.getSumNumProduct(typeCur2);
@@ -206,6 +287,27 @@ export class IncDataMthPage {
   }
 
   ///end select all///
+
+  /// fillter ภาพรวม///
+  OverallProvince:any;
+  overAllSelectRegion(OverallRegion, OverallProvince, typeCur2){
+    OverallProvince = 'undefined';
+    this.OverallProvince = "undefined";
+
+    if (this.region != "00") {
+      OverallRegion = localStorage.region_desc;
+    }
+    this.overallSelectionProvince(OverallRegion, OverallProvince,typeCur2);
+  }
+
+  overallSelectionProvince(OverallRegion, OverallProvince, typeCur2){
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + OverallRegion).then((data) => {
+      this.ResponseOverAllProvince = data;
+    });
+    this.loadData(OverallRegion, OverallProvince,typeCur2);
+  }
+
+  ///end fillter ภาพรวม///
 
   selectMonthFrom(Region,Province,Mth_From,Mth_To,typeCur){
     this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);

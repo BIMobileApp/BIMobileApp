@@ -1995,9 +1995,8 @@
                <tr style="background-color: #F78B26; ">
                  <th><h3 class='td-center' [style.fontSize]="fontSize" >จังหวัด</h3></th>
                  <th><h3 class='td-center' [style.fontSize]="fontSize" >ปีนี้</h3></th>
-                 <th><h3 class='td-center' [style.fontSize]="fontSize" >ปีก่อน</h3></th>
-                 <th><h3 class='td-center'  [style.fontSize]="fontSize">ประมาณการ</h3></th>
-                 <!--<th><h3 class='td-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>-->
+                 <th><h3 class='td-center' [style.fontSize]="fontSize" >ปีก่อน</h3></th>              
+                 <th><h3 class='td-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>
                  <th width="15%"><h3 class='td-center' [style.fontSize]="fontSize" >+/-</h3></th>
                </tr>
              </thead>
@@ -2007,7 +2006,7 @@
                  <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.TAX}}</h3></td>
                  <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.LAST_TAX}}</h3></td>
                  <td><h3 class='td-right'  [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>
-                <!-- <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>-->
+                 
                    <td width="15%">
                      <h3 *ngIf="data.PERCENT_TAX > 5 " class='td-right font-green2' [style.fontSize]="fontSize" >{{data.PERCENT_TAX}}</h3>
                      <h3 *ngIf="data.PERCENT_TAX <= 5 && data.PERCENT_TAX > 0 " class='td-right font-green' [style.fontSize]="fontSize" >{{data.PERCENT_TAX}}</h3>
@@ -2062,7 +2061,7 @@
 
              <th><h3 class='th-center' [style.fontSize]="fontSize" >ปีนี้</h3></th>
              <th><h3 class='th-center' [style.fontSize]="fontSize" >ปีก่อน</h3></th>
-             <!--<th><h3 class='th-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>-->
+             <th><h3 class='th-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>
              <th width="15%"><h3 class='th-center' [style.fontSize]="fontSize" >+/-</h3></th>
            </tr>
          </thead>
@@ -2073,7 +2072,7 @@
 
              <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.TAX}}</h3></td>
              <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.LAST_TAX}}</h3></td>
-             <!--<td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>-->
+             <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>
          <td width="15%">
              <h3 *ngIf="data.PERCENT_TAX > 5 " class='td-right font-green2' [style.fontSize]="fontSize" >{{data.PERCENT_TAX}}</h3>
              <h3 *ngIf="data.PERCENT_TAX <= 5 && data.PERCENT_TAX > 0 " class='td-right font-green' [style.fontSize]="fontSize" >{{data.PERCENT_TAX}}</h3>
@@ -2102,7 +2101,7 @@
                <th><h3 class='td-center' [style.fontSize]="fontSize" >สินค้า</h3></th>
                <th><h3 class='td-center' [style.fontSize]="fontSize" >ปีนี้</h3></th>
                <th><h3 class='td-center' [style.fontSize]="fontSize" >ปีก่อน</h3></th>
-               <!--<th><h3 class='td-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>-->
+               <th><h3 class='td-center' [style.fontSize]="fontSize" >ประมาณการ</h3></th>
                <th width="15%"><h3 class='td-center' [style.fontSize]="fontSize" >+/-</h3></th>
              </tr>
            </thead>
@@ -2111,7 +2110,7 @@
                <td><h3 class='td-left' [style.fontSize]="fontSize" >{{data.GROUP_NAME}}</h3></td>
                <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.TAX}}</h3></td>
                <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.LAST_TAX}}</h3></td>
-               <!--<td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>-->
+               <td><h3 class='td-right' [style.fontSize]="fontSize" >{{data.ESTIMATE}}</h3></td>
                  <td width="15%">
                    <h3 *ngIf="data.PERCENT_TAX > 5 " class='td-right font-green2' [style.fontSize]="fontSize" >{{data.PERCENT_TAX}}</h3>
                    <h3 *ngIf="data.PERCENT_TAX <= 5 && data.PERCENT_TAX > 0 " class='td-right font-green' [style.fontSize]="fontSize" >{{data.PERCENT_TAX}}</h3>

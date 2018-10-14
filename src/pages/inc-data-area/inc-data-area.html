@@ -16,14 +16,38 @@
   </div>
   <div *ngIf="toggleTable1==1">
     <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+       
+      <ion-grid>
+              <ion-row>
+                  <ion-col>
+                    <ion-item class="size">
+                      <ion-label> เดือน : </ion-label>
+                      <ion-select [(ngModel)]="month_from"  (ionChange)="overallSelectMonthFrom(month_from,month_to,typeCur2)">
+                        <ion-option value="undefined">ทั้งหมด</ion-option>
+                        <ion-option *ngFor="let item3 of ResponseOverallMthFrom"  value="{{item3.BUDGET_MONTH_CD}}"  [selected]="select_mth_from == item3.BUDGET_MONTH_CD">{{item3.MONTH_DESC}}</ion-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item class="size">
+                      <ion-label> ถึง: </ion-label>
+                      <ion-select [(ngModel)]="month_to" (ionChange)="overallSelectMonthTo(month_from,month_to,typeCur2)">
+                        <ion-option value="undefined">ทั้งหมด</ion-option>
+                        <ion-option  *ngFor="let item4 of ResponseOverallMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>
+                      </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
       <ion-card>
         <ion-card-content no-padding>
           <ion-item>
-            <ion-label text-center><strong>{{dateAsOff}}</strong></ion-label>
+            <ion-label text-center><strong>{{dateAsOffOverall}}</strong></ion-label>
           </ion-item>
           <ion-item class="sizemini" no-lines>
             <ion-label> หน่วย : </ion-label>
-            <ion-select [(ngModel)]="typeCur2" #item (ionChange)="loadData(typeCur2)">
+            <ion-select [(ngModel)]="typeCur2" #item (ionChange)="loadData(month_from,month_to,typeCur2)">
               <ion-option value="M" [selected]="true">ล้านใบ/ล้านบาท</ion-option>
               <ion-option value="B">ใบ/บาท</ion-option>
             </ion-select>
@@ -117,19 +141,8 @@
                     <ion-item class="size">
                       <ion-label>เดือน : </ion-label>
                       <ion-select [(ngModel)]="Mth_From" (ionChange)="selectMonthFrom(Area,Province,Mth_From,Mth_To,typeCur)">
-                        <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
-                        <ion-option value="1">ตุลาคม</ion-option>
-                        <ion-option value="2">พฤศจิกายน</ion-option>
-                        <ion-option value="3">ธันวาคม</ion-option>
-                        <ion-option value="4">มกราคม</ion-option>
-                        <ion-option value="5">กุมภาพันธ์</ion-option>
-                        <ion-option value="6">มีนาคม</ion-option>
-                        <ion-option value="7">เมษายน</ion-option>
-                        <ion-option value="8">พฤษภาคม</ion-option>
-                        <ion-option value="9">มิถุนายน</ion-option>
-                        <ion-option value="10">กรกฎาคม</ion-option>
-                        <ion-option value="11">สิงหาคม</ion-option>
-                        <ion-option value="12">กันยายน</ion-option>
+                        <ion-option value="undefined" >ทั้งหมด</ion-option>
+                        <ion-option *ngFor="let item1 of ResponseMthFrom"  value="{{item1.BUDGET_MONTH_CD}}"  [selected]="select_mth_from1 == item1.BUDGET_MONTH_CD">{{item1.MONTH_DESC}}</ion-option>
                       </ion-select>
                     </ion-item>
                   </ion-col>
@@ -137,19 +150,8 @@
                       <ion-item class="size">
                           <ion-label>ถึง  : </ion-label>
                           <ion-select [(ngModel)]="Mth_To" (ionChange)="selectMonthTo(Area,Province,Mth_From,Mth_To,typeCur)">
-                            <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
-                            <ion-option value="1">ตุลาคม</ion-option>
-                            <ion-option value="2">พฤศจิกายน</ion-option>
-                            <ion-option value="3">ธันวาคม</ion-option>
-                            <ion-option value="4">มกราคม</ion-option>
-                            <ion-option value="5">กุมภาพันธ์</ion-option>
-                            <ion-option value="6">มีนาคม</ion-option>
-                            <ion-option value="7">เมษายน</ion-option>
-                            <ion-option value="8">พฤษภาคม</ion-option>
-                            <ion-option value="9">มิถุนายน</ion-option>
-                            <ion-option value="10">กรกฎาคม</ion-option>
-                            <ion-option value="11">สิงหาคม</ion-option>
-                            <ion-option value="12">กันยายน</ion-option>                 
+                            <ion-option value="undefined" >ทั้งหมด</ion-option>
+                            <ion-option *ngFor="let item2 of ResponseMthTo"  value="{{item2.BUDGET_MONTH_CD}}"  [selected]="select_mth_to1 == item2.BUDGET_MONTH_CD">{{item2.MONTH_DESC}}</ion-option>           
                           </ion-select>
                         </ion-item>
                   </ion-col>
@@ -184,7 +186,7 @@
               <h2 class="header-style">{{dateAsOff}}</h2>
               <ion-item class="sizemini" no-lines>
                 <ion-label> หน่วย : </ion-label>
-                <ion-select [(ngModel)]="typeCur" #item (ionChange)="getProduct(Area,Province,Mth_From,Mth_To,typeCur)">
+                <ion-select [(ngModel)]="typeCur"  (ionChange)="getProduct(Area,Province,Mth_From,Mth_To,typeCur)">
                   <ion-option value="M" [selected]="true">ล้านใบ/ล้านบาท</ion-option>
                   <ion-option value="B">ใบ/บาท</ion-option>
                 </ion-select>

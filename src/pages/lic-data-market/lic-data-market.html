@@ -11,10 +11,33 @@
       <h2 class="header-style">สถิติใบอนุญาตแยกตามราย</h2>
       <h2 class="header-style">{{dateAsOff}}</h2>
     </ion-item>
+
+    <ion-grid>
+        <ion-row>
+                <ion-col>
+                  <ion-item class="size">
+                    <ion-label> เดือน : </ion-label>
+                    <ion-select [(ngModel)]="month_from"  (ionChange)="SelectMonthFrom(typeCur,month_from,month_to)">
+                        <ion-option value="undefined">ทั้งหมด</ion-option>
+                        <ion-option *ngFor="let item3 of ResponseMthFrom"  value="{{item3.BUDGET_MONTH_CD}}"  [selected]="select_mth_from == item3.BUDGET_MONTH_CD">{{item3.MONTH_DESC}}</ion-option>       
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item class="size">
+                    <ion-label> ถึง: </ion-label>
+                    <ion-select [(ngModel)]="month_to" (ionChange)="SelectMonthTo(typeCur,month_from,month_to)">
+                            <ion-option value="undefined">ทั้งหมด</ion-option>
+                            <ion-option  *ngFor="let item4 of ResponseMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>        
+                    </ion-select>
+                  </ion-item>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
   
     <ion-item class="sizemini" no-lines>
       <ion-label> หน่วย : </ion-label>
-      <ion-select [(ngModel)]="typeCur" (ionChange)="ChangeCurrency(typeCur)">
+      <ion-select [(ngModel)]="typeCur" (ionChange)="loadData(typeCur,month_from,month_to)">
         <ion-option value="M" [selected]="true">ล้านราย/ล้านใบ</ion-option>
         <ion-option value="B">ราย/ใบ</ion-option>
       </ion-select>

@@ -5,6 +5,8 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var changeCurrency: any;
 declare var dateDisplayNow: any;
 declare var dateDisplayAll: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -44,6 +46,9 @@ export class DimensionTime_03Page {
   isEnableProv: any;
   oldRegion: any;
   oldtypeCur: any;
+
+  mthNumber:any;
+
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -59,6 +64,7 @@ export class DimensionTime_03Page {
     this.dateAsOff = dateDisplayAll;
     this.dateDisplay = localStorage.last_update_date;
     this.dateNow = dateDisplayNow;
+    this.mthNumber = monthNowNumber; 
 
     ///หา offcode เพื่อหา ภาค จังหวัด สาขา
     this.region = localStorage.offcode.substring(0, 2);
@@ -91,18 +97,40 @@ export class DimensionTime_03Page {
     ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
   ionViewDidLoad() {
     this.selectionAreaAll();
     this.selectionProvinceAll();
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
 
     let Region = 'undefined';
     let Province = 'undefined';
     let typeCur = "M";
-    let month = 'undefined';
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
 
-    this.getAllData(Region, Province, month, typeCur);
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
+    this.getAllData(Region, Province, typeCur,month_from,month_to);
     //var d = new Date(); 
     // var n = d.getMonth();
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
   }
 
   selectionAreaAll() {
@@ -122,7 +150,7 @@ export class DimensionTime_03Page {
     });
   }
 
-  selectRegion(Region, Province, month, typeCur) {
+  selectRegion(Region, Province, typeCur,month_from,month_to) {
     Province = 'undefined';
     this.Province = 'undefined';
     //this.select_all_value = true;
@@ -132,7 +160,7 @@ export class DimensionTime_03Page {
       Region = localStorage.region_desc;
     }
     this.selectionProvinceFill(Region);
-    this.getAllData(Region, Province, month, typeCur);
+    this.getAllData(Region, Province, typeCur,month_from,month_to);
   }
 
   selectionProvinceFill(Region) {
@@ -142,16 +170,20 @@ export class DimensionTime_03Page {
     });
   }
 
-  selectionProvince(Region, Province, month, typeCur) {
-    this.getAllData(Region, Province, month, typeCur);
+  selectionProvince(Region, Province, typeCur,month_from,month_to) {
+    this.getData(Region, Province, typeCur,month_from,month_to);
   }
 
-  selectMonth(Region, Province, month, typeCur) {
-    this.getAllData(Region, Province, month, typeCur);
+  selectMonthFrom(Region, Province, typeCur,month_from,month_to) {
+    this.getData(Region, Province, typeCur,month_from,month_to);
+  }
+
+  selectMonthTo(Region, Province, typeCur,month_from,month_to){
+    this.getData(Region, Province, typeCur,month_from,month_to);
   }
 
   regionSelectType = "";
-  getAllData(Region, Province, month, typeCur) {
+  getAllData(Region, Province, typeCur,month_from,month_to) {
     if (this.region != "00") {
       Region = localStorage.region_desc;
     }
@@ -166,10 +198,59 @@ export class DimensionTime_03Page {
       this.regionSelectType =  typeCur;
     }
     
-    this.webapi.getData('DimansionTime03?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month=' + month).then((data) => {
+    this.webapi.getData('DimansionTime03?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + month_from+'&month_to='+month_to).then((data) => {
       this.respondData = data;
       this.getTableTAX(this.regionSelectType);
     });
+  }
+
+  getData(Region, Province, typeCur,month_from,month_to) {
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+
+    if (this.branch != "00" || this.province != "00") {
+      Province = this.select_province;
+    }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+    
+    this.webapi.getData('DimansionTime03?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + month_from+'&month_to='+month_to).then((data) => {
+      this.respondData = data;
+      this.getTableTAX(this.regionSelectType);
+    });
+
+      this.getDateTiTle(month_from,month_to);
+  }
+
+  responseDateTitle:any;
+  getDateTiTle(monthFrom,monthTo){  
+ 
+    let dateTitle;
+    if(monthFrom != undefined  && monthTo != undefined){
+      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOff =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
   }
 
   getTableTAX(typeCur) {
