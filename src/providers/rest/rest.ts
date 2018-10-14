@@ -12,8 +12,8 @@ export class RestProvider {
     
      //this.baseUrl = "http://localhost:62657/api/";
     //this.baseUrl = "http://192.168.41.101/BIWebService/api/";
-     this.baseUrl = "https://bimobile.excise.go.th/ExciseMobile/api/";
-    //this.baseUrl = "https://bimobile.excise.go.th/ExciseMobileForTest/api/";
+    //this.baseUrl = "https://bimobile.excise.go.th/ExciseMobile/api/";
+    this.baseUrl = "https://bimobile.excise.go.th/ExciseMobileForTest/api/";
 
   } 
 

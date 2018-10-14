@@ -23,6 +23,11 @@ export class TaxBudgetRegByMthPage {
   responseDateTitle:any;
   dateDisplay: any;
   dateAsOff: any;
+  Province: any;
+  region: any;
+  province: any;
+  ResponseProvince:any;
+  responseRegion:any
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -50,33 +55,63 @@ export class TaxBudgetRegByMthPage {
     let Mth_From = 'undefined';
     let Mth_To  = 'undefined';
     let typeCur = "M";
-    this.selectDate(Mth_From,Mth_To,typeCur);   
+    let Region;
+    let Province;
+    this.selectDate(Region, Province,typeCur,Mth_From,Mth_To);   
   }
 
-  /*selectDataAll(){  
-    this.webapi.getData('TaxBudgetRegByMth?offcode='+this.offcode+'&grpup_id='+this.grp_id).then((data)=>{
-      this.responseData = data;
-      this.getTableTAX();
+  selectRegionAll() {
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
+      this.responseRegion = data;
     });
-  }*/
-
-  selectMonthFrom(Mth_From,Mth_To,typeCur){
-    this.selectDate(Mth_From,Mth_To,typeCur);
   }
 
-  selectMonthTo(Mth_From,Mth_To,typeCur){
-    this.selectDate(Mth_From,Mth_To,typeCur); 
+  selectionProvinceAll() {
+    let region;
+    if (this.region != "00") {
+      region = localStorage.region_desc;
+    }
+    //let  Region = 'undefined';
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + region).then((data) => {
+      this.ResponseProvince = data;
+    });
+  }
+
+  selectRegion(Region, Province,typeCur,Mth_From,Mth_To) {
+    Province = 'undefined';
+    this.Province = "undefined";
+
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+
+    this.selectionProvinceFill(Region);
+    this.selectDate(Region, Province,typeCur,Mth_From,Mth_To);
+  }
+
+  selectionProvinceFill(Region) {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
+      this.ResponseProvince = data;
+    });
+  }
+
+  selectMonthFrom(Region, Province,typeCur,Mth_From,Mth_To){
+    this.selectDate(Region, Province,typeCur,Mth_From,Mth_To);
+  }
+
+  selectMonthTo(Region, Province,typeCur,Mth_From,Mth_To){
+    this.selectDate(Region, Province,typeCur,Mth_From,Mth_To); 
   }
 
   regionSelectType = "";
-  selectDate(Mth_From,Mth_To,typeCur) {
+  selectDate(Region, Province,typeCur,Mth_From,Mth_To) {
     if(typeCur == undefined){
       this.regionSelectType = "M";
     }else{
       this.regionSelectType =  typeCur;
   }
 
-    this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + Mth_From+'&month_to='+Mth_To).then((data) => {
+    this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + Mth_From+'&month_to='+Mth_To+'&Region='+Region+'&Province='+Province).then((data) => {
       this.responseData = data; 
       this.getTableTAX(this.regionSelectType);
     });
