@@ -125,6 +125,8 @@ export class IncDataAreaPage {
 
   select_mth_from = '';
   select_mth_to = '';
+  select_mth_from1 = '';
+  select_mth_to1 = '';
   
   ionViewDidLoad() {
 
@@ -142,6 +144,9 @@ export class IncDataAreaPage {
 
     this.select_mth_from = monthFrom;
     this.select_mth_to = monthTo;
+
+    this.select_mth_from1 = monthFrom;
+    this.select_mth_to1 = monthTo;
 
     this.ProductAll(typeCur);
   }
@@ -363,22 +368,32 @@ export class IncDataAreaPage {
    //--------------------------------------------------------- selection เดือน  ---------------------------------------------------------//
 
    ResponseOverallMthFrom:any;
+   ResponseMthFrom:any;
    ddlMonthFrom(){
      this.webapi.getData('dllMMonth').then((data) => {
        this.ResponseOverallMthFrom = data;
      });
+
+     this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+     });
    }
  
    ResponseOverallMthTo:any;
+   ResponseMthTo:any;
    ddlMonthTo(){
      this.webapi.getData('dllMMonth').then((data) => {
        this.ResponseOverallMthTo = data;
      });
+
+     this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+
    }
  
- 
    overallSelectMonthFrom(month_from,month_to,typeCur2){
-    // this.loadData(month_from,month_to,typeCur2);
+     this.loadData(month_from,month_to,typeCur2);
    }
  
    overallSelectMonthTo(month_from,month_to,typeCur2){
@@ -449,17 +464,16 @@ export class IncDataAreaPage {
     this.getDateTiTleOverall(month_from,month_to);
   }
 
-  getDateTiTleOverall(monthFrom,monthTo){
-    alert(monthFrom);
+  getDateTiTleOverall(month_from,month_to){
     let dateTitle;
-    if(monthFrom != undefined  && monthTo != undefined){
-      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
-      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
+    if(month_from != undefined  && month_to != undefined){
+      if( month_from != 'undefined'  && month_to != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(month_from == undefined  ? month_to : month_from) +'&endMonth='+(month_to == undefined ? month_from :month_to)).then((data) => {
         this.responseDateTitle = data;       
         dateTitle= this.responseDateTitle[0].DATE_TITLE;
       //  console.log("dateTitle"+dateTitle);
         if (dateTitle == "0"){
-          this.dateAsOffOverall="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
          }else{
     
           this.dateAsOffOverall =dateTitle;
@@ -472,10 +486,7 @@ export class IncDataAreaPage {
     }else{
       this.dateAsOffOverall = 'ข้อมูล '+dateDisplayAll;
     }    
-
   }
-
-
 
   getProductAmt(typeCur2) {
 

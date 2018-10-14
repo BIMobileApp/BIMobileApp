@@ -4,6 +4,9 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
+
 @IonicPage()
 @Component({
   selector: 'page-compare-tax-car',
@@ -44,12 +47,16 @@ export class CompareTaxCarPage {
   isEnableProv:any;
   responseMonth: any;
 
+  mthNumber:any; 
+
   dbtable = "MBL_PRODUCT_CAR_MONTH";
   label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
+
+      this.mthNumber = monthNowNumber;
 
       ///หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);
@@ -83,6 +90,9 @@ export class CompareTaxCarPage {
 
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
+  
   ionViewDidLoad() {
 
     this.username = localStorage.userData;
@@ -91,11 +101,17 @@ export class CompareTaxCarPage {
     this.offcode = localStorage.offcode;
     this.selectionAreaAll();
     this.selectionProvinceAll();
-    this.selectionBudgetMonth();
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let Region;
     let Province;
-    let month_from;
-    let month_to;
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
     this.getLineTaxData(Region,Province,month_from,month_to);
   }
 
@@ -131,11 +147,21 @@ export class CompareTaxCarPage {
 
     this.getLineTaxData(Region,Province,month_from,month_to);
   }
-  selectionBudgetMonth(){
+  
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
     this.webapi.getData('dllMMonth').then((data) => {
-      this.responseMonth = data;
-    }); 
+      this.ResponseMthFrom = data;
+    });
   }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+  }
+
 
  getLineTaxData(Region,Province,month_from,month_to) {
   if(this.region != "00"){

@@ -101,7 +101,7 @@ responseData : any;
    }
 
    selectionProvince(){
-    this.webapi.getData('getAreaProvinceTaxCurYear?offcode='+this.offcode+'&area='+this.area).then((data) => {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+this.area).then((data) => {
       this.responseProvince = data;
     });
   }

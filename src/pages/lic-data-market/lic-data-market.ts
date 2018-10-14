@@ -93,7 +93,7 @@ export class LicDataMarketPage {
   }
 
   SelectMonthFrom(typeCur,month_from,month_to){
-    //this. loadData(typeCur,month_from,month_to);
+    this. loadData(typeCur,month_from,month_to);
   }
 
   SelectMonthTo(typeCur,month_from,month_to){

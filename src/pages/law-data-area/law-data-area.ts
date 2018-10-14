@@ -30,6 +30,7 @@ export class LawDataAreaPage {
 
   dateDisplay:any;
   dateAsOff:any;
+  dateAsOffOverall:any;
   str_offcode:any;
   str_head_offcode:any;
   responseDateTitle:any;
@@ -67,6 +68,7 @@ public isScaling = false;
       this.offcode = localStorage.offcode;            
       this.dateDisplay = localStorage.last_update_date;
       this.dateAsOff =  dateDisplayAll;
+      this.dateAsOffOverall = dateDisplayAll;
       this.username = localStorage.userData;
       this.mthNumber = monthNowNumber;
 
@@ -103,7 +105,10 @@ public isScaling = false;
   }
 
   select_mth_from = '';
-  select_mth_to = ''
+  select_mth_to = '';
+  select_mth_from1 = '';
+  select_mth_to1 = '';
+
   ionViewDidLoad() {
     this.ddlMonthFrom();
     this.ddlMonthTo();
@@ -125,6 +130,9 @@ public isScaling = false;
     let SProvince; 
     let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from1 = month_from;
+    this.select_mth_to1 = month_to;
     
     if(this.region != "00"){
       SRegion = localStorage.region_desc;
@@ -143,16 +151,26 @@ public isScaling = false;
   //--------------------------------------------------------- selection เดือน  ---------------------------------------------------------//
 
   ResponseOverallMthFrom:any;
+  ResponseMthFrom:any;
   ddlMonthFrom(){
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseOverallMthFrom = data;
     });
+
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+     });
   }
 
   ResponseOverallMthTo:any;
+  ResponseMthTo:any;
   ddlMonthTo(){
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseOverallMthTo = data;
+    });
+
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
     });
   }
 
@@ -328,19 +346,59 @@ public isScaling = false;
   }
 
   getTableDataAll(overall_month_from,overall_month_to,typeCurFirst){
+    if(typeCurFirst == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCurFirst;
+    }
+    console.log(1+' | '+overall_month_from+' | '+overall_month_to);
+
     this.webapi.getData('LawReportArea?offcode='+this.offcode+'&month_from='+overall_month_from+'&month_to='+overall_month_to).then((data) => {
       this.responseData = data; 
-      this.getTaxData(typeCurFirst);
+      this.getTaxData(this.regionSelectType);
      });
   }
 
   getTableData(overall_month_from,overall_month_to,typeCurFirst){
+
+    if(typeCurFirst == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCurFirst;
+    }
+
+    //console.log(2+' | '+overall_month_from+' | '+overall_month_to);
+
     this.webapi.getData('LawReportArea?offcode='+this.offcode+'&month_from='+overall_month_from+'&month_to='+overall_month_to).then((data) => {
       this.responseData = data; 
-      this.getTaxData(typeCurFirst);
+      this.getTaxData(this.regionSelectType);
      });
 
-     this.getDateTiTle(overall_month_from,overall_month_to);
+     this.getDateTiTleOverAll(overall_month_from,overall_month_to);
+  }
+
+  getDateTiTleOverAll(overall_month_from,overall_month_to){
+    let dateTitle;
+    if(overall_month_from != undefined  && overall_month_to != undefined){
+      if( overall_month_from != 'undefined'  && overall_month_to != 'undefined'){
+      this.webapi.getData('DateTitle?startMonth='+(overall_month_from == undefined  ? overall_month_to : overall_month_from) +'&endMonth='+(overall_month_to == undefined ? overall_month_from :overall_month_to)).then((data) => {
+        this.responseDateTitle = data;       
+        dateTitle= this.responseDateTitle[0].DATE_TITLE;
+      //  console.log("dateTitle"+dateTitle);
+        if (dateTitle == "0"){
+          this.dateAsOffOverall="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+         }else{
+    
+          this.dateAsOffOverall =dateTitle;
+         }
+       //  console.log("this.dateAsOff"+this.dateAsOff);
+       }); 
+      }else{   
+        this.dateAsOffOverall = 'ข้อมูล '+dateDisplayAll;
+      }
+    }else{
+      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    }    
   }
 
   getTaxData(typeCurFirst){

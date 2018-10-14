@@ -127,6 +127,8 @@ public isScaling = false;
     let typeCur = 'M';
     this.selectionArea();
     this.selectionProviceFirst();
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
     
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
@@ -189,6 +191,20 @@ public isScaling = false;
       this.responseProvince = data;
     });
     this.getTableData(area, Province, typeCur,month_from,month_to);
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
   }
 
   regionSelectType = "";

@@ -52,11 +52,11 @@ export class HomePage {
   Authenticate_User:any;
   login() {
 
-    /*this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
+    this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
       
       this.Authenticate_User = data;
 
-      if(this.Authenticate_User == 12){*/
+      if(this.Authenticate_User == 12){
 
         this.webapi.getData('TMP_USER?username=' + this.userData.username).then((data) => {
           this.userDB = data;
@@ -91,7 +91,7 @@ export class HomePage {
               }*/
             });
 
-     /* }else{
+     }else{
 
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
@@ -101,7 +101,7 @@ export class HomePage {
         alert.present();
      } 
      
-     });*/
+     });
 
   }
 

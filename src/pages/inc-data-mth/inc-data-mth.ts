@@ -110,14 +110,22 @@ export class IncDataMthPage {
   }
 
   mthNumber:any;
+  select_mth_from1 = '';
+  select_mth_to1 = '';
+
   ionViewDidLoad() {
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let typeCur = 'M';
     let typeCur2 = 'M';
     let Region;
     let Province;
-    let Month = 'undefined';
     let Mth_From = convertMthBudYear(this.mthNumber);
     let Mth_To = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from1 = Mth_From;
+    this.select_mth_to1 = Mth_To;
 
     this.loadDataAll(Region, Province,typeCur2)
     //this.loadData(Mth_From,Mth_To,typeCur2);
@@ -164,6 +172,20 @@ export class IncDataMthPage {
     });
   }
 
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+     this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+     this.ResponseMthTo = data;
+   });
+  }
+
   loadData(OverallRegion, OverallProvince,typeCur2) {
     if (this.region != "00") {
       OverallRegion = localStorage.region_desc;
@@ -195,7 +217,12 @@ export class IncDataMthPage {
 
   ResponseOverAllProvince:any;
   overallProvince(){
-    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
+    let Region
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+ 
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
       this.ResponseOverAllProvince = data;
     });
   }
@@ -266,10 +293,17 @@ export class IncDataMthPage {
   overAllSelectRegion(OverallRegion, OverallProvince, typeCur2){
     OverallProvince = 'undefined';
     this.OverallProvince = "undefined";
+
+    if (this.region != "00") {
+      OverallRegion = localStorage.region_desc;
+    }
     this.overallSelectionProvince(OverallRegion, OverallProvince,typeCur2);
   }
 
   overallSelectionProvince(OverallRegion, OverallProvince, typeCur2){
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + OverallProvince).then((data) => {
+      this.ResponseOverAllProvince = data;
+    });
     this.loadData(OverallRegion, OverallProvince,typeCur2);
   }
 

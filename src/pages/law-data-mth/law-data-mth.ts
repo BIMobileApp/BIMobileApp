@@ -62,6 +62,8 @@ constructor(
     //this.dateAsOff =  dateDisplayAll;
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.mthNumber = monthNowNumber;
+
+
      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);
      this.province = localStorage.offcode.substring(2, 4);
@@ -95,8 +97,13 @@ constructor(
 
 select_mth_from = '';
 select_mth_to = '';
+select_mth_from1 = '';
+select_mth_to1 = '';
 mthNumber:any;
 ionViewDidLoad() {
+  this.ddlMonthFrom();
+  this.ddlMonthTo();
+
   let typeCur = 'M';
   let typeCurFirst = 'M';
   let OverallRegion = 'undefined';
@@ -115,9 +122,10 @@ ionViewDidLoad() {
 
   this.select_mth_from = month_from;
   this.select_mth_to = month_to;
+  this.select_mth_from1 = month_from;
+  this.select_mth_to1 = month_to;
  
   this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
-
 }
 
 toggleTable2Show() {
@@ -135,6 +143,38 @@ toggleTable1Show() {
     this.toggleTable1 = 0;
   }
 }
+
+   ResponseMthFrom:any;
+   ddlMonthFrom(){
+     this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+     });
+   }
+ 
+   ResponseMthTo:any;
+   ddlMonthTo(){
+     this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
+
+   }
+
+   OverallProvince:any;
+   overAllSelectRegion(OverallRegion, OverallProvince, typeCurFirst){
+    OverallProvince = 'undefined';
+    this.OverallProvince = "undefined";
+
+    if (this.region != "00") {
+      OverallRegion = localStorage.region_desc;
+    }
+
+    this.getTableData(OverallRegion, OverallProvince, typeCurFirst);
+   }
+
+   overallSelectionProvince(OverallRegion, OverallProvince, typeCurFirst){
+    this.getTableData(OverallRegion, OverallProvince, typeCurFirst);
+   }
+
 selectionAreaAll(){
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -160,7 +200,13 @@ overallRegion(){
 
 ResponseOverAllProvince:any;
 overallProvince(){
-  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=undefined').then((data) => {
+
+  let area;
+  if(this.region != "00"){
+    area = localStorage.region_desc;
+  }
+
+  this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+area).then((data) => {
     this.ResponseOverAllProvince = data;
   });
 }

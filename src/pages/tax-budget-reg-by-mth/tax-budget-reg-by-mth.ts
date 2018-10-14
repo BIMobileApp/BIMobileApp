@@ -96,6 +96,8 @@ export class TaxBudgetRegByMthPage {
 
     this.ddlMonthFrom();
     this.ddlMonthTo();
+    this.selectRegionAll();
+    this.selectionProvinceAll();
 
     let month_from = convertMthBudYear(this.mthNumber);
     let month_tor  = convertMthBudYear(this.mthNumber);
@@ -107,6 +109,42 @@ export class TaxBudgetRegByMthPage {
     this.select_mth_to = month_tor;
 
     this.selectDataAll(Region, Province, typeCur,month_from,month_tor);   
+  }
+  responseRegion:any;
+  selectRegionAll() {
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
+      this.responseRegion = data;
+    });
+  }
+
+  ResponseProvince:any;
+  selectionProvinceAll() {
+    let region;
+    if (this.region != "00") {
+      region = localStorage.region_desc;
+    }
+   
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + region).then((data) => {
+      this.ResponseProvince = data;
+    });
+  }
+  Province:any;
+  selectRegion(Region, Province, typeCur,month_from,month_to) {
+    Province = 'undefined';
+    this.Province = "undefined";
+
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+
+   this.selectionProvince(Region, Province, typeCur,month_from,month_to)
+  }
+
+  selectionProvince(Region, Province, typeCur,month_from,month_to) {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
+      this.ResponseProvince = data;
+    });
+    this.selectDataAll(Region, Province, typeCur,month_from,month_to);
   }
 
   selectDataAll(Region, Province, typeCur,month_from,month_to){ 
@@ -158,11 +196,11 @@ export class TaxBudgetRegByMthPage {
 
   regionSelectType = "";
   selectDate(Region, Province, typeCur,month_from,month_to) {
-    if(typeCur == undefined){
-      this.regionSelectType = "M";
-    }else{
-      this.regionSelectType =  typeCur;
-  }
+      if(typeCur == undefined){
+        this.regionSelectType = "M";
+      }else{
+        this.regionSelectType =  typeCur;
+      }
 
       if (this.region != "00") {
         Region = localStorage.region_desc;
@@ -175,13 +213,13 @@ export class TaxBudgetRegByMthPage {
         Province = Province;
       }
 
-  this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + month_from+'&month_to='+month_to+
-                                  '&region='+Region+'&province='+Province).then((data) => {
-      this.responseData = data; 
-      this.getTableTAX(this.regionSelectType);
-    });
+      this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + month_from+'&month_to='+month_to+
+                                      '&region='+Region+'&province='+Province).then((data) => {
+          this.responseData = data; 
+          this.getTableTAX(this.regionSelectType);
+        });
 
-    this.getDateTiTle(month_from,month_to);
+     this.getDateTiTle(month_from,month_to);
   }
 
   getDateTiTle(monthFrom,monthTo){  

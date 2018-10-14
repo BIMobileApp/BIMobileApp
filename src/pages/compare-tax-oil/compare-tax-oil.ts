@@ -4,6 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
+declare var convertMthBudYear:any;
+declare var monthNowNumber:any;
 
 @IonicPage()
 @Component({
@@ -43,6 +45,7 @@ export class CompareTaxOilPage {
   select_all_prov_value:any;
   isEnableProv:any;
   responseMonth: any;
+  mthNumber:any;
   dbtable = "MBL_PRODUCT_OIL_MONTH";
   label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
@@ -51,6 +54,7 @@ export class CompareTaxOilPage {
     this.region = localStorage.offcode.substring(0, 2);
     this.province = localStorage.offcode.substring(2, 4);
     this.branch =  localStorage.offcode.substring(4, 6);
+    this.mthNumber = monthNowNumber;
   /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
 
    ///ตรวจสอบภาคเพื่อ default selection
@@ -78,6 +82,8 @@ export class CompareTaxOilPage {
  ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
+  select_mth_from = '';
+  select_mth_to = '';
   ionViewDidLoad() {
     this.username = localStorage.userData;
    // this.dateAsOff = dateDisplayAll;
@@ -86,10 +92,17 @@ export class CompareTaxOilPage {
     this.selectionAreaAll();
     this.selectionProvinceAll();
     this.selectionBudgetMonth();
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
+
     let Region;
     let Province;
-    let month_from;
-    let month_to;
+    let month_from = convertMthBudYear(this.mthNumber);
+    let month_to = convertMthBudYear(this.mthNumber);
+
+    this.select_mth_from = month_from;
+    this.select_mth_to = month_to;
+
     this.getLineTaxData(Region,Province,month_from,month_to);
   }
   selectionBudgetMonth(){
@@ -117,6 +130,20 @@ export class CompareTaxOilPage {
     Province =  'undefined';
     this.Province = 'undefined';
     this.selectionProvince(Region,Province,month_from,month_to);
+  }
+
+  ResponseMthFrom:any;
+  ddlMonthFrom(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthFrom = data;
+    });
+  }
+
+  ResponseMthTo:any;
+  ddlMonthTo(){
+    this.webapi.getData('dllMMonth').then((data) => {
+      this.ResponseMthTo = data;
+    });
   }
 
   selectionProvince(Region,Province,month_from,month_to){
