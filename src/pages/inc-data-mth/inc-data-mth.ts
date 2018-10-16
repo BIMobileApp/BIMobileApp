@@ -164,10 +164,16 @@ export class IncDataMthPage {
       OverallProvince = OverallProvince;
     }
 
+    if(typeCur2 == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur2;
+    }
+
     this.webapi.getData('IncDataMonth?offcode=' + this.offcode+'&province='+OverallProvince+'&region='+OverallRegion).then((data) => {
       this.responseData = data;
-      this.getAmtProduct(typeCur2)
-      this.getNumProduct(typeCur2);
+      this.getAmtProduct(this.regionSelectType)
+      this.getNumProduct(this.regionSelectType);
       //this.selectionSumArea(OverallRegion, OverallProvince,typeCur2);
     });
   }
