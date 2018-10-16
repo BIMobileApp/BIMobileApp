@@ -89,7 +89,8 @@ export class CompareTaxBeerPage {
   select_mth_to = '';
 
   ionViewDidLoad() {
-
+    this.ddlMonthFrom();
+    this.ddlMonthTo();
     this.username = localStorage.userData;
     //this.dateAsOff = dateDisplayAll;
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
@@ -164,6 +165,7 @@ export class CompareTaxBeerPage {
   if(this.branch != "00" || this.province != "00"){     
     Province =  this.select_province;
   }
+
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
   /*   this.webapi.getData('CompareTaxVolBeer?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;

@@ -92,7 +92,8 @@ public isScaling = false;
   ///end  ตรวจสอบสาขาเพื่อ default selection
   
     var d = new Date();
-    this.time = d.getHours() + " : " +  d.getMinutes();
+    this.time = d.getHours() + " : " +  (d.getMinutes()<10?'0':'')+ d.getMinutes();
+    
   }
 
   newType = "";

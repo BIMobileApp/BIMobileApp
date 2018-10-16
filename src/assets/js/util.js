@@ -61,16 +61,32 @@ if ((now.getDate() - 1) < 1) {
 }
 
 dateDisplayNow = " ข้อมูล ณ วันที่ " + now.getDate() + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
-
 dateDisplayDataReailTime = "ข้อมูลเดือน "+ (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()] + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1));
-
 monthNowNumber = now.getMonth()+1;
-
-
-
 monthNowText = thmonth[now.getMonth()];
-
 datePreviousOneDay = now.getDate() - 1;
+
+//ฟังก์ชั่นใส่ comma
+function addComma(val) {
+  var result
+  result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return result;
+}
+
+//ฟังก์ชั่นใส่ comma percent
+function addCommaPercent(val) {
+  console.log("f = " + val)
+  var result
+  if(val.split('-')){
+    console.log("-  = " + val)
+    //result = val[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }else{
+    console.log(val)
+    //result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  return result;
+}
+
 
 //ฟังก์ชั่น เปลี่ยนบาทเป็นล้านบาท
 function changeCurrency(val, typeNow) {
@@ -83,7 +99,8 @@ function changeCurrency(val, typeNow) {
     } else {
       result = notRound(val);
     }
-    result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    result = addComma(result);
+    /* result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
     return result;
   } catch (e) {
     alert('error: ' + e);
@@ -101,7 +118,8 @@ function changeCurrencyNoUnit(val, typeNow) {
     } else {
       result = val;
     }
-    result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    result = addComma(result);
+   /*  result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
     return result;
   } catch (e) {
     alert('error: ' + e);
