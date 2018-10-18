@@ -8,6 +8,7 @@ declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 declare var getColorMap: any; 
 declare var budgetyear : any;
+declare var addCommaPercent: any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -167,7 +168,7 @@ TableGetData(Province,typeCur) {
   });
   this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode+'&area='+this.area+'&province='+Province).then((data) => {
     this.DataProduct = data;
-    console.log(this.DataProduct);
+  
     this.getProductTAX(this.regionSelectType);
   });
 
@@ -191,6 +192,7 @@ OverallBranch(area, Province, typeCur){
  getTaxBranch(typeCur){
   let tax_branch;
   let last_tax_branch;
+  let percent;
   for (var i = 0; i < this.DataOverallBranch.length; i++) {
     tax_branch = this.DataOverallBranch[i].TAX;
     if (tax_branch != null) { tax_branch = changeCurrency(tax_branch, typeCur); }
@@ -201,7 +203,10 @@ OverallBranch(area, Province, typeCur){
     this.DataOverallBranch[i].LAST_TAX = last_tax_branch;
 
     if(this.DataOverallBranch[i].PERCENT_TAX != null){
-      this.DataOverallBranch[i].PERCENT_TAX = notRound(this.DataOverallBranch[i].PERCENT_TAX);
+      percent = notRound(this.DataOverallBranch[i].PERCENT_TAX);
+      this.DataOverallBranch[i].PERCENT_NOCOMMA = percent;
+      this.DataOverallBranch[i].PERCENT_TAX = addCommaPercent(percent);
+      /* this.DataOverallBranch[i].PERCENT_TAX = notRound(this.DataOverallBranch[i].PERCENT_TAX); */
     }
   }
  }
@@ -212,6 +217,7 @@ getDataTAX(typeCur){
   let tax;
   let last_tax;
   let est;
+  let percent;
 
   for (var i = 0; i < this.DataCurYear.length; i++) {
 
@@ -223,7 +229,10 @@ getDataTAX(typeCur){
     if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
     if (est != null) { est = changeCurrency(est, typeCur); }
     if(this.DataCurYear[i].PERCENT_TAX != null){
-      this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
+      percent = notRound(this.DataCurYear[i].PERCENT_TAX);
+      this.DataCurYear[i].PERCENT_NOCOMMA = percent;
+      this.DataCurYear[i].PERCENT_TAX = addCommaPercent(percent);
+     /*  this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX); */
     }
     this.DataCurYear[i].TAX = tax;
     this.DataCurYear[i].LAST_TAX = last_tax;
@@ -246,6 +255,7 @@ getProductTAX(typeCur) {
   let tax;
   let last_tax;
   let est;
+  let percent;
 
   for (var i = 0; i < this.DataProduct.length; i++) {
     tax = this.DataProduct[i].TAX;
@@ -256,7 +266,10 @@ getProductTAX(typeCur) {
     if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCur); }
     if (est != null) { est = changeCurrency(est, typeCur); }
     if(this.DataProduct[i].PERCENT_TAX != null){
-      this.DataProduct[i].PERCENT_TAX =  notRound(this.DataProduct[i].PERCENT_TAX);
+      percent = notRound(this.DataProduct[i].PERCENT_TAX);
+      this.DataProduct[i].PERCENT_NOCOMMA = percent;
+      this.DataProduct[i].PERCENT_TAX = addCommaPercent(percent);
+      /* this.DataProduct[i].PERCENT_TAX =  notRound(this.DataProduct[i].PERCENT_TAX); */
     }
     this.DataProduct[i].TAX = tax;
     this.DataProduct[i].LAST_TAX = last_tax;
@@ -271,6 +284,7 @@ getProvinceTAX(typeCurFirst){
   let tax;
   let last_tax;
   let est;
+  let percent;
 
   for (var i = 0; i < this.DataProvince.length; i++) {
     tax = this.DataProvince[i].TAX;
@@ -281,7 +295,10 @@ getProvinceTAX(typeCurFirst){
     if (last_tax != null) { last_tax = changeCurrency(last_tax, typeCurFirst); }
     if (est != null) { est = changeCurrency(est, typeCurFirst); }
     if(this.DataProvince[i].PERCENT_TAX != null){
-      this.DataProvince[i].PERCENT_TAX =  notRound(this.DataProvince[i].PERCENT_TAX);
+      percent = notRound(this.DataProvince[i].PERCENT_TAX);
+      this.DataProvince[i].PERCENT_NOCOMMA = percent;
+      this.DataProvince[i].PERCENT_TAX = addCommaPercent(percent);
+      /* this.DataProvince[i].PERCENT_TAX =  notRound(this.DataProvince[i].PERCENT_TAX); */
     }
 
     this.DataProvince[i].TAX = tax;

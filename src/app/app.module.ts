@@ -4,9 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-import { NgCircleProgressModule } from 'ng-circle-progress';
 
-import { Injectable, Injector } from '@angular/core';
+import { Injector } from '@angular/core';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ChartPage } from '../pages/chart/chart';
@@ -264,15 +263,6 @@ import { TaxBranchSection10Page } from '../pages/tax-branch-section10/tax-branch
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition'
-    }),
-    NgCircleProgressModule.forRoot({
-      // set defaults here
-      radius: 100,
-      outerStrokeWidth: 16,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#78C000",
-      innerStrokeColor: "#C7E596",
-      animationDuration: 300
     })
   ],
   bootstrap: [IonicApp],

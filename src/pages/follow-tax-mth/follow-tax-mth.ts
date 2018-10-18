@@ -55,8 +55,8 @@ export class FollowTaxMthPage {
         other.push(this.respondData[i]);
     } 
     
-      for (var i = 0; i < other.length; i++) {
-        amts.push(other[i].AMT);
+      for (var l = 0; l < other.length; l++) {
+        amts.push(other[l].AMT);
       }
 
       return JSON.stringify(amts);

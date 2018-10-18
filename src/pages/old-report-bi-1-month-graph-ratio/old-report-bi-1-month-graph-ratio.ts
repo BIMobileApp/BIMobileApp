@@ -40,8 +40,8 @@ export class OldReportBi_1MonthGraphRatioPage {
       this.total_tax.push(this.respondData[i].TOTAL_TAX);
     }
 
-    for (var i = 0; i < this.total_tax.length; i++) {
-      if (this.total_tax[i] != 0) {
+    for (var j = 0; j < this.total_tax.length; j++) {
+      if (this.total_tax[j] != 0) {
         this.flag = 1;
         break;
       }

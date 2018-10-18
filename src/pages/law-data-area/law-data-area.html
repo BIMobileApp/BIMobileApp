@@ -44,10 +44,10 @@
         </ion-grid>
 
           <ion-item class="sizemini" no-lines>
-            <ion-label> หน่วย : </ion-label>
+            <ion-label> หน่วย: คดี/</ion-label>
             <ion-select [(ngModel)]="typeCurFirst" (ionChange)="getTableData(overall_month_from,overall_month_to,typeCurFirst)">
-              <ion-option value="M" [selected]="true">ล้านคดี/ล้านบาท</ion-option>
-              <ion-option value="B">คดี/บาท</ion-option>
+              <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+              <ion-option value="B">บาท</ion-option>
             </ion-select>
           </ion-item>
           
@@ -171,10 +171,10 @@
               <h2 class="header-style">สถิติคดีแยกตามประเภทสินค้า</h2>
 
               <ion-item class="sizemini" no-lines>
-                <ion-label> หน่วย : </ion-label>
+                <ion-label>หน่วย: คดี/</ion-label>
                 <ion-select [(ngModel)]="typeCur" (ionChange)="getProductUnit(SRegion,SProvince,typeCur,month_from,month_to)">
-                  <ion-option value="M" [selected]="true">ล้านคดี/ล้านบาท</ion-option>
-                  <ion-option value="B">คดี/บาท</ion-option>
+                  <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+                  <ion-option value="B">บาท</ion-option>
                 </ion-select>
               </ion-item>
 

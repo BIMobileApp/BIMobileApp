@@ -212,7 +212,7 @@ export class TaxBudgetRegByMthPage {
       } else {
         Province = Province;
       }
-
+     console.log(Region+"----"+Province+"----"+ typeCur+"----"+month_from+"----"+month_to);
       this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + month_from+'&month_to='+month_to+
                                       '&region='+Region+'&province='+Province).then((data) => {
           this.responseData = data; 

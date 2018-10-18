@@ -2,7 +2,6 @@ import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
-import { AnyMxRecord } from 'dns';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
@@ -441,10 +440,10 @@ export class CompareTaxSicaPage {
             let valFormat;
             if (tooltipItem.yLabel > 999999) {
               valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ";
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านหน่วย";
             } else {
               valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ";
+              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " หน่วย";
             }
             return value;
           }
@@ -463,7 +462,7 @@ export class CompareTaxSicaPage {
             },
             scaleLabel: {
               display: true,
-              labelString: ''
+              labelString: 'ล้านหน่วย'
             }
           }
           ],

@@ -466,7 +466,7 @@ export class CompareTaxCarPage {
             },
             scaleLabel: {
               display: true,
-              labelString: 'คัน'
+              labelString: 'ล้านคัน'
             }
           }
           ],

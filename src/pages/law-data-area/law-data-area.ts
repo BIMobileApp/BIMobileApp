@@ -360,7 +360,7 @@ public isScaling = false;
   }
 
   getTableData(overall_month_from,overall_month_to,typeCurFirst){
-    console.log(typeCurFirst);
+    
     if(typeCurFirst == undefined){
       this.regionSelectType = "M";
     }else{

@@ -75,14 +75,13 @@ function addComma(val) {
 
 //ฟังก์ชั่นใส่ comma percent
 function addCommaPercent(val) {
-  console.log("f = " + val)
   var result
-  if(val.split('-')){
-    console.log("-  = " + val)
-    //result = val[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if(val < 0){
+    val = val.split("-");
+    result = val[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    result = "-"+result;
   }else{
-    console.log(val)
-    //result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    result = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   return result;
 }
@@ -111,13 +110,14 @@ function changeCurrencyNoUnit(val, typeNow) {
   
   try {
     var result = 0;
-    if (typeNow == 'M') {
+   /*  if (typeNow == 'M') {
         val = val/1000000;
         result = Math.round(val * 1000) / 1000;
        //result = Math.ceil(val * 1000) / 1000;
     } else {
       result = val;
-    }
+    } */
+    result = val;
     result = addComma(result);
    /*  result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
     return result;

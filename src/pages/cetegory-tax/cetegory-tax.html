@@ -1483,7 +1483,7 @@
             <table style="width: 100%;">
               <thead>
                 <tr style="background-color: #F78B26; ">
-                  <th width="12%">
+                  <th width="15%">
                     <h3 class='th-center'  [style.fontSize]="fontSize">เดือน</h3>
                   </th>
                   <th>
@@ -1502,7 +1502,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of DataCurYear">
-                  <td width="12%">
+                  <td width="15%">
                     <h3 class='td-center'  [style.fontSize]="fontSize">{{data.BUDGET_MONTH_DESC}}</h3>
                   </td>
                   <td>
@@ -1599,7 +1599,7 @@
                 <thead>
                   <tr style="background-color: #F78B26; ">
                     <th>
-                      <h3 class='td-center'  [style.fontSize]="fontSize">จังหวัด</h3>
+                      <h3 class='td-center'  [style.fontSize]="fontSize">สสพ.</h3>
                     </th>
                     <th>
                       <h3 class='td-center'  [style.fontSize]="fontSize">ปีนี้</h3>
@@ -1690,6 +1690,7 @@
           </ion-card-content>
         </ion-card>
       </div>-->
+     
 
       <div padding>
         <p class="DataStatus-font"> หมายเหตุ :
@@ -1701,4 +1702,91 @@
       </div>
     </div>
   </div>
+
+  <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleTable3YearShow()" no-lines>
+      <ion-label class="toggleLabel"> >> ตารางแสดงภาษีย้อนหลัง 3 ปี</ion-label>
+    </ion-item>
+  </div>
+  <div *ngIf="toggleTable3Year==1">
+    <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+      <ion-grid no-padding>
+
+        <ion-row>
+          <ion-col>
+            <ion-item class="size">
+              <ion-label> ภาค : </ion-label>
+              <ion-select [(ngModel)]="area3Year" (ionChange)="selectionProvince3Year(area3Year,Province3Year,typeCur3Year)">
+                <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                <ion-option *ngFor="let item3Year1 of responseArea3Year" value="{{item3Year1.REGION_NAME}}" >{{item3Year1.REGION_NAME}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item class="size">
+              <ion-label>จังหวัด : </ion-label>
+              <ion-select [(ngModel)]="Province3Year" (ionChange)="Get3YearTable(area3Year,Province3Year,typeCur3Year)" >
+                <ion-option value="undefined" [selected]="true">ทั้งหมด</ion-option>
+                <ion-option *ngFor="let item3Year2 of responseProvince3Year" value="{{item3Year2.PROVINCE_NAME}}"  [style.fontSize]="fontSize" >{{item3Year2.PROVINCE_NAME}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <h1 class="header-style">ตารางแสดงภาษีย้อนหลัง 3 ปี</h1>
+     <!--  <h2 class="header-style">ข้อมูล {{dateAsOff}}</h2> -->
+      <ion-item class="sizemini" no-lines>
+        <ion-label> หน่วย : </ion-label>
+        <ion-select [(ngModel)]="typeCur3Year" #item3 (ionChange)="Get3YearTable(area3Year, Province3Year, typeCur3Year)">
+          <ion-option value="M" [selected]="true" >ล้านบาท</ion-option>
+          <ion-option value="B" >บาท</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-card>
+        <ion-card-content no-padding>
+
+          <div class="table-responsive">
+            <table style="width: 100%;">
+              <thead>
+                <tr *ngFor="let data of Tax3YearHeader" style="background-color: #F78B26; "  >
+                  <th >
+                    <h3 class='th-center'  [style.fontSize]="fontSize">ประเภทสินค้า</h3>
+                  </th>
+                  <th>
+                    <h3 class='th-center'  [style.fontSize]="fontSize">{{data.YEAR1}}</h3>
+                  </th>
+                  <th>
+                    <h3 class='th-center'  [style.fontSize]="fontSize">{{data.YEAR2}}</h3>
+                  </th>
+                  <th>
+                    <h3 class='th-center'  [style.fontSize]="fontSize">{{data.YEAR3}}</h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of Data3Year">
+                  <td>
+                    <h3 class='td-left'  [style.fontSize]="fontSize">{{data.GROUP_NAME}}</h3>
+                  </td>
+                  <td>
+                    <h3 class='td-right'  [style.fontSize]="fontSize">{{data.YEAR1}}</h3>
+                  </td>
+                  <td>
+                    <h3 class='td-right'  [style.fontSize]="fontSize">{{data.YEAR2}}</h3>
+                  </td>
+                  <td>
+                    <h3 class='td-right'  [style.fontSize]="fontSize">{{data.YEAR3}}</h3>
+                  </td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    </div>
 </ion-content>

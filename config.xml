@@ -3,7 +3,7 @@
     <name>Excise BI</name>
     <description>This is Excise BI</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.188.119:8107" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -13,7 +13,8 @@
     <allow-intent href="geo:*" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="AutoHideSplashScreen" value="true" />
     <preference name="loadUrlTimeoutValue" value="100000" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -81,6 +82,7 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-document-viewer" spec="^0.9.10" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <allow-navigation href="http://192.168.188.119:8107" />
     <engine name="ios" spec="4.5.5" />
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

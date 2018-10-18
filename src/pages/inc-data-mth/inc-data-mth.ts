@@ -59,7 +59,7 @@ export class IncDataMthPage {
   oldArea: any;
   oldtypeCur: any;
   curTG = "ล้านบาท";
-  unitTG2 = "ล้านใบ";
+  unitTG2 = "ใบ";
   toggleTable2 = 0;
   toggleTable1 = 0;
   /* start for pinch */
@@ -169,6 +169,7 @@ export class IncDataMthPage {
     }else{
       this.regionSelectType =  typeCur2;
     }
+    
 
     this.webapi.getData('IncDataMonth?offcode=' + this.offcode+'&province='+OverallProvince+'&region='+OverallRegion).then((data) => {
       this.responseData = data;
@@ -203,11 +204,15 @@ export class IncDataMthPage {
     } else {
       OverallProvince = OverallProvince;
     }
-
+    if(typeCur2 == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur2;
+    }
     this.webapi.getData('IncDataMonth?offcode=' + this.offcode+'&province='+OverallProvince+'&region='+OverallRegion).then((data) => {
       this.responseData = data;
-      this.getAmtProduct(typeCur2)
-      this.getNumProduct(typeCur2);
+      this.getAmtProduct(this.regionSelectType)
+      this.getNumProduct(this.regionSelectType);
      // this.selectionSumArea(typeCur2,OverallProvince,typeCur2);
     });
   }
@@ -362,10 +367,10 @@ export class IncDataMthPage {
   
     if (typeCur == "M") {
       this.curTG = "ล้านบาท";
-      this.unitTG2 = "ล้านใบ";
+      this.unitTG2 = "ใบ";
     }else if(typeCur == undefined ){
       this.curTG = "ล้านบาท";
-      this.unitTG2 = "ล้านใบ";
+      this.unitTG2 = "ใบ";
     }  else {
       this.curTG = "บาท";
       this.unitTG2 = "ใบ";
@@ -507,7 +512,6 @@ export class IncDataMthPage {
     let sura;
     let top;
     let card;
-    let summary;
     for (var i = 0; i < this.responseSumArea.length; i++) {
       sura = this.responseSumArea[i].AMT_OF_LIC_SURA;
       if (sura != null) { sura = changeCurrency(sura, typeCur2); }

@@ -71,7 +71,7 @@ export class IncDataAreaPage {
   toggleTable2 = 0;
   toggleTable1 = 0;
   curTG2 = "ล้านบาท";
-  unitTG2 = "ล้านใบ";
+  unitTG2 = "ใบ";
   regionSelectType2 = "";
   
   /* start for pinch */
@@ -300,10 +300,10 @@ export class IncDataAreaPage {
   
     if (typeCur == "M") {
       this.curTG2 = "ล้านบาท";
-      this.unitTG2 = "ล้านใบ";
+      this.unitTG2 = "ใบ";
     }else if(typeCur == undefined ){
       this.curTG2 = "ล้านบาท";
-      this.unitTG2 = "ล้านใบ";
+      this.unitTG2 = "ใบ";
     } else {
       this.curTG2 = "บาท";
       this.unitTG2 = "ใบ";

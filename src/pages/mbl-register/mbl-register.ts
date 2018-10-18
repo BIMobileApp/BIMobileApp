@@ -231,7 +231,7 @@ public isScaling = false;
   }
 
   getChangNumber(typeCur){
-    console.log(typeCur);
+   
     let imp_register;
     let in_register;
     let total_register;

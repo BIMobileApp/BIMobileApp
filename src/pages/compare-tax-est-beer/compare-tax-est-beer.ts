@@ -449,12 +449,16 @@ export class CompareTaxEstBeerPage {
           callbacks: {
             label: function (tooltipItem, data) {
               let value;
+              let valFormat;
               if (tooltipItem.yLabel > 999999) {
-                value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท";
+                valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+                value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " ล้านบาท"; 
+            /*     value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท"; */
               } else {
-                value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท";
+                valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+                value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " บาท"; 
+               /*  value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท"; */
               }
-
               return value;
             }
           } // end callbacks:

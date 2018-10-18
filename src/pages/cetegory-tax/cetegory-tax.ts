@@ -12,13 +12,12 @@ import { TaxCoutrySection7Page } from '../tax-coutry-section7/tax-coutry-section
 import { TaxCoutrySection8Page } from '../tax-coutry-section8/tax-coutry-section8';
 import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section9';
 import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
-import { MblRegisterPage } from '../mbl-register/mbl-register';
-
 declare var notRound: any;
 declare var changeCurrency: any;
 declare var dateDisplayAll: any; 
 declare var getColorMap: any;
 declare var budgetyear : any;
+declare var addCommaPercent: any;
 
 
 declare var slayNow: any; 
@@ -55,11 +54,13 @@ export class CetegoryTaxPage {
   TaxlyGauge: any;
   TaxEstGauge: any;
   responseData: any;
+  Data3Year: any;
   offdesc: any;
   name: any;
   toggleBar = 0;
   toggleMap = 0;
   toggleTable = 0;
+  toggleTable3Year = 0;
 
   barChart: any;
   bargetTax = [];
@@ -86,6 +87,8 @@ export class CetegoryTaxPage {
   oldArea: any;
   oldtypeCur : any;
   hideTableBrance = 0;
+  Tax3YearHeader:any;
+
 
   //dateDisplay = localStorage.getItem("last_update_date");
   dateDisplay = "";
@@ -95,6 +98,7 @@ export class CetegoryTaxPage {
   region:any;
   province:any;
   branch:any;
+  Province3Year:any;
 
   select_region:any;
   select_all_value:any;
@@ -105,6 +109,10 @@ export class CetegoryTaxPage {
   oldRegion:any;
   responseDataMap : any; 
   show_map_thiland:any;
+  regionSelectType3Year:any;
+
+  responseArea3Year:any;
+  responseProvince3Year:any;
 
     public Mzone1 = `#DCDCDD`;
     public Mzone2 = `#DCDCDD`;
@@ -183,10 +191,18 @@ export class CetegoryTaxPage {
     let Province;
     let typeCur = 'M';
 
-    
     this.TableGetData(area, Province, typeCur);
     this.hideTableBrance = 0;
 
+    if(this.region != "00"){
+      this.hideTableBrance = 2;
+    }
+    let area3Year;
+    let Province3Year;
+    let typeCur3Year = 'M';
+    this.selectionArea3Year();
+    this.selectionProviceFirst3Year();
+    this.Get3YearTable(area3Year,Province3Year,typeCur3Year);
    
   }
 
@@ -214,6 +230,15 @@ export class CetegoryTaxPage {
       this.toggleTable = 0;
     }
   }
+
+    toggleTable3YearShow(){
+      if (this.toggleTable3Year == 0) {
+        this.toggleTable3Year = 1;
+      } else {
+        this.toggleTable3Year = 0;
+      }
+    }
+
   selectionArea() {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
@@ -239,7 +264,7 @@ export class CetegoryTaxPage {
     if(this.region != "00"){
       area = localStorage.region_desc;
     }
-
+    
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
@@ -267,6 +292,7 @@ export class CetegoryTaxPage {
 
    let Region;
    let province;
+   console.log(this.region);
     if(this.region != "00"){
 
       if(area != 'undefined'){
@@ -280,6 +306,8 @@ export class CetegoryTaxPage {
       }
 
       Region = localStorage.region_desc;
+      this.GetProvinceTable(Region, this.regionSelectType);
+      
     }else{
       if(area != 'undefined'){
         this.display_region_product = area;
@@ -322,6 +350,7 @@ export class CetegoryTaxPage {
     }  
 
  
+ 
    /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
       province = undefined;
     }*/
@@ -331,10 +360,12 @@ export class CetegoryTaxPage {
     }else{
       this.regionSelectType =  typeCur;
     }
-
+    
     this.webapi.getData('TaxCurYearbyYear?offcode=' + this.offcode + '&area=' + Region + '&province=' + province).then((data) => {
       this.DataCurYear = data;
+    
       this.getTAX( this.regionSelectType);
+     
     });
     this.webapi.getData('TaxProductCurYear?offcode=' + this.offcode + '&area=' + Region + '&province=' + province).then((data) => {
       this.DataProduct = data;
@@ -364,6 +395,7 @@ export class CetegoryTaxPage {
     let tax;
     let last_tax;
     let est;
+    let percent;
     for (var i = 0; i < this.DataCurYear.length; i++) {
       tax = this.DataCurYear[i].TAX;
       if (tax != null) { tax = changeCurrency(tax, typeCur); }
@@ -378,7 +410,10 @@ export class CetegoryTaxPage {
       this.DataCurYear[i].ESTIMATE = est;
 
       if (this.DataCurYear[i].PERCENT_TAX != null) {
-        this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX);
+        percent = notRound(this.DataCurYear[i].PERCENT_TAX);
+        this.DataCurYear[i].PERCENT_NOCOMMA = percent;
+        this.DataCurYear[i].PERCENT_TAX = addCommaPercent(percent);
+      /*   this.DataCurYear[i].PERCENT_TAX = notRound(this.DataCurYear[i].PERCENT_TAX); */
       }
     }
   }
@@ -387,6 +422,7 @@ export class CetegoryTaxPage {
     let tax;
     let last_tax;
     let est;
+    let percent;
     for (var i = 0; i < this.DataProduct.length; i++) {
       tax = this.DataProduct[i].TAX;
       if (tax != null) { tax = changeCurrency(tax, typeCur); }
@@ -401,7 +437,10 @@ export class CetegoryTaxPage {
       this.DataProduct[i].ESTIMATE = est;
 
       if (this.DataProduct[i].PERCENT_TAX != null) {
-        this.DataProduct[i].PERCENT_TAX = notRound(this.DataProduct[i].PERCENT_TAX);
+        percent = notRound(this.DataProduct[i].PERCENT_TAX);
+        this.DataProduct[i].PERCENT_NOCOMMA = percent;
+        this.DataProduct[i].PERCENT_TAX = addCommaPercent(percent);
+       /*  this.DataProduct[i].PERCENT_TAX = notRound(this.DataProduct[i].PERCENT_TAX); */
       }
     }
   }
@@ -412,6 +451,7 @@ export class CetegoryTaxPage {
     let tax;
     let last_tax;
     let est;
+    let percent;
     for (var i = 0; i < this.DataProvince.length; i++) {
       tax = this.DataProvince[i].TAX;
       if (tax != null) { tax = changeCurrency(tax, typeCur); }
@@ -426,7 +466,10 @@ export class CetegoryTaxPage {
       this.DataProvince[i].ESTIMATE = est;
 
       if (this.DataProvince[i].PERCENT_TAX != null) {
-        this.DataProvince[i].PERCENT_TAX = notRound(this.DataProvince[i].PERCENT_TAX);
+        percent = notRound(this.DataProvince[i].PERCENT_TAX);
+        this.DataProvince[i].PERCENT_NOCOMMA = percent;
+        this.DataProvince[i].PERCENT_TAX = addCommaPercent(percent);
+      /*   this.DataProvince[i].PERCENT_TAX = notRound(this.DataProvince[i].PERCENT_TAX); */
       }
     }
   }
@@ -575,6 +618,75 @@ export class CetegoryTaxPage {
       this.DataOverallRegion[i].LAST_TAX = last_tax_branch;
     }
    }
+   
+
+   selectionArea3Year() {
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
+      this.responseArea3Year = data;     
+    });
+    console.log(this.responseArea3Year);
+  }
+  selectionProviceFirst3Year() {
+    let region;
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+region).then((data) => {
+      this.responseProvince3Year = data;
+    });
+    console.log(this.responseProvince3Year);
+  }
+
+  selectionProvince3Year(area3Year,Province3Year,typeCur3Year) {
+
+    Province3Year = 'undefined';
+    this.Province3Year = 'undefined';
+   
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area3Year).then((data) => {
+      this.responseProvince3Year = data;
+    });
+
+    this.Get3YearTable(area3Year,Province3Year,typeCur3Year);
+  }
+
+  GetHeader3Year() {
+    this.webapi.getData('Tax3Year').then((data) => {
+      this.Tax3YearHeader = data;
+    });
+    console.log(this.Tax3YearHeader);
+  }
+
+   Get3YearTable(area3Year,Province3Year,typeCur3Year) {
+    if(typeCur3Year == undefined){
+      this.regionSelectType3Year = "M";
+    }else{
+      this.regionSelectType3Year =  typeCur3Year;
+    }
+    this.webapi.getData('Tax3Year').then((data) => {
+      this.Tax3YearHeader = data;
+    });
+
+    this.webapi.getData('Tax3Year?area='+area3Year+'&province='+Province3Year).then((data) => {
+      this.Data3Year = data;
+      this.getTax3Year(this.regionSelectType3Year);
+    });
+  }
+
+  getTax3Year(typeCur){
+    let taxYear1;
+    let taxYear2;
+    let taxYear3;
+    for (var i = 0; i < this.Data3Year.length; i++) {
+      taxYear1 = this.Data3Year[i].YEAR1;
+      if (taxYear1 != null) { taxYear1 = changeCurrency(taxYear1, typeCur); }
+      this.Data3Year[i].YEAR1 = taxYear1;
+
+      taxYear2 = this.Data3Year[i].YEAR2;
+      if (taxYear2 != null) { taxYear2 = changeCurrency(taxYear2, typeCur); }
+      this.Data3Year[i].YEAR2 = taxYear2;
+
+      taxYear3 = this.Data3Year[i].YEAR3;
+      if (taxYear3 != null) { taxYear3 = changeCurrency(taxYear3, typeCur); }
+      this.Data3Year[i].YEAR3 = taxYear3;
+    }
+   }
 
   /*section1() {
     this.app.getRootNav().push(TaxCoutrySection1Page);
@@ -634,7 +746,7 @@ export class CetegoryTaxPage {
   /* end  */
 
   setData() {
-    console.log(budgetyear);
+
     this.webapi.getData('MapColorThailand?budget_year='+budgetyear).then((data) => {
       this.responseDataMap = data;
       for (var i = 0; i < this.responseDataMap.length; i++) {       
