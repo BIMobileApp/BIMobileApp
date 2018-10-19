@@ -94,7 +94,7 @@ function changeCurrency(val, typeNow) {
     var result = 0;
     if (typeNow == 'M') {
       val = val/1000000;
-      result = Math.round(val * 1000) / 1000;
+      result = MnotRound(Math.round(val * 1000) / 1000);
     } else {
       result = notRound(val);
     }
@@ -102,7 +102,7 @@ function changeCurrency(val, typeNow) {
     /* result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
     return result;
   } catch (e) {
-    alert('error: ' + e);
+    console.log('error: ' + e);
   }
 }
 
@@ -122,7 +122,7 @@ function changeCurrencyNoUnit(val, typeNow) {
    /*  result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
     return result;
   } catch (e) {
-    alert('error: ' + e);
+    console,log('error: ' + e);
   }
 }
 
@@ -145,6 +145,7 @@ function fillterMonthCd(monthForm,monthTo){
 function notRound(val) {
   var returnVal;
   var res = val.toString().split(".");
+
   if (res.length == 1) {
     returnVal = res + ".00";
   } else if (res[1].length < 2) {
@@ -152,11 +153,40 @@ function notRound(val) {
   } else {
     returnVal = res[0] + "." + res[1].substring(0, 2);
   }
+
+  return returnVal;
+}
+
+
+function MnotRound(val) {
+  var returnVal;
+  var res = val.toString().split(".");
+
+  if (res.length == 1) {
+    returnVal = res + ".000";
+  }else if(res[1].length == 1){
+    returnVal = res[0] + "." + res[1] + "00";
+  }else if(res[1].length == 2){
+    returnVal = res[0] + "." + res[1] + "0";
+  }else{
+    returnVal = val;
+  }
+
+  /*if (res[1].length < 1) {
+    returnVal = res + ".000";
+  } else if (res[1].length < 2) {
+    returnVal = res[0] + "." + res[1] + "00";
+  } else if(res[1].length < 3){
+    returnVal = res[0] + "." + res[1] + "0";//res[0] + "." + res[1].substring(0, 2);
+  }else{
+    returnVal = val;
+  }*/
  /* if(returnVal == "-100.00" || returnVal == "-100"){
     returnVal = "-";
   }*/
   return returnVal;
 }
+
 
 
 function convertMthBudYear(month){

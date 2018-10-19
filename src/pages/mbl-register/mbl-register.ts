@@ -5,8 +5,7 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll:any;
 declare var changeCurrencyNoUnit:any;
-declare var convertMthBudYear:any;
-declare var monthNowNumber:any;
+
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -23,7 +22,6 @@ export class MblRegisterPage {
   responseData: any;
   username:any;
 
-  responseDateTitle:any;
   dateDisplay:any;
   dateAsOff:any;
 
@@ -43,14 +41,13 @@ export class MblRegisterPage {
   isEnableProv:any;
   oldRegion:any;
   oldtypeCur:any;
-  mthNumber:any;
 
   /* start for pinch */
-public fontSize = `${BASE_SCALE}rem`;
-private scale = BASE_SCALE;
-private alreadyScaled = BASE_SCALE;
-public isScaling = false;
-/* end  */
+  public fontSize = `${BASE_SCALE}rem`;
+  private scale = BASE_SCALE;
+  private alreadyScaled = BASE_SCALE;
+  public isScaling = false;
+  /* end  */
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -58,7 +55,6 @@ public isScaling = false;
       this.offcode = localStorage.offcode;
       this.username = localStorage.userData;
       this.dateDisplay = localStorage.last_update_date;
-      this.mthNumber = monthNowNumber;
     //  this.dateAsOff =  dateDisplayAll;
 
       this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
@@ -93,37 +89,22 @@ public isScaling = false;
       ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
-  select_mth_from = '';
-  select_mth_to = '';
   ionViewDidLoad() {
-    this.ddlMonthFrom();
-    this.ddlMonthTo();
 
     let Region;
     let Province;
-    let typeCur  = 'B';
-    let Mth_From = convertMthBudYear(this.mthNumber);
-    let Mth_To  = convertMthBudYear(this.mthNumber);
+    let ISIC_TYPE;
 
-    this.select_mth_from = Mth_From;
-    this.select_mth_to = Mth_To;
-
-    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
     this.selectRegionAll();
     this.selectionProvinceAll();
+    this.selectddlTypeAll();
+    this.selectDataAll(Region,Province,ISIC_TYPE);
   }
 
-  ResponseMthFrom:any;
-  ddlMonthFrom(){
-    this.webapi.getData('dllMMonth').then((data) => {
-      this.ResponseMthFrom = data;
-    });
-  }
-
-  ResponseMthTo:any;
-  ddlMonthTo(){
-    this.webapi.getData('dllMMonth').then((data) => {
-      this.ResponseMthTo = data;
+  ISIC:any;
+  selectddlTypeAll(){
+    this.webapi.getData('ddlRegister').then((data) => {
+      this.ISIC = data;
     });
   }
 
@@ -132,6 +113,7 @@ public isScaling = false;
       this.responseRegion = data;
     });
   }
+
   selectionProvinceAll(){
     let area;
     if(this.region != "00"){
@@ -142,21 +124,15 @@ public isScaling = false;
       this.ResponseProvince = data;
     }); 
   }
-  selectRegion(Mth_From,Mth_To,Region,Province,typeCur){
+
+  selectRegion(Region,Province,ISIC_TYPE){
     Province =  'undefined';
     this.Province = 'undefined';
 
-    this.selectionProvince(Mth_From,Mth_To,Region,Province,typeCur);
-    
+    this.selectionProvince(Region,Province,ISIC_TYPE); 
   }
 
-  /*selectionProvinceFill(Region){
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+Region).then((data) => {
-      this.ResponseProvince = data;
-    }); 
-  }*/
-
-  selectionProvince(Mth_From,Mth_To,Region,Province,typeCur){ 
+  selectionProvince(Region,Province,ISIC_TYPE){ 
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -165,20 +141,19 @@ public isScaling = false;
     }); 
 
    // this.selectionProvinceFill(Region);
-    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
+    this.selectDataAll(Region,Province,ISIC_TYPE);
   }
 
-  selectMonthFrom(Mth_From,Mth_To,Region,Province,typeCur){
-    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
+  selectType(Region,Province,ISIC_TYPE){
+    this.selectDataAll(Region,Province,ISIC_TYPE);
   }
 
-  selectMonthTo(Mth_From,Mth_To,Region,Province,typeCur){
-    this.selectDataAll(Mth_From,Mth_To,Region,Province,typeCur);
-  }
-
-  regionSelectType = "";
-  selectDataAll(Mth_From,Mth_To,Region,Province,typeCur){
+  responseSumData:any;
+  selectDataAll(Region,Province,ISIC_TYPE){
   
+    console.log(Region);
+    console.log(Province);
+    console.log(ISIC_TYPE);
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{
@@ -190,47 +165,20 @@ public isScaling = false;
     }else{
       Province = Province;
     }
-
-    if(typeCur == undefined){
-      this.regionSelectType = "B";
-    }else{
-      this.regionSelectType =  typeCur;
-    }
    
-    this.webapi.getData('MBLRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&month_from=' + Mth_From+'&month_to='+Mth_To).then((data)=>{
+    this.webapi.getData('MBLRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&type=' + ISIC_TYPE).then((data)=>{
       this.responseData = data;  
-      this.getChangNumber(this.regionSelectType);    
+      this.getChangNumber();    
     });
+
+    /* this.webapi.getData('MBLSumRegister?offcode='+this.offcode+'&region='+Region+'&province='+Province+'&type=' + ISIC_TYPE).then((data)=>{
+      this.responseSumData = data;  
+      this.getSumChangNumber();    
+    }); */
     
-    this.getDateTiTle(Mth_From,Mth_To);
   }
 
-  getDateTiTle(monthFrom,monthTo){  
- 
-    let dateTitle;
-    if(monthFrom != undefined  && monthTo != undefined){
-      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
-      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
-        this.responseDateTitle = data;       
-        dateTitle= this.responseDateTitle[0].DATE_TITLE;
-      //  console.log("dateTitle"+dateTitle);
-        if (dateTitle == "0"){
-          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
-         }else{
-    
-          this.dateAsOff =dateTitle;
-         }
-       //  console.log("this.dateAsOff"+this.dateAsOff);
-       }); 
-      }else{   
-        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-      }
-    }else{
-      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-    }    
-  }
-
-  getChangNumber(typeCur){
+  getChangNumber(typeCur = 'B'){
    
     let imp_register;
     let in_register;
@@ -249,6 +197,27 @@ public isScaling = false;
       this.responseData[i].IN_REGISTER = in_register;
       this.responseData[i].TOTAL_REGISTER = total_register;
     }
+  }
+
+  getSumChangNumber(typeCur = 'B'){
+    let imp_register;
+    let in_register;
+    let total_register;
+
+    for (var i = 0; i < this.responseSumData.length; i++) {
+      imp_register = this.responseSumData[i].IMP_REGISTER;
+      in_register = this.responseSumData[i].IN_REGISTER;
+      total_register = this.responseSumData[i].TOTAL_REGISTER;
+
+      if (imp_register != null) { imp_register = changeCurrencyNoUnit(imp_register, typeCur); }
+      if (in_register != null) { in_register = changeCurrencyNoUnit(in_register, typeCur); }
+      if (total_register != null) { total_register = changeCurrencyNoUnit(total_register, typeCur); }
+
+      this.responseSumData[i].IMP_REGISTER = imp_register;
+      this.responseSumData[i].IN_REGISTER = in_register;
+      this.responseSumData[i].TOTAL_REGISTER = total_register;
+    }
+
   }
  /* start for pinch */
  public onPinchStart(e) {

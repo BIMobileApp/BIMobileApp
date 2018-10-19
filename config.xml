@@ -3,7 +3,7 @@
     <name>Excise BI</name>
     <description>This is Excise BI</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.188.119:8107" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -84,5 +84,5 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <allow-navigation href="http://192.168.188.119:8107" />
     <engine name="ios" spec="4.5.5" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="~7.0.0" />
 </widget>

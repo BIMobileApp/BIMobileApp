@@ -53,7 +53,7 @@ export class LicDataMarketPage {
     this.ddlMonthFrom();
     this.ddlMonthTo();
 
-    let typeCur = 'M';
+    let typeCur = 'B';
     let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
 
@@ -99,13 +99,9 @@ export class LicDataMarketPage {
   SelectMonthTo(typeCur,month_from,month_to){
     this. loadData(typeCur,month_from,month_to);
   }
-  regionSelectType = '';
+  regionSelectType = 'B';
   loadData(typeCur,month_from,month_to){
-    if(typeCur == undefined){
-      this.regionSelectType = "M";
-    }else{
-      this.regionSelectType =  typeCur;
-    }
+
     this.webapi.getData('IncDataMarketList?offcode=' + this.offcode+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
       this.responseData = data;
       this.getDataAmt(this.regionSelectType);

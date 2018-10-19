@@ -4,8 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
-declare var convertMthBudYear:any;
-declare var monthNowNumber:any;
+declare var convertMthBudYear: any;
+declare var monthNowNumber: any;
 
 @IonicPage()
 @Component({
@@ -15,78 +15,79 @@ declare var monthNowNumber:any;
 export class CompareTaxAlcoholPage {
   @ViewChild('LineCanvasTax') LineCanvasTax;
   @ViewChild('LineCanvasVol') LineCanvasVol;
- 
-  offcode:any;
+
+  offcode: any;
   //Line Tax
   TaxlineChart: any;
   TaxLineData: any;
   tax_TAX = [];
   tax_TAX_LY = [];
   tax_lebel = [];
-  
+
   //Line Vol
   VollineChart: any;
   vol_TAX = [];
   vol_TAX_LY = [];
 
   textDataNotValid: any;
-  username:any;
+  username: any;
 
-  dateDisplay:any;
-  dateAsOff:any;
-  mthNumber:any;
+  dateDisplay: any;
+  dateAsOff: any;
+  mthNumber: any;
 
-  Province:any;
-  region:any;
-  province:any;
-  branch:any;
-  select_region:any;
-  select_all_value:any;
-  isEnable:any;
-  select_province:any;
-  select_all_prov_value:any;
-  isEnableProv:any;
-  
-  responseDateTitle:any;
-  responseRegion:any;
-  responseProvince:any;
+  Province: any;
+  region: any;
+  province: any;
+  branch: any;
+  select_region: any;
+  select_all_value: any;
+  isEnable: any;
+  select_province: any;
+  select_all_prov_value: any;
+  isEnableProv: any;
+
+  responseDateTitle: any;
+  responseRegion: any;
+  responseProvince: any;
   responseMonth: any;
-  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
-
+  changeCurrencyType = '';
+  strVolUnit = '';
+  strTaxUnit = '';
   dbtable = "MBL_PRODUCT_SURA_MONTH";
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-       ///หา offcode เพื่อหา ภาค จังหวัด สาขา
-     this.region = localStorage.offcode.substring(0, 2);
-     this.province = localStorage.offcode.substring(2, 4);
-     this.branch =  localStorage.offcode.substring(4, 6);
-   /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+    ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+    this.region = localStorage.offcode.substring(0, 2);
+    this.province = localStorage.offcode.substring(2, 4);
+    this.branch = localStorage.offcode.substring(4, 6);
+    /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
 
     ///ตรวจสอบภาคเพื่อ default selection
-    if(this.region != "00"){
+    if (this.region != "00") {
       this.select_region = localStorage.region_desc;
-      this.select_all_value = false;    
-      this.isEnable  = true;        
-    }else{
+      this.select_all_value = false;
+      this.isEnable = true;
+    } else {
       this.select_all_value = true;
-      this.isEnable  = false;
+      this.isEnable = false;
     }
- ///end ตรวจสอบภาคเพื่อ default selection
+    ///end ตรวจสอบภาคเพื่อ default selection
 
-  /// ตรวจสอบสาขาเพื่อ default selection
-  var res = "";
-  if(this.branch != "00" || this.province != "00"){          
-     res =  localStorage.offdesc.split(" ");
-     this.select_province  = res[0];
-     this.select_all_prov_value = false;
-     this.isEnableProv = true;
-   }else{
-     this.select_all_prov_value = true;
-     this.isEnableProv = false;
-   }
-  ///end  ตรวจสอบสาขาเพื่อ default selection
+    /// ตรวจสอบสาขาเพื่อ default selection
+    var res = "";
+    if (this.branch != "00" || this.province != "00") {
+      res = localStorage.offdesc.split(" ");
+      this.select_province = res[0];
+      this.select_all_prov_value = false;
+      this.isEnableProv = true;
+    } else {
+      this.select_all_prov_value = true;
+      this.isEnableProv = false;
+    }
+    ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
   select_mth_from = '';
@@ -100,9 +101,9 @@ export class CompareTaxAlcoholPage {
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
     this.mthNumber = monthNowNumber;
-   // this.dateAsOff =  dateDisplayAll;
-   
-   this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    // this.dateAsOff =  dateDisplayAll;
+
+    this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
     this.offcode = localStorage.offcode;
 
     this.selectionAreaAll();
@@ -111,131 +112,149 @@ export class CompareTaxAlcoholPage {
 
     let Region;
     let Province;
+    let typeCur = 'M';
+    this.strVolUnit = 'ล้านลิตร';
+    this.strTaxUnit = 'ล้านบาท';
     let month_from = convertMthBudYear(this.mthNumber);;
     let month_to = convertMthBudYear(this.mthNumber);;
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
 
-    this.getLineTaxData(Region,Province,month_from,month_to);
+    this.getLineTaxData(typeCur, Region, Province, month_from, month_to);
 
   }
 
-  ResponseMthFrom:any;
-  ddlMonthFrom(){
+  ResponseMthFrom: any;
+  ddlMonthFrom() {
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseMthFrom = data;
     });
   }
 
-  ResponseMthTo:any;
-  ddlMonthTo(){
+  ResponseMthTo: any;
+  ddlMonthTo() {
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseMthTo = data;
     });
   }
 
-  selectionAreaAll(){
+  selectionAreaAll() {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseRegion = data;
     });
   }
 
-  selectionProvinceAll(){
+  selectionProvinceAll() {
     let region;
-    if(this.region != "00"){
+    if (this.region != "00") {
       region = localStorage.region_desc;
     }
-    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+region).then((data) => {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + region).then((data) => {
       this.responseProvince = data;
-    }); 
+    });
   }
 
-  selectRegion(Region,Province,month_from,month_to){
-    Province =  'undefined';
+  selectRegion(typeCur, Region, Province, month_from, month_to) {
+    Province = 'undefined';
     this.Province = 'undefined';
-    this.selectionProvince(Region,Province,month_from,month_to);
+    this.selectionProvince(typeCur, Region, Province, month_from, month_to);
   }
 
-  selectionProvince(Region,Province,month_from,month_to){
-    if(this.region != "00"){
+  selectionProvince(typeCur, Region, Province, month_from, month_to) {
+    if (this.region != "00") {
       Region = localStorage.region_desc;
     }
-    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
-    }); 
-   
+    });
 
-    this.getLineTaxData(Region,Province,month_from,month_to);
+
+    this.getLineTaxData(typeCur, Region, Province, month_from, month_to);
   }
 
-  selectionBudgetMonth(){
+  selectionBudgetMonth() {
     this.webapi.getData('dllMMonth').then((data) => {
       this.responseMonth = data;
-    }); 
+    });
   }
 
- getLineTaxData(Region,Province,month_from,month_to) {
- 
-  if(this.region != "00"){
-    Region = localStorage.region_desc;
-  }
 
-  if(this.branch != "00" || this.province != "00"){     
-    Province =  this.select_province;
-  }
+  getLineTaxData(typeCur, Region, Province, month_from, month_to) {
+
+    if (this.region != "00") {
+      Region = localStorage.region_desc;
+    }
+
+    if (this.branch != "00" || this.province != "00") {
+      Province = this.select_province;
+    }
   
-  this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
-    /* this.webapi.getData('CompareTaxVolSura?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
+    if(typeCur == undefined){
+      this.changeCurrencyType = "M";
+      this.strVolUnit = 'ล้านลิตร';
+      this.strTaxUnit = 'ล้านบาท';
+    }else if(typeCur == 'M'){
+      this.changeCurrencyType =  typeCur;
+      this.strVolUnit = 'ล้านลิตร';
+      this.strTaxUnit = 'ล้านบาท';
+    }else{
+      this.changeCurrencyType =  typeCur;
+      this.strVolUnit = 'ลิตร';
+      this.strTaxUnit = 'บาท';
+    }
+
+    this.webapi.getData('CompareTaxVolProduct?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + this.dbtable).then((data) => {
+      /* this.webapi.getData('CompareTaxVolSura?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
-      if(this.TaxLineData.length > 0){
+      if (this.TaxLineData.length > 0) {
         this.textDataNotValid = 1;
         this.TaxgetTAX();
-        if(this.TaxlineChart){
+        if (this.TaxlineChart) {
           this.TaxlineChart.destroy();
         }
         setTimeout(() => {
           this.TaxCreateChart();
-        },1000);
-       
+        }, 1000);
+
         this.VolgetTAX();
-        if(this.VollineChart){
+        if (this.VollineChart) {
           this.VollineChart.destroy();
         }
         setTimeout(() => {
           this.VolCreateChart();
-        },1000);
-       
-      }else{
+        }, 1000);
+
+      } else {
         this.textDataNotValid = 0;
       }
     });
-    
-    this.getDateTiTle(month_from,month_to);
+
+    this.getDateTiTle(month_from, month_to);
   }
-  getDateTiTle(monthFrom,monthTo){  
- 
+  getDateTiTle(monthFrom, monthTo) {
+
     let dateTitle;
-    if(monthFrom != undefined  && monthTo != undefined){
-      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
-      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
-        this.responseDateTitle = data;       
-        dateTitle= this.responseDateTitle[0].DATE_TITLE;
-      //  console.log("dateTitle"+dateTitle);
-        if (dateTitle == "0"){
-          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
-         }else{
-    
-          this.dateAsOff =dateTitle;
-         }
-       //  console.log("this.dateAsOff"+this.dateAsOff);
-       }); 
-      }else{   
-        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    if (monthFrom != undefined && monthTo != undefined) {
+      if (monthFrom != 'undefined' && monthTo != 'undefined') {
+        this.webapi.getData('DateTitle?startMonth=' + (monthFrom == undefined ? monthTo : monthFrom) + '&endMonth=' + (monthTo == undefined ? monthFrom : monthTo)).then((data) => {
+          this.responseDateTitle = data;
+          dateTitle = this.responseDateTitle[0].DATE_TITLE;
+          //  console.log("dateTitle"+dateTitle);
+          if (dateTitle == "0") {
+            this.dateAsOff = "โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+          } else {
+
+            this.dateAsOff = dateTitle;
+          }
+          //  console.log("this.dateAsOff"+this.dateAsOff);
+        });
+      } else {
+        this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
       }
-    }else{
-      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-    }    
+    } else {
+      this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    }
   }
   //----------------------- Start Manage Data from API-------------------------//
 
@@ -260,7 +279,7 @@ export class CompareTaxAlcoholPage {
       type: 'line',
       data: {
         labels: this.tax_lebel,
-      /*   labels: this.label, */
+        /*   labels: this.label, */
         datasets: [
           {
             label: "ปีนี้",
@@ -314,45 +333,50 @@ export class CompareTaxAlcoholPage {
         legend: {
           display: true,
           labels: {
-              boxWidth: 10,
+            boxWidth: 10,
           }
-      },
-      tooltips: {
-        mode: 'index',
-        label: 'myLabel',
-        callbacks: {
-          label: function (tooltipItem, data) {
-            let value;
-            let valFormat;
-            if (tooltipItem.yLabel > 999999) {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-              value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " ล้านบาท"; 
-            } else {
-             valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-             value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " บาท"; 
-            }
+        },
+        tooltips: {
+          mode: 'index',
+          label: 'myLabel',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              let value; 
+              let valFormat;
+              valFormat = changeCurrency(tooltipItem.yLabel, this.changeCurrencyType);
+              value = data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat +  this.strTaxUnit ;
+              /*   if (tooltipItem.yLabel > 999999) {
+                  valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+                  value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " ล้านบาท"; 
+                } else {
+                 valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+                 value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " บาท"; 
+                } */
 
-            return value;
+              return value;
+            }
           }
-        }
-      },
+        },
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                if(value >= 1000000){
+                value = changeCurrency(value, this.changeCurrencyType);
+                return value;
+              /*   if (value >= 1000000) {
                   value = (value / 1000000);
                   value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                   return value;
-                }else{
+                } else {
+                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                   return value;
-                }
+                } */
               }
             },
             scaleLabel: {
               display: true,
-              labelString: 'ล้านบาท'
+              labelString: this.strTaxUnit
             }
           }
           ],
@@ -389,7 +413,7 @@ export class CompareTaxAlcoholPage {
       type: 'line',
       data: {
         labels: this.tax_lebel,
-       /*  labels: this.label, */
+        /*  labels: this.label, */
         datasets: [
           {
             label: "ปีนี้",
@@ -443,42 +467,46 @@ export class CompareTaxAlcoholPage {
         legend: {
           display: true,
           labels: {
-              boxWidth: 10,
+            boxWidth: 10,
           }
-      },
-      tooltips: {
-        mode: 'index',
-        label: 'myLabel',
-        callbacks: {
-          label: function (tooltipItem, data) {
-            let value;
-            let valFormat;
-            if (tooltipItem.yLabel > 999999) {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านลิตร";
-            } else {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ลิตร";
-            }
+        },
+        tooltips: {
+          mode: 'index',
+          label: 'myLabel',
+          callbacks: {
+            label: function (tooltipItem, data) {
+              let value;
+              let valFormat;
+              valFormat = changeCurrency(tooltipItem.yLabel, this.changeCurrencyType);
+              value = data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + this.strVolUnit;
+              /*  if (tooltipItem.yLabel > 999999) {
+                 valFormat = changeCurrency(tooltipItem.yLabel, 'M');
+                 value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านลิตร";
+               } else {
+                 valFormat = changeCurrency(tooltipItem.yLabel, 'B');
+                 value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ลิตร";
+               } */
 
-            return value;
-          }
-        } // end callbacks:
-      }, //end tooltip
+              return value;
+            }
+          } // end callbacks:
+        }, //end tooltip
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                  value = (value / 1000000);
-                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  return value;
+                value = changeCurrency(value, this.changeCurrencyType);
+                return value;
+                /*  value = (value / 1000000);*/
+                /* value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return value; */
 
               }
             },
             scaleLabel: {
               display: true,
-              labelString: 'ลิตร'
+              labelString: this.strVolUnit
             }
           }
           ],

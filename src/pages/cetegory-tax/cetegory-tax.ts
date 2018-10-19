@@ -292,7 +292,7 @@ export class CetegoryTaxPage {
 
    let Region;
    let province;
-   console.log(this.region);
+ 
     if(this.region != "00"){
 
       if(area != 'undefined'){
@@ -624,14 +624,14 @@ export class CetegoryTaxPage {
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea3Year = data;     
     });
-    console.log(this.responseArea3Year);
+    
   }
   selectionProviceFirst3Year() {
     let region;
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+region).then((data) => {
       this.responseProvince3Year = data;
     });
-    console.log(this.responseProvince3Year);
+   
   }
 
   selectionProvince3Year(area3Year,Province3Year,typeCur3Year) {
@@ -650,7 +650,7 @@ export class CetegoryTaxPage {
     this.webapi.getData('Tax3Year').then((data) => {
       this.Tax3YearHeader = data;
     });
-    console.log(this.Tax3YearHeader);
+
   }
 
    Get3YearTable(area3Year,Province3Year,typeCur3Year) {

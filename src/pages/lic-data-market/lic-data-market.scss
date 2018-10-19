@@ -7,15 +7,12 @@ page-lic-data-market {
     border-collapse: collapse;
     table-layout: fixed;
   }
-
   table tbody tr:nth-child(odd) {
     background-color: rgb(250, 220, 137) !important;
   }
-
   table tbody tr:nth-child(even) {
     background-color: rgb(255, 255, 255) !important;
   }
-
   table tbody tr:last-child {
     background: #a7d8ff !important;
   }
@@ -25,11 +22,9 @@ page-lic-data-market {
       width: 90%;
     }
   }
-
   ion-content.disable-scrolling .scroll-content {
     overflow-y: hidden;
   }
-
   h1.header-style {
     font-weight: bold;
     color: black !important;
@@ -43,14 +38,18 @@ page-lic-data-market {
     font-size: 5vw !important;
     text-align: center !important;
   }
-
+  .desc-right {
+    font-weight: bold;
+    color: black !important;
+    font-size: 4vw !important;
+    text-align: right !important;
+  }
   .th-center {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
     // font-size: 3vw !important;
     text-align: center !important;
   }
-
   .td-center {
     font-weight: bold;
     color: rgb(27, 15, 15) !important;
