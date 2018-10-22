@@ -3,9 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var dateDisplayAll: any;
-declare var changeCurrency: any;
 declare var convertMthBudYear: any;
 declare var monthNowNumber: any;
+declare var GetYAxes: any;
+declare var GetTooltips: any;
+
 
 @IonicPage()
 @Component({
@@ -275,6 +277,8 @@ export class CompareTaxAlcoholPage {
   //----------------------- End Manage Data from API-------------------------//
 
   TaxCreateChart() {
+    let curType = this.changeCurrencyType;
+    let str = this.strTaxUnit;
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
@@ -341,18 +345,9 @@ export class CompareTaxAlcoholPage {
           label: 'myLabel',
           callbacks: {
             label: function (tooltipItem, data) {
-              let value; 
-              let valFormat;
-              valFormat = changeCurrency(tooltipItem.yLabel, this.changeCurrencyType);
-              value = data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat +  this.strTaxUnit ;
-              /*   if (tooltipItem.yLabel > 999999) {
-                  valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-                  value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " ล้านบาท"; 
-                } else {
-                 valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-                 value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " บาท"; 
-                } */
-
+              let name = data.datasets[tooltipItem.datasetIndex].label;
+              let val = tooltipItem.yLabel;
+              let value = GetTooltips(val,name,curType,str);
               return value;
             }
           }
@@ -362,16 +357,8 @@ export class CompareTaxAlcoholPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = changeCurrency(value, this.changeCurrencyType);
+                value = GetYAxes(value,curType);
                 return value;
-              /*   if (value >= 1000000) {
-                  value = (value / 1000000);
-                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  return value;
-                } else {
-                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  return value;
-                } */
               }
             },
             scaleLabel: {
@@ -407,8 +394,11 @@ export class CompareTaxAlcoholPage {
 
 
   //----------------------- End Manage Data from API-------------------------//
+ 
 
   VolCreateChart() {
+    let curType = this.changeCurrencyType;
+    let str = this.strVolUnit;
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
@@ -475,18 +465,9 @@ export class CompareTaxAlcoholPage {
           label: 'myLabel',
           callbacks: {
             label: function (tooltipItem, data) {
-              let value;
-              let valFormat;
-              valFormat = changeCurrency(tooltipItem.yLabel, this.changeCurrencyType);
-              value = data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + this.strVolUnit;
-              /*  if (tooltipItem.yLabel > 999999) {
-                 valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-                 value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านลิตร";
-               } else {
-                 valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-                 value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ลิตร";
-               } */
-
+              let name = data.datasets[tooltipItem.datasetIndex].label;
+              let val = tooltipItem.yLabel;
+              let value = GetTooltips(val,name,curType,str);
               return value;
             }
           } // end callbacks:
@@ -496,11 +477,8 @@ export class CompareTaxAlcoholPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = changeCurrency(value, this.changeCurrencyType);
+                value = GetYAxes(value,curType);
                 return value;
-                /*  value = (value / 1000000);*/
-                /* value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return value; */
 
               }
             },

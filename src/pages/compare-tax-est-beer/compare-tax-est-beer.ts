@@ -6,6 +6,8 @@ declare var changeCurrency: any;
 declare var dateDisplayAll: any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
+declare var GetYAxes: any;
+declare var GetTooltips: any;
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -24,7 +26,6 @@ export class CompareTaxEstBeerPage {
   offcode: any;
   responseArea: any;
   responseProvince: any;
-  curTG = "ล้านบาท";
   display_region_top10 = "";
   display_province_top10 = "";
 
@@ -65,6 +66,10 @@ export class CompareTaxEstBeerPage {
   grp_id: any;
 
   mthNumber:any;
+  typeCurLine:any;
+  TYPE_DESC :any;
+  changeCurrencyType = '';
+  strTaxUnit = '';
 
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
@@ -127,10 +132,11 @@ export class CompareTaxEstBeerPage {
 
     let area;
     let Province;
+
     let month_from = convertMthBudYear(this.mthNumber);;
     let month_to = convertMthBudYear(this.mthNumber);;
     let typeCur = 'M';
-
+    this.strTaxUnit = 'ล้านบาท';
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
    
@@ -156,6 +162,10 @@ export class CompareTaxEstBeerPage {
   }
   
   toggleLineShow() {
+    this.changeCurrencyType = "M";
+    this.strTaxUnit = 'ล้านบาท';
+    this.typeCurLine = "M";
+    this.TYPE_DESC = "";
     if (this.toggleLine == 0) {
       this.getLineAll();
       this.toggleLine = 1;
@@ -267,13 +277,7 @@ export class CompareTaxEstBeerPage {
     this.selectDataAll(area, Province, this.regionSelectType,month_from,month_to);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-    if (typeCur == "M") {
-      this.curTG = "ล้านบาท";
-    } else if(typeCur == undefined){
-      this.curTG = "ล้านบาท";
-    }else {
-      this.curTG = "บาท";
-    }
+   
     this.getDateTiTle(month_from,month_to);
   }
 
@@ -326,7 +330,18 @@ export class CompareTaxEstBeerPage {
   }
 
 
-  getLineTaxData(TYPE_DESC) {
+  getLineTaxData(typeCurLine,TYPE_DESC) {
+    if (typeCurLine == undefined) {
+      this.changeCurrencyType = "M";
+      this.strTaxUnit = 'ล้านบาท';
+    } else if (typeCurLine == 'M') {
+      this.changeCurrencyType = typeCurLine;
+      this.strTaxUnit = 'ล้านบาท';
+    } else {
+      this.changeCurrencyType = typeCurLine;
+      this.strTaxUnit = 'บาท';
+    }
+    if( TYPE_DESC == undefined ){ TYPE_DESC = ""; }
     if (TYPE_DESC != "") {
       this.webapi.getData('CompareTaxBeerMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
@@ -383,6 +398,8 @@ export class CompareTaxEstBeerPage {
   }
 
   TaxCreateChart() {
+    let curType = this.changeCurrencyType;
+    let str = this.strTaxUnit;
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
@@ -448,17 +465,9 @@ export class CompareTaxEstBeerPage {
           label: 'myLabel',
           callbacks: {
             label: function (tooltipItem, data) {
-              let value;
-              let valFormat;
-              if (tooltipItem.yLabel > 999999) {
-                valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-                value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " ล้านบาท"; 
-            /*     value = data.datasets[tooltipItem.datasetIndex].label + ': ' + (tooltipItem.yLabel / 1000000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ล้านบาท"; */
-              } else {
-                valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-                value = data.datasets[tooltipItem.datasetIndex].label + ': '  + valFormat + " บาท"; 
-               /*  value = data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " บาท"; */
-              }
+              let name = data.datasets[tooltipItem.datasetIndex].label;
+              let val = tooltipItem.yLabel;
+              let value = GetTooltips(val, name, curType, str);
               return value;
             }
           } // end callbacks:
@@ -468,17 +477,13 @@ export class CompareTaxEstBeerPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-
-                value = (value / 1000000);
-                value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                value = GetYAxes(value,curType);
                 return value;
-
-
               }
             },
             scaleLabel: {
               display: true,
-              labelString: "ล้านบาท",
+              labelString: this.strTaxUnit
             }
           }
           ],

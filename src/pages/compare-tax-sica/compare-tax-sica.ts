@@ -4,10 +4,10 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 
 declare var dateDisplayAll: any;
-declare var changeCurrency: any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
-
+declare var GetYAxes: any;
+declare var GetTooltips: any;
 
 @IonicPage()
 @Component({
@@ -49,8 +49,10 @@ export class CompareTaxSicaPage {
   responseMonth: any;
 
   mthNumber:any;
+  changeCurrencyType = '';
+  strVolUnit = '';
+  strTaxUnit = '';
   dbtable = "MBL_PRODUCT_TOBACCO_MONTH";
-  label = ["ต.ค.","พ.ย.","ธ.ค","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค","ส.ค.","ก.ย."];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public webapi: RestProvider) {
     this.mthNumber = monthNowNumber;
@@ -100,13 +102,16 @@ export class CompareTaxSicaPage {
     this.ddlMonthTo();
     let Region;
     let Province;
+    let typeCur = 'M';
+    this.strVolUnit = 'ล้านหน่วย';
+    this.strTaxUnit = 'ล้านบาท';
     let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
 
-    this.getLineTaxData(Region,Province,month_from,month_to);
+    this.getLineTaxData(typeCur, Region,Province,month_from,month_to);
   }
   selectionBudgetMonth(){
     this.webapi.getData('dllMMonth').then((data) => {
@@ -144,30 +149,43 @@ export class CompareTaxSicaPage {
     }); 
   }
 
-  selectRegion(Region,Province,month_from,month_to){
+  selectRegion(typeCur,Region,Province,month_from,month_to){
     Province =  'undefined';
     this.Province = 'undefined';
 
-    this.selectionProvince(Region,Province,month_from,month_to);
+    this.selectionProvince(typeCur,Region,Province,month_from,month_to);
   }
 
-  selectionProvince(Region,Province,month_from,month_to){
+  selectionProvince(typeCur,Region,Province,month_from,month_to){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
       this.responseProvince = data;
     }); 
-    this.getLineTaxData(Region,Province,month_from,month_to);
+    this.getLineTaxData(typeCur,Region,Province,month_from,month_to);
   }
 
- getLineTaxData(Region,Province,month_from,month_to) {
+ getLineTaxData(typeCur,Region,Province,month_from,month_to) {
   if(this.region != "00"){
     Region = localStorage.region_desc;
   }
 
   if(this.branch != "00"  || this.province != "00"){     
     Province =  this.select_province;
+  }
+  if (typeCur == undefined) {
+    this.changeCurrencyType = "M";
+    this.strVolUnit = 'ล้านหน่วย';
+    this.strTaxUnit = 'ล้านบาท';
+  } else if (typeCur == 'M') {
+    this.changeCurrencyType = typeCur;
+    this.strVolUnit = 'ล้านหน่วย';
+    this.strTaxUnit = 'ล้านบาท';
+  } else {
+    this.changeCurrencyType = typeCur;
+    this.strVolUnit = 'หน่วย';
+    this.strTaxUnit = 'บาท';
   }
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
   /*   this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
@@ -242,6 +260,8 @@ export class CompareTaxSicaPage {
   //----------------------- End Manage Data from API-------------------------//
 
   TaxCreateChart() {
+    let curType = this.changeCurrencyType;
+    let str = this.strTaxUnit;
     this.TaxlineChart = new Chart(this.LineCanvasTax.nativeElement, {
       type: 'line',
       data: {
@@ -307,16 +327,9 @@ export class CompareTaxSicaPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
-            let value;
-            let valFormat;
-            if (tooltipItem.yLabel > 999999) {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านบาท";
-            } else {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " บาท";
-            }
-
+            let name = data.datasets[tooltipItem.datasetIndex].label;
+            let val = tooltipItem.yLabel;
+            let value = GetTooltips(val, name, curType, str);
             return value;
           }
         } // end callbacks:
@@ -326,18 +339,14 @@ export class CompareTaxSicaPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                if(value >= 1000000){
-                  value = (value / 1000000);
-                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  return value;
-                }else{
-                  return value;
-                }
+                value = GetYAxes(value,curType);
+                return value;
+                
               }
             },
             scaleLabel: {
               display: true,
-              labelString: 'ล้านบาท'
+              labelString: this.strTaxUnit
             }
           }
           ],
@@ -371,6 +380,8 @@ export class CompareTaxSicaPage {
   //----------------------- End Manage Data from API-------------------------//
 
   VolCreateChart() {
+    let curType = this.changeCurrencyType;
+    let str = this.strVolUnit;
     this.VollineChart = new Chart(this.LineCanvasVol.nativeElement, {
       type: 'line',
       data: {
@@ -436,15 +447,9 @@ export class CompareTaxSicaPage {
         label: 'myLabel',
         callbacks: {
           label: function (tooltipItem, data) {
-            let value;
-            let valFormat;
-            if (tooltipItem.yLabel > 999999) {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'M');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " ล้านหน่วย";
-            } else {
-              valFormat = changeCurrency(tooltipItem.yLabel, 'B');
-              value =data.datasets[tooltipItem.datasetIndex].label + ': ' + valFormat + " หน่วย";
-            }
+            let name = data.datasets[tooltipItem.datasetIndex].label;
+            let val = tooltipItem.yLabel;
+            let value = GetTooltips(val,name,curType,str);
             return value;
           }
         } // end callbacks:
@@ -454,15 +459,14 @@ export class CompareTaxSicaPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                  value = (value / 1000000);
-                  value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  return value;
+                value = GetYAxes(value,curType);
+                return value;
                
               }
             },
             scaleLabel: {
               display: true,
-              labelString: 'ล้านหน่วย'
+              labelString: this.strVolUnit
             }
           }
           ],

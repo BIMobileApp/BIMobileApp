@@ -22,13 +22,20 @@
         <ion-item class="size">
 
           <ion-label>กลุ่มสินค้า : </ion-label>
-          <ion-select [(ngModel)]="TYPE_DESC" (ionChange)="getLineTaxData(TYPE_DESC)">
+          <ion-select [(ngModel)]="TYPE_DESC" (ionChange)="getLineTaxData(typeCurLine,TYPE_DESC)">
             <ion-option value="" [selected]="true">ทั้งหมด</ion-option>
             <ion-option *ngFor="let data of ProductType" value="{{data.I_TYPE_DESC}}">
               {{data.I_TYPE_DESC}}
             </ion-option>
           </ion-select>
         </ion-item>
+          <ion-item class="sizemini" no-lines>
+            <ion-label> หน่วย : </ion-label>
+            <ion-select [(ngModel)]="typeCurLine" #item (ionChange)="getLineTaxData(typeCurLine, TYPE_DESC)">
+              <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+              <ion-option value="B">บาท</ion-option>
+            </ion-select>
+          </ion-item>
         <div *ngIf="textDataInValid=='0' ">
           <br>
           <br>
