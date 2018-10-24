@@ -16,7 +16,7 @@
                 <ion-col>
                   <ion-item class="size">
                     <ion-label> เดือน : </ion-label>
-                    <ion-select [(ngModel)]="month_from"  (ionChange)="selectionProvince(typeCur,Region,Province,month_from,month_to)">
+                    <ion-select [(ngModel)]="month_from"  (ionChange)="selectionProvince(Region,Province,month_from,month_to)">
                       <ion-option value="undefined">ทั้งหมด</ion-option>
                       <ion-option *ngFor="let item3 of ResponseMthFrom"  value="{{item3.BUDGET_MONTH_CD}}"  [selected]="select_mth_from == item3.BUDGET_MONTH_CD">{{item3.MONTH_DESC}}</ion-option>
                     </ion-select>
@@ -25,7 +25,7 @@
                 <ion-col>
                   <ion-item class="size">
                     <ion-label> ถึง: </ion-label>
-                    <ion-select [(ngModel)]="month_to" (ionChange)="selectionProvince(typeCur,Region,Province,month_from,month_to)">
+                    <ion-select [(ngModel)]="month_to" (ionChange)="selectionProvince(Region,Province,month_from,month_to)">
                       <ion-option value="undefined">ทั้งหมด</ion-option>
                       <ion-option  *ngFor="let item4 of ResponseMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>     
                     </ion-select>
@@ -37,7 +37,7 @@
              <ion-col>
                <ion-item  class="size">
                    <ion-label> ภาค : </ion-label>
-                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(typeCur,Region,Province,month_from,month_to)" disabled={{isEnable}}>
+                   <ion-select  [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,month_from,month_to)" disabled={{isEnable}}>
                           <ion-option value="undefined"   [selected]="select_all_value">ทั้งหมด</ion-option>
                           <ion-option  *ngFor="let item of responseRegion"  value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>              
                    </ion-select>
@@ -46,7 +46,7 @@
              <ion-col>
                <ion-item  class="size">
                    <ion-label>จังหวัด : </ion-label>
-                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(typeCur,Region,Province,month_from,month_to)" disabled={{isEnableProv}}>
+                   <ion-select  [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,month_from,month_to)" disabled={{isEnableProv}}>
                          <ion-option value="undefined"  [selected]="select_all_prov_value">ทั้งหมด</ion-option >
                            <ion-option  *ngFor="let item1 of responseProvince"  value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>            
                    </ion-select>
@@ -54,13 +54,13 @@
             </ion-col>        
             </ion-row>
          </ion-grid>
-         <ion-item class="sizemini" no-lines>
+       <!--   <ion-item class="sizemini" no-lines>
           <ion-label> หน่วย : </ion-label>
           <ion-select [(ngModel)]="typeCur" #item (ionChange)="getLineTaxData(typeCur, Region, Province, month_from, month_to)">
             <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
             <ion-option value="B">บาท</ion-option>
           </ion-select>
-        </ion-item>
+        </ion-item> -->
          
     <ion-card>
       <ion-card-content>

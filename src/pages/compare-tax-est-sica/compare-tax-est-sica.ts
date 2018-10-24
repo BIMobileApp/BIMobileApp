@@ -59,7 +59,7 @@ export class CompareTaxEstSicaPage {
   //Table reg d
   responseRegData: any;
   grp_id: any;
-
+  curTG  = "ล้านบาท";
   region: any;
   province: any;
   branch: any;
@@ -273,7 +273,13 @@ export class CompareTaxEstSicaPage {
     this.selectDataAll(area, Province, this.regionSelectType,month_from,month_to);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else if(typeCur == undefined){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
     this.getDateTiTle(month_from,month_to);
 
 
@@ -325,8 +331,10 @@ export class CompareTaxEstSicaPage {
     });
   }
 
-  getLineTaxData(typeCurLine,TYPE_DESC) {
-    if (typeCurLine == undefined) {
+  getLineTaxData(TYPE_DESC) {
+    this.changeCurrencyType = "M";
+    this.strTaxUnit = 'ล้านบาท';
+   /*  if (typeCurLine == undefined) {
       this.changeCurrencyType = "M";
       this.strTaxUnit = 'ล้านบาท';
     } else if (typeCurLine == 'M') {
@@ -336,7 +344,7 @@ export class CompareTaxEstSicaPage {
       this.changeCurrencyType = typeCurLine;
       this.strTaxUnit = 'บาท';
     }
-    if( TYPE_DESC == undefined ){ TYPE_DESC = ""; }
+    if( TYPE_DESC == undefined ){ TYPE_DESC = ""; } */
     if (TYPE_DESC != "") {
       this.webapi.getData('CompareTaxSicaMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
@@ -482,6 +490,11 @@ export class CompareTaxEstSicaPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
+               /*  if(this.tax_TAX == undefined && this.tax_TAX_LY == undefined){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                } */
                 value = GetYAxes(value,curType);
                 return value;
               }

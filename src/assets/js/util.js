@@ -260,14 +260,16 @@ function coventACtoBE(data){
 }
 //ฟังก์ชั่น เปลี่ยนบาทเป็นล้านบาท
 function changeCurrencyYAxes(val, typeNow) {
-
   try {
-    var result = 0;
-    if (typeNow == 'M') {
-      result = val/1000000;
-    } else {
-      result = val;
-    }
+  
+      var result = 0;
+      if (typeNow == 'M') {
+        result = val/1000000;
+      } else {
+        result = val;
+      }
+    
+   
     result = addComma(result);
     /* result = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
     return result;

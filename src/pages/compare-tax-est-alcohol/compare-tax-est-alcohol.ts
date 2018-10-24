@@ -64,7 +64,7 @@ export class CompareTaxEstAlcoholPage {
   //Table reg
   responseRegData: any;
   grp_id: any;
-
+  curTG  = "ล้านบาท";
   mthNumber: any;
   typeCurLine:any;
   TYPE_DESC :any;
@@ -269,7 +269,13 @@ export class CompareTaxEstAlcoholPage {
     this.selectDataAll(area, Province, this.regionSelectType, month_from, month_to);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-  
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else if(typeCur == undefined){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
     this.getDateTiTle(month_from, month_to);
   }
 
@@ -322,9 +328,11 @@ export class CompareTaxEstAlcoholPage {
   }
 
 //-----------------------------------------------------------------------------------------------------------//
-  getLineTaxData(typeCurLine, TYPE_DESC) {
-
-    if (typeCurLine == undefined) {
+  getLineTaxData(TYPE_DESC) {
+ 
+    this.changeCurrencyType = "M";
+    this.strTaxUnit = 'ล้านบาท';
+   /*  if (typeCurLine == undefined) {
       this.changeCurrencyType = "M";
       this.strTaxUnit = 'ล้านบาท';
     } else if (typeCurLine == 'M') {
@@ -333,8 +341,8 @@ export class CompareTaxEstAlcoholPage {
     } else {
       this.changeCurrencyType = typeCurLine;
       this.strTaxUnit = 'บาท';
-    }
-   if( TYPE_DESC == undefined ){ TYPE_DESC = ""; }
+    } */
+  /*  if( TYPE_DESC == undefined ){ TYPE_DESC = ""; } */
     this.TaxLineData = [];
     if (TYPE_DESC != "" ) {
       this.webapi.getData('CompareTaxSuraMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
@@ -486,7 +494,13 @@ export class CompareTaxEstAlcoholPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = GetYAxes(value,curType);
+               /*  if(this.tax_TAX == undefined && this.tax_TAX_LY == undefined){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                }
+               */
+              value = GetYAxes(value,curType);
                 return value;
               }
             },

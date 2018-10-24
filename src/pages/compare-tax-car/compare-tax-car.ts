@@ -119,7 +119,7 @@ export class CompareTaxCarPage {
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
 
-    this.getLineTaxData(typeCur,Region,Province,month_from,month_to);
+    this.getLineTaxData(Region,Province,month_from,month_to);
   }
 
   selectionAreaAll(){
@@ -138,13 +138,13 @@ export class CompareTaxCarPage {
     }); 
   }
 
-  selectRegion(typeCur,Region,Province,month_from,month_to){
+  selectRegion(Region,Province,month_from,month_to){
     Province =  'undefined';
     this.Province = 'undefined';
-    this.selectionProvince(typeCur,Region,Province,month_from,month_to);
+    this.selectionProvince(Region,Province,month_from,month_to);
   }
 
-  selectionProvince(typeCur,Region,Province,month_from,month_to){
+  selectionProvince(Region,Province,month_from,month_to){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -152,7 +152,7 @@ export class CompareTaxCarPage {
       this.responseProvince = data;
     }); 
 
-    this.getLineTaxData(typeCur,Region,Province,month_from,month_to);
+    this.getLineTaxData(Region,Province,month_from,month_to);
   }
   
   ResponseMthFrom:any;
@@ -170,7 +170,7 @@ export class CompareTaxCarPage {
   }
 
 
- getLineTaxData(typeCur,Region,Province,month_from,month_to) {
+ getLineTaxData(Region,Province,month_from,month_to) {
   if(this.region != "00"){
     Region = localStorage.region_desc;
   }
@@ -178,8 +178,10 @@ export class CompareTaxCarPage {
   if(this.branch != "00" || this.province != "00"){     
     Province =  this.select_province;
   }
-
-  if (typeCur == undefined) {
+  this.changeCurrencyType = "M";
+  this.strVolUnit = 'ล้านคัน';
+  this.strTaxUnit = 'ล้านบาท';
+ /*  if (typeCur == undefined) {
     this.changeCurrencyType = "M";
     this.strVolUnit = 'ล้านคัน';
     this.strTaxUnit = 'ล้านบาท';
@@ -191,7 +193,7 @@ export class CompareTaxCarPage {
     this.changeCurrencyType = typeCur;
     this.strVolUnit = 'คัน';
     this.strTaxUnit = 'บาท';
-  }
+  } */
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
    /*  this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
@@ -345,6 +347,11 @@ export class CompareTaxCarPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
+              /*   if(this.tax_TAX == undefined && this.tax_TAX_LY == undefined){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                } */
                 value = GetYAxes(value,curType);
                 return value;
               }
@@ -464,6 +471,11 @@ export class CompareTaxCarPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
+               /*  if(this.tax_TAX == undefined && this.tax_TAX_LY == undefined){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                } */
                 value = GetYAxes(value,curType);
                 return value;
               }

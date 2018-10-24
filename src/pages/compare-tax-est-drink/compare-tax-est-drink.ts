@@ -69,7 +69,7 @@ export class CompareTaxEstDrinkPage {
     //Table reg
     responseRegData: any;
     grp_id: any;
-    
+    curTG  = "ล้านบาท";
     /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -276,6 +276,13 @@ export class CompareTaxEstDrinkPage {
     this.selectDataAll(area, Province,this.regionSelectType,month_from,month_to);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
+    if(typeCur == "M"){
+      this.curTG = "ล้านบาท";
+    }else if(typeCur == undefined){
+      this.curTG = "ล้านบาท";
+    }else{
+      this.curTG = "บาท";
+    }
     this.getDateTiTle(month_from,month_to);
 
   }
@@ -327,8 +334,10 @@ export class CompareTaxEstDrinkPage {
   }
 
  
-  getLineTaxData(typeCurLine,TYPE_DESC) {
-    if (typeCurLine == undefined) {
+  getLineTaxData(TYPE_DESC) {
+    this.changeCurrencyType = "M";
+    this.strTaxUnit = 'ล้านบาท';
+   /*  if (typeCurLine == undefined) {
       this.changeCurrencyType = "M";
       this.strTaxUnit = 'ล้านบาท';
     } else if (typeCurLine == 'M') {
@@ -338,7 +347,7 @@ export class CompareTaxEstDrinkPage {
       this.changeCurrencyType = typeCurLine;
       this.strTaxUnit = 'บาท';
     }
-    if( TYPE_DESC == undefined ){ TYPE_DESC = ""; }
+    if( TYPE_DESC == undefined ){ TYPE_DESC = ""; } */
     if (TYPE_DESC != "") {
       this.webapi.getData('CompareTaxDrinkMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
@@ -471,6 +480,21 @@ export class CompareTaxEstDrinkPage {
               beginAtZero: true,
               userCallback: function (value, index, values) {
                 value = GetYAxes(value,curType);
+               /*  let AlldataisZero;
+                for(let i = 0; i < this.tax_TAX.length; i++){
+                  if(this.tax_TAX[i]==0){
+                    AlldataisZero = true;
+                  }else{
+                    AlldataisZero = false;
+                    break;
+                  }
+                }
+                if(AlldataisZero){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                }
+               */
                 return value;
               }
             },

@@ -110,7 +110,7 @@ export class CompareTaxOilPage {
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
 
-    this.getLineTaxData(typeCur, Region,Province,month_from,month_to);
+    this.getLineTaxData(Region,Province,month_from,month_to);
   }
   selectionBudgetMonth(){
     this.webapi.getData('dllMMonth').then((data) => {
@@ -133,10 +133,10 @@ export class CompareTaxOilPage {
     }); 
   }
 
-  selectRegion(typeCur, Region,Province,month_from,month_to){
+  selectRegion(Region,Province,month_from,month_to){
     Province =  'undefined';
     this.Province = 'undefined';
-    this.selectionProvince(typeCur, Region,Province,month_from,month_to);
+    this.selectionProvince(Region,Province,month_from,month_to);
   }
 
   ResponseMthFrom:any;
@@ -153,7 +153,7 @@ export class CompareTaxOilPage {
     });
   }
 
-  selectionProvince(typeCur, Region,Province,month_from,month_to){
+  selectionProvince(Region,Province,month_from,month_to){
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }
@@ -161,10 +161,10 @@ export class CompareTaxOilPage {
       this.responseProvince = data;
     }); 
 
-    this.getLineTaxData(typeCur, Region,Province,month_from,month_to);
+    this.getLineTaxData(Region,Province,month_from,month_to);
   }
 
- getLineTaxData(typeCur, Region,Province,month_from,month_to) {
+ getLineTaxData(Region,Province,month_from,month_to) {
   if(this.region != "00"){
     Region = localStorage.region_desc;
   }
@@ -172,8 +172,10 @@ export class CompareTaxOilPage {
   if(this.branch != "00" || this.province != "00"){     
     Province =  this.select_province;
   }
-
-  if (typeCur == undefined) {
+  this.changeCurrencyType = "M";
+  this.strVolUnit = 'ล้านลิตร';
+  this.strTaxUnit = 'ล้านบาท';
+ /*  if (typeCur == undefined) {
     this.changeCurrencyType = "M";
     this.strVolUnit = 'ล้านลิตร';
     this.strTaxUnit = 'ล้านบาท';
@@ -185,7 +187,7 @@ export class CompareTaxOilPage {
     this.changeCurrencyType = typeCur;
     this.strVolUnit = 'ลิตร';
     this.strTaxUnit = 'บาท';
-  }
+  } */
   this.webapi.getData('CompareTaxVolProduct?offcode='+this.offcode+'&region='+Region+'&province='+Province+ '&month_from=' + month_from + '&month_to=' + month_to+ '&dbtable=' + this.dbtable).then((data) => {
     /* this.webapi.getData('CompareTaxVolCar?offcode='+this.offcode+'&region='+Region+'&province='+Province).then((data) => { */
       this.TaxLineData = data;
@@ -338,6 +340,11 @@ export class CompareTaxOilPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
+               /*  if(this.tax_TAX == undefined && this.tax_TAX_LY == undefined){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                } */
                 value = GetYAxes(value,curType);
                 return value;
                 
@@ -458,6 +465,11 @@ export class CompareTaxOilPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
+               /*  if(this.tax_TAX == undefined && this.tax_TAX_LY == undefined){
+                  value = 0;
+                }else{
+                  value = GetYAxes(value,curType);
+                } */
                 value = GetYAxes(value,curType);
                 return value;
                
