@@ -90,7 +90,7 @@ export class HomePage {
                   loading.dismiss();
                 }, 1000);
                 setTimeout(() => {
-                  this.navCtrl.setRoot(MenuGroupPage);
+                  this.navCtrl.setRoot(MenuGroupPage); 
                 }, 1000);
                 
                   
