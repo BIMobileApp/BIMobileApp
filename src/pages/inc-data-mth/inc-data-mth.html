@@ -1,0 +1,332 @@
+<ion-header>
+  <ion-navbar color="navber">
+    <ion-title>ใบอนุญาต <br>
+      ผู้ใช้งาน : {{username}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content [class.disable-scrolling]='isScaling' [style.fontSize]="fontSize">
+  <ion-item style="background-color:#D0DFE6;" text-center>
+    <h1 class="header-style">สถิติใบอนุญาตแยกตามเดือน</h1>
+  </ion-item>
+  
+  <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleTable1Show()" no-lines>
+      <ion-label class="toggleLabel"> >> สถิติใบอนุญาตแยกตามเดือน ภาพรวม</ion-label>
+    </ion-item>
+  </div>
+  <div *ngIf="toggleTable1==1">
+    <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+
+      <ion-grid>
+        <ion-row>
+            <ion-col>
+              <ion-item  class="size">
+                  <ion-label> ภาค : </ion-label>
+                  <ion-select  [(ngModel)]="OverallRegion" (ionChange)="overAllSelectRegion(OverallRegion, OverallProvince, typeCur2)" disabled={{isEnable}}>
+                       <ion-option value="undefined"  [selected]="select_all_value">ทั้งหมด</ion-option>
+                       <ion-option  *ngFor="let item3 of responseOverallRegion"  value="{{item3.REGION_NAME}}"  [selected]="select_region == item3.REGION_NAME">{{item3.REGION_NAME}}</ion-option>              
+                  </ion-select>
+                </ion-item>
+            </ion-col>        
+            <ion-col>
+              <ion-item  class="size">
+                  <ion-label>จังหวัด : </ion-label>
+                  <ion-select  [(ngModel)]="OverallProvince" (ionChange)="overallSelectionProvince(OverallRegion, OverallProvince, typeCur2)" disabled={{isEnableProv}}>
+                       <ion-option value="undefined"   [selected]="select_all_prov_value">ทั้งหมด</ion-option >
+                       <ion-option  *ngFor="let item4 of ResponseOverAllProvince"  value="{{item4.PROVINCE_NAME}}"  [selected]="select_province == item4.PROVINCE_NAME">{{item4.PROVINCE_NAME}}</ion-option>            
+                  </ion-select>
+              </ion-item>
+           </ion-col>         
+         </ion-row>
+      </ion-grid>
+
+      <ion-card>
+        <ion-card-content no-padding>
+          <h2 class="header-style">{{dateAsOffOverall}}</h2>
+
+          <ion-item class="sizemini" no-lines>
+            <ion-label> หน่วย : ใบ/</ion-label>
+            <ion-select [(ngModel)]="typeCur2" #item (ionChange)="loadData(OverallRegion, OverallProvince, typeCur2)">
+              <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+              <ion-option value="B">บาท</ion-option>
+            </ion-select>
+          </ion-item>
+          <!--  <h3 style="padding-right: 2%" class="right">หน่วย : ล้านบาท</h3> -->
+          <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+              <thead>
+                <tr style="background-color: #F78B26; " class="solid-head">
+                  <th rowspan="2" width="10%">
+                    <h3 class="th-center"  [style.fontSize]="fontSize">เดือน</h3>
+                  </th>
+                  <th colspan="2">
+                    <h3 class="th-center"  [style.fontSize]="fontSize">สุรา</h3>
+                  </th>
+                  <th colspan="2">
+                    <h3 class="th-center"  [style.fontSize]="fontSize">ยาสูบ</h3>
+                  </th>
+                  <th colspan="2">
+                    <h3 class="th-center"  [style.fontSize]="fontSize">ไพ่</h3>
+                  </th>
+                </tr>
+                <tr style="background-color: #F78B26; ">
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนใบอนุญาต</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนเงิน</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนใบอนุญาต</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนเงิน</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนใบอนุญาต</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนเงิน</h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of responseData">
+                  <td width="10%">
+                    <h3 class="th-center "  [style.fontSize]="fontSize">{{data.MONTH_DESC}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right"  [style.fontSize]="fontSize">{{data.NUM_OF_LIC_SURA}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right"  [style.fontSize]="fontSize">{{data.AMT_OF_LIC_SURA}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right"  [style.fontSize]="fontSize">{{data.NUM_OF_LIC_TOBBACO}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right"  [style.fontSize]="fontSize">{{data.AMT_OF_LIC_TOBBACO}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.NUM_OF_LIC_CARD}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.AMT_OF_LIC_CARD}}</h3>
+                  </td>
+                </tr>
+                <tr *ngFor="let data of responseSumArea">
+                  <td width="10%">
+                    <h3 class="th-center " [style.fontSize]="fontSize">รวม</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.NUM_OF_LIC_SURA}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.AMT_OF_LIC_SURA}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.NUM_OF_LIC_TOBBACO}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.AMT_OF_LIC_TOBBACO}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.NUM_OF_LIC_CARD}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.AMT_OF_LIC_CARD}}</h3>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div style="border-bottom: solid 1px #2c95eb ; background-color: rgb(213, 241, 241)">
+    <ion-item (click)="toggleTable2Show()" no-lines>
+      <ion-label class="toggleLabel"> >> สถิติใบอนุญาตแยกตามเดือน ตามประเภทสินค้า</ion-label>
+    </ion-item>
+  </div>
+  <div *ngIf="toggleTable2==1">
+    <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
+      <ion-card>
+        <ion-card-content no-padding>
+          <h2 class="header-style">สถิติใบอนุญาตแยกตามเดือน ตามประเภทสินค้า</h2>
+
+          <ion-grid no-padding>
+
+          <ion-row>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label>เดือน : </ion-label>
+                  <ion-select [(ngModel)]="Mth_From" (ionChange)="selectMonthFrom(Region,Province,Mth_From,Mth_To,typeCur)">
+                    <ion-option value="undefined">ทั้งหมด</ion-option>
+                    <ion-option *ngFor="let item1 of ResponseMthFrom"  value="{{item1.BUDGET_MONTH_CD}}"  [selected]="select_mth_from1 == item1.BUDGET_MONTH_CD">{{item1.MONTH_DESC}}</ion-option>          
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                  <ion-item class="size">
+                      <ion-label>ถึง : </ion-label>
+                      <ion-select [(ngModel)]="Mth_To" (ionChange)="selectMonthTo(Region,Province,Mth_From,Mth_To,typeCur)">
+                        <ion-option value="undefined">ทั้งหมด</ion-option>
+                        <ion-option *ngFor="let item2 of ResponseMthTo"  value="{{item2.BUDGET_MONTH_CD}}"  [selected]="select_mth_to1 == item2.BUDGET_MONTH_CD">{{item2.MONTH_DESC}}</ion-option>              
+                      </ion-select>
+                    </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label> ภาค : </ion-label>
+                  <ion-select [(ngModel)]="Region" (ionChange)="selectRegion(Region,Province,Mth_From,Mth_To,typeCur)" disabled={{isEnable}}>
+                    <ion-option value="undefined" [selected]="select_all_value">ทั้งหมด</ion-option>
+                    <ion-option *ngFor="let item of responseArea" value="{{item.REGION_NAME}}" [selected]="select_region == item.REGION_NAME">{{item.REGION_NAME}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item class="size">
+                  <ion-label>จังหวัด : </ion-label>
+                  <ion-select [(ngModel)]="Province" (ionChange)="selectionProvince(Region,Province,Mth_From,Mth_To,typeCur)" disabled={{isEnableProv}}>
+                    <ion-option value="undefined" [selected]="select_all_prov_value">ทั้งหมด</ion-option>
+                    <ion-option *ngFor="let item1 of responseProvince" value="{{item1.PROVINCE_NAME}}" [selected]="select_province == item1.PROVINCE_NAME">{{item1.PROVINCE_NAME}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+
+          <h2 class="header-style">สถิติใบอนุญาตแยกตามเดือน ตามประเภทสินค้าสุรา</h2>
+          <h2 class="header-style">{{dateAsOff}}</h2>
+
+          <ion-item class="sizemini" no-lines>
+            <ion-label> หน่วย : ใบ/</ion-label>
+            <ion-select [(ngModel)]="typeCur" #item (ionChange)="IncProductAll(Region,Province,Mth_From,Mth_To,typeCur)">
+              <ion-option value="M" [selected]="true">ล้านบาท</ion-option>
+              <ion-option value="B">บาท</ion-option>
+            </ion-select>
+          </ion-item>
+          <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+              <thead>
+                <tr style="background-color: #F78B26; ">
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">ประเภทสินค้า</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนใบอนุญาต</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนเงิน</h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of repondProductSura">
+                  <td>
+                    <h3 class="td-left"  [style.fontSize]="fontSize">{{data.TYPE_DESC}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.COUNT}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right"  [style.fontSize]="fontSize">{{data.AMT}}</h3>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content no-padding><br>
+          <h2 class="header-style">สถิติใบอนุญาตแยกตามเดือน ตามประเภทสินค้ายาสูบ</h2>
+          <h2 class="header-style">{{dateAsOff}}</h2>
+
+          <h3 style="padding-right: 2%" class="desc-right">หน่วย : {{unitTG2}}/{{curTG}}</h3>
+          <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+              <thead>
+                <tr style="background-color: #F78B26; ">
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">ประเภทสินค้า</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">จำนวนใบอนุญาต</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center" [style.fontSize]="fontSize">จำนวนเงิน</h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of repondProductSica">
+                  <td>
+                    <h3 class="td-left" [style.fontSize]="fontSize">{{data.TYPE_DESC}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.COUNT}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.AMT}}</h3>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content no-padding><br>
+          <h2 class="header-style">สถิติใบอนุญาตแยกตามเดือน ตามประเภทสินค้าไพ่</h2>
+          <h2 class="header-style">{{dateAsOff}}</h2>
+
+          <h3 style="padding-right: 2%" class="desc-right">หน่วย : {{unitTG2}}/{{curTG}}</h3>
+          <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+              <thead>
+                <tr style="background-color: #F78B26; ">
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">ประเภทสินค้า</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนใบอนุญาต</h3>
+                  </th>
+                  <th>
+                    <h3 class="th-center"  [style.fontSize]="fontSize">จำนวนเงิน</h3>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of repondProductCard">
+                  <td>
+                    <h3 class="td-left"  [style.fontSize]="fontSize">{{data.TYPE_DESC}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right"  [style.fontSize]="fontSize">{{data.COUNT}}</h3>
+                  </td>
+                  <td>
+                    <h3 class="td-right" [style.fontSize]="fontSize">{{data.AMT}}</h3>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

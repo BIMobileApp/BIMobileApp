@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="navber">
+    <ion-title>ตามรายสินค้า <br>
+      ผู้ใช้งาน : {{username}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+   <ion-item style="background-color:#D0DFE6;font-size: 20px;" text-center>
+    <h1 class="header-style">Gauge สำนักมาตรฐานภาษี (รถยนต์)</h1>
+    <h2 class="header-style">{{dateAsOff}}</h2>
+  </ion-item> 
+  <ion-item class="size">
+      <ion-label text-center> สินค้า : </ion-label>
+      <ion-select disabled=true>
+          <ion-option [selected]="true">ภาษีรถยนต์</ion-option>
+      </ion-select>
+  </ion-item>
+ 
+     <div id="chart_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div> 
+    
+     <ion-list  *ngFor="let data of respondData">
+        <ion-item>
+          <ion-label><strong>สรุปการจัดเก็บภาษี</strong></ion-label>
+      </ion-item>
+
+      <h3 style="padding-right: 2%" class="td-right">หน่วย : เปอร์เซ็นต์/ล้านบาท</h3>
+
+      <ion-item>
+        <ion-label color="primary" ><h3>ปีนี้ :</h3></ion-label>
+        <ion-label><h3>{{data.TAX_PERCENT | number : fractionSize}}</h3></ion-label>
+        <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
+        <ion-label text-left><h3>{{data.TAX}}</h3></ion-label>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label color="primary" ><h3>ปีก่อน :</h3></ion-label>
+        <ion-label><h3>{{data.LAST_TAX_PERCENT}}</h3></ion-label>
+        <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
+        <ion-label text-left><h3>{{data.TAX_LY}}</h3></ion-label>
+      </ion-item>
+
+      <ion-item>
+          <ion-label color="primary"><h3>ปีประมาณการ :</h3></ion-label>
+          <ion-label><h3>{{data.EST_PERCENT}}</h3></ion-label>
+          <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
+          <ion-label text-left><h3>{{data.EST}}</h3></ion-label>
+      </ion-item>
+      </ion-list>
+
+      <div id="chart_quan_div" style="width: 300px; height: 250;  padding-left: 80px; padding-top:10px;"></div>
+     
+     
+    <ion-list  *ngFor="let data of respondData2">
+        <ion-item>
+          <ion-label><strong>สรุปปริมาณ</strong></ion-label>
+      </ion-item>
+      <h3 style="padding-right: 2%" class="td-right">หน่วย : เปอร์เซ็นต์/ล้านคัน</h3> 
+      <ion-item>
+        <ion-label color="primary"><h3>ปีนี้ :</h3></ion-label>
+        <ion-label><h3>{{data.QUAN_PERCENT | number : fractionSize}}</h3></ion-label>
+        <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
+        <ion-label text-left><h3>{{data.TOTAL_VOLUMN_CAPA}}</h3></ion-label>
+      </ion-item>
+      
+      <ion-item>
+      <ion-label color="primary"><h3>ปีก่อน :</h3></ion-label>
+      <ion-label><h3>{{data.LAST_QUAN_PERCENT}}</h3></ion-label>
+      <ion-label color="primary" ><h3>จำนวน :</h3></ion-label>
+      <ion-label text-left><h3>{{data.LAST_TOTAL_VOLUMN_CAPA}}</h3></ion-label>
+      </ion-item>
+
+    </ion-list> 
+     
+
+</ion-content>

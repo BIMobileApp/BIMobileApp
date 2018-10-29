@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Charts in Ionic 2
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content padding>
+ 
+  <div class="table-responsive">    
+  <table class="table" style="width: 100%;">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <!--<td><p title="john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com" #item (click)="tooltip(item.value)">john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com</p></td>-->
+        <td><p title="john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com"  #title (click)="tooltip()">john@example.comjohn@example.comjohn@example.comjohn@example.comjohn@example.com</p></td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td><p>mary@example.com</p></td>
+      </tr>
+      <tr>
+        <td>July </td>
+        <td>Dooley</td>
+        <td><p>july@example.com</p> </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>{{1337.1337 | number : fractionSize}}</p>
+
+ <p >ปีงบประมาณ : {{summaryDate}} </p> 
+
+ <!--<ion-select >
+   <ion-option *ngFor="let data of respondData" value="">{{data.key}}</ion-option>
+ </ion-select>-->
+
+ 
+</ion-content>

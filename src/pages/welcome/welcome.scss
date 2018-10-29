@@ -1,0 +1,36 @@
+page-welcome {
+   
+ img.img-size{
+    height: 90%;
+    width: auto;
+ }
+ .nav-login{
+
+    font-size: 2em;
+    color: rgb(32, 91, 201);
+    text-decoration: underline;
+
+    
+ }
+ .bg{
+    background-image: url('../../assets/imgs/WelcomeBG.png');
+    background-size: cover !important;
+ }
+.middle-on-screen{
+    padding-top: 4em;
+    height: 100%; 
+}
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  twitter: (
+    base: #55acee,
+    contrast: #ffffff
+  )
+);
+ 
+}

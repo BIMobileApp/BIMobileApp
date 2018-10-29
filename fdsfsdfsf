@@ -1,0 +1,523 @@
+[33mcommit 33001ffd35f2d6557a939f7a6e292c0c08d2eb19[m[33m ([m[1;36mHEAD -> [m[1;32mDAW[m[33m, [m[1;31morigin/DAW[m[33m)[m
+Merge: 4f57853 ecd3808
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 23 17:54:25 2018 +0700
+
+    add
+
+[33mcommit 4f5785378bec3097d68ae3adef8a166757977173[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 23 17:41:49 2018 +0700
+
+    23-8-2018
+
+[33mcommit ecd3808100f343848e8cfd506e08e00e58bed87c[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Thu Aug 23 15:33:16 2018 +0700
+
+    add agian
+
+[33mcommit 7083e759d40ca7bece831c5abd9b6d2b9815b1f1[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Thu Aug 23 15:18:32 2018 +0700
+
+    ทำ report แยกตามหมวดหมู่ส่วน มิติมุมมอง Realtime และ ตามสินค้าในส่วน gauge
+
+[33mcommit 53486c0e909302627874662226a8ef460dc07400[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 23 15:18:18 2018 +0700
+
+    add product report
+
+[33mcommit 35b0f0e048fcc0695940391ee2dd1c8dfddb60e7[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 22 19:13:36 2018 +0700
+
+    22-08-2018
+
+[33mcommit 5b0a55d298e19af0da1998cbdadeb66e0830a9c6[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 22 14:51:22 2018 +0700
+
+    Update Overview
+
+[33mcommit 3f5232541614dfab267ea57739c8bfe3d80b6712[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 22 13:38:02 2018 +0700
+
+    edit overview finish
+
+[33mcommit 55215dc30c8c93c059d737da888456090e7ae285[m
+Merge: 2741787 53a9c82
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 22 11:55:46 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit 274178741c96a87b956c927aaac8fb26a0ad41b0[m
+Merge: 3c2b966 0555ff4
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 22 11:54:56 2018 +0700
+
+    ทำหน้าแยกตาม profile
+
+[33mcommit 53a9c820dc979baed06d23196bd45f540408e819[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 22 09:47:08 2018 +0700
+
+    add overview
+
+[33mcommit 1224c081779b93874ef592e327462b139f297ba5[m
+Merge: 0555ff4 3c2b966
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 22 08:59:41 2018 +0700
+
+    present
+
+[33mcommit 0555ff45b0438b22203667017e0695b142333337[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 21 17:31:09 2018 +0700
+
+    add old report and catagory list
+
+[33mcommit 3c2b966ddc3e872a1ad3cd450de1ec95dd2d1b3f[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 21 17:06:15 2018 +0700
+
+    ทำ report เก่า กราฟแท่งและกราฟวงกลม
+
+[33mcommit 39ebb3d267cecbe56d2d74fb6e7118aeb0f20276[m
+Merge: 3c9274b 5b005b1
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 21 09:22:15 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit 3c9274b33a3ea72754b49dbbf866149fb8b9ede1[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 21 09:20:01 2018 +0700
+
+    ปรับแต่งก guage chart
+
+[33mcommit 5b005b197a24674af7348adb1a16c290351fa731[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Mon Aug 20 21:07:24 2018 +0700
+
+    add old report page
+
+[33mcommit 4a860d94952811dca4d740f7ffa65ad3a9d69acb[m
+Merge: 71b6d05 e11f972
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sun Aug 19 23:33:53 2018 +0700
+
+    welcome page success
+
+[33mcommit 71b6d050f013e932abb6c9392609b00bc1b6ff15[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 18 15:59:56 2018 +0700
+
+    add welcome page
+
+[33mcommit e11f97267c51827afeb41b432f641dbe63c8a937[m
+Merge: 96342b4 b1da447
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Sat Aug 18 15:56:40 2018 +0700
+
+    merge code
+
+[33mcommit 96342b456f096a2089d5ef5771b6702d463f7bd7[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Sat Aug 18 15:45:33 2018 +0700
+
+    update gauge ซึ่งก็ต้องเปลี่ยนอีก
+
+[33mcommit b1da4473b26cddc5a60ba5e8a3411fa05d19dd23[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 18 15:30:44 2018 +0700
+
+    edit table catagory
+
+[33mcommit 19df2d6cef716cf55582d9f570b3e938e38e0e9f[m
+Merge: 1b4af8a d055928
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Sat Aug 18 09:15:43 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit 1b4af8ad91800c047dbc222bd287af39aeab5091[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Sat Aug 18 09:14:48 2018 +0700
+
+    chart
+
+[33mcommit d055928794ba75aa1e0acef6fb95f0adf0672f37[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 18 09:04:36 2018 +0700
+
+    Edit Table New
+
+[33mcommit 560b6cda2f5574c2d78e3f3850607759b43c2d95[m
+Merge: bcb19e7 f8e515f
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 17 22:29:17 2018 +0700
+
+    Merge branch 'peemai' of https://github.com/BIMobileApp/BIMobileApp into DAW
+
+[33mcommit bcb19e7cf9db7e6574aec5b70591d62126c5c67d[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 17 17:19:36 2018 +0700
+
+    edit Table
+
+[33mcommit 82daf7858a67df1a0706187de7dc11b0dc44d471[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 17 11:46:43 2018 +0700
+
+    Table succes
+
+[33mcommit 036104baf3c77c660145e0dddaf196d72e3cf58b[m
+Merge: 9ccfa58 ffdba09
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 17 09:20:30 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit ffdba09857f5a5efb9a7a976bab50b4a9f233064[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 17 09:19:04 2018 +0700
+
+    add new line
+
+[33mcommit 9ccfa58dccdde7abd093ee95ca171d0bcc926779[m
+Merge: f8e515f 03af9ce
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 17 09:02:31 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit f8e515f4759e2add6cac73190bd934b3bdadc6da[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 17 09:00:50 2018 +0700
+
+    input gauge chart
+
+[33mcommit 03af9ceb076a559df99dc50b01a38b239c7dd0dd[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 16 14:15:50 2018 +0700
+
+    overview success with out gauge
+
+[33mcommit 647f63ca8b187f983d2e928c5055a870c57f767b[m
+Merge: da323f8 318c976
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 15 18:36:43 2018 +0700
+
+    Merge branch 'peemai' of https://github.com/BIMobileApp/BIMobileApp into DAW
+
+[33mcommit 86fc72b77760830e1fea6b0d3a54bb525ec24b3b[m
+Merge: 318c976 da323f8
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 15 18:34:36 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit da323f83805ef8fd28ae40cc7d5871d50f2ef003[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 15 18:32:06 2018 +0700
+
+    edit overview page
+
+[33mcommit 318c976b68f6ed5fa844c5f12ef7add5ebbec7b6[m
+Merge: ba9519f b59fa48
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 15 18:31:37 2018 +0700
+
+    update menu and table style
+
+[33mcommit ba9519f37625dd18c35166c482d0e334dc874d3b[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 15 15:08:04 2018 +0700
+
+    check data render
+
+[33mcommit b59fa4815898ad916e49da2b4f938006ca1282b1[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 15 15:06:44 2018 +0700
+
+    add country map
+
+[33mcommit 76f80d63ea68b91efd6ea89f90bb97b7d5a0ba88[m
+Merge: 7d7af27 3d06a7b
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 15 09:05:41 2018 +0700
+
+    ตัวอย่าง table
+
+[33mcommit 7d7af27628f4b89c5001ac7d652bcdf0f06d7c71[m
+Merge: bcc313c e71ab97
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 14 21:45:39 2018 +0700
+
+    update table style
+
+[33mcommit 3d06a7b6bcae1d79013844ac332a2a97be96ece2[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 14 19:43:09 2018 +0700
+
+    edit ui
+
+[33mcommit bcc313c693dcfd8d1406ce830381f56a18111f72[m
+Merge: 16d83b9 1c53c5f
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 14 11:31:20 2018 +0700
+
+    no change
+
+[33mcommit e71ab9765f9abe977a0bb9aae848890fd3cdaa6a[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 14 11:30:11 2018 +0700
+
+    comment google map
+
+[33mcommit 16d83b9e4a86d29cf4d4242854747aae9e50ec1b[m
+Merge: 9cb471b b36b690
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 14 11:21:16 2018 +0700
+
+    update code
+
+[33mcommit 1c53c5fcf1799c3fefcdbd9c3fccc7a9f83c9591[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 14 11:21:09 2018 +0700
+
+    add ouuuu
+
+[33mcommit b36b6908d6fee8bd19a1dc25e1fdd8502b85fe70[m
+Merge: 0a4d42a 5dc4385
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 14 11:08:22 2018 +0700
+
+    edit import
+
+[33mcommit 9cb471b0e0b8515a970fd74994e8f41191ae94e4[m
+Merge: b2e2ed4 0a4d42a
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 14 11:04:16 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit b2e2ed480c1c389b9ff4e781bee59dbccbc7d1f3[m
+Merge: 5dc4385 c94ab18
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 14 11:03:14 2018 +0700
+
+    update table style
+
+[33mcommit 0a4d42a9314d532a747c5806e414a727863d9760[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 14 09:09:27 2018 +0700
+
+    add map
+
+[33mcommit 5dc438506e36f47f3593e91355cb853b5ad19e30[m
+Merge: 3f512a1 b968d00
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Mon Aug 13 22:50:29 2018 +0700
+
+    update table style
+
+[33mcommit c94ab1847ccf8d514fa5137065bdaf24be28f293[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 11 02:14:36 2018 +0700
+
+    add sidemenu, edit back button success
+
+[33mcommit 489934c260504bfce83a14c0b3960ddbb8533be4[m
+Merge: b968d00 3f512a1
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 11 00:47:16 2018 +0700
+
+    login check with DB
+
+[33mcommit 3f512a1dd6761e3f982e48ced6598f56ffde0155[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 10 16:31:31 2018 +0700
+
+    update url link และใส่ข้อมูลที่เป็นตารางเพิ่มเติม
+
+[33mcommit b968d00883676a02b654af27af1a8406fd339bcc[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 10 16:21:50 2018 +0700
+
+    add graph compare tax est
+
+[33mcommit 25e8906f93ce89b9d0ecbee2f360a62260759b1e[m
+Merge: 89ba8d0 cf52e8f
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 10 09:47:53 2018 +0700
+
+    Merge branch 'peemai' of https://github.com/BIMobileApp/BIMobileApp into DAW
+
+[33mcommit 89ba8d03c5ef670939bf2513fb57fd4abd64813b[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 10 09:47:24 2018 +0700
+
+    update page
+
+[33mcommit bf5d64a1da1a7a3d68c667b848208d9cdf32aadd[m
+Merge: cf52e8f 0e6df15
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 10 09:06:33 2018 +0700
+
+    Merge branch 'DAW' of https://github.com/BIMobileApp/BIMobileApp into peemai
+
+[33mcommit cf52e8fea3de0e9044da93a5ece009e570cbdc13[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 10 09:04:45 2018 +0700
+
+    update url
+
+[33mcommit 0e6df1559c19b9dedb6a5e7d1fd42122f14e4eb3[m
+Merge: 3d14a48 e54d115
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 10 08:59:32 2018 +0700
+
+    add line graph ตามสำนัก
+
+[33mcommit 3d14a48e574b2ba7640a327965968b5ae15825cd[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 9 14:32:54 2018 +0700
+
+    edit login page update
+
+[33mcommit e54d115d132a37449a6bc741669be15be1c5990f[m
+Merge: bdde1d6 3a1c928
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Thu Aug 9 14:07:09 2018 +0700
+
+    update menu design
+
+[33mcommit 907b414b6e3df72d3ecbfc3f50fec24c1ba58465[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 9 13:11:41 2018 +0700
+
+    edit home login page
+
+[33mcommit 460d65a7dc3ffba59fb576a7f478c32c006da43c[m
+Merge: 3a1c928 bdde1d6
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Thu Aug 9 11:06:30 2018 +0700
+
+    add side bar
+
+[33mcommit bdde1d62a08e3345f3e366f623ce5247a3c12e73[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Wed Aug 8 11:53:09 2018 +0700
+
+    เพิ่มรายงานตาราง ในรายงานใหม่
+
+[33mcommit 3a1c92852690d8e07db6553e5e23c5877fbfd28f[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 8 11:45:04 2018 +0700
+
+    add selection
+
+[33mcommit 78cfa76777d98d5d9a3f479cf772b4968b1f5126[m
+Merge: a45abc3 3efda81
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Wed Aug 8 10:20:28 2018 +0700
+
+    add Login,Bar Chart for Old report Success
+
+[33mcommit 3efda81eaa96fa790b7f5064b11337cb8b74d09b[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Tue Aug 7 15:33:43 2018 +0700
+
+    update code
+
+[33mcommit a45abc38fd89c357788fec0cf259d7fa52c9891b[m
+Merge: 3cb87fc 9812b37
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Tue Aug 7 15:21:43 2018 +0700
+
+    เพิ่มรายงานตามประเภทสินค้า
+
+[33mcommit 3cb87fce1bfed0643ba4682d68884944c894f8ef[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Mon Aug 6 19:40:21 2018 +0700
+
+    Addgauge
+
+[33mcommit 9812b3754134e8807f0b743430326b5485a909e8[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Mon Aug 6 19:13:09 2018 +0700
+
+    เพิ่มเมนู
+
+[33mcommit 6c0b329ff17eb840461979401f29febc2127065c[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sun Aug 5 01:03:04 2018 +0700
+
+    Bar Chart Success
+
+[33mcommit 74022af30983d91cdb9580324590963861e50bd5[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 4 23:13:39 2018 +0700
+
+    test push branch
+
+[33mcommit 9e94bbca45976fdc9ef5405bead50f7b5e911344[m
+Merge: d5b2625 fb6708a
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 4 23:10:29 2018 +0700
+
+    add peemai code
+
+[33mcommit d5b26251adc2f030d9fdb37ced4742435ae79a40[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Sat Aug 4 22:34:01 2018 +0700
+
+    test2 not success
+
+[33mcommit fb6708a7a1167ae0fee990f3717b9c892020f5b4[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 3 19:06:41 2018 +0700
+
+    add chart success
+
+[33mcommit a9c2c772982ca882b8a87b9a10b942520c034708[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 3 18:06:57 2018 +0700
+
+    add chart
+
+[33mcommit 67cfe69a79ca83fd7226e109e1e0043a7003468a[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 3 15:37:40 2018 +0700
+
+    add button to test chart
+
+[33mcommit ab52a9234de89e10ce0552c1951fe13b33980bd9[m
+Merge: 6df81b7 c6b7495
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 3 14:57:28 2018 +0700
+
+    Merge branch 'master' of https://github.com/BIMobileApp/BIMobileApp into DAW
+
+[33mcommit c6b7495c2f3ec808726cff1811b19f71d94bd3b5[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mpeemai[m[33m)[m
+Author: Peemai124 <nongmai_kitchakoot@hotmail.com>
+Date:   Fri Aug 3 14:40:24 2018 +0700
+
+    คอธิบาย
+
+[33mcommit 6df81b7a624e1103240e2597650d937e96296617[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 3 14:15:42 2018 +0700
+
+    c1
+
+[33mcommit 3e736b3f8304e02daff851fcc93511f4b174f9e5[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Juthamart <Juthamart.k@v-smart.com>
+Date:   Fri Aug 3 13:54:37 2018 +0700
+
+    Up to git first App

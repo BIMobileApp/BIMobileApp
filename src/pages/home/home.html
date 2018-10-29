@@ -1,0 +1,50 @@
+<ion-content>
+  <div style="background-color: rgb(238, 238, 238);">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 class="header-title">ระบบสารสนเทศเพื่อการบริหาร
+            <br>กรมสรรพสามิต</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <img no-padding class="icon-krom-style" src="../../assets/imgs/AIconkrom174x214px.png" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col (click)="DataStatus()" text-center>
+          <img class="icon-menu-style" src="../../assets/imgs/AStatus2.png" />
+          <p class="content-center">แหล่งที่มา</p>
+        </ion-col>
+        <ion-col (click)="dowload_file()"  text-center>
+          <img class="icon-menu-style" src="../../assets/imgs/AManual2.png" />
+          <p class="content-center">คู่มือติดตั้ง</p>
+        </ion-col>
+        <ion-col (click)="NewsEvent()" text-center>
+          <img class="icon-menu-style" src="../../assets/imgs/ANew2.png" />
+          <p class="content-center">ข่าวสาร</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <header padding>
+    <div>
+      <span class="spacer"></span>
+      <h1>เข้าสู่ระบบ</h1>
+      <span class="spacer"></span>
+    </div>
+  </header>
+
+  <div padding>
+    <ion-input class="box-style" placeholder="ชื่อผู้ใช้" [(ngModel)]="userData.username"></ion-input>
+    <br>
+    <ion-input class="box-style" type="password" placeholder="รหัสผ่าน" [(ngModel)]="userData.password" ></ion-input>
+    <br>
+    <button class="box" ion-button color="navber" (click)="login()">เข้าสู่ระบบ</button>
+  </div>
+
+  
+
+</ion-content>

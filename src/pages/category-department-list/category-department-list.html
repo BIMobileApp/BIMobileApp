@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-navbar color="navber">
+      <ion-title>ตาม Profile <br>
+            ผู้ใช้งาน : {{username}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+   
+  <ion-content>
+
+      <ion-card-content no-padding>
+                <ion-item style="background-color:#E6E6FA;">
+                  <ion-label class="shelf-title">ผู้ประกอบการ</ion-label>
+                </ion-item>
+            
+                <ion-grid>            
+                    <ion-row>
+                        <ion-col (click)="TaxTopRegTable('ภาษีรถยนต์')" text-center >
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DCar.png"/>
+                              <p class="content-center">รถยนต์</p> 
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                        <ion-col (click)="TaxTopRegTable('ภาษีสุรา')" text-center>
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DSura.png">
+                              <p class="content-center">สุรา</p> 
+                        </ion-col>
+                        <ion-col col-1></ion-col>
+                        <ion-col (click)="TaxTopRegTable('ภาษีเบียร์')" text-center>
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DBeer.png">
+                              <p class="content-center">เบียร์</p> 
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col (click)="TaxTopRegTable('ภาษีเครื่องดื่ม')" text-center >
+                                <img no-padding class="iconStyle" src="../../assets/imgs/DDrink.png"/>
+                                <p class="content-center">เครื่องดื่ม</p> 
+                          </ion-col>
+                          <ion-col col-1></ion-col>
+                          <ion-col (click)="TaxTopRegTable('ภาษีน้ำมันและผลิตภัณฑ์น้ำมัน')" text-center>
+                                <img no-padding class="iconStyle" src="../../assets/imgs/DOil.png">
+                                <p class="content-center">น้ำมัน</p> 
+                          </ion-col>
+                          <ion-col col-1></ion-col>
+                          <ion-col (click)="TaxTopRegTable('ภาษียาสูบ')" text-center> 
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DSica.png">
+                              <p class="content-center">ยาสูบ</p> 
+                         </ion-col>                          
+                        </ion-row>
+                        <!--<ion-row>
+                              <ion-col (click)="MBLRegisterLink()" text-center>
+                                    <img no-padding class="iconStyle" src="../../assets/imgs/DLic.png">
+                                    <p class="content-center">จดทะเบียน</p> 
+                               </ion-col>
+                              <ion-col col-1></ion-col>
+                              <ion-col><img class="iconStyle"></ion-col> 
+                              <ion-col col-1></ion-col>
+                              <ion-col><img class="iconStyle"></ion-col>                          
+                        </ion-row>-->
+                        
+                    </ion-grid>
+
+                    <ion-item style="background-color:#E6E6FA;">
+                      <ion-label class="shelf-title">ผู้ประกอบการรายเดือน</ion-label>
+                    </ion-item>
+
+                    <ion-grid>            
+                    <ion-row>
+                        <ion-col col-3 (click)="TaxTopMthTable()" text-center >
+                              <img no-padding class="iconStyle" src="../../assets/imgs/DReg.png"/>
+                              <p class="content-center">ผู้ประกอบการรายเดือน</p> 
+                        </ion-col>                  
+                      </ion-row>
+                  </ion-grid>
+                             
+         </ion-card-content>
+
+    </ion-content>
+  
