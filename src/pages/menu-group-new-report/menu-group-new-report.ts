@@ -1,33 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
-import { IncomerealtimePage } from '../incomerealtime/incomerealtime';
-import { CompareTaxAlcoholPage } from '../compare-tax-alcohol/compare-tax-alcohol';
-import { CompareTaxBeerPage } from '../compare-tax-beer/compare-tax-beer';
-import { CompareTaxCarPage } from '../compare-tax-car/compare-tax-car';
-import { CompareTaxDrinkPage } from '../compare-tax-drink/compare-tax-drink';
-import { CompareTaxEstCarPage } from '../compare-tax-est-car/compare-tax-est-car';
-import { CompareTaxEstBeerPage } from '../compare-tax-est-beer/compare-tax-est-beer';
-import { CompareTaxEstDrinkPage } from '../compare-tax-est-drink/compare-tax-est-drink';
-import { CompareTaxEstAlcoholPage } from '../compare-tax-est-alcohol/compare-tax-est-alcohol';
-import { NewReportGaugeTaxCarPage } from '../new-report-gauge-tax-car/new-report-gauge-tax-car';
-import { NewReportGaugeQuantityCarPage } from '../new-report-gauge-quantity-car/new-report-gauge-quantity-car';
-import { NewReportGaugeTaxAlcoholPage } from '../new-report-gauge-tax-alcohol/new-report-gauge-tax-alcohol';
-import { NewReportGaugeQuantityAlcoholPage } from '../new-report-gauge-quantity-alcohol/new-report-gauge-quantity-alcohol';
-import { NewReportGaugeTaxBeerPage } from '../new-report-gauge-tax-beer/new-report-gauge-tax-beer';
-import { NewReportGaugeQuantityBeerPage } from '../new-report-gauge-quantity-beer/new-report-gauge-quantity-beer';
-import { NewReportGaugeTaxDrinkPage } from '../new-report-gauge-tax-drink/new-report-gauge-tax-drink';
-import { NewReportGaugeQuantityDrinkPage } from '../new-report-gauge-quantity-drink/new-report-gauge-quantity-drink';
-import { TaxEdRealtimePage } from '../tax-ed-realtime/tax-ed-realtime';
-import { FollowTaxRealtimePage } from '../follow-tax-realtime/follow-tax-realtime';
-import { TaxYearByProductPage } from '../tax-year-by-product/tax-year-by-product';
-import { TaxProductByMthPage } from '../tax-product-by-mth/tax-product-by-mth';
-import { DimensionTime_03Page } from '../dimension-time-03/dimension-time-03';
-import { CompareTaxEstOilPage } from '../compare-tax-est-oil/compare-tax-est-oil';
-import { CompareTaxOilPage } from '../compare-tax-oil/compare-tax-oil';
-import { NewReportGaugeTaxOilPage } from '../new-report-gauge-tax-oil/new-report-gauge-tax-oil';
-import { CompareTaxEstSicaPage } from '../compare-tax-est-sica/compare-tax-est-sica';
-import { CompareTaxSicaPage } from '../compare-tax-sica/compare-tax-sica';
-import { NewReportGaugeTaxSicaPage } from '../new-report-gauge-tax-sica/new-report-gauge-tax-sica';
 
 @IonicPage()
 @Component({
@@ -47,94 +19,102 @@ export class MenuGroupNewReportPage {
    }
 
   reportCar27_31(){
-    this.app.getRootNav().push(CompareTaxCarPage);  
+    this.navCtrl.push('CompareTaxCarPage'); 
+    /* this.app.getRootNav().push(CompareTaxCarPage);   */
   }
   reportAlcohol26_30(){
-    this.app.getRootNav().push(CompareTaxAlcoholPage);  
+    this.navCtrl.push('CompareTaxAlcoholPage'); 
+   /*  this.app.getRootNav().push(CompareTaxAlcoholPage);   */
   }
   reportBeer28_32(){
-    this.app.getRootNav().push(CompareTaxBeerPage);  
+    this.navCtrl.push('CompareTaxBeerPage'); 
+    /* this.app.getRootNav().push(CompareTaxBeerPage);   */
   }
   reportDrink29_33(){
-    this.app.getRootNav().push(CompareTaxDrinkPage);  
+    this.navCtrl.push('CompareTaxDrinkPage'); 
+    /* this.app.getRootNav().push(CompareTaxDrinkPage);   */
   }
   reportCar3(){
-    this.app.getRootNav().push(CompareTaxEstCarPage); 
+    this.navCtrl.push('CompareTaxEstCarPage'); 
+   /*  this.app.getRootNav().push(CompareTaxEstCarPage);  */
   }
   reportBeer3(){
-    this.app.getRootNav().push(CompareTaxEstBeerPage);  
+    this.navCtrl.push('CompareTaxEstBeerPage'); 
+   /*  this.app.getRootNav().push(CompareTaxEstBeerPage);   */
   }
   reportDrink3(){
-    this.app.getRootNav().push(CompareTaxEstDrinkPage);  
+    this.navCtrl.push('CompareTaxEstDrinkPage'); 
+  /*   this.app.getRootNav().push(CompareTaxEstDrinkPage);   */
   }
   reportAlcohol3(){
-    this.app.getRootNav().push(CompareTaxEstAlcoholPage);  
+    this.navCtrl.push('CompareTaxEstAlcoholPage'); 
+   /*  this.app.getRootNav().push(CompareTaxEstAlcoholPage);   */
   }
   reportincome(){
-    this.app.getRootNav().push(IncomerealtimePage);  
+    this.navCtrl.push('IncomerealtimePage'); 
+   /*  this.app.getRootNav().push(IncomerealtimePage);   */
   }
   reportGaugeTaxCar(){
-    this.app.getRootNav().push(NewReportGaugeTaxCarPage);  
-  }
-  reportGaugeQuanCar(){
-    this.app.getRootNav().push(NewReportGaugeQuantityCarPage);  
+    this.navCtrl.push('NewReportGaugeTaxCarPage'); 
+   /*  this.app.getRootNav().push(NewReportGaugeTaxCarPage);   */
   }
   reportGaugeTaxAol(){
-    this.app.getRootNav().push(NewReportGaugeTaxAlcoholPage);  
-  }
-  reportGaugeQuanAol(){
-    this.app.getRootNav().push(NewReportGaugeQuantityAlcoholPage);
+    this.navCtrl.push('NewReportGaugeTaxAlcoholPage'); 
+   /*  this.app.getRootNav().push(NewReportGaugeTaxAlcoholPage);   */
   }
   reportGaugeTaxBeer(){
-    this.app.getRootNav().push(NewReportGaugeTaxBeerPage);
-  }
-  reportGaugeQuanBeer(){
-    this.app.getRootNav().push(NewReportGaugeQuantityBeerPage);
+    this.navCtrl.push('NewReportGaugeTaxBeerPage'); 
+   /*  this.app.getRootNav().push(NewReportGaugeTaxBeerPage); */
   }
   reportGaugeTaxDrink(){
-    this.app.getRootNav().push(NewReportGaugeTaxDrinkPage);
+    this.navCtrl.push('NewReportGaugeTaxDrinkPage'); 
+    /* this.app.getRootNav().push(NewReportGaugeTaxDrinkPage); */
   }
-  reportGaugeQuanDrink(){
-    this.app.getRootNav().push(NewReportGaugeQuantityDrinkPage);
-  }
-
   FollowTaxRealtime(){
-    this.app.getRootNav().push(FollowTaxRealtimePage);
+    this.navCtrl.push('FollowTaxRealtimePage'); 
+    /* this.app.getRootNav().push(FollowTaxRealtimePage); */
   }
 
-  /*TaxYearByProduct(){
-    this.app.getRootNav().push(TaxYearByProductPage);
-  }*/
   DimentionTime03(){
-    this.app.getRootNav().push(DimensionTime_03Page);
+    this.navCtrl.push('DimensionTime_03Page'); 
+   /*  this.app.getRootNav().push(DimensionTime_03Page); */
   }
 
   TaxMthByProduct(){
-    this.app.getRootNav().push(TaxProductByMthPage);
+    this.navCtrl.push('TaxProductByMthPage'); 
+    /* this.app.getRootNav().push(TaxProductByMthPage); */
   }
   IncomeRealTimeTable(){
-    this.app.getRootNav().push(IncomerealtimePage);
+    this.navCtrl.push('IncomerealtimePage'); 
+    /* this.app.getRootNav().push(IncomerealtimePage); */
   }
   TaxEdRealtime(){
-    this.app.getRootNav().push(TaxEdRealtimePage);
+    this.navCtrl.push('TaxEdRealtimePage'); 
+    /* this.app.getRootNav().push(TaxEdRealtimePage); */
   }
   reportOil3(){
-    this.app.getRootNav().push(CompareTaxEstOilPage);
+    this.navCtrl.push('CompareTaxEstOilPage'); 
+    /* this.app.getRootNav().push(CompareTaxEstOilPage); */
   }
   reportOil29_33(){
-    this.app.getRootNav().push(CompareTaxOilPage);
+    this.navCtrl.push('CompareTaxOilPage'); 
+   /*  this.app.getRootNav().push(CompareTaxOilPage); */
   }
   reportGaugeTaxOil(){
-    this.app.getRootNav().push(NewReportGaugeTaxOilPage);
+    this.navCtrl.push('NewReportGaugeTaxOilPage'); 
+    /* this.app.getRootNav().push(NewReportGaugeTaxOilPage); */
   }
   reportSica3(){
-    this.app.getRootNav().push(CompareTaxEstSicaPage);
+    this.navCtrl.push('CompareTaxEstSicaPage'); 
+    /* this.app.getRootNav().push(CompareTaxEstSicaPage); */
   }
   reportSica29_33(){
-    this.app.getRootNav().push(CompareTaxSicaPage);
+    this.navCtrl.push('CompareTaxSicaPage'); 
+    /* this.app.getRootNav().push(CompareTaxSicaPage); */
   }
   reportGaugeTaxSica(){
-    this.app.getRootNav().push(NewReportGaugeTaxSicaPage);
+    this.navCtrl.push('NewReportGaugeTaxSicaPage'); 
+    /* this.app.getRootNav().push(NewReportGaugeTaxSicaPage); */
   }
 
 }

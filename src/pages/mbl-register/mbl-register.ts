@@ -151,9 +151,6 @@ export class MblRegisterPage {
   responseSumData:any;
   selectDataAll(Region,Province,ISIC_TYPE){
   
-    console.log(Region);
-    console.log(Province);
-    console.log(ISIC_TYPE);
     if(this.region != "00"){
       Region = localStorage.region_desc;
     }else{

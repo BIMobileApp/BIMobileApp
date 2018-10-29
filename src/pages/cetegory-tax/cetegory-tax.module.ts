@@ -5,9 +5,11 @@ import { CetegoryTaxPage } from './cetegory-tax';
 @NgModule({
   declarations: [
     CetegoryTaxPage,
+   
   ],
   imports: [
     IonicPageModule.forChild(CetegoryTaxPage),
   ],
+ 
 })
 export class CetegoryTaxPageModule {}

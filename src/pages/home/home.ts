@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, App, NavParams, AlertController,Platform } from 'ionic-angular';
+import { NavController, App, NavParams, AlertController,Platform,LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { MenuGroupPage } from '../menu-group/menu-group';
 import { DataStatusPage } from '../data-status/data-status';
 import { NewsEventPage } from '../news-event/news-event';
-import { Http, ResponseContentType } from '@angular/http';
 
 import { File } from '@ionic-native/file';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
@@ -22,6 +21,7 @@ export class HomePage {
     "username": "",
     "password": ""
   };
+  
   userDB: any;
   offcode: any;
   offdesc: any;
@@ -40,7 +40,8 @@ export class HomePage {
     private document: DocumentViewer,
      private file: File, 
      private fileTransfer: FileTransfer,
-     private platform: Platform) {
+     private platform: Platform,
+     public loadingCtrl: LoadingController) {
       
   }
 
@@ -52,6 +53,13 @@ export class HomePage {
   Authenticate_User:any;
   login() {
 
+    let loading = this.loadingCtrl.create({
+      content: 'กำลังเข้าถึงข้อมูล...'
+    });
+  
+    
+    loading.present();
+
     this.webapi.getData('AuthenticateUser?username=' + this.userData.username + '&password=' + this.userData.password).then((data) => {      
       
       this.Authenticate_User = data;
@@ -59,7 +67,7 @@ export class HomePage {
 
         this.webapi.getData('TMP_USER?username=' + this.userData.username).then((data) => {
           this.userDB = data;
-            console.log(this.userDB );
+          
             //if (this.userDB.length!=0) {
                 this.offcode = this.userDB[0].OFFCODE;
                 this.offdesc = this.userDB[0].OFFDESC;
@@ -78,8 +86,14 @@ export class HomePage {
                 localStorage.setItem("region_shot", this.region_shot); 
                 
                 //ปิดหน้า login และกลับไปหน้าหลัง
-
-                this.navCtrl.setRoot(MenuGroupPage);
+                setTimeout(() => {
+                  loading.dismiss();
+                }, 1000);
+                setTimeout(() => {
+                  this.navCtrl.setRoot(MenuGroupPage);
+                }, 1000);
+                
+                  
              /* }else {
                 const alert = this.alertCtrl.create({
                   title: 'เข้าสู่ระบบไม่สำเร็จ!',
@@ -91,7 +105,7 @@ export class HomePage {
             });
 
      }else{
-
+      loading.dismiss();
         const alert = this.alertCtrl.create({
           title: 'เข้าสู่ระบบไม่สำเร็จ!',
           subTitle: 'รหัสผู้ใช้งานยังไม่ได้ลงทะเบียน',
@@ -101,7 +115,11 @@ export class HomePage {
      } 
      
      });
-
+    
+    /*  setTimeout(() => {
+      loading.dismiss();
+    }, 5000); */
+   /*  loading.dismiss(); */
   }
 
   NewsEvent(){
@@ -117,7 +135,6 @@ export class HomePage {
   }
   //this.app.getRootNav().push(MenuGroupPage); 
   
-
   openLocalPdf() {
     const options: DocumentViewerOptions = {
       title: 'My PDF'

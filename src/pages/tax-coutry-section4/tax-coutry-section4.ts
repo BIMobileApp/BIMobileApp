@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import { TaxBranchSection4Page } from '../tax-branch-section4/tax-branch-section4';
 declare var notRound: any;
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
@@ -375,7 +374,8 @@ setData() {
   }
 
   GotoBranch(province){
-    this.app.getRootNav().push(TaxBranchSection4Page,{province:province}); 
+    this.navCtrl.push('TaxBranchSection4Page',{province:province});
+    /* this.app.getRootNav().push(TaxBranchSection4Page,{province:province});  */
   }
 
 }

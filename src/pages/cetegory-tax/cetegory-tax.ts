@@ -2,16 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { RestProvider } from '../../providers/rest/rest';
-import { TaxCoutrySection1Page } from '../tax-coutry-section1/tax-coutry-section1';
-import { TaxCoutrySection2Page } from '../tax-coutry-section2/tax-coutry-section2';
-import { TaxCoutrySection3Page } from '../tax-coutry-section3/tax-coutry-section3';
-import { TaxCoutrySection4Page } from '../tax-coutry-section4/tax-coutry-section4';
-import { TaxCoutrySection5Page } from '../tax-coutry-section5/tax-coutry-section5';
-import { TaxCoutrySection6Page } from '../tax-coutry-section6/tax-coutry-section6';
-import { TaxCoutrySection7Page } from '../tax-coutry-section7/tax-coutry-section7';
-import { TaxCoutrySection8Page } from '../tax-coutry-section8/tax-coutry-section8';
-import { TaxCoutrySection9Page } from '../tax-coutry-section9/tax-coutry-section9';
-import { TaxCoutrySection10Page } from '../tax-coutry-section10/tax-coutry-section10';
+
 declare var notRound: any;
 declare var changeCurrency: any;
 declare var dateDisplayAll: any; 
@@ -19,12 +10,11 @@ declare var getColorMap: any;
 declare var budgetyear : any;
 declare var addCommaPercent: any;
 
-
 declare var slayNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
-const MIN_SCALE = 0.9;
+const MIN_SCALE = 0.9; 
 const BASE_SCALE = 1.2;
 /* end  */
 
@@ -792,43 +782,53 @@ export class CetegoryTaxPage {
   }
 
   gotoZone1(){
-    this.app.getRootNav().push(TaxCoutrySection1Page);
+    this.navCtrl.push('TaxCoutrySection1Page');
+   /*  this.app.getRootNav().push(TaxCoutrySection1Page); */
   }
 
   gotoZone2(){
-    this.app.getRootNav().push(TaxCoutrySection2Page); 
+    this.navCtrl.push('TaxCoutrySection2Page');
+   /*  this.app.getRootNav().push(TaxCoutrySection2Page);  */
   }
 
   gotoZone3(){
-    this.app.getRootNav().push(TaxCoutrySection3Page); 
+    this.navCtrl.push('TaxCoutrySection3Page');
+   /*  this.app.getRootNav().push(TaxCoutrySection3Page);  */
   }
 
   gotoZone4(){
-    this.app.getRootNav().push(TaxCoutrySection4Page); 
+    this.navCtrl.push('TaxCoutrySection4Page');
+    /* this.app.getRootNav().push(TaxCoutrySection4Page);  */
   }
 
   gotoZone5(){
-    this.app.getRootNav().push(TaxCoutrySection5Page); 
+    this.navCtrl.push('TaxCoutrySection5Page');
+    /* this.app.getRootNav().push(TaxCoutrySection5Page);  */
   }
 
   gotoZone6(){
-    this.app.getRootNav().push(TaxCoutrySection6Page); 
+    this.navCtrl.push('TaxCoutrySection6Page');
+  /*   this.app.getRootNav().push(TaxCoutrySection6Page);  */
   }
 
   gotoZone7(){
-    this.app.getRootNav().push(TaxCoutrySection7Page); 
+    this.navCtrl.push('TaxCoutrySection7Page');
+   /*  this.app.getRootNav().push(TaxCoutrySection7Page);  */
   }
 
   gotoZone8(){
-    this.app.getRootNav().push(TaxCoutrySection8Page); 
+    this.navCtrl.push('TaxCoutrySection8Page');
+   /*  this.app.getRootNav().push(TaxCoutrySection8Page);  */
   }
 
   gotoZone9(){
-    this.app.getRootNav().push(TaxCoutrySection9Page); 
+    this.navCtrl.push('TaxCoutrySection9Page');
+    /* this.app.getRootNav().push(TaxCoutrySection9Page);  */
   }
 
   gotoZone10(){
-    this.app.getRootNav().push(TaxCoutrySection10Page); 
+    this.navCtrl.push('TaxCoutrySection10Page');
+   /*  this.app.getRootNav().push(TaxCoutrySection10Page);  */
   }
 
 }
