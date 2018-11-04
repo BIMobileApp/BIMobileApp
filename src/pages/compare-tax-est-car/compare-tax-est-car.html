@@ -22,7 +22,7 @@
       <ion-card>
         <ion-card-content>
           <h2 class="header-style" >กราฟเปรียบเทียบภาษีปีก่อน (รถยนต์)</h2>
-          <h2 class="header-style">{{dateAsOff}}</h2>
+          <h2 class="header-style">{{dateAsOffLine}}</h2>
           <ion-item class="size">
             <ion-label>กลุ่มสินค้า : </ion-label>
             <ion-select [(ngModel)]="TYPE_DESC" (ionChange)="getLineTaxData(TYPE_DESC)" class="itemStyle">
@@ -196,6 +196,17 @@
         </ion-card-content>
 
       </ion-card>
+      <div padding>
+          <div *ngIf="eecMarkShow==1" >
+              <h5  class="DataStatus-font"  > หมายเหตุ* : <br>
+                  <span >ภาค EEC ได้แก่ 
+                      <span *ngFor="let eecmark of responseProvince; let isLast=last" >
+                          {{eecmark.PROVINCE_NAME}}{{isLast ? '' : ', '}}
+                       </span>
+                      </span>
+                </h5>  
+          </div>
+        </div>
     </div>
   </div>
 

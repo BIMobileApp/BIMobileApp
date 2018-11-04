@@ -62,6 +62,8 @@ export class IncDataMthPage {
   unitTG2 = "ใบ";
   toggleTable2 = 0;
   toggleTable1 = 0;
+  eecMarkShow:any;
+  eecMarkShow2:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -74,7 +76,8 @@ export class IncDataMthPage {
     public webapi: RestProvider) {
     this.offcode = localStorage.offcode;
     this.dateDisplay = localStorage.last_update_date;
-    //this.dateAsOff = dateDisplayAll;
+    this.dateAsOff = "ข้อมูล" + dateDisplayAll;
+    this.dateAsOffOverall = "ข้อมูล" +  dateDisplayAll;
     this.mthNumber = monthNowNumber;
     this.username = localStorage.userData;
 
@@ -121,7 +124,7 @@ export class IncDataMthPage {
     let typeCur2 = 'M';
     let Region;
     let Province;
-    let Mth_From = convertMthBudYear(this.mthNumber);
+    let Mth_From = "1";//convertMthBudYear(this.mthNumber);
     let Mth_To = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from1 = Mth_From;
@@ -129,7 +132,8 @@ export class IncDataMthPage {
 
     this.loadDataAll(Region, Province,typeCur2)
     //this.loadData(Mth_From,Mth_To,typeCur2);
-    this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
+    this.IncProductAllFrist(Region,Province,Mth_From,Mth_To,typeCur);
+    /* this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur); */
     this.selectionArea();
     this.selectionAllProvince();
     this.overallRegion();
@@ -257,6 +261,11 @@ export class IncDataMthPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
+    if(Region == "EEC"){
+      this.eecMarkShow2=1;
+    }else{
+      this.eecMarkShow2=0;
+    }
     this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
   }
 
@@ -308,6 +317,11 @@ export class IncDataMthPage {
     if (this.region != "00") {
       OverallRegion = localStorage.region_desc;
     }
+    if(OverallRegion == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.overallSelectionProvince(OverallRegion, OverallProvince,typeCur2);
   }
 
@@ -327,7 +341,57 @@ export class IncDataMthPage {
   selectMonthTo(Region,Province,Mth_From,Mth_To,typeCur){
     this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur);
   }
-
+  IncProductAllFrist(Region,Province,Mth_From,Mth_To,typeCur) {
+    /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {
+       this.Province = undefined;
+       Province = undefined;
+     }*/
+ 
+     if (this.region != "00") {
+       Region = localStorage.region_desc;
+     } else {
+       Region = Region;
+     }
+     if (this.branch != "00" || this.province != "00") {
+       Province = this.select_province;
+     } else {
+       Province = Province;
+     }
+ 
+     if(typeCur == undefined){
+       this.regionSelectType = "M";
+     }else{
+       this.regionSelectType =  typeCur;
+     }
+    
+     this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + Mth_From +'&month_to='+Mth_To+ '&group_name=สุรา').then((data) => {
+       this.repondProductSura = data;
+       this.getCountAmtProdSura(this.regionSelectType );
+     });
+     this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + Mth_From +'&month_to='+Mth_To+ '&group_name=ยาสูบ').then((data) => {
+       this.repondProductSica = data;
+       this.getCountAmtSica(this.regionSelectType );
+     });
+     this.webapi.getData('IncProductByMth?offcode=' + this.offcode + '&region=' + Region + '&province=' + Province + '&month_from=' + Mth_From +'&month_to='+Mth_To+ '&group_name=ไพ่').then((data) => {
+       this.repondProductCard = data;
+       this.getCountAmtCard(this.regionSelectType );
+     });
+   
+     if (typeCur == "M") {
+       this.curTG = "ล้านบาท";
+       this.unitTG2 = "ใบ";
+     }else if(typeCur == undefined ){
+       this.curTG = "ล้านบาท";
+       this.unitTG2 = "ใบ";
+     }  else {
+       this.curTG = "บาท";
+       this.unitTG2 = "ใบ";
+     }
+ 
+     this.oldArea = Region;
+     this.oldtypeCur = typeCur;
+     
+   }
   regionSelectType = "";
   IncProductAll(Region,Province,Mth_From,Mth_To,typeCur) {
    /* if (Region !== this.oldArea || typeCur !== this.oldtypeCur) {

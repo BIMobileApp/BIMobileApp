@@ -50,7 +50,7 @@ export class CompareTaxDrinkPage {
   responseProvince:any;
   responseMonth: any;
   mthNumber:any;
-
+  eecMarkShow: any;
   changeCurrencyType = '';
   strVolUnit = '';
   strTaxUnit = '';
@@ -111,7 +111,7 @@ export class CompareTaxDrinkPage {
     let typeCur = 'M';
     this.strVolUnit = 'ล้านลิตร';
     this.strTaxUnit = 'ล้านบาท';
-    let month_from = convertMthBudYear(this.mthNumber);;
+    let month_from = "1";//convertMthBudYear(this.mthNumber);;
     let month_to = convertMthBudYear(this.mthNumber);;
 
     this.select_mth_from = month_from;
@@ -153,6 +153,11 @@ export class CompareTaxDrinkPage {
   selectRegion(Region,Province,month_from,month_to){
     Province =  'undefined';
     this.Province = 'undefined';
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.selectionProvince(Region,Province,month_from,month_to);
   }
 
@@ -165,6 +170,7 @@ export class CompareTaxDrinkPage {
     }); 
 
     this.getLineTaxData(Region,Province,month_from,month_to);
+    this.getDateTiTle(month_from, month_to);
   }
   selectionBudgetMonth(){
     this.webapi.getData('dllMMonth').then((data) => {
@@ -222,7 +228,7 @@ export class CompareTaxDrinkPage {
       }
     });
     
-    this.getDateTiTle(month_from,month_to);
+    /* this.getDateTiTle(month_from,month_to); */
   }
 
   getDateTiTle(monthFrom,monthTo){  

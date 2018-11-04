@@ -73,6 +73,7 @@ export class IncDataAreaPage {
   curTG2 = "ล้านบาท";
   unitTG2 = "ใบ";
   regionSelectType2 = "";
+  eecMarkShow:any;
   
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
@@ -137,7 +138,7 @@ export class IncDataAreaPage {
 
     let typeCur = 'M';
     let typeCur2 = 'M';
-    let monthFrom = convertMthBudYear(this.mthNumber);
+    let monthFrom = "1";//convertMthBudYear(this.mthNumber);
     let monthTo = convertMthBudYear(this.mthNumber);
     this.loadDataAll(monthFrom,monthTo,typeCur2);
     this.selectionArea();
@@ -199,6 +200,12 @@ export class IncDataAreaPage {
   }
   //---------------------------------------------------------SURA------------------------------------------------------------//
   Getitems(Area,Province,Mth_From,Mth_To,typeCur) {
+    if(Area == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
+
     Province = 'undefined';
     this.Province = "undefined";
     if (this.region != "00") {

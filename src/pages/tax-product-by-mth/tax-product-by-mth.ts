@@ -39,6 +39,7 @@ export class TaxProductByMthPage {
   oldArea: any;
   oldtypeCur : any;
   dateAsOff = "";
+  eecMarkShow:any;
   /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -119,7 +120,7 @@ public isScaling = false;
 
     var area;
     var Province;
-    var monthFrom = convertMthBudYear(this.mthNumber);
+    var monthFrom = "1";//convertMthBudYear(this.mthNumber);
     var monthTo =  convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
 
@@ -240,7 +241,11 @@ public isScaling = false;
     }*/ 
         Province =  'undefined';
         this.Province = 'undefined';
-        
+        if(area == "EEC"){
+          this.eecMarkShow=1;
+        }else{
+          this.eecMarkShow=0;
+        }
         this.selectionProvince(area,Province,monthFrom,monthTo,typeCur);
       
     }

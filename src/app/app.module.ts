@@ -10,7 +10,6 @@ import { MyApp } from './app.component';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { DocumentViewer } from '@ionic-native/document-viewer';
-import { DirectivesModule } from '../directives/directives.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 
@@ -89,12 +88,11 @@ import { TaxBranchSection10Page } from '../pages/tax-branch-section10/tax-branch
     WelcomePage,
     HomePage,
     MenuGroupPage,
-    ContactPage  
+    ContactPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    DirectivesModule,
     ChartsModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: '',
@@ -111,7 +109,7 @@ import { TaxBranchSection10Page } from '../pages/tax-branch-section10/tax-branch
     WelcomePage,
     HomePage,
     MenuGroupPage,
-    ContactPage  
+    ContactPage,
   ],
   providers: [
     StatusBar,

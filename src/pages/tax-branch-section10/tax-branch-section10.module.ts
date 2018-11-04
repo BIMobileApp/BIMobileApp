@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TaxBranchSection10Page } from './tax-branch-section10';
+import { DirectivesModule } from '../../directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { TaxBranchSection10Page } from './tax-branch-section10';
   ],
   imports: [
     IonicPageModule.forChild(TaxBranchSection10Page),
+    DirectivesModule,
   ],
 })
 export class TaxBranchSection10PageModule {}

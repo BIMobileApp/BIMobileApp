@@ -7,6 +7,7 @@ declare var dateDisplayNow: any;
 declare var dateDisplayAll: any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -28,6 +29,7 @@ export class DimensionTime_03Page {
 
   username: any;
   dateAsOff = "";
+  dateAsOffMonthNow = "";
   dateDisplay = "";
   dateNow = "";
   unitType: any;
@@ -48,7 +50,7 @@ export class DimensionTime_03Page {
   oldtypeCur: any;
 
   mthNumber:any;
-
+  eecMarkShow:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -61,7 +63,8 @@ export class DimensionTime_03Page {
     this.regiondesc = localStorage.region_shot;
     this.offdesc = localStorage.offdesc;
     this.username = localStorage.userData;
-    this.dateAsOff = dateDisplayAll;
+    this.dateAsOff = "ข้อมูล "+dateDisplayAll;
+    this.dateAsOffMonthNow = "ข้อมูล "+ dateDisplayMonthNow;
     this.dateDisplay = localStorage.last_update_date;
     this.dateNow = dateDisplayNow;
     this.mthNumber = monthNowNumber; 
@@ -108,7 +111,9 @@ export class DimensionTime_03Page {
     let Region = 'undefined';
     let Province = 'undefined';
     let typeCur = "M";
-    let month_from = convertMthBudYear(this.mthNumber);
+      let month_from = convertMthBudYear(this.mthNumber);
+    
+    
     let month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
@@ -158,6 +163,11 @@ export class DimensionTime_03Page {
 
     if (this.region != "00") {
       Region = localStorage.region_desc;
+    }
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
     }
     this.selectionProvinceFill(Region);
     this.getAllData(Region, Province, typeCur,month_from,month_to);
@@ -238,18 +248,18 @@ export class DimensionTime_03Page {
         dateTitle= this.responseDateTitle[0].DATE_TITLE;
       //  console.log("dateTitle"+dateTitle);
         if (dateTitle == "0"){
-          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+          this.dateAsOffMonthNow="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
          }else{
     
-          this.dateAsOff =dateTitle;
+          this.dateAsOffMonthNow =dateTitle;
          }
        //  console.log("this.dateAsOff"+this.dateAsOff);
        }); 
       }else{   
-        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+        this.dateAsOffMonthNow = 'ข้อมูล '+dateDisplayMonthNow;
       }
     }else{
-      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      this.dateAsOffMonthNow = 'ข้อมูล '+dateDisplayMonthNow;
     }    
   }
 

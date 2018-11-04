@@ -43,6 +43,7 @@ export class CompareTaxEstAlcoholPage {
 
   dateDisplay: any;
   dateAsOff: any;
+  dateAsOffLine: any;
   subArea: any;
   toggleLine = 0;
   toggleTable = 0;
@@ -70,6 +71,7 @@ export class CompareTaxEstAlcoholPage {
   TYPE_DESC :any;
   changeCurrencyType = '';
   strTaxUnit = '';
+  eecMarkShow: any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -85,6 +87,7 @@ export class CompareTaxEstAlcoholPage {
     this.mthNumber = monthNowNumber;
     // this.dateAsOff = dateDisplayAll;   
     this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOffLine = 'ข้อมูล ' + dateDisplayAll;
     this.grp_id = 'ภาษีสุรา';
     this.offcode = localStorage.offcode;
 
@@ -127,7 +130,7 @@ export class CompareTaxEstAlcoholPage {
 
     let area;
     let Province;
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.strTaxUnit = 'ล้านบาท';
@@ -138,8 +141,8 @@ export class CompareTaxEstAlcoholPage {
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
-
-    this.getTableData(area, Province, typeCur, month_from, month_to);
+    this.getTableDataAll(area, Province, typeCur, month_from, month_to);
+   /*  this.getTableData(area, Province, typeCur, month_from, month_to); */
     this.selectDataAll(area, Province, typeCur, month_from, month_to);
   }
 
@@ -201,6 +204,12 @@ export class CompareTaxEstAlcoholPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
+    if(area == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
+   
     this.getTableData(area, Province, typeCur, month_from, month_to);
   }
 
@@ -217,6 +226,51 @@ export class CompareTaxEstAlcoholPage {
       this.ResponseMthTo = data;
     });
   }
+  getTableDataAll(area, Province, typeCur, month_from, month_to){
+    let table = "MBL_PRODUCT_SURA";
+    if (this.region != "00") {
+      if (area != 'undefined') {
+        this.display_region_top10 = localStorage.region_desc;
+      } else {
+        this.display_region_top10 = "";
+      }
+      area = localStorage.region_desc;
+    } else {
+      if (area != 'undefined') {
+        this.display_region_top10 = area;
+      } else {
+        this.display_region_top10 = "";
+      }
+      area = area;
+    }
+
+    if (this.branch != "00" || this.province != "00") {
+      if (Province != 'undefined') {
+        this.display_province_top10 = this.select_province;
+      }
+      else {
+        this.display_province_top10 = "";
+      }
+      Province = this.select_province;
+    } else {
+      if (Province != 'undefined') {
+        this.display_province_top10 = Province;
+      }
+      else {
+        this.display_province_top10 = "";
+      }
+      Province = Province;
+    }
+
+      this.regionSelectType = "M";
+    this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode + '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
+      this.responseData = data;
+      this.getTableTAX(this.regionSelectType);
+    });
+    this.selectDataAll(area, Province, this.regionSelectType, month_from, month_to);
+  }
+
+
 
   regionSelectType = "";
   getTableData(area, Province, typeCur, month_from, month_to) {
@@ -261,7 +315,6 @@ export class CompareTaxEstAlcoholPage {
     } else {
       this.regionSelectType = typeCur;
     }
-
     this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode + '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
       this.responseData = data;
       this.getTableTAX(this.regionSelectType);
@@ -276,12 +329,12 @@ export class CompareTaxEstAlcoholPage {
     }else{
       this.curTG = "บาท";
     }
+   
     this.getDateTiTle(month_from, month_to);
   }
 
 
   getDateTiTle(monthFrom, monthTo) {
-
     let dateTitle;
     if (monthFrom != undefined && monthTo != undefined) {
       if (monthFrom != 'undefined' && monthTo != 'undefined') {

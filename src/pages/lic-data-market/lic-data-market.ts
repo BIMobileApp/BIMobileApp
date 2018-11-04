@@ -54,7 +54,7 @@ export class LicDataMarketPage {
     this.ddlMonthTo();
 
     let typeCur = 'B';
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;

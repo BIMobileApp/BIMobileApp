@@ -41,6 +41,7 @@ export class MblRegisterPage {
   isEnableProv:any;
   oldRegion:any;
   oldtypeCur:any;
+  eecMarkShow:any;
 
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
@@ -128,7 +129,11 @@ export class MblRegisterPage {
   selectRegion(Region,Province,ISIC_TYPE){
     Province =  'undefined';
     this.Province = 'undefined';
-
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.selectionProvince(Region,Province,ISIC_TYPE); 
   }
 

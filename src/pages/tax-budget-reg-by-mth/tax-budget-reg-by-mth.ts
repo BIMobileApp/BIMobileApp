@@ -27,6 +27,7 @@ export class TaxBudgetRegByMthPage {
   dateAsOff: any;
   monthNowNumber:any;
   mthNumber:any;
+  eecMarkShow:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -99,7 +100,7 @@ export class TaxBudgetRegByMthPage {
     this.selectRegionAll();
     this.selectionProvinceAll();
 
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_tor  = convertMthBudYear(this.mthNumber);
     let typeCur = "M";
     let Region = 'undefined';
@@ -136,7 +137,11 @@ export class TaxBudgetRegByMthPage {
     if (this.region != "00") {
       Region = localStorage.region_desc;
     }
-
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
    this.selectionProvince(Region, Province, typeCur,month_from,month_to)
   }
 
@@ -212,7 +217,6 @@ export class TaxBudgetRegByMthPage {
       } else {
         Province = Province;
       }
-     console.log(Region+"----"+Province+"----"+ typeCur+"----"+month_from+"----"+month_to);
       this.webapi.getData('TaxBudgetRegByMth?offcode=' + this.offcode + '&month_from=' + month_from+'&month_to='+month_to+
                                       '&region='+Region+'&province='+Province).then((data) => {
           this.responseData = data; 

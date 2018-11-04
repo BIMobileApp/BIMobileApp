@@ -6,6 +6,7 @@ import { RestProvider } from '../../providers/rest/rest';
 declare var notRound: any;
 declare var changeCurrency: any;
 declare var dateDisplayAll: any; 
+declare var dateDisplayMonthNow: any; 
 declare var getColorMap: any;
 declare var budgetyear : any;
 declare var addCommaPercent: any;
@@ -84,6 +85,7 @@ export class CetegoryTaxPage {
   dateDisplay = "";
   dateAsOff = ""; 
   dateAsOff_Map= "";
+  dateAsOffGood = "";
   Province: any;
   region:any;
   province:any;
@@ -103,6 +105,8 @@ export class CetegoryTaxPage {
 
   responseArea3Year:any;
   responseProvince3Year:any;
+  eecMarkShow : any;
+  eecMarkShow2 : any;
 
     public Mzone1 = `#DCDCDD`;
     public Mzone2 = `#DCDCDD`;
@@ -128,8 +132,8 @@ export class CetegoryTaxPage {
     public webapi: RestProvider) {
     this.dateDisplay = localStorage.last_update_date;
     this.dateAsOff = dateDisplayAll;
-     
-  this.dateAsOff_Map = slayNow;
+    this.dateAsOffGood = dateDisplayMonthNow;
+    this.dateAsOff_Map = slayNow;
     this.username = localStorage.userData;
     this.offdesc = localStorage.offdesc;
     this.name = localStorage.username;
@@ -269,6 +273,11 @@ export class CetegoryTaxPage {
     }
 
     this.OverallBranch(area, Province, this.regionSelectType);
+    if(area == "EEC"){
+      this.eecMarkShow = 1;
+    }else{
+      this.eecMarkShow = 0;
+    }
   }
 
   GetProvinceTable(area, typeCur) {
@@ -632,7 +641,12 @@ export class CetegoryTaxPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area3Year).then((data) => {
       this.responseProvince3Year = data;
     });
-
+    if(area3Year == "EEC"){
+      this.eecMarkShow2 = 1;
+    }else{
+      this.eecMarkShow2 = 0;
+    }
+    
     this.Get3YearTable(area3Year,Province3Year,typeCur3Year);
   }
 
