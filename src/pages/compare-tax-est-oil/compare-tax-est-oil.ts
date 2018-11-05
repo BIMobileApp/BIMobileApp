@@ -8,6 +8,7 @@ declare var convertMthBudYear: any;
 declare var monthNowNumber: any;
 declare var GetYAxes: any;
 declare var GetTooltips: any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -77,6 +78,8 @@ export class CompareTaxEstOilPage {
   isEnableProv: any;
 
   mthNumber: any;
+  month_from:any;
+  month_to:any;
 
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
@@ -91,7 +94,7 @@ export class CompareTaxEstOilPage {
     this.dateDisplay = localStorage.last_update_date;
     this.mthNumber = monthNowNumber;
     // this.dateAsOff = dateDisplayAll;
-    this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล ' + dateDisplayMonthNow;
     this.dateAsOffLine = 'ข้อมูล ' + dateDisplayAll;
     this.grp_id = 'ภาษีน้ำมันและผลิตภัณฑ์น้ำมัน';
     this.offcode = localStorage.offcode;
@@ -137,8 +140,10 @@ export class CompareTaxEstOilPage {
     this.getProductType();
     let area;
     let Province;
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.strTaxUnit = 'ล้านบาท';
     this.selectionArea();

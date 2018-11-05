@@ -8,6 +8,7 @@ declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
 declare var GetYAxes: any;
 declare var GetTooltips: any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -45,6 +46,9 @@ export class CompareTaxEstCarPage {
   dateAsOffLine: any;
   dateAsOff: any;
   subArea: any;
+  month_from:any;
+  month_to:any;
+
 
   oldArea: any;
   oldtypeCur: any;
@@ -91,7 +95,7 @@ export class CompareTaxEstCarPage {
     this.dateDisplay = localStorage.last_update_date;
     this.mthNumber = monthNowNumber;
     //this.dateAsOff = dateDisplayAll;
-    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล '+dateDisplayMonthNow;
     this.dateAsOffLine = 'ข้อมูล '+dateDisplayAll;
     this.grp_id = 'ภาษีรถยนต์';
     this.offcode = localStorage.offcode;
@@ -135,8 +139,11 @@ export class CompareTaxEstCarPage {
     this.getProductType();
     let area;
     let Province;
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
+
     let typeCur = 'M';
     this.strTaxUnit = 'ล้านบาท';
     this.selectionArea();
@@ -226,6 +233,7 @@ export class CompareTaxEstCarPage {
     }else{
       this.eecMarkShow=0;
     }
+    
     this.getTableData(area, Province, typeCur,month_from,month_to);
   }
   //-----------------------------------------------------------------------------------------------------------//
@@ -295,7 +303,6 @@ export class CompareTaxEstCarPage {
    }
 
   getTableData(area, Province, typeCur,month_from,month_to) {
-
    /* if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       this.Province = undefined;
       Province = undefined;

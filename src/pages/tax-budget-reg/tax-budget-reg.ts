@@ -7,6 +7,7 @@ declare var changeCurrency: any;
 declare var fillterMonthCd:any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -26,6 +27,7 @@ export class TaxBudgetRegPage {
   mthNumber:any;
   offcode: any;
   year: any;
+  month_from:any;
   month_to:any;
   grp_id: any;
   dateAsOff = "";
@@ -64,7 +66,7 @@ export class TaxBudgetRegPage {
     this.str_product = this.grp_id;
     this.offcode = localStorage.offcode;
    // this.dateAsOff = dateDisplayAll;
-   this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+   this.dateAsOff = 'ข้อมูล '+dateDisplayMonthNow;
     this.dateDisplay = localStorage.last_update_date;
     this.mthNumber = monthNowNumber;
   }
@@ -110,8 +112,10 @@ export class TaxBudgetRegPage {
 
       let Region;
       let Province;
-      let month_from = "1";//convertMthBudYear(this.mthNumber);
+      let month_from = convertMthBudYear(this.mthNumber);
       let month_to = convertMthBudYear(this.mthNumber);
+      this.month_from = convertMthBudYear(this.mthNumber);
+      this.month_to = convertMthBudYear(this.mthNumber);
       let typeCur = 'M';
 
      this.select_mth_from = month_from;

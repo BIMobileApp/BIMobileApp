@@ -6,6 +6,7 @@ declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -28,6 +29,8 @@ export class TaxBudgetRegByMthPage {
   monthNowNumber:any;
   mthNumber:any;
   eecMarkShow:any;
+  month_from:any;
+  month_to:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -100,8 +103,10 @@ export class TaxBudgetRegByMthPage {
     this.selectRegionAll();
     this.selectionProvinceAll();
 
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_tor  = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
     let typeCur = "M";
     let Region = 'undefined';
     let Province =  'undefined';

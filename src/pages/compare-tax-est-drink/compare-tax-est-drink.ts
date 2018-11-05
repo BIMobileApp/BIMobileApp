@@ -8,6 +8,7 @@ declare var convertMthBudYear: any;
 declare var monthNowNumber: any;
 declare var GetYAxes: any;
 declare var GetTooltips: any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -60,6 +61,8 @@ export class CompareTaxEstDrinkPage {
   region: any;
   province: any;
   branch: any;
+  month_from:any;
+  month_to:any;
 
   select_region: any;
   select_all_value: any;
@@ -88,7 +91,7 @@ export class CompareTaxEstDrinkPage {
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
     // this.dateAsOff = dateDisplayAll;
-    this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล ' + dateDisplayMonthNow;
     this.dateAsOffLine = 'ข้อมูล ' + dateDisplayAll;
     this.mthNumber = monthNowNumber;
     this.grp_id = 'ภาษีเครื่องดื่ม';
@@ -134,8 +137,10 @@ export class CompareTaxEstDrinkPage {
 
     let area;
     let Province;
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.strTaxUnit = 'ล้านบาท';
     this.selectionArea();
