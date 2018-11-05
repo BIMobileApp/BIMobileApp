@@ -46,6 +46,8 @@ export class FollowTaxRealtimePage {
   oldtypeCur : any;
   eecMarkShow: any;
   mthNumber:any;
+  month_from:any;
+  month_to:any;
    /* start for pinch */
    public fontSize = `${BASE_SCALE}rem`;
    private scale = BASE_SCALE;
@@ -111,6 +113,8 @@ export class FollowTaxRealtimePage {
     let Province = undefined;
     let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
@@ -244,18 +248,18 @@ export class FollowTaxRealtimePage {
         dateTitle= this.responseDateTitle[0].DATE_TITLE;
       //  console.log("dateTitle"+dateTitle);
         if (dateTitle == "0"){
-          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+          this.dateAsOffMonthNow="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
          }else{
     
-          this.dateAsOff =dateTitle;
+          this.dateAsOffMonthNow =dateTitle;
          }
        //  console.log("this.dateAsOff"+this.dateAsOff);
        }); 
       }else{   
-        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+        this.dateAsOffMonthNow = 'ข้อมูล '+dateDisplayAll;
       }
     }else{
-      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+      this.dateAsOffMonthNow = 'ข้อมูล '+dateDisplayAll;
     }    
   }
   /* getDashboardItemsByDate(month){

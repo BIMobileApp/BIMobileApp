@@ -48,6 +48,8 @@ export class DimensionTime_03Page {
   isEnableProv: any;
   oldRegion: any;
   oldtypeCur: any;
+  month_from: any;
+  month_to: any;
 
   mthNumber:any;
   eecMarkShow:any;
@@ -111,11 +113,10 @@ export class DimensionTime_03Page {
     let Region = 'undefined';
     let Province = 'undefined';
     let typeCur = "M";
-      let month_from = convertMthBudYear(this.mthNumber);
-    
-    
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
-
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
 

@@ -50,6 +50,7 @@ public isScaling = false;
   region:any;
   province:any;
   branch:any;
+  monthFrom:any;
   monthTo:any;
   mthText:any;
   lastDayoff:any;
@@ -122,6 +123,8 @@ public isScaling = false;
     var Province;
     var monthFrom = "1";//convertMthBudYear(this.mthNumber);
     var monthTo =  convertMthBudYear(this.mthNumber);
+    this.monthFrom = "1";
+    this.monthTo =  convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
 
     this.select_mth_from = monthFrom;

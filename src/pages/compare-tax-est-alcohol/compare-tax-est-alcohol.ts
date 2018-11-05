@@ -8,6 +8,7 @@ declare var convertMthBudYear: any;
 declare var monthNowNumber: any;
 declare var GetYAxes: any;
 declare var GetTooltips: any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -86,7 +87,7 @@ export class CompareTaxEstAlcoholPage {
     this.dateDisplay = localStorage.last_update_date;
     this.mthNumber = monthNowNumber;
     // this.dateAsOff = dateDisplayAll;   
-    this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล ' + dateDisplayMonthNow;
     this.dateAsOffLine = 'ข้อมูล ' + dateDisplayAll;
     this.grp_id = 'ภาษีสุรา';
     this.offcode = localStorage.offcode;
