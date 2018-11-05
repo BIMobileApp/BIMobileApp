@@ -113,7 +113,9 @@ export class DimensionTime_03Page {
     let Region = 'undefined';
     let Province = 'undefined';
     let typeCur = "M";
-    let month_from = convertMthBudYear(this.mthNumber);
+      let month_from = convertMthBudYear(this.mthNumber);
+    
+    
     let month_to = convertMthBudYear(this.mthNumber);
     this.month_from = convertMthBudYear(this.mthNumber);
     this.month_to = convertMthBudYear(this.mthNumber);

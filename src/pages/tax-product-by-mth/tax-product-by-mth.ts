@@ -9,6 +9,7 @@ declare var fillterMonthCd:any;
 declare var lastDay:any; 
 declare var convertMthBudYear:any;
 declare var dateDisplaySelectMth:any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -121,9 +122,9 @@ public isScaling = false;
 
     var area;
     var Province;
-    var monthFrom = "1";//convertMthBudYear(this.mthNumber);
+    var monthFrom = convertMthBudYear(this.mthNumber);
     var monthTo =  convertMthBudYear(this.mthNumber);
-    this.monthFrom = "1";
+    this.monthFrom = convertMthBudYear(this.mthNumber);
     this.monthTo =  convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
 
@@ -290,9 +291,8 @@ public isScaling = false;
 
   regionSelectType = "";
   getTableDataAll(area,Province,monthFrom,monthTo,typeCur){
-
-    this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-   
+    
+    this.dateAsOff = 'ข้อมูล '+dateDisplayMonthNow;
     let Region;
     let province;
 
