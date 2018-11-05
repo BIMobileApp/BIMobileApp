@@ -4,9 +4,9 @@ import { RestProvider } from '../../providers/rest/rest';
 
 declare var dateDisplayAll: any;
 declare var changeCurrency: any;
-declare var getColorMap: any; 
 declare var notRound: any;
 declare var addCommaPercent: any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -44,6 +44,7 @@ export class TaxBranchSection6Page {
    area = 'ภาค 06';
    curTG = "ล้านบาท";
    display_province_fillter = "";
+   dateAsOffGood = "";
 
    resProvince:any;
    titleProvince:any;
@@ -74,6 +75,8 @@ public Ptak = `#DCDCDD`;
     this.username = localStorage.userData;
     this.dateAsOff = dateDisplayAll;
     this.offcode = localStorage.offcode;
+
+    this.dateAsOffGood = dateDisplayMonthNow;
 
      //หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);

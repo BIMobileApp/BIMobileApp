@@ -105,6 +105,9 @@ export class LawDataMthPage {
   select_mth_from1 = '';
   select_mth_to1 = '';
   mthNumber: any;
+  month_from:any;
+  month_to:any;
+
   ionViewDidLoad() {
     this.ddlMonthFrom();
     this.ddlMonthTo();
@@ -122,8 +125,10 @@ export class LawDataMthPage {
 
     let SRegion;
     let SProvince;
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
@@ -249,6 +254,7 @@ export class LawDataMthPage {
     });
 
     this.getProductAll(SRegion, SProvince, typeCur, month_from, month_to);
+    this.getDateTiTle(month_from, month_to);
   }
 
   getTableDataAll(OverallRegion, OverallProvince, typeCurFirst) {

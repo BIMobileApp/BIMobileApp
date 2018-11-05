@@ -101,7 +101,6 @@ public isScaling = false;
     this.select_all_prov_value = true;
     this.isEnableProv = false;
   }
-
   ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
@@ -109,6 +108,11 @@ public isScaling = false;
   select_mth_to = '';
   select_mth_from1 = '';
   select_mth_to1 = '';
+  overall_month_from:any;
+  overall_month_to:any;
+
+  month_from:any;
+  month_to:any;
 
   ionViewDidLoad() {
     this.ddlMonthFrom();
@@ -117,8 +121,10 @@ public isScaling = false;
     let typeCur = "M";
     let typeCurFirst ='M';
     
-    let overall_month_from = "1";//convertMthBudYear(this.mthNumber);
+    let overall_month_from = convertMthBudYear(this.mthNumber);
     let overall_month_to = convertMthBudYear(this.mthNumber);
+    this.overall_month_from = convertMthBudYear(this.mthNumber);
+    this.overall_month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = overall_month_from;
     this.select_mth_to = overall_month_to;
@@ -129,8 +135,10 @@ public isScaling = false;
 
     let SRegion;
     let SProvince; 
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from1 = month_from;
     this.select_mth_to1 = month_to;
@@ -244,6 +252,7 @@ public isScaling = false;
     });
     
     this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
+    this.getDateTiTle(month_from,month_to);
   }
 
   getProductAllFirst(SRegion,SProvince,typeCur,month_from,month_to){

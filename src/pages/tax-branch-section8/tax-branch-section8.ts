@@ -6,6 +6,7 @@ declare var dateDisplayAll: any;
 declare var changeCurrency: any;
 declare var getColorMap: any; 
 declare var addCommaPercent: any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -48,6 +49,7 @@ export class TaxBranchSection8Page {
    area = 'ภาค 08';
    curTG = "ล้านบาท";
    display_province_fillter  = "";
+   dateAsOffGood  = "";
 
    resProvince:any;
    titleProvince:any;
@@ -73,6 +75,7 @@ public Pnakhon_si_thammarat = `#DCDCDD`;
     this.username = localStorage.userData;
     this.dateAsOff = dateDisplayAll;
     this.offcode = localStorage.offcode;
+    this.dateAsOffGood = dateDisplayMonthNow;
 
      //หา offcode เพื่อหา ภาค จังหวัด สาขา
      this.region = localStorage.offcode.substring(0, 2);

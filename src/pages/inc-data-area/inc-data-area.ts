@@ -130,6 +130,10 @@ export class IncDataAreaPage {
   select_mth_to = '';
   select_mth_from1 = '';
   select_mth_to1 = '';
+  month_from:any;
+  month_to:any;
+  Mth_From:any;
+  Mth_To:any;
   
   ionViewDidLoad() {
 
@@ -138,8 +142,12 @@ export class IncDataAreaPage {
 
     let typeCur = 'M';
     let typeCur2 = 'M';
-    let monthFrom = "1";//convertMthBudYear(this.mthNumber);
+    let monthFrom = convertMthBudYear(this.mthNumber);
     let monthTo = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
+    this.Mth_From = convertMthBudYear(this.mthNumber);
+    this.Mth_To = convertMthBudYear(this.mthNumber);
     this.loadDataAll(monthFrom,monthTo,typeCur2);
     this.selectionArea();
     this.selectionGeoupName();
@@ -151,7 +159,7 @@ export class IncDataAreaPage {
     this.select_mth_from1 = monthFrom;
     this.select_mth_to1 = monthTo;
 
-    this.ProductAll(typeCur);
+    this.ProductAll(monthFrom,monthTo,typeCur);
   }
 
   toggleTable2Show() {
@@ -354,7 +362,7 @@ export class IncDataAreaPage {
    } */
 
   ///get all product///
-  ProductAll(typeCur) {
+  ProductAll(monthFrom,monthTo,typeCur) {
     this.webapi.getData('IncProductByAreaAll?offcode=' + this.offcode + '&group_name=สุรา').then((data) => {
       this.repondProductSura = data;
       this.getSuraAmt(typeCur);
@@ -369,6 +377,8 @@ export class IncDataAreaPage {
       this.repondProductCard = data;
       this.getCardAmt(typeCur);
     });
+
+    this.getDateTiTle(monthFrom,monthTo);    
   }
 
    ///end get all product///
@@ -402,7 +412,6 @@ export class IncDataAreaPage {
    }
  
    overallSelectMonthFrom(month_from,month_to,typeCur2){
-     
      this.loadData(month_from,month_to,typeCur2);
    }
  
@@ -460,6 +469,7 @@ export class IncDataAreaPage {
       this.responseData = data;
       this.getProductAmt(typeCur2);
       this.getProductNum(typeCur2);
+      this.getDateTiTleOverall(month_from,month_to);
     });
   }
 
@@ -474,7 +484,6 @@ export class IncDataAreaPage {
       this.getProductAmt(this.regionSelectType2);
       this.getProductNum(this.regionSelectType2);
     });
-
     this.getDateTiTleOverall(month_from,month_to);
   }
 
@@ -487,7 +496,7 @@ export class IncDataAreaPage {
         dateTitle= this.responseDateTitle[0].DATE_TITLE;
       //  console.log("dateTitle"+dateTitle);
         if (dateTitle == "0"){
-          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+          this.dateAsOffOverall="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
          }else{
     
           this.dateAsOffOverall =dateTitle;

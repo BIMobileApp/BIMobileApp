@@ -7,6 +7,7 @@ declare var changeCurrency: any;
 declare var getColorMap: any; 
 declare var budgetyear : any;
 declare var addCommaPercent : any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -45,6 +46,7 @@ export class TaxBranchSection1Page {
    area = 'ภาค 01';
    curTG = "ล้านบาท";
    display_province_fillter = "";
+   dateAsOffGood = "";
 
   region:any;
   province:any;
@@ -77,6 +79,7 @@ export class TaxBranchSection1Page {
       this.username = localStorage.userData;
       this.dateAsOff = dateDisplayAll;
       this.offcode = localStorage.offcode;
+      this.dateAsOffGood = dateDisplayMonthNow;
         
         //หา offcode เพื่อหา ภาค จังหวัด สาขา
         this.region = localStorage.offcode.substring(0, 2);

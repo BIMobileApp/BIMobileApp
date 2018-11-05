@@ -26,7 +26,6 @@
                     <ion-item class="size">
                       <ion-label> เดือน : </ion-label>
                       <ion-select [(ngModel)]="overall_month_from"  (ionChange)="overallSelectMonthFrom(overall_month_from,overall_month_to,typeCurFirst)">
-                        <ion-option value="undefined">ทั้งหมด</ion-option>
                         <ion-option *ngFor="let item3 of ResponseOverallMthFrom"  value="{{item3.BUDGET_MONTH_CD}}"  [selected]="select_mth_from == item3.BUDGET_MONTH_CD">{{item3.MONTH_DESC}}</ion-option>
                       </ion-select>
                     </ion-item>
@@ -35,7 +34,6 @@
                     <ion-item class="size">
                       <ion-label> ถึง: </ion-label>
                       <ion-select [(ngModel)]="overall_month_to" (ionChange)="overallSelectMonthTo(overall_month_from,overall_month_to,typeCurFirst)">
-                        <ion-option value="undefined">ทั้งหมด</ion-option>
                         <ion-option  *ngFor="let item4 of ResponseOverallMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>
                       </ion-select>
                     </ion-item>
@@ -122,7 +120,6 @@
                     <ion-item class="size">
                       <ion-label> เดือน : </ion-label>
                       <ion-select [(ngModel)]="month_from"  (ionChange)="getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to)">
-                        <ion-option value="undefined">ทั้งหมด</ion-option>
                        <!--  <ion-option  *ngFor="let monthfrom of responseMonth"  value="{{monthfrom.BUDGET_MONTH_CD}}" >{{monthfrom.MONTH_DESC}}</ion-option>  -->
                         <ion-option *ngFor="let item1 of ResponseMthFrom"  value="{{item1.BUDGET_MONTH_CD}}"  [selected]="select_mth_from1 == item1.BUDGET_MONTH_CD">{{item1.MONTH_DESC}}</ion-option>
                       </ion-select>
@@ -132,7 +129,6 @@
                     <ion-item class="size">
                       <ion-label> ถึง: </ion-label>
                       <ion-select [(ngModel)]="month_to" (ionChange)="getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to)">
-                        <ion-option value="undefined">ทั้งหมด</ion-option>
                        <!--  <ion-option  *ngFor="let monthto of responseMonth"  value="{{monthto.BUDGET_MONTH_CD}}" >{{monthto.MONTH_DESC}}</ion-option> -->
                        <ion-option *ngFor="let item2 of ResponseMthTo"  value="{{item2.BUDGET_MONTH_CD}}"  [selected]="select_mth_to1 == item2.BUDGET_MONTH_CD">{{item2.MONTH_DESC}}</ion-option>                  
                       </ion-select>

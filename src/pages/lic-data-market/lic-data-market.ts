@@ -47,6 +47,8 @@ export class LicDataMarketPage {
 
   select_mth_from = '';
   select_mth_to = '';
+  month_from:any;
+  month_to:any;
 
   ionViewDidLoad() {
    
@@ -54,8 +56,10 @@ export class LicDataMarketPage {
     this.ddlMonthTo();
 
     let typeCur = 'B';
-    let month_from = "1";//convertMthBudYear(this.mthNumber);
+    let month_from = convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
+    this.month_from = convertMthBudYear(this.mthNumber);
+    this.month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
@@ -82,6 +86,8 @@ export class LicDataMarketPage {
       this.responseData = data;
       this.getDataAmt(typeCur);
       this.SumData(typeCur,month_from,month_to);
+
+      this.getDateTiTle(month_from,month_to);
     });
   }
 
@@ -93,11 +99,11 @@ export class LicDataMarketPage {
   }
 
   SelectMonthFrom(typeCur,month_from,month_to){
-    this. loadData(typeCur,month_from,month_to);
+    this.loadData(typeCur,month_from,month_to);
   }
 
   SelectMonthTo(typeCur,month_from,month_to){
-    this. loadData(typeCur,month_from,month_to);
+    this.loadData(typeCur,month_from,month_to);
   }
   regionSelectType = 'B';
   loadData(typeCur,month_from,month_to){

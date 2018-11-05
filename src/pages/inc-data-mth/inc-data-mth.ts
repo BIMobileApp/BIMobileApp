@@ -116,6 +116,9 @@ export class IncDataMthPage {
   select_mth_from1 = '';
   select_mth_to1 = '';
 
+  Mth_From:any;
+  Mth_To:any;
+
   ionViewDidLoad() {
     this.ddlMonthFrom();
     this.ddlMonthTo();
@@ -124,13 +127,15 @@ export class IncDataMthPage {
     let typeCur2 = 'M';
     let Region;
     let Province;
-    let Mth_From = "1";//convertMthBudYear(this.mthNumber);
+    let Mth_From = convertMthBudYear(this.mthNumber);
     let Mth_To = convertMthBudYear(this.mthNumber);
+    this.Mth_From = convertMthBudYear(this.mthNumber);
+    this.Mth_To = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from1 = Mth_From;
     this.select_mth_to1 = Mth_To;
 
-    this.loadDataAll(Region, Province,typeCur2)
+    this.loadDataAll(Region, Province,Mth_From,Mth_To,typeCur2)
     //this.loadData(Mth_From,Mth_To,typeCur2);
     this.IncProductAllFrist(Region,Province,Mth_From,Mth_To,typeCur);
     /* this.IncProductAll(Region,Province,Mth_From,Mth_To,typeCur); */
@@ -156,7 +161,7 @@ export class IncDataMthPage {
     }
   }
 
-  loadDataAll(OverallRegion, OverallProvince,typeCur2) {
+  loadDataAll(OverallRegion, OverallProvince,Mth_From,Mth_To,typeCur2) {
     if (this.region != "00") {
       OverallRegion = localStorage.region_desc;
     } else {
@@ -179,6 +184,8 @@ export class IncDataMthPage {
       this.responseData = data;
       this.getAmtProduct(this.regionSelectType)
       this.getNumProduct(this.regionSelectType);
+
+      this.getDateTiTle(Mth_From,Mth_To);
       //this.selectionSumArea(OverallRegion, OverallProvince,typeCur2);
     });
   }
@@ -376,6 +383,8 @@ export class IncDataMthPage {
        this.repondProductCard = data;
        this.getCountAmtCard(this.regionSelectType );
      });
+
+     this.getDateTiTle(Mth_From,Mth_To);
    
      if (typeCur == "M") {
        this.curTG = "ล้านบาท";

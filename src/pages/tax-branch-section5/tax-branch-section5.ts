@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 declare var dateDisplayAll: any;
-declare var changeCurrency: any;
-declare var getColorMap: any; 
+declare var changeCurrency: any; 
 declare var notRound: any;
 declare var addCommaPercent: any;
-
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -45,6 +44,7 @@ export class TaxBranchSection5Page {
    area = 'ภาค 05';
    curTG = "ล้านบาท";
    display_province_fillter = "";
+   dateAsOffGood = "";
 
    region:any;
    province:any;
@@ -75,6 +75,7 @@ responseData : any;
       this.username = localStorage.userData;
       this.dateAsOff = dateDisplayAll;
       this.offcode = localStorage.offcode;
+      this.dateAsOffGood = dateDisplayMonthNow;
   
        //หา offcode เพื่อหา ภาค จังหวัด สาขา
        this.region = localStorage.offcode.substring(0, 2);
