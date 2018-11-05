@@ -21,10 +21,13 @@ var dateDisplayAll = '';
 var dateDisplayNow = '';
 var dateDisplayDataReailTime = "";
 var monthNowNumber = "";
+var monthLastNumber = "";
 var monthCnvBudYear = "";
 var datePreviousOneDay = "";
 var lastDay = "";
 var slayNow = 'ตั้งแต่ 1 ตุลาคม ถึง 30 กันยายน ปีงบฯ 2561';
+var dateDisplayMonthNow = '';
+
 
 var now = new Date();
 var buddhayear = now.getFullYear() + 543;
@@ -53,18 +56,28 @@ var thmonthBudYear = new Array("ตุลาคม", "พฤศจิกาย�
   } */
 
 if ((now.getDate() - 1) < 1) {
+  //กระทบยอด
   dateDisplayAll = "ตั้งแต่ 1 ตุลาคม ถึง " + last.getDate() + " " + (last.getMonth() - 2 < 0 ? thmonth[11] : thmonth[last.getMonth()]) + " ปีงบฯ " + (last.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
   //dateDisplayDataReailTime = "ข้อมูลเดือน" + last.getDate() + " " + (last.getMonth() - 2 < 0 ? thmonth[11] : thmonth[last.getMonth()]) + " ปีงบฯ " + (last.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
+  //ไม่กระทบยอด
+  dateDisplayMonthNow = "ตั้งแต่ 1 "+(last.getMonth() - 2 < 0 ? thmonth[11] : thmonth[last.getMonth()])+" ถึง " + last.getDate() + " " + (last.getMonth() - 2 < 0 ? thmonth[11] : thmonth[last.getMonth()]) + " ปีงบฯ " + (last.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
+  monthNowNumber = last.getMonth()+1;
 } else {
+  //กระทบยอด
   dateDisplayAll = "ตั้งแต่ 1 ตุลาคม ถึง " + (now.getDate() - 1) + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
   //dateDisplayDataReailTime = "ข้อมูลเดือน " + (now.getDate() - 1) + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
+  //ไม่กระทบยอด
+  dateDisplayMonthNow = "ตั้งแต่ 1 "+(now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) +" ถึง " + (now.getDate() - 1) + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
+  monthNowNumber = now.getMonth()+1;
 }
 
 dateDisplayNow = " ข้อมูล ณ วันที่ " + now.getDate() + " " + (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()]) + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1);
 dateDisplayDataReailTime = "ข้อมูลเดือน "+ (now.getMonth() - 2 < 0 ? thmonth[11] : thmonth[now.getMonth()] + " ปีงบฯ " + (now.getMonth() + 1 >= 10 ? budgetyear : budgetyear - 1));
-monthNowNumber = now.getMonth()+1;
+/* monthNowNumber = now.getMonth()+1; */
 monthNowText = thmonth[now.getMonth()];
 datePreviousOneDay = now.getDate() - 1;
+
+
 
 //ฟังก์ชั่นใส่ comma
 function addComma(val) {

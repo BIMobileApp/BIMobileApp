@@ -8,6 +8,7 @@ import { CompareTaxAlcoholPage } from './compare-tax-alcohol';
   ],
   imports: [
     IonicPageModule.forChild(CompareTaxAlcoholPage),
+    
   ],
 })
 export class CompareTaxAlcoholPageModule {}

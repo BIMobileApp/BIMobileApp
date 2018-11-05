@@ -47,6 +47,7 @@ export class IncomerealtimePage {
   isEnableProv:any;
   oldRegion:any;
   oldtypeCur:any;
+  eecMarkShow: any;
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -128,6 +129,12 @@ public isScaling = false;
     this.Province =  'undefined';
     this.selectionProvince(Region,Province,typeCur);
     //this.getData(Region,Province,typeCur);
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
+   
   }
 
 

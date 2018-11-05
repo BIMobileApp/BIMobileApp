@@ -24,6 +24,7 @@ export class LawDataMthPage {
   offcode: any;
   username: any;
   dateAsOff: any;
+  dateAsOffOverall:any;
   responseDateTitle: any;
   responseArea: any;
   responseProvince: any;
@@ -46,6 +47,8 @@ export class LawDataMthPage {
   toggleTable2 = 0;
   toggleTable1 = 0;
   regionSelectType2 = '';
+  eecMarkShow: any;
+  eecMarkShow2:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -62,6 +65,7 @@ export class LawDataMthPage {
     this.offcode = localStorage.offcode;
     //this.dateAsOff =  dateDisplayAll;
     this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOffOverall = 'ข้อมูล ' + dateDisplayAll;
     this.mthNumber = monthNowNumber;
 
 
@@ -118,15 +122,15 @@ export class LawDataMthPage {
 
     let SRegion;
     let SProvince;
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
     this.select_mth_from1 = month_from;
     this.select_mth_to1 = month_to;
-
-    this.getProductAll(SRegion, SProvince, typeCur, month_from, month_to);
+    this.getProductAllFrist(SRegion, SProvince, typeCur, month_from, month_to);
+    /* this.getProductAll(SRegion, SProvince, typeCur, month_from, month_to); */
   }
 
   toggleTable2Show() {
@@ -167,6 +171,11 @@ export class LawDataMthPage {
 
     if (this.region != "00") {
       OverallRegion = localStorage.region_desc;
+    }
+    if(OverallRegion == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
     }
     this.overallSelectionProvince(OverallRegion, OverallProvince, typeCurFirst);
   }
@@ -220,7 +229,11 @@ export class LawDataMthPage {
   getitemsRegion(SRegion, SProvince, typeCur, month_from, month_to) {
     SProvince = 'undefined';
     this.SProvince = 'undefined';
-
+    if(SRegion == "EEC"){
+      this.eecMarkShow2=1;
+    }else{
+      this.eecMarkShow2=0;
+    }
     this.getitemsProvince(SRegion, SProvince, typeCur, month_from, month_to);
     //this.getProductAll(area,province,typeCur);
   }
@@ -279,7 +292,30 @@ export class LawDataMthPage {
     });
   }
 
+  getProductAllFrist(SRegion, SProvince, typeCur, month_from, month_to){
+    if (this.region != "00") {
+      SRegion = localStorage.region_desc;
+    } else {
+      SRegion = SRegion;
+    }
 
+    if (this.branch != "00" || this.province != "00") {
+      SProvince = this.select_province;
+    } else {
+      SProvince = SProvince;
+    }
+
+    if (typeCur == undefined) {
+      this.regionSelectType = "M";
+    } else {
+      this.regionSelectType = typeCur;
+    }
+    //alert("ภาค="+SRegion+" จังหวัด="+ SProvince+" หน่วย="+ typeCur);
+    this.webapi.getData('LawProductAllMonth?offcode=' + this.offcode + '&region=' + SRegion + '&province=' + SProvince + '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
+      this.repondProductSura = data;
+      this.getTableTAX(this.regionSelectType);
+    });
+  }
   ///select all product///
   regionSelectType = "";
   getProductAll(SRegion, SProvince, typeCur, month_from, month_to) {

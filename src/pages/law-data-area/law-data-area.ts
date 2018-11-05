@@ -55,6 +55,7 @@ export class LawDataAreaPage {
   oldtypeCur:any;
   toggleTable2 = 0;
   toggleTable1 = 0;
+  eecMarkShow:any;
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -67,8 +68,8 @@ public isScaling = false;
     public webapi: RestProvider) {
       this.offcode = localStorage.offcode;            
       this.dateDisplay = localStorage.last_update_date;
-      this.dateAsOff =  dateDisplayAll;
-      this.dateAsOffOverall = dateDisplayAll;
+      this.dateAsOff =  "ข้อมูล" + dateDisplayAll;
+      this.dateAsOffOverall = "ข้อมูล" + dateDisplayAll;
       this.username = localStorage.userData;
       this.mthNumber = monthNowNumber;
 
@@ -116,7 +117,7 @@ public isScaling = false;
     let typeCur = "M";
     let typeCurFirst ='M';
     
-    let overall_month_from = convertMthBudYear(this.mthNumber);
+    let overall_month_from = "1";//convertMthBudYear(this.mthNumber);
     let overall_month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = overall_month_from;
@@ -128,7 +129,7 @@ public isScaling = false;
 
     let SRegion;
     let SProvince; 
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from1 = month_from;
@@ -145,7 +146,8 @@ public isScaling = false;
     }else{
       SProvince = 'undefined';
     }   
-    this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
+    this.getProductAllFirst(SRegion,SProvince,typeCur,month_from,month_to);
+  /*   this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to); */
   }
 
   //--------------------------------------------------------- selection เดือน  ---------------------------------------------------------//
@@ -224,7 +226,11 @@ public isScaling = false;
     this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
-
+    if(SRegion == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.getitemsProvince(SRegion,SProvince,typeCur,month_from,month_to);
   }
 
@@ -238,6 +244,31 @@ public isScaling = false;
     });
     
     this.getProductAll(SRegion,SProvince,typeCur,month_from,month_to);
+  }
+
+  getProductAllFirst(SRegion,SProvince,typeCur,month_from,month_to){
+    if(this.region != "00"){
+      SRegion = localStorage.region_desc;
+    }else{
+      SRegion = SRegion;
+    }
+
+    if(this.branch != "00" || this.province != "00"){
+      SProvince = this.select_province;
+    }else{
+      SProvince = SProvince;
+    }
+
+    if(typeCur == undefined){
+      this.regionSelectType = "M";
+    }else{
+      this.regionSelectType =  typeCur;
+    }
+
+    this.webapi.getData('LawProductAreaMonth?offcode='+this.offcode+'&region='+SRegion+'&province='+SProvince+'&month_from='+month_from+'&month_to='+month_to).then((data) => {
+      this.repondProductSura = data;
+      this.getTableTAX(this.regionSelectType);
+    });
   }
 
   regionSelectType = "";

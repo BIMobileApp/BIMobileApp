@@ -4,8 +4,8 @@ import { RestProvider } from '../../providers/rest/rest';
 import { Chart } from 'chart.js';
 declare var changeCurrency: any;
 declare var dateDisplayAll: any;
-declare var convertMthBudYear:any;
-declare var monthNowNumber:any;
+declare var convertMthBudYear: any;
+declare var monthNowNumber: any;
 declare var GetYAxes: any;
 declare var GetTooltips: any;
 
@@ -25,11 +25,11 @@ export class CompareTaxEstDrinkPage {
   responseData: any;
   ProductType: any;
   offcode: any;
-  responseArea:any;
-  responseProvince:any;
+  responseArea: any;
+  responseProvince: any;
   display_region_top10 = "";
   display_province_top10 = "";
-  responseDateTitle:any;
+  responseDateTitle: any;
   //Line Tax
   TaxlineChart: any;
   TaxLineData: any;
@@ -39,23 +39,24 @@ export class CompareTaxEstDrinkPage {
   tax_lebel = [];
   yAxesticks = [];
   textDataInValid: any;
-  typeCurLine:any;
-   TYPE_DESC :any;
-   changeCurrencyType = '';
-   strTaxUnit = '';
+  typeCurLine: any;
+  TYPE_DESC: any;
+  changeCurrencyType = '';
+  strTaxUnit = '';
 
-  username:any;
-  
+  username: any;
 
-  dateDisplay:any;
-  dateAsOff:any;
-  subArea:any;
+
+  dateDisplay: any;
+  dateAsOff: any;
+  dateAsOffLine: any;
+  subArea: any;
   toggleLine = 0;
   toggleTable = 0;
   oldArea: any;
-  oldtypeCur : any; 
+  oldtypeCur: any;
 
-  Province:any;
+  Province: any;
   region: any;
   province: any;
   branch: any;
@@ -66,60 +67,62 @@ export class CompareTaxEstDrinkPage {
   select_province: any;
   isEnable: any;
   isEnableProv: any;
-    //Table reg
-    responseRegData: any;
-    grp_id: any;
-    curTG  = "ล้านบาท";
-    /* start for pinch */
+  //Table reg
+  responseRegData: any;
+  grp_id: any;
+  curTG = "ล้านบาท";
+  eecMarkShow: any;
+  /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
   private alreadyScaled = BASE_SCALE;
   public isScaling = false;
   /* end  */
-  
-  mthNumber :any;
+
+  mthNumber: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public webapi: RestProvider) {
-      this.offcode = localStorage.offcode;
+    this.offcode = localStorage.offcode;
     this.username = localStorage.userData;
     this.dateDisplay = localStorage.last_update_date;
-   // this.dateAsOff = dateDisplayAll;
-   this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-   this.mthNumber = monthNowNumber;
+    // this.dateAsOff = dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOffLine = 'ข้อมูล ' + dateDisplayAll;
+    this.mthNumber = monthNowNumber;
     this.grp_id = 'ภาษีเครื่องดื่ม';
     this.offcode = localStorage.offcode;
 
-      ///หา offcode เพื่อหา ภาค จังหวัด สาขา
-      this.region = localStorage.offcode.substring(0, 2);
-      this.province = localStorage.offcode.substring(2, 4);
-      this.branch = localStorage.offcode.substring(4, 6);
-      /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
+    ///หา offcode เพื่อหา ภาค จังหวัด สาขา
+    this.region = localStorage.offcode.substring(0, 2);
+    this.province = localStorage.offcode.substring(2, 4);
+    this.branch = localStorage.offcode.substring(4, 6);
+    /// end  หา offcode เพื่อหา ภาค จังหวัด สาขา
 
-      ///ตรวจสอบภาคเพื่อ default selection
-      if (this.region != "00") {
-        this.select_region = localStorage.region_desc;
-        this.select_all_value = false;
-        this.isEnable = true;
-      } else {
-        this.select_all_value = true;
-        this.isEnable = false;
-      }
-      ///end ตรวจสอบภาคเพื่อ default selection
+    ///ตรวจสอบภาคเพื่อ default selection
+    if (this.region != "00") {
+      this.select_region = localStorage.region_desc;
+      this.select_all_value = false;
+      this.isEnable = true;
+    } else {
+      this.select_all_value = true;
+      this.isEnable = false;
+    }
+    ///end ตรวจสอบภาคเพื่อ default selection
 
-      /// ตรวจสอบสาขาเพื่อ default selection
-      var res = "";
-      if (this.branch != "00"  || this.province != "00") {
-        res = localStorage.offdesc.split(" ");
-        this.select_province = res[0];
-        this.select_all_prov_value = false;
-        this.isEnableProv = true;
-      } else {
-        this.select_all_prov_value = true;
-        this.isEnableProv = false;
-      }
-      ///end  ตรวจสอบสาขาเพื่อ default selection
+    /// ตรวจสอบสาขาเพื่อ default selection
+    var res = "";
+    if (this.branch != "00" || this.province != "00") {
+      res = localStorage.offdesc.split(" ");
+      this.select_province = res[0];
+      this.select_all_prov_value = false;
+      this.isEnableProv = true;
+    } else {
+      this.select_all_prov_value = true;
+      this.isEnableProv = false;
+    }
+    ///end  ตรวจสอบสาขาเพื่อ default selection
   }
 
   select_mth_from = '';
@@ -131,7 +134,7 @@ export class CompareTaxEstDrinkPage {
 
     let area;
     let Province;
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.strTaxUnit = 'ล้านบาท';
@@ -140,12 +143,11 @@ export class CompareTaxEstDrinkPage {
 
     this.select_mth_from = month_from;
     this.select_mth_to = month_to;
-
-    this.getTableData(area, Province,typeCur,month_from,month_to);
-    this.selectDataAll(area, Province,typeCur,month_from,month_to);
+    this.getTableDataAll(area, Province, typeCur, month_from, month_to)
+    /* this.selectDataAll(area, Province, typeCur, month_from, month_to); */
   }
-  
-  toggleLineShow(){
+
+  toggleLineShow() {
     this.changeCurrencyType = "M";
     this.strTaxUnit = 'ล้านบาท';
     this.typeCurLine = "M";
@@ -158,7 +160,7 @@ export class CompareTaxEstDrinkPage {
     }
   }
 
-  toggleTableShow(){
+  toggleTableShow() {
     if (this.toggleTable == 0) {
       this.toggleTable = 1;
     } else {
@@ -166,23 +168,23 @@ export class CompareTaxEstDrinkPage {
     }
   }
 
-  ResponseMthFrom:any;
-  ddlMonthFrom(){
+  ResponseMthFrom: any;
+  ddlMonthFrom() {
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseMthFrom = data;
     });
   }
 
-  ResponseMthTo:any;
-  ddlMonthTo(){
+  ResponseMthTo: any;
+  ddlMonthTo() {
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseMthTo = data;
     });
   }
-  
-  selectDataAll(area, Province,typeCur,month_from,month_to) {
-    this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + area + '&province=' + Province+ '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
-/*     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => { */
+
+  selectDataAll(area, Province, typeCur, month_from, month_to) {
+    this.webapi.getData('Top10Profile?offcode=' + this.offcode + '&group_id=' + this.grp_id + '&region=' + area + '&province=' + Province + '&month_from=' + month_from + '&month_to=' + month_to).then((data) => {
+      /*     this.webapi.getData('TopRegSegment?offcode=' + this.offcode + '&group_id=' + this.grp_id+'&area=' + area + '&province=' + Province ).then((data) => { */
       this.responseRegData = data;
       if (!this.responseRegData) { } else { this.getTableRegTAX(typeCur); }
     });
@@ -197,119 +199,174 @@ export class CompareTaxEstDrinkPage {
     }
   }
 
-  selectionArea(){
-    this.webapi.getData('ddlMRegion?offcode='+this.offcode).then((data) => {
+  selectionArea() {
+    this.webapi.getData('ddlMRegion?offcode=' + this.offcode).then((data) => {
       this.responseArea = data;
     });
   }
-  selectionProviceFirst(){
+  selectionProviceFirst() {
     let region;
     if (this.region != "00") {
       region = localStorage.region_desc;
     }
 
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+region).then((data) => {
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + region).then((data) => {
       this.responseProvince = data;
 
     });
   }
-  selectionProvince(area,Province,typeCur,month_from,month_to){
+  selectionProvince(area, Province, typeCur, month_from, month_to) {
 
-    Province = 'undefined'; 
-    this.Province =  'undefined';
-    this.webapi.getData('ddlMProvince?offcode='+this.offcode+'&area='+area).then((data) => {
+    Province = 'undefined';
+    this.Province = 'undefined';
+    this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + area).then((data) => {
       this.responseProvince = data;
     });
-    this.getTableData(area,Province,typeCur,month_from,month_to);
+    if (area == "EEC") {
+      this.eecMarkShow = 1;
+    } else {
+      this.eecMarkShow = 0;
+    }
+    this.getTableData(area, Province, typeCur, month_from, month_to);
   }
   //-----------------------------------------------------------------------------------------------------------//
-  regionSelectType = "";
-  getTableData(area, Province,typeCur,month_from,month_to) {
-   
+  getTableDataAll(area, Province, typeCur, month_from, month_to) {
+
     /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
       Province = undefined;
     }*/
-   let table = "MBL_PRODUCT_DRINK";
+    let table = "MBL_PRODUCT_DRINK";
     if (this.region != "00") {
-      if(area != 'undefined'){
-        this.display_region_top10 =  localStorage.region_desc;
-      }else{
+      if (area != 'undefined') {
+        this.display_region_top10 = localStorage.region_desc;
+      } else {
         this.display_region_top10 = "";
       }
       area = localStorage.region_desc;
     } else {
-      if(area != 'undefined'){
+      if (area != 'undefined') {
         this.display_region_top10 = area;
-      }else{
+      } else {
         this.display_region_top10 = "";
       }
       area = area;
     }
-    if (this.branch != "00"  || this.province != "00") {
-      if(Province != 'undefined'){
+    if (this.branch != "00" || this.province != "00") {
+      if (Province != 'undefined') {
         this.display_province_top10 = this.select_province;
       }
-      else{
+      else {
         this.display_province_top10 = "";
       }
       Province = this.select_province;
     } else {
-      if(Province != 'undefined'){
+      if (Province != 'undefined') {
         this.display_province_top10 = Province;
       }
-      else{
+      else {
         this.display_province_top10 = "";
       }
       Province = Province;
     }
 
-    if(typeCur == undefined){
       this.regionSelectType = "M";
-    }else{
-      this.regionSelectType =  typeCur;
-    }
-    this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode+ '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
-    /* this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => { */
+    this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode + '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
+      /* this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => { */
       this.responseData = data;
       this.getTableTAX(this.regionSelectType);
     });
-    this.selectDataAll(area, Province,this.regionSelectType,month_from,month_to);
+    this.selectDataAll(area, Province, this.regionSelectType, month_from, month_to);
     this.oldArea = area;
     this.oldtypeCur = typeCur;
-    if(typeCur == "M"){
+  }
+
+  regionSelectType = "";
+  getTableData(area, Province, typeCur, month_from, month_to) {
+
+    /*if (area !== this.oldArea || typeCur !== this.oldtypeCur) {
+      Province = undefined;
+    }*/
+    let table = "MBL_PRODUCT_DRINK";
+    if (this.region != "00") {
+      if (area != 'undefined') {
+        this.display_region_top10 = localStorage.region_desc;
+      } else {
+        this.display_region_top10 = "";
+      }
+      area = localStorage.region_desc;
+    } else {
+      if (area != 'undefined') {
+        this.display_region_top10 = area;
+      } else {
+        this.display_region_top10 = "";
+      }
+      area = area;
+    }
+    if (this.branch != "00" || this.province != "00") {
+      if (Province != 'undefined') {
+        this.display_province_top10 = this.select_province;
+      }
+      else {
+        this.display_province_top10 = "";
+      }
+      Province = this.select_province;
+    } else {
+      if (Province != 'undefined') {
+        this.display_province_top10 = Province;
+      }
+      else {
+        this.display_province_top10 = "";
+      }
+      Province = Province;
+    }
+
+    if (typeCur == undefined) {
+      this.regionSelectType = "M";
+    } else {
+      this.regionSelectType = typeCur;
+    }
+    this.webapi.getData('CompareTaxProduct?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode + '&month_from=' + month_from + '&month_to=' + month_to + '&dbtable=' + table).then((data) => {
+      /* this.webapi.getData('CompareTaxDrink?area=' + area + '&Province=' + Province + '&offcode=' + this.offcode).then((data) => { */
+      this.responseData = data;
+      this.getTableTAX(this.regionSelectType);
+    });
+    this.selectDataAll(area, Province, this.regionSelectType, month_from, month_to);
+    this.oldArea = area;
+    this.oldtypeCur = typeCur;
+    if (typeCur == "M") {
       this.curTG = "ล้านบาท";
-    }else if(typeCur == undefined){
+    } else if (typeCur == undefined) {
       this.curTG = "ล้านบาท";
-    }else{
+    } else {
       this.curTG = "บาท";
     }
-    this.getDateTiTle(month_from,month_to);
+    this.getDateTiTle(month_from, month_to);
 
   }
 
-  getDateTiTle(monthFrom,monthTo){  
- 
+  getDateTiTle(monthFrom, monthTo) {
+
     let dateTitle;
-    if(monthFrom != undefined  && monthTo != undefined){
-      if( monthFrom != 'undefined'  && monthTo != 'undefined'){
-      this.webapi.getData('DateTitle?startMonth='+(monthFrom == undefined  ? monthTo : monthFrom) +'&endMonth='+(monthTo == undefined ? monthFrom :monthTo)).then((data) => {
-        this.responseDateTitle = data;       
-        dateTitle= this.responseDateTitle[0].DATE_TITLE;
-      //  console.log("dateTitle"+dateTitle);
-        if (dateTitle == "0"){
-          this.dateAsOff="โปรดตรวจสอบช่วงเดือนอีกครั้ง";
-         }else{
-    
-          this.dateAsOff =dateTitle;
-         }
-       //  console.log("this.dateAsOff"+this.dateAsOff);
-       }); 
-      }else{   
-        this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    if (monthFrom != undefined && monthTo != undefined) {
+      if (monthFrom != 'undefined' && monthTo != 'undefined') {
+        this.webapi.getData('DateTitle?startMonth=' + (monthFrom == undefined ? monthTo : monthFrom) + '&endMonth=' + (monthTo == undefined ? monthFrom : monthTo)).then((data) => {
+          this.responseDateTitle = data;
+          dateTitle = this.responseDateTitle[0].DATE_TITLE;
+          //  console.log("dateTitle"+dateTitle);
+          if (dateTitle == "0") {
+            this.dateAsOff = "โปรดตรวจสอบช่วงเดือนอีกครั้ง";
+          } else {
+
+            this.dateAsOff = dateTitle;
+          }
+          //  console.log("this.dateAsOff"+this.dateAsOff);
+        });
+      } else {
+        this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
       }
-    }else{
-      this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
-    }    
+    } else {
+      this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    }
   }
 
   //-----------------------------------------------------------------------------------------------------------//
@@ -333,21 +390,21 @@ export class CompareTaxEstDrinkPage {
     });
   }
 
- 
+
   getLineTaxData(TYPE_DESC) {
     this.changeCurrencyType = "M";
     this.strTaxUnit = 'ล้านบาท';
-   /*  if (typeCurLine == undefined) {
-      this.changeCurrencyType = "M";
-      this.strTaxUnit = 'ล้านบาท';
-    } else if (typeCurLine == 'M') {
-      this.changeCurrencyType = typeCurLine;
-      this.strTaxUnit = 'ล้านบาท';
-    } else {
-      this.changeCurrencyType = typeCurLine;
-      this.strTaxUnit = 'บาท';
-    }
-    if( TYPE_DESC == undefined ){ TYPE_DESC = ""; } */
+    /*  if (typeCurLine == undefined) {
+       this.changeCurrencyType = "M";
+       this.strTaxUnit = 'ล้านบาท';
+     } else if (typeCurLine == 'M') {
+       this.changeCurrencyType = typeCurLine;
+       this.strTaxUnit = 'ล้านบาท';
+     } else {
+       this.changeCurrencyType = typeCurLine;
+       this.strTaxUnit = 'บาท';
+     }
+     if( TYPE_DESC == undefined ){ TYPE_DESC = ""; } */
     if (TYPE_DESC != "") {
       this.webapi.getData('CompareTaxDrinkMonth?TYPE_DESC=' + TYPE_DESC + '&offcode=' + this.offcode).then((data) => {
         this.TaxLineData = data;
@@ -355,28 +412,28 @@ export class CompareTaxEstDrinkPage {
           this.TaxgetTAX();
           this.TaxlineChart.destroy();
           this.TaxCreateChart();
-    
+
         } else {
           this.textDataInValid = 0;
         }
       });
     } else {
-     this.getLineAll();
+      this.getLineAll();
     }
 
 
   }
 
-  getLineAll(){
+  getLineAll() {
     this.webapi.getData('CompareTaxDrinkMonthAll?offcode=' + this.offcode).then((data) => {
       this.TaxLineData = data;
       if (this.TaxLineData.length > 0) {
         this.TaxgetTAX();
-        if(this.TaxlineChart){
+        if (this.TaxlineChart) {
           this.TaxlineChart.destroy();
         }
         this.TaxCreateChart();
-  
+
       } else {
         this.textDataInValid = 0;
       }
@@ -398,7 +455,7 @@ export class CompareTaxEstDrinkPage {
     this.tax_lebel = JSON.parse(JSON.stringify(this.tax_lebel));
   }
 
-  
+
   TaxCreateChart() {
     let curType = this.changeCurrencyType;
     let str = this.strTaxUnit;
@@ -479,22 +536,22 @@ export class CompareTaxEstDrinkPage {
             ticks: {
               beginAtZero: true,
               userCallback: function (value, index, values) {
-                value = GetYAxes(value,curType);
-               /*  let AlldataisZero;
-                for(let i = 0; i < this.tax_TAX.length; i++){
-                  if(this.tax_TAX[i]==0){
-                    AlldataisZero = true;
-                  }else{
-                    AlldataisZero = false;
-                    break;
-                  }
-                }
-                if(AlldataisZero){
-                  value = 0;
-                }else{
-                  value = GetYAxes(value,curType);
-                }
-               */
+                value = GetYAxes(value, curType);
+                /*  let AlldataisZero;
+                 for(let i = 0; i < this.tax_TAX.length; i++){
+                   if(this.tax_TAX[i]==0){
+                     AlldataisZero = true;
+                   }else{
+                     AlldataisZero = false;
+                     break;
+                   }
+                 }
+                 if(AlldataisZero){
+                   value = 0;
+                 }else{
+                   value = GetYAxes(value,curType);
+                 }
+                */
                 return value;
               }
             },
@@ -516,29 +573,29 @@ export class CompareTaxEstDrinkPage {
 
     });
   }
-/* start for pinch */
-public onPinchStart(e) {
-  this.isScaling = true;
-}
-public onPinchEnd(e) {
-  this.isScaling = false;
-  this.alreadyScaled = this.scale * this.alreadyScaled;
-}
-public onPinchMove(e) {
-  this.scale = e.scale;
-  let totalScaled = this.alreadyScaled * e.scale;
-  if (totalScaled >= MAX_SCALE) {
-    this.scale = MAX_SCALE / this.alreadyScaled;
-    totalScaled = MAX_SCALE;
-  } else if (totalScaled <= MIN_SCALE) {
-    this.scale = MIN_SCALE / this.alreadyScaled;
-    totalScaled = MIN_SCALE;
+  /* start for pinch */
+  public onPinchStart(e) {
+    this.isScaling = true;
   }
+  public onPinchEnd(e) {
+    this.isScaling = false;
+    this.alreadyScaled = this.scale * this.alreadyScaled;
+  }
+  public onPinchMove(e) {
+    this.scale = e.scale;
+    let totalScaled = this.alreadyScaled * e.scale;
+    if (totalScaled >= MAX_SCALE) {
+      this.scale = MAX_SCALE / this.alreadyScaled;
+      totalScaled = MAX_SCALE;
+    } else if (totalScaled <= MIN_SCALE) {
+      this.scale = MIN_SCALE / this.alreadyScaled;
+      totalScaled = MIN_SCALE;
+    }
 
-  let fontSize = Math.round(totalScaled * 10) / 10;
-  if ((fontSize * 10) % 3 === 0) {
-    this.fontSize = `${fontSize}rem`;
+    let fontSize = Math.round(totalScaled * 10) / 10;
+    if ((fontSize * 10) % 3 === 0) {
+      this.fontSize = `${fontSize}rem`;
+    }
   }
-}
-/* end  */
+  /* end  */
 }

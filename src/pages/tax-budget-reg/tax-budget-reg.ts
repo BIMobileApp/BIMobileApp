@@ -46,6 +46,7 @@ export class TaxBudgetRegPage {
   oldtypeCur: any;
   username: any;
   name: any;
+  eecMarkShow:any;
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
   private scale = BASE_SCALE;
@@ -109,7 +110,7 @@ export class TaxBudgetRegPage {
 
       let Region;
       let Province;
-      let month_from = convertMthBudYear(this.mthNumber);
+      let month_from = "1";//convertMthBudYear(this.mthNumber);
       let month_to = convertMthBudYear(this.mthNumber);
       let typeCur = 'M';
 
@@ -157,7 +158,11 @@ export class TaxBudgetRegPage {
     if (this.region != "00") {
       Region = localStorage.region_desc;
     }
-
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.selectionProvinceFill(Region);
     this.selectData(Region, Province, typeCur,month_from,month_to);
   }

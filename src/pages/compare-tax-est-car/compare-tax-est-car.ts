@@ -42,6 +42,7 @@ export class CompareTaxEstCarPage {
   username: any;
 
   dateDisplay: any;
+  dateAsOffLine: any;
   dateAsOff: any;
   subArea: any;
 
@@ -72,6 +73,7 @@ export class CompareTaxEstCarPage {
   TYPE_DESC :any;
   changeCurrencyType = '';
   strTaxUnit = '';
+  eecMarkShow:any;
 
   /* start for pinch */
   public fontSize = `${BASE_SCALE}rem`;
@@ -90,6 +92,7 @@ export class CompareTaxEstCarPage {
     this.mthNumber = monthNowNumber;
     //this.dateAsOff = dateDisplayAll;
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
+    this.dateAsOffLine = 'ข้อมูล '+dateDisplayAll;
     this.grp_id = 'ภาษีรถยนต์';
     this.offcode = localStorage.offcode;
 
@@ -132,7 +135,7 @@ export class CompareTaxEstCarPage {
     this.getProductType();
     let area;
     let Province;
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
     let typeCur = 'M';
     this.strTaxUnit = 'ล้านบาท';
@@ -143,7 +146,6 @@ export class CompareTaxEstCarPage {
     this.select_mth_to = month_to;
 
     this.getTableDataAll(area, Province, typeCur,month_from,month_to);
-    this.selectDataAll(area, Province, typeCur,month_from,month_to);
   }
   toggleLineShow() {
     this.changeCurrencyType = "M";
@@ -219,6 +221,11 @@ export class CompareTaxEstCarPage {
       this.responseProvince = data;
 
     });
+    if(area == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.getTableData(area, Province, typeCur,month_from,month_to);
   }
   //-----------------------------------------------------------------------------------------------------------//
@@ -356,7 +363,6 @@ export class CompareTaxEstCarPage {
   }
 
   getDateTiTle(monthFrom,monthTo){  
- 
     let dateTitle;
     if(monthFrom != undefined  && monthTo != undefined){
       if( monthFrom != 'undefined'  && monthTo != 'undefined'){

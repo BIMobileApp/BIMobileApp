@@ -92,6 +92,16 @@
       </ion-card-content>
 
     </ion-card>
-
+    <div padding>
+        <div *ngIf="eecMarkShow==1" >
+            <h5  class="DataStatus-font"  > หมายเหตุ* : <br>
+                <span >ภาค EEC ได้แก่ 
+                    <span *ngFor="let eecmark of ResponseProvince; let isLast=last" >
+                        {{eecmark.PROVINCE_NAME}}{{isLast ? '' : ', '}}
+                     </span>
+                    </span>
+              </h5>  
+        </div>
+      </div>
 </div>
 </ion-content>

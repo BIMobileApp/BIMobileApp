@@ -144,6 +144,17 @@
           </div>
         </ion-card-content>
       </ion-card>
+      <div padding>
+          <div *ngIf="eecMarkShow==1" >
+              <h5  class="DataStatus-font"  > หมายเหตุ* : <br>
+                  <span >ภาค EEC ได้แก่ 
+                      <span *ngFor="let eecmark of ResponseOverAllProvince; let isLast=last" >
+                          {{eecmark.PROVINCE_NAME}}{{isLast ? '' : ', '}}
+                       </span>
+                      </span>
+                </h5>  
+          </div>
+        </div>
     </div>
   </div>
 
@@ -327,6 +338,17 @@
           </div>
         </ion-card-content>
       </ion-card>
+      <div padding>
+          <div *ngIf="eecMarkShow2==1" >
+              <h5  class="DataStatus-font"  > หมายเหตุ* : <br>
+                  <span >ภาค EEC ได้แก่ 
+                      <span *ngFor="let eecmark2 of responseProvince; let isLast=last" >
+                          {{eecmark2.PROVINCE_NAME}}{{isLast ? '' : ', '}}
+                       </span>
+                      </span>
+                </h5>  
+          </div>
+        </div>
     </div>
   </div>
 </ion-content>

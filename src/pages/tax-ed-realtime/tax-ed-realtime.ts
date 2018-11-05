@@ -44,6 +44,7 @@ export class TaxEdRealtimePage {
   isEnableProv:any;
   oldRegion:any;
   oldtypeCur:any;
+  eecMarkShow:any;
 /* start for pinch */
 public fontSize = `${BASE_SCALE}rem`;
 private scale = BASE_SCALE;
@@ -135,6 +136,11 @@ public isScaling = false;
     Province =  'undefined';
     this.Province = 'undefined';
     this.selectionProvince(Region,Province,this.newType);
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.getData(Region,Province,this.newType);
   }
 

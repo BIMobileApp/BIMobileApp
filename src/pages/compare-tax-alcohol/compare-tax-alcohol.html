@@ -6,6 +6,7 @@
   </ion-header>
   
   <ion-content>
+    
       <ion-item style="background-color:#D0DFE6;" text-center>
           <h1 class="header-style">รายงานเปรียบเทียบภาษี/ปริมาณ ปีก่อน</h1>
           <h2 class="header-style">{{dateAsOff}}</h2>
@@ -19,18 +20,6 @@
                 <ion-select [(ngModel)]="month_from"  (ionChange)="selectionProvince(Region,Province,month_from,month_to)">
                   <ion-option value="undefined">ทั้งหมด</ion-option>
                   <ion-option *ngFor="let item3 of ResponseMthFrom"  value="{{item3.BUDGET_MONTH_CD}}"  [selected]="select_mth_from == item3.BUDGET_MONTH_CD">{{item3.MONTH_DESC}}</ion-option>
-               <!--  <ion-option value="10">ตุลาคม</ion-option>
-                <ion-option value="11">พฤศจิกายน</ion-option>
-                <ion-option value="12">ธันวาคม</ion-option>
-                <ion-option value="1">มกราคม</ion-option>
-                <ion-option value="2">กุมภาพันธ์</ion-option>
-                <ion-option value="3">มีนาคม</ion-option>
-                <ion-option value="4">เมษายน</ion-option>
-                <ion-option value="5">พฤษภาคม</ion-option>
-                <ion-option value="6">มิถุนายน</ion-option>
-                <ion-option value="7">กรกฎาคม</ion-option>
-                <ion-option value="8">สิงหาคม</ion-option>
-                <ion-option value="9">กันยายน</ion-option>     -->   
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -39,19 +28,7 @@
                 <ion-label> ถึง: </ion-label>
                 <ion-select [(ngModel)]="month_to" (ionChange)="selectionProvince(Region,Province,month_from,month_to)">
                   <ion-option value="undefined">ทั้งหมด</ion-option>
-                  <ion-option  *ngFor="let item4 of ResponseMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>
-                  <!-- <ion-option value="10">ตุลาคม</ion-option>
-                  <ion-option value="11">พฤศจิกายน</ion-option>
-                  <ion-option value="12">ธันวาคม</ion-option>
-                  <ion-option value="1">มกราคม</ion-option>
-                  <ion-option value="2">กุมภาพันธ์</ion-option>
-                  <ion-option value="3">มีนาคม</ion-option>
-                  <ion-option value="4">เมษายน</ion-option>
-                  <ion-option value="5">พฤษภาคม</ion-option>
-                  <ion-option value="6">มิถุนายน</ion-option>
-                  <ion-option value="7">กรกฎาคม</ion-option>
-                  <ion-option value="8">สิงหาคม</ion-option>
-                  <ion-option value="9">กันยายน</ion-option>  -->                  
+                  <ion-option  *ngFor="let item4 of ResponseMthTo"  value="{{item4.BUDGET_MONTH_CD}}"  [selected]="select_mth_to == item4.BUDGET_MONTH_CD">{{item4.MONTH_DESC}}</ion-option>              
                 </ion-select>
               </ion-item>
           </ion-col>
@@ -111,6 +88,18 @@
         </div>
       </ion-card-content>
     </ion-card>
-  
+
+    <div padding>
+        <div *ngIf="eecMarkShow==1" >
+            <h5  class="DataStatus-font"> หมายเหตุ* : <br>
+                <span  [style.fontSize]="fontSize">ภาค EEC ได้แก่ 
+                    <span *ngFor="let eecmark of responseProvince; let isLast=last" >
+                        {{eecmark.PROVINCE_NAME}}{{isLast ? '' : ', '}}
+                     </span>
+                    </span>
+              </h5>  
+        </div>
+      </div>
+    
   </ion-content>
   

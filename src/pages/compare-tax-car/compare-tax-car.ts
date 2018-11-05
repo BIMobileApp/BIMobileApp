@@ -53,6 +53,7 @@ export class CompareTaxCarPage {
   changeCurrencyType = '';
   strVolUnit = '';
   strTaxUnit = '';
+  eecMarkShow: any;
 
   dbtable = "MBL_PRODUCT_CAR_MONTH";
   
@@ -103,6 +104,7 @@ export class CompareTaxCarPage {
    // this.dateAsOff = dateDisplayAll;    
     this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     this.offcode = localStorage.offcode;
+    
     this.selectionAreaAll();
     this.selectionProvinceAll();
     this.ddlMonthFrom();
@@ -113,7 +115,7 @@ export class CompareTaxCarPage {
     let typeCur = 'M';
     this.strVolUnit = 'ล้านคัน';
     this.strTaxUnit = 'ล้านบาท';
-    let month_from = convertMthBudYear(this.mthNumber);
+    let month_from = "1";//convertMthBudYear(this.mthNumber);
     let month_to = convertMthBudYear(this.mthNumber);
 
     this.select_mth_from = month_from;
@@ -141,6 +143,11 @@ export class CompareTaxCarPage {
   selectRegion(Region,Province,month_from,month_to){
     Province =  'undefined';
     this.Province = 'undefined';
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.selectionProvince(Region,Province,month_from,month_to);
   }
 
@@ -151,14 +158,19 @@ export class CompareTaxCarPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area='+Region).then((data) => {
       this.responseProvince = data;
     }); 
-
+   
     this.getLineTaxData(Region,Province,month_from,month_to);
+    /* if(month_from == undefined){
+      month_from = 1;
+    } */
+    this.getDateTiTle(month_from,month_to);
   }
   
   ResponseMthFrom:any;
   ddlMonthFrom(){
     this.webapi.getData('dllMMonth').then((data) => {
       this.ResponseMthFrom = data;
+      
     });
   }
 
@@ -220,11 +232,11 @@ export class CompareTaxCarPage {
       }
      
     });
-    this.getDateTiTle(month_from,month_to);
+    
+    /* this.getDateTiTle(month_from,month_to); */
   }
 
   getDateTiTle(monthFrom,monthTo){  
- 
     let dateTitle;
     if(monthFrom != undefined  && monthTo != undefined){
       if( monthFrom != 'undefined'  && monthTo != 'undefined'){
@@ -247,6 +259,8 @@ export class CompareTaxCarPage {
       this.dateAsOff = 'ข้อมูล '+dateDisplayAll;
     }    
   }
+
+
 
   //----------------------- Start Manage Data from API-------------------------//
 

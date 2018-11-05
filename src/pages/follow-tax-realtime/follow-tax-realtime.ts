@@ -7,6 +7,7 @@ declare var dateDisplayDataReailTime:any;
 declare var coventACtoBE:any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
+declare var dateDisplayMonthNow: any; 
 /* start for pinch */
 const MAX_SCALE = 11.1;
 const MIN_SCALE = 0.9;
@@ -26,6 +27,7 @@ export class FollowTaxRealtimePage {
   dateDisplay:any;
   dateAsOff:any;
   dateNow = "";
+  dateAsOffMonthNow = "";
 
   Province:any;
   region:any;
@@ -42,7 +44,7 @@ export class FollowTaxRealtimePage {
   responseProvince:any;
   oldRegion: any;
   oldtypeCur : any;
-
+  eecMarkShow: any;
   mthNumber:any;
    /* start for pinch */
    public fontSize = `${BASE_SCALE}rem`;
@@ -57,7 +59,8 @@ export class FollowTaxRealtimePage {
 
   this.offcode = localStorage.offcode;
   this.dateDisplay = localStorage.last_update_date;
-  this.dateAsOff =  dateDisplayAll;
+  this.dateAsOff =   "ข้อมูล "+ dateDisplayAll;
+  this.dateAsOffMonthNow = "ข้อมูล "+ dateDisplayMonthNow;
   this.dateNow = dateDisplayDataReailTime;
   this.username = localStorage.userData;
   this.mthNumber = monthNowNumber; 
@@ -153,7 +156,6 @@ export class FollowTaxRealtimePage {
        this.getTableAmt(this.regionSelectType);
        this.getDateFormat();
      });
-
   }
 
   selectionAreaAll(){
@@ -184,6 +186,11 @@ export class FollowTaxRealtimePage {
     Province =  'undefined';
     this.Province =  'undefined';
     this.selectionProvince(Region,Province, month_from,month_to,typeCur);
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
   }
 
   selectionProvince(Region,Province, month_from,month_to,typeCur){
@@ -223,7 +230,6 @@ export class FollowTaxRealtimePage {
      });
      this.oldRegion = Region;
      this.oldtypeCur = typeCur;
-
      this.getDateTiTle(month_from,month_to);
    }  
 

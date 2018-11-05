@@ -9,7 +9,7 @@
   <div pinch (pinchstart)="onPinchStart($event)" (pinchend)="onPinchEnd($event)" (pinchmove)="onPinchMove($event)">
     <ion-item style="background-color:#D0DFE6;" text-center>
       <h1 class="header-style">รายงานภาษีสรรพสามิตนำเข้าแยกรายวัน</h1>
-      <h2 class="header-style">{{dateAsOff}}</h2>
+      <h2 class="header-style">{{dateAsOffMonthNow}}</h2>
     </ion-item>
 
     <ion-grid>
@@ -112,5 +112,16 @@
 
       </ion-card-content>
     </ion-card>
+    <div padding>
+        <div *ngIf="eecMarkShow==1" >
+            <h5  class="DataStatus-font"  [style.fontSize]="fontSize"> หมายเหตุ* : <br>
+                <span >ภาค EEC ได้แก่ 
+                    <span *ngFor="let eecmark of responseProvince; let isLast=last" >
+                        {{eecmark.PROVINCE_NAME}}{{isLast ? '' : ', '}}
+                     </span>
+                    </span>
+              </h5>  
+        </div>
+      </div>
   </div>
 </ion-content>

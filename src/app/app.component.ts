@@ -28,9 +28,9 @@ export class MyApp {
 
      // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'หน้าแรก', component: HomePage,icon: 'BHome'},
+      { title: 'หน้าแรก', component: null,icon: 'BHome'},
       { title: 'ติดต่อเรา', component: ContactPage,icon: 'BContact' },
-      { title: 'ออกจากระบบ', component: HomePage,icon: 'BSignOut' }
+      { title: 'ออกจากระบบ', component: null,icon: 'BSignOut' }
     ];
     
   }
@@ -62,7 +62,19 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.push(page.component);
+   
+    if(page.component) {
+      this.nav.push(page.component);
+  } else {
+      // Since the component is null, this is the logout option
+      // ...
+
+      // logout logic
+      // ...
+
+      // redirect to home
+      this.nav.setRoot(HomePage);
+  }
   }
 
   getUserLogin(){

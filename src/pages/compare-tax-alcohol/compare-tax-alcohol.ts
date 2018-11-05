@@ -57,6 +57,8 @@ export class CompareTaxAlcoholPage {
   strVolUnit = '';
   strTaxUnit = '';
   dbtable = "MBL_PRODUCT_SURA_MONTH";
+  eecMarkShow : any;
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -117,7 +119,7 @@ export class CompareTaxAlcoholPage {
     let typeCur = 'M';
     this.strVolUnit = 'ล้านลิตร';
     this.strTaxUnit = 'ล้านบาท';
-    let month_from = convertMthBudYear(this.mthNumber);;
+    let month_from = "1";//convertMthBudYear(this.mthNumber);;
     let month_to = convertMthBudYear(this.mthNumber);;
 
     this.select_mth_from = month_from;
@@ -160,7 +162,13 @@ export class CompareTaxAlcoholPage {
   selectRegion(Region, Province, month_from, month_to) {
     Province = 'undefined';
     this.Province = 'undefined';
+    if(Region == "EEC"){
+      this.eecMarkShow=1;
+    }else{
+      this.eecMarkShow=0;
+    }
     this.selectionProvince(Region, Province, month_from, month_to);
+    
   }
 
   selectionProvince(Region, Province, month_from, month_to) {
@@ -170,9 +178,9 @@ export class CompareTaxAlcoholPage {
     this.webapi.getData('ddlMProvince?offcode=' + this.offcode + '&area=' + Region).then((data) => {
       this.responseProvince = data;
     });
-
-
     this.getLineTaxData(Region, Province, month_from, month_to);
+    this.getDateTiTle(month_from, month_to);
+
   }
 
   selectionBudgetMonth() {
@@ -234,7 +242,7 @@ export class CompareTaxAlcoholPage {
       }
     });
 
-    this.getDateTiTle(month_from, month_to);
+    /* this.getDateTiTle(month_from, month_to); */
   }
   getDateTiTle(monthFrom, monthTo) {
 
@@ -512,5 +520,7 @@ export class CompareTaxAlcoholPage {
 
     });
   }
+
+ 
 
 }

@@ -123,7 +123,7 @@ export class HomePage {
   }
 
   NewsEvent(){
-    this.app.getRootNav().push(NewsEventPage);  
+    this.navCtrl.push('NewsEventPage');  
   }
   
   test(){
@@ -131,7 +131,8 @@ export class HomePage {
   }
 
   DataStatus(){
-    this.app.getRootNav().push(DataStatusPage);  
+    this.navCtrl.push('DataStatusPage');  
+   /*  this.app.getRootNav().push(DataStatusPage);   */
   }
   //this.app.getRootNav().push(MenuGroupPage); 
   
