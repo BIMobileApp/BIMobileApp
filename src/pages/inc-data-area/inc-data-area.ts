@@ -142,6 +142,8 @@ export class IncDataAreaPage {
 
     let typeCur = 'M';
     let typeCur2 = 'M';
+    let Area = undefined;
+    let Province = undefined;
     let monthFrom = convertMthBudYear(this.mthNumber);
     let monthTo = convertMthBudYear(this.mthNumber);
     this.month_from = convertMthBudYear(this.mthNumber);
@@ -159,7 +161,8 @@ export class IncDataAreaPage {
     this.select_mth_from1 = monthFrom;
     this.select_mth_to1 = monthTo;
 
-    this.ProductAll(monthFrom,monthTo,typeCur);
+    /* this.ProductAll(monthFrom,monthTo,typeCur); */
+    this.getProduct(Area,Province,monthFrom,monthTo,typeCur)
   }
 
   toggleTable2Show() {

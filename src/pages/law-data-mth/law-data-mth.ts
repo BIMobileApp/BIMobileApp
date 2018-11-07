@@ -7,6 +7,7 @@ declare var changeCurrency: any;
 declare var changeCurrencyNoUnit: any;
 declare var convertMthBudYear: any;
 declare var monthNowNumber: any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -64,7 +65,7 @@ export class LawDataMthPage {
     this.username = localStorage.userData;
     this.offcode = localStorage.offcode;
     //this.dateAsOff =  dateDisplayAll;
-    this.dateAsOff = 'ข้อมูล ' + dateDisplayAll;
+    this.dateAsOff = 'ข้อมูล ' + dateDisplayMonthNow;
     this.dateAsOffOverall = 'ข้อมูล ' + dateDisplayAll;
     this.mthNumber = monthNowNumber;
 

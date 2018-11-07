@@ -7,6 +7,7 @@ declare var changeCurrency: any;
 declare var changeCurrencyNoUnit:any;
 declare var convertMthBudYear:any;
 declare var monthNowNumber:any;
+declare var dateDisplayMonthNow: any; 
 
 /* start for pinch */
 const MAX_SCALE = 11.1;
@@ -68,8 +69,8 @@ public isScaling = false;
     public webapi: RestProvider) {
       this.offcode = localStorage.offcode;            
       this.dateDisplay = localStorage.last_update_date;
-      this.dateAsOff =  "ข้อมูล" + dateDisplayAll;
-      this.dateAsOffOverall = "ข้อมูล" + dateDisplayAll;
+      this.dateAsOff =  "ข้อมูล" + dateDisplayMonthNow;
+      this.dateAsOffOverall = "ข้อมูล" + dateDisplayMonthNow;
       this.username = localStorage.userData;
       this.mthNumber = monthNowNumber;
 
